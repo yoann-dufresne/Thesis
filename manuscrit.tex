@@ -6,6 +6,9 @@
 \usepackage[]{algorithm2e}
 
 
+\setcounter{secnumdepth}{3}
+
+
 
 % Title Page
 \title{Algorithmique pour les peptides non ribosomiques}
@@ -17,6 +20,50 @@
 
 \chapter{Les peptides non ribosomiques et leur voie de synthèse alternative}
 
+\section{Synthèse non-ribosomique}
+
+\subsection{Introduction}
+
+\paragraph{}Afin de bien comprendre la voie de synthèse non ribosomique, commençons par quelques rappels rapide sur la synthèse
+des protéïnes classiques. Les protéines sont assemblées dans la cellule par un organite appelé ribosome. Les ARN messagers sont
+les vecteurs de l'information protéique. Ils sont la réplication d'un morceau d'ADN qui sera traduit par triplets de nucléotides
+en chaine d'acides aminés. Les 64 codons possible ($4^3$ nucléotides) sont traduit en 20 acides aminés que l'on appélera acides
+aminés protéinogènes (justement car ils interviennent dans la synthèse classique de protéines). Ces acides aminés sont tous 
+composés d'un même squelette contenant les atomes permettant deux liaisons permettant ainsi la formation de chaines peptidique
+ainsi qu'un radical variant selon l'acide aminé (Voir figure TODO). L'un des côté du squelette contient un groupement amine
+($NH_2$) et l'autre un groupement carboxyle ($C(=O)OH$). Ces deux groupements se lient entre eux en chaine et créent ainsi la
+protéine.
+
+\paragraph{Figure acides aminés}
+
+\paragraph{}Une protéine assemblée se replie sur elle même et c'est cette forme repliée qui détermine son activité. C'est plus
+précisément les proprités des éléments en contact avec l'extérieur de la protéine (les atomes qui ne se retrouvent pas enfermé
+au milieu du repliement) qui déterminent les propriétés de celle-ci. Ces propriétés sont donc très dépendantes du repliement et
+des types de radicaux exposés.
+
+\subsection{Vue globale de la synthèse non ribosomique}
+
+\subsubsection{Une synthèse à quatre niveaux}
+
+% Introduire les termes pour NRP et NRPS
+
+\subsubsection{Les propriétés générales des NRP}
+
+\subsection{Les synthétases}
+
+\subsubsection{Des enzymes modulaires}
+
+\subsubsection{La spécificité des modules A}
+
+\subsubsection{Inclusion monomériques par les modules C}
+
+\subsubsection{Les modules secondaires}
+
+\subsection{L'activité finale d'un peptide}
+
+\subsubsection{Formes et compositions}
+
+\subsubsection{Modifications post-synthèse}
 
 
 
@@ -352,8 +399,8 @@ pouvait avoir $n$ labels différents, celle-ci pourra générer plus de $n^2$ ($
 noeuds).
 
 \paragraph{}Le raisonnement des line graphe peut être étendu récursivement. On peut ainsi créer des line-graph de line-graph.
-Cependant cela pose plusieurs problèmes de répéter cette opération dans notre cas. Certains graphe vont diminuer de taille
-jusqu'à disparaître complètement (ce qui est peu pratique pour la comparaison) alors que d'autre vont grossir de plus en plus
+Cependant cela pose plusieurs problèmes de répéter cette opération dans notre cas. Certains graphes vont diminuer de taille
+jusqu'à disparaître complètement (ce qui est peu pratique pour la comparaison) alors que d'autres vont grossir de plus en plus
 et ajouter de plus en plus de phases de comparaison de labels et d'étapes dans l'algorithme VF2. Pour ces raisons nous avons
 choisi de n'effectuer qu'une seule étape de line-graph.
 
