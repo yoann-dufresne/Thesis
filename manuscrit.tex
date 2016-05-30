@@ -82,9 +82,7 @@ peptides impossibles à obtenir depuis des protéines classiques.
 
 
 
-\subsection{Les synthétases}
-
-\subsubsection{Généralité sur les synthétases}
+\subsection{Généralité sur les synthétases}
 
 \paragraph{}Comme nous l'avons vu dans la courte introduction précédente, les synthétases permettant l'assemblage des NRP sont des protéines issues d'une synthèse classique.
 Les synthétases sont organisées en modules consécutifs qui permettent chacun de capturer modifier et intégrer un monomère au NRP.
@@ -105,21 +103,110 @@ Le découpage pour ce NRP est représenté sur la figure [REF figure].
 Aux 4 modules correspondent 4 modules A, 4 modules T et 3 modules C.
 On peut également voir un module d'épimérisation (modification de l'acide aminé inclus) présent en fin de premier module ainsi qu'un module C supplémentaire en fin d'enzyme permettant la cyclisation du peptide.
 
-\subsubsection{Des enzymes modulaires}
+\subsection{Les domaines principaux}
 
-\subsubsection{La spécificité des modules A}
+\subsubsection{Le domaine d'Adénilation (domaine A)}
 
-\subsubsection{Inclusion monomériques par les modules C}
+\paragraph{}C'est le domaine qui porte la spécificité du module dans lequel il se trouve.
+La séquence d'acides aminés de ce domaine varie fortement afin de pouvoir capturer beaucoup de monomères différents.
+Une fois le repliement de la synthétase effectué, les domaines A possèdent une cavité interne permettant la reconnaissance et l'accueil d'une molécule.
+Ce sont les acides aminés de la synthétase en contact avec cette cavité qui vont permettre de "choisir" le monomère à capturer dans l'environnement.
+La taille de la cavité ainsi que les propriétés physico-chimiques de ces acides aminés en contact permettent une affinité forte avec un unique monomère.
+Il arrive parfois que le domaine ne soit pas spécifique à un seul monomère mais plutôt à un petit nombre de monomères très proches les uns des autres.
+Cependant ce cas reste rare et dans la majorité des cas,  un NRPS ne permet la création que d'un seul NRP.
 
-\subsubsection{Les modules secondaires}
+\paragraph{}En 1999, Stachelhaus et al. publient un article analysant la structure de nombreux domaines A.
+Ils essayent d'aligner un grand nombre de domaines A pour en extraire les parties conservées et les parties spécifiques au monomère à capturer.
+Il apparait que très peu d'acides aminés sont conservés d'un domaine A à l'autre mais que ceux-ci peuvent être utilisés comme marqueurs fixes.
+Ces points conservés (et donc à priori très importants), permettent de servir de repères vers des acides aminés proches faisant partie de la poche d'accueil du monomère.
+Les auteurs extraient un codage permettant de déterminer le monomère inclus à partir de 10 acides aminés présents dans la séquence d'un domaine A.
+Depuis cet article, ce codage de référence est appelé code de Stachelhaus.
+
+\paragraph{}Depuis 2011, l'outil NRPSPredictor2 est venu affiner la reconnaissance de la spécificité.
+Les auteurs ont entrainés un Modèle de Markov Caché (Hidden Markov Model (HMM)) sur des centaines séquences de domaines A connus.
+Cet outil prédit un avec différents niveaux de granularité les monomères inclus à partir des domaines A.
+%Chaque monomère est regroupé avec d'autres dans des clusters par affinités.
+%Chacun de ces clusters est alors regroupé avec d'autres sur 3 niveaux de granularités. (TODO schéma de l'article ?)
+Les monomères sont identifiés avec une moyenne précision-rappel (F-Mesure) de 80\%.
+L'outil prédit également avec une très grande précision (F-mesure > 95\%) le type du monomère inclus (polaire, hydrophobique, aliphatique, ...).
+Cet outil est particulièrement précieux pour la découverte et l'annotation de domaines A de NRPS.
+
+
+\subsubsection{Le domaine de Thiolation (domaine T)}
+%citations : 
+%• Biochemical characterization of peptidyl carrier protein (PCP), the thiolation domain of multifunctional peptide synthetases.
+%• Portability of the thiolation domain in recombinant pyoverdine non-ribosomal peptide synthetases
+
+\paragraph{}Le but du domaine T est d'assurer la logistique au sein du module dans lequel il est contenu.
+Ce domaine est également souvent appelé "Peptidyl Carrier domains".
+Il est en charge de la récupération et du transfert du peptide en cours de formation.
+Chaque domaine T possède un groupement 4’-phosphopantetheine incluant un "bras flexible" qui permet d'agripper et de déplacer les monomères.
+Dans un premier temps, ce bras permet d'aller chercher le monomère capturé par le domaine A voisin et de le lier de manière covalente.
+Dans un second temps, le monomère est mené au le site de condensation du début de module afin d'être inséré par le domaine C au début du NRP déjà formé.
+Enfin, le bras se plie dans la direction du domaine de condensation suivant afin de lier le NRP au monomère suivant.
+Durant cette étape, le peptide est libéré du domaine T courant pour être laissé à la charge du domaine T suivant.
+
+\paragraph{Schéma du domaine T}
+
+\subsubsection{Le domaine de Condensation (domaine C)}
+%citations :
+%• Peptide Bond Formation in Nonribosomal Peptide Biosynthesis, CATALYTIC ROLE OF THE CONDENSATION DOMAIN
+%• http://bmcevolbiol.biomedcentral.com/articles/10.1186/1471-2148-7-78
+
+\paragraph{}Le domaine C est par convention considéré comme le premier domaine de chaque module.
+C'est un domaine qui permet de lier le morceau de peptide assemblé par les modules précédents avec le monomère capturé par le domaine A du module courant.
+Bien que sa fonction principale reste toujours la même, il existe plusieurs variants de ce domaine.
+
+\paragraph{Les domaine LCL et DCL}
+Les acides aminés capturés par les domaines A existent dans deux configuration différentes dites configurations L et D.
+Il existe deux domaines C différents pour lier ces molécules.
+Le plus standard, permet la liaison de deux monomères de type L. Le domaine est alors appelé domaine LCL.
+Le second permet de lier un monomère D à un L, il est alors appelé domaine DCL.
+Ces domaines sont juste deux spécialisations du modèle décrit ci-dessus.
+
+\paragraph{Les domaines C starter (Cs) et C terminal (Ct)}
+Comme leur noms l'indiquent ces domaines sont en bout de protéines.
+Il ne sont donc pas entouré de deux modules différents mais sont inclus respectivement dans le premier et dernier modules.
+Il ne peuvent donc faire la liaison entre deux monomères fixés sur deux bras de domaines T.
+
+\paragraph{}Le domaine Cs permet de directement capturer et lier un monomère de l'environnement afin de débuter le peptide.
+Cela permet d'inclure par exemple des acides gras qui n'aurait pas de domaines A spécifiques.
+Ces modules capturent toujours le même type de monomère mais on ne sait actuellement pas exactement comment cette spécificité est encodée dans l'enzyme.
+
+\paragraph{}Le rôle du domaine Ct est lui un peu plus flou.
+Dans certains peptides ce domaine permet de faire une liaison entre le dernier monomère et un monomère déjà inclus, créant ainsi un cycle.
+Dans d'autres il lie le dernier monomère avec un monomère de l'environnement.
+Comme pour le Cs, la spécificité n'est pas encore expliquée.
+Il est également possible que les deux comportements soient en fait issus de deux sous catégories de Ct mais rien n'a encore été prouvé.
+
+\paragraph{Le domaine Cy}
+Cette dernière variation du module C standard permet de lier deux monomères voisins en effectuant deux liaisons.
+Cette liaison est toujours effectuée par un monomère possédant un atome de soufre près d'un groupement amine.
+
+\paragraph{Schéma liaison Cy}
+
+
+\subsubsection{Le domaine de Thioestérase}
+
+\paragraph{}Contrairement aux 3 autres domaines principaux, celui-ci ne fait partie d'aucun module.
+C'est un module de terminaison qui permet le décrochage du peptide complètement formé.
+Ce module de séparation n'est pas toujours présent et sa fonction est parfois exprimée par d'autres modules comme le Ct.
+
+
+\subsection{Les domaines secondaires}
+
+\paragraph{}Dans cette section je vais décrire quelques-uns des domaines optionnels les plus fréquents dans les NRPS.
+
+\subsubsection{La fonction d'épimérisation (domaines E et C/E)}
+
+\paragraphe{}Lors de la description des domaines LCL et DCL, j'ai rapidement évoqué l
 
 
 
-\subsection{L'activité finale d'un peptide}
+\subsection{Liens avec les PKS}
 
-\subsubsection{Formes et compositions}
 
-\subsubsection{Modifications post-synthèse}
+
 
 
 \section{Norine}
