@@ -1,10 +1,11 @@
-\documentclass[a4paper,10pt]{report}
+%\documentclass[11pt,french,twoside]{thlifl}
+\documentclass[12pt,french,twoside]{report}
 \usepackage[utf8]{inputenc}
 \usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{graphicx}
-\usepackage[]{algorithm2e}
-\usepackage[margin=3cm]{geometry}
+\usepackage[french]{algorithm2e}
+\usepackage[margin=2.5cm]{geometry}
 
 
 \setcounter{secnumdepth}{3}
@@ -19,7 +20,7 @@
 \begin{document}
 \maketitle
 
-\chapter{Les peptides non ribosomiques et leur voie de synthèse alternative}
+\chapter{Les peptides non ribosomiques}
 
 \section{Synthèse non-ribosomique}
 
@@ -193,23 +194,55 @@ C'est un module de terminaison qui permet le décrochage du peptide complètemen
 Ce module de séparation n'est pas toujours présent et sa fonction est parfois exprimée par d'autres modules comme le Ct.
 
 
-\subsection{Les domaines secondaires}
+\subsection{Les domaines de transformation monomérique}
 
-\paragraph{}Dans cette section je vais décrire quelques-uns des domaines optionnels les plus fréquents dans les NRPS.
-
-\subsubsection{La fonction d'épimérisation (domaines E et C/E)}
-
-\paragraphe{}Lors de la description des domaines LCL et DCL, j'ai rapidement évoqué l
+\paragraph{}Nous allons à présent parler de quelques modules optionnels permettant de modifier un monomère capturé par un domaine A.
+Ces transformations permettent aux organismes d'obtenir des configurations monomériques peu fréquentes dans leur environnement.
 
 
+\paragraph{La fonction d'épimérisation (domaines E et C/E)}
 
-\subsection{Liens avec les PKS}
+Lors de la description des domaines LCL et DCL, nous avons rapidement évoqué la possibilité pour une molécule d'être dans deux configurations différentes tout en possédant pour autant la même composition et structure atomique.
+Ces deux configuration sont en fait des images miroirs l'une de l'autre [TODO : voir figure].
+On appel ces deux configurations Leavus (L) et Dexter (D).
+
+\paragraph{Schéma D-L}
+
+\paragraph{}Alors que la majorité de la vie est gauchère (ne contient que des acides aminés L), les NRPS permettent l'inclusion de monomères de forme D en capturant un monomère L puis en le transformant.
+Les domaines responsables de ces transformation sont appelés domaines d'épimérisation.
+Une fois le monomère L lié au reste du peptide par le domaine C, il est emmené auprès du domaine E afin de changer son orientation.
+Le fait que cette transformation soit postérieure à la fixation sur le reste du peptide explique l'absence de domaines DCD (Les monomères de droite seront toujours présentés au domaine C avant transformation).
+Il arrive parfois que cette transformation du monomère ne soit pas portée par un module E mais directement incluse dans le domaine C précédent.
+Ce domaine est alors appelé domaine C/E et assure les deux fonctionnalités.
+
+\paragraph{Schéma de la transformation}
+
+
+\paragraph{domaine de N-méthylation (NM)}
+
+De la même manière que le domaine E, le domaine NM agit à la suite de la liaison du monomère actuel au morceau de peptide précédemment assemblé.
+Ce domaine permet l'ajout d'un méthyle (CH3) sur le groupement amine du monomère courant.
+
+\paragraph{Schéma de la transformation}
+
+\paragraph{domaine de formylation}
+% http://archiv.ub.uni-marburg.de/diss/z2008/0068/pdf/dgs.pdf
+
+Ce module n'existe à priori que pour les modules d'initiation.
+Il permet la formylation (ajout d'un groupe C(=O)H) sur le groupement amine du premier monomère.
+
+\paragraph{Schéma de la transformation}
 
 
 
 
 
-\section{Norine}
+
+
+
+
+
+\section{Les outils bioinformatiques pour l'annotation et l'analyse des NRP/NRPS}
 
 
 

@@ -1,0 +1,57 @@
+
+## Les domaines de transformation monomérique
+
+Le but de cette section est de parler de quelques domaines de NRPS capables de transformer des monomères pendant leur inclusion au NRP.
+
+
+### La fonction d'épimérisation (domaines E et C/E)
+
+Lors de la description des domaines LCL et DCL, j'ai rapidement évoqué la possibilité pour une molécule d'être dans deux configurations différentes en possédant pour autant la même composition et structure atomique.
+Ces deux configuration sont en fait des images miroirs l'une de l'autre [TODO : voir figure].
+On appel ceux deux configuarations Leavus (L) et Dexter (D).
+Alors que la majorité de la vie est gauchère (ne contient que des acides aminés L), les NRPS permettent l'inclusion de monomères de forme D en modifiant un monomère L capturé.
+
+Schéma D-L
+
+Les domaines responsables de ces transformation sont appelés domaines d'épimérisation.
+Une fois le monomère lié au reste du peptide par le domaine C, il est emmené auprès du domaine E afin de changer son orientation.
+Le fait que cette transformation soit postérieure à la fixation sur le reste du peptide explique l'absence de domaine DCD (Les monomères de droite seront toujours présentés avant transformation).
+Il arrive parfois que cette transformation du monomère ne soit pas portée par un module E mais directement inclus dans le domaine C précédent.
+Ce domaine est alors appelé domaine C/E et assure les deux fonctionnalités.
+
+
+### domaine de N-méthylation (NM)
+
+De la même manière que le domaine E, le domaine NM agit à la suite de la liaison du monomère actuel au morceau de peptide précédamment assemblé.
+Ce domaine permet l'ajout d'un méthyle (CH3) sur le groupement amine du monomère courant.
+
+Schéma de la transformation
+
+### domaine de formylation
+% http://archiv.ub.uni-marburg.de/diss/z2008/0068/pdf/dgs.pdf
+
+Ce module n'existe à priori que pour les modules d'initiation.
+Il permet la formylation (ajout d'un groupe C(=O)H) sur le groupement amine du premier monomère.
+
+Schéma de la transformation
+
+
+## Incorporation de molécules complexes
+
+### Sucres
+
+### PKS
+
+
+
+
+
+# Les outils bio-informatiques pour les NRPS et NRP
+
+
+
+
+
+
+
+
