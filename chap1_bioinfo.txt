@@ -11,12 +11,10 @@ Cette partie rassemblera les différentes bases de données, dédiées ou non et
 
 # Les outils d'annotation de NRPS
 
-La première phase pour toute annotation de NRPS est la détection des parties du génome dédiées à leur création.
-
 ## Détection de clusters de gènes
 
-L'information des clusters de gène est très importante pour comprendre les NRP finaux.
-La détection des clusters nous permet de détecter les gènes qui ne sont pas directement impliqués dans la synthèse d'un NRP et qui produisent potentiellement des enzymes de modification post-synthèse.
+L'information des clusters de gènes est très importante pour comprendre les formes finales de NRP.
+La détection des clusters nous permet d'identifier l'ensemble des gènes impliqués dans la synthèse d'un NRP et pas uniquement ceux impliqués dans la création d'un NRPS.
 
 
 ### CLUSEAN
@@ -48,10 +46,13 @@ Citations :
 · Motif-independent de novo detection of secondary metabolite gene clusters-toward identification from filamentous fungi.
 · SMURF: Genomic mapping of fungal secondary metabolite clusters.
 
-Il existe beaucoup de méthodes spécialisées pour trouver des clusters de gène particuliers mais nous ne décrirons pas ici car ils nous seront peu utiles.
+Il existe beaucoup de méthodes spécialisées pour trouver des clusters de gènes particuliers mais nous ne décrirons pas ici car ils nous seront peu utiles.
 
 
-## Détection de modules
+## Détection et identification de domaines
+
+La détection et l'identification des gènes codant pour les domaines est le coeur de l'annotaion des NRPS.
+Nous allons ici présenter des méthodes qui permettent à la fois d'identifier les différents types de domaines (A, C, T, ...) ainsi que des méthodes permettant d'inférer les spécificités de ces domaines.
 
 ### La recherche "manuelle"/automatique
 
@@ -101,7 +102,7 @@ Ces groupes ont été transformés en différentes HMM représentatives utilisé
 Citations :
 · Chapter 8 Methods for In Silico Prediction of Microbial Polyketide and Nonribosomal Peptide Biosynthetic Pathways from DNA Sequence Data
 
-Ces deux logiciels sont deux implémentations de la même technique de détection des modules NRPS et PKS.
+Ces deux logiciels sont deux implémentations de la même technique de détection des domaines NRPS et PKS.
 2metDB est un outil standalone alors que PKS/NRPS web server est la version en ligne des mêmes algorithmes.
 Les auteurs font le constat qu'un domaine NRPS ou PKS possède des zones très variables en composition ainsi que des zones très conservées.
 Ce sont ces zones conservées qui ont permis de déterminer des coordonnées fixes dans les domaines A et ansi de créer le code de Stachelhaus.
@@ -112,6 +113,11 @@ L'utilisation de HMM en faible nombre permet à ces logiciels d'être extrémeme
 
 ## Antismash, le pipline pour l'identification de métabolites secondaires
 
+Citations :
+· antiSMASH 3.0-a comprehensive resource for the genome mining of biosynthetic gene clusters
+
+Contrairement aux autres logiciels présentés jusqu'ici, antismash n'apporte pas de nouveaux algorithmes pour l'identification de NRPS.
+C'est un pipeline qui inclut la plupart des logiciels précédents dans le but d'offrir une détection globale de métabolites secondaires.
 
 
 
