@@ -114,16 +114,70 @@ L'utilisation de HMM en faible nombre permet à ces logiciels d'être extrémeme
 ## Antismash, le pipline pour l'identification de métabolites secondaires
 
 Citations :
+· antiSMASH: rapid identification, annotation and analysis of secondary metabolite biosynthesis gene clusters in bacterial and fungal genome sequences
 · antiSMASH 3.0-a comprehensive resource for the genome mining of biosynthetic gene clusters
 
 Contrairement aux autres logiciels présentés jusqu'ici, antismash n'apporte pas de nouveaux algorithmes pour l'identification de NRPS.
 C'est un pipeline qui inclut la plupart des logiciels précédents dans le but d'offrir une détection globale de métabolites secondaires.
+Ce logiciel prend une séquence ADN en entrée et applique une succession de méthodes de plus en plus précises.
+Le pipline commence par l'identification de clusters de gènes candidats à la création de métabolites secondaires.
+Une fois le type de métabolite secondaire identifié, des outils spécifiques sont lancés sur chaque cluster afin d'identifier précisément le métabolite et ses spécificités.
+Pour les NRPS précisément, un premier outil permet la détection des domaines puis NaPDoS est lancé sur les domaines C identifiés et NRPS predictor sur les domaines A.
+
+Antismash à rencontré un très grand succès auprès de la communauté
+TODO
 
 
 
 
+# Les bases de connaissances de NRPS
 
 
+# L'annotation de NRP
+
+## Anotation automatiques depuis l'ADN
+
+Le séquençage de polymères est une tache difficile.
+C'est pourquoi les protéines ne sont pas directement séquencées mais inférées depuis le séquençage de l'ADN qui permet de les générer.
+Dans le cas des NRP, l'interprétation de l'ADN ne permet que de prédire les séquences protéiques des NRPS.
+Il est nécessaire ensuite de comprendre précisément le fonctionnement de ces NRPS pour traduire leur séquence en NRP.
+Cependant, comme nous l'avons suggéré dans les descriptions de logiciels d'analyse de NRPS, cette compréhenssion ne permet pas encore d'avoir des résultats parfait.
+Dans certains cas la précision de la prédiction ne permet pas de décrire précisément le monomère inclut.
+Par exemple il est possible de terminer une prédiction avec une structure contenant un monomère aliphatique sans savoir lequel précisément.
+Il est également possible d'obtenir des structures monomèriques incomplétes.
+Par exemple il n'est pas toujours évident de savoir lorsqu'un produit préconstruit est introduit par un C starter.
+
+L'annotation automatique de NRP depuis l'ADN est donc une méthode très rapide grâce aux technologies récentes de séquençage mais dont les résultat peuvent être incertains.
+Cette technique est donc utilisée pour une prédiction rapide qui devra ensuite être vérifiée expérimentalement.
+
+
+## La spectrométrie de masse
+
+La spectrométrie de masse est une technique physique d'analyse permettant l'identification de structures moléculaires.
+Ce procédé est basé sur la mesure de masses moléculaires.
+On utilise un échantillon purifié d'une molécule d'intérêt puis on envoie un niveau d'énergie précis afin de casser la molécules en morceaux.
+Différents niveaux d'énergie sont injectés afin d'obtenir plus ou moins de morceaux de molécules.
+Ces morceaux sont ensuite comparés à des morceaux de référence afin de déterminer leur nature.
+Il est ensuite possible à partir des morceaux identifiés, de reconstruire la molécule originelle.
+
+Cette méthode permet d'avoir à disposition une reconstruction atomique fiable.
+Certains des morceaux de références utilisés lors de la reconstruction sont en fait des acides aminés.
+Cela permet d'obtenir directement une annotation monomérique de toutes les parties composées d'acides aminés classiques.
+Cependant, les NRP étant composés de plus de 500 monomères différents, l'annotation monomérique directement issue des analyses de spectres n'est pas suffisante.
+Pour finir l'annotation d'un NRP, il est nécessaire d'avoir recours à un spécialiste du domaine afin qu'il nomme chacun des monomères non annotés.
+
+Pour résumer, la spectrométrie de masse permet d'avoir accès à des structures atomiques de molécules avec un degré de certitude très élevé.
+De plus, contrairement à l'anotation depuis l'ADN, nous sommes certain que la molécule existe puisqu'elle est issue de l'environement étudié.
+Cependant, les gros inconvénients de la technique restent le besoin d'avoir un expert pour l'annotation et le faible débit de génération de données.
+
+
+## La Résonance Magnétique Nucléaire
+
+La détection de structures par Résonance Magnétique Nucléaire (RMN) est une technique d'analyse de structures moléculaire.
+Cette technique exploite la propriété qu'ont certains atomes à émettre un rayonnement lorsqu'ils sont placés dans des champs magnétique.
+
+
+# Les bases de connaissance de NRP
 
 
 
