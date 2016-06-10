@@ -204,6 +204,11 @@ Cette technique est également très coûteuse de part les équipements nécessa
 
 # Les bases de connaissance de NRP
 
+## Norine, la base de référence des NRP
+
+Parmis les bases de connaissances pour les peptides non ribosomiques, beaucoup répertorient les clusters de gènes NRPS mais seule la base Norine 
+
+
 ## ClusterScan
 
 Citations :
@@ -211,9 +216,6 @@ Citations :
 
 Clusters gènes + refs + peptide produit
 2013
-
-
-## Norine, la base de référence des NRP
 
 
 
