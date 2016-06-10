@@ -132,6 +132,28 @@ TODO
 
 # Les bases de connaissances de NRPS
 
+## ClusterMine360
+
+BDD NRPS
+Accession NCBI
+Affichage prédictions Antismash
+Last news 2013
+
+
+## ClusterScan
+
+Citations :
+· Databases of the thiotemplate modular systems (CSDB) and their in silico recombinants (r-CSDB).
+
+Clusters gènes + refs + peptide produit
+2013
+
+
+## MIBiG, la base de référence des clusters de gènes NRPS/PKS
+
+Citations :
+· Minimum Information about a Biosynthetic Gene cluster
+
 
 # L'annotation de NRP
 
@@ -175,11 +197,23 @@ Cependant, les gros inconvénients de la technique restent le besoin d'avoir un 
 
 La détection de structures par Résonance Magnétique Nucléaire (RMN) est une technique d'analyse de structures moléculaire.
 Cette technique exploite la propriété qu'ont certains atomes à émettre un rayonnement lorsqu'ils sont placés dans des champs magnétique.
+Les structures obtenues en sortie sont uniquement atomiques.
+Il est donc également nécessaire d'avoir recours à un expert pour effectuer l'annotation.
+Cette technique est également très coûteuse de part les équipements nécessaires pour réaliser les analyses.
 
 
 # Les bases de connaissance de NRP
 
+## ClusterScan
 
+Citations :
+· Databases of the thiotemplate modular systems (CSDB) and their in silico recombinants (r-CSDB).
+
+Clusters gènes + refs + peptide produit
+2013
+
+
+## Norine, la base de référence des NRP
 
 
 
