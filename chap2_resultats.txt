@@ -1,0 +1,146 @@
+# Résultats et interprétations
+
+Cette section va se séparer en trois blocs différents.
+Premiérement, nous allons présenter les différents jeux de données que nous avons utilisé pour tester la qualité du logiciel.
+Puis nous présenterons la méthodologie et les métriques utilisées pour étudier la qualité des résultats.
+Enfin, nous décortiquerons les résultats afin d'expliquer les erreurs de détection des structures monomériques.
+
+Schéma validation 1 peptide
+
+
+## Jeux de données
+
+### Les constituants des jeux de données
+
+Afin de vérifier la pertinence des résultats de s2m, il est nécessaire de construire plusieurs jeux de données tests.
+Pour chacun de ces jeux de données, il est nécessaire de créer une base de polymères que nous allons analyser ainsi qu'une base contenant tous les monomères présents dans ces polymères.
+Dans les jeux de données de polymères, nous avons regroupé de nombreuses molécules pour lesquelles la structure atomique et la structure monomérique sont connues.
+La structure atomique permet l'analyse de la molécule par s2m et la structure monomérique la vérification du résultat.
+
+
+### Norine
+
+Le développement de s2m ayant été déclenché par ma thèse centrée sur les NRP, il est logique de trouver un jeu de validation non ribosomique.
+Nous utilisons la base de donnée Norine que j'ai déjà présenté dans le chapitre 1 (TODO ref) afin de constituer mon jeu de données.
+La base des peptides est constitué des entrées Norine dont le smiles était déjà présents ainsi que les entrées por lesquelles nous avons trouvé une entrée pubchem correspondante (rapatriement automatique par nom).
+La base des monomère est elle très facilement constituée puisqu'il existe déjà l'ensemble des monomères et leur smiles au sein de Norine.
+
+
+### The Chemical Component Dictionary (CCD)
+
+Citations :
+· The chemical component dictionary: complete descriptions of constituent molecules in experimentally determined 3D macromolecules in the Protein Data Bank
+· The Protein Data Bank
+
+CCD est une sous base de données de PDB.
+Cette base regroupe toutes les petites molécules présentes dans PDB.
+Parmis ceux-ci se trouvent de nombreux petits polymères annotés ainsi que les monomères les constituant.
+Le gros avantage de cette base est que toute molécule y étant présente est accompagnée de son smiles.
+Nous avons constitué la base des peptides en extrayant toutes les molécules possédant une structure polymérique annotée.
+La base des monomères est elle composée de tous les monomères référencés au moins une fois par un polymère.
+
+
+### Résumé sur les données
+
+Le jeu de données est constitué de deux sous ensembles de molécules de types différents.
+Le premier est issu de la base Norine et comporte XXX polymères accompagnés de leurs 533 monomères.
+Le second jeu est issu de la base CCD et comporte 378 polymères accompagnés de leurs YYY monomères.
+Il est à noté qu'aucun des polymères présent dans une base n'est présent dans l'autre et que seuls 63 monomères sont identiques d'un jeu à l'autre.
+Ces monomères identiques sont en très grande majorité des acides aminés classiques et leurs variants proches.
+
+Tableau de présentation des chiffres ?
+
+
+## Méthodologie pour la mesure et l'analyse des résultats
+
+Nous allons séparer deux types d'analyses.
+Les analyses locales s'attarderont uniquement sur les résultats pour un peptide.
+Ce type d'analyse mettra donc en avant les réusites et les ratés au sein d'une seule annotation.
+En complément nous ferons des analyses globales qui agrégeront les résultats sue l'ensemble d'un jeu de données.
+Nous pourrons ainsi dégager des statistiques globales de réussites/échecs.
+
+
+### Analyse d'un résultat.
+
+s2m permet de générer des résultats sous différents formats.
+Il est possible par exemple de générer un format textuel json permettant facilement de recharger ces résultats dans d'autres logiciels.
+Lorsque nous présenterons un résultat ici, nous le présenterons via le format graphique en html.
+
+Figure : Présentation d'un résultat
+
+Une page de résultat peut être décomposée en 3 parties.
+En haut à gauche se trouve l'image du polymère étudié, colorée selon les monomères qui y sont présents.
+C'est l'information la plus parlante visuellement car elle permet d'immédiatement interpréter les résultats.
+
+Sous l'image se trouvent trois listes de monomères.
+La première liste correspond aux monomères découverts dans la structure atomique par s2m et que l'on sait être justes grâce aux annotations déjà connues.
+Le seconde liste correspond également aux monomères découverts par s2m mais qui cette fois-ci ne sont pas présent dans l'annotation initiale.
+La dernière correspond aux monomères qui sont présent dans l'annotation mais qui n'ont pas été trouvés par s2m.
+
+La dernière partie de la figure représente les informations générales sur le polymère.
+Tout d'abord, il y a le nom du polymère puis les statistiques sur celui-ci.
+La première statistique est le taux de couverture atomique (Coverage).
+Cette valeur donne le ratio des atomes annotés par s2m comme faisant partie des monomères trouvés par le nombre d'atomes du polymère.
+La seconde valeur donne également un ratio d'atome mais uniquement pour les atomes correctement annotés.
+Cette valeur ne prend en compte que les atomes faisant partie des monomères de la première des trois listes.
+
+Lors de la présentation des résultats qui suivront, nous ferons toujours attention de bien mentionner si les chiffres sont des comptages monomériques ou des comptages atomique.
+Les pourcentages déduits peuvent être fort différents du à la grande variabilité du nombre d'atomes d'un monomère à l'autre.
+
+La dernière statistique que nous allons étudier à l'échelle d'un peptide est le temps de calcul nécessaire pour sa recherche.
+Cette valeur n'est évidemment pas directement visible depuis les résultats.
+Cependant il nous sera nécessaire de l'étudier pour déterminer la rapidité de l'outil.
+Le temps de calcul sera divisé en plusieurs parties :
+- Le précalcul : Cette valeur n'est pas accessible directement pour chaque résultat.
+Le temps de précalcul des résidus n'est effectué qu'une seule fois par base monomérique et ne dépend pas des peptides que nous allons analyser.
+Nous en parlerons plus en détails avec les statistiques globales.
+- Le chargement des données : C'est le temps nécessaire aux librairies pour charger toutes les données en mémoire (typiquement le temps de transformer un smiles en format moléculaire).
+- Les isomorphismes de sous graphe : Le temps pour chercher indépendament tous les monomères dans le peptide.
+- Le pavages : Le temps d'assembler toutes les pièces de puzzle.
+- La génération des résultats : Le temps nécessaire aux différentes librairies pour générer les images et fichiers html pour un résultat.
+
+
+### Statistiques globales
+
+Moyennes
+
+Moyennes pondérées par nombre d'atomes
+
+Précision/rappel
+
+Temps d'exécution
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
