@@ -32,11 +32,15 @@ Les ARN messagers sont les vecteurs de l'information protéique.
 Ils sont la réplication d'un morceau d'ADN qui sera traduit par triplets de nucléotides en chaine d'acides aminés.
 Les 64 codons possible ($4^3$ nucléotides) sont traduit en 20 acides aminés que l'on appelle les acides aminés protéinogènes (justement car ils interviennent dans la synthèse classique de protéines).
 Ces acides aminés sont tous composés d'un même squelette atomique autorisant deux liaisons et permettant ainsi la formation de chaines peptidiques.
-Sur le squelette est ancré une chaine latérale variant d'un acide aminé à l'autre, leur donnant leur spécificités (Voir figure TODO).
+Sur le squelette est ancré une chaine latérale variant d'un acide aminé à l'autre, leur donnant leur spécificités (Voir figure \ref{chaine_pep}).
 Les deux liaisons qu'effectuent le squelette sont supportés par un groupement amine ($NH_2$) et un groupement carboxyle ($C(=O)OH$).
 Ces deux groupements se lient entre eux en chaine et créent ainsi la protéine.
 
-\paragraph{Figure acides aminés}
+\begin{figure}
+  \includegraphics[width=400px]{Figures/bio/Intro/chaine_pep.png}
+  \caption{\label{chaine_pep}Présentation d'une chaine peptidique.
+  Chaque trait pointillé vertical sépare un acide aminé d'un autre et chaque trait horizontal sépare le squelette de la chaine latérale des acides aminés.}
+\end{figure}
 
 \paragraph{}Une fois assemblée, une protéine se replie sur elle même et ce sont les caractéristiques structurelles et physico-chimiques qui en découlent qui donnent son activité.
 Plus précisément, ce sont les propriétés des éléments en contact avec l'extérieur de la protéine (les atomes qui ne se retrouvent pas enfermé au milieu du repliement) qui déterminent l'activité de celle-ci.
@@ -56,37 +60,40 @@ Ces complexes sont appelés des synthétases (Non Ribosomal Peptide Synthetase (
 Là où les protéines classiques sont composées des 20 acides aminés standards, la synthèse non ribosomique permet
 l'incorporation de plusieurs centaines de {\em monomères} (briques de bases) différents.
 
-\paragraph{TODO : schéma Dpr}
+
+\begin{figure}
+  \includegraphics[width=480px]{Figures/bio/Intro/Dpr/2-3_liaisons.png}
+  \caption{\label{DPR_incl}Deux exemples d'inclusion du monomère Dpr.
+  Au sein de l'Edeine A, seules les deux liaisons classiques du squelette peptidique sont effectuées entre le Dpr et les autres monomères.
+  Au sein de de la Capreomycin IA, une troisième liaison est effectuée par le Dpr depuis son groupement amine de la chaine latérale.}
+\end{figure}
 
 \paragraph{}Les NRPS sont également plus souples dans la façon d'incorporer des monomères.
 Certains monomères possèdent plus de deux groupements capables de se lier.
-Ainsi sur l'exemple (TODO : Dpr), on peut constater que le monomère nommé Drp possède un groupement amine supplémentaire à celui déjà présent dans le squelette des acides aminés classiques.
+Ainsi sur l'exemple (Voir figure \ref{DPR_incl}), on peut constater que le monomère nommé Drp possède un groupement amine supplémentaire à celui déjà présent dans le squelette des acides aminés classiques.
 Ce groupement en bout de chaine latérale permet au Drp de parfois se lier 3 fois et ainsi de casser la linéarité de la molécule assemblée.
 Ce genre monomères, permet lorsqu'ils sont inclus, d'obtenir des structures à embranchements ou cycles.
 
 \paragraph{TODO : Schéma exhaustif de NRPs}
 
-% TODO : A changer ---------------------------------------------------------------------------------------------------------------------------
 
-\paragraph{}Cette possibilité de structures branchées permet de contraindre les repliements et de créer de nouvelles structures
-externes. La composition en monomère rentre également en compte dans l'activité finale des peptides. Les structures chimiques des
-nombreux monomères inclus par les NRPS permettent à leur tour la création de surfaces externes différentes de celles produites
-par les 20 acides aminés de base. Grâce à ces deux caractéristiques, les organismes producteurs ont accès à de nombreuses activités
-peptides impossibles à obtenir depuis des protéines classiques.
-
-% 1 NRPS ≈ 1 NRP
-% Grande diversité d'activités
-% Intérêt fort pour ces activités
-% Se comprend par l'énergie dépenssée par la cellule
-
-% /TODO : A changer ---------------------------------------------------------------------------------------------------------------------------
-
+\paragraph{}Les NRP présentent une grande diversité d'activités, souvent cruciales pour leurs producteurs.
+Beaucoup de NRP recensés sont par exemple des antibiotiques.
+La célèbre molécule de pénicilline est par exemple synthétisée à partir d'un précurseur NRP appelé ACV\cite{queener_molecular_1990}.
+La diversité d'activités peut être expliquée par les grandes variations de structure et de composition par rapport aux protéines.
+La possibilité d'effectuer des structures différentes contraint les repliements et la diversité de monomères permet la mise en contact avec l'extérieur, de structures moléculaires différentes.
+L'efficacité des NRP produit peut quant à elle être expliqué par un effet de sélection.
+La quantité d'énergie dépensée par la cellule pour produire un NRPS est énorme.
+Si cette débauche d'énergie n'aboutissait sur rien, il y a fort à parier que la sélection naturelle aurait favorisé la suppression de ces fonctionnalités.
 
 
 \subsection{Généralité sur les synthétases}
 
 \paragraph{}Comme nous l'avons vu dans la courte introduction précédente, les synthétases permettant l'assemblage des NRP sont des protéines issues d'une synthèse classique.
-Les synthétases sont organisées en modules consécutifs qui permettent chacun de capturer modifier et intégrer un monomère au NRP.
+Chaque NRPS est un complexe enzymatique extrémement grand dont la taille est parfois à comparer à un ribosome (TODO : exemple taille en aa).
+Cependant, contrairement à un ribosome, les NRPS sont spécialisés.
+Un NRPS ne peut produire qu'un seul type de NRP.
+Elles sont organisées en modules consécutifs qui permettent de capturer modifier et intégrer un monomère au NRP.
 Chacun de ces modules peut à son tour être découpé en domaines fonctionnels.
 Généralement un module est constitué de 3 domaines principaux et éventuellement de domaines optionnels.
 Un module standard est d'abord composé d'un domaine de condensation (C) permettant la liaison du peptide déjà formé au monomère encours d'inclusion puis d'un module d'adénilation (A) permettant la capture du monomère à insérer et d'un module thiolation (T) effectuant la fixation du monomère capturé et le transfert du NRP depuis le domaine C précédent au domaine C suivant.
