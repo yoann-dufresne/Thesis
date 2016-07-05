@@ -1,52 +1,52 @@
 
-## Les domaines de transformation monomérique
 
-Le but de cette section est de parler de quelques domaines de NRPS capables de transformer des monomères pendant leur inclusion au NRP.
+## Incorporations extra-NRPS
 
-
-### La fonction d'épimérisation (domaines E et C/E)
-
-Lors de la description des domaines LCL et DCL, j'ai rapidement évoqué la possibilité pour une molécule d'être dans deux configurations différentes en possédant pour autant la même composition et structure atomique.
-Ces deux configuration sont en fait des images miroirs l'une de l'autre [TODO : voir figure].
-On appel ceux deux configuarations Leavus (L) et Dexter (D).
-Alors que la majorité de la vie est gauchère (ne contient que des acides aminés L), les NRPS permettent l'inclusion de monomères de forme D en modifiant un monomère L capturé.
-
-Schéma D-L
-
-Les domaines responsables de ces transformation sont appelés domaines d'épimérisation.
-Une fois le monomère lié au reste du peptide par le domaine C, il est emmené auprès du domaine E afin de changer son orientation.
-Le fait que cette transformation soit postérieure à la fixation sur le reste du peptide explique l'absence de domaine DCD (Les monomères de droite seront toujours présentés avant transformation).
-Il arrive parfois que cette transformation du monomère ne soit pas portée par un module E mais directement inclus dans le domaine C précédent.
-Ce domaine est alors appelé domaine C/E et assure les deux fonctionnalités.
+Depuis le début, nous parlons de synthèse non ribosomique.
+Cependant, il arrive que le produit délivré par la synthétase et le produit final retrouvé dans l'environnement de la cellule ne soient pas les mêmes.
+Lorsque cette différence est constatée, c'est que le peptide a subit une transformation entre la fin de sa synthèse non ribosomique et le moment où il est effectivement en activité.
+Il arrive également que certaines molécules incorporées soient également des polymères pré-assemblés par d'autres mécanismes.
+Nous aborderons ici ces différents moyens d'augmenter encore la diversité des compositions de NRP.
 
 
-### domaine de N-méthylation (NM)
+### Les enzymes de décoration
 
-De la même manière que le domaine E, le domaine NM agit à la suite de la liaison du monomère actuel au morceau de peptide précédamment assemblé.
-Ce domaine permet l'ajout d'un méthyle (CH3) sur le groupement amine du monomère courant.
+Les clusters de gènes de NRPS ne sont pas uniquement constitués des gènes d'enzymes NRPS.
+Tout un tas de gènes accompagnateurs sont présent au même endroit.
+Parmis ceux-ci, certains gènes servent à modifier les NRP après leur production.
+La vancomycine est un très bon exemple de modifications enzymatiques post-synthèse.
 
-Schéma de la transformation
+TODO : Schéma vancomycine (Entourer Cl, Entourer sucre)
 
-### domaine de formylation
-% http://archiv.ub.uni-marburg.de/diss/z2008/0068/pdf/dgs.pdf
+Dans la vancomycine, on peut facilement voir que deux sucres ont été ajoutés (un vancosamine et un D-glucose).
+Les sucres ne peuvent pas être capturés par des domaines A.
+Ce sont en fait des gènes extérieurs à la NRPS qui sont dédiés à la capture, transformation et liaison de ces sucres sur la NRP.
+Comme le suggère \cite{} trois enzymes sont en action pour la création et l'incorporation de la vancosamine.
 
-Ce module n'existe à priori que pour les modules d'initiation.
-Il permet la formylation (ajout d'un groupe C(=O)H) sur le groupement amine du premier monomère.
+La vancomycine possède également deux atomes de Clore.
+Ces deux atomes ne sont pas initialement présent sur les monomères auxquels ils sont attachés.
+Ils ne sont pas non plus inclus par un module de la NRPS.
+Van Wageningen dans l'article précédamment cité montre également que deux enzymes issues du cluster de gène de la NRPS, sont responsables de ces incorporations.
+Ce type d'enzyme est appelé enzyme d'halogénation car elle est capable d'inclure un atome halogène (Fluore, Clore, Brome, Iode, Astate)
 
-Schéma de la transformation
-
-
-## Incorporation de molécules complexes
-
-### Sucres
-
-### PKS
-
-
-
+Pour résumer, les deux exemples de la Vancomycine nous montrent que certains gènes des clusters NRPS permettent la transformation des NRP en effectuant 3 taches :
+- La synthèse de monomères en modifiant des composants de l'environement (création de vancosamine)
+- La création de liaison entre monomères de l'environement et NRP (Les sucres de la Vancomycine)
+- La modification de morceaux de monomères déjà inclus dans le NRP (halogénation par exemple)
 
 
-# Les outils bio-informatiques pour les NRPS et NRP
+### Les Chromophores
+
+
+### Les PKS
+% TODO : Reférences
+
+Les PKS (Polyketyde Synthetase) sont tout comme les NRPS des enzymes modulaires permettant de synthétiser des polymère complexes par une voie non ribosomique.
+Cependant, contrairement aux NRPS, les PKS n'incorporent pas de monomères directement formés mais construisent les PK par ajouts successifs de quelques atomes.
+Chaque module est spécialisé dans un type de réaction.
+
+
+
 
 
 

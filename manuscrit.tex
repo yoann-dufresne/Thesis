@@ -37,9 +37,11 @@ Les deux liaisons qu'effectuent le squelette sont supportés par un groupement a
 Ces deux groupements se lient entre eux en chaine et créent ainsi la protéine.
 
 \begin{figure}
-  \includegraphics[width=400px]{Figures/bio/Intro/chaine_pep.png}
-  \caption{\label{chaine_pep}Présentation d'une chaine peptidique.
-  Chaque trait pointillé vertical sépare un acide aminé d'un autre et chaque trait horizontal sépare le squelette de la chaine latérale des acides aminés.}
+  \begin{center}
+    \includegraphics[width=400px]{Figures/bio/Intro/chaine_pep.png}
+    \caption{\label{chaine_pep}Présentation d'une chaine peptidique.
+    Chaque trait pointillé vertical sépare un acide aminé d'un autre et chaque trait horizontal sépare le squelette de la chaine latérale des acides aminés.}
+  \end{center}
 \end{figure}
 
 \paragraph{}Une fois assemblée, une protéine se replie sur elle même et ce sont les caractéristiques structurelles et physico-chimiques qui en découlent qui donnent son activité.
@@ -62,10 +64,12 @@ l'incorporation de plusieurs centaines de {\em monomères} (briques de bases) di
 
 
 \begin{figure}
-  \includegraphics[width=480px]{Figures/bio/Intro/Dpr/2-3_liaisons.png}
-  \caption{\label{DPR_incl}Deux exemples d'inclusion du monomère Dpr.
-  Au sein de l'Edeine A, seules les deux liaisons classiques du squelette peptidique sont effectuées entre le Dpr et les autres monomères.
-  Au sein de de la Capreomycin IA, une troisième liaison est effectuée par le Dpr depuis son groupement amine de la chaine latérale.}
+  \begin{center}
+    \includegraphics[width=480px]{Figures/bio/Intro/Dpr/2-3_liaisons.png}
+    \caption{\label{DPR_incl}Deux exemples d'inclusion du monomère Dpr.
+    Au sein de l'Edeine A, seules les deux liaisons classiques du squelette peptidique sont effectuées entre le Dpr et les autres monomères.
+    Au sein de de la Capreomycin IA, une troisième liaison est effectuée par le Dpr depuis son groupement amine de la chaine latérale.}
+  \end{center}
 \end{figure}
 
 \paragraph{}Les NRPS sont également plus souples dans la façon d'incorporer des monomères.
@@ -100,14 +104,20 @@ Un module standard est d'abord composé d'un domaine de condensation (C) permett
 Il se peut que un ou plusieurs domaines permettant des modifications sur le monomère inclus, soient présents entre le domaine A et le domaine T.
 Le premier module est également une exception à la règle du C-A-T car il ne possède normalement pas de domaine C (Car il n'y a rien à lier).
 
-\paragraph{Figure hc-toxin}
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=480px]{Figures/bio/Intro/hc-toxin.png}
+    \caption{\label{mibig_hc}Modules NRPS pour la création du peptide HC-Toxin.
+    Image issue du site web MiBIG.}
+  \end{center}
+\end{figure}
 
-\paragraph{}Prenons pour exemple le NRP appelé hc-toxin [Ref mibig].
+\paragraph{}Prenons pour exemple le NRP appelé hc-toxin\cite{_mibig:_????}.
 Le hc-toxin est un peptide non ribosomique composé de 4 monomères.
 D'après la base de données MiBig couplée à celle du NCBI, la synthétase permettant sa création est composée de 5218 acides aminés.
 Cette enzyme peut être séparée en 4 modules, chacun permettant l'inclusion d'un monomère.
 Chacun des modules est également découpé en domaines.
-Le découpage pour ce NRP est représenté sur la figure [REF figure].
+Le découpage pour ce NRP est représenté sur la figure \ref{mibig_hc}.
 Aux 4 modules correspondent 4 modules A, 4 modules T et 3 modules C.
 On peut également voir un module d'épimérisation (modification de l'acide aminé inclus) présent en fin de premier module ainsi qu'un module C supplémentaire en fin d'enzyme permettant la cyclisation du peptide.
 
@@ -123,21 +133,12 @@ La taille de la cavité ainsi que les propriétés physico-chimiques de ces acid
 Il arrive parfois que le domaine ne soit pas spécifique à un seul monomère mais plutôt à un petit nombre de monomères très proches les uns des autres.
 Cependant ce cas reste rare et dans la majorité des cas,  un NRPS ne permet la création que d'un seul NRP.
 
-\paragraph{}En 1999, Stachelhaus et al. publient un article analysant la structure de nombreux domaines A.
+\paragraph{}En 1999, Stachelhaus et al. publient un article analysant la structure de nombreux domaines A\cite{stachelhaus_specificity-conferring_1999}.
 Ils essayent d'aligner un grand nombre de domaines A pour en extraire les parties conservées et les parties spécifiques au monomère à capturer.
 Il apparait que très peu d'acides aminés sont conservés d'un domaine A à l'autre mais que ceux-ci peuvent être utilisés comme marqueurs fixes.
 Ces points conservés (et donc à priori très importants), permettent de servir de repères vers des acides aminés proches faisant partie de la poche d'accueil du monomère.
 Les auteurs extraient un codage permettant de déterminer le monomère inclus à partir de 10 acides aminés présents dans la séquence d'un domaine A.
 Depuis cet article, ce codage de référence est appelé code de Stachelhaus.
-
-\paragraph{}Depuis 2011, l'outil NRPSPredictor2 est venu affiner la reconnaissance de la spécificité.
-Les auteurs ont entrainés un Modèle de Markov Caché (Hidden Markov Model (HMM)) sur des centaines séquences de domaines A connus.
-Cet outil prédit un avec différents niveaux de granularité les monomères inclus à partir des domaines A.
-%Chaque monomère est regroupé avec d'autres dans des clusters par affinités.
-%Chacun de ces clusters est alors regroupé avec d'autres sur 3 niveaux de granularités. (TODO schéma de l'article ?)
-Les monomères sont identifiés avec une moyenne précision-rappel (F-Mesure) de 80\%.
-L'outil prédit également avec une très grande précision (F-mesure > 95\%) le type du monomère inclus (polaire, hydrophobique, aliphatique, ...).
-Cet outil est particulièrement précieux pour la découverte et l'annotation de domaines A de NRPS.
 
 
 \subsubsection{Le domaine de Thiolation (domaine T)}
@@ -145,8 +146,8 @@ Cet outil est particulièrement précieux pour la découverte et l'annotation de
 %• Biochemical characterization of peptidyl carrier protein (PCP), the thiolation domain of multifunctional peptide synthetases.
 %• Portability of the thiolation domain in recombinant pyoverdine non-ribosomal peptide synthetases
 
-\paragraph{}Le but du domaine T est d'assurer la logistique au sein du module dans lequel il est contenu.
-Ce domaine est également souvent appelé "Peptidyl Carrier domains".
+\paragraph{}Le but du domaine T est d'assurer la logistique au sein du module dans lequel il est contenu\cite{stachelhaus_biochemical_1996,calcott_portability_2015}.
+Ce domaine est également souvent appelé "Peptidyl Carrier domain".
 Il est en charge de la récupération et du transfert du peptide en cours de formation.
 Chaque domaine T possède un groupement 4’-phosphopantetheine incluant un "bras flexible" qui permet d'agripper et de déplacer les monomères.
 Dans un premier temps, ce bras permet d'aller chercher le monomère capturé par le domaine A voisin et de le lier de manière covalente.
@@ -161,9 +162,9 @@ Durant cette étape, le peptide est libéré du domaine T courant pour être lai
 %• Peptide Bond Formation in Nonribosomal Peptide Biosynthesis, CATALYTIC ROLE OF THE CONDENSATION DOMAIN
 %• http://bmcevolbiol.biomedcentral.com/articles/10.1186/1471-2148-7-78
 
-\paragraph{}Le domaine C est par convention considéré comme le premier domaine de chaque module.
+\paragraph{}Le domaine C est par convention considéré comme le premier domaine de chaque module\cite{stachelhaus_peptide_1998}.
 C'est un domaine qui permet de lier le morceau de peptide assemblé par les modules précédents avec le monomère capturé par le domaine A du module courant.
-Bien que sa fonction principale reste toujours la même, il existe plusieurs variants de ce domaine.
+Bien que sa fonction principale reste toujours la même, il existe plusieurs variants\cite{rausch_phylogenetic_2007} de ce domaine que nous allons décrire par la suite.
 
 \paragraph{Les domaine LCL et DCL}
 Les acides aminés capturés par les domaines A existent dans deux configuration différentes dites configurations L et D.
@@ -191,7 +192,12 @@ Il est également possible que les deux comportements soient en fait issus de de
 Cette dernière variation du module C standard permet de lier deux monomères voisins en effectuant deux liaisons.
 Cette liaison est toujours effectuée par un monomère possédant un atome de soufre près d'un groupement amine.
 
-\paragraph{Schéma liaison Cy}
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=300px]{Figures/bio/Intro/domainCy_bacitracine.png}
+    \caption{\label{domaine_Cy}Cyclisation entre deux monomères par un domaine Cy}
+  \end{center}
+\end{figure}
 
 
 \subsubsection{Le domaine de Thioestérase}
@@ -210,19 +216,22 @@ Ces transformations permettent aux organismes d'obtenir des configurations monom
 \paragraph{La fonction d'épimérisation (domaines E et C/E)}
 
 Lors de la description des domaines LCL et DCL, nous avons rapidement évoqué la possibilité pour une molécule d'être dans deux configurations différentes tout en possédant pour autant la même composition et structure atomique.
-Ces deux configuration sont en fait des images miroirs l'une de l'autre [TODO : voir figure].
+Ces deux configuration sont en fait des images miroirs l'une de l'autre.
 On appel ces deux configurations Leavus (L) et Dexter (D).
 
-\paragraph{Schéma D-L}
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=400px]{Figures/bio/Intro/domaineE-bacitracine.png}
+    \caption{\label{domaine_E}Épimérisation d'un monomère par un domaine E}
+  \end{center}
+\end{figure}
 
 \paragraph{}Alors que la majorité de la vie est gauchère (ne contient que des acides aminés L), les NRPS permettent l'inclusion de monomères de forme D en capturant un monomère L puis en le transformant.
 Les domaines responsables de ces transformation sont appelés domaines d'épimérisation.
 Une fois le monomère L lié au reste du peptide par le domaine C, il est emmené auprès du domaine E afin de changer son orientation.
 Le fait que cette transformation soit postérieure à la fixation sur le reste du peptide explique l'absence de domaines DCD (Les monomères de droite seront toujours présentés au domaine C avant transformation).
-Il arrive parfois que cette transformation du monomère ne soit pas portée par un module E mais directement incluse dans le domaine C précédent.
+Il arrive parfois que cette transformation du monomère ne soit pas portée par un domaine E mais directement incluse dans le domaine C précédent.
 Ce domaine est alors appelé domaine C/E et assure les deux fonctionnalités.
-
-\paragraph{Schéma de la transformation}
 
 
 \paragraph{domaine de N-méthylation (NM)}
@@ -230,15 +239,25 @@ Ce domaine est alors appelé domaine C/E et assure les deux fonctionnalités.
 De la même manière que le domaine E, le domaine NM agit à la suite de la liaison du monomère actuel au morceau de peptide précédemment assemblé.
 Ce domaine permet l'ajout d'un méthyle (CH3) sur le groupement amine du monomère courant.
 
-\paragraph{Schéma de la transformation}
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=300px]{Figures/bio/Intro/domaineNMe-cyclosporine.png}
+    \caption{\label{domaine_NMe}Méthylation d'un monomère par un domaine NM}
+  \end{center}
+\end{figure}
 
 \paragraph{domaine de formylation}
 % http://archiv.ub.uni-marburg.de/diss/z2008/0068/pdf/dgs.pdf
 
-Ce module n'existe à priori que pour les modules d'initiation.
-Il permet la formylation (ajout d'un groupe C(=O)H) sur le groupement amine du premier monomère.
+Ce domaine n'existe à priori que pour les modules d'initiation.
+Il permet la formylation (ajout d'un groupe C(=O)H) sur le groupement amine du premier monomère\cite{schonafinger_amide_2007}.
 
-\paragraph{Schéma de la transformation}
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=300px]{Figures/bio/Intro/domaineF-gramicidine.png}
+    \caption{\label{domaine_F}Formilation d'un monomère par un domaine F}
+  \end{center}
+\end{figure}
 
 
 
