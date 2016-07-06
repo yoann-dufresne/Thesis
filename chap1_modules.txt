@@ -37,13 +37,21 @@ Pour résumer, les deux exemples de la Vancomycine nous montrent que certains g�
 
 ### Les Chromophores
 
+???
+
 
 ### Les PKS
 % TODO : Reférences
 
 Les PKS (Polyketyde Synthetase) sont tout comme les NRPS des enzymes modulaires permettant de synthétiser des polymère complexes par une voie non ribosomique.
 Cependant, contrairement aux NRPS, les PKS n'incorporent pas de monomères directement formés mais construisent les PK par ajouts successifs de quelques atomes.
-Chaque module est spécialisé dans un type de réaction.
+De la même manière que les domaines A des NRPS capturent des monomères spécifiques, certains domaines PKS sont spécialisés pour effectuer des réactions permettant l'ajout de quelques atomes au PK en création.
+Tout comme les NRP, les PK sont des molécules très coûteuses à produire mais très utiles pour les organismes qui les produisent.
+
+Au sein d'un cluster de gènes comportant des gènes NRPS, il est possible d'également trouver des gènes PKS.
+Les molécules formées sont alors des hybrides NRP-PK.
+Dans certains cas les enzymes PKS forment un complexe secondaire qui créé un PK puis l'incluent au sein du NRP ; dans d'autres cas c'est unique gros complexe NRPS-PKS qui se créé et forme directement une molécule hybride.
+Cette fusion des deux types de métabolites secondaires permet une encore plus grande diversité d'activités que les PK où NRP seuls.
 
 
 
