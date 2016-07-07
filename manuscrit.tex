@@ -319,7 +319,7 @@ De la même manière que les domaines A des NRPS capturent des monomères spéci
 Tout comme les NRP, les PK sont des molécules très coûteuses à produire mais très utiles pour les organismes qui les produisent.
 Sur la figure \ref{pks} nous montrons le processus de synthèse d'une PK.
 
-\begin{figure}[h!]
+\begin{figure}
   \begin{center}
     \includegraphics[width=400px]{Figures/bio/Intro/PKS.png}
     \caption{\label{pks}Synthèse d'une epsilon-rhodomycinone
@@ -349,8 +349,85 @@ A nouveau, cette hybridation avec d'autres types de polymères permet d'augmente
 
 \section{Les outils bioinformatiques pour l'annotation et l'analyse des NRP/NRPS}
 
+\paragraph{}Après avoir présenté les NRP ainsi que leur voies de synthèse, nous allons nous attarder sur les outils bio-informatiques qui s'y intéressent.
+Les outils que nous allons présenter ici se focalisent soit sur les NRPS soit sur les NRP, c'est pourquoi la présentation séparera distinctement ces deux types d'outils.
+Pour chacune de ces catégorie, nous allons également distinguer deux sous catégories.
+La première portera sur les outils permettant l'annotation des données.
+Pour les NRPS l'annotation correspondra à la phase de recherche de gènes NRPS dans le génome ainsi qu'à l'identification des différentes briques contenues dans ces gènes (entre autre les modules).
+Pour les NRP l'annotation correspondra à la phase d'identification et de décomposition des structures monomériques présentes dans des molécules.
+La seconde sous-catégorie présentera les moyens d'archivage et de mise à disposition des informations récolétées par les outils d'annoation.
+Cette partie rassemblera les différentes bases de données, dédiées ou non et contenant une ou plusieurs informations à propos des NRPS ou NRP.
+
+\subsection{Les outils d'annotation de NRPS}
+
+\paragraph{}Dans cette partie, nous allons nous attarder sur les outils bioinformatiques permettant la découverte et l'annotation de NRPS depuis le génome.
+Cette recherche pourra être effectuée par étapes successives en commençant par la détection des clusters de gènes, en poursuivant par l'annotation des domaines des NRP et en finissant par les détections spécifiques aux types de clusters.
+
+\subsubsection{Détection de clusters de gènes}
+
+\paragraph{}L'information des clusters de gènes est très importante pour comprendre les formes finales de NRP.
+La détection des clusters nous permet d'identifier l'ensemble des gènes impliqués dans la synthèse d'un NRP et pas uniquement ceux impliqués dans la création d'un NRPS.
+Avoir accès à l'ensemble des gènes d'un cluster nous permet par exemple de détecter les transformations post-synthèse qui peuvent modifier un NRP.
+
+\paragraph{}Il existe de nombreuses techniques permettant la recherche de clusters de gènes.
+Certains outils génériques comme CLUSEAN\cite{weber_clusean:_2009} qui permettent de détecter des clusters de gène quels qu'ils soient.
+L'inconvénient fort pour l'application aux NRPS, il est nécessaire de passer un second logiciel pour vérifier que le cluster est bien NRPS.
+Il exise également des techniques spécialisées pour détecter directement des cluseters de gène de métabolites secondaires.
+Par exemple, le logiciel CASSIS\cite{wolf_cassis_2016} exploite des propriétés de régions promotrices pour découvrir et classifier ces clusters.
+
+\paragraph{}De nombreux autres logiciels encore plus spécilisés existent.
+Il est possible de découvrir des clusters de métabolites secondaires chez des bactéries\cite{cruz-morales_recapitulation_2015}, des champignons\cite{khaldi_smurf:_2010} ou encore plus précisément chez des champignons filamenteux\cite{andersen_accurate_2013,umemura_motif-independent_2015}.
+Tout ces outils pour dire que quel que soit le sous domaine des NRP étudié, nous pouvons toujours trouver un outil spécialisé dans la recherche de leurs clusters de gènes.
 
 
+
+\subsubsection{Détection et identification de domaines NRPS}
+
+\paragraph{}La détection et l'identification des gènes codant pour les domaines est le coeur de l'annotaion des NRPS.
+Nous allons ici présenter des méthodes qui permettent à la fois d'identifier les différents types de domaines (A, C, T, ...) ainsi que des méthodes permettant d'inférer les spécificités de ces domaines.
+
+% Chapter 8 Methods for In Silico Prediction of Microbial Polyketide and Nonribosomal Peptide Biosynthetic Pathways from DNA Sequence Data
+\paragraph{La recherche "manuelle"/automatique}
+Il est possible de rechercher des domaines NRPS quasi-manuellement\cite{bachmann_chapter_2009}.
+Pour cela, il faut constituer une petite base données de domaines NRPS très généralistes puis les rechercher dans le génome cible à l'aide d'algorithmes comme BLAST.
+En analysant ensuite manuellement les alignements obtenus, il est possible de détecter certains domaines qui auraient été éliminés par des algorithmes automatiques.
+Cette méthode reste dérisoire au regard de la quantité d'informations à gérer.
+Elle n'est utilisée que dans des cas très particuliers où l'on suppose fortement la découverte de nouveaux éléments.
+Cette technique peut également être utilisée automatiquement.
+Après avoir les résultats des différents BLAST lancés, il est possible de mettre un seuil de ressemblance et d'annoter tous les domaines trouvés par le nom du domaine de référence le plus proche.
+
+%· Specificity prediction of adenylation domains in nonribosomal peptide synthetases (NRPS) using transductive support vector machines (TSVMs)
+%· NRPSpredictor2—a web server for predicting NRPS adenylation domain specificity
+\paragraph{NRPS predictor}
+NRPS prédictor\cite{rottig_nrpspredictor2web_2011,rausch_specificity_2005} est un outil de prédiction des substrats capturés par les domaines A.
+Il analyse une séquence trouvée par un algorithme de détection de module A et prédit sa spécificité.
+Cet outil est basé sur la recherche par Machines à Vecteurs de Support (Support Vector Machine (SVM)).
+L'idée est de se baser sur les données de domaines A déjà annotés afin de créer des séquences (vecteurs) caractéristiques des domaines.
+L'outil permet de prédire les domaines A avec différents niveaux de granularité, ce qui permet d'avoir de l'information même lorsque le module A précis n'est pas détecté.
+Le niveau le plus fin permet la détection exacte du monomère mais il est également possible de prédire les spécificités par "groupements" de monomère.
+Par exemple, l'outil essayera de prédire si le monomère inclus est polaire, hydrophobique, aliphatique...
+Chacun de ces critères ayant son propre profil SVM.
+Cet outil est bien plus performant que le simple code de Stachelhaus et obtient une F-mesure de 80\% pour la prédiction la plus fine et 95\% pour les plus gros groupements de monomères.
+
+
+% The Natural Product Domain Seeker NaPDoS: A Phylogeny Based Bioinformatic Tool to Classify Secondary Metabolite Gene Diversity
+\paragraph{NaPDoS et l'identification des domaines C}
+NaPDoS\cite{ziemert_natural_2012} est un logiciel issu d'un travail sur la phylogénie des domaines C NRPS.
+Les auteurs ont créé une base de domaines C de NRPS déjà connus.
+À partir de cette base, ils ont alignés tous les domaines les uns contre les autres et construit une phylogénie.
+Cette phylogénie à permis aux auteurs de diviser les domaines C en plusieurs groupes et ainsi de créer la première classification de ces domaines.
+Ces groupes ont été transformés en différentes HMM représentatives utilisées pour la classification des domaines au travers du serveur web de l'application.
+
+
+% Chapter 8 Methods for In Silico Prediction of Microbial Polyketide and Nonribosomal Peptide Biosynthetic Pathways from DNA Sequence Data
+\paragraph{2metDB - PKS/NRPS web server}
+Ces deux logiciels sont deux implémentations de la même technique de détection des domaines NRPS et PKS\cite{bachmann_chapter_2009}.
+La différence entre les deux est que 2metDB est un outil standalone alors que PKS/NRPS web server est une version en ligne.
+Les auteurs font le constat qu'un domaine NRPS ou PKS possède des zones très variables en composition ainsi que des zones très conservées.
+Ce sont ces zones conservées qui ont permis de déterminer des coordonnées fixes entre domaines A et ansi de créer le code de Stachelhaus.
+Il existe des zones conservées au sein de tous les domaines.
+Les auteurs des logiciels ont tiré partie de ces zones en créant des HMM pour représenter des archétypes pour chacun des types de domaine.
+L'utilisation de HMM en faible nombre permet à ces logiciels d'être extrémement rapide pour les recherches.
 
 
 
