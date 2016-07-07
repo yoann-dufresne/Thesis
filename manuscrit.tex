@@ -36,7 +36,7 @@ Sur le squelette est ancré une chaine latérale variant d'un acide aminé à l'
 Les deux liaisons qu'effectuent le squelette sont supportés par un groupement amine ($NH_2$) et un groupement carboxyle ($C(=O)OH$).
 Ces deux groupements se lient entre eux en chaine et créent ainsi la protéine.
 
-\begin{figure}
+\begin{figure}[h!]
   \begin{center}
     \includegraphics[width=400px]{Figures/bio/Intro/chaine_pep.png}
     \caption{\label{chaine_pep}Présentation d'une chaine peptidique.
@@ -63,7 +63,7 @@ Là où les protéines classiques sont composées des 20 acides aminés standard
 l'incorporation de plusieurs centaines de {\em monomères} (briques de bases) différents.
 
 
-\begin{figure}
+\begin{figure}[h!]
   \begin{center}
     \includegraphics[width=480px]{Figures/bio/Intro/Dpr/2-3_liaisons.png}
     \caption{\label{DPR_incl}Deux exemples d'inclusion du monomère Dpr.
@@ -104,7 +104,7 @@ Un module standard est d'abord composé d'un domaine de condensation (C) permett
 Il se peut que un ou plusieurs domaines permettant des modifications sur le monomère inclus, soient présents entre le domaine A et le domaine T.
 Le premier module est également une exception à la règle du C-A-T car il ne possède normalement pas de domaine C (Car il n'y a rien à lier).
 
-\begin{figure}
+\begin{figure}[h!]
   \begin{center}
     \includegraphics[width=480px]{Figures/bio/Intro/hc-toxin.png}
     \caption{\label{mibig_hc}Modules NRPS pour la création du peptide HC-Toxin.
@@ -259,6 +259,85 @@ Il permet la formylation (ajout d'un groupe C(=O)H) sur le groupement amine du p
   \end{center}
 \end{figure}
 
+
+\subsection{Incorporations extra-NRPS}
+
+\paragraph{}Depuis le début de cette partie, nous parlons de synthèse non ribosomique.
+Cependant, il arrive que le produit délivré par la synthétase et le produit final trouvé dans l'environnement de la cellule ne soient pas les mêmes.
+Lorsque cette différence est constatée, c'est que le peptide a subit une transformation entre la fin de sa synthèse non ribosomique et le moment où il est effectivement en activité.
+Toutes les modifications ponctuelles sont effectuées par des enzymes de décoration.
+Parfois il arrive que ce soit une partie complète de la molécule qui ne soit pas NRP.
+Il existe des molécules très proches des NRP appelés polyketides qui peuvent venir s'hybrider avec des NRP.
+Dans cette partie nous allons aborder ces deux types de modification d'un NRP.
+
+
+\subsubsection{Les enzymes de décoration}
+
+\paragraph{}Les clusters de gènes de NRPS ne sont pas uniquement constitués des gènes d'enzymes NRPS.
+Tout un tas de gènes accompagnateurs sont présent au même endroit.
+Parmis ceux-ci, certains gènes servent à modifier les NRP après leur production.
+La vancomycine est un très bon exemple de modifications enzymatiques post-synthèse.
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=300px]{Figures/bio/Intro/vanco.png}
+    \caption{\label{vanco}Modifications post-synthèse NRP pour la vancomycine}
+  \end{center}
+\end{figure}
+
+\paragraph{}Sur la figure \ref{vanco}, les deux structures entourées en vert se démarquent par rapport au reste de la molécule.
+Ce sont deux sucres qui ont été ajoutés après la synthèse (un vancosamine et un D-glucose).
+Les sucres sont des monomères qui ne peuvent pas être capturés par des domaines A.
+Ce sont des gènes extérieurs à la NRPS qui sont dédiés à leur capture, transformation et liaison avec la NRP.
+Ce phénomène d'ajout de sucre est appelé glycosylation.
+Comme le suggère \cite{van_wageningen_sequencing_1998} trois enzymes sont en action pour l'incorporation de la vancosamine.
+La vancosamine n'étant pas naturellement présent dans l'environement de l'organisme producteur, l'une des enzymes est dédiée à la création de ce sucre à partir du NDP-4-keto-6-deoxyglucose.
+
+\paragraph{}La vancomycine possède également deux atomes de Clore.
+Ces deux atomes sont innabituels pour des NRP et ne sont pas initialement présent au sein de leur monomères de rattachement.
+Il n'existe pas non plus de domaine NRPS capable d'inclure ce genre d'atomes.
+Van Wageningen dans l'article précédamment cité montre également que deux enzymes issues du cluster de gène de la NRPS, sont responsables de ces incorporations.
+Ce type d'enzyme est appelé enzyme d'halogénation car elle est capable d'inclure un atome halogène (Fluore, Clore, Brome, Iode, Astate)
+
+\paragraph{}Pour résumer, les enzymes de décoration post-synthèse sont capable d'effectuer 3 tâches que nous avons découvert sur l'exemple de la vancomycine :
+\begin{itemize}
+  \item La synthèse de monomères en modifiant des composants de l'environement (création de vancosamine)
+  \item La création de liaison entre monomères de l'environement et NRP (Les sucres de la Vancomycine)
+  \item La modification de morceaux de monomères déjà inclus dans le NRP (halogénation par exemple)
+\end{itemize}
+
+Toutes ces enzymes permettent à nouveau d'augmenter la combinatoire des molécules potentiellement créées.
+
+
+
+\subsubsection{Les PKS}
+% TODO : Reférences
+
+\paragraph{}Les PKS (Polyketyde Synthetase) sont tout comme les NRPS des enzymes modulaires permettant de synthétiser des polymère complexes par une voie non ribosomique.
+Cependant, contrairement aux NRPS, les PKS n'incorporent pas de monomères directement formés mais construisent les PK par ajouts successifs de quelques atomes.
+De la même manière que les domaines A des NRPS capturent des monomères spécifiques, certains domaines PKS sont spécialisés pour effectuer des réactions permettant l'ajout de quelques atomes au PK en création.
+Tout comme les NRP, les PK sont des molécules très coûteuses à produire mais très utiles pour les organismes qui les produisent.
+Sur la figure \ref{pks} nous montrons le processus de synthèse d'une PK.
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=400px]{Figures/bio/Intro/PKS.png}
+    \caption{\label{pks}Synthèse d'une epsilon-rhodomycinone
+    Comme pour les NRPS, les PKS sont constitués de modules fonctionnels.
+    Sur cet exemple on peut voir que certains modules sont utilisés plusieurs fois itérativement.
+    La longue chaine carbonée de la première étape est créée par une répétion successive de 9 fois le même module.
+    Tout comme les NRP, les PK peuvent être modifiés après libération par le PKS (étapes 5 à 10 ici).
+    Source de l'image : en.wikipedia.org/wiki/Polyketide\_synthase}%
+  \end{center}
+\end{figure}
+
+\paragraph{}Les PKS et NRPS ont des origines communes dans l'évolution et il est logique de les retrouver au mêmes endroits du génome.
+Plusieurs NRP sont hybride avec des PK, le cluster de gènes est alors composé de gènes NRPS et PKS.
+Il existe alors deux moyens de créer ces hybrides.
+Soit la PK est créé séparément du NRP et les deux sont liés post-synthèse par des enzymes similaires aux enzymes décoratrices décrites précédamment.
+Soit la PKS et la NRPS sont produit simultanément et s'assemblent pour former un gros complexe enzymatique hybride.
+Le NRP-PK est alors directement formé pendant la synthèse en faisant passer le polymère en formation de module en module (qu'ils soient NRPS ou PKS).
+A nouveau, cette hybridation avec d'autres types de polymères permet d'augmenter la quantité de conformations de peptides possibles.
 
 
 
