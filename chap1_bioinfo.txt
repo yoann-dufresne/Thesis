@@ -68,12 +68,17 @@ Citations :
 · antiSMASH: rapid identification, annotation and analysis of secondary metabolite biosynthesis gene clusters in bacterial and fungal genome sequences
 · antiSMASH 3.0-a comprehensive resource for the genome mining of biosynthetic gene clusters
 
+Antismash est sans doute le logiciel qui est venu ces dernières années révolutionner la prédiction de métabolites secondaire depuis l'ADN.
+Le logiciel est un pipline incluant de nombreux outils tels que ceux que nous avons décrit précédemment.
+
+
 Contrairement aux autres logiciels présentés jusqu'ici, antismash n'apporte pas de nouveaux algorithmes pour l'identification de NRPS.
-C'est un pipeline qui inclut la plupart des logiciels précédents dans le but d'offrir une détection globale de métabolites secondaires.
-Ce logiciel prend une séquence ADN en entrée et applique une succession de méthodes de plus en plus précises.
+C'est un pipeline qui inclut la plupart des logiciels précédents.
+Le but est d'automatiser complétement l'annotation de l'ADN en utilisant successivement les différentes briques précédentes.
 Le pipline commence par l'identification de clusters de gènes candidats à la création de métabolites secondaires.
 Une fois le type de métabolite secondaire identifié, des outils spécifiques sont lancés sur chaque cluster afin d'identifier précisément le métabolite et ses spécificités.
 Pour les NRPS précisément, un premier outil permet la détection des domaines puis NaPDoS est lancé sur les domaines C identifiés et NRPS predictor sur les domaines A.
+Avec des serveur de calcul et une interface de résultat en ligne
 
 Antismash à rencontré un très grand succès auprès de la communauté
 TODO
