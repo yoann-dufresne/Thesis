@@ -69,46 +69,55 @@ Citations :
 · antiSMASH 3.0-a comprehensive resource for the genome mining of biosynthetic gene clusters
 
 Antismash est sans doute le logiciel qui est venu ces dernières années révolutionner la prédiction de métabolites secondaire depuis l'ADN.
-Le logiciel est un pipline incluant de nombreux outils tels que ceux que nous avons décrit précédemment.
+Le logiciel est un pipline incluant de nombreux outils dont ceux que nous avons décrit précédemment.
+Les outils sont lancés les uns derrière les autres en analysant les séquences avec une granularité de plus en plus fine.
+Les annotations effectuées par l'outil sont mis dans l'ordre en fonction des spécificités des génomes.
+Par exemple, en lançant une analyse sur un génome bactérien, antismash va commencer par rechercher les clusters de gène avec CLUSEAN, puis identifier parmis les clusters détectés, ceux qui permettent la production de métabolites secondaires pour finir par lancer les outils spécifiques à chaque métabolite comme NRPS predictor et NAPDOS sur les clusters NRPS.
 
-
-Contrairement aux autres logiciels présentés jusqu'ici, antismash n'apporte pas de nouveaux algorithmes pour l'identification de NRPS.
-C'est un pipeline qui inclut la plupart des logiciels précédents.
-Le but est d'automatiser complétement l'annotation de l'ADN en utilisant successivement les différentes briques précédentes.
-Le pipline commence par l'identification de clusters de gènes candidats à la création de métabolites secondaires.
-Une fois le type de métabolite secondaire identifié, des outils spécifiques sont lancés sur chaque cluster afin d'identifier précisément le métabolite et ses spécificités.
-Pour les NRPS précisément, un premier outil permet la détection des domaines puis NaPDoS est lancé sur les domaines C identifiés et NRPS predictor sur les domaines A.
-Avec des serveur de calcul et une interface de résultat en ligne
-
-Antismash à rencontré un très grand succès auprès de la communauté
-TODO
+Le gros intérêt de cet outil est qu'il est disponible depuis un serveur en ligne et exécute tout ces logiciels automatiquement, sur un serveur qui lui est dédié.
+Une fois les résultats créés, les utilisateurs reçoivent un mail et peuvent analyser leurs résultats en utilisant le visualisateur du site web ou en téléchangeant les fichiers de séquence annotés.
+Cette facilité d'utilisation et la puissance des outils utilisés dans le pipline à permis à l'outil d'obtenir un fort succès auprès de la communauté.
+Le succès à été tel que les auteurs ont du recourir à des listes d'attente avec priorité pour pouvoir obtenir des résultats depuis le serveur dédié.
 
 
 
 
 # Les bases de connaissances de NRPS
 
+Nous allons ici parler de toutes les bases de données qui contiennent des informations à propos des NRPS.
+Globalement ces bases servent à préserver les données qui ont été générées par des prédictions ou par des analyses fines.
+Il est important de centraliser ces données pour ensuite pouvoir les analyser globalement.
+
 ## ClusterMine360
 
-BDD NRPS
-Accession NCBI
-Affichage prédictions Antismash
-Last news 2013
+ClusterMine360 est une base de données recensant des clusters de gène NRPS et PKS.
+Les gènes sont pas stoqués directement sur la base de donnée mais pointés depuis le site du NCBI.
+Ces gènes sont pour la plupart prédits depuis antismash.
+C'est d'ailleurs les résultats antismash (v1) qui sont affichés pour le détail de chaque cluster.
+Malheureusement cette base n'est pas tenue à jour et la dernière news date de 2013.
 
 
-## ClusterScan
+## ClustScan Database
 
 Citations :
 · Databases of the thiotemplate modular systems (CSDB) and their in silico recombinants (r-CSDB).
 
-Clusters gènes + refs + peptide produit
-2013
+ClustScan Database est une base de données créée à partir des résultats de l'outil de prédiction de NRPS et PKS appelé ClustScan.
+On y trouve les publications liées aux différents clusters quand elles ont été ajoutées par des utilisateur.
+ClustScan permet également de prédire les structures des NRP et PK mais uniquement de manière linéaire ou cyclique.
+Tous les produits qui ne sont ni l'un ni l'autre ne pourront donc pas être prédit correctement.
 
 
 ## MIBiG, la base de référence des clusters de gènes NRPS/PKS
 
 Citations :
 · Minimum Information about a Biosynthetic Gene cluster
+
+MIBiG est une base de données de clusters de gènes NRPS ainsi que de toutes les annoations qui leur sont associées.
+Dans cette base seules des données rentrées à la main peuvent être insérées.
+Le but est d'essayer de rassembler les annotations de qualité qui ont été vérifiées par des humains.
+Cette base fait le lien entre les NRPS et les peptides si ils ont été identifiés complétement.
+Ce sont les auteurs de auteurs de Antismash qui sont derrière cette base et qui souhaitent concentrer les données propres.
 
 
 # L'annotation de NRP
@@ -162,16 +171,31 @@ Cette technique est également très coûteuse de part les équipements nécessa
 
 ## Norine, la base de référence des NRP
 
-Parmis les bases de connaissances pour les peptides non ribosomiques, beaucoup répertorient les clusters de gènes NRPS mais seule la base Norine 
+Norine est la base de donées de référence pour les peptides non ribosomiques annotés.
+Contrairement aux autres bases, c'est une base entiérement dédiée aux NRP.
+Tous sont extraits de publications à propos de la molécule qui permettent de déterminer leur status NRPS.
+Chaque NRP entré dans la base est accompagné de sa structure monomérique et parfois de se structure atomique.
+Depuis 2015, la base de donnée est entiérement ouverte aux contributions exterieures.
+En quelques clics et en appuyant sa soumission par des articles de preuve de la voie de synthèse, toute personne peut soumettre de nouvelles entrées.
+Le gros intérêt de cette base de donnée est d'être sûr des structures qui y sont présentées.
+Cependant, le processus d'ajout de nouvelles entrées, strict pour préserver la qualité, ne permet d'ajouter de nouvelles entrées par centaines.
+Soulignons tout de même le travail des auteurs initiaux qui ont entré plus de 1200 annotations à la main.
 
 
-## ClusterScan
+## MIBiG
 
 Citations :
 · Databases of the thiotemplate modular systems (CSDB) and their in silico recombinants (r-CSDB).
 
-Clusters gènes + refs + peptide produit
-2013
+MIBiG est la seule base hors Norine encore active et contenant des annotations vérifiées de NRP.
+Comme nous l'avons déjà dit lors de la présentation de cette base, MIBiG est une base surtout dédiée à l'annotation de NRPS.
+Les annotations de NRPS sont accompagnées d'informations sur les peptides produits.
+Ces informations peuvent être de deux types.
+Soit l'organisme est connu comme producteur d'un NRP dont on connait la structure et l'annotation de NRPS peut être vérifiée.
+Dans ce cas, la structure présente dans MIBiG est exacte même si on ne sait parfois pas quels gènes sont venu ajouter/modifier des morceaux du NRP.
+Soit le NRP est une prédiction depuis le cluster de gènes.
+Dans ce cas, il se peut qu'il ne soit que partiel et potentiellement incorrect.
+
 
 
 
