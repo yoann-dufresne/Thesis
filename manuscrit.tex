@@ -275,7 +275,7 @@ Dans cette partie nous allons aborder ces deux types de modification d'un NRP.
 
 \paragraph{}Les clusters de gènes de NRPS ne sont pas uniquement constitués des gènes d'enzymes NRPS.
 Tout un tas de gènes accompagnateurs sont présent au même endroit.
-Parmis ceux-ci, certains gènes servent à modifier les NRP après leur production.
+Parmi ceux-ci, certains gènes servent à modifier les NRP après leur production.
 La vancomycine est un très bon exemple de modifications enzymatiques post-synthèse.
 
 \begin{figure}[h!]
@@ -355,7 +355,7 @@ Pour chacune de ces catégorie, nous allons également distinguer deux sous cat�
 La première portera sur les outils permettant l'annotation des données.
 Pour les NRPS l'annotation correspondra à la phase de recherche de gènes NRPS dans le génome ainsi qu'à l'identification des différentes briques contenues dans ces gènes (entre autre les modules).
 Pour les NRP l'annotation correspondra à la phase d'identification et de décomposition des structures monomériques présentes dans des molécules.
-La seconde sous-catégorie présentera les moyens d'archivage et de mise à disposition des informations récolétées par les outils d'annoation.
+La seconde sous-catégorie présentera les moyens d'archivage et de mise à disposition des informations récoltées par les outils d'annotation.
 Cette partie rassemblera les différentes bases de données, dédiées ou non et contenant une ou plusieurs informations à propos des NRPS ou NRP.
 
 \subsection{Les outils d'annotation de NRPS}
@@ -372,10 +372,10 @@ Avoir accès à l'ensemble des gènes d'un cluster nous permet par exemple de d�
 \paragraph{}Il existe de nombreuses techniques permettant la recherche de clusters de gènes.
 Certains outils génériques comme CLUSEAN\cite{weber_clusean:_2009} qui permettent de détecter des clusters de gène quels qu'ils soient.
 L'inconvénient fort pour l'application aux NRPS, il est nécessaire de passer un second logiciel pour vérifier que le cluster est bien NRPS.
-Il exise également des techniques spécialisées pour détecter directement des cluseters de gène de métabolites secondaires.
+Il existe également des techniques spécialisées pour détecter directement des clusters de gène de métabolites secondaires.
 Par exemple, le logiciel CASSIS\cite{wolf_cassis_2016} exploite des propriétés de régions promotrices pour découvrir et classifier ces clusters.
 
-\paragraph{}De nombreux autres logiciels encore plus spécilisés existent.
+\paragraph{}De nombreux autres logiciels encore plus spécialisés existent.
 Il est possible de découvrir des clusters de métabolites secondaires chez des bactéries\cite{cruz-morales_recapitulation_2015}, des champignons\cite{khaldi_smurf:_2010} ou encore plus précisément chez des champignons filamenteux\cite{andersen_accurate_2013,umemura_motif-independent_2015}.
 Tout ces outils pour dire que quel que soit le sous domaine des NRP étudié, nous pouvons toujours trouver un outil spécialisé dans la recherche de leurs clusters de gènes.
 
@@ -427,7 +427,81 @@ Les auteurs font le constat qu'un domaine NRPS ou PKS possède des zones très v
 Ce sont ces zones conservées qui ont permis de déterminer des coordonnées fixes entre domaines A et ansi de créer le code de Stachelhaus.
 Il existe des zones conservées au sein de tous les domaines.
 Les auteurs des logiciels ont tiré partie de ces zones en créant des HMM pour représenter des archétypes pour chacun des types de domaine.
-L'utilisation de HMM en faible nombre permet à ces logiciels d'être extrémement rapide pour les recherches.
+L'utilisation de HMM en faible nombre permet à ces logiciels d'être extrêmement rapide pour les recherches.
+
+
+%· antiSMASH: rapid identification, annotation and analysis of secondary metabolite biosynthesis gene clusters in bacterial and fungal genome sequences
+%· antiSMASH 3.0-a comprehensive resource for the genome mining of biosynthetic gene clusters
+\paragraph{Antismash, le pipline pour l'identification de métabolites secondaires}
+Antismash est sans doute le logiciel qui est venu révolutionner ces dernières années la prédiction de métabolites secondaire depuis l'ADN.
+Le logiciel est un pipline incluant de nombreux outils dont ceux que nous avons décrit précédemment.
+Les outils sont lancés les uns après les autres en analysant les séquences avec une granularité de plus en plus fine.
+A un instant donné, en fonction des spécificité des génomes et des annotations réalisées précédemment sur un génome en cours d'analyse, Antismash va choisir les logiciels à lancer pour raffiner les prédictions.
+Par exemple, en lançant une analyse sur un génome bactérien, Antismash va commencer par rechercher les clusters de gène avec CLUSEAN, puis identifier parmi les clusters détectés, ceux qui permettent la production de métabolites secondaires pour finir par lancer les outils spécifiques à chaque métabolite comme NRPS predictor et NAPDOS sur les clusters NRPS.
+
+%Streptomyces coelicolor
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=450px]{Figures/bio/Bioinfo/antismash_example.png}
+    \caption{\label{antismash_result}Exemple de résultat d'antismash pour un cluster NRPS au sein du génome de Streptomyces coelicolor}
+  \end{center}
+\end{figure}
+
+\paragraph{}Le gros avantage de Antismash est sa facilité d'utilisation.
+Disponible en ligne, il permet l'envoie de génomes ou séquences protéiques pour une analyse sur des serveurs qui lui sont dédiés.
+Grâce à ce serveur, l'utilisateur n'a pas de contraintes sur la machine nécessaire au calcul.
+Après parfois plusieurs heures de calcul, l'utilisateur reçoit un mail contenant un lien vers ses résultats.
+La page de résultats comporte les résultats de tous les clusters qui ont été annotés avec des détails sur chacun des métabolites secondaires attendus.
+Cette facilité d'utilisation et la puissance des outils utilisés dans le pipline à permis un grand succès auprès de la communauté.
+Le succès à été tel que les auteurs ont du recourir à des listes d'attente avec priorité pour pouvoir obtenir des résultats depuis le serveur dédié.
+
+
+
+\subsection{Les bases de connaissances de NRPS}
+
+\paragraph{}Nous allons ici parler de toutes les bases de données qui contiennent des informations à propos des NRPS.
+Ces bases servent à préserver les données qui ont été générées par des logiciels de prédiction comme ceux présentés précédemment ou par des analyses biologiques en laboratoire.
+Ces données sont en général produites une à une par des chercheurs s'intéressant à un sujet particulier, mais il est très important de les centraliser au sein de grosses bases de connaissance pour pouvoir en tirer des règles générales.
+
+\paragraph{ClusterMine360}
+ClusterMine360 est une base de données recensant des clusters de gène NRPS et PKS.
+Ce base ne stocke pas vraiment les gènes/protéines mais uniquement les annotations.
+Elle pointe vers le NCBI pour toutes les références aux séquences.
+Les gènes de la base sont pour la plupart prédits depuis Antismash.
+C'est d'ailleurs les résultats de Antismash v1 qui sont affichés pour le détail de chaque cluster.
+Malheureusement cette base n'est pas tenue à jour et la dernière news date de 2013.
+
+
+%· Databases of the thiotemplate modular systems (CSDB) and their in silico recombinants (r-CSDB).
+\paragraph{ClustScan Database}
+ClustScan Database est une base de données créée à partir des résultats de l'outil de prédiction de NRPS et PKS appelé ClustScan.
+%Dans cette base, on trouve les publications liées aux différents clusters donquand elles ont été ajoutées par des utilisateur.
+%ClustScan permet également de prédire les structures des NRP et PK mais uniquement de manière linéaire ou cyclique.
+%Tous les produits qui ne sont ni l'un ni l'autre ne pourront donc pas être prédit correctement.
+
+
+## MIBiG, la base de référence des clusters de gènes NRPS/PKS
+
+Citations :
+· Minimum Information about a Biosynthetic Gene cluster
+
+MIBiG est une base de données de clusters de gènes NRPS ainsi que de toutes les annoations qui leur sont associées.
+Dans cette base seules des données rentrées à la main peuvent être insérées.
+Le but est d'essayer de rassembler les annotations de qualité qui ont été vérifiées par des humains.
+Cette base fait le lien entre les NRPS et les peptides si ils ont été identifiés complétement.
+Ce sont les auteurs de auteurs de Antismash qui sont derrière cette base et qui souhaitent concentrer les données propres.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
