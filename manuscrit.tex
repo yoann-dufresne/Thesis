@@ -275,7 +275,7 @@ Dans cette partie nous allons aborder ces deux types de modification d'un NRP.
 
 \paragraph{}Les clusters de gènes de NRPS ne sont pas uniquement constitués des gènes d'enzymes NRPS.
 Tout un tas de gènes accompagnateurs sont présent au même endroit.
-Parmis ceux-ci, certains gènes servent à modifier les NRP après leur production.
+Parmi ceux-ci, certains gènes servent à modifier les NRP après leur production.
 La vancomycine est un très bon exemple de modifications enzymatiques post-synthèse.
 
 \begin{figure}[h!]
@@ -319,7 +319,7 @@ De la même manière que les domaines A des NRPS capturent des monomères spéci
 Tout comme les NRP, les PK sont des molécules très coûteuses à produire mais très utiles pour les organismes qui les produisent.
 Sur la figure \ref{pks} nous montrons le processus de synthèse d'une PK.
 
-\begin{figure}[h!]
+\begin{figure}
   \begin{center}
     \includegraphics[width=400px]{Figures/bio/Intro/PKS.png}
     \caption{\label{pks}Synthèse d'une epsilon-rhodomycinone
@@ -348,6 +348,230 @@ A nouveau, cette hybridation avec d'autres types de polymères permet d'augmente
 
 
 \section{Les outils bioinformatiques pour l'annotation et l'analyse des NRP/NRPS}
+
+\paragraph{}Après avoir présenté les NRP ainsi que leur voies de synthèse, nous allons nous attarder sur les outils bio-informatiques qui s'y intéressent.
+Les outils que nous allons présenter ici se focalisent soit sur les NRPS soit sur les NRP, c'est pourquoi la présentation séparera distinctement ces deux types d'outils.
+Pour chacune de ces catégorie, nous allons également distinguer deux sous catégories.
+La première portera sur les outils permettant l'annotation des données.
+Pour les NRPS l'annotation correspondra à la phase de recherche de gènes NRPS dans le génome ainsi qu'à l'identification des différentes briques contenues dans ces gènes (entre autre les modules).
+Pour les NRP l'annotation correspondra à la phase d'identification et de décomposition des structures monomériques présentes dans des molécules.
+La seconde sous-catégorie présentera les moyens d'archivage et de mise à disposition des informations récoltées par les outils d'annotation.
+Cette partie rassemblera les différentes bases de données, dédiées ou non et contenant une ou plusieurs informations à propos des NRPS ou NRP.
+
+\subsection{Les outils d'annotation de NRPS}
+
+\paragraph{}Dans cette partie, nous allons nous attarder sur les outils bioinformatiques permettant la découverte et l'annotation de NRPS depuis le génome.
+Cette recherche pourra être effectuée par étapes successives en commençant par la détection des clusters de gènes, en poursuivant par l'annotation des domaines des NRP et en finissant par les détections spécifiques aux types de clusters.
+
+\subsubsection{Détection de clusters de gènes}
+
+\paragraph{}L'information des clusters de gènes est très importante pour comprendre les formes finales de NRP.
+La détection des clusters nous permet d'identifier l'ensemble des gènes impliqués dans la synthèse d'un NRP et pas uniquement ceux impliqués dans la création d'un NRPS.
+Avoir accès à l'ensemble des gènes d'un cluster nous permet par exemple de détecter les transformations post-synthèse qui peuvent modifier un NRP.
+
+\paragraph{}Il existe de nombreuses techniques permettant la recherche de clusters de gènes.
+Certains outils génériques comme CLUSEAN\cite{weber_clusean:_2009} qui permettent de détecter des clusters de gène quels qu'ils soient.
+L'inconvénient fort pour l'application aux NRPS, il est nécessaire de passer un second logiciel pour vérifier que le cluster est bien NRPS.
+Il existe également des techniques spécialisées pour détecter directement des clusters de gène de métabolites secondaires.
+Par exemple, le logiciel CASSIS\cite{wolf_cassis_2016} exploite des propriétés de régions promotrices pour découvrir et classifier ces clusters.
+
+\paragraph{}De nombreux autres logiciels encore plus spécialisés existent.
+Il est possible de découvrir des clusters de métabolites secondaires chez des bactéries\cite{cruz-morales_recapitulation_2015}, des champignons\cite{khaldi_smurf:_2010} ou encore plus précisément chez des champignons filamenteux\cite{andersen_accurate_2013,umemura_motif-independent_2015}.
+Tout ces outils pour dire que quel que soit le sous domaine des NRP étudié, nous pouvons toujours trouver un outil spécialisé dans la recherche de leurs clusters de gènes.
+
+
+
+\subsubsection{Détection et identification de domaines NRPS}
+
+\paragraph{}La détection et l'identification des gènes codant pour les domaines est le coeur de l'annotaion des NRPS.
+Nous allons ici présenter des méthodes qui permettent à la fois d'identifier les différents types de domaines (A, C, T, ...) ainsi que des méthodes permettant d'inférer les spécificités de ces domaines.
+
+% Chapter 8 Methods for In Silico Prediction of Microbial Polyketide and Nonribosomal Peptide Biosynthetic Pathways from DNA Sequence Data
+\paragraph{La recherche "manuelle"/automatique}
+Il est possible de rechercher des domaines NRPS quasi-manuellement\cite{bachmann_chapter_2009}.
+Pour cela, il faut constituer une petite base données de domaines NRPS très généralistes puis les rechercher dans le génome cible à l'aide d'algorithmes comme BLAST.
+En analysant ensuite manuellement les alignements obtenus, il est possible de détecter certains domaines qui auraient été éliminés par des algorithmes automatiques.
+Cette méthode reste dérisoire au regard de la quantité d'informations à gérer.
+Elle n'est utilisée que dans des cas très particuliers où l'on suppose fortement la découverte de nouveaux éléments.
+Cette technique peut également être utilisée automatiquement.
+Après avoir les résultats des différents BLAST lancés, il est possible de mettre un seuil de ressemblance et d'annoter tous les domaines trouvés par le nom du domaine de référence le plus proche.
+
+%· Specificity prediction of adenylation domains in nonribosomal peptide synthetases (NRPS) using transductive support vector machines (TSVMs)
+%· NRPSpredictor2—a web server for predicting NRPS adenylation domain specificity
+\paragraph{NRPS predictor}
+NRPS prédictor\cite{rottig_nrpspredictor2web_2011,rausch_specificity_2005} est un outil de prédiction des substrats capturés par les domaines A.
+Il analyse une séquence trouvée par un algorithme de détection de module A et prédit sa spécificité.
+Cet outil est basé sur la recherche par Machines à Vecteurs de Support (Support Vector Machine (SVM)).
+L'idée est de se baser sur les données de domaines A déjà annotés afin de créer des séquences (vecteurs) caractéristiques des domaines.
+L'outil permet de prédire les domaines A avec différents niveaux de granularité, ce qui permet d'avoir de l'information même lorsque le module A précis n'est pas détecté.
+Le niveau le plus fin permet la détection exacte du monomère mais il est également possible de prédire les spécificités par "groupements" de monomère.
+Par exemple, l'outil essayera de prédire si le monomère inclus est polaire, hydrophobique, aliphatique...
+Chacun de ces critères ayant son propre profil SVM.
+Cet outil est bien plus performant que le simple code de Stachelhaus et obtient une F-mesure de 80\% pour la prédiction la plus fine et 95\% pour les plus gros groupements de monomères.
+
+
+% The Natural Product Domain Seeker NaPDoS: A Phylogeny Based Bioinformatic Tool to Classify Secondary Metabolite Gene Diversity
+\paragraph{NaPDoS et l'identification des domaines C}
+NaPDoS\cite{ziemert_natural_2012} est un logiciel issu d'un travail sur la phylogénie des domaines C NRPS.
+Les auteurs ont créé une base de domaines C de NRPS déjà connus.
+À partir de cette base, ils ont alignés tous les domaines les uns contre les autres et construit une phylogénie.
+Cette phylogénie à permis aux auteurs de diviser les domaines C en plusieurs groupes et ainsi de créer la première classification de ces domaines.
+Ces groupes ont été transformés en différentes HMM représentatives utilisées pour la classification des domaines au travers du serveur web de l'application.
+
+
+% Chapter 8 Methods for In Silico Prediction of Microbial Polyketide and Nonribosomal Peptide Biosynthetic Pathways from DNA Sequence Data
+\paragraph{2metDB - PKS/NRPS web server}
+Ces deux logiciels sont deux implémentations de la même technique de détection des domaines NRPS et PKS\cite{bachmann_chapter_2009}.
+La différence entre les deux est que 2metDB est un outil standalone alors que PKS/NRPS web server est une version en ligne.
+Les auteurs font le constat qu'un domaine NRPS ou PKS possède des zones très variables en composition ainsi que des zones très conservées.
+Ce sont ces zones conservées qui ont permis de déterminer des coordonnées fixes entre domaines A et ansi de créer le code de Stachelhaus.
+Il existe des zones conservées au sein de tous les domaines.
+Les auteurs des logiciels ont tiré partie de ces zones en créant des HMM pour représenter des archétypes pour chacun des types de domaine.
+L'utilisation de HMM en faible nombre permet à ces logiciels d'être extrêmement rapide pour les recherches.
+
+
+%· antiSMASH: rapid identification, annotation and analysis of secondary metabolite biosynthesis gene clusters in bacterial and fungal genome sequences
+%· antiSMASH 3.0-a comprehensive resource for the genome mining of biosynthetic gene clusters
+\paragraph{Antismash, le pipline pour l'identification de métabolites secondaires}
+Antismash est sans doute le logiciel qui est venu révolutionner ces dernières années la prédiction de métabolites secondaire depuis l'ADN.
+Le logiciel est un pipline incluant de nombreux outils dont ceux que nous avons décrit précédemment.
+Les outils sont lancés les uns après les autres en analysant les séquences avec une granularité de plus en plus fine.
+A un instant donné, en fonction des spécificité des génomes et des annotations réalisées précédemment sur un génome en cours d'analyse, Antismash va choisir les logiciels à lancer pour raffiner les prédictions.
+Par exemple, en lançant une analyse sur un génome bactérien, Antismash va commencer par rechercher les clusters de gène avec CLUSEAN, puis identifier parmi les clusters détectés, ceux qui permettent la production de métabolites secondaires pour finir par lancer les outils spécifiques à chaque métabolite comme NRPS predictor et NAPDOS sur les clusters NRPS.
+
+%Streptomyces coelicolor
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=450px]{Figures/bio/Bioinfo/antismash_example.png}
+    \caption{\label{antismash_result}Exemple de résultat d'antismash pour un cluster NRPS au sein du génome de Streptomyces coelicolor}
+  \end{center}
+\end{figure}
+
+\paragraph{}Le gros avantage de Antismash est sa facilité d'utilisation.
+Disponible en ligne, il permet l'envoie de génomes ou séquences protéiques pour une analyse sur des serveurs qui lui sont dédiés.
+Grâce à ce serveur, l'utilisateur n'a pas de contraintes sur la machine nécessaire au calcul.
+Après parfois plusieurs heures de calcul, l'utilisateur reçoit un mail contenant un lien vers ses résultats.
+La page de résultats comporte les résultats de tous les clusters qui ont été annotés avec des détails sur chacun des métabolites secondaires attendus.
+Cette facilité d'utilisation et la puissance des outils utilisés dans le pipline à permis un grand succès auprès de la communauté.
+Le succès à été tel que les auteurs ont du recourir à des listes d'attente avec priorité pour pouvoir obtenir des résultats depuis le serveur dédié.
+
+
+
+\subsection{Les bases de connaissances de NRPS}
+
+\paragraph{}Nous allons ici parler de toutes les bases de données qui contiennent des informations à propos des NRPS.
+Ces bases servent à préserver les données qui ont été générées par des logiciels de prédiction comme ceux présentés précédemment ou par des analyses biologiques en laboratoire.
+Ces données sont en général produites une à une par des chercheurs s'intéressant à un sujet particulier, mais il est très important de les centraliser au sein de grosses bases de connaissance pour pouvoir en tirer des règles générales.
+
+\paragraph{ClusterMine360}
+ClusterMine360 est une base de données recensant des clusters de gène NRPS et PKS.
+Ce base ne stocke pas vraiment les gènes/protéines mais uniquement les annotations.
+Elle pointe vers le NCBI pour toutes les références aux séquences.
+Les gènes de la base sont pour la plupart prédits depuis Antismash.
+C'est d'ailleurs les résultats de Antismash v1 qui sont affichés pour le détail de chaque cluster.
+Malheureusement cette base n'est pas tenue à jour et la dernière news date de 2013.
+
+
+%· Databases of the thiotemplate modular systems (CSDB) and their in silico recombinants (r-CSDB).
+\paragraph{ClustScan Database}
+ClustScan Database est une base de données créée à partir des résultats de l'outil de prédiction de NRPS et PKS appelé ClustScan.
+Certains clusters ont été vérifiés à la main et sont accompagnés de publications lorsque les utilisateurs de la base les ont ajouté.
+Le logiciel permet également la prédiction des structures NRP.
+Cependant, la prédiction s'arrête aux structures linéaires et cycliques portées par des domaines de cyclisation.
+Ces prédictions de structures NRP sont donc a vérifier avant de les utiliser.
+
+
+%· Minimum Information about a Biosynthetic Gene cluster
+\paragraph{MIBiG, la base de référence des clusters de gènes NRPS/PKS}
+MIBiG est une base de données de clusters de gènes de métabolites secondaires, incluant des gènes NRPS accompagnés de leurs annotations.
+Les créateurs de la base cherchent la qualité avant la qualité.
+En effet, le seul moyen d'entrer des données est de les rentrer à la main en indiquant les sources desquelles proviennent ces données.
+Sur le site de MIBiG, les annotations de NRPS sont souvent accompagnées des peptides qui leur correspondent.
+Ce lien fort entre clusters de gènes et composé est très intéressant mais n'est entièrement disponible que pour 67 éléments.
+
+
+
+\subsection{L'annotation de NRP}
+
+\paragraph{Annotations automatiques depuis l'ADN}
+Le séquençage de polymères est une tâche difficile.
+C'est pourquoi les protéines ne sont pas directement séquencées mais inférées depuis le séquençage de l'ADN.
+Dans le cas des NRP, l'interprétation de l'ADN ne permet que de prédire les séquences protéiques des NRPS.
+Il est nécessaire ensuite de comprendre précisément le fonctionnement de ces NRPS pour traduire leur séquence en NRP.
+Cependant, comme nous l'avons vu lors des descriptions de logiciels d'analyse de NRPS, cette compréhension ne permet pas encore d'avoir de résultats parfait.
+La prédiction ne permet pas de prédire précisément les monomères capturés par les domaines A.
+Par exemple il est possible d'obtenir une prédiction un monomère "polaire" sans avoir plus de détails.
+Il est également possible d'obtenir des structures monomériques incomplètes, en manquant par exemple les composés capturés par des domaines C starter.
+
+\paragraph{}L'annotation automatique de NRP depuis l'ADN est une méthode très rapide grâce aux technologies récentes de séquençage mais dont les résultats peuvent être incertains voir incomplet.
+Lorsque cette technique est utilisée pour connaître la structure d'un NRP, il sera toujours nécessaire de la vérifier d'une autre manière.
+
+
+\paragraph{Analyse par spectrométrie de masse}
+La spectrométrie de masse est une technique physique d'analyse permettant l'identification de structures moléculaires.
+Ce procédé est basé sur la mesure de masses moléculaires.
+On utilise un échantillon purifié d'une molécule d'intérêt puis on envoie un niveau d'énergie précis afin de casser la molécules en morceaux.
+Selon les technologies, une ou plusieurs cassures accompagnées de une ou plusieurs mesures sont effectuées.
+L'analyse en résultant permet d'obtenir un spectre contenant différents piques représentant les masses des morceaux obtenus.
+Ces masses peuvent ensuite être comparées à des bases de données de masses caractéristiques pour ainsi connaître les composants.
+Enfin, à partir des morceaux identifiés, il existe est parfois possible de reconstruire la molécule originelle (tout dépend des technologies qui ont été utilisées).
+
+\paragraph{}Cette méthode permet d'obtenir une reconstruction atomique fiable lorsque toutes les masses sont présentes dans les bases de référence.
+Dans ces bases sont par exemple présentes les masses des acides aminés classiques et de leur dérivés proches.
+Si la technologie de spectrométrie utilisée casse les molécules au niveau de leurs liaisons peptidiques, la reconstruction permet d'obtenir directement une annotation monomérique de toutes les parties composées d'acides aminés classiques.
+Cependant, les NRP étant composés de plus de 500 monomères différents, l'annotation monomérique directement issue des analyses de spectres n'est pas suffisante.
+Beaucoup de monomères n'étant pas proche de molécules classiques, ne sont pas répertoriés parmi les masses classiques.
+Pour finir l'annotation d'un NRP, il est nécessaire d'avoir recours à un spécialiste du domaine afin qu'il nomme chacun des monomères non annotés.
+
+\paragraph{}Pour résumer, la spectrométrie de masse permet d'avoir accès à des structures atomiques de molécules avec un degré de certitude très élevé.
+De plus, contrairement à l'annotation depuis l'ADN, nous sommes certain que la molécule existe puisqu'elle est directement tirée de l'environnement étudié.
+Cependant, le besoin d'accès à un expert pour l'annotation et le faible débit de génération de données dû aux purifications nécessaires ne permettent pas une annotation efficace.
+
+
+\paragraph{Analyse par Résonance Magnétique Nucléaire}
+La Résonance Magnétique Nucléaire (RMN) est une technique permettant la détermination de structures moléculaire.
+Cette technique exploite la propriété qu'ont certains atomes à émettre un rayonnement lorsqu'ils sont placés dans des champs magnétiques.
+Les structures obtenues en sortie sont uniquement atomiques.
+Il est donc également nécessaire d'avoir recours à un expert pour effectuer une annotation monomérique.
+Cette technique est également très coûteuse de part les équipements nécessaires pour réaliser les analyses ainsi que le temps nécessaire pour créer un cristal capable de convenir à l'analyse.
+
+
+
+\subsection{Les bases de connaissance de NRP}
+
+\paragraph{}Les bases de NRP sont très rare en comparaison des bases de NRPS.
+Quasiment toutes les bases de NRPS que nous avons précédemment présenté comportent également les structures de NRP prédis.
+Cependant, comme nous l'avons déjà dit plusieurs fois ces données ne sont pas toutes fiables.
+Beaucoup des structures sont inexactes voir incomplètes dû aux prédictions.
+
+\paragraph{Norine, la base de référence des NRP}
+Norine est la base de données de référence pour les peptides non ribosomiques annotés.
+Contrairement aux autres bases, c'est une base entièrement dédiée aux NRP.
+Tous sont extraits de publications présentant les molécules et déterminant leur caractère NRP.
+Chaque molécule entrée dans la base est accompagné de sa structure monomérique (et parfois de se structure atomique).
+Depuis 2015, la base de donnée est entièrement ouverte aux contributions exterieurs.
+En quelques clics et en appuyant sa soumission par des articles de preuve de la voie de synthèse, toute personne peut soumettre de nouvelles entrées.
+Les structures présentes dans cette base sont sures, ce qui est un gros avantage comparé aux prédictions présentées jusqu'à présent.
+Cependant, le processus d'ajout de nouvelles entrées, strict pour préserver la qualité, ne permet d'ajouter de nouvelles entrées par centaines.
+Soulignons tout de même le travail effectué par les auteurs initiaux qui ont entré plus de 1200 annotations à la main.
+
+
+\paragraph{MIBiG}
+Retour sur MIBiG car c'est la seule base hors Norine encore active et contenant des annotations vérifiées de NRP.
+Comme nous l'avons déjà dit lors de la présentation de cette base, MIBiG est une base surtout dédiée à l'annotation de NRPS.
+Les annotations de NRPS sont accompagnées d'informations sur les peptides produits.
+Ces informations peuvent être de deux types.
+Soit l'organisme est connu comme producteur d'un NRP dont on connait la structure et l'annotation de NRPS peut être vérifiée.
+Dans ce cas, la structure présente dans MIBiG est exacte même si on ne sait parfois pas quels gènes sont venu ajouter/modifier des morceaux du NRP.
+Soit le NRP est une prédiction depuis le cluster de gènes.
+Dans ce cas, il se peut qu'il ne soit que partiel et potentiellement incorrect.
+
+
+
+
+
+
+
 
 
 
