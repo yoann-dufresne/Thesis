@@ -1,9 +1,14 @@
-\documentclass[a4paper,10pt]{report}
+%\documentclass[11pt,french,twoside]{thlifl}
+\documentclass[12pt,french,twoside]{report}
 \usepackage[utf8]{inputenc}
 \usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{graphicx}
-\usepackage[]{algorithm2e}
+\usepackage[french]{algorithm2e}
+\usepackage[margin=2.5cm]{geometry}
+
+
+\setcounter{secnumdepth}{3}
 
 
 
@@ -15,7 +20,555 @@
 \begin{document}
 \maketitle
 
-\chapter{Les peptides non ribosomiques et leur voie de synthèse alternative}
+\chapter{Les peptides non ribosomiques}
+
+\section{Synthèse non-ribosomique}
+
+\subsection{Introduction}
+
+\paragraph{}Afin de bien comprendre la voie de synthèse non ribosomique, commençons par quelques rappels rapides sur la synthèse des protéines classiques.
+Les protéines sont assemblées dans la cellule par un organite appelé ribosome.
+Les ARN messagers sont les vecteurs de l'information protéique.
+Ils sont la réplication d'un morceau d'ADN qui sera traduit par triplets de nucléotides en chaine d'acides aminés.
+Les 64 codons possible ($4^3$ nucléotides) sont traduit en 20 acides aminés que l'on appelle les acides aminés protéinogènes (justement car ils interviennent dans la synthèse classique de protéines).
+Ces acides aminés sont tous composés d'un même squelette atomique autorisant deux liaisons et permettant ainsi la formation de chaines peptidiques.
+Sur le squelette est ancré une chaine latérale variant d'un acide aminé à l'autre, leur donnant leur spécificités (Voir figure \ref{chaine_pep}).
+Les deux liaisons qu'effectuent le squelette sont supportés par un groupement amine ($NH_2$) et un groupement carboxyle ($C(=O)OH$).
+Ces deux groupements se lient entre eux en chaine et créent ainsi la protéine.
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=400px]{Figures/bio/Intro/chaine_pep.png}
+    \caption{\label{chaine_pep}Présentation d'une chaine peptidique.
+    Chaque trait pointillé vertical sépare un acide aminé d'un autre et chaque trait horizontal sépare le squelette de la chaine latérale des acides aminés.}
+  \end{center}
+\end{figure}
+
+\paragraph{}Une fois assemblée, une protéine se replie sur elle même et ce sont les caractéristiques structurelles et physico-chimiques qui en découlent qui donnent son activité.
+Plus précisément, ce sont les propriétés des éléments en contact avec l'extérieur de la protéine (les atomes qui ne se retrouvent pas enfermé au milieu du repliement) qui déterminent l'activité de celle-ci.
+Ces propriétés sont donc très dépendantes du repliement et des types de radicaux exposés.
+
+
+
+\subsection{Généralités sur les peptides non ribosomiques}
+\paragraph{}Les peptides non ribosomiques (Non Ribosomal Peptide (NRP)) sont des petits polymères synthétisés par certaines bactéries et certains champignons unicellulaires.
+Tout comme les protéines classiques, les NRP sont des des molécules résultant d'assemblages de briques de base.
+Cependant, comme le nom l'indique, la voie de synthèse d'un NRP est différente de celle des protéines.
+Cette voie de synthèse comporte une étape supplémentaire.
+Comme nous venons de le présenter, lors d'une création classique de protéine, l'ADN est transcrit en ARN qui lui même est traduit en protéine.
+Ici, la protéine produite n'est pas le produit final mais une enzyme qui peut agir seule ou se grouper en complexes afin d'assembler
+des NRP.
+Ces complexes sont appelés des synthétases (Non Ribosomal Peptide Synthetase (NRPS)).
+Là où les protéines classiques sont composées des 20 acides aminés standards, la synthèse non ribosomique permet
+l'incorporation de plusieurs centaines de {\em monomères} (briques de bases) différents.
+
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=480px]{Figures/bio/Intro/Dpr/2-3_liaisons.png}
+    \caption{\label{DPR_incl}Deux exemples d'inclusion du monomère Dpr.
+    Au sein de l'Edeine A, seules les deux liaisons classiques du squelette peptidique sont effectuées entre le Dpr et les autres monomères.
+    Au sein de de la Capreomycin IA, une troisième liaison est effectuée par le Dpr depuis son groupement amine de la chaine latérale.}
+  \end{center}
+\end{figure}
+
+\paragraph{}Les NRPS sont également plus souples dans la façon d'incorporer des monomères.
+Certains monomères possèdent plus de deux groupements capables de se lier.
+Ainsi sur l'exemple (Voir figure \ref{DPR_incl}), on peut constater que le monomère nommé Drp possède un groupement amine supplémentaire à celui déjà présent dans le squelette des acides aminés classiques.
+Ce groupement en bout de chaine latérale permet au Drp de parfois se lier 3 fois et ainsi de casser la linéarité de la molécule assemblée.
+Ce genre monomères, permet lorsqu'ils sont inclus, d'obtenir des structures à embranchements ou cycles.
+
+\paragraph{TODO : Schéma exhaustif de NRPs}
+
+
+\paragraph{}Les NRP présentent une grande diversité d'activités, souvent cruciales pour leurs producteurs.
+Beaucoup de NRP recensés sont par exemple des antibiotiques.
+La célèbre molécule de pénicilline est par exemple synthétisée à partir d'un précurseur NRP appelé ACV\cite{queener_molecular_1990}.
+La diversité d'activités peut être expliquée par les grandes variations de structure et de composition par rapport aux protéines.
+La possibilité d'effectuer des structures différentes contraint les repliements et la diversité de monomères permet la mise en contact avec l'extérieur, de structures moléculaires différentes.
+L'efficacité des NRP produit peut quant à elle être expliqué par un effet de sélection.
+La quantité d'énergie dépensée par la cellule pour produire un NRPS est énorme.
+Si cette débauche d'énergie n'aboutissait sur rien, il y a fort à parier que la sélection naturelle aurait favorisé la suppression de ces fonctionnalités.
+
+
+\subsection{Généralité sur les synthétases}
+
+\paragraph{}Comme nous l'avons vu dans la courte introduction précédente, les synthétases permettant l'assemblage des NRP sont des protéines issues d'une synthèse classique.
+Chaque NRPS est un complexe enzymatique extrêmement grand dont la taille est parfois à comparer à un ribosome (TODO : exemple taille en aa).
+Cependant, contrairement à un ribosome, les NRPS sont spécialisés.
+Un NRPS ne peut produire qu'un seul type de NRP.
+Elles sont organisées en modules consécutifs qui permettent de capturer modifier et intégrer un monomère au NRP.
+Chacun de ces modules peut à son tour être découpé en domaines fonctionnels.
+Généralement un module est constitué de 3 domaines principaux et éventuellement de domaines optionnels.
+Un module standard est d'abord composé d'un domaine de condensation (C) permettant la liaison du peptide déjà formé au monomère encours d'inclusion puis d'un module d'adénilation (A) permettant la capture du monomère à insérer et d'un module thiolation (T) effectuant la fixation du monomère capturé et le transfert du NRP depuis le domaine C précédent au domaine C suivant.
+Il se peut que un ou plusieurs domaines permettant des modifications sur le monomère inclus, soient présents entre le domaine A et le domaine T.
+Le premier module est également une exception à la règle du C-A-T car il ne possède normalement pas de domaine C (Car il n'y a rien à lier).
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=480px]{Figures/bio/Intro/hc-toxin.png}
+    \caption{\label{mibig_hc}Modules NRPS pour la création du peptide HC-Toxin.
+    Image issue du site web MiBIG.}
+  \end{center}
+\end{figure}
+
+\paragraph{}Prenons pour exemple le NRP appelé hc-toxin\cite{_mibig:_????}.
+Le hc-toxin est un peptide non ribosomique composé de 4 monomères.
+D'après la base de données MiBig couplée à celle du NCBI, la synthétase permettant sa création est composée de 5218 acides aminés.
+Cette enzyme peut être séparée en 4 modules, chacun permettant l'inclusion d'un monomère.
+Chacun des modules est également découpé en domaines.
+Le découpage pour ce NRP est représenté sur la figure \ref{mibig_hc}.
+Aux 4 modules correspondent 4 modules A, 4 modules T et 3 modules C.
+On peut également voir un module d'épimérisation (modification de l'acide aminé inclus) présent en fin de premier module ainsi qu'un module C supplémentaire en fin d'enzyme permettant la cyclisation du peptide.
+
+\subsection{Les domaines principaux}
+
+\subsubsection{Le domaine d'Adénilation (domaine A)}
+
+\paragraph{}C'est le domaine qui porte la spécificité du module dans lequel il se trouve.
+La séquence d'acides aminés de ce domaine varie fortement afin de pouvoir capturer beaucoup de monomères différents.
+Une fois le repliement de la synthétase effectué, les domaines A possèdent une cavité interne permettant la reconnaissance et l'accueil d'une molécule.
+Ce sont les acides aminés de la synthétase en contact avec cette cavité qui vont permettre de "choisir" le monomère à capturer dans l'environnement.
+La taille de la cavité ainsi que les propriétés physico-chimiques de ces acides aminés en contact permettent une affinité forte avec un unique monomère.
+Il arrive parfois que le domaine ne soit pas spécifique à un seul monomère mais plutôt à un petit nombre de monomères très proches les uns des autres.
+Cependant ce cas reste rare et dans la majorité des cas,  un NRPS ne permet la création que d'un seul NRP.
+
+\paragraph{}En 1999, Stachelhaus et al. publient un article analysant la structure de nombreux domaines A\cite{stachelhaus_specificity-conferring_1999}.
+Ils essayent d'aligner un grand nombre de domaines A pour en extraire les parties conservées et les parties spécifiques au monomère à capturer.
+Il apparait que très peu d'acides aminés sont conservés d'un domaine A à l'autre mais que ceux-ci peuvent être utilisés comme marqueurs fixes.
+Ces points conservés (et donc à priori très importants), permettent de servir de repères vers des acides aminés proches faisant partie de la poche d'accueil du monomère.
+Les auteurs extraient un codage permettant de déterminer le monomère inclus à partir de 10 acides aminés présents dans la séquence d'un domaine A.
+Depuis cet article, ce codage de référence est appelé code de Stachelhaus.
+
+
+\subsubsection{Le domaine de Thiolation (domaine T)}
+%citations : 
+%• Biochemical characterization of peptidyl carrier protein (PCP), the thiolation domain of multifunctional peptide synthetases.
+%• Portability of the thiolation domain in recombinant pyoverdine non-ribosomal peptide synthetases
+
+\paragraph{}Le but du domaine T est d'assurer la logistique au sein du module dans lequel il est contenu\cite{stachelhaus_biochemical_1996,calcott_portability_2015}.
+Ce domaine est également souvent appelé "Peptidyl Carrier domain".
+Il est en charge de la récupération et du transfert du peptide en cours de formation.
+Chaque domaine T possède un groupement 4’-phosphopantetheine incluant un "bras flexible" qui permet d'agripper et de déplacer les monomères.
+Dans un premier temps, ce bras permet d'aller chercher le monomère capturé par le domaine A voisin et de le lier de manière covalente.
+Dans un second temps, le monomère est mené au le site de condensation du début de module afin d'être inséré par le domaine C au début du NRP déjà formé.
+Enfin, le bras se plie dans la direction du domaine de condensation suivant afin de lier le NRP au monomère suivant.
+Durant cette étape, le peptide est libéré du domaine T courant pour être laissé à la charge du domaine T suivant.
+
+\paragraph{Schéma du domaine T}
+
+\subsubsection{Le domaine de Condensation (domaine C)}
+%citations :
+%• Peptide Bond Formation in Nonribosomal Peptide Biosynthesis, CATALYTIC ROLE OF THE CONDENSATION DOMAIN
+%• http://bmcevolbiol.biomedcentral.com/articles/10.1186/1471-2148-7-78
+
+\paragraph{}Le domaine C est par convention considéré comme le premier domaine de chaque module\cite{stachelhaus_peptide_1998}.
+C'est un domaine qui permet de lier le morceau de peptide assemblé par les modules précédents avec le monomère capturé par le domaine A du module courant.
+Bien que sa fonction principale reste toujours la même, il existe plusieurs variants\cite{rausch_phylogenetic_2007} de ce domaine que nous allons décrire par la suite.
+
+\paragraph{Les domaine LCL et DCL}
+Les acides aminés capturés par les domaines A existent dans deux configuration différentes dites configurations L et D.
+Il existe deux domaines C différents pour lier ces molécules.
+Le plus standard, permet la liaison de deux monomères de type L. Le domaine est alors appelé domaine LCL.
+Le second permet de lier un monomère D à un L, il est alors appelé domaine DCL.
+Ces domaines sont juste deux spécialisations du modèle décrit ci-dessus.
+
+\paragraph{Les domaines C starter (Cs) et C terminal (Ct)}
+Comme leur noms l'indiquent ces domaines sont en bout de protéines.
+Il ne sont donc pas entouré de deux modules différents mais sont inclus respectivement dans le premier et dernier modules.
+Il ne peuvent donc faire la liaison entre deux monomères fixés sur deux bras de domaines T.
+
+\paragraph{}Le domaine Cs permet de directement capturer et lier un monomère de l'environnement afin de débuter le peptide.
+Cela permet d'inclure par exemple des acides gras qui n'aurait pas de domaines A spécifiques.
+Ces modules capturent toujours le même type de monomère mais on ne sait actuellement pas exactement comment cette spécificité est encodée dans l'enzyme.
+
+\paragraph{}Le rôle du domaine Ct est lui un peu plus flou.
+Dans certains peptides ce domaine permet de faire une liaison entre le dernier monomère et un monomère déjà inclus, créant ainsi un cycle.
+Dans d'autres il lie le dernier monomère avec un monomère de l'environnement.
+Comme pour le Cs, la spécificité n'est pas encore expliquée.
+Il est également possible que les deux comportements soient en fait issus de deux sous catégories de Ct mais rien n'a encore été prouvé.
+
+\paragraph{Le domaine Cy}
+Cette dernière variation du module C standard permet de lier deux monomères voisins en effectuant deux liaisons.
+Cette liaison est toujours effectuée par un monomère possédant un atome de soufre près d'un groupement amine.
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=300px]{Figures/bio/Intro/domainCy_bacitracine.png}
+    \caption{\label{domaine_Cy}Cyclisation entre deux monomères par un domaine Cy}
+  \end{center}
+\end{figure}
+
+
+\subsubsection{Le domaine de Thioestérase}
+
+\paragraph{}Contrairement aux 3 autres domaines principaux, celui-ci ne fait partie d'aucun module.
+C'est un module de terminaison qui permet le décrochage du peptide complètement formé.
+Ce module de séparation n'est pas toujours présent et sa fonction est parfois exprimée par d'autres modules comme le Ct.
+
+
+\subsection{Les domaines de transformation monomérique}
+
+\paragraph{}Nous allons à présent parler de quelques modules optionnels permettant de modifier un monomère capturé par un domaine A.
+Ces transformations permettent aux organismes d'obtenir des configurations monomériques peu fréquentes dans leur environnement.
+
+
+\paragraph{La fonction d'épimérisation (domaines E et C/E)}
+
+Lors de la description des domaines LCL et DCL, nous avons rapidement évoqué la possibilité pour une molécule d'être dans deux configurations différentes tout en possédant pour autant la même composition et structure atomique.
+Ces deux configuration sont en fait des images miroirs l'une de l'autre.
+On appel ces deux configurations Leavus (L) et Dexter (D).
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=400px]{Figures/bio/Intro/domaineE-bacitracine.png}
+    \caption{\label{domaine_E}Épimérisation d'un monomère par un domaine E}
+  \end{center}
+\end{figure}
+
+\paragraph{}Alors que la majorité de la vie est gauchère (ne contient que des acides aminés L), les NRPS permettent l'inclusion de monomères de forme D en capturant un monomère L puis en le transformant.
+Les domaines responsables de ces transformation sont appelés domaines d'épimérisation.
+Une fois le monomère L lié au reste du peptide par le domaine C, il est emmené auprès du domaine E afin de changer son orientation.
+Le fait que cette transformation soit postérieure à la fixation sur le reste du peptide explique l'absence de domaines DCD (Les monomères de droite seront toujours présentés au domaine C avant transformation).
+Il arrive parfois que cette transformation du monomère ne soit pas portée par un domaine E mais directement incluse dans le domaine C précédent.
+Ce domaine est alors appelé domaine C/E et assure les deux fonctionnalités.
+
+
+\paragraph{domaine de N-méthylation (NM)}
+
+De la même manière que le domaine E, le domaine NM agit à la suite de la liaison du monomère actuel au morceau de peptide précédemment assemblé.
+Ce domaine permet l'ajout d'un méthyle (CH3) sur le groupement amine du monomère courant.
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=300px]{Figures/bio/Intro/domaineNMe-cyclosporine.png}
+    \caption{\label{domaine_NMe}Méthylation d'un monomère par un domaine NM}
+  \end{center}
+\end{figure}
+
+\paragraph{domaine de formylation}
+% http://archiv.ub.uni-marburg.de/diss/z2008/0068/pdf/dgs.pdf
+
+Ce domaine n'existe à priori que pour les modules d'initiation.
+Il permet la formylation (ajout d'un groupe C(=O)H) sur le groupement amine du premier monomère\cite{schonafinger_amide_2007}.
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=300px]{Figures/bio/Intro/domaineF-gramicidine.png}
+    \caption{\label{domaine_F}Formilation d'un monomère par un domaine F}
+  \end{center}
+\end{figure}
+
+
+\subsection{Incorporations extra-NRPS}
+
+\paragraph{}Depuis le début de cette partie, nous parlons de synthèse non ribosomique.
+Cependant, il arrive que le produit délivré par la synthétase et le produit final trouvé dans l'environnement de la cellule ne soient pas les mêmes.
+Lorsque cette différence est constatée, c'est que le peptide a subit une transformation entre la fin de sa synthèse non ribosomique et le moment où il est effectivement en activité.
+Toutes les modifications ponctuelles sont effectuées par des enzymes de décoration.
+Parfois il arrive que ce soit une partie complète de la molécule qui ne soit pas NRP.
+Il existe des molécules très proches des NRP appelés polyketides qui peuvent venir s'hybrider avec des NRP.
+Dans cette partie nous allons aborder ces deux types de modification d'un NRP.
+
+
+\subsubsection{Les enzymes de décoration}
+
+\paragraph{}Les clusters de gènes de NRPS ne sont pas uniquement constitués des gènes d'enzymes NRPS.
+Tout un tas de gènes accompagnateurs sont présent au même endroit.
+Parmi ceux-ci, certains gènes servent à modifier les NRP après leur production.
+La vancomycine est un très bon exemple de modifications enzymatiques post-synthèse.
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=300px]{Figures/bio/Intro/vanco.png}
+    \caption{\label{vanco}Modifications post-synthèse NRP pour la vancomycine}
+  \end{center}
+\end{figure}
+
+\paragraph{}Sur la figure \ref{vanco}, les deux structures entourées en vert se démarquent par rapport au reste de la molécule.
+Ce sont deux sucres qui ont été ajoutés après la synthèse (un vancosamine et un D-glucose).
+Les sucres sont des monomères qui ne peuvent pas être capturés par des domaines A.
+Ce sont des gènes extérieurs à la NRPS qui sont dédiés à leur capture, transformation et liaison avec la NRP.
+Ce phénomène d'ajout de sucre est appelé glycosylation.
+Comme le suggère \cite{van_wageningen_sequencing_1998} trois enzymes sont en action pour l'incorporation de la vancosamine.
+La vancosamine n'étant pas naturellement présent dans l'environement de l'organisme producteur, l'une des enzymes est dédiée à la création de ce sucre à partir du NDP-4-keto-6-deoxyglucose.
+
+\paragraph{}La vancomycine possède également deux atomes de Clore.
+Ces deux atomes sont inhabituels pour des NRP et ne sont pas initialement présent au sein de leur monomères de rattachement.
+Il n'existe pas non plus de domaine NRPS capable d'inclure ce genre d'atomes.
+Van Wageningen dans l'article précédemment cité montre également que deux enzymes issues du cluster de gène de la NRPS, sont responsables de ces incorporations.
+Ce type d'enzyme est appelé enzyme d'halogénation car elle est capable d'inclure un atome halogène (Fluore, Clore, Brome, Iode, Astate)
+
+\paragraph{}Pour résumer, les enzymes de décoration post-synthèse sont capable d'effectuer 3 tâches que nous avons découvert sur l'exemple de la vancomycine :
+\begin{itemize}
+  \item La synthèse de monomères en modifiant des composants de l'environnement (création de vancosamine)
+  \item La création de liaison entre monomères de l'environnement et NRP (Les sucres de la vancomycine)
+  \item La modification de morceaux de monomères déjà inclus dans le NRP (halogénation par exemple)
+\end{itemize}
+
+Toutes ces enzymes permettent à nouveau d'augmenter la combinatoire des molécules potentiellement créées.
+
+
+
+\subsubsection{Les PKS}
+% TODO : Reférences
+
+\paragraph{}Les PKS (Polyketyde Synthetase) sont tout comme les NRPS des enzymes modulaires permettant de synthétiser des polymère complexes par une voie non ribosomique.
+Cependant, contrairement aux NRPS, les PKS n'incorporent pas de monomères directement formés mais construisent les PK par ajouts successifs de quelques atomes.
+De la même manière que les domaines A des NRPS capturent des monomères spécifiques, certains domaines PKS sont spécialisés pour effectuer des réactions permettant l'ajout de quelques atomes au PK en création.
+Tout comme les NRP, les PK sont des molécules très coûteuses à produire mais très utiles pour les organismes qui les produisent.
+Sur la figure \ref{pks} nous montrons le processus de synthèse d'une PK.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=400px]{Figures/bio/Intro/PKS.png}
+    \caption{\label{pks}Synthèse d'une epsilon-rhodomycinone
+    Comme pour les NRPS, les PKS sont constitués de modules fonctionnels.
+    Sur cet exemple on peut voir que certains modules sont utilisés plusieurs fois itérativement.
+    La longue chaine carbonée de la première étape est créée par une répétition successive de 9 fois le même module.
+    Tout comme les NRP, les PK peuvent être modifiés après libération par le PKS (étapes 5 à 10 ici).
+    Source de l'image : en.wikipedia.org/wiki/Polyketide\_synthase}
+  \end{center}
+\end{figure}
+
+\paragraph{}Les PKS et NRPS ont des origines communes dans l'évolution et il est logique de les retrouver au mêmes endroits du génome.
+Plusieurs NRP sont hybride avec des PK, le cluster de gènes est alors composé de gènes NRPS et PKS.
+Il existe alors deux moyens de créer ces hybrides.
+Soit la PK est créé séparément du NRP et les deux sont liés post-synthèse par des enzymes similaires aux enzymes décoratrices décrites précédemment.
+Soit la PKS et la NRPS sont produit simultanément et s'assemblent pour former un gros complexe enzymatique hybride.
+Le NRP-PK est alors directement formé pendant la synthèse en faisant passer le polymère en formation de module en module (qu'ils soient NRPS ou PKS).
+A nouveau, cette hybridation avec d'autres types de polymères permet d'augmenter la quantité de conformations de peptides possibles.
+
+
+
+
+
+
+
+
+
+\section{Les outils bioinformatiques pour l'annotation et l'analyse des NRP/NRPS}
+
+\paragraph{}Après avoir présenté les NRP ainsi que leur voies de synthèse, nous allons nous attarder sur les outils bio-informatiques qui s'y intéressent.
+Les outils que nous allons présenter ici se focalisent soit sur les NRPS soit sur les NRP, c'est pourquoi la présentation séparera distinctement ces deux types d'outils.
+Pour chacune de ces catégorie, nous allons également distinguer deux sous catégories.
+La première portera sur les outils permettant l'annotation des données.
+Pour les NRPS l'annotation correspondra à la phase de recherche de gènes NRPS dans le génome ainsi qu'à l'identification des différentes briques contenues dans ces gènes (entre autre les modules).
+Pour les NRP l'annotation correspondra à la phase d'identification et de décomposition des structures monomériques présentes dans des molécules.
+La seconde sous-catégorie présentera les moyens d'archivage et de mise à disposition des informations récoltées par les outils d'annotation.
+Cette partie rassemblera les différentes bases de données, dédiées ou non et contenant une ou plusieurs informations à propos des NRPS ou NRP.
+
+\subsection{Les outils d'annotation de NRPS}
+
+\paragraph{}Dans cette partie, nous allons nous attarder sur les outils bioinformatiques permettant la découverte et l'annotation de NRPS depuis le génome.
+Cette recherche pourra être effectuée par étapes successives en commençant par la détection des clusters de gènes, en poursuivant par l'annotation des domaines des NRP et en finissant par les détections spécifiques aux types de clusters.
+
+\subsubsection{Détection de clusters de gènes}
+
+\paragraph{}L'information des clusters de gènes est très importante pour comprendre les formes finales de NRP.
+La détection des clusters nous permet d'identifier l'ensemble des gènes impliqués dans la synthèse d'un NRP et pas uniquement ceux impliqués dans la création d'un NRPS.
+Avoir accès à l'ensemble des gènes d'un cluster nous permet par exemple de détecter les transformations post-synthèse qui peuvent modifier un NRP.
+
+\paragraph{}Il existe de nombreuses techniques permettant la recherche de clusters de gènes.
+Certains outils génériques comme CLUSEAN\cite{weber_clusean:_2009} qui permettent de détecter des clusters de gène quels qu'ils soient.
+L'inconvénient fort pour l'application aux NRPS, il est nécessaire de passer un second logiciel pour vérifier que le cluster est bien NRPS.
+Il existe également des techniques spécialisées pour détecter directement des clusters de gène de métabolites secondaires.
+Par exemple, le logiciel CASSIS\cite{wolf_cassis_2016} exploite des propriétés de régions promotrices pour découvrir et classifier ces clusters.
+
+\paragraph{}De nombreux autres logiciels encore plus spécialisés existent.
+Il est possible de découvrir des clusters de métabolites secondaires chez des bactéries\cite{cruz-morales_recapitulation_2015}, des champignons\cite{khaldi_smurf:_2010} ou encore plus précisément chez des champignons filamenteux\cite{andersen_accurate_2013,umemura_motif-independent_2015}.
+Tout ces outils pour dire que quel que soit le sous domaine des NRP étudié, nous pouvons toujours trouver un outil spécialisé dans la recherche de leurs clusters de gènes.
+
+
+
+\subsubsection{Détection et identification de domaines NRPS}
+
+\paragraph{}La détection et l'identification des gènes codant pour les domaines est le coeur de l'annotaion des NRPS.
+Nous allons ici présenter des méthodes qui permettent à la fois d'identifier les différents types de domaines (A, C, T, ...) ainsi que des méthodes permettant d'inférer les spécificités de ces domaines.
+
+% Chapter 8 Methods for In Silico Prediction of Microbial Polyketide and Nonribosomal Peptide Biosynthetic Pathways from DNA Sequence Data
+\paragraph{La recherche "manuelle"/automatique}
+Il est possible de rechercher des domaines NRPS quasi-manuellement\cite{bachmann_chapter_2009}.
+Pour cela, il faut constituer une petite base données de domaines NRPS très généralistes puis les rechercher dans le génome cible à l'aide d'algorithmes comme BLAST.
+En analysant ensuite manuellement les alignements obtenus, il est possible de détecter certains domaines qui auraient été éliminés par des algorithmes automatiques.
+Cette méthode reste dérisoire au regard de la quantité d'informations à gérer.
+Elle n'est utilisée que dans des cas très particuliers où l'on suppose fortement la découverte de nouveaux éléments.
+Cette technique peut également être utilisée automatiquement.
+Après avoir les résultats des différents BLAST lancés, il est possible de mettre un seuil de ressemblance et d'annoter tous les domaines trouvés par le nom du domaine de référence le plus proche.
+
+%· Specificity prediction of adenylation domains in nonribosomal peptide synthetases (NRPS) using transductive support vector machines (TSVMs)
+%· NRPSpredictor2—a web server for predicting NRPS adenylation domain specificity
+\paragraph{NRPS predictor}
+NRPS prédictor\cite{rottig_nrpspredictor2web_2011,rausch_specificity_2005} est un outil de prédiction des substrats capturés par les domaines A.
+Il analyse une séquence trouvée par un algorithme de détection de module A et prédit sa spécificité.
+Cet outil est basé sur la recherche par Machines à Vecteurs de Support (Support Vector Machine (SVM)).
+L'idée est de se baser sur les données de domaines A déjà annotés afin de créer des séquences (vecteurs) caractéristiques des domaines.
+L'outil permet de prédire les domaines A avec différents niveaux de granularité, ce qui permet d'avoir de l'information même lorsque le module A précis n'est pas détecté.
+Le niveau le plus fin permet la détection exacte du monomère mais il est également possible de prédire les spécificités par "groupements" de monomère.
+Par exemple, l'outil essayera de prédire si le monomère inclus est polaire, hydrophobique, aliphatique...
+Chacun de ces critères ayant son propre profil SVM.
+Cet outil est bien plus performant que le simple code de Stachelhaus et obtient une F-mesure de 80\% pour la prédiction la plus fine et 95\% pour les plus gros groupements de monomères.
+
+
+% The Natural Product Domain Seeker NaPDoS: A Phylogeny Based Bioinformatic Tool to Classify Secondary Metabolite Gene Diversity
+\paragraph{NaPDoS et l'identification des domaines C}
+NaPDoS\cite{ziemert_natural_2012} est un logiciel issu d'un travail sur la phylogénie des domaines C NRPS.
+Les auteurs ont créé une base de domaines C de NRPS déjà connus.
+À partir de cette base, ils ont alignés tous les domaines les uns contre les autres et construit une phylogénie.
+Cette phylogénie à permis aux auteurs de diviser les domaines C en plusieurs groupes et ainsi de créer la première classification de ces domaines.
+Ces groupes ont été transformés en différentes HMM représentatives utilisées pour la classification des domaines au travers du serveur web de l'application.
+
+
+% Chapter 8 Methods for In Silico Prediction of Microbial Polyketide and Nonribosomal Peptide Biosynthetic Pathways from DNA Sequence Data
+\paragraph{2metDB - PKS/NRPS web server}
+Ces deux logiciels sont deux implémentations de la même technique de détection des domaines NRPS et PKS\cite{bachmann_chapter_2009}.
+La différence entre les deux est que 2metDB est un outil standalone alors que PKS/NRPS web server est une version en ligne.
+Les auteurs font le constat qu'un domaine NRPS ou PKS possède des zones très variables en composition ainsi que des zones très conservées.
+Ce sont ces zones conservées qui ont permis de déterminer des coordonnées fixes entre domaines A et ansi de créer le code de Stachelhaus.
+Il existe des zones conservées au sein de tous les domaines.
+Les auteurs des logiciels ont tiré partie de ces zones en créant des HMM pour représenter des archétypes pour chacun des types de domaine.
+L'utilisation de HMM en faible nombre permet à ces logiciels d'être extrêmement rapide pour les recherches.
+
+
+%· antiSMASH: rapid identification, annotation and analysis of secondary metabolite biosynthesis gene clusters in bacterial and fungal genome sequences
+%· antiSMASH 3.0-a comprehensive resource for the genome mining of biosynthetic gene clusters
+\paragraph{Antismash, le pipline pour l'identification de métabolites secondaires}
+Antismash est sans doute le logiciel qui est venu révolutionner ces dernières années la prédiction de métabolites secondaire depuis l'ADN.
+Le logiciel est un pipline incluant de nombreux outils dont ceux que nous avons décrit précédemment.
+Les outils sont lancés les uns après les autres en analysant les séquences avec une granularité de plus en plus fine.
+A un instant donné, en fonction des spécificité des génomes et des annotations réalisées précédemment sur un génome en cours d'analyse, Antismash va choisir les logiciels à lancer pour raffiner les prédictions.
+Par exemple, en lançant une analyse sur un génome bactérien, Antismash va commencer par rechercher les clusters de gène avec CLUSEAN, puis identifier parmi les clusters détectés, ceux qui permettent la production de métabolites secondaires pour finir par lancer les outils spécifiques à chaque métabolite comme NRPS predictor et NAPDOS sur les clusters NRPS.
+
+%Streptomyces coelicolor
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=450px]{Figures/bio/Bioinfo/antismash_example.png}
+    \caption{\label{antismash_result}Exemple de résultat d'antismash pour un cluster NRPS au sein du génome de Streptomyces coelicolor}
+  \end{center}
+\end{figure}
+
+\paragraph{}Le gros avantage de Antismash est sa facilité d'utilisation.
+Disponible en ligne, il permet l'envoie de génomes ou séquences protéiques pour une analyse sur des serveurs qui lui sont dédiés.
+Grâce à ce serveur, l'utilisateur n'a pas de contraintes sur la machine nécessaire au calcul.
+Après parfois plusieurs heures de calcul, l'utilisateur reçoit un mail contenant un lien vers ses résultats.
+La page de résultats comporte les résultats de tous les clusters qui ont été annotés avec des détails sur chacun des métabolites secondaires attendus.
+Cette facilité d'utilisation et la puissance des outils utilisés dans le pipline à permis un grand succès auprès de la communauté.
+Le succès à été tel que les auteurs ont du recourir à des listes d'attente avec priorité pour pouvoir obtenir des résultats depuis le serveur dédié.
+
+
+
+\subsection{Les bases de connaissances de NRPS}
+
+\paragraph{}Nous allons ici parler de toutes les bases de données qui contiennent des informations à propos des NRPS.
+Ces bases servent à préserver les données qui ont été générées par des logiciels de prédiction comme ceux présentés précédemment ou par des analyses biologiques en laboratoire.
+Ces données sont en général produites une à une par des chercheurs s'intéressant à un sujet particulier, mais il est très important de les centraliser au sein de grosses bases de connaissance pour pouvoir en tirer des règles générales.
+
+\paragraph{ClusterMine360}
+ClusterMine360 est une base de données recensant des clusters de gène NRPS et PKS.
+Ce base ne stocke pas vraiment les gènes/protéines mais uniquement les annotations.
+Elle pointe vers le NCBI pour toutes les références aux séquences.
+Les gènes de la base sont pour la plupart prédits depuis Antismash.
+C'est d'ailleurs les résultats de Antismash v1 qui sont affichés pour le détail de chaque cluster.
+Malheureusement cette base n'est pas tenue à jour et la dernière news date de 2013.
+
+
+%· Databases of the thiotemplate modular systems (CSDB) and their in silico recombinants (r-CSDB).
+\paragraph{ClustScan Database}
+ClustScan Database est une base de données créée à partir des résultats de l'outil de prédiction de NRPS et PKS appelé ClustScan.
+Certains clusters ont été vérifiés à la main et sont accompagnés de publications lorsque les utilisateurs de la base les ont ajouté.
+Le logiciel permet également la prédiction des structures NRP.
+Cependant, la prédiction s'arrête aux structures linéaires et cycliques portées par des domaines de cyclisation.
+Ces prédictions de structures NRP sont donc a vérifier avant de les utiliser.
+
+
+%· Minimum Information about a Biosynthetic Gene cluster
+\paragraph{MIBiG, la base de référence des clusters de gènes NRPS/PKS}
+MIBiG est une base de données de clusters de gènes de métabolites secondaires, incluant des gènes NRPS accompagnés de leurs annotations.
+Les créateurs de la base cherchent la qualité avant la qualité.
+En effet, le seul moyen d'entrer des données est de les rentrer à la main en indiquant les sources desquelles proviennent ces données.
+Sur le site de MIBiG, les annotations de NRPS sont souvent accompagnées des peptides qui leur correspondent.
+Ce lien fort entre clusters de gènes et composé est très intéressant mais n'est entièrement disponible que pour 67 éléments.
+
+
+
+\subsection{L'annotation de NRP}
+
+\paragraph{Annotations automatiques depuis l'ADN}
+Le séquençage de polymères est une tâche difficile.
+C'est pourquoi les protéines ne sont pas directement séquencées mais inférées depuis le séquençage de l'ADN.
+Dans le cas des NRP, l'interprétation de l'ADN ne permet que de prédire les séquences protéiques des NRPS.
+Il est nécessaire ensuite de comprendre précisément le fonctionnement de ces NRPS pour traduire leur séquence en NRP.
+Cependant, comme nous l'avons vu lors des descriptions de logiciels d'analyse de NRPS, cette compréhension ne permet pas encore d'avoir de résultats parfait.
+La prédiction ne permet pas de prédire précisément les monomères capturés par les domaines A.
+Par exemple il est possible d'obtenir une prédiction un monomère "polaire" sans avoir plus de détails.
+Il est également possible d'obtenir des structures monomériques incomplètes, en manquant par exemple les composés capturés par des domaines C starter.
+
+\paragraph{}L'annotation automatique de NRP depuis l'ADN est une méthode très rapide grâce aux technologies récentes de séquençage mais dont les résultats peuvent être incertains voir incomplet.
+Lorsque cette technique est utilisée pour connaître la structure d'un NRP, il sera toujours nécessaire de la vérifier d'une autre manière.
+
+
+\paragraph{Analyse par spectrométrie de masse}
+La spectrométrie de masse est une technique physique d'analyse permettant l'identification de structures moléculaires.
+Ce procédé est basé sur la mesure de masses moléculaires.
+On utilise un échantillon purifié d'une molécule d'intérêt puis on envoie un niveau d'énergie précis afin de casser la molécules en morceaux.
+Selon les technologies, une ou plusieurs cassures accompagnées de une ou plusieurs mesures sont effectuées.
+L'analyse en résultant permet d'obtenir un spectre contenant différents piques représentant les masses des morceaux obtenus.
+Ces masses peuvent ensuite être comparées à des bases de données de masses caractéristiques pour ainsi connaître les composants.
+Enfin, à partir des morceaux identifiés, il existe est parfois possible de reconstruire la molécule originelle (tout dépend des technologies qui ont été utilisées).
+
+\paragraph{}Cette méthode permet d'obtenir une reconstruction atomique fiable lorsque toutes les masses sont présentes dans les bases de référence.
+Dans ces bases sont par exemple présentes les masses des acides aminés classiques et de leur dérivés proches.
+Si la technologie de spectrométrie utilisée casse les molécules au niveau de leurs liaisons peptidiques, la reconstruction permet d'obtenir directement une annotation monomérique de toutes les parties composées d'acides aminés classiques.
+Cependant, les NRP étant composés de plus de 500 monomères différents, l'annotation monomérique directement issue des analyses de spectres n'est pas suffisante.
+Beaucoup de monomères n'étant pas proche de molécules classiques, ne sont pas répertoriés parmi les masses classiques.
+Pour finir l'annotation d'un NRP, il est nécessaire d'avoir recours à un spécialiste du domaine afin qu'il nomme chacun des monomères non annotés.
+
+\paragraph{}Pour résumer, la spectrométrie de masse permet d'avoir accès à des structures atomiques de molécules avec un degré de certitude très élevé.
+De plus, contrairement à l'annotation depuis l'ADN, nous sommes certain que la molécule existe puisqu'elle est directement tirée de l'environnement étudié.
+Cependant, le besoin d'accès à un expert pour l'annotation et le faible débit de génération de données dû aux purifications nécessaires ne permettent pas une annotation efficace.
+
+
+\paragraph{Analyse par Résonance Magnétique Nucléaire}
+La Résonance Magnétique Nucléaire (RMN) est une technique permettant la détermination de structures moléculaire.
+Cette technique exploite la propriété qu'ont certains atomes à émettre un rayonnement lorsqu'ils sont placés dans des champs magnétiques.
+Les structures obtenues en sortie sont uniquement atomiques.
+Il est donc également nécessaire d'avoir recours à un expert pour effectuer une annotation monomérique.
+Cette technique est également très coûteuse de part les équipements nécessaires pour réaliser les analyses ainsi que le temps nécessaire pour créer un cristal capable de convenir à l'analyse.
+
+
+
+\subsection{Les bases de connaissance de NRP}
+
+\paragraph{}Les bases de NRP sont très rare en comparaison des bases de NRPS.
+Quasiment toutes les bases de NRPS que nous avons précédemment présenté comportent également les structures de NRP prédis.
+Cependant, comme nous l'avons déjà dit plusieurs fois ces données ne sont pas toutes fiables.
+Beaucoup des structures sont inexactes voir incomplètes dû aux prédictions.
+
+\paragraph{Norine, la base de référence des NRP}
+Norine est la base de données de référence pour les peptides non ribosomiques annotés.
+Contrairement aux autres bases, c'est une base entièrement dédiée aux NRP.
+Tous sont extraits de publications présentant les molécules et déterminant leur caractère NRP.
+Chaque molécule entrée dans la base est accompagné de sa structure monomérique (et parfois de se structure atomique).
+Depuis 2015, la base de donnée est entièrement ouverte aux contributions exterieurs.
+En quelques clics et en appuyant sa soumission par des articles de preuve de la voie de synthèse, toute personne peut soumettre de nouvelles entrées.
+Les structures présentes dans cette base sont sures, ce qui est un gros avantage comparé aux prédictions présentées jusqu'à présent.
+Cependant, le processus d'ajout de nouvelles entrées, strict pour préserver la qualité, ne permet d'ajouter de nouvelles entrées par centaines.
+Soulignons tout de même le travail effectué par les auteurs initiaux qui ont entré plus de 1200 annotations à la main.
+
+
+\paragraph{MIBiG}
+Retour sur MIBiG car c'est la seule base hors Norine encore active et contenant des annotations vérifiées de NRP.
+Comme nous l'avons déjà dit lors de la présentation de cette base, MIBiG est une base surtout dédiée à l'annotation de NRPS.
+Les annotations de NRPS sont accompagnées d'informations sur les peptides produits.
+Ces informations peuvent être de deux types.
+Soit l'organisme est connu comme producteur d'un NRP dont on connait la structure et l'annotation de NRPS peut être vérifiée.
+Dans ce cas, la structure présente dans MIBiG est exacte même si on ne sait parfois pas quels gènes sont venu ajouter/modifier des morceaux du NRP.
+Soit le NRP est une prédiction depuis le cluster de gènes.
+Dans ce cas, il se peut qu'il ne soit que partiel et potentiellement incorrect.
+
+
+
+
 
 
 
@@ -352,8 +905,8 @@ pouvait avoir $n$ labels différents, celle-ci pourra générer plus de $n^2$ ($
 noeuds).
 
 \paragraph{}Le raisonnement des line graphe peut être étendu récursivement. On peut ainsi créer des line-graph de line-graph.
-Cependant cela pose plusieurs problèmes de répéter cette opération dans notre cas. Certains graphe vont diminuer de taille
-jusqu'à disparaître complètement (ce qui est peu pratique pour la comparaison) alors que d'autre vont grossir de plus en plus
+Cependant cela pose plusieurs problèmes de répéter cette opération dans notre cas. Certains graphes vont diminuer de taille
+jusqu'à disparaître complètement (ce qui est peu pratique pour la comparaison) alors que d'autres vont grossir de plus en plus
 et ajouter de plus en plus de phases de comparaison de labels et d'étapes dans l'algorithme VF2. Pour ces raisons nous avons
 choisi de n'effectuer qu'une seule étape de line-graph.
 

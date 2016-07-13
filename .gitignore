@@ -1,0 +1,8 @@
+*.gz
+*.aux
+*.log
+*.bbl
+*.blg
+*.tex.*
+manuscrit.pdf
+*.cls
