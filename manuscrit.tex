@@ -582,22 +582,22 @@ Dans ce cas, il se peut qu'il ne soit que partiel et potentiellement incorrect.
 
 \chapter{Smiles2Monomers : Des atomes vers les monomères}
 
-\section{Introduction des principes}
+\section{Introduction}
 
-\subsection{Pourquoi chercher les structures monomériques des NRP ?}
-
-\paragraph{}L'un des principes fondamentaux lorsque l'on cherche à comprendre quelle est l'activité d'une molécule,
-est de dire que cette activité a une relation forte avec la structure de cette molécule. Ce principe est appelé la
-``Relation Quantitative Structure à Activité'' (en anglais : Quantitative Structure-Activity Relationship (QSAR))
-\cite{patani_bioisosterism:_1996,leach_molecular_2001,helma_predictive_2005}.
-Par structure, il ne faut pas uniquement entendre conformation 2D ou 3D de la molécule mais également toutes les
-propriétés physico-chimiques qui résultent des atomes et liaisons présents.
-Lorsque l'on cherche à décrire l'activité d'une molécule on étudie donc sa structure et l'on part du postulat que
-deux structures semblables ont une activité semblable. Pour prédire l'activité d'une molécule il est donc nécessaire
-de comparer sa structure avec des structures dont on connaît déjà l'activité. Il existe beaucoup de techniques\{TODO Refs nécessaires\} de
-comparaison mais elles ont toutes un point commun : Plus la comparaison de structure inclut de propriétés et plus
-elle est précise mais difficile a effectuer. Le but est donc d'essayer d'étudier des propriétés pertinentes et
-faciles à comparer.
+\paragraph{}Pour comprendre un système biologique, il est nécessaire de comprendre les interactions chimiques qui s'y déroulent.
+Au delà du simple catalogage qui peut être fait, comprendre les actions moléculaires permet d'utiliser voir d'inventer de nouvelles substances pour l'industrie.
+Afin de comprendre ces activités, un postulat simple a été posé : Deux molécules proches auront deux activités proches.
+Ce postulat simple parait raisonnable puisqu'il s'appuie sur le fait que l'activité d'une molécule est portée par la configuration spatiale des différents éléments qui la composent.
+On sait aujourd'hui que ce postulat est faux car il existe quelques contre exemples\cite{patani_bioisosterism:_1996}.
+Cependant, dans la majorité des cas, cette approximation fonctionne bien et tout un domaine de chémoinformatique s'est développé dans ce sens.
+Toutes les techniques cherchant à rapprocher les structures des activités moléculaires sont regroupées derrière l'accronyme QSAR (Quantitative structure-activity relationship).
+Les techniques QSAR sont nombreuses et variées\cite{patani_bioisosterism:_1996,leach_molecular_2001,helma_predictive_2005}.
+Certaines s'attardent sur les ressemblances de structures atomiques 2D ou 3D, certaines sur les propriétés magnétiques, d'autres sur les contraintes de repliement etc.
+Beaucoup ne se cantonnent pas à une seule des ressemblances citées ci-dessus mais essayent de les combiner pour prédire le mieux possible.
+Cependant, ces techniques ont deux contraintes limitantes.
+Premièrement, pour connaître l'activité d'une molécule il est nécessaire de connaître les activités de molécules "proches".
+Secondement, les temps de calcul nécessaires augmentent rapidement avec le nombre de critères à comparer et le détail d'analyse de chaque critère.
+Le but de ces méthodes est donc d'inclure les critères les plus sélectifs afin de se rapprocher des activités connues dans un temps raisonnable.
 
 \paragraph{}Dans le cas des NRP, l'analyse des activités revient donc à chercher les ressemblances et les différences
 entre la molécule étudiée et celles dont on connaît déjà la ou les activités. Beaucoup d'approches QSAR classiques
@@ -1422,7 +1422,7 @@ C'est un critère classiquement utilisé pour la résolution gloutonne du probl�
 
 \begin{figure}
   \includegraphics[width=300px]{Figures/s2m/pavage/tri_glouton.pdf}
-  \caption{\label{glouton}En vert le chemin prit par l'algorithme glouton pour générer la chaîne du motif a-b-d}
+  \caption{\label{tri_glouton}En vert le chemin prit par l'algorithme glouton pour générer la chaîne du motif a-b-d}
 \end{figure}
 
 \paragraph{}Lorsque les résidus sont issus de monomères très similaires en taille, il arrive fréquemment que nombre d'entre eux
@@ -1474,7 +1474,7 @@ couvrant des zones non couvertes de la solution partielle.
 
 \begin{figure}
   \includegraphics[width=300px]{Figures/s2m/pavage/modulation.png}
-  \caption{\label{glouton}En vert le chemin prit par l'algorithme glouton pour générer la chaîne du motif a-b-d}
+  \caption{\label{modulation}En vert le chemin prit par l'algorithme glouton pour générer la chaîne du motif a-b-d}
 \end{figure}
 
 \paragraph{}
