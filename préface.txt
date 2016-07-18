@@ -1,0 +1,16 @@
+J'aurais pu commencer ce manuscrit comme bien d'autres en citant de grand principes et en faisant de longues phrases commençant par "De tout temps..." ou encore "L'homme a toujours...".
+Cependant, je trouves toujours ce genre de phrases beaucoup trop pompeuses et parfois même risibles, ce que je souhaites particuliérement éviter ici.
+Pour en revenir à ce document, mon nom est Yoann et je suis un informaticien pur jus.
+Je suis passionné par l'algorithmique et la logique bien au delà de mon métier ce qui explique le fait que je me retrouve en doctorat.
+Alors pourquoi une thèse en bioinformatique me demanderez-vous ?
+Pour deux raisons essentiellement.
+Tout d'abord, je suis passionné d'algorithmique certes mais particuliérement dans des cas très complexes.
+Pour être précis, j'adore résoudre dans des cas particuliers des problèmes connus comme étant NP-complets et la bioinformatique regorge de ce genre de possibilités.
+Et secondement, soyons raisonnable, jamais je ne serais capable de tenir tête aux ténors de l'informatique théorique.
+En tout cas, je ne m'en sent pas capable et ce n'est pas plus mal comme ça !
+
+Dans ce manuscrit vous trouverez donc mon travail des trois dernières années rédigé au sein de longues lignes parfois un peu lourdes ; toutes issues de la sueur de mes mains tappant un peu trop sur la touche retour de mon clavier.
+J'ai beaucoup essayé de travailler sur la forme mais mon incompétence la plus totale dans cet exercice ne me permet pas d'aller très loin.
+Du coup j'espère vous avoir mis un fond assez intéressant pour que vous ne vous perdiez pas au sein de mes mots.
+
+Pour ce qui est du fond, vous trouverez beaucoup de ce que j'ai comprit de la biologie des peptides non ribosomiques que je ne connaissait pas avant de tomber sur mon sujet de thèse.
