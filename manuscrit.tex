@@ -622,59 +622,24 @@ Il nous a donc paru nécessaire de créer ce genre d'outil d'annotation automati
 
 
 
-\subsection{Formalisation du problème}
+\section{Formalisation du problème d'annotaion}
 
-\subsubsection{Formalisation générale}
+\subsection{Définition du problème}
 
-\paragraph{}Résumons la situation. Les NRP sont des molécules polymères assemblées à partir d'un nombre de briques
-de bases monomériques finies. Lors d'un séquençage de ces molécules, nous avons accès à la structure chimique de
-ces composés mais pas toujours à leur structure monomérique. Cette structure nous intéressant particuliérement,
-nous aimerions pouvoir remonter automatiquement depuis la structure chimique vers la structure monomérique.
-
-\paragraph{}En formalisant cette demande d'un point de vue informatique, nous pouvons dire que nous aimerions avoir
-un programme qui prend en entrées une structure chimique que l'on sait être un NRP ainsi qu'une liste de monomères
-finie que l'on sait composer les NRP, pour produire une sortie qui nous permet de dire quels monomères sont présents
-dans le polymère en sachant à quels atomes ils sont rattachés.
-
-\paragraph{Figure s2m}
+\paragraph{TODO}
 
 
 
 
 
-\subsubsection{Les problématiques existantes}
-
-\paragraph{}TODO : Réécrire sous la forme 2 techniques monos->poly ou polys->monos + figure
-
-\paragraph{}Une technique appelée CHUCKLES\cite{siani_chuckles:_1994} et décrite en 1994 correspond parfaitement à
-ce que nous recherchons. Dans des buts de requêtage et de compression, les auteurs avaient besoin d'un moyen de
-passer rapidement de la représentation monomérique à la représentation atomique et inversement. La partie ``inverse''
-(Back-Translation dans l'article) part de la liste des 20 acides aminés standards (sans leurs atomes d'hydrogène)
-et les recherche un à un de manière exacte en commençant par les plus gros. La recherche des monomères se fait
-de manière indépendante en utilisant un format appelé SMARTS\{TODO Ref\} qui permet de faire des recherches par des
-algorithmes d'isomorphisme de sous graphe (voir sous partie suivante pour plus de détails). Cette technique fonctionne
-parfaitement avec les 20 acides aminés standards tant qu'ils ne sont pas transformés au sein de la molécule d'arrivée.
-Cependant, dans le cas des peptides non-ribosomiques, le nombre de monomères s'élève à plus de 500 dont certains
-étant très ressemblants. Dès que ces monomères très ressemblants sont intégrés au NRP (et donc qu'ils ont été
-modifiés par les liaisons) il devient alors impossible à partir d'un algorithme simple d'être certain de trouver
-la bonne transformation (Et ce même si elle est possible). Cette méthode est donc une bonne base de travail pour
-créer notre outil mais n'est pas suffisant pour outrepasser la complexité des molécules que nous souhaitons traiter.
-
-\paragraph{}Une seconde possibilité pour séparer une molécule en sous-composants est de choisir des règles de
-découpe de liens en ciblant certaines zones d'intérêt. Le logiciel molBLOCKS\cite{ghersi_molblocks:_2014} utilise
-cette stratégie. Le logiciel découpe non pas une mais un ensemble de molécules d'intérêt selon les règles définies
-jusqu'à ne plus pouvoir ou jusqu'à atteindre une limite minimale de taille de fragments (fixée par l'utilisateur).
-Le logiciel analyse ensuite la fréquence des fragments sur l'ensemble des molécules pour déterminer les fragments
-qui ont le moins de chance d'être artificiellement créés et ainsi les considérer comme les monomères réels. Cette
-méthode à pour gros avantage de ne pas prendre de base de donnée de monomères comme prérequis et propose une
-manière élégante de les retrouver. Cependant rien ne garantit que les monomères créés ne sont pas artificiels.
-De plus, les monomères rares dans la base de données ne généreront pas de fragments avec une suffisamment grande
-redondance pour être considérés comme réels. Enfin, si les règles de découpe sont mal choisies, les fragment générés
-n'auront aucune signification biologique.
+\subsection{Les problématiques existantes}
 
 \paragraph{}Sous techniques
 \paragraph{}SMARTS+variants (ambit-smarts)
 \paragraph{}Recherche de 1 molécule dans une autre (SMSD (MCS), .
+
+
+
 
 
 \paragraph{Conclusion}Séparation en deux sous problèmes
@@ -685,12 +650,12 @@ n'auront aucune signification biologique.
 
 
 
-\subsubsection{Des molécules aux graphes}
+\subsection{Des molécules aux graphes}
 
 \newtheorem{definition}{Definition}
 \begin{definition}\textbf{Graphe :}
  Un graphe est une représentation mathématique d'un ensemble d'objets où chacun des objets est appelé un sommet et
- chaque relation entre deux objets est représentée par un lien entre les deux sommets représentant ces objets.
+ chaque relation entre deux objets est représentée par un lien entre les deux sommets correspondant.
 \end{definition}
 
 \paragraph{}En suivant cette définition, nous allons pouvoir représenter nos deux type de structure sous la forme de
@@ -712,7 +677,7 @@ du graphe représentant la structure atomique de cette molécule. Il en sera de 
 
 
 
-\subsubsection{Formalisation en problèmes de graphes}
+\subsection{Formalisation en problèmes de graphes}
 
 \paragraph{}Comme expliqué plus haut le problème de recherche de sous composants d'un polymère peut être divisé en deux
 plus petit problèmes : un problème de recherche de monomères et un problème de placement des monomères trouvés. Traitons
@@ -736,13 +701,13 @@ monomérique.
 
 
 
-\subsection{Isomorphisme de Sous-graphe et Sous-graphe Maximum Commun}
+\section{Isomorphisme de Sous-graphe et Sous-graphe Maximum Commun}
 
 \paragraph{}Nous avons vu que nous pouvions faire correspondre deux problèmes de graphes différents avec notre problème
 de recherche de monomère. Le but de cette partie est d'étudier les différents algorithmes existant pour chacun de ces
 problèmes
 
-\subsubsection{Sous-graphe Maximum Commun : définition}
+\subsection{Sous-graphe Maximum Commun : définition}
 
 \paragraph{}Commençons par définir clairement le sous graphe maximum commun.
 
@@ -760,7 +725,7 @@ problèmes
 
 
 
-\subsubsection{Isomorphisme de Sous-graphe : définition}
+\subsection{Isomorphisme de Sous-graphe : définition}
 
 \paragraph{}De la même manière que pour le MCS, définissons précisément ce qu'est l'Isomorphisme de Sous-graphe
 
