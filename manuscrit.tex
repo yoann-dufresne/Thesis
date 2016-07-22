@@ -653,29 +653,74 @@ Nous allons ici présenter ces deux approches.
 
 \subsubsection{CHUCKLES, une méthode constructive}
 
-\paragraph{}La technique appelée CHUCKLES, décrite en 1994, correspond parfaitement à ce que nous recherchons.
-A des fins de requêtage et de compression, les auteurs avaient besoin d'un moyen de passer rapidement de la représentation monomérique à la représentation atomique et inversement.
-La partie ``inverse'' (Back-Translation dans l'article) utilise la liste des 20 acides aminés standards (sans leurs atomes d'hydrogène) afin de les rechercher un à un dans la molécule à analyser.
-Les acides aminés sont recherchés du plus gros au plus petit afin d'éviter des positionnements aléatoires des plus petits.
-Les recherches des acides aminés peuvent être effectuées rapidement et de manière exactes grâce à de bonnes implémentations des SMARTS~\cite{jeliazkova_ambit-smarts:_2011}.
-Cette technique fonctionne parfaitement avec les 20 acides aminés standards tant qu'ils ne sont pas transformés au sein de la molécule d'arrivée.
-Dans le cas des peptides non-ribosomiques, le nombre de monomères s'élève à plus de 500 dont de nombreux très ressemblants entre eux.
-Dès que ces monomères très ressemblants sont intégrés au NRP (et qu'ils ont été modifiés par les liaisons) il devient alors impossible en utilisant un algorithme simple, d'être certain de trouver la bonne structure monomérique.
-Cette méthode est donc une bonne base de travail pour créer un outil d'annotation NRP mais n'est pas suffisant pour outrepasser la complexité des molécules que nous souhaitons traiter.
+\paragraph{}CHUCKLES est une méthode publiée en 1994 permettant de rechercher des peptides au sein d'une base de donnée.
+Le but est de requéter une base de données de moléules en utilisant des expressions régulières représentant des sous-molécules d'intérêt.
+Les recherches peuvent être effectuée à la fois au niveau atomique et au niveau monomérique.
+Le but de CHUCKLES est de convertir rapidement les données du format monomérique vers le format atomique et inversement.
+Les auteurs pensent qu'il est plus utile de converver les formats atomiques en base plutôt que les séquences protéiques.
+Sachant que la plupart des peptides de l'époque étaient déjà représenté par leur séquence, les auteurs proposent une méthode de transformation vers la structure atomique.
+Cette transformation est appelée ``Forward-Translation'' (FT).
 
-\paragraph{TODO : Schéma CHUCKLES}
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=450px]{Figures/s2m/formalisation/CHUCK_FT.png}
+    \caption{\label{chuck_ft}CHUCKLES Forward Translation.
+    Transformation des annotations peptidiques en SMILES.
+    Sous l'annotation peptidique est écrite la formile SMILES après concaténation de tous les SMILES des monomères trouvés.
+    Schémas issus de la publication}
+  \end{center}
+\end{figure}
+
+\paragraph{}Pour mener à bien chaque ST, les auteurs ont besoin d'une table de transformation qui ressence les structures atomiques de chacun des monomères à transformer.
+Chaque séquence ne doit pas contenir les atomes qui vont être perdus lors des liaisons avec d'autres monomères.
+Pour les structures linéaires, la méthode indique simplement de concaténer les structures atomiques selon la chaine peptidique.
+Lorsque les structures sont branchées ou cycliques, il est nécessaire d'ajouter dans la séquence initiale l'information de liaison annexe.
+
+Cette méthode de reconstruction des structures atomiques est très intéressante mais souffre du manque d'information des séquences protéiques.
+On peut remarquer que la reconstruction ne peut fonctionner à tous les coups sans plus d'information.
+En effet, si les monomères ne possédent pas de groupement carboxyl et amine, la reconstruction ne peut pas être effectuée sans choix aléatoires d'orientation.
+
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=300px]{Figures/s2m/formalisation/CHUCK_BT.png}
+    \caption{\label{chuck_bt}CHUCKLES Backward Translation.
+    La première partie représente la phase de recherche des monomères au sein de la structure atomique.
+    La seconde partie représente la structure monomérique post contraction.
+    On peut voir à gauche la chaine principale qui a été extraite à partir du N initial.
+    A droite sont répertoriées les deux ponts disulfures extrait hors de la chaine principale.
+    Chaque monomère découvert comporte un identifiant différent de son nom pour éviter d'avoir deux fois le même nom comme cela pourrait être ici.
+    Schémas issus de la publication}
+  \end{center}
+\end{figure}
+
+\paragraph{}La seconde partie de la méthode présente la transformation inverse (``Backward-Transformation'' (BT)).
+C'est cette partie qui est très intéressante pour l'annotation car elle part des structures atomiques pour reconstruire les structures monomériques.
+Les auteurs proposent une annotation en deux temps.
+Le premier temps représente la phase de recherche des monomères et le second temps la convertion des moomères trouvés en une annotation.
+L'idée de la première phase est de rechercher chaque monomère connu en masquant les atomes déjà utilisés par des monomères précédamment trouvés.
+En recherchant les monomères par nombre d'atomes décroissant, les auteurs s'assurent que de petit monomères ne viendront pas prendre la place de plus gros.
+Lors de la seconde phase, les atomes des molécules sont contractés pour ne plus former qu'un seul noeud par monomère.
+Le N terminal de la chaine peptidique est ensuite recherché afin d'extraire l'annotation de cette chaine en suivant les liaisons peptidiques.
+Enfin les liaisons n'ayant pas encore été explorées sont ajoutées à la représentation monomérique finale.
+
+Comme pour le FT, le BT utilise des techniques intelligentes mais encore faillibles.
+Dans le cas des NRP, certains monomères ne possédent pas les deux domaines pour les liaisons peptidiques.
+Il est donc potentiellement impossible de retrouver une chaine principale.
+De plus, lors de la recherche, si les monomères a rechercher sont structurellement proches, il est possible qu'un gros monomère vienne prendre la place d'un plus petit en débordant sur un ou plusieurs monomères voisins.
+Dans ce cas, vu qu'aucun retrour en arrière n'est effectué, l'annotation sera innexacte voir incomplète.
 
 
 \subsubsection{molBLOCKS, une méthode destructive}
 
-\paragraph{}Une seconde méthode d'annotation cherche à ``détruire'' les liens pertinents de la molécule pour en extraire les composants.
-Le logiciel molBLOCKS utilise cette stratégie.
-Il découpe un ensemble de molécules d'intérêt selon les règles définies par l'utilisateur, jusqu'à ne plus trouver de liaisons ou atteindre une taille limite de fragments.
-Le logiciel analyse ensuite la fréquence des fragments sur l'ensemble des molécules pour déterminer les fragments qui ont le moins de chance d'être artificiellement créés et ainsi les considérer comme les monomères réels.
-Cette méthode à pour avantage de ne pas avoir besoin de base de donnée de monomères comme prérequis et propose une manière élégante de les retrouver.
-Cependant rien ne garantit que les monomères créés par le logiciel ne soient ceux vraiment inclus biologiquement.
-De plus, les monomères rares dans la base de données ne généreront pas de fragments avec une suffisamment grande redondance pour être considérés comme réels.
-Enfin, si les règles de découpe sont mal choisies, les fragment générés n'auront aucune signification biologique.
+\paragraph{}Le logiciel momBLOCKS n'est à la base pas du tout concu pour le travail que nous cherchons à effectuer.
+C'est un logiciel qui permet de découvrir des monomères en repérant les sous morceaux fréquents au sein d'une population de polymères.
+Pour cela le logiciel découpe les polymères en petits morceaux et fait des comptages sur ces morceaux.
+Pour espérer découvrir des monomères réalistes, les découpes ne sont pas faites au hasard mais selon des règles exprimées par l'utilisateur.
+Cependant, il n'est jamais exclu que les règles définies par l'utilisateur ne sur-découpent pas les molécules.
+
+Dans notre cas, nous pourrions utiliser un tel logiciel pour découper les peptides d'intérêt puis effectuer par la suite une étape de reconnaissance des monomères générés.
+Cependant, aux vues des liaisons particulières de certains NRP, il est fort probable que certains morceaux ne ressemblent jamais à un monomère NRP connu.
+Le fait de ne pas garantir la véracité des monomères dès la découpe est un fort unconvénient dans notre cas.
 
 \paragraph{TODO : Schéma molBLOCKS}
 
