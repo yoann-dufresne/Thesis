@@ -1,4 +1,3 @@
-%\documentclass[11pt,french,twoside]{thlifl}
 \documentclass[12pt,french,twoside]{report}
 \usepackage[utf8]{inputenc}
 \usepackage{amsthm}
@@ -255,7 +254,7 @@ Il permet la formylation (ajout d'un groupe C(=O)H) sur le groupement amine du p
 \begin{figure}[h!]
   \begin{center}
     \includegraphics[width=300px]{Figures/bio/Intro/domaineF-gramicidine.png}
-    \caption{\label{domaine_F}Formilation d'un monomère par un domaine F}
+    \caption{\label{domaine_F}Formylation d'un monomère par un domaine F}
   \end{center}
 \end{figure}
 
@@ -291,13 +290,13 @@ Les sucres sont des monomères qui ne peuvent pas être capturés par des domain
 Ce sont des gènes extérieurs à la NRPS qui sont dédiés à leur capture, transformation et liaison avec la NRP.
 Ce phénomène d'ajout de sucre est appelé glycosylation.
 Comme le suggère ~\cite{van_wageningen_sequencing_1998} trois enzymes sont en action pour l'incorporation de la vancosamine.
-La vancosamine n'étant pas naturellement présent dans l'environement de l'organisme producteur, l'une des enzymes est dédiée à la création de ce sucre à partir du NDP-4-keto-6-deoxyglucose.
+La vancosamine n'étant pas naturellement présent dans l'environnement de l'organisme producteur, l'une des enzymes est dédiée à la création de ce sucre à partir du NDP-4-keto-6-deoxyglucose.
 
 \paragraph{}La vancomycine possède également deux atomes de Clore.
 Ces deux atomes sont inhabituels pour des NRP et ne sont pas initialement présents au sein de leurs monomères de rattachement.
 Il n'existe pas non plus de domaine NRPS capable d'inclure ces atomes.
 Van Wageningen dans l'article précédemment cité montre également que deux enzymes issues du cluster de gènes de la NRPS, sont responsables de ces incorporations.
-Ce type d'enzyme est appelé enzyme d'halogénation car elle est capable d'inclure un atome halogène (Fluore, Clore, Brome, Iode, Astate)
+Ce type d'enzyme est appelé enzyme d'halogénation car elle est capable d'inclure un atome halogène (Fluor, Clore, Brome, Iode, Astate)
 
 \paragraph{}Pour résumer, les enzymes de décoration post-synthèse sont capables d'effectuer 3 tâches que nous avons découvert sur l'exemple de la vancomycine :
 \begin{itemize}
@@ -383,7 +382,7 @@ Tous ces outils pour dire que quel que soit le sous domaine des NRP étudiés, n
 
 \subsubsection{Détection et identification de domaines NRPS}
 
-\paragraph{}La détection et l'identification des gènes codant pour les domaines est le coeur de l'annotaion des NRPS.
+\paragraph{}La détection et l'identification des gènes codant pour les domaines est le coeur de l'annotation des NRPS.
 Nous allons ici présenter des méthodes qui permettent à la fois d'identifier les différents types de domaines (A, C, T, ...) ainsi que des méthodes permettant d'inférer les spécificités de ces domaines.
 
 % Chapter 8 Methods for In Silico Prediction of Microbial Polyketide and Nonribosomal Peptide Biosynthetic Pathways from DNA Sequence Data
@@ -399,7 +398,7 @@ Après avoir les résultats des différents BLAST lancés, il est possible de me
 %· Specificity prediction of adenylation domains in nonribosomal peptide synthetases (NRPS) using transductive support vector machines (TSVMs)
 %· NRPSpredictor2—a web server for predicting NRPS adenylation domain specificity
 \paragraph{NRPS predictor}
-NRPS prédictor~\cite{rottig_nrpspredictor2web_2011,rausch_specificity_2005} est un outil de prédiction des substrats capturés par les domaines A.
+NRPS predictor~\cite{rottig_nrpspredictor2web_2011,rausch_specificity_2005} est un outil de prédiction des substrats capturés par les domaines A.
 Il analyse une séquence trouvée par un algorithme de détection de modules A et prédit sa spécificité.
 Cet outil est basé sur la recherche par Machines à Vecteurs de Support (Support Vector Machine (SVM)).
 L'idée est de se baser sur les données de domaines A déjà annotés afin de créer des séquences (vecteurs) caractéristiques des domaines.
@@ -589,8 +588,8 @@ Au delà du simple catalogage qui peut être fait, comprendre les actions moléc
 Afin de comprendre ces activités, un postulat simple a été posé : Deux molécules proches auront deux activités proches.
 Ce postulat simple parait raisonnable puisqu'il s'appuie sur le fait que l'activité d'une molécule est portée par la configuration spatiale des différents éléments qui la composent.
 On sait aujourd'hui que ce postulat est faux car il existe quelques contre exemples~\cite{patani_bioisosterism:_1996}.
-Cependant, dans la majorité des cas, cette approximation fonctionne bien et tout un domaine de chémoinformatique s'est développé dans ce sens.
-Toutes les techniques cherchant à rapprocher les structures des activités moléculaires sont regroupées derrière l'accronyme QSAR (Quantitative structure-activity relationship).
+Cependant, dans la majorité des cas, cette approximation fonctionne bien et tout un domaine de chemoinformatique s'est développé dans ce sens.
+Toutes les techniques cherchant à rapprocher les structures des activités moléculaires sont regroupées derrière l'acronyme QSAR (Quantitative structure-activity relationship).
 Les techniques QSAR sont nombreuses et variées~\cite{patani_bioisosterism:_1996,leach_molecular_2001,helma_predictive_2005}.
 Certaines s'attardent sur les ressemblances de structures atomiques 2D ou 3D, certaines sur les propriétés magnétiques, d'autres sur les contraintes de repliement etc.
 Beaucoup ne se cantonnent pas à une seule des ressemblances citées ci-dessus mais essayent de les combiner pour prédire le mieux possible.
@@ -599,15 +598,15 @@ Premièrement, pour connaître l'activité d'une molécule il est nécessaire de
 Secondement, les temps de calcul nécessaires augmentent rapidement avec le nombre de critères à comparer et le détail d'analyse de chaque critère.
 Le but de ces méthodes est donc d'inclure les critères les plus sélectifs afin de se rapprocher des activités connues dans un temps raisonnable.
 
-\paragraph{}Beaucoup de NRP possèdent des activités très intéressantes (antibiotiques, antitumeurs, antidouleurs, ...).
-À ce titre, nous cherchons en permanance à caractériser les activités de chaque nouvelle molécule découverte.
+\paragraph{}Beaucoup de NRP possèdent des activités très intéressantes (antibiotiques, anti-tumeurs, antidouleurs, ...).
+À ce titre, nous cherchons en permanence à caractériser les activités de chaque nouvelle molécule découverte.
 Lorsque ces activités ne sont pas déterminées expérimentalement, les logiciels exploitant des techniques de type QSAR permettent d'effectuer une prédiction.
 En 2012 puis 2014, Abdo et al. publient de nouvelles méthodes de prédiction d'activité NRP, se basant sur les spécificités des NRP~\cite{abdo_new_2012, abdo_prediction_2014}.
 Dans les deux cas, les prédictions sont effectuées à partir des compositions monomériques et non pas atomiques.
 Dans le premier article la prédiction est effectuée en créant pour chaque activité connue un fingerprint.
 Ces fingerprints sont composés, pour chaque type de monomère, d'un nombre représentant la composition moyenne de l'activité. 
 Prédire l'activité d'un nouveau NRP revient alors à déterminer celle dont le fingerprint est le plus proche.
-Dans le second article, c'est un classifieur par réseau bayésien qui est entrainé sur les compositions en monomères.
+Dans le second article, c'est un classifieur par réseau Bayésien qui est entrainé sur les compositions en monomères.
 Une fois les réseau entrainé, il suffit de fournir une composition en entrée pour avoir les probabilités de chaque activité en sortie.
 Dans les deux cas, il est important de constater que l'abstraction monomérique est suffisante pour une prédiction de qualité.
 De plus les structures ne sont pas utilisées, ce qui laisse encore beaucoup de possibilités d'améliorations.
@@ -622,14 +621,14 @@ Il nous a donc paru nécessaire de créer ce genre d'outil d'annotation automati
 
 
 
-\section{Formalisation du problème d'annotaion}
+\section{Formalisation du problème d'annotation}
 
 \subsection{Définition du problème}
 
 \paragraph{}Nous cherchons à créer un outil bioinformatique permettant l'obtention de nouvelles annotations monomériques NRP fiables.
 La génération d'annotations peut se baser sur la recherche d'informations à partir des gènes ou à partir des molécules dont on connaît la structure.
-Dans notre cas, nous n'avons pas choisi de démarer des clusters de gènes NRPS puisque des modèles déjà bien éprouvés existent déjà (NRPSpredictor, NaPDoS, ...) mais que leurs prédictions ne sont pas garanties.
-Les avancées dans ce domaines viendront avec le nombre d'annotations fiables de binomes clusters/NRP qui permettrons l'amélioration des modèles d'apprentissage actuels.
+Dans notre cas, nous n'avons pas choisi de démarrer des clusters de gènes NRPS puisque des modèles déjà bien éprouvés existent déjà (NRPSpredictor, NaPDoS, ...) mais que leurs prédictions ne sont pas garanties.
+Les avancées dans ce domaines viendront avec le nombre d'annotations fiables de binômes clusters/NRP qui permettrons l'amélioration des modèles d'apprentissage actuels.
 
 \paragraph{}Dans notre cas, nous allons partir des structures atomiques pour déduire les composants monomériques.
 De telles structures sont présentes dans de nombreuses bases de données publiques telles que PDB ou PubChem.
@@ -646,8 +645,8 @@ Ce type d'annotation pourra également être effectué sur toutes les nouvelles 
 
 \paragraph{}Parmi l'existant les logiciels CHUCKLES~\cite{siani_chuckles:_1994} et molBLOCKS~\cite{ghersi_molblocks:_2014} se démarquent des autres.
 Dans les deux cas les logiciels permettent à partir d'une structure atomique d'un polymère de trouver la structure monomérique.
-Les deux logiciels sont oposés dans leur façon de prendre le problème.
-CHUCKLES est constructif car il part des monomères pour recostituer le polymère alors que molBLOCKS est destructif car il part du polymère pour retrouver les monomères par découpes successives de liens.
+Les deux logiciels sont opposés dans leur façon de prendre le problème.
+CHUCKLES est constructif car il part des monomères pour reconstituer le polymère alors que molBLOCKS est destructif car il part du polymère pour retrouver les monomères par découpes successives de liens.
 Nous allons ici présenter ces deux approches.
 
 
@@ -744,7 +743,7 @@ Cette tâche très importante n'est pas suffisante pour répondre à nos attente
 \subsection{Vers des problèmes informatiques}
 
 \paragraph{}Pour concevoir notre logiciel d'annotation, nous allons nous inspirer des techniques existantes en essayant d'outrepasser leurs difficultés.
-Nous possédons au sein de Norine, une grande base de connaissance de monomères existants (plus de 500) et nous pouvons nous appuyer sur cette base bien établie pour assurer l'existance des monomères lors des annotations.
+Nous possédons au sein de Norine, une grande base de connaissance de monomères existants (plus de 500) et nous pouvons nous appuyer sur cette base bien établie pour assurer l'existence des monomères lors des annotations.
 Cette base étant, nous pouvons essayer de concevoir un algorithme constructif.
 
 
@@ -755,10 +754,10 @@ Rechercher les monomères par taille (en nombre d'atomes) décroissante est un c
 Dans notre cas, la proximité entre certains monomères ne nous permettra pas de les départager grâce à un tri par taille.
 Il sera nécessaire de modifier les solutions incomplètes pour essayer de les améliorer.
 Contrairement à CHUCKLES, nous aurons donc besoin de connaître les différents monomères candidats à la composition du polymère même lorsqu'ils sont chevauchant à des monomères déjà placés.
-Si d'un côté nous recherchons les monomères au sein du NRP puis de l'autre nous assemblons ceux trouvés, alors nous pouvons séparer notre programme en deux sous-problèmes complétement distincts.
+Si d'un côté nous recherchons les monomères au sein du NRP puis de l'autre nous assemblons ceux trouvés, alors nous pouvons séparer notre programme en deux sous-problèmes complètement distincts.
 
 \paragraph{}Dans un premier temps, nous allons chercher à déterminer quels sont les monomères qui pourraient composer le peptide étudié.
-En utilisant la base Norine, nous pouvons indépendament rechercher chacun des monomères connus au sein de la molécule à annoter.
+En utilisant la base Norine, nous pouvons indépendamment rechercher chacun des monomères connus au sein de la molécule à annoter.
 La recherche exacte d'un monomère au sein d'un peptide est donc notre premier sous problème à résoudre.
 Ce sous problème sera appelé la ``recherche''.
 
@@ -766,10 +765,10 @@ Ce sous problème sera appelé la ``recherche''.
 
 \paragraph{}Dans un second temps, nous devrons choisir parmi tous les monomères candidats issus de la recherche, lesquels composent réellement le polymère.
 Nous aurons plusieurs contraintes associées à ce problème.
-Aucun des monmères choisis dans la solution ne peux être chevauchant avec un autre.
+Aucun des monomères choisis dans la solution ne peux être chevauchant avec un autre.
 En effet, aucun atome ne peut provenir de deux molécules différentes et donc aucune sous partie de monomères ne peut être chevauchante avec un autre monomère.
 De plus nous allons chercher à obtenir une annotation complète des peptides, ce qui correspond maximiser les atomes du polymère couvert par des monomères.
-On appélera cette étape, l'étape de pavage.
+On appèlera cette étape, l'étape de pavage.
 
 
 \subsubsection{Des molécules aux graphes}
@@ -976,10 +975,10 @@ possible de représenter ses relations d'adjacence au sein d'un second graphe $L
 représentés dans $L$ comme un seul noeud. Chaque ancienne arrête devient un noeud et chaque ancien noeud devient une multitude
 d'arête (une clique entre tous les nouveaux noeuds représentant les anciennes arête de cet ancien noeud). Nous étendons le 
 raisonnement pour les labels en disant que le label d'un noeud du nouveau graphe est la composition des labels des anciens
-noeuds ainsi que de l'arité entre ces deux noeuds (Dans notre cas, les labels sont mis dans l'ordre lexicographique pour ne pas
+noeuds ainsi que de l'arrité entre ces deux noeuds (Dans notre cas, les labels sont mis dans l'ordre lexicographique pour ne pas
 avoir deux labels possibles à partir des labels d'origine)(Voir figure \ref{representations},
 troisième partie). Un tel type de graphe est appelé line graph~\cite{orlin_line-digraphs_1978}. L'un des
-gros avantage de cette représentation est d'inclure directement dans les labels des noeuds ce qui touche à l'arité entre noeuds.
+gros avantage de cette représentation est d'inclure directement dans les labels des noeuds ce qui touche à l'arrité entre noeuds.
 La fonction
 de recherche n'aura donc plus du tout à s'attarder sur les liens mais uniquement sur les noeuds. De plus, transformer les graphes
 de cette manière nous permet de répondre à la volonté d'augmentation du nombre de labels. Là où la représentation précédente
@@ -1112,7 +1111,7 @@ donc tester tous les noeuds de tous les peptides d'apprentissage pour la premiè
 
 \begin{figure}
   \includegraphics[width=300px]{Figures/s2m/indexation/glouton.png}
-  \caption{\label{arite}Arité restante pour les différents noeuds d'un graphe chimique simple}
+  \caption{\label{arrite}Arrité restante pour les différents noeuds d'un graphe chimique simple}
 \end{figure}
 
 \paragraph{}Lors d'une recherche d'une chaîne $c_{n-1}$, il est possible de trouver isomorphismes sur la cible
@@ -1122,7 +1121,7 @@ calcul de $C_{n-1}$ auquel on vient ajouter le temps de recherche de la dernièr
 $n-1$. Il faut également tenir compte du nombre d'extensions qui vont être essayées. Par exemple, si l'on cherche à étendre un
 isomorphisme précédent en suivant un lien qui est enraciné sur un $NH$, il ne reste qu'une liaison à explorer (le $N$ ayant déjà
 une liaison avec son $H$ et une liaison avec le reste du motif déjà recherché). En reprenant la même logique pour un $C$, il
-resterait donc trois liaisons à suivre. Nous appellerons cette quantité l'arité restante. On peut donc écrire :
+resterait donc trois liaisons à suivre. Nous appellerons cette quantité l'arrité restante. On peut donc écrire :
 
 \begin{equation}
  T(p_{n-1} \rightarrow p_n) = n_{p_{n-1}} \times a_{p_{n-1} \rightarrow p_n} \times t
@@ -1143,7 +1142,7 @@ labels (ce temps peut être considéré constant)
   \caption{\label{app_compt}Base d'apprentissage accompagnée des comptages de tous les $n_{p_{n}}$}
 \end{figure}
 
-\paragraph{}En utilisant les comptages fait sur la base d'apprentissage (Voir \ref{app_compt}) ainsi que le calcul de l'arité
+\paragraph{}En utilisant les comptages fait sur la base d'apprentissage (Voir \ref{app_compt}) ainsi que le calcul de l'arrité
 restante de chaque noeud à chaque étape, nous allons pouvoir estimer sur la base, un temps d'exécution de la recherche d'une
 chaîne. Ce temps est un coût exact de le recherche sur la base d'apprentissage. En normalisant cette valeur par le nombre de
 noeuds de la base nous pouvons obtenir le coût de recherche par noeud et ainsi pouvoir estimer le temps de calcul quelque soit
@@ -1675,10 +1674,10 @@ La structure en boucle avec l'isomorphisme light nous permet pour la plupart des
 \subsubsection{Les constituants des jeux de données}
 
 \paragraph{}Nous souhaitons connaître la pertinence des annotations issues de s2m.
-Pour cela, il est nécesaire de construire des jeux de données tests au sein desquels les annotations attendues seront déjà connues.
-Ces bases de test doivent être composées de polymères comprenant leur SMILES, représentation de leur structure atomique ainsi que dde l'annotation attendue (un graphe monomérique).
+Pour cela, il est nécessaire de construire des jeux de données tests au sein desquels les annotations attendues seront déjà connues.
+Ces bases de test doivent être composées de polymères comprenant leur SMILES, représentation de leur structure atomique ainsi que de l'annotation attendue (un graphe monomérique).
 Pour les entrées de s2m, il est également nécessaire de constituer une base de monomères pour chaque jeu de données différent.
-s2m précalculera les indexes pour chaque base de monomère puis sera exécuté sur chaque polymère.
+s2m pré-calculera les indexes pour chaque base de monomère puis sera exécuté sur chaque polymère.
 L'annotation de sortie sera alors comparée à l'annotation préexistante pour en définir la qualité.
 
 
@@ -1697,7 +1696,7 @@ La base de monomères est quant à elle constituée de l'ensemble des monomères
 
 \paragraph{}CCD~\cite{westbrook_chemical_2015} est une sous partie de la base de données PDB~\cite{berman_protein_2000} (Protein Data Bank).
 Cette base regroupe toutes les petites molécules présentes dans PDB.
-Parmis celles-ci se trouvent de nombreux petits polymères annotés ainsi que les monomères les constituant.
+Parmi celles-ci se trouvent de nombreux petits polymères annotés ainsi que les monomères les constituant.
 L'avantage de cette base est que toute molécule y étant présente est accompagnée de son smiles.
 En extrayant les molécules annotées comme polymères, nous avons constitué un second jeu de données.
 Pour constituer la base de monomères dont s2m à besoin en pré-traitement, il nous a suffit d'extraire les molécules présentes dans les annotations polymériques.
@@ -1705,7 +1704,7 @@ Pour constituer la base de monomères dont s2m à besoin en pré-traitement, il 
 
 \subsubsection{Résumé sur les données}
 
-Les données de validation seront composées de deux jeux distrincts.
+Les données de validation seront composées de deux jeux distincts.
 D'un côté les polymères extraits de Norine seront au nombre de 343.
 Les données NRP seront accompagnées des 533 monomères de la base.
 Le second jeu est issu de la base CCD et comporte 378 polymères et 507 monomères issus des annotations.
