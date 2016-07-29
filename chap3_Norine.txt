@@ -1,0 +1,154 @@
+# Norine
+
+## Généralités
+
+Nous avons déjà plusieurs fois abordé la base Norine au sein de ce manuscrit mais nous allons ici décrire en détail son fonctionnement.
+Norine à été créée durant la thèse de Ségolène Caboche (2006-2009) dans le but de centraliser l'information sur les NRP.
+Avant cette base, il n'existait rien permettant de croiser directement les données NRP.
+Les structures atomiques et monomériques étaient publiées dans des articles scientifiques puis parfois entrés dans différentes bases généralistes.
+Il n'existe souvent aucune annotation monomérique présente renseignées en dehors de ces publications.
+Norine a été créer dans le but d'avoir un accès facile et rapide zux NRP connus.
+De plus centraliser toutes ces informations permet d'avoir accès des statistiques générales.
+Enfin, plus le nombre de peptides augmente et plus il est possible de créer des modèles de prédiction fiables pour, par exemple, prédire les activités de nouveaux peptides.
+
+TODO : Schéma SQL simplifié
+
+Norine est une base de données postgres contenant plusieurs disaines de tables, toutes articulées autour de la notion de peptide (voir la version très simplifiée de la figure TODO).
+La table centrale des peptides contient toutes les informations centrales telles que le nom, la famille ou les différentes stuctures.
+Les information d'activités, d'organismes producteurs ou le détail de chaque monomères sont quant à eux présent dans des tables annexes et reliés soit par clef externe soit par des tables d'associations.
+Pour les activités par exemple, une table les ressencant est dédiée.
+Ces activités sont ensuite mises en relation avec les peptides via une table ``produit par''.
+Au sein de cette table d'association, il est possible de trouver plusieurs activités par peptide et plusieurs peptides par activité.
+
+La base de donnée est accompagnée d'une interface web en générée par un serveur Java J2EE.
+Cette interface a pour but de rendre les données simples d'accès pour tous les utilisateurs.
+L'interface est accessible via le serveur de logiciels de l'équipe Bonsai à l'adresse http://bioinfo.lifl.fr/norine/.
+Au travers de cette interface, toutes les informations présentes en base sont disponibles.
+chaque peptide et chaque monomère possèdent leur page dédiée.
+Sur ces pages se trouvent tous les détails de ces molécules issus de la base de donnée.
+Toutes ces pages sont accessibles via des formulaires de recherche par nom/type/organismes producteurs/activité etc.
+Pour les peptides, il existe également une recherche par sous graphe dont nous donnerons plus de détail par la suite.
+
+
+## Les peptides
+
+### l'interface web
+
+TODO impression écran page peptide
+
+Comme nous l'avons déjà évoqué, toute la base de données est axée autour de notre matière première : les peptides.
+La page web centrale du serveur web est donc logiquement la page d'information correspondant à chaque NRP.
+Ces pages sont divisées en trois parties.
+Au tout début de la page se trouvent les informations générales comme le nom, l'identifiant ou la liste des activités connues de ce peptide.
+La masse moléculaire est également présente et est particuliairement utile pour les personnes faisant de la spectrométrie de masses.
+Cette première partie est purement factuelle et ne fait reprendre les éléments potentiellement présents dans d'autres bases.
+
+La seconde partie de la page représente la plus grande contribution apportée par Norine.
+Cette partie donne toutes les information de structures.
+Cette partie est remplie au minimum par la structure monomérique du NRP.
+Cette structure est donnée à la fois par un format textuel représentant un graphe et par une image des monomères et des liens qui existent entre eux.
+Chaque monomère entrant dans la composition est affiché dans une liste les numérotant et permettant d'accéder à leur détail.
+Sur les pages des monomères sont présentes les structures atomiques, leur dessin et tous les détails généraux concernant ces monomères.
+Dans le meilleur des cas, la structure monomérique est accompagnée d'un SMILES et depuis peu, d'un dessin de la structure atomique dont les monomères sont colorés par s2m.
+
+Enfin, la dernière partie de la page est consacrée aux références et liens.
+Ce sont toutes les informations qui permettrons de replacer le peptide dans son contexte et d'en savoir plus au trvers d'autres bases de données.
+Les organismes producteurs sont détaillés à cet endroit et un lient vers leur classification NCBI est disponible.
+C'est également ici que sont répertoriés les articles de recherche qui ont permis la découverte du peptide et l'établissement de son statut non ribosomique.
+Enfin, lorsqu'ils sont référencés, sont présent des liens référencant la même molécule dans d'autres bases de données.
+Actuellement, sont surtout présent des liens vers pubchem et uniprot, ce qui permet d'en apprendre plus sur les structures chimiques de ces molécules.
+
+
+### Les méthodes de recherche
+
+Comme dans toutes les autres bases de données, il est possible de rechercher un peptide via un grand nombre de critères.
+En idiquant le nom ou l'identifiant, un peptide unique pourra être trouvé.
+En indiquant un nom partiel ou tout autre critière (avec la possibilité de combiner les crtères), une liste de peptide sera retournée.
+Cependant, Norine propose également un autre type de recherche très intéressant pour notre type de données.
+Il est possible de rechercher les peptides par structures monomériques.
+Plus précisément, il est possible des créer des expressions régulières de structures pour les rechercher dans la base.
+Prenons un exemple.
+Si nous souhaitons effectuer des recherches de peptides qui contiennent une Valine liée à n'impote quel variant d'une Cystéine ou Leucine, il nous faut écrire la requête : Val,[Cys*|Leu*]@1@0.
+Ce format est un format de graphe.
+Les noms séparés par des virgules représentent les noeuds (un noeud Val et un noeud Cys* ou Leu*) et les valeurs séparées par des @, les arêtes.
+Pour résumé cette requête, nous avons :
+- Le noeud 0 labellé par Val
+- Le noeud 1 labellé par Cys* (n'importe quel dérivé de Cys) ou Leu*
+- Un lien sortant du premier noeud (noeud 0) pour joindre le noeud 1 (la @1 en première position)
+- Un lien sortant du deuxième noeud (noeud 1) pour joindre le noeud 0 (la @0)
+
+TODO : Shéma résultats requête.
+
+Une fois la requête formatée, il est possible d'exécuter deux algorithmes différents.
+L'un des deux est l'isomorphisme de sous graphe que nous avons déjà longement abordé durant le second chapitre (TODO ref).
+La requête est croisée avec toutes les structures monomériques présentes en base et retourne tous les peptides dont la structure monomérique contient le motif recherché.
+
+Le second algorithme ne prend pas en compte la structure mais uniquement la composition.
+C'est une recherche par fingerprint composée des comptages de monomères et des comptages par groupe de monomères.
+Plusieurs groupements sont définis dans Norine.
+Par exemple Cys* cité précédemment est un groupement contenant la Cystéine, la D-Cystéine, l'alpha-méthyl-Cystéine et bien d'autres dérivés de la Cystéine.
+Les fingerprints des peptides en base sont pré-calculés et le fingerprint de la requête est créé à la volée.
+Le fingerprint requête est comparé aux fingerprints de la base et une distance est calculée.
+Les résultats sont affichés par distance décroissante.
+Cette recherche ne prends pas en compte les structures mais permet une souplesse dans les monomères inclus.
+Par exemple si le peptide possède une D-Cystéine alors que le motif a été renseigné avec un Cystéine, le fingerprint sera toujours identique au niveau des groupements.
+Les fingerprints différents de 1 en Cystéine et 1 en D-Cystéine mais préservent la valeur de Cys*.
+Les regroupement permettent de préserver une proximité élevée malgré la différence de monomère présent.
+
+
+
+## Les outils liés
+
+Depuis la création de la base et du serveur web, beaucoup de petites améliorations ont été effectuées mais ici nous allons parler des trois dernières évolutions majeures.
+
+
+### Éditeur graphique
+
+TODO schéma interface graphique
+
+Mise à jour en 2015 par Juraj Michalik, l'interface de recherche dans la base posséde désormais une interface graphique de créations dynamique des requêtes.
+L'interface présentée au sein de la figure TODO permet de générer des requêtes complexes.
+Le menu de gauche permet de sélectionner les différents monomères que nous souhaitons ajouter à une requête et la page principale permet d'ajouter des liens entre monomères par des simples clics.
+Au fur et à mesure de la création la requête textuelle s'affiche au dessus de l'éditeur.
+Une version sans interface de cet éditeur est également utilisée sur les pages des peptides de Norine afin d'avoir une représentation graphique de ceux-ci.
+
+Cet éditeur est d'un réel intérêt pour la base car il permet une interaction utilisateur simple qui n'était pas possible auparavant.
+Ce genre d'interface est nécessaire pour rendre les outils bioinformatiques accessible aux biologistes cibles.
+
+
+
+### Services REST
+
+Créés en 2014 par Areski Flissi, une interface REST de récupération de données de la base Norine est disponible.
+Cette interface avait pour but la simplification de l'interfacage des données Norine avec d'autres logiciels.
+C'est cette interface que nous avons utilisé pour récupérer les données afin de tester Smiles2Monomers.
+Une explication d'utilisation de l'interface est disponible à l'adresse http://bioinfo.lifl.fr/norine/service.jsp
+
+
+
+### Crowdsourcing via MyNorine
+
+Le dernier outil que nous allons présenter s'appel MyNorine.
+C'est un outil de crowdsourcing de NRP, c'est à dire que toute personne extérieure à l'équipe de développement de Norine et des outils peut tout de même soumettre de nouvelles entrées.
+Tout comme l'interface REST, il a été développé par Areski Flissi.
+
+MyNorine est en ligne depuis 2015 mais le développement de nouvelles fonctionnalités est toujours en cours.
+L'outil utilise une interface intuitive pour l'utilisateur.
+Il est possible de rentrer de nombreuses information mais seuls les champs en gras sont obligatoires.
+Parmi les informations obligatoires, on retrouve toutes les informations de base comme le nom, le type de structure, la structure monomérique et au moins une référence bibliographique.
+Pour ne pas avoir à construire la chaine de caractères compliquée représentant la structure, l'interface javascript décrite ci-dessus est disponible aux moments opportuns.
+Tout peptide soumis par un utilisateur sera ensuite envoyé à l'équipe de curateurs qui devra vérifier la validité et la pertinence de la soumission.
+Pour l'instant, cette équipe de curateur est composée de Maude Pupin, Valérie Leclère, Areski Flissi et moi même.
+
+La mise à disposition de cette interface est une véritable plus-value pour la base de donnée.
+Elle permet de donner du poid à la communauté en leur délégant une part du travail d'archivage des NRP.
+À l'été 2015, nous avons organisé un workshop autour de la thématique NRPS/PKS durant lequel nous avons inciter des membres de la communauté à partager leur travail au travers de MyNorine.
+Quelques peptides ont été soumis mais il reste encore à rendre récurent ce partage d'informations à chaque nouveau peptide découvert.
+
+
+## Statistiques de Norine
+
+Nombre de peptides + répartition en nombre de monomères
+formes des peptides
+Activités présentes
+Répartition des monomères
