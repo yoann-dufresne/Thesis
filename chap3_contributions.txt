@@ -1,0 +1,51 @@
+# Mes contributions
+
+## Améliorations de l'existant
+
+### Introduction aux Norine days
+
+### s2m pour corriger les erreurs.
+
+
+### s2m pour empécher les erreurs
+
+Comme nous avons pu le voir (TODO ref chap 2), Smiles2Monomers nous a permis de détecter des erreurs au sein des structures atomiques et monomériques présentes dans des bases de données telles que Norine.
+Comment pouvons nous alors faire en sorte d'essayer d'éviter ces erreurs avant qu'elles ne soient introduites en base.
+Le seul moyen est d'essayer de détecter automatiquement les annotations fausses lorsqu'elles sont entrées et de demander à l'utilisateur ce qu'il en pense.
+
+TODO : Schéma avertissement.
+
+Dans le cas de Norine, toute nouvelle entrée manuelle est effectuée via MyNorine.
+Pour éviter l'introduction des erreurs, si le SMILES de la molécule à été entré, nous exécutons s2m en arrière plan.
+Si l'annotation obtenue par s2m couvre entiérement le peptide mais que cette annotation diffère de l'annotation entrée manuellement, nous avertissons l'utilisateur et lui demandons de vérifier sa structure avant validation.
+Cela nous a permis plusieurs fois durant les Norine days de nous rendre compte d'erreurs que nous étions en train de commettre et nous penssons donc que cela permettra d'en éviter de nombreuses autres
+
+TODO : Schéma création automatique d'annotation.
+
+Nous proposons également à l'utilisateur d'exécuter s2m avant d'entrer manuellement son annotation.
+Si un SMILES est renseigné, alors s2m peut être déclenché pour obtenir une première annotation.
+L'uilisateur peut ensuite la modifier si celle-ci n'est pas complétement exacte.
+Par ce système nous incitons les contributeurs à ajouter le SMILES de leurs peptides (information trop peu présente dans Norine pour le moment) et nous évitons les erreurs d'innatention et fautes de frappe lors de la saisie utilisateur.
+
+Pour résumer, s2m a permis à MyNorine d'augmenter encore la qualité des annotations entrées par l'évitement d'erreurs humaines.
+
+
+## Vers des annotations automatiques de qualité
+
+Jusqu'à présent, Norine ne stoque en base que des annotations de NRP qui ont été validées par des curateurs humains.
+L'idée originelle est de garantir la qualité des annotations récupérées.
+Par exemple, il est hors de question d'entrer en base les prédictions de NRP faites à partir des NRPS trouvés par des logiciels tels que antiSMASH.
+Comme nous l'avons souligné lors du premier chapitre, ces prédictions, bien que très instructives, ne donnent souvent qu'une bonne approximation de la vérité.
+
+Cependant, depuis la création de s2m, nous avons choisi de revenir sur cette décision.
+Sachant un SMILES et en ayant comme retour de s2m une couverture de 100%, nous pouvons être très confiant quant à la qualité de la structure monomérique de retour.
+C'est pour cela que dans cette partie, nous allons aborder les possibilités d'utilisation de s2m pour enrichir automatiquement Norine.
+
+
+### Récupération massive de NRP
+
+Il existe plusieurs bases de données contenant des molécules connues comme étant NRP.
+Pour certaines d'entre elles, les structures sont de bonne qualité grâce au travail des curateurs de ces bases.
+
+
+### Fouille en bases de données
