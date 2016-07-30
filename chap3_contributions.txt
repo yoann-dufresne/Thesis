@@ -30,22 +30,24 @@ Par ce système nous incitons les contributeurs à ajouter le SMILES de leurs pe
 Pour résumer, s2m a permis à MyNorine d'augmenter encore la qualité des annotations entrées par l'évitement d'erreurs humaines.
 
 
-## Vers des annotations automatiques de qualité
+## Mises à jour de Norine
 
-Jusqu'à présent, Norine ne stoque en base que des annotations de NRP qui ont été validées par des curateurs humains.
-L'idée originelle est de garantir la qualité des annotations récupérées.
-Par exemple, il est hors de question d'entrer en base les prédictions de NRP faites à partir des NRPS trouvés par des logiciels tels que antiSMASH.
-Comme nous l'avons souligné lors du premier chapitre, ces prédictions, bien que très instructives, ne donnent souvent qu'une bonne approximation de la vérité.
+A force de parcourir de nombreuses bases de connaissances biologiques et chimiques, nous avons mis à jour deux améliorations possible de la base Norine.
+D'un côté, cette exploration nous pointé le vieillissement des données de Norine.
+En effet, de nombreuses données présentes sur Norine ont des noms des références ou des taxonomies qui ont été changées depuis leur entrée en base.
+Par exemple certains liens vers PubChem, censés contenir les détails moléculaires des NRP correspondant, pointent désormais vers des molécules différentes.
+Suite aux mises à jour d'éléments de PubChem certains liens sont corrompus.
 
-Cependant, depuis la création de s2m, nous avons choisi de revenir sur cette décision.
-Sachant un SMILES et en ayant comme retour de s2m une couverture de 100%, nous pouvons être très confiant quant à la qualité de la structure monomérique de retour.
-C'est pour cela que dans cette partie, nous allons aborder les possibilités d'utilisation de s2m pour enrichir automatiquement Norine.
+De l'autre côté nous voyons apparaître de nombreux NRP non présents dans Norine.
+Certaines bases possèdent des molécules annotées NRP mais sans forcément avoir le découpage monomérique et les référeces d'articles les publiant.
+Ces molécules nous intéressent beaucoup car elles peuvent venir compléter notre base de connaissance et aider aux développements d'outils d'apprentissage.
 
+Dans cette section, nous allons parler des différents mises à jour que nous avons effectué sur la structure de la base et les modifications de données qui ont suivies pour effectuer les amélirations citées ci-dessus.
+
+
+
+### Mise à jour des données de Norine
 
 ### Récupération massive de NRP
-
-Il existe plusieurs bases de données contenant des molécules connues comme étant NRP.
-Pour certaines d'entre elles, les structures sont de bonne qualité grâce au travail des curateurs de ces bases.
-
 
 ### Fouille en bases de données
