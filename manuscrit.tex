@@ -3,6 +3,7 @@
 \usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{chemist}
 \usepackage[french]{algorithm2e}
 \usepackage[margin=2.5cm]{geometry}
 
@@ -711,17 +712,52 @@ Dans ce cas, vu qu'aucun retrour en arrière n'est effectué, l'annotation sera 
 
 \subsubsection{molBLOCKS, une méthode destructive}
 
-\paragraph{}Le logiciel momBLOCKS n'est à la base pas du tout concu pour le travail que nous cherchons à effectuer.
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=400px]{Figures/s2m/Intro/molBlocks.png}
+    \caption{\label{molBlocks}Application de la méthode molBlocks sur le polymère ACV.
+    Le polymère est séparé en morceau par une règle de liaison peptidique.
+    Les trois morceaux correspondent aux trois monomères réellement inclus, la découpe fonctionne.}
+  \end{center}
+\end{figure}
+
+\paragraph{}Le logiciel molBLOCKS n'est à la base pas conçu pour le travail que nous cherchons à effectuer.
 C'est un logiciel qui permet de découvrir des monomères en repérant les sous morceaux fréquents au sein d'une population de polymères.
-Pour cela le logiciel découpe les polymères en petits morceaux et fait des comptages sur ces morceaux.
-Pour espérer découvrir des monomères réalistes, les découpes ne sont pas faites au hasard mais selon des règles exprimées par l'utilisateur.
-Cependant, il n'est jamais exclu que les règles définies par l'utilisateur ne sur-découpent pas les molécules.
+Pour cela le logiciel découpe les polymères en petits morceaux et effectue des comptages sur ces morceaux.
+Ces découpes suivent des règles entrées par l'utilisateur.
+Par exemple en donnant comme règle
+\begin{chemmath}
+  O=CNH \longrightarrow C=O + NH
+\end{chemmath}
+toutes les liaisons peptidiques seront ciblées et déconnectées (voir figure \ref{molBlocks}).
+Pour des protéines ribosomiques la découpe sera donc parfaite avec cette seule règle et les monomères seront découverts.
 
-Dans notre cas, nous pourrions utiliser un tel logiciel pour découper les peptides d'intérêt puis effectuer par la suite une étape de reconnaissance des monomères générés.
-Cependant, aux vues des liaisons particulières de certains NRP, il est fort probable que certains morceaux ne ressemblent jamais à un monomère NRP connu.
-Le fait de ne pas garantir la véracité des monomères dès la découpe est un fort unconvénient dans notre cas.
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=300px]{Figures/s2m/Intro/molBlocks_problem.png}
+    \caption{\label{molBlocks_problem}Dans le cas de ce di-peptide, un sucre est lié à une Hydroxy-Phenil-Glycine (Hpg).
+    En utilisant la règle de découpe à appliquer pour les hydroxyl, une ambiguité et une erreur apparaissent.
+    Nous ne pouvons savoir de quel côté les découpent vont être les plus pertinentes avant d'essayer de reconnaître les monomères.
+    De ce fait, 4 découpes différentes sont possibles.
+    De plus, le cycle du sucre se voit ouvert alors que la découpe est inutile.}
+  \end{center}
+\end{figure}
 
-\paragraph{TODO : Schéma molBLOCKS}
+\paragraph{}Dans notre cas, nous pourrions utiliser un tel logiciel pour découper les NRP en monomères.
+En effectuant par la suite une étape de reconnaissance de ces monomères il serait alors possible de reconstruire le peptide.
+Cependant certaine réactions effectuées au sein des NRP ne permettent pas de découper entièrement le peptide avec la seule règle énoncée précédammant.
+Toutes les liaisons non peptidiques énoncées au chapitre précédent ne seront pas découpées.
+Il est donc nécessaire de rajouter nombre de nouvelles règles.
+Cependant, la liaison hydroxyl à elle seule ne permet déjà plus d'effectuer une découpe correcte.
+Pour pouvoir la délier il faudrait une règle du type
+\begin{chemmath}
+  COC \longrightarrow CO + C
+\end{chemmath}
+Mais ce genre de règle est ambigüe.
+Comment savoir de quel côté du O la liaison doit être rompue ?
+De plus, certains monomères comme le glucose sont initialement composés de $COC$.
+Ces monomères seront donc découpés alors qu'ils ne devraient pas.
+Pour ces deux raisons, nous ne pourrons pas directement utiliser ce logiciel afin de convertir nos structures atomiques en structures monomériques.
 
 
 \subsubsection{Vue générale}
