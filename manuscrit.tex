@@ -59,27 +59,75 @@ Comme nous venons de le présenter, lors d'une création classique de protéine,
 Ici, la protéine produite n'est pas le produit final mais une enzyme qui peut agir seule ou se grouper en complexes afin d'assembler
 des NRP.
 Ces complexes sont appelés des synthétases (Non Ribosomal Peptide Synthetase (NRPS)).
-Là où les protéines classiques sont composées des 20 acides aminés standards, la synthèse non ribosomique permet
-l'incorporation de plusieurs centaines de {\em monomères} (briques de bases) différents.
 
+\paragraph{}TODO : schéma synthèse globale
+
+\subsubsection{Les monomères}
+
+\paragraph{TODO : schéma résidus}
+
+Là où les protéines classiques sont composées des 20 acides aminés standards, la synthèse non ribosomique permet
+l'incorporation de plusieurs centaines de {\em monomères} différents (briques de bases).
+La base de données de référence des NRP en compte pour le moment 533.
+Les monomères peuvent provenir de différentes classes.
+Parmis eux, on compte naturellement les 20 acides aminés standards ainsi qu'un grand nombre de dérivés proches.
+Après plusieurs modifications que nous détaillerons plus tard, il est par exemple possible d'obtenir des monomères méthylés ou oxydés (voir schéma \ref{}).
+On peut également citer les sucres et les acides gras comme faisant partie des monomères candidat à l'inclusion dans des NRP.
+
+
+\subsubsection{Les structures peptidiques}
 
 \begin{figure}[h!]
   \begin{center}
     \includegraphics[width=480px]{Figures/bio/Intro/Dpr/2-3_liaisons.png}
     \caption{\label{DPR_incl}Deux exemples d'inclusion du monomère Dpr.
-    Au sein de l'Edeine A, seules les deux liaisons classiques du squelette peptidique sont effectuées entre le Dpr et les autres monomères.
-    Au sein de de la Capreomycin IA, une troisième liaison est effectuée par le Dpr depuis son groupement amine de la chaine latérale.}
+    Au sein de l'Edeine A, seules les deux liaisons classiques du squelette peptidique sont effectuées entre le Dpr (en rose) et les autres monomères.
+    Au sein de de la Capreomycin IA, une troisième liaison est effectuée par le Dpr (en rouge) depuis son groupement amine de la chaine latérale.}
   \end{center}
 \end{figure}
 
-\paragraph{}Les NRPS sont également plus souples dans la façon d'incorporer des monomères.
+\paragraph{}Les NRPS sont également souple dans la façon d'arranger les monomères au sein des structures de NRP.
 Certains monomères possèdent plus de deux groupements capables de se lier.
 Ainsi sur l'exemple (Voir figure \ref{DPR_incl}), on peut constater que le monomère nommé Drp possède un groupement amine supplémentaire à celui déjà présent dans le squelette des acides aminés classiques.
 Ce groupement en bout de chaine latérale permet au Drp de parfois se lier 3 fois et ainsi de casser la linéarité de la molécule assemblée.
-Ce genre monomères, permet lorsqu'ils sont inclus, d'obtenir des structures à embranchements ou cycles.
+Ce genre monomères, permet lorsqu'ils sont inclus, d'obtenir des structures à embranchements ou cycles (Voir figure TODO).
 
 \paragraph{TODO : Schéma exhaustif de NRPs}
 
+
+\subsubsection{Les liaisons inter-monomères}
+
+\paragraph{}Pour compléter la gamme d'éléments permettant la diversité des compositions/structures, d'autres liaisons que les liaisons peptidiques sont réalisées entre les composants des NRP.
+De la même manière que pour les protéines classiques, les NRP peuvent être assemblés via des liaisons amino-acide entre monomères.
+La plupart des monomères inclus effectuent d'ailleurs leurs liaisons de cette manière.
+Nous pouvons ensuite lister quatre types de liaisons différentes.
+
+\paragraph{}La première est effectuée par les monomères contenant un atome de soufre.
+Comme dans des protéines classiques les monomères souffrés peuvent effectuer des ponts dissulfure.
+Cependant ce type de liaison n'est pas la seule impliquant un soufre.
+Comme nous le verrons plus tard lors de la description des modules NRPS Cy, l'atome de soufre peut également intervenir dans une cyclisation entre deux monomères.
+
+\paragraph{TODO : cycle Cys}
+
+\paragraph{}La seconde possibilité est d'effectuer des liaison sur des cylces aromatiques présents au sein des monomères (cycles Imidazoles et Benzene).
+Dans les deux cas c'est un atome d'hydrogène qui est arraché au cycle afin de pouvoir y lier un monomère.
+Dans le cas du cycle Imidazole l'hydrogène est toujours arraché à un des deux atomes C voisins dans le cycle.
+Dans le cas d'un Benzene, c'est la présence d'un oxygène accroché au cycle qui permettra une affinité avec les carbones voisins.
+
+\paragraph{TODO : cycles aromatiques}
+
+\paragraph{}Le troisième type de liaison concerne les sucres.
+Nous condensserons toutes les liaisons sucre sous le nom de liaisons ``ose''.
+Ces liaisons interviennent sur les sucres sur le groupement OH présent sur un carbone voisin à l'oxygène inclus dans le cycle.
+
+\paragraph{TODO : liaisons sucre}
+
+\paragraph{TODO : a réécrire/vérifier}Enfin, nous avons regroupé derrière le nom ``liaison hydroxyl'' les liaisons s'effectuant entre des groupements OH qui ne perdent que leur H lors de la recombinaison.
+
+\paragraph{}L'ensemble des liaisons présentées ici permettent d'augmenter le nombre de monomères candidats aux inclusions et le nombre de site de liaison sur chaque monomère.
+Ceci permet donc d'augmenter grandement le nombre de peptides non-linéaires et ne contenant pas de monomères standards.
+
+\subsubsection{Les activités}
 
 \paragraph{}Les NRP présentent une grande diversité d'activités, souvent cruciales pour leurs producteurs.
 Beaucoup de NRP recensés sont par exemple des antibiotiques.
