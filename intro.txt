@@ -1,0 +1,19 @@
+Un travail de trois années juste pour mener à ce moment.
+Le moment où vous, lecteurs, commencez à lire ce manuscrit et à découvrir mon univers.
+Dans ce manuscrit je vais vous parler de biologie, un tout petit peu de chimie et beaucoup d'informatique.
+Je vais vous parler de d'algorithmique et de modèles informatiques appliqués à des molécules appelées peptides non ribosomiques.
+
+Tout d'abord donnons rapidement une intuition de ce que sont les peptides non ribosomiques (NRP).
+Les NRP sont un ensemble de petites molécules modulaires que l'on retrouve chez certaines bactéries certains eukaryotes unicellulaires.
+Ces molécules sont très intéressantes pour nous car parmis leurs activités nous trouvons majoritairement des antibiotiques mais également des antitumeurs, des surfactants, des anti-inflamatoirs...
+Certaines de ces molécules sont déjà d'une grande utilité pour notre industrie pharmaceutique mais beaucoup de molécules sont encore à découvrir.
+
+La particularité des NRP est leur voie de synthèse.
+Contrairement aux protéines, les NRP sont assemblés hors du ribosome par des enzymes modulaires appellées Synthétases de Peptides Non-ribosomiques (NRPS)
+
+
+
+
+
+Durant tout le reste du manuscrit, je parlerai à la seconde du pluriel car tout le travail que vous voyez ici est issu d'un travail d'équipe.
+Sans toute l'équipe Norine ainsi que les stagiaires passés par là, je n'aurais pas pu présenter un travail aussi complet.
