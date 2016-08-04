@@ -38,7 +38,7 @@ Ces deux groupements se lient entre eux en chaine et créent ainsi la protéine.
 
 \begin{figure}[h!]
   \begin{center}
-    \includegraphics[width=400px]{Figures/bio/Intro/chaine_pep.png}
+    \includegraphics[width=350px]{Figures/bio/Intro/chaine_pep.jpg}
     \caption{\label{chaine_pep}Présentation d'une chaîne peptidique.
     Chaque trait pointillé vertical sépare un acide aminé d'un autre et chaque trait horizontal sépare le squelette de la chaîne latérale des acides aminés.}
   \end{center}
@@ -54,13 +54,21 @@ Ces propriétés sont donc très dépendantes du repliement et des types de radi
 \paragraph{}Les peptides non ribosomiques (Non Ribosomal Peptide (NRP)) sont des petits polymères synthétisés par certaines bactéries et certains champignons unicellulaires.
 Tout comme les protéines classiques, les NRP sont des molécules résultant d'assemblages de briques de base.
 Cependant, comme le nom l'indique, la voie de synthèse d'un NRP est différente de celle des protéines.
-Cette voie de synthèse comporte une étape supplémentaire (Voir figure TODO).
+Cette voie de synthèse comporte une étape supplémentaire (Voir figure \ref{global}).
 Comme nous venons de le présenter, lors d'une création classique de protéine, l'ADN est transcrit en ARN qui lui même est traduit en protéine.
-Ici, la protéine produite n'est pas le produit final mais une enzyme qui peut agir seule ou se grouper en complexes afin d'assembler
-des NRP.
+Ici, la protéine produite n'est pas le produit final mais une \textit{enzyme modulaire} agissant seule ou en complexes afin d'assembler les NRP.
 Ces complexes sont appelés des synthétases (Non Ribosomal Peptide Synthetase (NRPS)).
 
-\paragraph{}TODO : schéma synthèse globale
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=450px]{Figures/bio/Intro/synthese.png}
+    \caption{\label{global}Voie de synthèse non ribosomique.
+    Groupés en clusters, les gènes codant la protéine NRPS sont transcrit puis traduits par le ribosome.
+    Les modules A de la NRPS capturent ensuite des monomères (billes de couleur ici) dans l'environement afin des les assembler.
+    Enfin, le NRP assemblé est relaché pour aller effectuer sa tâche.
+    }
+  \end{center}
+\end{figure}
 
 \subsubsection{Les monomères}
 
@@ -79,7 +87,7 @@ On peut également citer les sucres et les acides gras comme faisant partie des 
 
 \begin{figure}[h!]
   \begin{center}
-    \includegraphics[width=480px]{Figures/bio/Intro/Dpr/2-3_liaisons.png}
+    \includegraphics[width=400px]{Figures/bio/Intro/Dpr/2-3_liaisons.png}
     \caption{\label{DPR_incl}Deux exemples d'inclusion du monomère Dpr.
     Au sein de l'Edeine A, seules les deux liaisons classiques du squelette peptidique sont effectuées entre le Dpr (en rose) et les autres monomères.
     Au sein de de la Capreomycin IA, une troisième liaison est effectuée par le Dpr (en rouge) depuis son groupement amine de la chaine latérale.}
@@ -102,32 +110,44 @@ En dehors de celle-ci, nous pouvons lister trois différents type de liaisons ef
 \paragraph{}Le premier type de liaison inclus un monomère contenant un atome de soufre.
 Comme dans des protéines classiques les monomères soufrés peuvent effectuer des ponts dissulfure (liaison entre deux atomes de soufre en perdant deux atomes d'hydrogène).
 Cependant ce type de liaison n'est pas la seule impliquant un soufre.
-Comme nous le verrons plus tard lors de la description des modules NRPS Cy, l'atome de soufre peut également intervenir dans une cyclisation entre deux monomères en perdant son atome d'hydrogène de la même manière que lors d'un pont disulfure.
+Comme nous le verrons plus tard lors de la description des modules NRPS Cy, l'atome de soufre peut également intervenir dans une cyclisation entre deux monomères en perdant son atome d'hydrogène de la même manière que lors d'un pont disulfure (voir figure \ref{Cy_link}).
 
-\paragraph{TODO : Liaisons soufre}
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=300px]{Figures/bio/Intro/reactions/Cy.pdf}
+    \caption{\label{Cy_link}Exemple de liaison effectuée par un module Cy}
+  \end{center}
+\end{figure}
 
 \paragraph{}Le second type de liaison implique au moins un monomère contenant un cycle aromatique (cycle Imidazole ou Benzene).
 Dans les deux cas c'est un atome d'hydrogène qui est arraché au cycle afin de pouvoir y lier un monomère.
 Lors d'une liaison d'un cycle Imidazole l'hydrogène remplacé par la liaison est toujours l'un des deux atomes de carbone voisins dans le cycle.
-Dans le cas d'un Benzene, c'est la présence d'un oxygène accroché au cycle qui permettra une affinité avec les carbones voisins.
+Dans le cas d'un Benzene (Voir figure \ref{benzene}), c'est la présence d'un oxygène accroché au cycle qui permettra une affinité avec les carbones voisins.
 
-\paragraph{TODO : cycles aromatiques}
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=300px]{Figures/bio/Intro/reactions/aro.pdf}
+    \caption{\label{benzene}Exemple de liaison effectuée au sein d'un cycle Benzene}
+  \end{center}
+\end{figure}
 
-\paragraph{}Le troisième type de liaison concerne les sucres.
-Nous condensserons toutes les liaisons sucre sous le nom de liaisons ``ose''.
-Ces liaisons interviennent sur les sucres sur le groupement OH présent sur un carbone voisin à l'oxygène inclus dans le cycle.
-
-\paragraph{TODO : liaisons sucre}
-
-\paragraph{TODO : a réécrire/vérifier}Enfin, le dernier type de liaison que nous alons décrire implique au moins un monomère faisant partie de la catégorie des sucres (Glucose ou Arabinose par exemple).
+\paragraph{}Enfin, le dernier type de liaison que nous alons décrire implique au moins un monomère faisant partie de la catégorie des sucres (Glucose ou Arabinose par exemple).
 Les sucres inclus dans les NRP connus sont toujours cyclisés.
 Ils se lient par perte d'un groupement OH présent sur un carbone voisin de l'oxygène présent dans le cycle.
 Face à eux, le monomère complémentaire ne perdra lui qu'un hydrogène pour former ainsi une molécule d'eau expulsée.
 
-\paragraph{TODO : schéma diversité peptidique}
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=300px]{Figures/bio/Intro/reactions/ose.pdf}
+    \caption{\label{ose}Exemple de liaison effectuée avec un sucre}
+  \end{center}
+\end{figure}
 
 \paragraph{}Cette diversité dans la façon de lier les monomères accompagnée du nombre de sites de liaisons candidats permet d'expliquer la diversité structurelle présente au sein des NRP.
 Sur la figure TODO, vous pouvez voir cette diversité s'exprimer au travers du grand nombre de structures différentes présentes.
+
+\paragraph{TODO : schéma diversité peptidique}
+
 
 \subsubsection{Les activités}
 
@@ -207,12 +227,20 @@ Depuis cet article, ce codage de référence est appelé code de Stachelhaus.
 Ce domaine est également souvent appelé ``Peptidyl Carrier domain''.
 Il est en charge de la récupération et du transfert du peptide en cours de formation.
 Chaque domaine T possède un groupement \textit{4’-phosphopantetheine} incluant un ``bras flexible'' qui permet d'agripper et de déplacer les monomères.
-Dans un premier temps, ce bras amène le monomère capturé par le domaine A voisin pour le lier de manière covalente à la synthétase.
+Dans un premier temps, ce bras se plie vers le domaine A voisin pour le lier de manière covalente au monomère.
 Dans un second temps, le monomère est mené au le site de condensation afin d'être inséré en bout du NRP.
 Enfin, le bras se plie dans la direction du domaine de condensation suivant afin de lier le NRP au monomère suivant.
 Durant cette étape, le peptide est libéré du domaine T courant pour être laissé à la charge du domaine T suivant.
 
-\paragraph{Schéma du domaine T}
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=450px]{Figures/bio/Intro/domaineT.pdf}
+    \caption{\label{T_domain}Rôle du domaine T au sein d'une NRPS.
+    1~- Liaison entre le monomère capturé par le domaine A et le bras du module T.
+    2~- Liaison entre le monomère et le bout de la chaine peptidique déjà formée.
+    3~- Déplacement du peptide vers le domaine C suivant}
+  \end{center}
+\end{figure}
 
 \subsubsection{Le domaine de Condensation (domaine C)}
 %citations :
