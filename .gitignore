@@ -6,6 +6,5 @@
 *.tex.*
 manuscrit.pdf
 *.cls
-*.pdf
-*.dvi
 *.toc
+*.dvi
