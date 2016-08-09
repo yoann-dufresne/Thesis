@@ -1,9 +1,9 @@
-%\documentclass[11pt,french,twoside]{thlifl}
 \documentclass[12pt,french,twoside]{report}
 \usepackage[utf8]{inputenc}
 \usepackage{amsthm}
 \usepackage{amssymb}
 \usepackage{graphicx}
+\usepackage{chemist}
 \usepackage[french]{algorithm2e}
 \usepackage[margin=2.5cm]{geometry}
 
@@ -16,9 +16,9 @@
 \title{Algorithmique pour les peptides non ribosomiques}
 \author{Yoann Dufresne}
 
-
 \begin{document}
 \maketitle
+\tableofcontents
 
 \chapter{Les peptides non ribosomiques}
 
@@ -28,80 +28,155 @@
 
 \paragraph{}Afin de bien comprendre la voie de synthèse non ribosomique, commençons par quelques rappels rapides sur la synthèse des protéines classiques.
 Les protéines sont assemblées dans la cellule par un organite appelé ribosome.
-Les ARN messagers sont les vecteurs de l'information protéique.
-Ils sont la réplication d'un morceau d'ADN qui sera traduit par triplets de nucléotides en chaîne d'acides aminés.
-Les 64 codons possibles ($4^3$ nucléotides) sont traduits en 20 acides aminés que l'on appelle les acides aminés protéinogènes (justement car ils interviennent dans la synthèse classique de protéines).
-Ces acides aminés sont tous composés d'un même squelette atomique autorisant deux liaisons et permettant ainsi la formation de chaînes peptidiques.
-Sur le squelette est ancré une chaîne latérale variant d'un acide aminé à l'autre, leur donnant leurs spécificités (voir figure \ref{chaine_pep}).
-Les deux liaisons qu'effectuent le squelette sont supportées par un groupement amine ($NH_2$) et un groupement carboxyle ($C(=O)OH$).
-Ces deux groupements se lient entre eux en chaîne et créent ainsi la protéine.
+Les ARN messagers sont les vecteurs de l'information génétique.
+Ils sont la réplication d'un morceau d'ADN qui sera traduit par triplets de nucléotides (appelés codons) en chaine d'acides aminés.
+Les 64 codons possible ($4^3$ nucléotides) sont traduit en 20 acides aminés appelés acides aminés protéinogènes (justement car ils interviennent dans la synthèse classique de protéines).
+Ces acides aminés sont tous composés d'un même squelette atomique autorisant deux liaisons et permettant ainsi la formation de chaines peptidiques.
+Sur le squelette est ancré une chaine latérale variant d'un acide aminé à l'autre, leur donnant leur spécificités (Voir figure \ref{chaine_pep}).
+Les deux liaisons qu'effectuent le squelette sont supportés par un groupement amine ($NH_2$) et un groupement carboxyle ($C(=O)OH$).
+Ces deux groupements se lient entre eux en chaine et créent ainsi la protéine.
 
 \begin{figure}[h!]
   \begin{center}
-    \includegraphics[width=400px]{Figures/bio/Intro/chaine_pep.png}
+    \includegraphics[width=350px]{Figures/bio/Intro/chaine_pep.jpg}
     \caption{\label{chaine_pep}Présentation d'une chaîne peptidique.
     Chaque trait pointillé vertical sépare un acide aminé d'un autre et chaque trait horizontal sépare le squelette de la chaîne latérale des acides aminés.}
   \end{center}
 \end{figure}
 
-\paragraph{}Une fois assemblée, une protéine se replie sur elle même et ce sont les caractéristiques structurelles et physico-chimiques qui en découlent qui donnent son activité.
-Plus précisément, ce sont les propriétés des éléments en contact avec l'extérieur de la protéine (les atomes qui ne se retrouvent pas enfermé au milieu du repliement) qui déterminent l'activité de celle-ci.
+\paragraph{}Une fois assemblée, une protéine se replie sur elle même et ses caractéristiques structurelles et physico-chimiques qui en découlent lui donnent son activité.
+Plus précisément, les propriétés des éléments en contact avec l'extérieur de la protéine (les atomes qui ne se retrouvent pas enfermé au milieu du repliement) déterminent l'activité de celle-ci.
 Ces propriétés sont donc très dépendantes du repliement et des types de radicaux exposés.
 
 
 
 \subsection{Généralités sur les peptides non ribosomiques}
 \paragraph{}Les peptides non ribosomiques (Non Ribosomal Peptide (NRP)) sont des petits polymères synthétisés par certaines bactéries et certains champignons unicellulaires.
-Tout comme les protéines classiques, les NRP sont des des molécules résultant d'assemblages de briques de base.
+Tout comme les protéines classiques, les NRP sont des molécules résultant d'assemblages de briques de base.
 Cependant, comme le nom l'indique, la voie de synthèse d'un NRP est différente de celle des protéines.
-Cette voie de synthèse comporte une étape supplémentaire.
+Cette voie de synthèse comporte une étape supplémentaire (Voir figure \ref{global}).
 Comme nous venons de le présenter, lors d'une création classique de protéine, l'ADN est transcrit en ARN qui lui même est traduit en protéine.
-Ici, la protéine produite n'est pas le produit final mais une enzyme qui peut agir seule ou se grouper en complexes afin d'assembler
-des NRP.
+Ici, la protéine produite n'est pas le produit final mais une \textit{enzyme modulaire} agissant seule ou en complexe afin d'assembler les NRP.
 Ces complexes sont appelés des synthétases (Non Ribosomal Peptide Synthetase (NRPS)).
-Là où les protéines classiques sont composées des 20 acides aminés standards, la synthèse non ribosomique permet
-l'incorporation de plusieurs centaines de {\em monomères} (briques de bases) différents.
-
 
 \begin{figure}[h!]
   \begin{center}
-    \includegraphics[width=480px]{Figures/bio/Intro/Dpr/2-3_liaisons.png}
-    \caption{\label{DPR_incl}Deux exemples d'inclusion du monomère Dpr.
-    Au sein de l'Edeine A, seules les deux liaisons classiques du squelette peptidique sont effectuées entre le Dpr et les autres monomères.
-    Au sein de de la Capreomycin IA, une troisième liaison est effectuée par le Dpr depuis son groupement amine de la chaîne latérale.}
+    \includegraphics[width=450px]{Figures/bio/Intro/synthese.png}
+    \caption{\label{global}Voie de synthèse non ribosomique~:
+    Groupés en clusters, les gènes codant la protéine NRPS sont transcrit puis traduits par le ribosome.
+    Les modules A de la NRPS capturent ensuite des monomères (billes de couleur ici) dans l'environement afin des les assembler.
+    Enfin, le NRP assemblé est relaché pour aller effectuer sa tâche.
+    }
   \end{center}
 \end{figure}
 
-\paragraph{}Les NRPS sont également plus souples dans la façon d'incorporer des monomères.
+\subsubsection{Les monomères}
+
+\paragraph{TODO : schéma résidus}
+
+\paragraph{}Là où les protéines classiques sont à majorité composées des 20 acides aminés standards, la synthèse non ribosomique incorpore plusieurs centaines de briques de bases différentes.
+Ces briques de base sont appelées des {\em monomères}.
+La base de données de référence des NRP compte pour le moment 533 monomères différents.
+Les monomères peuvent provenir de différents groupes.
+Parmis ces monomères, on compte les 20 acides aminés standards ainsi qu'un grand nombre de dérivés proches.
+Après plusieurs modifications que nous détaillerons plus tard, il est par exemple possible d'obtenir des monomères méthylés ou oxydés (voir schéma TODO).
+On peut également citer les sucres et les acides gras comme faisant partie des monomères candidats à l'inclusion dans des NRP.
+
+
+\subsubsection{Les structures peptidiques}
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=400px]{Figures/bio/Intro/Dpr/2-3_liaisons.png}
+    \caption{\label{DPR_incl}Deux exemples d'inclusion du monomère Dp~:
+    Au sein de l'Edeine A, seules les deux liaisons classiques du squelette peptidique sont effectuées entre le Dpr (en rose) et les autres monomères.
+    Au sein de de la Capreomycin IA, une troisième liaison est effectuée par le Dpr (en rouge) depuis son groupement amine de la chaine latérale.}
+  \end{center}
+\end{figure}
+
+\paragraph{}Les NRPS peuvent arranger les monomères au sein des NRP avec une certaine souplesse.
 Certains monomères possèdent plus de deux groupements capables de se lier.
-Ainsi sur l'exemple (Voir figure \ref{DPR_incl}), on peut constater que le monomère nommé Dpr possède un groupement amine supplémentaire à celui déjà présent dans le squelette des acides aminés classiques.
-Ce groupement en bout de chaîne latérale permet au Dpr de parfois se lier 3 fois et ainsi de casser la linéarité de la molécule assemblée.
-Ce genre monomères, permet lorsqu'ils sont inclus, d'obtenir des structures à embranchements ou cycles.
+Ainsi sur l'exemple (voir figure \ref{DPR_incl}), on peut constater que le monomère nommé Drp (acide 2,3-diamonopropionique) possède un groupement amine supplémentaire à celui déjà présent dans le squelette des acides aminés classiques.
+Ce groupement en bout de chaine latérale autorise le Drp à se lier 3 fois et ainsi casser la linéarité de la molécule assemblée.
+Ces monomères permettent ainsi d'obtenir des structures à embranchements.
 
-\paragraph{TODO : Schéma exhaustif de NRPs}
 
+\subsubsection{Les liaisons inter-monomères}
+
+\paragraph{}Classiquement les liaisons au sein de peptides se font par le rapprochement d'un groupe hydroxyl d'un monomère vers le groupe amine d'un autre.
+Au sein des NRP plusieurs autres types viennent compléter les liaisons possibles et augmentent ainsi la diversité possible des structures.
+La liaison peptidique classique reste tout de même la principale liaison effectuée entre monomères.
+En dehors de celle-ci, nous pouvons lister trois différents types de liaisons NRP.
+
+\paragraph{}Le premier type de liaison inclut un monomère contenant un atome de soufre.
+Comme dans des protéines classiques les monomères soufrés peuvent effectuer des ponts dissulfure (liaison entre deux atomes de soufre en perdant deux atomes d'hydrogène).
+Cependant ce type de liaison n'est pas la seule impliquant un soufre.
+Comme nous le verrons plus tard lors de la description des modules NRPS Cy, l'atome de soufre peut également intervenir dans une cyclisation entre deux monomères en perdant son atome d'hydrogène de la même manière que lorsqu'il réalise un pont disulfure (voir figure \ref{Cy_link}).
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=300px]{Figures/bio/Intro/reactions/Cy.pdf}
+    \caption{\label{Cy_link}Exemple de liaison effectuée par un module Cy}
+  \end{center}
+\end{figure}
+
+\paragraph{}Le second type de liaison implique au moins un monomère contenant un cycle aromatique (cycle Imidazole ou Benzene).
+Dans les deux cas c'est un atome d'hydrogène qui est arraché au cycle afin de pouvoir y lier un monomère.
+Lors d'une liaison d'un cycle Imidazole l'hydrogène remplacé par la liaison est toujours l'un des deux atomes de carbone voisins dans le cycle.
+Dans le cas d'un Benzene (Voir figure \ref{benzene}), c'est la présence d'un oxygène accroché au cycle qui permettra une affinité avec les carbones voisins.
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=300px]{Figures/bio/Intro/reactions/aro.pdf}
+    \caption{\label{benzene}Exemple de liaison effectuée au sein d'un cycle Benzene}
+  \end{center}
+\end{figure}
+
+\paragraph{}Enfin, le dernier type de liaison que nous alons décrire implique au moins un monomère de la catégorie des sucres (Glucose ou Arabinose par exemple).
+Les sucres inclus dans les NRP connus sont toujours cyclisés.
+Ils se lient par perte d'un groupement OH présent sur un carbone voisin de l'oxygène du cycle.
+Face à eux, le monomère complémentaire ne perdra lui qu'un hydrogène pour former ainsi une molécule d'eau expulsée.
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=300px]{Figures/bio/Intro/reactions/ose.pdf}
+    \caption{\label{ose}Exemple de liaison effectuée avec un sucre}
+  \end{center}
+\end{figure}
+
+\paragraph{}Cette diversité dans la façon de lier les monomères accompagnée du nombre de sites de liaisons candidats explique la diversité structurelle présente au sein des NRP.
+Sur la figure TODO, vous pouvez voir cette diversité s'exprimer au travers du grand nombre de structures différentes.
+
+\paragraph{TODO : schéma diversité peptidique}
+
+
+\subsubsection{Les activités}
 
 \paragraph{}Les NRP présentent une grande diversité d'activités, souvent cruciales pour leurs producteurs.
 Beaucoup de NRP recensés sont par exemple des antibiotiques.
-La célèbre molécule de pénicilline est par exemple synthétisée à partir d'un précurseur NRP appelé ACV\cite{queener_molecular_1990}.
+Par exemple, la célèbre molécule de pénicilline est synthétisée à partir d'un précurseur NRP appelé ACV~\cite{queener_molecular_1990}.
 La diversité d'activités peut être expliquée par les grandes variations de structure et de composition par rapport aux protéines.
-La possibilité d'effectuer des structures différentes contraint les repliements et la diversité de monomères permet la mise en contact avec l'extérieur, de structures moléculaires différentes.
-L'efficacité des NRP produits peut quant à elle être expliquée par un effet de sélection.
-La quantité d'énergie dépensée par la cellule pour produire un NRPS est énorme.
-Si cette débauche d'énergie n'aboutissait sur rien, il y a fort à parier que la sélection naturelle aurait favorisé la suppression de ces fonctionnalités.
+Les différentes structures et divers monomères imposent aux NRP d'opter pour des repliements différents des protéines classiques.
+Les contraintes structurelles permettent des repliements difficiles pour des molécules linéaires.
+Les activités spécifiques aux NRP sont obtenues grâce à ces repliements.
+
+\paragraph{}Effectuer un assemblage non ribosomique est très consommateur en énergie pour l'organisme producteur.
+Les complexes enzymatiques à créer sont énorme et leurs gènes peuvent représenter plusieurs pourcents de l'ADN nucléaire.
+De plus, contrairement au ribosome, un NRPS ne peut produire qu'un seul NRP (sauf quelques exeptions qui produisent des variants proches).
+Cependant les avantages obtenus grâce aux activités des NRP ont préservé ces génes au cours du temps.
 
 
 \subsection{Généralité sur les synthétases}
 
-\paragraph{}Comme nous l'avons vu dans la courte introduction précédente, les synthétases permettant l'assemblage des NRP sont des protéines issues d'une synthèse classique.
+\paragraph{}Comme nous l'avons vu dans la courte introduction précédente, les synthétases assemblant les NRP sont des protéines issues d'une synthèse classique.
 Chaque NRPS est un complexe enzymatique extrêmement grand dont la taille est parfois à comparer à un ribosome (TODO : exemple taille en aa).
 Cependant, contrairement à un ribosome, les NRPS sont spécialisés.
 Un NRPS ne peut produire qu'un seul type de NRP.
-Elles sont organisées en modules consécutifs qui permettent de capturer modifier et intégrer un monomère au NRP.
+Elles sont organisées en modules consécutifs qui capturent modifient et intégrent un monomère au NRP\cite{schwarzer_nonribosomal_2003,marahiel_modular_1997}.
 Chacun de ces modules peut à son tour être découpé en domaines fonctionnels.
-Généralement un module est constitué de 3 domaines principaux et éventuellement de domaines optionnels.
-Un module standard est d'abord composé d'un domaine de condensation (C) permettant la liaison du peptide déjà formé au monomère en cours d'inclusion puis d'un module d'adénilation (A) permettant la capture du monomère à insérer et d'un module thiolation (T) effectuant la fixation du monomère capturé et le transfert du NRP depuis le domaine C précédent au domaine C suivant.
-Il se peut que un ou plusieurs domaines permettant des modifications sur le monomère inclus, soient présents entre le domaine A et le domaine T.
+Généralement un module est constitué de 3 domaines principaux et éventuellement de domaines optionnels\cite{finking_biosynthesis_2004}.
+Un module standard est d'abord composé d'un domaine de condensation (C) effectuant la liaison du peptide déjà formé au monomère en cours d'inclusion puis d'un module d'adénilation (A) permettant la capture du monomère à insérer et d'un module thiolation (T) effectuant la fixation du monomère capturé et le transfert du NRP depuis le domaine C précédent au domaine C suivant.
+Il se peut que un ou plusieurs domaines modifiant le monomère inclus, soient présents entre le domaine A et le domaine T.
 Le premier module est également une exception à la règle du C-A-T car il ne possède normalement pas de domaine C (Car il n'y a rien à lier).
 
 \begin{figure}[h!]
@@ -112,32 +187,36 @@ Le premier module est également une exception à la règle du C-A-T car il ne p
   \end{center}
 \end{figure}
 
-\paragraph{}Prenons pour exemple le NRP appelé hc-toxin\cite{_mibig:_????}.
+\paragraph{}Prenons pour exemple le NRP appelé hc-toxin~\cite{_mibig:_????}.
 Le hc-toxin est un peptide non ribosomique composé de 4 monomères.
 D'après la base de données MiBig couplée à celle du NCBI, la synthétase permettant sa création est composée de 5218 acides aminés.
-Cette enzyme peut être séparée en 4 modules, chacun permettant l'inclusion d'un monomère.
+Cette enzyme peut être séparée en 4 modules, incluant chacun un monomère.
 Chacun des modules est également découpé en domaines.
-Le découpage pour ce NRP est représenté sur la figure \ref{mibig_hc}.
-Aux 4 modules correspondent 4 modules A, 4 modules T et 3 modules C.
-On peut également voir un module d'épimérisation (modification de l'acide aminé inclus) présent en fin de premier module ainsi qu'un module C supplémentaire en fin d'enzyme permettant la cyclisation du peptide.
+Le découpage pour ce NRP est représenté sur la figure~\ref{mibig_hc}.
+Aux 4 modules correspondent 4 domaines A, 4 domaines T et 3 domaines C.
+On peut également voir un domaines d'épimérisation (modification de l'acide aminé inclus) présent en fin de premier domaines ainsi qu'un domaines C supplémentaire en fin d'enzyme effectuant la cyclisation du peptide.
 
 \subsection{Les domaines principaux}
 
 \subsubsection{Le domaine d'Adénilation (domaine A)}
 
-\paragraph{}C'est le domaine qui porte la spécificité du module dans lequel il se trouve.
-La séquence d'acides aminés de ce domaine varie fortement afin de pouvoir capturer beaucoup de monomères différents.
-Une fois le repliement de la synthétase effectué, les domaines A possèdent une cavité interne permettant la reconnaissance et l'accueil d'une molécule.
-Ce sont les acides aminés de la synthétase en contact avec cette cavité qui vont permettre de "choisir" le monomère à capturer dans l'environnement.
+\paragraph{}Ce domaine porte la spécificité du module dans lequel il se trouve.
+Un domaine A donné ne peut capturer qu'un seul type de monomère (sauf quelques exceptions qui peuvent capturer des variants proches).
+La séquence d'acides aminés de ce type de domaine varie fortement d'un domaine à l'autre.
+Un grand nombre de domaines A différents (plusieurs centaines) sont obtenus grâce à ces vairations.
+de fait, plusieurs centaines de monomères sont inclus par ces domaines.
+Une fois le repliement de la synthétase effectué, les domaines A possèdent une cavité interne effectuant la reconnaissance et l'accueil d'une molécule.
+Les acides aminés de la synthétase en contact avec cette cavité vont ``choisir'' le monomère à capturer dans l'environnement.
 La taille de la cavité ainsi que les propriétés physico-chimiques de ces acides aminés en contact permettent une affinité forte avec un unique monomère.
 Il arrive parfois que le domaine ne soit pas spécifique à un seul monomère mais plutôt à un petit nombre de monomères très proches les uns des autres.
-Cependant ce cas reste rare et dans la majorité des cas,  un NRPS ne permet la création que d'un seul NRP.
+Cependant ce cas reste rare et dans la majorité des cas, un NRPS ne créé qu'un seul NRP.
 
-\paragraph{}En 1999, Stachelhaus et al. publient un article analysant la structure de nombreux domaines A\cite{stachelhaus_specificity-conferring_1999}.
-Ils essayent d'aligner un grand nombre de domaines A pour en extraire les parties conservées et les parties spécifiques au monomère à capturer.
-Il apparait que très peu d'acides aminés sont conservés d'un domaine A à l'autre mais que ceux-ci peuvent être utilisés comme marqueurs fixes.
-Ces points conservés (et donc à priori très importants), permettent de servir de repères vers des acides aminés proches faisant partie de la poche d'accueil du monomère.
-Les auteurs extraient un codage permettant de déterminer le monomère inclus à partir de 10 acides aminés présents dans la séquence d'un domaine A.
+\paragraph{}En 1999, Stachelhaus et al. publient un article analysant la structure de nombreux domaines A~\cite{stachelhaus_specificity-conferring_1999}.
+Ils alignent un grand nombre de domaines A pour en extraire les parties conservées et les parties spécifiques au monomère à capturer.
+Il apparait que très peu d'acides aminés sont conservés entre domaines A.
+Ces quelques acides aminés peuvent cependant servir de marqueurs.
+Ces points conservés (et donc à priori très importants), servent de repères vers des acides aminés proches faisant partie de la poche d'accueil du monomère.
+Les auteurs extraient un codage déterminant le monomère inclus à partir de 10 acides aminés présents dans la séquence d'un domaine A.
 Depuis cet article, ce codage de référence est appelé code de Stachelhaus.
 
 
@@ -146,51 +225,59 @@ Depuis cet article, ce codage de référence est appelé code de Stachelhaus.
 %• Biochemical characterization of peptidyl carrier protein (PCP), the thiolation domain of multifunctional peptide synthetases.
 %• Portability of the thiolation domain in recombinant pyoverdine non-ribosomal peptide synthetases
 
-\paragraph{}Le but du domaine T est d'assurer la logistique au sein du module dans lequel il est contenu\cite{stachelhaus_biochemical_1996,calcott_portability_2015}.
-Ce domaine est également souvent appelé "Peptidyl Carrier domain".
+\paragraph{}Le but du domaine T est d'assurer la logistique au sein du module dans lequel il est contenu~\cite{stachelhaus_biochemical_1996,calcott_portability_2015}.
+Ce domaine est également souvent appelé ``Peptidyl Carrier domain''.
 Il est en charge de la récupération et du transfert du peptide en cours de formation.
-Chaque domaine T possède un groupement 4’-phosphopantetheine incluant un "bras flexible" qui permet d'agripper et de déplacer les monomères.
-Dans un premier temps, ce bras permet d'aller chercher le monomère capturé par le domaine A voisin et de le lier de manière covalente.
-Dans un second temps, le monomère est mené au site de condensation du début de module afin d'être inséré par le domaine C au début du NRP déjà formé.
+Chaque domaine T possède un groupement \textit{4’-phosphopantetheine} incluant un ``bras flexible'' qui agrippe et déplace les monomères.
+Dans un premier temps, ce bras se plie vers le domaine A voisin pour le lier de manière covalente au monomère.
+Dans un second temps, le monomère est mené au le site de condensation afin d'être inséré en bout du NRP.
 Enfin, le bras se plie dans la direction du domaine de condensation suivant afin de lier le NRP au monomère suivant.
 Durant cette étape, le peptide est libéré du domaine T courant pour être laissé à la charge du domaine T suivant.
 
-\paragraph{Schéma du domaine T}
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=450px]{Figures/bio/Intro/domaineT.pdf}
+    \caption{\label{T_domain}Rôle du domaine T au sein d'une NRPS.
+    1~- Liaison entre le monomère capturé par le domaine A et le bras du module T.
+    2~- Liaison entre le monomère et le bout de la chaine peptidique déjà formée.
+    3~- Déplacement du peptide vers le domaine C suivant}
+  \end{center}
+\end{figure}
 
 \subsubsection{Le domaine de Condensation (domaine C)}
 %citations :
 %• Peptide Bond Formation in Nonribosomal Peptide Biosynthesis, CATALYTIC ROLE OF THE CONDENSATION DOMAIN
 %• http://bmcevolbiol.biomedcentral.com/articles/10.1186/1471-2148-7-78
 
-\paragraph{}Le domaine C est par convention considéré comme le premier domaine de chaque module\cite{stachelhaus_peptide_1998}.
-C'est un domaine qui permet de lier le morceau de peptide assemblé par les modules précédents avec le monomère capturé par le domaine A du module courant.
-Bien que sa fonction principale reste toujours la même, il existe plusieurs variants\cite{rausch_phylogenetic_2007} de ce domaine que nous allons décrire par la suite.
+\paragraph{}Le domaine C est par convention considéré comme le premier domaine de chaque module~\cite{stachelhaus_peptide_1998}.
+C'est un domaine qui lie le morceau de peptide assemblé par les modules précédents avec le monomère capturé par le domaine A du module courant.
+Bien que sa fonction principale reste toujours la même, il existe plusieurs variants~\cite{rausch_phylogenetic_2007} de ce domaine que nous allons décrire par la suite.
 
-\paragraph{Les domaines LCL et DCL}
-Les acides aminés capturés par les domaines A existent dans deux configuration différentes dites configurations L et D.
+\paragraph{Les domaine LCL et DCL}
+Les acides aminés capturés par les domaines A existent dans deux configuration différentes dites configurations L (Leavus) et D (Dexter).
 Il existe deux domaines C différents pour lier ces molécules.
-Le plus standard, permet la liaison de deux monomères de type L. Le domaine est alors appelé domaine LCL.
-Le second permet de lier un monomère D à un L, il est alors appelé domaine DCL.
+Le plus standard, lie deux monomères de type L. Le domaine est alors appelé domaine LCL.
+Le second lui, lie un monomère D à un L, il est alors appelé domaine DCL.
 Ces domaines sont juste deux spécialisations du modèle décrit ci-dessus.
 
 \paragraph{Les domaines C starter (Cs) et C terminal (Ct)}
-Comme leurs noms l'indiquent ces domaines sont en bout de protéines.
-Ils ne sont donc pas entourés de deux modules différents mais sont inclus respectivement dans le premier et dernier module.
+Comme leur noms l'indiquent ces domaines sont en bout de protéines.
+Ils ne sont donc pas entourés de deux modules différents mais sont inclus respectivement dans le premier et dernier modules.
 Il ne peuvent donc faire la liaison entre deux monomères fixés sur deux bras de domaines T.
 
-\paragraph{}Le domaine Cs permet de directement capturer et lier un monomère de l'environnement afin de débuter le peptide.
+\paragraph{}Le domaine Cs capture et lie directement un monomère de l'environnement afin de débuter le peptide.
 Cela permet d'inclure par exemple les acides gras car ils ne sont pas reconnus par les domaines A.
 Ces modules capturent toujours le même type de monomères mais on ne sait actuellement pas exactement comment cette spécificité est encodée dans l'enzyme.
 
 \paragraph{}Le rôle du domaine Ct est lui un peu plus flou.
-Dans certains peptides ce domaine permet de faire une liaison entre le dernier monomère et un monomère déjà inclus, créant ainsi un cycle.
-Dans d'autres il lie le dernier monomère avec un monomère de l'environnement.
+Dans certains peptides ce domaine effectue une liaison entre le dernier monomère et un monomère déjà inclus, créant ainsi un cycle\cite{gao_cyclization_2012}.
+Dans d'autres il lie le dernier monomère avec un monomère spécifique de l'environnement (même procédé que pour le module Cs).
 Comme pour le Cs, la spécificité n'est pas encore expliquée.
-Il est également possible que les deux comportements soient en fait issus de deux sous catégories de Ct mais rien n'a encore été prouvé.
+Il est également possible que les deux comportements soient en fait issus de deux sous catégories de Ct mais aucune litérature sur le sujet n'a encore été publiée.
 
 \paragraph{Le domaine Cy}
-Cette dernière variation du module C standard permet de lier deux monomères voisins en effectuant deux liaisons.
-Cette liaison est toujours effectuée par un monomère possédant un atome de soufre près d'un groupement amine.
+Cette dernière variation du module C standard lie deux monomères voisins en effectuant deux liaisons qui forment un cycle local.
+Cette liaison est toujours effectuée entre un monomère possédant un atome de soufre près d'un groupement amine (la Cystéine et certaines de ses dérivées) et un monomère avec un groupement hydroxyl.
 
 \begin{figure}[h!]
   \begin{center}
@@ -202,22 +289,23 @@ Cette liaison est toujours effectuée par un monomère possédant un atome de so
 
 \subsubsection{Le domaine de Thioestérase}
 
-\paragraph{}Contrairement aux 3 autres domaines principaux, celui-ci ne fait partie d'aucun module.
-C'est un module de terminaison qui permet le décrochage du peptide complètement formé.
-Ce module de séparation n'est pas toujours présent et sa fonction est parfois exprimée par d'autres modules comme le Ct.
+\paragraph{}Le domaine Te fait partie du module de terminaison.
+Il est le dernier domaine de ce module et vient succéder le domaine T ou les domaines optionnels présents après le T.
+C'est un domaine de terminaison qui permet le décrochage et parfois la cyclisation du peptide complètement formé~\cite{trauger_peptide_2000,kohli_thioesterase_2002}.
+Ce domaine de séparation n'est pas toujours présent et sa fonction est parfois exprimée par d'autres domaines comme le Ct.
 
 
 \subsection{Les domaines de transformation monomérique}
 
-\paragraph{}Nous allons à présent parler de quelques modules optionnels permettant de modifier un monomère capturé par un domaine A.
+\paragraph{}Nous allons à présent parler de quelques domaines optionnels modifiant un monomère capturé par un domaine A.
 Ces transformations permettent aux organismes d'obtenir des configurations monomériques peu fréquentes dans leur environnement.
 
 
 \paragraph{La fonction d'épimérisation (domaines E et C/E)}
 
-Lors de la description des domaines LCL et DCL, nous avons rapidement évoqué la possibilité pour une molécule d'être dans deux configurations différentes tout en possédant pour autant la même composition et structure atomique.
-Ces deux configuration sont en fait des images miroirs l'une de l'autre.
-On appel ces deux configurations Leavus (L) et Dexter (D).
+Lors de la description des domaines LCL et DCL, nous avons rapidement évoqué la possibilité pour une molécule d'être dans deux conformations différentes tout en possédant pour autant la même composition et structure atomique.
+Ces deux conformations sont symétriques l'une de l'autre.
+Elles sont appelées Leavus (L) et Dexter (D).
 
 \begin{figure}[h!]
   \begin{center}
@@ -226,18 +314,18 @@ On appel ces deux configurations Leavus (L) et Dexter (D).
   \end{center}
 \end{figure}
 
-\paragraph{}Alors que la majorité de la vie est gauchère (ne contient que des acides aminés L), les NRPS permettent l'inclusion de monomères de forme D en capturant un monomère L puis en le transformant.
-Les domaines responsables de ces transformations sont appelés domaines d'épimérisation.
+\paragraph{}Alors que la majorité de la vie est ``gauchère'' (ne contient que des acides aminés L), les NRPS autorisent l'inclusion de monomères de forme D par la capture d'un monomère L puis en sa transformation en conformation D.
+Les domaines responsables de ces transformations sont appelés domaines d'\textit{épimérisation}~\cite{calcott_portability_2015}.
 Une fois le monomère L lié au reste du peptide par le domaine C, il est emmené auprès du domaine E afin de changer son orientation.
 Le fait que cette transformation soit postérieure à la fixation sur le reste du peptide explique l'absence de domaines DCD (Les monomères de droite seront toujours présentés au domaine C avant transformation).
 Il arrive parfois que cette transformation du monomère ne soit pas portée par un domaine E mais directement incluse dans le domaine C précédent.
-Ce domaine est alors appelé domaine C/E et assure les deux fonctionnalités.
+Ce domaine est alors appelé domaine C/E et assure les deux fonctionnalités~\cite{yin_enduracidin_2006,balibar_generation_2005}.
 
 
 \paragraph{domaine de N-méthylation (NM)}
 
 De la même manière que le domaine E, le domaine NM agit à la suite de la liaison du monomère actuel au morceau de peptide précédemment assemblé.
-Ce domaine permet l'ajout d'un méthyle (CH3) sur le groupement amine du monomère courant.
+Ce domaine ajoute un méthyle ($CH_{3}$) sur le groupement amine du monomère courant.
 
 \begin{figure}[h!]
   \begin{center}
@@ -250,12 +338,12 @@ Ce domaine permet l'ajout d'un méthyle (CH3) sur le groupement amine du monomè
 % http://archiv.ub.uni-marburg.de/diss/z2008/0068/pdf/dgs.pdf
 
 Ce domaine n'existe à priori que pour les modules d'initiation.
-Il permet la formylation (ajout d'un groupe C(=O)H) sur le groupement amine du premier monomère\cite{schonafinger_amide_2007}.
+Il permet la formylation (ajout d'un groupe C(=O)H) sur le groupement amine du premier monomère~\cite{schonafinger_amide_2007}.
 
 \begin{figure}[h!]
   \begin{center}
     \includegraphics[width=300px]{Figures/bio/Intro/domaineF-gramicidine.png}
-    \caption{\label{domaine_F}Formilation d'un monomère par un domaine F}
+    \caption{\label{domaine_F}Formylation d'un monomère par un domaine F}
   \end{center}
 \end{figure}
 
@@ -268,15 +356,15 @@ Lorsque cette différence est constatée, c'est que le peptide a subit une trans
 Toutes les modifications ponctuelles sont effectuées par des enzymes de décoration.
 Parfois il arrive que ce soit une partie complète de la molécule qui ne soit pas NRP.
 Il existe des molécules très proches des NRP appelés polyketides qui peuvent venir s'hybrider avec des NRP.
-Dans cette partie nous allons aborder ces deux types de modification d'un NRP.
+Dans cette partie nous allons aborder ces deux types de modification/ajout d'un NRP.
 
 
 \subsubsection{Les enzymes de décoration}
 
 \paragraph{}Les clusters de gènes de NRPS ne sont pas uniquement constitués des gènes d'enzymes NRPS.
 De nombreux gènes accompagnateurs sont présents, généralement inclus dans le cluster.
-Parmi ceux-ci, certains gènes servent à modifier les NRP après leur production.
-La vancomycine est un très bon exemple de modifications enzymatiques post-synthèse.
+Parmi ceux-ci, certains gènes servent à modifier les NRP déjà relachés par la NRPS.
+La \textit{vancomycine} est un très bon exemple de peptide ayat subit des modifications enzymatiques post-synthèse.
 
 \begin{figure}[h!]
   \begin{center}
@@ -286,37 +374,36 @@ La vancomycine est un très bon exemple de modifications enzymatiques post-synth
 \end{figure}
 
 \paragraph{}Sur la figure \ref{vanco}, les deux structures entourées en vert se démarquent par rapport au reste de la molécule.
-Ce sont deux sucres qui ont été ajoutés après la synthèse (un vancosamine et un D-glucose).
+Ce sont deux sucres qui ont été ajoutés après la synthèse (une \textit{vancosamine} et un \textit{D-glucose}).
 Les sucres sont des monomères qui ne peuvent pas être capturés par des domaines A.
-Ce sont des gènes extérieurs à la NRPS qui sont dédiés à leur capture, transformation et liaison avec la NRP.
-Ce phénomène d'ajout de sucre est appelé glycosylation.
-Comme le suggère \cite{van_wageningen_sequencing_1998} trois enzymes sont en action pour l'incorporation de la vancosamine.
-La vancosamine n'étant pas naturellement présent dans l'environement de l'organisme producteur, l'une des enzymes est dédiée à la création de ce sucre à partir du NDP-4-keto-6-deoxyglucose.
+Ce sont des gènes extérieurs à la NRPS mais faisant partie du cluster, qui sont dédiés à leur capture, transformation et liaison avec la NRP.
+Ce phénomène d'ajout de sucre est appelé \textit{glycosylation}.
+Comme le suggère \cite{van_wageningen_sequencing_1998}, trois enzymes entrent en action pour incorporer la vancosamine.
+La vancosamine n'étant pas naturellement présente dans l'environement de l'organisme producteur, l'une des enzymes est dédiée à la création de ce sucre à partir du \textit{NDP-4-keto-6-deoxyglucose}.
 
-\paragraph{}La vancomycine possède également deux atomes de Clore.
+\paragraph{}La vancomycine possède également deux atomes de Chlore.
 Ces deux atomes sont inhabituels pour des NRP et ne sont pas initialement présents au sein de leurs monomères de rattachement.
 Il n'existe pas non plus de domaine NRPS capable d'inclure ces atomes.
-Van Wageningen dans l'article précédemment cité montre également que deux enzymes issues du cluster de gènes de la NRPS, sont responsables de ces incorporations.
+Van Wageningen dans l'article précédemment cité, montre également que deux enzymes issues du cluster de gènes de la NRPS, sont responsables de ces incorporations.
 Ce type d'enzyme est appelé enzyme d'halogénation car elle est capable d'inclure un atome halogène (Fluore, Clore, Brome, Iode, Astate)
 
-\paragraph{}Pour résumer, les enzymes de décoration post-synthèse sont capables d'effectuer 3 tâches que nous avons découvert sur l'exemple de la vancomycine :
+\paragraph{}Pour résumer, les enzymes de décoration post-synthèse sont capables d'effectuer 3 tâches que nous avons découvertes sur l'exemple de la vancomycine :
 \begin{itemize}
-  \item La synthèse de monomères en modifiant des composants de l'environnement (création de vancosamine)
-  \item La création de liaison entre monomères de l'environnement et NRP (Les sucres de la vancomycine)
+  \item La synthèse de monomères en modifiant des composants de l'environnement (par exemple, création de vancosamine)
+  \item La création de liaison entre monomères de l'environnement et NRP (par exemple, les sucres de la vancomycine)
   \item La modification de morceaux de monomères déjà inclus dans le NRP (halogénation par exemple)
 \end{itemize}
 
-Toutes ces enzymes permettent à nouveau d'augmenter la combinatoire des molécules potentiellement créées.
+Toutes ces enzymes augmentent à nouveau la combinatoire des molécules potentiellement créées.
 
 
 
 \subsubsection{Les PKS}
-% TODO : Reférences
 
-\paragraph{}Les PKS (Polyketyde Synthetase) sont, tout comme les NRPS, des enzymes modulaires permettant de synthétiser des polymères complexes par une voie non ribosomique.
-Cependant, contrairement aux NRPS, les PKS n'incorporent pas de monomères directement formés mais construisent les PK par ajouts successifs de quelques atomes.
-De la même manière que les domaines A des NRPS capturent des monomères spécifiques, certains domaines PKS sont spécialisés pour effectuer des réactions permettant l'ajout de quelques atomes au PK en création.
-Tout comme les NRP, les PK sont des molécules très coûteuses à produire mais très utiles pour les organismes qui les produisent.
+\paragraph{}Les PKS (Polyketyde Synthase)~\cite{shen_polyketide_2003,staunton_polyketide_2001} sont, tout comme les NRPS, des enzymes modulaires synthétisant des polymères complexes par assemblage de monomères.
+Cependant, contrairement aux NRPS, les PKS n'incorporent pas de monomères directement formés mais construisent les PK (Polyketyde) par ajouts successifs de monomères ne faisant que quelques atomes (moins de 10 en général).
+De la même manière que les domaines A des NRPS capturent des monomères spécifiques, certains domaines PKS sont spécialisés pour effectuer des réactions d'ajout de quelques atomes au PK en création.
+Tout comme les NRP, les PK sont des molécules très coûteuses en énergie pour la production mais très utiles pour les organismes qui les synthétisent.
 Sur la figure \ref{pks} nous montrons le processus de synthèse d'une PK.
 
 \begin{figure}
@@ -324,20 +411,19 @@ Sur la figure \ref{pks} nous montrons le processus de synthèse d'une PK.
     \includegraphics[width=400px]{Figures/bio/Intro/PKS.png}
     \caption{\label{pks}Synthèse d'une epsilon-rhodomycinone
     Comme pour les NRPS, les PKS sont constitués de modules fonctionnels.
-    Sur cet exemple on peut voir que certains modules sont utilisés plusieurs fois itérativement.
-    La longue chaîne carbonée de la première étape est créée par une répétition successive de 9 fois le même module.
+    Sur cet exemple on peut voir que certains modules sont utilisés itérativement.
+    La longue chaîne carbonée de la première étape est créée par une utilisation de 9 fois le même module.
     Tout comme les NRP, les PK peuvent être modifiés après libération par le PKS (étapes 5 à 10 ici).
     Source de l'image : en.wikipedia.org/wiki/Polyketide\_synthase}
   \end{center}
 \end{figure}
 
-\paragraph{}Les PKS et NRPS ont des origines communes dans l'évolution et il est logique de les retrouver aux mêmes endroits du génome.
-Plusieurs NRP sont hybrides avec des PK, le cluster de gènes est alors composé de gènes NRPS et PKS.
+\paragraph{}Plusieurs NRP sont hybrides avec des PK, le cluster de gènes est alors composé de gènes NRPS et PKS.
 Il existe alors deux moyens de créer ces hybrides.
 Soit la PK est créé séparément du NRP et les deux sont liés post-synthèse par des enzymes similaires aux enzymes décoratrices décrites précédemment.
 Soit la PKS et la NRPS sont produits simultanément et s'assemblent pour former un gros complexe enzymatique hybride.
 Le NRP-PK est alors directement formé pendant la synthèse en faisant passer le polymère en formation de module en module (qu'ils soient NRPS ou PKS).
-A nouveau, cette hybridation avec d'autres types de polymères permet d'augmenter la quantité de conformations de peptides possibles.
+A nouveau, cette hybridation avec d'autres types de polymères augmente la quantité de molécules différentes possibles.
 
 
 
@@ -352,7 +438,7 @@ A nouveau, cette hybridation avec d'autres types de polymères permet d'augmente
 \paragraph{}Après avoir présenté les NRP ainsi que leurs voies de synthèse, nous allons nous attarder sur les outils bio-informatiques qui s'y intéressent.
 Les outils que nous allons présenter ici se focalisent soit sur les NRPS soit sur les NRP, c'est pourquoi la présentation séparera distinctement ces deux types d'outils.
 Pour chacune de ces catégories, nous allons également distinguer deux sous-catégories.
-La première portera sur les outils permettant l'annotation des données.
+La première portera sur les outils effectuant l'annotation des données.
 Pour les NRPS l'annotation correspondra à la phase de recherche de gènes NRPS dans le génome ainsi qu'à l'identification des différentes briques contenues dans ces gènes (entre autre les modules).
 Pour les NRP l'annotation correspondra à la phase d'identification et de décomposition des structures monomériques présentes dans des molécules.
 La seconde sous-catégorie présentera les moyens d'archivage et de mise à disposition des informations récoltées par les outils d'annotation.
@@ -360,84 +446,82 @@ Cette partie rassemblera les différentes bases de données, dédiées ou non, e
 
 \subsection{Les outils d'annotation de NRPS}
 
-\paragraph{}Dans cette partie, nous allons nous attarder sur les outils bioinformatiques permettant la découverte et l'annotation de NRPS depuis le génome.
-Cette recherche pourra être effectuée par étapes successives en commençant par la détection des clusters de gènes, en poursuivant par l'annotation des domaines des NRP et en finissant par les détections spécifiques aux types de clusters.
+\paragraph{}Dans cette partie, nous allons présenter les outils bioinformatiques permettant la découverte et l'annotation de NRPS depuis le génome.
+Cette recherche pourra être effectuée par étapes successives en commençant par la détection des clusters de gènes, en poursuivant par l'annotation des domaines des NRP et en finissant par les détections spécifiques aux domaines détectés.
 
 \subsubsection{Détection de clusters de gènes}
 
 \paragraph{}L'information des clusters de gènes est très importante pour comprendre les formes finales de NRP.
-La détection des clusters nous permet d'identifier l'ensemble des gènes impliqués dans la synthèse d'un NRP et pas uniquement ceux impliqués dans la création d'un NRPS.
-Avoir accès à l'ensemble des gènes d'un cluster nous permet par exemple de détecter les transformations post-synthèse qui peuvent modifier un NRP.
+La détection des clusters nous permet d'identifier l'ensemble des gènes impliqués dans la synthèse d'un NRP et pas uniquement ceux codant une NRPS.
+Avoir accès à l'ensemble des gènes d'un cluster nous autorise par exemple la détection des transformations post-synthèse qui peuvent modifier un NRP.
 
-\paragraph{}Il existe de nombreuses techniques permettant la recherche de clusters de gènes.
-Certains outils génériques comme CLUSEAN\cite{weber_clusean:_2009} qui permettent de détecter des clusters de gènes quels qu'ils soient.
-L'inconvénient fort pour l'application aux NRPS, il est nécessaire de passer un second logiciel pour vérifier que le cluster est bien NRPS.
+\paragraph{}Il existe de nombreuses techniques de recherche de clusters de gènes.
+Certains outils génériques comme CLUSEAN\cite{weber_clusean:_2009} détectent tout type de clusters.
 Il existe également des techniques spécialisées pour détecter directement des clusters de gènes de métabolites secondaires.
-Par exemple, le logiciel CASSIS\cite{wolf_cassis_2016} exploite des propriétés de régions promotrices pour découvrir et classifier ces clusters.
+Par exemple, le logiciel CASSIS~\cite{wolf_cassis_2016} exploite des propriétés de régions promotrices pour découvrir et classifier ces clusters.
 
 \paragraph{}De nombreux autres logiciels encore plus spécialisés existent.
-Il est possible de découvrir des clusters de métabolites secondaires chez des bactéries\cite{cruz-morales_recapitulation_2015}, des champignons\cite{khaldi_smurf:_2010} ou encore plus précisément chez des champignons filamenteux\cite{andersen_accurate_2013,umemura_motif-independent_2015}.
-Tous ces outils pour dire que quel que soit le sous domaine des NRP étudiés, nous pouvons toujours trouver un outil spécialisé dans la recherche de leurs clusters de gènes.
-
+Il est aussi possible de découvrir des clusters de métabolites secondaires chez des bactéries\cite{cruz-morales_recapitulation_2015}, des champignons\cite{khaldi_smurf:_2010} ou encore plus précisément chez des champignons filamenteux\cite{andersen_accurate_2013,umemura_motif-independent_2015}.
+Quel que soit le sous domaine des NRP étudié, nous pourrons trouver un outil spécialisé dans la recherche de leurs clusters de gènes.
 
 
 \subsubsection{Détection et identification de domaines NRPS}
 
-\paragraph{}La détection et l'identification des gènes codant pour les domaines est le coeur de l'annotaion des NRPS.
-Nous allons ici présenter des méthodes qui permettent à la fois d'identifier les différents types de domaines (A, C, T, ...) ainsi que des méthodes permettant d'inférer les spécificités de ces domaines.
+\paragraph{}La détection et l'identification des gènes codant pour les domaines est au coeur de l'annotaion des NRPS.
+Nous allons ici présenter des méthodes identifiant les différents types de domaines (A, C, T, ...) ainsi que des méthodes inférant les spécificités de ces domaines.
 
 % Chapter 8 Methods for In Silico Prediction of Microbial Polyketide and Nonribosomal Peptide Biosynthetic Pathways from DNA Sequence Data
-\paragraph{La recherche "manuelle"/automatique}
-Il est possible de rechercher des domaines NRPS quasi-manuellement\cite{bachmann_chapter_2009}.
-Pour cela, il faut constituer une petite base données de domaines NRPS très généralistes puis les rechercher dans le génome cible à l'aide d'algorithmes comme BLAST.
+\paragraph{La recherche par alignements}
+Il est possible de rechercher des domaines NRPS \textit{quasi-manuellement}~\cite{bachmann_chapter_2009}.
+Pour cela, il faut tout d'abord constituer une petite base données de domaines NRPS très généralistes puis les rechercher dans le génome cible à l'aide d'algorithmes d'alignement comme BLAST.
 En analysant ensuite manuellement les alignements obtenus, il est possible de détecter certains domaines qui auraient été éliminés par des algorithmes automatiques.
 Cette méthode reste dérisoire au regard de la quantité d'informations à gérer.
 Elle n'est utilisée que dans des cas très particuliers où l'on suppose fortement la découverte de nouveaux éléments.
 Cette technique peut également être utilisée automatiquement.
-Après avoir les résultats des différents BLAST lancés, il est possible de mettre un seuil de ressemblance et d'annoter tous les domaines trouvés par le nom du domaine de référence le plus proche.
+Après avoir les résultats des différents BLAST lancés, il est possible de mettre un ``seuil de ressemblance'' et d'annoter tous les domaines trouvés par le nom du domaine de référence le plus proche.
 
 %· Specificity prediction of adenylation domains in nonribosomal peptide synthetases (NRPS) using transductive support vector machines (TSVMs)
 %· NRPSpredictor2—a web server for predicting NRPS adenylation domain specificity
 \paragraph{NRPS predictor}
-NRPS prédictor\cite{rottig_nrpspredictor2web_2011,rausch_specificity_2005} est un outil de prédiction des substrats capturés par les domaines A.
+NRPS predictor~\cite{rottig_nrpspredictor2web_2011,rausch_specificity_2005} est un outil de prédiction des substrats capturés par les domaines A.
 Il analyse une séquence trouvée par un algorithme de détection de modules A et prédit sa spécificité.
 Cet outil est basé sur la recherche par Machines à Vecteurs de Support (Support Vector Machine (SVM)).
 L'idée est de se baser sur les données de domaines A déjà annotés afin de créer des séquences (vecteurs) caractéristiques des domaines.
-L'outil permet de prédire les domaines A avec différents niveaux de granularité, ce qui permet d'avoir de l'information même lorsque le module A précis n'est pas détecté.
-Le niveau le plus fin permet la détection exacte du monomère mais il est également possible de prédire les spécificités par "groupements" de monomères.
-Par exemple, l'outil essayera de prédire si le monomère inclus est polaire, hydrophobique, aliphatique...
-Chacun de ces critères ayant son propre profil SVM.
+Ces vecteurs sont composés des propriétés physicos-chimiques des acides aminés proches (A moins de 8Å) de la ``poche'' d'accueil du monomère.
+L'outil prédit les domaines A avec différents niveaux de granularité, ce qui donne de l'information même lorsque la spécificité précise du module A n'est pas détectée.
+Le niveau le plus fin correspond à la détection exacte du monomère mais il est également possible de prédire les spécificités par ``groupements'' de monomères.
+Par exemple, l'outil essayera de prédire si le monomère inclus est polaire, hydrophobique, aliphatique... , chacun de ces critères ayant son propre profil SVM.
 Cet outil est bien plus performant que le simple code de Stachelhaus et obtient une F-mesure de 80\% pour la prédiction la plus fine et 95\% pour les plus gros groupements de monomères.
 
 
 % The Natural Product Domain Seeker NaPDoS: A Phylogeny Based Bioinformatic Tool to Classify Secondary Metabolite Gene Diversity
 \paragraph{NaPDoS et l'identification des domaines C}
-NaPDoS\cite{ziemert_natural_2012} est un logiciel issu d'un travail sur la phylogénie des domaines C NRPS.
+NaPDoS~\cite{ziemert_natural_2012} est un logiciel issu d'un travail sur la phylogénie des domaines C NRPS.
 Les auteurs ont créé une base de domaines C de NRPS déjà connus.
 À partir de cette base, ils ont alignés tous les domaines les uns contre les autres et construit une phylogénie.
-Cette phylogénie a permis aux auteurs de diviser les domaines C en plusieurs groupes et ainsi de créer la première classification de ces domaines.
+Comme Raush et al en 2007~\cite{rausch_phylogenetic_2007}, cette phylogénie a permis aux auteurs de diviser les domaines C en plusieurs groupes et ainsi de créer une classification de ces domaines.
 Ces groupes ont été transformés en différentes HMM représentatives utilisées pour la classification des domaines au travers du serveur web de l'application.
 
 
 % Chapter 8 Methods for In Silico Prediction of Microbial Polyketide and Nonribosomal Peptide Biosynthetic Pathways from DNA Sequence Data
 \paragraph{2metDB - PKS/NRPS web server}
-Ces deux logiciels sont deux implémentations de la même technique de détection des domaines NRPS et PKS\cite{bachmann_chapter_2009}.
+Ces deux logiciels sont deux implémentations de la même technique de détection des domaines NRPS et PKS~\cite{bachmann_chapter_2009}.
 La différence entre les deux est que 2metDB est un outil standalone alors que PKS/NRPS web server est une version en ligne.
 Les auteurs font le constat qu'un domaine NRPS ou PKS possède des zones très variables en composition ainsi que des zones très conservées.
-Ce sont ces zones conservées qui ont permis de déterminer des coordonnées fixes entre domaines A et ansi de créer le code de Stachelhaus.
+Ces zones conservées déterminent des coordonnées fixes entre domaines A et ansi de créer le code de Stachelhaus.
 Il existe des zones conservées au sein de tous les domaines.
 Les auteurs des logiciels ont tiré partie de ces zones en créant des HMM pour représenter des archétypes pour chacun des types de domaine.
-L'utilisation de HMM en faible nombre permet à ces logiciels d'être extrêmement rapides pour les recherches.
+Ces logiciels sont extrémement rapide pour les recherches grâce à l'utilisation d'un faible nombre d'archétypes.
 
 
 %· antiSMASH: rapid identification, annotation and analysis of secondary metabolite biosynthesis gene clusters in bacterial and fungal genome sequences
 %· antiSMASH 3.0-a comprehensive resource for the genome mining of biosynthetic gene clusters
 \paragraph{antiSMASH, le pipline pour l'identification de métabolites secondaires}
-antiSMASH est sans doute le logiciel qui est venu révolutionner ces dernières années la prédiction de métabolites secondaires depuis l'ADN.
+antiSMASH~\cite{weber_antismash_2015,medema_antismash:_2011} est sans doute le logiciel qui est venu révolutionner ces dernières années la prédiction de métabolites secondaires depuis l'ADN.
 Le logiciel est un pipline incluant de nombreux outils dont certains de ceux que nous avons décrits précédemment.
-Les outils sont lancés les uns après les autres en analysant les séquences avec une granularité de plus en plus fine.
+Les outils sont lancés les uns à la suite des autres en analysant les séquences avec une granularité de plus en plus fine.
 A un instant donné, en fonction des spécificité des génomes et des annotations réalisées précédemment sur le génome en cours d'analyse, antiSMASH va choisir les logiciels à lancer pour raffiner les prédictions.
-Par exemple, en lançant une analyse sur un génome bactérien, antiSMASH va commencer par rechercher les clusters de gènes avec CLUSEAN, puis identifier parmi les clusters détectés, ceux qui permettent la production de métabolites secondaires pour finir par lancer les outils spécifiques à chaque métabolite comme NRPSpredictor et NAPDOS sur les clusters NRPS.
+Par exemple, en lançant une analyse sur un génome bactérien, antiSMASH va commencer par la recherche de clusters de gènes, puis identifier parmi les clusters détectés, ceux qui permettent la production de métabolites secondaires pour finir par lancer les outils spécifiques à chaque métabolite comme NRPSpredictor et NaPDoS sur les clusters NRPS.
 
 %Streptomyces coelicolor
 \begin{figure}
@@ -447,91 +531,109 @@ Par exemple, en lançant une analyse sur un génome bactérien, antiSMASH va com
   \end{center}
 \end{figure}
 
-\paragraph{}Le gros avantage de antiSMASH est sa facilité d'utilisation.
+\paragraph{}L'un des avantages de antiSMASH est sa facilité d'utilisation.
 Disponible en ligne, il permet l'envoi de génomes ou séquences protéiques pour une analyse sur des serveurs qui lui sont dédiés.
 Grâce à ce serveur, l'utilisateur n'a pas de contraintes sur la machine nécessaire au calcul.
 Après parfois plusieurs heures de calcul, l'utilisateur reçoit un mail contenant un lien vers ses résultats.
 La page de résultats comporte les résultats de tous les clusters qui ont été annotés avec des détails sur chacun des métabolites secondaires attendus.
-Cette facilité d'utilisation et la puissance des outils utilisés dans le pipeline a permis un grand succès auprès de la communauté.
+Cette facilité d'utilisation et la puissance des outils utilisés dans le pipeline a procuré un grand succès du pipline auprès de la communauté.
 Le succès a été tel que les auteurs ont du recourir à des listes d'attente avec priorité pour pouvoir obtenir des résultats depuis le serveur dédié.
 
 
 
 \subsection{Les bases de connaissances de NRPS}
 
-\paragraph{}Nous allons ici parler de toutes les bases de données qui contiennent des informations à propos des NRPS.
-Ces bases servent à préserver les données qui ont été générées par des logiciels de prédiction comme ceux présentés précédemment ou par des analyses biologiques en laboratoire.
-Ces données sont en général produites une à une par des chercheurs s'intéressant à un sujet particulier, mais il est très important de les centraliser au sein de grosses bases de connaissance pour pouvoir en tirer des règles générales.
+\paragraph{}Nous allons ici parler de toutes les bases de données spécifiques aux NRPS.
+Elles servent au stockage des données qui ont été générées par des logiciels de prédiction comme ceux présentés précédemment ou par des analyses biologiques en laboratoire.
+Ces données sont en général produites indépendamment par des chercheurs s'intéressant à un sujet particulier, mais il est très important de les centraliser pour pouvoir en tirer des règles générales.
 
 \paragraph{ClusterMine360}
-ClusterMine360 est une base de données recensant des clusters de gènes NRPS et PKS.
+ClusterMine360~\cite{conway_clustermine360:_2013} est une base de données recensant des clusters de gènes NRPS et PKS.
 Cette base ne stocke pas vraiment les gènes/protéines mais uniquement les annotations.
 Elle pointe vers le NCBI pour toutes les références aux séquences.
 Les gènes de la base sont pour la plupart prédits depuis antiSMASH.
 C'est d'ailleurs les résultats de antiSMASH v1 qui sont affichés pour le détail de chaque cluster.
-Malheureusement cette base n'est pas tenue à jour et la dernière news date de 2013.
+Malheureusement cette base n'est pas tenue à jour et le dernier article posté date de 2013.
 
 
 %· Databases of the thiotemplate modular systems (CSDB) and their in silico recombinants (r-CSDB).
 \paragraph{ClustScan Database}
-ClustScan Database est une base de données créée à partir des résultats de l'outil de prédiction de NRPS et PKS appelé ClustScan.
+ClustScan Database~\cite{diminic_databases_2013} est une base de données créée à partir des résultats de l'outil de prédiction de NRPS et PKS appelé ClustScan.
 Certains clusters ont été vérifiés à la main et sont accompagnés de publications lorsque les utilisateurs de la base les ont ajoutées.
-Le logiciel permet également la prédiction des structures NRP.
+Le logiciel prédit également des structures NRP.
 Cependant, la prédiction s'arrête aux structures linéaires et cycliques portées par des domaines de cyclisation.
-Ces prédictions de structures NRP sont donc à vérifier avant de les utiliser.
+Ces données ne reste que des prédictions de structures NRP et seront toujours à utiliser avec précaution.
+La base ne semble pas avoir été mise à jour récemment mais aucune date explicite n'apparait sur le site web.
 
 
 %· Minimum Information about a Biosynthetic Gene cluster
 \paragraph{MIBiG, la base de référence des clusters de gènes NRPS/PKS}
-MIBiG est une base de données de clusters de gènes de métabolites secondaires, incluant des gènes NRPS accompagnés de leurs annotations.
-Les créateurs de la base cherchent la qualité avant la quantité.
-En effet, le seul moyen d'entrer des données est de les rentrer à la main en indiquant les sources desquelles proviennent ces données.
+MIBiG~\cite{medema_minimum_2015} est une base de données de clusters de gènes de métabolites secondaires, incluant des gènes NRPS accompagnés de leurs annotations.
+Les créateurs de la base cherchent avant tout la qualité plutôt que la quantité.
+En effet, le seul moyen d'ajouter des données est de les entrer manuellement en indiquant les sources desquelles elles proviennent.
 Sur le site de MIBiG, les annotations de NRPS sont souvent accompagnées des peptides qui leur correspondent.
-Ce lien fort entre clusters de gènes et composés est très intéressant mais n'est entièrement disponible que pour 67 éléments.
+Ce lien fort entre clusters de gènes et produit est très intéressant mais n'est disponible à ce jour que pour 67 entrées.
 
 
 
 \subsection{L'annotation de NRP}
 
 \paragraph{Annotations automatiques depuis l'ADN}
-Le séquençage de polymères est une tâche difficile.
+Le séquençage de polymères autres que l'ADN/ARN, est une tâche difficile.
 C'est pourquoi les protéines ne sont pas directement séquencées mais inférées depuis le séquençage de l'ADN.
-Dans le cas des NRP, l'interprétation de l'ADN ne permet que de prédire les séquences protéiques des NRPS.
-Il est nécessaire ensuite de comprendre précisément le fonctionnement de ces NRPS pour traduire leur séquence en NRP.
-Cependant, comme nous l'avons vu lors des descriptions de logiciels d'analyse de NRPS, cette compréhension ne permet pas encore d'avoir des résultats parfaits et complets.
-La prédiction ne permet pas de prédire précisément les monomères capturés par les domaines A.
-Par exemple il est possible d'obtenir une prédiction un monomère "polaire" sans avoir plus de détails.
+Dans le cas des NRP, l'interprétation de l'ADN indique uniquement les séquences protéiques des NRPS.
+Il est nécessaire ensuite de comprendre précisément le fonctionnement de ces NRPS pour le NRP depuis leur séquence.
+Cependant, comme nous l'avons vu lors des descriptions de logiciels d'analyse de NRPS, cette compréhension ne donne pas encore de résultats parfaits et complets.
+Les logiciels ne prédisent pas précisément les monomères capturés par les domaines A.
+Par exemple il est possible d'obtenir une prédiction de type ``c'un monomère polaire'' sans avoir plus de détails.
 Il est également possible d'obtenir des structures monomériques incomplètes, en manquant par exemple les composés capturés par des domaines C starter.
+Enfin, dans la majorité des cas, il est impossible de prédire la forme exacte pour des structures non linéaires.
 
-\paragraph{}L'annotation automatique de NRP depuis l'ADN est une méthode très rapide grâce aux technologies récentes de séquençage mais dont les résultats peuvent être incertains voir incomplets.
-Lorsque cette technique est utilisée pour connaître la structure d'un NRP, il sera toujours nécessaire de la vérifier d'une autre manière.
+\paragraph{}L'annotation automatique de NRP depuis l'ADN est une méthode très rapide grâce à la quantité de données issues des technologies récentes de séquençage mais dont les résultats peuvent être incertains voir incomplets.
+Lorsque cette technique est utilisée pour inférer la structure d'un NRP, il sera toujours nécessaire de la vérifier d'une autre manière.
 
 
 \paragraph{Analyse par spectrométrie de masse}
-La spectrométrie de masse est une technique physique d'analyse permettant l'identification de structures moléculaires.
+La spectrométrie de masse est une technique physique d'identification de structures moléculaires.
 Ce procédé est basé sur la mesure de masses moléculaires.
 On utilise un échantillon purifié d'une molécule d'intérêt puis on envoie un niveau d'énergie précis afin de casser la molécule en morceaux.
 Selon les technologies, une ou plusieurs cassures accompagnées de une ou plusieurs mesures sont effectuées.
-L'analyse en résultant permet d'obtenir un spectre contenant différents pics représentant les masses des morceaux obtenus.
+En sortie, un spectre composé de différents pics représentant les masses des morceaux est obtenu.
 Ces masses peuvent ensuite être comparées à des bases de données de masses caractéristiques pour ainsi connaître les composants.
-Enfin, à partir des morceaux identifiés, il existe est parfois possible de reconstruire la molécule originelle (tout dépend des technologies qui ont été utilisées).
+Enfin, à partir des morceaux identifiés, il est parfois possible de reconstruire la molécule originelle (dépend des technologies utilisées).
 
 \paragraph{}Cette méthode permet d'obtenir une reconstruction atomique fiable lorsque toutes les masses sont présentes dans les bases de référence.
-Dans ces bases sont par exemple présentes les masses des acides aminés classiques et de leur dérivés proches.
-Si la technologie de spectrométrie utilisée casse les molécules au niveau de leurs liaisons peptidiques, la reconstruction permet d'obtenir directement une annotation monomérique de toutes les parties composées d'acides aminés classiques.
+Ces bases donnent par exemple les masses des acides aminés classiques et de leur dérivés proches.
+Si la technologie de spectrométrie utilisée casse les molécules au niveau de leurs liaisons peptidiques, la reconstruction peut directement obtenir une annotation monomérique de toutes les parties composées d'acides aminés classiques.
 Cependant, les NRP étant composés de plus de 500 monomères différents, l'annotation monomérique directement issue des analyses de spectres n'est pas suffisante.
 Beaucoup de monomères n'étant pas proches de molécules classiques, ne sont pas répertoriés parmi les masses classiques.
+De plus les peptides comportant des liaisons non peptidiques ne sont pas facilement découpables facilement sur certaines technologies de spectrométries.
 Pour finir l'annotation d'un NRP, il est nécessaire d'avoir recours à un spécialiste du domaine afin qu'il nomme chacun des monomères non annotés.
 
-\paragraph{}Pour résumer, la spectrométrie de masse permet d'avoir accès à des structures atomiques de molécules avec un degré de certitude très élevé.
-De plus, contrairement à l'annotation depuis l'ADN, nous sommes certains que la molécule existe puisqu'elle est directement tirée de l'environnement étudié.
-Cependant, le besoin d'accès à un expert pour l'annotation et le faible débit de génération de données dû aux purifications nécessaires ne permettent pas une annotation efficace.
+\paragraph{}L'outil d'analyse CycloBranch~\cite{novak_cyclobranch:_2015} essaye lui de remonter directement à la structure monomérique des NRP.
+En essayant de casser les molécules uniquement au niveau des liaisons NRP attendues, le logiciel génère des spectres qu'il analyse ensuite informatiquement.
+Ayant constitué une base de données de masses de monomères NRP, il arrive à contourner une partie du problème de manque de masses de référence.
+Les auteurs construisent ensuite une multitude de graphes monomériques possibles en essayant différentes formes branchées et cyclisées.
+Puis, pour choisir parmi les différents peptides probables, ils utilisent une méthode de génération de spectres théoriques afin de les comparer au spectre réel.
+Cette re-génération de spectre élimine de nombreux candidats et de parfois remonter jusqu'à la structure monomérique du NRP.
+Cependant, la méthode n'obtient pas toujours une unique reconstruction.
+De plus les résultats obtenus dans l'article ne semble pas tous être reproductibles (communication personnelle).
+
+\paragraph{}Il existe également un logiciel appelé NRPQuest~\cite{mohimani_nrpquest:_2014}qui croise les spectres obtenus avec des domaines prédits par des approches d'analyses NRPS (les résultats de l'article sont obtenus avec NRPSPredictor2).
+En mettant en relation les différents domaines prédits de l'ADN avec le graphe de reconstruction d'une molécule issue du spectre, ils arrivent à discriminer facilement les compositions et formes des NRP calculés.
+Cependant, si les prédictions NRPS ne contiennent pas tous les monomères du peptide, alors la reconstruction ne les contiendra pas non plus et ce, même si l'information est présente dans le spectre de masses.
+C'est une limitation forte du logicel que les auteurs pointent eux même à la fin de leur article.
+
+\paragraph{}Pour résumer, la spectrométrie de masse donne accès à des structures atomiques de molécules avec un degré de certitude très élevé et parfois à des reconstructions NRP fiables.
+De plus, contrairement à l'annotation depuis l'ADN, nous sommes certains que la molécule est produite puisqu'elle est directement tirée de l'environnement étudié.
+Cependant, le besoin d'accès à un expert pour terminer les annotations et le faible débit de génération de données dû aux purifications nécessaires, ne permettent pas une annotation efficace.
 
 
 \paragraph{Analyse par Résonance Magnétique Nucléaire}
-La Résonance Magnétique Nucléaire (RMN) est une technique permettant la détermination de structures moléculaires.
-Cette technique exploite la propriété qu'ont certains atomes à émettre un rayonnement lorsqu'ils sont placés dans des champs magnétiques.
+La Résonance Magnétique Nucléaire (RMN) est une technique de détermination de structures moléculaires.
+Cette technique exploite la propriété qu'ont certains atomes à émettre un rayonnement lorsqu'ils sont placés dans un champ magnétique.
 Les structures obtenues en sortie sont uniquement atomiques.
+Selon la technologie de la machine utilisée, la structure 3D de la molécule peut être accessible.
 Il est donc également nécessaire d'avoir recours à un expert pour effectuer une annotation monomérique.
 Cette technique est également très coûteuse de part les équipements nécessaires pour réaliser les analyses ainsi que le temps nécessaire pour créer un cristal capable de convenir à l'analyse.
 
@@ -541,29 +643,30 @@ Cette technique est également très coûteuse de part les équipements nécessa
 
 \paragraph{}Les bases de NRP sont très rares en comparaison des bases de NRPS.
 Quasiment toutes les bases de NRPS que nous avons précédemment présentées comportent également les structures de NRP prédis.
-Cependant, comme nous l'avons déjà dit plusieurs fois ces données ne sont pas toutes fiables.
-Beaucoup des structures sont inexactes voir incomplètes dû aux prédictions.
+Cependant, comme nous l'avons déjà dit plusieurs fois, ces données ne sont pas toutes fiables.
+Beaucoup des structures sont inexactes, voir incomplètes, à cause des prédictions.
 
 \paragraph{Norine, la base de référence des NRP}
-Norine est la base de données de référence pour les peptides non ribosomiques annotés.
+Norine~\cite{caboche_norine:_2008} est la base de données de référence pour les peptides non ribosomiques annotés.
+Cette base de donnée a été développé et est entretenue par l'équipe Bonsai de l'université de Lille 1, équipe au sein de laquelle j'effectue ma thèse.
 Contrairement aux autres bases, c'est une base entièrement dédiée aux NRP.
 Tous sont extraits de publications présentant les molécules et déterminant leur caractère NRP.
 Chaque molécule entrée dans la base est accompagnée de sa structure monomérique (et parfois de sa structure atomique).
 Depuis 2015, la base de données est entièrement ouverte aux contributions extérieures.
 En quelques clics et en appuyant sa soumission par des articles de preuve de la voie de synthèse, toute personne peut soumettre de nouvelles entrées.
-Les structures présentes dans cette base sont sûres, ce qui est un gros avantage comparé aux prédictions présentées jusqu'à présent.
-Cependant, le processus d'ajout de nouvelles entrées, strict pour préserver la qualité, ne permet d'ajouter de nouvelles entrées par centaines.
+Les structures présentes dans cette base sont fiables, ce qui est un avantage comparé aux prédictions présentées jusqu'à présent.
+Cependant, le processus d'ajout d'informations, strict pour préserver la qualité, ne permet d'ajouter de nouvelles entrées par centaines.
 Soulignons tout de même le travail effectué par les auteurs initiaux qui ont entré plus de 1200 annotations à la main.
 
 
-\paragraph{MIBiG}
-Retour sur MIBiG car c'est la seule base hors Norine encore active et contenant des annotations vérifiées de NRP.
+\paragraph{MIBiG}Revenons sur MIBiG, la base que nous avions présenté parmi les bases NRPS.
+MIBiG est la seule base hors Norine encore active et contenant des annotations vérifiées de NRP.
 Comme nous l'avons déjà dit lors de la présentation de cette base, MIBiG est une base surtout dédiée à l'annotation de NRPS.
 Les annotations de NRPS sont accompagnées d'informations sur les peptides produits.
 Ces informations peuvent être de deux types.
-Soit l'organisme est connu comme producteur d'un NRP dont on connaît la structure et l'annotation de NRPS peut être vérifiée.
-Dans ce cas, la structure présente dans MIBiG est exacte même si on ne sait parfois pas quels gènes sont venus ajouter/modifier des morceaux du NRP.
-Soit le NRP est une prédiction depuis le cluster de gènes.
+La premiére possibilité est de connaître par ailleurs la structure atomique du NRP produit.
+Dans ce cas, l'annotation a pu être vérifiée et la structure présente dans MIBiG est exacte et ce, malgré le fait que parfois nous ne savons pas quels gènes sont venus ajouter/modifier des morceaux du NRP post-synthèse.
+La seconde possibilité est que le NRP provient d'une prédiction depuis le cluster de gènes.
 Dans ce cas, il se peut qu'il ne soit que partiel et potentiellement incorrect.
 
 
@@ -588,93 +691,220 @@ Dans ce cas, il se peut qu'il ne soit que partiel et potentiellement incorrect.
 Au delà du simple catalogage qui peut être fait, comprendre les actions moléculaires permet d'utiliser voir d'inventer de nouvelles substances pour l'industrie.
 Afin de comprendre ces activités, un postulat simple a été posé : Deux molécules proches auront deux activités proches.
 Ce postulat simple parait raisonnable puisqu'il s'appuie sur le fait que l'activité d'une molécule est portée par la configuration spatiale des différents éléments qui la composent.
-On sait aujourd'hui que ce postulat est faux car il existe quelques contre exemples\cite{patani_bioisosterism:_1996}.
-Cependant, dans la majorité des cas, cette approximation fonctionne bien et tout un domaine de chémoinformatique s'est développé dans ce sens.
-Toutes les techniques cherchant à rapprocher les structures des activités moléculaires sont regroupées derrière l'accronyme QSAR (Quantitative structure-activity relationship).
-Les techniques QSAR sont nombreuses et variées\cite{patani_bioisosterism:_1996,leach_molecular_2001,helma_predictive_2005}.
+On sait aujourd'hui que ce postulat est faux car il existe quelques contre exemples~\cite{patani_bioisosterism:_1996}.
+Cependant, dans la majorité des cas, cette approximation fonctionne bien et tout un domaine de chemoinformatique s'est développé dans ce sens.
+Toutes les techniques cherchant à rapprocher les structures des activités moléculaires sont regroupées derrière l'acronyme QSAR (Quantitative structure-activity relationship).
+Les techniques QSAR sont nombreuses et variées~\cite{patani_bioisosterism:_1996,leach_molecular_2001,helma_predictive_2005}.
 Certaines s'attardent sur les ressemblances de structures atomiques 2D ou 3D, certaines sur les propriétés magnétiques, d'autres sur les contraintes de repliement etc.
 Beaucoup ne se cantonnent pas à une seule des ressemblances citées ci-dessus mais essayent de les combiner pour prédire le mieux possible.
 Cependant, ces techniques ont deux contraintes limitantes.
-Premièrement, pour connaître l'activité d'une molécule il est nécessaire de connaître les activités de molécules "proches".
+Premièrement, pour connaître l'activité d'une molécule il est nécessaire de connaître les activités de molécules ``proches''.
 Secondement, les temps de calcul nécessaires augmentent rapidement avec le nombre de critères à comparer et le détail d'analyse de chaque critère.
 Le but de ces méthodes est donc d'inclure les critères les plus sélectifs afin de se rapprocher des activités connues dans un temps raisonnable.
 
-\paragraph{}Dans le cas des NRP, l'analyse des activités revient donc à chercher les ressemblances et les différences
-entre la molécule étudiée et celles dont on connaît déjà la ou les activités. Beaucoup d'approches QSAR classiques
-sont applicables à partir du moment où elles ne nécessitent que l'étude de la structure atomique mais nous pouvons
-également nous appuyer sur l'information apportée par la structure monomérique de ces NRP. En 2012\cite{abdo_new_2012}
-puis 2014\cite{abdo_prediction_2014}, Abdo et al. publiaient la pertinence de l'analyse d'activités de NRP à partir
-de cette structure en utilisant respectivement des fingerprints et des réseaux bayesiens. L'avantage d'utiliser la
-structure monomérique au lieu de la structure atomique est la rapidité d'analyse. Là où une comparaison chimique
-dépend du nombre d'atomes présent dans les molécules (plusieurs centaines), la comparaison monomérique de NRP est
-dépendante du nombre de monomères (une vingtaine au maximum).
+\paragraph{}Beaucoup de NRP possèdent des activités très intéressantes (antibiotiques, anti-tumeurs, antidouleurs, ...).
+À ce titre, nous cherchons en permanence à caractériser les activités de chaque nouvelle molécule découverte.
+Lorsque ces activités ne sont pas déterminées expérimentalement, les logiciels exploitant des techniques de type QSAR permettent d'effectuer une prédiction.
+En 2012 puis 2014, Abdo et al. publient de nouvelles méthodes de prédiction d'activité NRP, se basant sur les spécificités des NRP~\cite{abdo_new_2012, abdo_prediction_2014}.
+Dans les deux cas, les prédictions sont effectuées à partir des compositions monomériques et non pas atomiques.
+Dans le premier article la prédiction est effectuée en créant pour chaque activité connue un fingerprint.
+Ces fingerprints sont composés, pour chaque type de monomère, d'un nombre représentant la composition moyenne de l'activité. 
+Prédire l'activité d'un nouveau NRP revient alors à déterminer celle dont le fingerprint est le plus proche.
+Dans le second article, c'est un classifieur par réseau Bayésien qui est entrainé sur les compositions en monomères.
+Une fois les réseau entrainé, il suffit de fournir une composition en entrée pour avoir les probabilités de chaque activité en sortie.
+Dans les deux cas, il est important de constater que l'abstraction monomérique est suffisante pour une prédiction de qualité.
+De plus les structures ne sont pas utilisées, ce qui laisse encore beaucoup de possibilités d'améliorations.
 
-\paragraph{}TODO : Conclusion des deux paragraphes du dessus.
-
-
-
-
-\subsection{Formalisation du problème}
-
-\subsubsection{Formalisation générale}
-
-\paragraph{}Résumons la situation. Les NRP sont des molécules polymères assemblées à partir d'un nombre de briques
-de bases monomériques finies. Lors d'un séquençage de ces molécules, nous avons accès à la structure chimique de
-ces composés mais pas toujours à leur structure monomérique. Cette structure nous intéressant particuliérement,
-nous aimerions pouvoir remonter automatiquement depuis la structure chimique vers la structure monomérique.
-
-\paragraph{}En formalisant cette demande d'un point de vue informatique, nous pouvons dire que nous aimerions avoir
-un programme qui prend en entrées une structure chimique que l'on sait être un NRP ainsi qu'une liste de monomères
-finie que l'on sait composer les NRP, pour produire une sortie qui nous permet de dire quels monomères sont présents
-dans le polymère en sachant à quels atomes ils sont rattachés.
-
-\paragraph{Figure s2m}
+\paragraph{}Ce que nous venons de montrer par cet exemple de prédiction d'activité, c'est l'importance de la détermination des structures simples comme les structures monomériques.
+Connaître ce genre de structure est un enjeu fort pour la détermination de caractéristiques moléculaires haut niveau (activité ou conformation 3D par exemple).
+Comme nous l'avons fait remarqué précédemment, il n'existe que peu d'outils permettant des annotations fiables de NRP.
+Les caractérisations fiables de NRP sont en très grande majorité effectuées à la main par des biologistes et chimistes.
+Beaucoup de structures atomiques sont également connues sans annotations monomériques malgré leur présence dans de grandes bases de données.
+Il nous a donc paru nécessaire de créer ce genre d'outil d'annotation automatique et c'est de cela que nous allons parler par la suite.
 
 
 
 
+\section{Formalisation du problème d'annotation}
 
-\subsubsection{Les problématiques existantes}
+\subsection{Définition du problème}
 
-\paragraph{}TODO : Réécrire sous la forme 2 techniques monos->poly ou polys->monos + figure
+\paragraph{}Nous cherchons à créer un outil bioinformatique permettant l'obtention de nouvelles annotations monomériques NRP fiables.
+La génération d'annotations peut se baser sur la recherche d'informations à partir des gènes ou à partir des molécules dont on connaît la structure.
+Dans notre cas, nous n'avons pas choisi de démarrer des clusters de gènes NRPS puisque des modèles déjà bien éprouvés existent déjà (NRPSpredictor, NaPDoS, ...) mais que leurs prédictions ne sont pas garanties.
+Les avancées dans ce domaines viendront avec le nombre d'annotations fiables de binômes clusters/NRP qui permettrons l'amélioration des modèles d'apprentissage actuels.
 
-\paragraph{}Une technique appelée CHUCKLES\cite{siani_chuckles:_1994} et décrite en 1994 correspond parfaitement à
-ce que nous recherchons. Dans des buts de requêtage et de compression, les auteurs avaient besoin d'un moyen de
-passer rapidement de la représentation monomérique à la représentation atomique et inversement. La partie ``inverse''
-(Back-Translation dans l'article) part de la liste des 20 acides aminés standards (sans leurs atomes d'hydrogène)
-et les recherche un à un de manière exacte en commençant par les plus gros. La recherche des monomères se fait
-de manière indépendante en utilisant un format appelé SMARTS\{TODO Ref\} qui permet de faire des recherches par des
-algorithmes d'isomorphisme de sous graphe (voir sous partie suivante pour plus de détails). Cette technique fonctionne
-parfaitement avec les 20 acides aminés standards tant qu'ils ne sont pas transformés au sein de la molécule d'arrivée.
-Cependant, dans le cas des peptides non-ribosomiques, le nombre de monomères s'élève à plus de 500 dont certains
-étant très ressemblants. Dès que ces monomères très ressemblants sont intégrés au NRP (et donc qu'ils ont été
-modifiés par les liaisons) il devient alors impossible à partir d'un algorithme simple d'être certain de trouver
-la bonne transformation (Et ce même si elle est possible). Cette méthode est donc une bonne base de travail pour
-créer notre outil mais n'est pas suffisant pour outrepasser la complexité des molécules que nous souhaitons traiter.
+\paragraph{}Dans notre cas, nous allons partir des structures atomiques pour déduire les composants monomériques.
+De telles structures sont présentes dans de nombreuses bases de données publiques telles que PDB ou PubChem.
+Il est possible de trouver au sein de ces BDD de nombreuses structures atomiques de NRP dont on ne possède pas d'annotation monomérique facilement accessible.
+Notre objectif sera d'être capable pour toute structure moléculaire NRP de déduire sa composition en monomères.
+Ainsi toutes les structures atomiques présentes dans les bases généralistes pourront être annotées et ajoutées à des bases spécialisées telles que Norine.
+Ce type d'annotation pourra également être effectué sur toutes les nouvelles structures atomiques ajoutées.
 
-\paragraph{}Une seconde possibilité pour séparer une molécule en sous-composants est de choisir des règles de
-découpe de liens en ciblant certaines zones d'intérêt. Le logiciel molBLOCKS\cite{ghersi_molblocks:_2014} utilise
-cette stratégie. Le logiciel découpe non pas une mais un ensemble de molécules d'intérêt selon les règles définies
-jusqu'à ne plus pouvoir ou jusqu'à atteindre une limite minimale de taille de fragments (fixée par l'utilisateur).
-Le logiciel analyse ensuite la fréquence des fragments sur l'ensemble des molécules pour déterminer les fragments
-qui ont le moins de chance d'être artificiellement créés et ainsi les considérer comme les monomères réels. Cette
-méthode à pour gros avantage de ne pas prendre de base de donnée de monomères comme prérequis et propose une
-manière élégante de les retrouver. Cependant rien ne garantit que les monomères créés ne sont pas artificiels.
-De plus, les monomères rares dans la base de données ne généreront pas de fragments avec une suffisamment grande
-redondance pour être considérés comme réels. Enfin, si les règles de découpe sont mal choisies, les fragment générés
-n'auront aucune signification biologique.
-
-\paragraph{}Sous techniques
-\paragraph{}SMARTS+variants (ambit-smarts)
-\paragraph{}Recherche de 1 molécule dans une autre (SMSD (MCS), .
-
-
-\paragraph{Conclusion}Séparation en deux sous problèmes
+\paragraph{TODO : figure structure atomique vers monomérique}
 
 
 
+\subsection{L'existant}
+
+\paragraph{}Parmi l'existant les logiciels CHUCKLES~\cite{siani_chuckles:_1994} et molBLOCKS~\cite{ghersi_molblocks:_2014} se démarquent des autres.
+Dans les deux cas les logiciels permettent à partir d'une structure atomique d'un polymère de trouver la structure monomérique.
+Les deux logiciels sont opposés dans leur façon de prendre le problème.
+CHUCKLES est constructif car il part des monomères pour reconstituer le polymère alors que molBLOCKS est destructif car il part du polymère pour retrouver les monomères par découpes successives de liens.
+Nous allons ici présenter ces deux approches.
 
 
+\subsubsection{CHUCKLES, une méthode constructive}
+
+\paragraph{}CHUCKLES est une méthode publiée en 1994 permettant de rechercher des peptides au sein d'une base de donnée.
+Le but est de requéter une base de données de moléules en utilisant des expressions régulières représentant des sous-molécules d'intérêt.
+Les recherches peuvent être effectuée à la fois au niveau atomique et au niveau monomérique.
+Le but de CHUCKLES est de convertir rapidement les données du format monomérique vers le format atomique et inversement.
+Les auteurs pensent qu'il est plus utile de converver les formats atomiques en base plutôt que les séquences protéiques.
+Sachant que la plupart des peptides de l'époque étaient déjà représenté par leur séquence, les auteurs proposent une méthode de transformation vers la structure atomique.
+Cette transformation est appelée ``Forward-Translation'' (FT).
+
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=450px]{Figures/s2m/formalisation/CHUCK_FT.png}
+    \caption{\label{chuck_ft}CHUCKLES Forward Translation.
+    Transformation des annotations peptidiques en SMILES.
+    Sous l'annotation peptidique est écrite la formile SMILES après concaténation de tous les SMILES des monomères trouvés.
+    Schémas issus de la publication}
+  \end{center}
+\end{figure}
+
+\paragraph{}Pour mener à bien chaque ST, les auteurs ont besoin d'une table de transformation qui ressence les structures atomiques de chacun des monomères à transformer.
+Chaque séquence ne doit pas contenir les atomes qui vont être perdus lors des liaisons avec d'autres monomères.
+Pour les structures linéaires, la méthode indique simplement de concaténer les structures atomiques selon la chaine peptidique.
+Lorsque les structures sont branchées ou cycliques, il est nécessaire d'ajouter dans la séquence initiale l'information de liaison annexe.
+
+Cette méthode de reconstruction des structures atomiques est très intéressante mais souffre du manque d'information des séquences protéiques.
+On peut remarquer que la reconstruction ne peut fonctionner à tous les coups sans plus d'information.
+En effet, si les monomères ne possédent pas de groupement carboxyl et amine, la reconstruction ne peut pas être effectuée sans choix aléatoires d'orientation.
+
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=300px]{Figures/s2m/formalisation/CHUCK_BT.png}
+    \caption{\label{chuck_bt}CHUCKLES Backward Translation.
+    La première partie représente la phase de recherche des monomères au sein de la structure atomique.
+    La seconde partie représente la structure monomérique post contraction.
+    On peut voir à gauche la chaine principale qui a été extraite à partir du N initial.
+    A droite sont répertoriées les deux ponts disulfures extrait hors de la chaine principale.
+    Chaque monomère découvert comporte un identifiant différent de son nom pour éviter d'avoir deux fois le même nom comme cela pourrait être ici.
+    Schémas issus de la publication}
+  \end{center}
+\end{figure}
+
+\paragraph{}La seconde partie de la méthode présente la transformation inverse (``Backward-Transformation'' (BT)).
+C'est cette partie qui est très intéressante pour l'annotation car elle part des structures atomiques pour reconstruire les structures monomériques.
+Les auteurs proposent une annotation en deux temps.
+Le premier temps représente la phase de recherche des monomères et le second temps la convertion des moomères trouvés en une annotation.
+L'idée de la première phase est de rechercher chaque monomère connu en masquant les atomes déjà utilisés par des monomères précédamment trouvés.
+En recherchant les monomères par nombre d'atomes décroissant, les auteurs s'assurent que de petit monomères ne viendront pas prendre la place de plus gros.
+Lors de la seconde phase, les atomes des molécules sont contractés pour ne plus former qu'un seul noeud par monomère.
+Le N terminal de la chaine peptidique est ensuite recherché afin d'extraire l'annotation de cette chaine en suivant les liaisons peptidiques.
+Enfin les liaisons n'ayant pas encore été explorées sont ajoutées à la représentation monomérique finale.
+
+Comme pour le FT, le BT utilise des techniques intelligentes mais encore faillibles.
+Dans le cas des NRP, certains monomères ne possédent pas les deux domaines pour les liaisons peptidiques.
+Il est donc potentiellement impossible de retrouver une chaine principale.
+De plus, lors de la recherche, si les monomères a rechercher sont structurellement proches, il est possible qu'un gros monomère vienne prendre la place d'un plus petit en débordant sur un ou plusieurs monomères voisins.
+Dans ce cas, vu qu'aucun retrour en arrière n'est effectué, l'annotation sera innexacte voir incomplète.
+
+
+\subsubsection{molBLOCKS, une méthode destructive}
+
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=400px]{Figures/s2m/Intro/molBlocks.png}
+    \caption{\label{molBlocks}Application de la méthode molBlocks sur le polymère ACV.
+    Le polymère est séparé en morceau par une règle de liaison peptidique.
+    Les trois morceaux correspondent aux trois monomères réellement inclus, la découpe fonctionne.}
+  \end{center}
+\end{figure}
+
+\paragraph{}Le logiciel molBLOCKS n'est à la base pas conçu pour le travail que nous cherchons à effectuer.
+C'est un logiciel qui permet de découvrir des monomères en repérant les sous morceaux fréquents au sein d'une population de polymères.
+Pour cela le logiciel découpe les polymères en petits morceaux et effectue des comptages sur ces morceaux.
+Ces découpes suivent des règles entrées par l'utilisateur.
+Par exemple en donnant comme règle
+\begin{chemmath}
+  O=CNH \longrightarrow C=O + NH
+\end{chemmath}
+toutes les liaisons peptidiques seront ciblées et déconnectées (voir figure \ref{molBlocks}).
+Pour des protéines ribosomiques la découpe sera donc parfaite avec cette seule règle et les monomères seront découverts.
+
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=300px]{Figures/s2m/Intro/molBlocks_problem.png}
+    \caption{\label{molBlocks_problem}Dans le cas de ce di-peptide, un sucre est lié à une Hydroxy-Phenil-Glycine (Hpg).
+    En utilisant la règle de découpe à appliquer pour les hydroxyl, une ambiguité et une erreur apparaissent.
+    Nous ne pouvons savoir de quel côté les découpent vont être les plus pertinentes avant d'essayer de reconnaître les monomères.
+    De ce fait, 4 découpes différentes sont possibles.
+    De plus, le cycle du sucre se voit ouvert alors que la découpe est inutile.}
+  \end{center}
+\end{figure}
+
+\paragraph{}Dans notre cas, nous pourrions utiliser un tel logiciel pour découper les NRP en monomères.
+En effectuant par la suite une étape de reconnaissance de ces monomères il serait alors possible de reconstruire le peptide.
+Cependant certaine réactions effectuées au sein des NRP ne permettent pas de découper entièrement le peptide avec la seule règle énoncée précédammant.
+Toutes les liaisons non peptidiques énoncées au chapitre précédent ne seront pas découpées.
+Il est donc nécessaire de rajouter nombre de nouvelles règles.
+Cependant, la liaison hydroxyl à elle seule ne permet déjà plus d'effectuer une découpe correcte.
+Pour pouvoir la délier il faudrait une règle du type
+\begin{chemmath}
+  COC \longrightarrow CO + C
+\end{chemmath}
+Mais ce genre de règle est ambigüe.
+Comment savoir de quel côté du O la liaison doit être rompue ?
+De plus, certains monomères comme le glucose sont initialement composés de $COC$.
+Ces monomères seront donc découpés alors qu'ils ne devraient pas.
+Pour ces deux raisons, nous ne pourrons pas directement utiliser ce logiciel afin de convertir nos structures atomiques en structures monomériques.
+
+
+\subsubsection{Vue générale}
+
+\paragraph{}Hors les deux logiciels que nous venons de présenter, rien n'est dédié spécifiquement à la tâche que nous cherchons à accomplir.
+Beaucoup des technique que j'ai étudié, ne nous permettent que la résolution de sous problèmes.
+Par exemple, lors de la présentation de CHUCKLES, nous citons une implémentation des SMARTS appelée AMBIT-SMARTS.
+Les SMARTS sont des expressions régulières moléculaires qui permettent de définir des motifs à rechercher.
+En appliquant un SMARTS sur une molécule (comme le permet AMBIT-SMARTS), nous pouvons savoir si cette molécule contient ce motif.
+Ce type de technique permet de savoir si une molécule est contenue dans une autre, ce qui dans notre cas reviendrait à savoir si un monomère est contenu dans un polymère.
+Cette tâche très importante n'est pas suffisante pour répondre à nos attentes mais peut éventuellement faire partie des sous techniques à utiliser.
+
+
+
+
+\subsection{Vers des problèmes informatiques}
+
+\paragraph{}Pour concevoir notre logiciel d'annotation, nous allons nous inspirer des techniques existantes en essayant d'outrepasser leurs difficultés.
+Nous possédons au sein de Norine, une grande base de connaissance de monomères existants (plus de 500) et nous pouvons nous appuyer sur cette base bien établie pour assurer l'existence des monomères lors des annotations.
+Cette base étant, nous pouvons essayer de concevoir un algorithme constructif.
+
+
+\subsubsection{Une histoire de sous problèmes}
+
+\paragraph{}L'algorithme CHUCKLES tire partie de la différence entre les 20 acides aminés pour se permettre de rechercher les plus gros en premier et de ne jamais revenir sur les choix faits.
+Rechercher les monomères par taille (en nombre d'atomes) décroissante est un choix pertinent car il permet d'éviter de reconnaître partout les petits acides aminés.
+Dans notre cas, la proximité entre certains monomères ne nous permettra pas de les départager grâce à un tri par taille.
+Il sera nécessaire de modifier les solutions incomplètes pour essayer de les améliorer.
+Contrairement à CHUCKLES, nous aurons donc besoin de connaître les différents monomères candidats à la composition du polymère même lorsqu'ils sont chevauchant à des monomères déjà placés.
+Si d'un côté nous recherchons les monomères au sein du NRP puis de l'autre nous assemblons ceux trouvés, alors nous pouvons séparer notre programme en deux sous-problèmes complètement distincts.
+
+\paragraph{}Dans un premier temps, nous allons chercher à déterminer quels sont les monomères qui pourraient composer le peptide étudié.
+En utilisant la base Norine, nous pouvons indépendamment rechercher chacun des monomères connus au sein de la molécule à annoter.
+La recherche exacte d'un monomère au sein d'un peptide est donc notre premier sous problème à résoudre.
+Ce sous problème sera appelé la ``recherche''.
+
+\paragraph{TODO : Schéma étape 1}
+
+\paragraph{}Dans un second temps, nous devrons choisir parmi tous les monomères candidats issus de la recherche, lesquels composent réellement le polymère.
+Nous aurons plusieurs contraintes associées à ce problème.
+Aucun des monomères choisis dans la solution ne peux être chevauchant avec un autre.
+En effet, aucun atome ne peut provenir de deux molécules différentes et donc aucune sous partie de monomères ne peut être chevauchante avec un autre monomère.
+De plus nous allons chercher à obtenir une annotation complète des peptides, ce qui correspond maximiser les atomes du polymère couvert par des monomères.
+On appèlera cette étape, l'étape de pavage.
 
 
 \subsubsection{Des molécules aux graphes}
@@ -682,26 +912,28 @@ n'auront aucune signification biologique.
 \newtheorem{definition}{Definition}
 \begin{definition}\textbf{Graphe :}
  Un graphe est une représentation mathématique d'un ensemble d'objets où chacun des objets est appelé un sommet et
- chaque relation entre deux objets est représentée par un lien entre les deux sommets représentant ces objets.
+ chaque relation entre deux objets est représentée par un lien entre les deux sommets correspondant.
 \end{definition}
 
-\paragraph{}En suivant cette définition, nous allons pouvoir représenter nos deux type de structure sous la forme de
-graphe.
+\paragraph{}En informatique, les graphes sont utilisés pour représenter de nombreuses données.
+Dans notre cas, les molécules peuvent être représentées comme des graphes.
+Un atome est alors un noeud dont le label est le nom de l'atome.
+Une liaison chimique est une arête du graphe.
+La structure monomérique peut elle aussi être représentée sous forme de graphe.
+Dans ce cas, les noeuds sont les monomères et leur labels leurs noms.
+Les liens sont les liaisons formées entre les monomères pour construire le peptide.
+Passer du graphe atomique au graphe monomérique revient donc à une contraction de noeuds.
 
-\paragraph{Structure chimique :}La structure chimique d'une molécule, c'est à dire ses atomes reliés par ses liaisons
-chimiques se représente immédiatement. Les atomes seront nos sommets de graphes et les liaisons les arêtes. Je rajouterai
-comme petite subtilité que les hydrogènes ne seront pas représentés comme sommets mais inclus directement dans le sommet
-de l'atome plus lourd sur lequel il est lié. Par exemple pour représenter CH3NH2, seuls deux sommets seront définis :
-(CH3) et (NH2). Ces deux sommets seront reliés par une arête représentant la liaison entre le C et le N. Remarque :
-cette représentation exclue la possibilité d'avoir un graphe pour le dihydrogène.
+\paragraph{TODO : Schéma graph atomique + graph monomérique}
 
-\paragraph{Structure monomérique :}La structure monomérique, c'est à dire les monomères et leur liaisons chimiques se
-représentent tout aussi immédiatement. Les monomères seront les sommets et les liaisons les arêtes des graphes
-monomériques.
 
-\paragraph{}Dès à présent dès que je parlerai de molécules quelles qu'elles soient, je parlerai par abus de langage
-du graphe représentant la structure atomique de cette molécule. Il en sera de même pour la structure monomérique.
 
+\paragraph{Recherche de monomère}Rechercher un monomère dans un polymère revient à rechercher un petit graphe atomique $S$ dans un plus gros graphe $G$.
+Deux cas sont alors possibles, soit nous recherchons à trouver exactement $S$ dans $G$, soit nous cherchons une approximation de $S$ dans $G$.
+Dans le premier cas, nous devons nous intéresser à un problème appelé ``Isomorphisme de Sous-graphe'' (en anglais Subgraph Isomorphism (SI)).
+Dans le second cas, nous nous intéresserons au problème du ``Sous-graphe Maximum Commun'' (en anglais Maximum Common Subgraph (MCS)).
+Les recherches de SI ou de MCS ont toutes deux été prouvées NP-Complet dans le cas général.
+Heureusement, il existe pour chacun plusieurs algorithmes praticable en fonction des propriétés des graphes auxquels ils s'appliquent.
 
 
 \subsubsection{Formalisation en problèmes de graphes}
@@ -718,23 +950,21 @@ $G$, soit nous cherchons une approximation de $S$ dans $G$. Dans le premier cas,
 deux été prouvées NP-Complet mais pour chacun des problème il existe des algorithmes rapides en pratique pour des graphes
 aux propriétés particulières dont nous parlerons dans la sous partie suivante.
 
-\paragraph{Placements des monomères}Une fois les monomères détectés, il est nécessaire de prendre une décision pour les
-parties du polymère où plusieurs d'entre eux ont été détectés au même endroit. L'objectif est donc de faire un choix entre
-les différents morceaux possibles afin de chercher à ne garder que les pièces non chevauchantes qui permettent de couvrir
-au mieux le polymère (Si possible totalement). Ce genre de méthode est appelée pavage sans recouvrement. Cette étape
-donnant accès à un lien direct entre atomes et monomères, une étape de contraction de graphe permettra d'obtenir le graphe
-monomérique.
+\paragraph{Placements des monomères}Une fois les monomères détectés, il est nécessaire de prendre une décision pour les parties du polymère où plusieurs d'entre eux ont été détectés au même endroit.
+L'objectif est donc de faire un choix entre les différents morceaux possibles afin de chercher à ne garder que les pièces non chevauchantes qui permettent de couvrir au mieux le polymère (Si possible totalement).
+Ce genre de méthode est appelée pavage sans recouvrement.
+Cette étape donnant accès à un lien direct entre atomes et monomères, une étape de contraction de graphe permettra d'obtenir le graphe monomérique.
 
 
 
 
-\subsection{Isomorphisme de Sous-graphe et Sous-graphe Maximum Commun}
+\section{Isomorphisme de Sous-graphe et Sous-graphe Maximum Commun}
 
 \paragraph{}Nous avons vu que nous pouvions faire correspondre deux problèmes de graphes différents avec notre problème
 de recherche de monomère. Le but de cette partie est d'étudier les différents algorithmes existant pour chacun de ces
 problèmes
 
-\subsubsection{Sous-graphe Maximum Commun : définition}
+\subsection{Sous-graphe Maximum Commun : définition}
 
 \paragraph{}Commençons par définir clairement le sous graphe maximum commun.
 
@@ -752,7 +982,7 @@ problèmes
 
 
 
-\subsubsection{Isomorphisme de Sous-graphe : définition}
+\subsection{Isomorphisme de Sous-graphe : définition}
 
 \paragraph{}De la même manière que pour le MCS, définissons précisément ce qu'est l'Isomorphisme de Sous-graphe
 
@@ -787,7 +1017,7 @@ recherche efficace.
 \subsubsection{L'algorithme originel VF2}
 
 \paragraph{}Comme nous l'avons déjà évoqué dans l'état de l'art de cette partie, l'algorithme VF2 permet d'effectuer des
-isomorphisme de graphe ou de sous-graphe non labellés d'un graphe $G$ sur un graphe $H$.
+isomorphismes de graphe ou de sous-graphe non labellés d'un graphe $G$ sur un graphe $H$.
 Écrivons l'algorithme tel qu'il est décrit dans l'article d'origine :
 
 \paragraph{}
@@ -837,7 +1067,7 @@ Une fois toutes les tentatives échouées, l'algorithme remonte dans l'arbre et 
 '1'-'b'.
 Récursivement l'algorithme conclut à un isomorphisme {(1,b);(2,a);(3,c)}.
 
-\paragraph{}En l'état l'algorithme VF2 ne permet de reconnaître qu'un seul et unique isomorphisme.
+\paragraph{}En l'état l'algorithme VF2 ne reconnaît qu'un seul et unique isomorphisme.
 On peut modifier simplement l'algorithme afin de récupérer tous les isomorphismes en ne retournant pas une fois que l'un d'eux est
 trouvé mais en l'enregistrant dans un ensemble puis en continuant l'exploration de l'arbre jusqu'au bout.
 Vu que tout l'arbre est exploré à chaque recherche, l'algorithme est exponentiel.
@@ -855,7 +1085,7 @@ Sur la figure \ref{vf2_labels}, on peut voir la recherche d'un graphe $G$ compos
 composé d'un branchement supplémentaire contenant un noeud B.
 Sur ce graphique nous avons représenté deux cas de recherche selon l'ordre dans lequel nous prenons $G$.
 Nous pouvons remarquer que dans les deux cas, la taille de l'arbre est bien plus faible que pour un graphe non labellé.
-Les labels des noeuds font office de filtres de recherche et permettent d'accélérer fortement la recherche.
+Les labels des noeuds font office de filtres de recherche et accélérent fortement la recherche.
 On voit également que la recherche est d'autant plus rapide que l'on choisi prioritairement les noeuds avec des labels de faible
 fréquence.
 
@@ -877,8 +1107,7 @@ des noeuds représentant les atomes plus lourds.
 Ainsi, plusieurs labels différents peuvent
 désormais être créés pour un même atome et ce, en fonction de ses compagnons hydrogènes (Voir figure \ref{representations},
 seconde partie). Par exemple $NH_2$, $NH$, $N$ sont les
-trois labels variant depuis l'ancien label unique $N$ qui était accompagné de voisins hydrogènes. Les labels sont plus nombreux et
-leur fréquences à la fois moins élevée et plus homogène, ce qui permet de les rendre plus sélectifs.
+trois labels variant depuis l'ancien label unique $N$ qui était accompagné de voisins hydrogènes. Les labels sont plus nombreux et leur fréquences à la fois moins élevée et plus homogène, ce qui les rend plus sélectifs.
 
 \begin{figure}
   \includegraphics[width=300px]{Figures/s2m/representations/all_tmp.pdf}
@@ -894,9 +1123,9 @@ possible de représenter ses relations d'adjacence au sein d'un second graphe $L
 représentés dans $L$ comme un seul noeud. Chaque ancienne arrête devient un noeud et chaque ancien noeud devient une multitude
 d'arête (une clique entre tous les nouveaux noeuds représentant les anciennes arête de cet ancien noeud). Nous étendons le 
 raisonnement pour les labels en disant que le label d'un noeud du nouveau graphe est la composition des labels des anciens
-noeuds ainsi que de l'arité entre ces deux noeuds (Dans notre cas, les labels sont mis dans l'ordre lexicographique pour ne pas
+noeuds ainsi que de l'arrité entre ces deux noeuds (Dans notre cas, les labels sont mis dans l'ordre lexicographique pour ne pas
 avoir deux labels possibles à partir des labels d'origine)(Voir figure \ref{representations},
-troisième partie). Un tel type de graphe est appelé line graph\cite{orlin_line-digraphs_1978}. L'un des
+troisième partie). Un tel type de graphe est appelé line graph~\cite{orlin_line-digraphs_1978}. L'un des
 gros avantage de cette représentation est d'inclure directement dans les labels des noeuds ce qui touche à l'arité entre noeuds.
 La fonction
 de recherche n'aura donc plus du tout à s'attarder sur les liens mais uniquement sur les noeuds. De plus, transformer les graphes
@@ -1030,7 +1259,7 @@ donc tester tous les noeuds de tous les peptides d'apprentissage pour la premiè
 
 \begin{figure}
   \includegraphics[width=300px]{Figures/s2m/indexation/glouton.png}
-  \caption{\label{arite}Arité restante pour les différents noeuds d'un graphe chimique simple}
+  \caption{\label{arrite}Arrité restante pour les différents noeuds d'un graphe chimique simple}
 \end{figure}
 
 \paragraph{}Lors d'une recherche d'une chaîne $c_{n-1}$, il est possible de trouver isomorphismes sur la cible
@@ -1040,7 +1269,7 @@ calcul de $C_{n-1}$ auquel on vient ajouter le temps de recherche de la dernièr
 $n-1$. Il faut également tenir compte du nombre d'extensions qui vont être essayées. Par exemple, si l'on cherche à étendre un
 isomorphisme précédent en suivant un lien qui est enraciné sur un $NH$, il ne reste qu'une liaison à explorer (le $N$ ayant déjà
 une liaison avec son $H$ et une liaison avec le reste du motif déjà recherché). En reprenant la même logique pour un $C$, il
-resterait donc trois liaisons à suivre. Nous appellerons cette quantité l'arité restante. On peut donc écrire :
+resterait donc trois liaisons à suivre. Nous appellerons cette quantité l'arrité restante. On peut donc écrire :
 
 \begin{equation}
  T(p_{n-1} \rightarrow p_n) = n_{p_{n-1}} \times a_{p_{n-1} \rightarrow p_n} \times t
@@ -1061,7 +1290,7 @@ labels (ce temps peut être considéré constant)
   \caption{\label{app_compt}Base d'apprentissage accompagnée des comptages de tous les $n_{p_{n}}$}
 \end{figure}
 
-\paragraph{}En utilisant les comptages fait sur la base d'apprentissage (Voir \ref{app_compt}) ainsi que le calcul de l'arité
+\paragraph{}En utilisant les comptages fait sur la base d'apprentissage (Voir \ref{app_compt}) ainsi que le calcul de l'arrité
 restante de chaque noeud à chaque étape, nous allons pouvoir estimer sur la base, un temps d'exécution de la recherche d'une
 chaîne. Ce temps est un coût exact de le recherche sur la base d'apprentissage. En normalisant cette valeur par le nombre de
 noeuds de la base nous pouvons obtenir le coût de recherche par noeud et ainsi pouvoir estimer le temps de calcul quelque soit
@@ -1156,7 +1385,7 @@ dynamique sera donc de complexité de l'ordre de $n^2$.
 Le pire motif qui peut être défini est une clique. Dans le cas d'une clique de taille $n$ pour calculer le coût du motif il faudra
 calculer $n-1$ parmi $n$ valeurs puis $n-2$ parmi $n$, ... Dans ce cas, la complexité sera de l'ordre de $2^n$.
 
-La redondance des labels permet quant à elle de couper certaines branches lors de l'indexation et permet ainsi de diminuer un peu
+La redondance des labels permet quant à elle de couper certaines branches lors de l'indexation et ainsi de diminue un peu
 la complexité. Cependant, l'ordre de grandeur n'en est pas modifié.
 
 \begin{equation}
@@ -1172,7 +1401,7 @@ la complexité. Cependant, l'ordre de grandeur n'en est pas modifié.
 \paragraph{}Dans un exemple précédent (TODO : ref), nous avons montré que le début d'une chaîne est très critique pour le temps
 de recherche de celle-ci. L'idée est donc de générer la chaîne par un mélange des deux techniques précédentes. Les débuts de la 
 chaîne seront être recherchés en exact jusqu'à une taille $k$ définie à l'avance puis le reste des extensions se feront en
-utilisant l'algorithme glouton. Cette découpe des chaînes en deux parties nous permet de garantir une recherche très rapide d'un
+utilisant l'algorithme glouton. Cette découpe des chaînes en deux parties garantit une recherche très rapide d'un
 motif sur la base d'apprentissage tout en limitant fortement le temps de pré-calcul nécessaire pour la construction de l'index.
 
 
@@ -1247,7 +1476,7 @@ naturel depuis le résidu racine jusqu'aux résidus de niveau 1 (Inutile de rech
 quel). De plus, il n'est jamais nécessaire de
 recalculer complètement un isomorphisme une fois que la racine trouvée. Pour passer d'un résidu $r$ à l'un de ses parents $p$ il
 suffit de rechercher à étendre l'isomorphisme de $r$ avec les atomes que nous avions considérés perdus pour passer de $p$ à $r$
-lors de la construction de la famille. De plus, le fait de ne pas tout recalculer à chaque étape nous permet de ne calculer
+lors de la construction de la famille. De plus, le fait de ne pas tout recalculer à chaque étape nous autorise à ne calculer
 l'index que pour les résidus racine. Le reste des résidus n'est indexé que sur les extensions a effectuer depuis leurs enfants.
 L'algorithme qui décrit la recherche d'une famille est donc le suivant :
 
@@ -1290,18 +1519,17 @@ L'algorithme qui décrit la recherche d'une famille est donc le suivant :
 
 \subsubsection{Pavage : définition}
 
-\paragraph{}La méthode de recherche des isomorphismes de sous graphe présentée précédemment, nous permet de trouver
-toutes les occurrences de chacun des monomères dans un peptide cible.
+\paragraph{}La méthode de recherche des isomorphismes de sous graphe présentée précédemment, trouve toutes les occurrences de chacun des monomères dans un peptide cible.
 
 Puisque nous connaissons les atomes contenus dans chacun des isomorphismes découverts, nous pouvons également connaître chacun des
 isomorphismes découvert par atome.
 L'étape de pavage consiste à choisir un sous ensemble des isomorphismes trouvés, de manière à maximiser les atomes couverts par ces
 isomorphismes en ayant pour chaque atome au plus un seul isomorphisme présent dans ce sous ensemble.
 
-Faisons une analogie avec un puzzle. La phase d'isomorphisme nous permet d'obtenir de nombreuses pièces de puzzle. Ces pièces ne
-permettent pas forcément de reconstituer un puzzle complet. De plus, parmi les pièces que nous disposons, certaines se
-chevauchent. La phase de pavage consiste à choisir parmi les pièces celles que l'on souhaite garder en maximisant le
-remplissage de notre puzzle et sans avoir de pièces chevauchantes (figure \ref{puzzle}).
+Faisons une analogie avec un puzzle. La phase d'isomorphisme obtenient de nombreuses pièces de puzzle.
+Une reconstruction complète du puzzle n'est pas forcément faisable uniquement à partir de ces pièces.
+De plus, parmi celles dont nous disposons, certaines se chevauchent.
+La phase de pavage consiste à choisir parmi les pièces, celles que l'on souhaite garder en maximisant le remplissage de notre puzzle et sans avoir de pièces chevauchantes (figure \ref{puzzle}).
 
 \begin{figure}
   \includegraphics[width=300px]{Figures/s2m/pavage/puzzle.pdf}
@@ -1335,8 +1563,8 @@ purement algorithmique de choisir quelle est la meilleure façon de découper ce
 problème de programmation linéaire est un
 problème représenté par un ensemble de variables, une fonction de score ainsi qu'une liste de contraintes sur les variables. La
 fonction de score est accompagnée d'un objectif de maximisation ou de minimisation. Ce type de problème est classiquement résolu
-par l'algorithme du simplexe\cite{murty_linear_1983}. Depuis la publication, de nombreuses variante de l'algorithme ont été
-créées. L'une d'elle, appelée ``Mixed Integer Programming'' (MIP)\cite{wolsey_mixed_2007}, permet de résoudre des problèmes
+par l'algorithme du simplexe~\cite{murty_linear_1983}. Depuis la publication, de nombreuses variante de l'algorithme ont été
+créées. L'une d'elle, appelée ``Mixed Integer Programming'' (MIP)~\cite{wolsey_mixed_2007}, permet de résoudre des problèmes
 pour lesquels les variables sont des entiers.
 
 \paragraph{}Dans notre cas, nous allons rechercher les résidus qui seront utiles pour notre assemblage final.
@@ -1367,15 +1595,14 @@ donc la somme des présences des résidus pondérée par la taille de chaque ré
  score : \sum^{r_i} v_{r_i} * size(r_i)
 \end{equation}
 
-\paragraph{}La réduction de notre problème de pavage en un MIP nous permet d'utiliser des solveurs déjà existant pour trouver la
-solution exacte. Nous pouvons par exemple utiliser la bibliothèque GLPK (l'une des seules bibliothèques de LP sous licence libre).
+\paragraph{}La réduction de notre problème de pavage en un MIP nous autorise l'utilisation des solveurs déjà existant pour trouver la solution exacte.
+Nous pouvons par exemple utiliser la bibliothèque GLPK (l'une des seules bibliothèques de LP sous licence libre).
 
 \paragraph{Schéma : Vue globale de la réduction en MIP}
 
 \paragraph{}Bien que cette solution soit élégante, MIP dans sa version ne contenant que des variables binaires fait partie des 21
-problèmes NP-complets de Karp\cite{karp_reducibility_1972}. Il n'existe donc actuellement aucune méthode ne permettant de
-résoudre ce problème en temps polynomial. Pour les cas les plus difficiles, il est donc nécessaire de trouver un moyen plus
-rapide d'obtenir une solution.
+problèmes NP-complets de Karp~\cite{karp_reducibility_1972}. Il n'existe donc actuellement aucune méthode de résolution de ce problème en temps polynomial.
+Pour les cas les plus difficiles, il est donc nécessaire de trouver un moyen plus rapide d'obtenir une solution.
 
 \paragraph{Stackexchange ?} Preuve NP complétude ?
 http://cs.stackexchange.com/questions/48775/np-hardness-of-covering-with-rectangular-pieces-google-hash-code-2015-test-roun/49074
@@ -1388,8 +1615,8 @@ http://cs.stackexchange.com/questions/48775/np-hardness-of-covering-with-rectang
 
 \paragraph{}L'un des moyen d'obtenir très rapidement une solution est de trier les résidus dans un ordre voulu puis de parcourir
 la liste triée en ajoutant le résidu courant à la solution uniquement si il ne chevauche aucun autre résidu de la solution.
-On pourra toujours trouver au moins un tri de la liste permettant d'atteindre la solution optimale. En faisant cela on reporte la
-difficulté du problème sur les critères de tri de la liste mais on garantit une très grande rapidité d'exécution.
+On pourra toujours trouver au moins un tri de la liste qui atteingne la solution optimale.
+En faisant cela on reporte la difficulté du problème sur les critères de tri de la liste mais on garantit une très grande rapidité d'exécution.
 
 \paragraph{}
 \begin{algorithm}[H]
@@ -1418,7 +1645,7 @@ Dans notre cas, la probabilité de trouver par hasard un résidu dans un peptide
 inversement proportionnelle au nombre d'atomes qu'il contient (La composition intervient également mais nous cherchons ici des
 critères simples). On peut donc dire qu'un résidu est d'autant plus ``efficace'' que sa probabilité d'apparition par hasard est
 faible. Le premier critère consiste donc à trier les résidus par taille décroissante (nombre d'atomes dont hydrogènes).
-C'est un critère classiquement utilisé pour la résolution gloutonne du problème du sac à dos\cite{_probleme_2016}.
+C'est un critère classiquement utilisé pour la résolution gloutonne du problème du sac à dos~\cite{_probleme_2016}.
 
 \begin{figure}
   \includegraphics[width=300px]{Figures/s2m/pavage/tri_glouton.pdf}
@@ -1563,7 +1790,7 @@ Dans un second temps si aucune solution complète n'est trouvée, nous relançon
 une nouvelle phase d'isomorphisme sans les décorateurs (isomorphisme {\em light}).
 Cette seconde phase d'isomorphisme est effectuée localement autour des zones qui ont posé problème lors du premier tour de 
 l'algorithme.
-Cette algorithme en deux temps nous permet de rapidement traiter tous les cas simples avec des sous algorithmes efficaces puis
+Cette algorithme en deux temps traite rapidement tous les cas simples avec des sous algorithmes efficaces puis
 de revenir sur les cas plus difficiles avec des algorithmes plus sensibles.
 
 \subsubsection{Vue globale des algorithmes}
@@ -1581,36 +1808,94 @@ Chacune des deux phases de cette étape se déroule en temps exponentiel mais re
 données.
 La seconde moitié du schéma rappelle l'ensemble des étapes comprises dans la phase de recherche. Comme présenté
 précédemment, toutes les phases de cette étape sont optimisées afin de minimiser le temps d'exécution de l'algorithme.
-La structure en boucle avec l'isomorphisme light nous permet pour la plupart des cas de sortir très vite de l'algorithme.
+La structure en boucle avec l'isomorphisme light sort, pour la plupart des cas, très vite de l'algorithme.
 
 
 
 
-\subsection{Résultats expérimentaux}
+\section{Résultats et interprétations}
 
-\subsubsection{}
+\subsection{Jeux de données}
 
+\subsubsection{Les constituants des jeux de données}
 
-
-
-
-\subsection{Smiles2Monomers en pratique}
-
-\subsubsection{s2m en open source}
-
-\paragraph{}Présentation des méthodes de développement (Github + tests + intégration continue)
-
-\subsubsection{s2m sur NORINE}
-
-\paragraph{}Les utilisations de s2m sur NORINE (Stand alone sur NRP + Correction BDD + 
-
-\subsubsection{Améliorations et limites}
-
-\paragraph{}Discution autour des limites matérielles
-
-\section{Utilisations}
+\paragraph{}Nous souhaitons connaître la pertinence des annotations issues de s2m.
+Pour cela, il est nécessaire de construire des jeux de données tests au sein desquels les annotations attendues seront déjà connues.
+Ces bases de test doivent être composées de polymères comprenant leur SMILES, représentation de leur structure atomique ainsi que de l'annotation attendue (un graphe monomérique).
+Pour les entrées de s2m, il est également nécessaire de constituer une base de monomères pour chaque jeu de données différent.
+s2m pré-calculera les indexes pour chaque base de monomère puis sera exécuté sur chaque polymère.
+L'annotation de sortie sera alors comparée à l'annotation préexistante pour en définir la qualité.
 
 
+\subsubsection{Premier jeu de données : Norine}
+
+\paragraph{}Puisque le déclenchement de ce travail est dû à la volonté d'accroitre le nombre d'annotations de NRP dans Norine, le premier jeu de données sera logiquement constitué de polymères non ribosomiques déjà annotés issus de cette base.
+Toutes les entrées de Norine sont accompagnées d'annotations monomérique et c'est d'ailleurs ce qui fait la force de cette base.
+Nous avons donc extrait tous les NRP pour lesquels un SMILES était renseigné pour constituer un jeu de polymères test.
+La base de monomères est quant à elle constituée de l'ensemble des monomères connus et présents dans Norine.
+
+
+%Citations :
+%· The chemical component dictionary: complete descriptions of constituent molecules in experimentally determined 3D macromolecules in the Protein Data Bank
+%· The Protein Data Bank
+\subsubsection{Second jeu de données : The Chemical Component Dictionary (CCD)}
+
+\paragraph{}CCD~\cite{westbrook_chemical_2015} est une sous partie de la base de données PDB~\cite{berman_protein_2000} (Protein Data Bank).
+Cette base regroupe toutes les petites molécules présentes dans PDB.
+Parmi celles-ci se trouvent de nombreux petits polymères annotés ainsi que les monomères les constituant.
+L'avantage de cette base est que toute molécule y étant présente est accompagnée de son smiles.
+En extrayant les molécules annotées comme polymères, nous avons constitué un second jeu de données.
+Pour constituer la base de monomères dont s2m à besoin en pré-traitement, il nous a suffit d'extraire les molécules présentes dans les annotations polymériques.
+
+
+\subsubsection{Résumé sur les données}
+
+Les données de validation seront composées de deux jeux distincts.
+D'un côté les polymères extraits de Norine seront au nombre de 343.
+Les données NRP seront accompagnées des 533 monomères de la base.
+Le second jeu est issu de la base CCD et comporte 378 polymères et 507 monomères issus des annotations.
+Il est à noté qu'aucun des polymères présent dans une base n'est présent dans l'autre et que seuls 63 monomères sont communs.
+Ces monomères identiques sont en très grande majorité des acides aminés classiques et leurs variants proches.
+
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=250px]{Figures/s2m/results/data.png}
+    \caption{\label{data}Répartition des données de validation}
+  \end{center}
+\end{figure}
+
+
+
+\subsection{Profil d'un résultat}
+
+\paragraph{}s2m permet de générer des résultats sous différents formats.
+Il est possible par exemple de générer un format textuel json permettant facilement de recharger ces résultats dans d'autres logiciels.
+Lorsque nous présenterons un résultat ici, nous le présenterons via le format graphique html.
+
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=450px]{Figures/s2m/results/apicidinC.png}
+    \caption{\label{s2m_HTML}Le résultat HTML de l'exécution de s2m sur l'apicidine C}
+  \end{center}
+\end{figure}
+
+\paragraph{}Une page de résultat peut être décomposée en 3 parties (voit figure \ref{s2m_HTML}).
+En haut à gauche se trouve l'image du polymère étudié, colorée selon les monomères qui y sont présents.
+C'est l'information la plus parlante visuellement car elle permet d'immédiatement interpréter les résultats.
+
+Sous l'image du peptide se trouvent trois listes de monomères.
+La première liste correspond aux monomères découverts dans la structure atomique par s2m et que l'on sait être justes grâce aux annotations déjà connues.
+Le seconde liste correspond également aux monomères découverts par s2m mais qui cette fois-ci ne sont pas présent dans l'annotation initiale.
+La dernière correspond aux monomères qui sont présent dans l'annotation mais qui n'ont pas été trouvés par s2m.
+
+La dernière partie de la figure représente les informations générales sur le polymère.
+Tout d'abord, il y a le nom du polymère puis les statistiques sur celui-ci.
+La première statistique est le taux de couverture atomique (Coverage).
+Cette valeur donne le ratio des atomes annotés par s2m comme faisant partie des monomères trouvés par le nombre d'atomes du polymère.
+La seconde valeur donne également un ratio d'atomes mais uniquement pour les atomes correctement annotés.
+Cette valeur ne prend en compte que les atomes faisant partie des monomères de la première des trois listes.
+Lors de la présentation des résultats qui suivront, nous ferons toujours attention de bien mentionner si les chiffres sont des comptages monomériques ou des comptages atomique.
+Les pourcentages de l'un à l'autre peuvent être fort différents dû à la grande variabilité du nombre d'atomes d'un monomère à l'autre.
 
 
 
@@ -1620,7 +1905,15 @@ La structure en boucle avec l'isomorphisme light nous permet pour la plupart des
 
 
 
-\chapter{Vers la biologie de synthèse}
+
+
+\chapter{Vers un enrichissement de Norine}
+
+\section{Norine}
+
+\section{Les contributions de s2m à dans Norine}
+
+\section{Vers la biologie de synthèse}
 
 \bibliography{these}
 \bibliographystyle{plain}
