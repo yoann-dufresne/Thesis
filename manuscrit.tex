@@ -1006,13 +1006,12 @@ problèmes
 
 \subsection{Isomorphisme de sous graphe}
 
+\label{isomorphisme_p}
+
 \paragraph{}La première partie Smiles2Monomers doit rechercher l'ensemble des monomères au sein d'un polymère cible.
-Comme nous l'avons vu dans l'état de l'art, ce problème transformé en problème de graphe est un problème d'isomorphisme de sous
-graphe.
-Dans cette partie nous allons présenter en détail l'algorithme classique de recherche de SI nommé VF2 en l'étendant à des graphes
-labellés.
-Puis nous montrerons en quoi les labels des noeuds du graphes influencent le temps de calcul afin en déduire une méthode de
-recherche efficace.
+Comme nous l'avons vu dans l'état de l'art, ce problème transformé en problème de graphe est un problème d'isomorphisme de sous graphe.
+Dans cette partie nous allons présenter en détail l'algorithme classique de recherche de SI nommé VF2 en l'étendant à des graphes labellés.
+Puis nous montrerons en quoi les labels des noeuds du graphes influencent le temps de calcul afin en déduire une méthode de recherche efficace.
 
 \subsubsection{L'algorithme originel VF2}
 
@@ -1145,6 +1144,8 @@ choisi de n'effectuer qu'une seule étape de line-graph.
 \end{figure}
 
 \subsubsection{Indexation des monomères}
+
+\label{index_p}
 
 \paragraph{}Connaissant la sélectivité pour un label, nous cherchons désormais à savoir l'ordre dans lequel il faut rechercher
 un motif afin de minimiser le temps de recherche.
@@ -1548,10 +1549,46 @@ purement algorithmique de choisir quelle est la meilleure façon de découper ce
   \caption{\label{reconstruction}Les différents types de reconstruction que l'on peut obtenir par le pavage}
 \end{figure}
 
+\subsubsection{Preuve de NP-Complétude}
+
+\paragraph{}En 2015 j'ai eu la chance de participer, avec mes amis Thomas Nachtergale et Alexandre Temperville, à la finale du concours d'algorithmique ``Google Hashcode''.
+La veille de l'épreuve finale, un petit problème test nous a été proposé.
+Le but était de découper une pizza (matrice), composée de cases de jambon (H dans la matrice) et de cases de sauce (T dans la matrice), en part dites ``royales'', tout en minimisant le gachis de pizza.
+Les part royales sont des parts rectangulaires contenant au minimum 3 cases de jambon et représentant une surface max de 12 cases.
+
+\paragraph{TODO : schéma pizzas}
+
+\paragraph{}Ce problème a été prouvé NP-Complet sur le forum stackexchange\cite{de_biasi_complexity_2015} suite à la question d'un paticipant.
+La preuve a été faite par réduction du problème ``Monotone cubic planar 1-3 SAT''.
+Prouvons que le problème est NP-Complet par réduction du problème ``Pizza''.
+
+\paragraph{}Premiérement, il est très facile de montrer par certificat que le problème de pavage est NP.
+Le certificat contient l'ensemble des résidus pavés.
+Leur nombre est borné par le nombre de résidus issus de l'isomorphisme.
+Le certificat est donc de taille proportionnelle au problème.
+Secondement, le validateur de certificat doit vérifier qu'aucun résidu ne se chevauche.
+Pour cela, il est possible de vérifier les chevauchements pour toutes les paires de résidus du certificat.
+La vérification du certificat peut être faite de manière quadratique, ce qui permet de dire que le problème est NP.
+
+\paragraph{}Prouvons ensuite que nous pouvons résoudre le problème Pizza en utilisant le problème Pavage.
+Nous avons besoin de définir 3 notions pour notre codage :
+- Les atomes du peptide : Les atomes du peptide représenteront les cases de la matrice pizza.
+- Les liens entre atomes : Les liens représentent les voisinage de deux cases.
+Si deux cases sont voisine (voisinage de Manhattan), alors un lien existe entre les deux atomes qui les représentent.
+- Les résidus : Les résidus correspondent aux parts royales de pizza.
+Chaque case faisant partie de la case sera représentée par un atome du résidu.
+
+Avec ce codage, si nous arrivons à résoudre le problème de pavage il devient possible de résoudre le problème de pizza.
+
+\paragraph{}Le problème de pavage est NP et il existe un problème NP-Complet qui peut se réduire en lui.
+Pavage est donc NP-Complet.
+
 
 
 
 \subsubsection{Pavage exact par optimisation linéaire}
+
+\label{MIP_p}
 
 \begin{figure}
   \includegraphics[width=300px]{Figures/s2m/pavage/reduction.pdf}
@@ -1600,23 +1637,20 @@ Nous pouvons par exemple utiliser la bibliothèque GLPK (l'une des seules biblio
 
 \paragraph{Schéma : Vue globale de la réduction en MIP}
 
-\paragraph{}Bien que cette solution soit élégante, MIP dans sa version ne contenant que des variables binaires fait partie des 21
-problèmes NP-complets de Karp~\cite{karp_reducibility_1972}. Il n'existe donc actuellement aucune méthode de résolution de ce problème en temps polynomial.
-Pour les cas les plus difficiles, il est donc nécessaire de trouver un moyen plus rapide d'obtenir une solution.
-
-\paragraph{Stackexchange ?} Preuve NP complétude ?
-http://cs.stackexchange.com/questions/48775/np-hardness-of-covering-with-rectangular-pieces-google-hash-code-2015-test-roun/49074
-
-
+\paragraph{}Bien que cette solution soit élégante, MIP dans sa version ne contenant que des variables binaires fait partie des 21 problèmes NP-complets de Karp~\cite{karp_reducibility_1972}.
+Il n'existe donc actuellement aucune méthode de résolution de ce problème en temps polynomial.
+Les cas les plus difficiles (ie contenant beaucoup de résidus chevauchants trouvés par isomorphisme) risquent de prendre beaucoup de temps.
+Proposons également une heuristique rapide pour résoudre le problème.
 
 
 
 \subsubsection{Pavage glouton}
 
-\paragraph{}L'un des moyen d'obtenir très rapidement une solution est de trier les résidus dans un ordre voulu puis de parcourir
-la liste triée en ajoutant le résidu courant à la solution uniquement si il ne chevauche aucun autre résidu de la solution.
+\label{TM_p}
+
+\paragraph{}L'un des moyen d'obtenir très rapidement une solution est de trier les résidus dans un ordre voulu puis de parcourir la liste triée en ajoutant le résidu courant à la solution uniquement si il ne chevauche aucun autre résidu de la solution.
 On pourra toujours trouver au moins un tri de la liste qui atteingne la solution optimale.
-En faisant cela on reporte la difficulté du problème sur les critères de tri de la liste mais on garantit une très grande rapidité d'exécution.
+En faisant cela nous reportons la difficulté du problème sur les critères de tri de la liste mais nous garantissons une très grande rapidité d'exécution.
 
 \paragraph{}
 \begin{algorithm}[H]
@@ -1756,6 +1790,8 @@ possible après $i$ appels récursifs ($i$ paramétrable).
 
 \subsection{Recherche approximative}
 
+\label{light_p}
+
 \paragraph{}Suite à des variations de composition ou de structure survenant dans certains résidus quelques polymères ne sont pas
 découpés correctement en utilisant les algorithmes précédents. Il y a essentiellement deux cas pour lesquels l'isomorphisme
 ne fonctionne pas. Dans un premier cas, nous avons a faire à un monomère ionisé au sein du peptide. Dans ce cas, il se peut qu'un
@@ -1774,18 +1810,18 @@ d'électron se concrétise par le déplacement d'un liaison double.
 \end{figure}
 
 \paragraph{}Les deux transformations présentées ont pour point commun de ne pas modifier en profondeur la structure des molécules.
-Dans les deux cas seuls les ``décorateurs'' des labels sont modifiés. Le moyen simple de reconnaître ce type de molécule est alors
-d'oublier ces décorateurs lors de la phase d'isomorphisme. Dès lors les résidus sont reconnus quel que soient
-leurs variations sur les hydrogènes ou les liens. Cette modification ne fait pas varier la qualité des résultats sur les NRP
-car les monomères utilisés différent entre eux au delà des atomes d'hydrogène. Bien que très séduisante cette méthode pose un
-problème de temps de calcul.
-La plupart des monomères NRP ne contiennent que des composés C N O et H.
+Dans les deux cas seuls les ``décorateurs'' des labels sont modifiés (hydrogènes et arité de liaison).
+Le moyen simple de reconnaître ce type de molécule est alors d'oublier ces décorateurs lors de la phase d'isomorphisme.
+Dès lors les résidus sont reconnus quel que soient leurs variations sur les hydrogènes ou les liens.
+Cette modification ne fait pas varier la qualité des résultats sur les NRP car les monomères utilisés différent entre eux au delà des atomes d'hydrogène.
+Bien que très séduisante cette méthode pose un problème de temps de calcul.
+La plupart des monomères NRP ne contiennent que des atomes C N O et H.
 Ne pouvant plus utiliser les H comme décorateurs et en rendant les liens indifférents les uns des autres, le nombre de labels différents chute à 9.
 Il est donc compréhensible que le temps de calcul augmente beaucoup.
 
 \paragraph{}La solution est une nouvelle fois hybride.
 Dans un premier temps, nous cherchons rapidement une solution en effectuant un
-isomorphisme contenant tous les labels (isomorphisme {\em strict}), puis en effectuant un pavage et une modulation.
+isomorphisme contenant tous les labels (isomorphisme {\em strict}), puis en effectuant un pavage.
 Dans un second temps si aucune solution complète n'est trouvée, nous relançons tout le processus en commençant par
 une nouvelle phase d'isomorphisme sans les décorateurs (isomorphisme {\em light}).
 Cette seconde phase d'isomorphisme est effectuée localement autour des zones qui ont posé problème lors du premier tour de 
@@ -1797,18 +1833,27 @@ de revenir sur les cas plus difficiles avec des algorithmes plus sensibles.
 
 \begin{figure}
   \includegraphics[width=300px]{Figures/s2m/algo/s2m.pdf}
-  \caption{\label{global_s2m}Schéma global de Smiles2Monomers}
+  \caption{\label{global_s2m}Schéma global de Smiles2Monomers (TODO : refaire avec les deux alternatives)}
 \end{figure}
 
 \paragraph{}Tout au long cette partie, nous avons présenté par morceaux les différentes parties de Smiles2Monomers.
 Nous rassemblons ici tous les morceaux au sein d'un schéma global (figure \ref{global_s2m}).
-Le première partie du schéma (au dessus des pointillés) est composée des deux phases de pré-calcul.
+Le première partie du schéma (au dessus des pointillés) est composée des deux phases de pré-calcul (voir \ref{index_p}).
 Cette étape de pré-calcul est lourde en temps mais n'est à effectuer qu'une seule fois.
 Chacune des deux phases de cette étape se déroule en temps exponentiel mais reste calculables grâce à la petite taille des
 données.
-La seconde moitié du schéma rappelle l'ensemble des étapes comprises dans la phase de recherche. Comme présenté
-précédemment, toutes les phases de cette étape sont optimisées afin de minimiser le temps d'exécution de l'algorithme.
-La structure en boucle avec l'isomorphisme light sort, pour la plupart des cas, très vite de l'algorithme.
+La partie principale de s2m possède deux alternatives algorithmiques.
+Dans les deux cas, l'algorithme commence par une phase de recherche d'isomorphismes (voir \ref{isomorphisme_p}) afin de connaître les résidus candidats à la composition du polymère.
+Ensuite vient la phase de pavage effectuée soit par une résolution de MIP (voir \ref{MIP_p}) soit par une heuristique de pavage (voir \ref{TM_p}).
+Enfin, pour les cas plus difficile, nous effectuons plusieurs passes de recherche d'isomorphismes light (voir \ref{light_p}) et de nouveaux pavages.
+
+L'algorithme global est paramétrable.
+Pour le précalcul, nous pouvons fixer la variable $k$ qui définiera la taille de chaine calculée avec le modèle markovien.
+Nous rappelons encore une fois que cette taille n'aura pas d'influence sur le résultat mais uniquement sur le temps de calcul.
+Pour la partie recherche, nous devrons choisir le nombre de fois où nous effectuerons la ``boucle light''.
+L'un des paramêtres est la limite max de nombre de tours.
+Enfin, si nous optons pour la méthode heuristique de modulation, il est également nécessaire de définir une profondeur maximale de modulation.
+L'influence de ces paramêtres sur l'exécution de l'algorithme sera étudiée durant la partie résultats.
 
 
 
@@ -1895,7 +1940,7 @@ Cette valeur donne le ratio des atomes annotés par s2m comme faisant partie des
 La seconde valeur donne également un ratio d'atomes mais uniquement pour les atomes correctement annotés.
 Cette valeur ne prend en compte que les atomes faisant partie des monomères de la première des trois listes.
 Lors de la présentation des résultats qui suivront, nous ferons toujours attention de bien mentionner si les chiffres sont des comptages monomériques ou des comptages atomique.
-Les pourcentages de l'un à l'autre peuvent être fort différents dû à la grande variabilité du nombre d'atomes d'un monomère à l'autre.
+Les pourcentages de l'un à l'autre peuvent être fort différents dû à la variabilité du nombre d'atomes composant les monomères.
 
 
 

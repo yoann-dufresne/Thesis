@@ -8,30 +8,65 @@
 
 ## Résultats
 
+### Choisir les paramètres
+
+Comment choisir les paramêtres nous permettant d'obtenir les résultats ?
+C'est la première question que nous allons nous poser ici.
+Classiquement, lorsque l'on souhaite évaluer les résultats d'une prédiction, on utilise les statistiques découlant des vrai/faux positifs/négatifs.
+Commençons par définir chacune de ces catégories dans notre cas :
+- Vrai positif (VP) : Un vrai positif est obtenu lorsque le résultat est identique au résultat attendu.
+Dans notre cas, une annotation peptidique est un VP si tous les monomères présents dans l'annotation de s2m sont également présent dans l'annotation dans le jeu de test.
+Nous aurons donc une couverture et un correctness de 100\%.
+- Faux positif (FP) : Un faux positif est obtenu lorsque le résultat parait correct mais qu'il diffère du résultat attendu.
+Dans notre cas, une annotation est un FP si tout ses atomes sont couverts par l'annotation mais que celle-ci diffère de celle du jeu test.
+Nous aurons donc une couverture de 100\% et un correctness inférieur à 100\%
+- Faux négatif (FN) : Un faux négatif est obtenu lorsque le résultat ne parait pas correct alors qu'il est possible de l'obtenir.
+Dans notre cas, une annotation est un FN lorsque nous n'arrivons pas à produire une annotation complète du peptide.
+C'est à dire que nous aurons une couverture et une correctness inférieure à 100\%.
+- Vrai négatif (VN) : Un vrai négatif est obtenu lorsque le résultat ne parait pas correct et qu'il n'est pas possible d'en obtenir un.
+Dans notre cas, ceci n'est pas possible.
+Il est toujours possible d'obtenir une annotation correcte vu qu'elles sont toutes présentes dans le jeu test.
+
+
+Pour débuter le choix des paramètres, nous n'allons pas du tout prendre en compte le temps d'exécution.
+Les but ici est d'exposer la qualité des résultats uniquement.
+Pour cela nous allons prendre comme indicateurs La couverture atomique moyenne, le corectness atomique moyen et les taux de VP/FP/FN (et donc la sensibilité).
+Nous allons faire varier le paramètre du nombre de tour de la boucle light ainsi que la profondeur de modulation pour le pavage avec modulation.
+Nous testerons également les deux algorithmes algorithmes de pavage.
+
+
+Tableau de chiffres pour les exécutions
+
+
+Comme nous voyons sur le tableau de la figure \ref{}, l'algorithme de pavage par optimisation linéaire n'est pas du tout sensible au changement de paramètres.
+Ceci s'explique par le fait qu'il n'a besoin que d'une seule phase light pour parvenir à son optimal local.
+En effet, dans certains cas, le problème et tout de suite résolu après la première phase de pavage succédant l'isomorphisme light car toutes les briques ont été correctement découvertes.
+Dans les autres cas, l'algorithme du MIP a tellement cherché à optimiser les nombre d'atomes couverts à la suite du premier pavage, que la solution intermédiaire est trop distante de la vraie solution pour pouvoir être rattrapée.
+
+Pour le pavage heuristique, la sensibilité aux paramètres est bien différente.
+On peut voir que augmenter le nombre de modulations augmente le nombre de bons résultats.
+Le nombre de vrais positifs augmente significativement en passant le paramètre de 1 à 2.
+Le paramètre de nombre de boucle light n'a que très peu d'influence et vient seulement compléter 3 résultats sur les données Norine.
+
+En conparant les résultats des deux algorithmes, on s'apperçoit que l'algorithme comprenant l'heuristique de pavage obtient de meilleurs résultats (pour une modulation >= 3) que l'algorithme incluant un pavage exact.
+Encore une fois ce résultat s'explique par le fait que le pavage exact va trop loin dans l'optimisation.
+Si aucune solution couvrante n'est possible avec les résidus issus de l'isomorphisme strict, alors le pavage maximal exact pourra potentiellement effectuer des solutions optimisées farfelues.
+Dans ce cas, la recherche de résidus par isomorphisme sert peu car les trous dans l'annotation ont été déplacés par l'optimisation.
+Il n'est souvent plus possible de construire l'annotation.
+
+
+Pour achever la comparaison, nous devons ajouter l'analyse du temps de calcul.
+
+TODO
+
+
+### Analyse des résultats
+
 Vous pourrez trouver tous les résultats sur les polymères testés à ces adresses :
 - CCD : www.TODO.com
 - Norine : www.TODO.com
 
-Ces résultats ont été créés en utilisant les paramètres par défaut de s2m.
-L'algorithme de pavage est effectué avec une modulation de rang 1 (voir la partie TODO).
 
-
-### Statistiques globale
-
-Pour l'analyse globale des résultat nous allons considérer les différentes classes suivante :
-- Vrai positif : pour les polymères dont s2m retrouve exactement la structure annotée dans la base de données correspondante.
-- Faux positif : pour les polymères dont s2m trouve une couverture à 100% mais dont les monomères ne sont pas exactement les mêmes que dans la BDD.
-- Faux négatif : pour les polymères dont s2m ne retrouve pas tous les monomères.
-
-Nous soulignons le fait qu'il n'existe pas de faux négatif car nous n'avons pas d'annotations incomplètes dans les bases de données.
-
-TODO : Figure TP/FP/FN
-
-Les résultats de s2m sont très satifaisant sur les deux jeux de données.
-L'algorithme ayant à la base été développé dans l'optique d'annotation de NRP, il est très satifaisant de constater que les résultats sont encore meilleurs sur CCD que sur Norine.
-
-
-## Performances
 
 
 
