@@ -1,0 +1,47 @@
+SMILES (mono || pep)
+- cyclotheonamide E3 (x2)
+- nordidemnin B
+- enniatin A1
+- microsclerodermin A
+- microsclerodermin B
+- bacitracin B1
+- bacitracin B2
+- bacitracin B3
+- kahalalide S
+- nazumamide A
+- deglucobalhimycin
+
+
+SMILES Monomère :
+- dolastatin 10
+- neamphamide A (Agdha)
+- callipeltin A (Agdha)
+- gymnangiamide (gSer)
+
+
+SMILES peptide :
+- halicylindramide E
+- pseudobactin
+- pseudobactin A
+- oscillarin
+
+
+Problèmes structures ou SMILES pep
+- edeine F
+
+
+??? :
+- enniatin F (Image compliquée)
+- avoparcin-alpha (Image)
+- avoparcin-beta (Image)
+- motuporin (bug s2m ?)
+
+
+s2m :
+- theonellamide A (manque règle)
+- theonellamide D (Ion +) (manque règle)
+- theonellamide E (manque règle)
+- theonellamide F (manque règle)
+- bacitracin A1 (manque règle)
+- bacitracin A2 (manque règle)
+- vibriobactin (bug ? - devrait fonctionner en light)
