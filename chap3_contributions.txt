@@ -11,10 +11,14 @@ Ensuite, nous reviendrons sur les applications initiales de s2m~: la création d
 Nous parlerons de complétion de données existantes ainsi que de récupération de nouvelles par des méthodes semi-automatiques et automatiques, le tout supervisé par s2m.
 
 
-## Introduction aux Norine days
+
+
+
+
+## Les Norine days
 
 La mise en ligne de l'outil MyNorine ainsi que l'arrivée massive de résultats de s2m nous a poussé à réguliérement réunir l'équipe de personnes travaillant autour de Norine.
-Réguliérement, nous avons effectué des ``Norine days'' pour analyser ces données et prendre des décisions sur l'avenir de Norine.
+Réguliérement, nous effectuons des ``Norine days'' pour analyser ces données et prendre des décisions sur l'avenir de Norine.
 Durant ces journées nous analysons plusieurs types de données et je vais présenter ici notre façon de procéder.
 
 
@@ -33,32 +37,25 @@ Les Norine days ont été l'occasion de traiter tous ensemble ces données et de
 ### Corrections d'erreurs
 
 
+
+
+
+
+
+
 ## Améliorations de l'existant
 
-Norine est remplie de plus de 1200 annotations.
+Norine est constituée d'environ 1200 annotations.
 Toutes ces annotations ont été extraites une à une d'articles scientifiques puis entrées à la main dans la base.
 Bien que le travail ait été réalisé avec beaucoup de rigeur, plusieurs erreurs se sont glissées en base.
-Nous allons ici présenter comment nous les avons détectées, comment nous les corrigeons et comment nous avons amélioré l'environnement de Norine afin de les éviter à l'avenir.
+Comme présenté lors des résultats de s2m (voir partie \ref{}), le logiciel permet la détection des erreurs présentes en base.
+Voyons ici les procédures mises en place pour corriger ces erreurs et essayer d'empêcher l'introduction de nouvelles.
 
 
 ### s2m pour corriger les erreurs
 
-En exécutant s2m sur les données de Norine nous nous sommes apperçu qu'il existait des erreurs au sein de la base.
-A partir de deux mesures de s2m (coverage et correctness), nous pouvons classifier les erreurs en deux catégories.
+Lors de l'analyse des résultats nous avons détecté quatre types d'erreurs : Les erreurs de structures atomique peptidique, de structure monomérique peptidique, de structure atomique monomérique et d'équivalences structurelles.
 
-TODO : figure fengycine
-
-#### Coverage 1.0 Correctness < 1.0
-Dans ce cas, cela veut dire que s2m a obtenu une découpe monomérique couvrant tout le peptide mais que celle-ci diverge de l'existante.
-Dans ce cas, l'annotation en base est soit équivalente soit erronée et il est alors nécessaire de vérifier à la main pour déduire la bonne annotation.
-Prenons comme exemple la ``fengycin A nC16'' (voir figure TODO).
-Avant mars 2016, la molécule était représentée en base comme possédant 3 acides glutamiques.
-Après un rapide coup d'oeuil au schéma, il est possible de détecter que, comme nous le dit s2m, l'acide glutamique de gauche est en fait une glutamine (N à la place de O en bout de chaine latérale).
-
-#### Coverage < 1.0
-Dans ce cas, soit le peptide possède un monomère qui n'a pas été entré au sein de s2m, soit la structure atomique du peptide est fausse.
-En effet, il est très rapide d'utiliser un SMILES qui paraît être le bon mais qui varie en réalité d'un ou deux atomes du SMILES voulu.
-Prenons pour exemple la ``malformin C'' qui jusqu'en Aout 2015 possédait le SMILES d'un proche cousin dans Norine.
 
 
 ### s2m pour empêcher les erreurs
@@ -82,6 +79,11 @@ L'uilisateur peut ensuite la modifier si celle-ci n'est pas complétement exacte
 Par ce système nous incitons les contributeurs à ajouter le SMILES de leurs peptides (information trop peu présente dans Norine pour le moment) et nous évitons les erreurs d'innatention et fautes de frappe lors de la saisie utilisateur.
 
 Pour résumer, s2m a permis à MyNorine d'augmenter encore la qualité des annotations entrées par l'évitement d'erreurs humaines.
+
+
+
+
+
 
 
 ## Mises à jour de Norine
