@@ -273,7 +273,7 @@ Ces modules capturent toujours le même type de monomères mais on ne sait actue
 Dans certains peptides ce domaine effectue une liaison entre le dernier monomère et un monomère déjà inclus, créant ainsi un cycle\cite{gao_cyclization_2012}.
 Dans d'autres il lie le dernier monomère avec un monomère spécifique de l'environnement (même procédé que pour le module Cs).
 Comme pour le Cs, la spécificité n'est pas encore expliquée.
-Il est également possible que les deux comportements soient en fait issus de deux sous catégories de Ct mais aucune litérature sur le sujet n'a encore été publiée.
+Il est également possible que les deux comportements soient en fait issus de deux sous catégories de Ct mais aucune littérature sur le sujet n'a encore été publiée.
 
 \paragraph{Le domaine Cy}
 Cette dernière variation du module C standard lie deux monomères voisins en effectuant deux liaisons qui forment un cycle local.
@@ -363,8 +363,8 @@ Dans cette partie nous allons aborder ces deux types de modification/ajout d'un 
 
 \paragraph{}Les clusters de gènes de NRPS ne sont pas uniquement constitués des gènes d'enzymes NRPS.
 De nombreux gènes accompagnateurs sont présents, généralement inclus dans le cluster.
-Parmi ceux-ci, certains gènes servent à modifier les NRP déjà relachés par la NRPS.
-La \textit{vancomycine} est un très bon exemple de peptide ayat subit des modifications enzymatiques post-synthèse.
+Parmi ceux-ci, certains gènes servent à modifier les NRP déjà relâchés par la NRPS.
+La \textit{vancomycine} est un très bon exemple de peptide ayant subit des modifications enzymatiques post-synthèse.
 
 \begin{figure}[h!]
   \begin{center}
@@ -385,7 +385,7 @@ La vancosamine n'étant pas naturellement présente dans l'environement de l'org
 Ces deux atomes sont inhabituels pour des NRP et ne sont pas initialement présents au sein de leurs monomères de rattachement.
 Il n'existe pas non plus de domaine NRPS capable d'inclure ces atomes.
 Van Wageningen dans l'article précédemment cité, montre également que deux enzymes issues du cluster de gènes de la NRPS, sont responsables de ces incorporations.
-Ce type d'enzyme est appelé enzyme d'halogénation car elle est capable d'inclure un atome halogène (Fluore, Clore, Brome, Iode, Astate)
+Ce type d'enzyme est appelé enzyme d'halogénation car elle est capable d'inclure un atome halogène (Fluor, Clore, Brome, Iode, Astate)
 
 \paragraph{}Pour résumer, les enzymes de décoration post-synthèse sont capables d'effectuer 3 tâches que nous avons découvertes sur l'exemple de la vancomycine :
 \begin{itemize}
@@ -467,7 +467,7 @@ Quel que soit le sous domaine des NRP étudié, nous pourrons trouver un outil s
 
 \subsubsection{Détection et identification de domaines NRPS}
 
-\paragraph{}La détection et l'identification des gènes codant pour les domaines est au coeur de l'annotaion des NRPS.
+\paragraph{}La détection et l'identification des gènes codant pour les domaines est au coeur de l'annotation des NRPS.
 Nous allons ici présenter des méthodes identifiant les différents types de domaines (A, C, T, ...) ainsi que des méthodes inférant les spécificités de ces domaines.
 
 % Chapter 8 Methods for In Silico Prediction of Microbial Polyketide and Nonribosomal Peptide Biosynthetic Pathways from DNA Sequence Data
@@ -487,7 +487,7 @@ NRPS predictor~\cite{rottig_nrpspredictor2web_2011,rausch_specificity_2005} est 
 Il analyse une séquence trouvée par un algorithme de détection de modules A et prédit sa spécificité.
 Cet outil est basé sur la recherche par Machines à Vecteurs de Support (Support Vector Machine (SVM)).
 L'idée est de se baser sur les données de domaines A déjà annotés afin de créer des séquences (vecteurs) caractéristiques des domaines.
-Ces vecteurs sont composés des propriétés physicos-chimiques des acides aminés proches (A moins de 8Å) de la ``poche'' d'accueil du monomère.
+Ces vecteurs sont composés des propriétés physiquos-chimiques des acides aminés proches (A moins de 8Å) de la ``poche'' d'accueil du monomère.
 L'outil prédit les domaines A avec différents niveaux de granularité, ce qui donne de l'information même lorsque la spécificité précise du module A n'est pas détectée.
 Le niveau le plus fin correspond à la détection exacte du monomère mais il est également possible de prédire les spécificités par ``groupements'' de monomères.
 Par exemple, l'outil essayera de prédire si le monomère inclus est polaire, hydrophobique, aliphatique... , chacun de ces critères ayant son propre profil SVM.
@@ -511,7 +511,7 @@ Les auteurs font le constat qu'un domaine NRPS ou PKS possède des zones très v
 Ces zones conservées déterminent des coordonnées fixes entre domaines A et ansi de créer le code de Stachelhaus.
 Il existe des zones conservées au sein de tous les domaines.
 Les auteurs des logiciels ont tiré partie de ces zones en créant des HMM pour représenter des archétypes pour chacun des types de domaine.
-Ces logiciels sont extrémement rapide pour les recherches grâce à l'utilisation d'un faible nombre d'archétypes.
+Ces logiciels sont extrêmement rapide pour les recherches grâce à l'utilisation d'un faible nombre d'archétypes.
 
 
 %· antiSMASH: rapid identification, annotation and analysis of secondary metabolite biosynthesis gene clusters in bacterial and fungal genome sequences
@@ -607,7 +607,7 @@ Ces bases donnent par exemple les masses des acides aminés classiques et de leu
 Si la technologie de spectrométrie utilisée casse les molécules au niveau de leurs liaisons peptidiques, la reconstruction peut directement obtenir une annotation monomérique de toutes les parties composées d'acides aminés classiques.
 Cependant, les NRP étant composés de plus de 500 monomères différents, l'annotation monomérique directement issue des analyses de spectres n'est pas suffisante.
 Beaucoup de monomères n'étant pas proches de molécules classiques, ne sont pas répertoriés parmi les masses classiques.
-De plus les peptides comportant des liaisons non peptidiques ne sont pas facilement découpables facilement sur certaines technologies de spectrométries.
+De plus les peptides comportant des liaisons non peptidiques ne sont pas facilement découpables facilement sur certaines technologies de spectrométrie.
 Pour finir l'annotation d'un NRP, il est nécessaire d'avoir recours à un spécialiste du domaine afin qu'il nomme chacun des monomères non annotés.
 
 \paragraph{}L'outil d'analyse CycloBranch~\cite{novak_cyclobranch:_2015} essaye lui de remonter directement à la structure monomérique des NRP.
@@ -622,7 +622,7 @@ De plus les résultats obtenus dans l'article ne semble pas tous être reproduct
 \paragraph{}Il existe également un logiciel appelé NRPQuest~\cite{mohimani_nrpquest:_2014}qui croise les spectres obtenus avec des domaines prédits par des approches d'analyses NRPS (les résultats de l'article sont obtenus avec NRPSPredictor2).
 En mettant en relation les différents domaines prédits de l'ADN avec le graphe de reconstruction d'une molécule issue du spectre, ils arrivent à discriminer facilement les compositions et formes des NRP calculés.
 Cependant, si les prédictions NRPS ne contiennent pas tous les monomères du peptide, alors la reconstruction ne les contiendra pas non plus et ce, même si l'information est présente dans le spectre de masses.
-C'est une limitation forte du logicel que les auteurs pointent eux même à la fin de leur article.
+C'est une limitation forte du logiciel que les auteurs pointent eux même à la fin de leur article.
 
 \paragraph{}Pour résumer, la spectrométrie de masse donne accès à des structures atomiques de molécules avec un degré de certitude très élevé et parfois à des reconstructions NRP fiables.
 De plus, contrairement à l'annotation depuis l'ADN, nous sommes certains que la molécule est produite puisqu'elle est directement tirée de l'environnement étudié.
@@ -664,7 +664,7 @@ MIBiG est la seule base hors Norine encore active et contenant des annotations v
 Comme nous l'avons déjà dit lors de la présentation de cette base, MIBiG est une base surtout dédiée à l'annotation de NRPS.
 Les annotations de NRPS sont accompagnées d'informations sur les peptides produits.
 Ces informations peuvent être de deux types.
-La premiére possibilité est de connaître par ailleurs la structure atomique du NRP produit.
+La première possibilité est de connaître par ailleurs la structure atomique du NRP produit.
 Dans ce cas, l'annotation a pu être vérifiée et la structure présente dans MIBiG est exacte et ce, malgré le fait que parfois nous ne savons pas quels gènes sont venus ajouter/modifier des morceaux du NRP post-synthèse.
 La seconde possibilité est que le NRP provient d'une prédiction depuis le cluster de gènes.
 Dans ce cas, il se peut qu'il ne soit que partiel et potentiellement incorrect.
@@ -757,10 +757,10 @@ Nous allons ici présenter ces deux approches.
 \subsubsection{CHUCKLES, une méthode constructive}
 
 \paragraph{}CHUCKLES est une méthode publiée en 1994 permettant de rechercher des peptides au sein d'une base de donnée.
-Le but est de requéter une base de données de moléules en utilisant des expressions régulières représentant des sous-molécules d'intérêt.
+Le but est de requêter une base de données de molécules en utilisant des expressions régulières représentant des sous-molécules d'intérêt.
 Les recherches peuvent être effectuée à la fois au niveau atomique et au niveau monomérique.
 Le but de CHUCKLES est de convertir rapidement les données du format monomérique vers le format atomique et inversement.
-Les auteurs pensent qu'il est plus utile de converver les formats atomiques en base plutôt que les séquences protéiques.
+Les auteurs pensent qu'il est plus utile de conserver les formats atomiques en base plutôt que les séquences protéiques.
 Sachant que la plupart des peptides de l'époque étaient déjà représenté par leur séquence, les auteurs proposent une méthode de transformation vers la structure atomique.
 Cette transformation est appelée ``Forward-Translation'' (FT).
 
@@ -769,19 +769,19 @@ Cette transformation est appelée ``Forward-Translation'' (FT).
     \includegraphics[width=450px]{Figures/s2m/formalisation/CHUCK_FT.png}
     \caption{\label{chuck_ft}CHUCKLES Forward Translation.
     Transformation des annotations peptidiques en SMILES.
-    Sous l'annotation peptidique est écrite la formile SMILES après concaténation de tous les SMILES des monomères trouvés.
+    Sous l'annotation peptidique est écrite la formule SMILES après concaténation de tous les SMILES des monomères trouvés.
     Schémas issus de la publication}
   \end{center}
 \end{figure}
 
-\paragraph{}Pour mener à bien chaque ST, les auteurs ont besoin d'une table de transformation qui ressence les structures atomiques de chacun des monomères à transformer.
+\paragraph{}Pour mener à bien chaque ST, les auteurs ont besoin d'une table de transformation qui recense les structures atomiques de chacun des monomères à transformer.
 Chaque séquence ne doit pas contenir les atomes qui vont être perdus lors des liaisons avec d'autres monomères.
 Pour les structures linéaires, la méthode indique simplement de concaténer les structures atomiques selon la chaine peptidique.
 Lorsque les structures sont branchées ou cycliques, il est nécessaire d'ajouter dans la séquence initiale l'information de liaison annexe.
 
 Cette méthode de reconstruction des structures atomiques est très intéressante mais souffre du manque d'information des séquences protéiques.
 On peut remarquer que la reconstruction ne peut fonctionner à tous les coups sans plus d'information.
-En effet, si les monomères ne possédent pas de groupement carboxyl et amine, la reconstruction ne peut pas être effectuée sans choix aléatoires d'orientation.
+En effet, si les monomères ne possèdent pas de groupement carboxyl et amine, la reconstruction ne peut pas être effectuée sans choix aléatoires d'orientation.
 
 \begin{figure}[!h]
   \begin{center}
@@ -790,7 +790,7 @@ En effet, si les monomères ne possédent pas de groupement carboxyl et amine, l
     La première partie représente la phase de recherche des monomères au sein de la structure atomique.
     La seconde partie représente la structure monomérique post contraction.
     On peut voir à gauche la chaine principale qui a été extraite à partir du N initial.
-    A droite sont répertoriées les deux ponts disulfures extrait hors de la chaine principale.
+    A droite sont répertoriées les deux ponts disulfure extrait hors de la chaine principale.
     Chaque monomère découvert comporte un identifiant différent de son nom pour éviter d'avoir deux fois le même nom comme cela pourrait être ici.
     Schémas issus de la publication}
   \end{center}
@@ -799,18 +799,18 @@ En effet, si les monomères ne possédent pas de groupement carboxyl et amine, l
 \paragraph{}La seconde partie de la méthode présente la transformation inverse (``Backward-Transformation'' (BT)).
 C'est cette partie qui est très intéressante pour l'annotation car elle part des structures atomiques pour reconstruire les structures monomériques.
 Les auteurs proposent une annotation en deux temps.
-Le premier temps représente la phase de recherche des monomères et le second temps la convertion des moomères trouvés en une annotation.
-L'idée de la première phase est de rechercher chaque monomère connu en masquant les atomes déjà utilisés par des monomères précédamment trouvés.
+Le premier temps représente la phase de recherche des monomères et le second temps la conversion des monomères trouvés en une annotation.
+L'idée de la première phase est de rechercher chaque monomère connu en masquant les atomes déjà utilisés par des monomères précédemment trouvés.
 En recherchant les monomères par nombre d'atomes décroissant, les auteurs s'assurent que de petit monomères ne viendront pas prendre la place de plus gros.
 Lors de la seconde phase, les atomes des molécules sont contractés pour ne plus former qu'un seul noeud par monomère.
 Le N terminal de la chaine peptidique est ensuite recherché afin d'extraire l'annotation de cette chaine en suivant les liaisons peptidiques.
 Enfin les liaisons n'ayant pas encore été explorées sont ajoutées à la représentation monomérique finale.
 
 Comme pour le FT, le BT utilise des techniques intelligentes mais encore faillibles.
-Dans le cas des NRP, certains monomères ne possédent pas les deux domaines pour les liaisons peptidiques.
+Dans le cas des NRP, certains monomères ne possèdent pas les deux domaines pour les liaisons peptidiques.
 Il est donc potentiellement impossible de retrouver une chaine principale.
 De plus, lors de la recherche, si les monomères a rechercher sont structurellement proches, il est possible qu'un gros monomère vienne prendre la place d'un plus petit en débordant sur un ou plusieurs monomères voisins.
-Dans ce cas, vu qu'aucun retrour en arrière n'est effectué, l'annotation sera innexacte voir incomplète.
+Dans ce cas, vu qu'aucun retour en arrière n'est effectué, l'annotation sera inexacte voir incomplète.
 
 
 \subsubsection{molBLOCKS, une méthode destructive}
@@ -839,7 +839,7 @@ Pour des protéines ribosomiques la découpe sera donc parfaite avec cette seule
   \begin{center}
     \includegraphics[width=300px]{Figures/s2m/Intro/molBlocks_problem.png}
     \caption{\label{molBlocks_problem}Dans le cas de ce di-peptide, un sucre est lié à une Hydroxy-Phenil-Glycine (Hpg).
-    En utilisant la règle de découpe à appliquer pour les hydroxyl, une ambiguité et une erreur apparaissent.
+    En utilisant la règle de découpe à appliquer pour les hydroxyl, une ambigüité et une erreur apparaissent.
     Nous ne pouvons savoir de quel côté les découpent vont être les plus pertinentes avant d'essayer de reconnaître les monomères.
     De ce fait, 4 découpes différentes sont possibles.
     De plus, le cycle du sucre se voit ouvert alors que la découpe est inutile.}
@@ -848,7 +848,7 @@ Pour des protéines ribosomiques la découpe sera donc parfaite avec cette seule
 
 \paragraph{}Dans notre cas, nous pourrions utiliser un tel logiciel pour découper les NRP en monomères.
 En effectuant par la suite une étape de reconnaissance de ces monomères il serait alors possible de reconstruire le peptide.
-Cependant certaine réactions effectuées au sein des NRP ne permettent pas de découper entièrement le peptide avec la seule règle énoncée précédammant.
+Cependant certaine réactions effectuées au sein des NRP ne permettent pas de découper entièrement le peptide avec la seule règle énoncée précédemment.
 Toutes les liaisons non peptidiques énoncées au chapitre précédent ne seront pas découpées.
 Il est donc nécessaire de rajouter nombre de nouvelles règles.
 Cependant, la liaison hydroxyl à elle seule ne permet déjà plus d'effectuer une découpe correcte.
@@ -1084,7 +1084,7 @@ Sur la figure \ref{vf2_labels}, on peut voir la recherche d'un graphe $G$ compos
 composé d'un branchement supplémentaire contenant un noeud B.
 Sur ce graphique nous avons représenté deux cas de recherche selon l'ordre dans lequel nous prenons $G$.
 Nous pouvons remarquer que dans les deux cas, la taille de l'arbre est bien plus faible que pour un graphe non labellé.
-Les labels des noeuds font office de filtres de recherche et accélérent fortement la recherche.
+Les labels des noeuds font office de filtres de recherche et accélèrent fortement la recherche.
 On voit également que la recherche est d'autant plus rapide que l'on choisi prioritairement les noeuds avec des labels de faible
 fréquence.
 
@@ -1167,7 +1167,7 @@ s'attarderont à la recherche de chaînes performantes (ie les plus rapide) lors
   \caption{\label{chaine_fail}Deux exemple de chaîne pour un motif simple}
 \end{figure}
 
-\paragraph{}Une bonne chaîne est donc une chaîne rapide mais a quoi ressemble une telle chaîne ? Déterminons quel(s) critère(s)
+\paragraph{}Une bonne chaîne est donc une chaîne rapide ; mais a quoi ressemble une telle chaîne ? Déterminons quel(s) critère(s)
 simple(s) nous permettent de supposer qu'une chaîne est bonne. Avec ce ou ces critères nous pourrons ensuite déterminer un
 moyen d'ordonner les noeuds de manière gloutonne. Partons de l'exemple présenté sur la figure \ref{chaine_fail}. A gauche est
 dessiné un motif simple suivi de deux chaînes pouvant le représenter (lecture de l'ordre des chaînes de gauche à droite). Pour
@@ -1260,7 +1260,7 @@ donc tester tous les noeuds de tous les peptides d'apprentissage pour la premiè
 
 \begin{figure}
   \includegraphics[width=300px]{Figures/s2m/indexation/glouton.png}
-  \caption{\label{arrite}Arrité restante pour les différents noeuds d'un graphe chimique simple}
+  \caption{\label{arrite}Arité restante pour les différents noeuds d'un graphe chimique simple}
 \end{figure}
 
 \paragraph{}Lors d'une recherche d'une chaîne $c_{n-1}$, il est possible de trouver isomorphismes sur la cible
@@ -1527,7 +1527,7 @@ isomorphismes découvert par atome.
 L'étape de pavage consiste à choisir un sous ensemble des isomorphismes trouvés, de manière à maximiser les atomes couverts par ces
 isomorphismes en ayant pour chaque atome au plus un seul isomorphisme présent dans ce sous ensemble.
 
-Faisons une analogie avec un puzzle. La phase d'isomorphisme obtenient de nombreuses pièces de puzzle.
+Faisons une analogie avec un puzzle. La phase d'isomorphisme obtennient de nombreuses pièces de puzzle.
 Une reconstruction complète du puzzle n'est pas forcément faisable uniquement à partir de ces pièces.
 De plus, parmi celles dont nous disposons, certaines se chevauchent.
 La phase de pavage consiste à choisir parmi les pièces, celles que l'on souhaite garder en maximisant le remplissage de notre puzzle et sans avoir de pièces chevauchantes (figure \ref{puzzle}).
@@ -1549,20 +1549,21 @@ purement algorithmique de choisir quelle est la meilleure façon de découper ce
   \caption{\label{reconstruction}Les différents types de reconstruction que l'on peut obtenir par le pavage}
 \end{figure}
 
+
 \subsubsection{Preuve de NP-Complétude}
 
 \paragraph{}En 2015 j'ai eu la chance de participer, avec mes amis Thomas Nachtergale et Alexandre Temperville, à la finale du concours d'algorithmique ``Google Hashcode''.
 La veille de l'épreuve finale, un petit problème test nous a été proposé.
-Le but était de découper une pizza (matrice), composée de cases de jambon (H dans la matrice) et de cases de sauce (T dans la matrice), en part dites ``royales'', tout en minimisant le gachis de pizza.
-Les part royales sont des parts rectangulaires contenant au minimum 3 cases de jambon et représentant une surface max de 12 cases.
+Le but était de découper une pizza (matrice), composée de cases de jambon (H dans la matrice) et de cases de sauce (T dans la matrice), en parts dites ``royales'', en minimisant le gâchis de pizza (morceaux ne contenant pas de parts).
+Les part royales sont des parts rectangulaires contenant au minimum 3 cases de jambon et représentant une surface maximale de 12 cases.
 
 \paragraph{TODO : schéma pizzas}
 
-\paragraph{}Ce problème a été prouvé NP-Complet sur le forum stackexchange\cite{de_biasi_complexity_2015} suite à la question d'un paticipant.
+\paragraph{}Ce problème a été prouvé NP-Complet sur le forum stackexchange~\cite{de_biasi_complexity_2015} suite à la question d'un participant.
 La preuve a été faite par réduction du problème ``Monotone cubic planar 1-3 SAT''.
-Prouvons que le problème est NP-Complet par réduction du problème ``Pizza''.
+Prouvons que le problème ``Pavage'' est également NP-Complet en utilisant une réduction du problème ``Pizza''.
 
-\paragraph{}Premiérement, il est très facile de montrer par certificat que le problème de pavage est NP.
+\paragraph{}Premièrement, il est très facile de montrer par certificat que pavage est NP.
 Le certificat contient l'ensemble des résidus pavés.
 Leur nombre est borné par le nombre de résidus issus de l'isomorphisme.
 Le certificat est donc de taille proportionnelle au problème.
@@ -1572,11 +1573,13 @@ La vérification du certificat peut être faite de manière quadratique, ce qui 
 
 \paragraph{}Prouvons ensuite que nous pouvons résoudre le problème Pizza en utilisant le problème Pavage.
 Nous avons besoin de définir 3 notions pour notre codage :
-- Les atomes du peptide : Les atomes du peptide représenteront les cases de la matrice pizza.
-- Les liens entre atomes : Les liens représentent les voisinage de deux cases.
+\begin{itemize}
+	\item Les atomes du peptide : Les atomes du peptide représenteront les cases de la matrice pizza.
+	\item Les liens entre atomes : Les liens représentent les voisinage de deux cases.
 Si deux cases sont voisine (voisinage de Manhattan), alors un lien existe entre les deux atomes qui les représentent.
-- Les résidus : Les résidus correspondent aux parts royales de pizza.
+	\item Les résidus : Les résidus correspondent aux parts royales de pizza.
 Chaque case faisant partie de la case sera représentée par un atome du résidu.
+\end{itemize}
 
 Avec ce codage, si nous arrivons à résoudre le problème de pavage il devient possible de résoudre le problème de pizza.
 
@@ -1649,7 +1652,7 @@ Proposons également une heuristique rapide pour résoudre le problème.
 \label{TM_p}
 
 \paragraph{}L'un des moyen d'obtenir très rapidement une solution est de trier les résidus dans un ordre voulu puis de parcourir la liste triée en ajoutant le résidu courant à la solution uniquement si il ne chevauche aucun autre résidu de la solution.
-On pourra toujours trouver au moins un tri de la liste qui atteingne la solution optimale.
+On pourra toujours trouver au moins un tri de la liste qui atteigne la solution optimale.
 En faisant cela nous reportons la difficulté du problème sur les critères de tri de la liste mais nous garantissons une très grande rapidité d'exécution.
 
 \paragraph{}
@@ -1848,12 +1851,12 @@ Ensuite vient la phase de pavage effectuée soit par une résolution de MIP (voi
 Enfin, pour les cas plus difficile, nous effectuons plusieurs passes de recherche d'isomorphismes light (voir \ref{light_p}) et de nouveaux pavages.
 
 L'algorithme global est paramétrable.
-Pour le précalcul, nous pouvons fixer la variable $k$ qui définiera la taille de chaine calculée avec le modèle markovien.
+Pour le précalcul, nous pouvons fixer la variable $k$ qui définira la taille de chaine calculée avec le modèle markovien.
 Nous rappelons encore une fois que cette taille n'aura pas d'influence sur le résultat mais uniquement sur le temps de calcul.
 Pour la partie recherche, nous devrons choisir le nombre de fois où nous effectuerons la ``boucle light''.
-L'un des paramêtres est la limite max de nombre de tours.
+L'un des paramètres est la limite max de nombre de tours.
 Enfin, si nous optons pour la méthode heuristique de modulation, il est également nécessaire de définir une profondeur maximale de modulation.
-L'influence de ces paramêtres sur l'exécution de l'algorithme sera étudiée durant la partie résultats.
+L'influence de ces paramètres sur l'exécution de l'algorithme sera étudiée durant la partie résultats.
 
 
 
