@@ -1,18 +1,13 @@
 # Mes contributions
 
-Après avoir présenté en détail la base Norine et les outils qui gravittent autour, je vais ici vous décrire les différentes améliorations auxquelles j'ai participé.
+\paragraph{}Après avoir présenté en détail la base Norine et les outils qui gravittent autour, je vais ici vous décrire les différentes améliorations auxquelles j'ai participé.
 Il est à noter que certaines des contributions que je vais citer ici sont des applications s2m que nous n'avions pas initialement prévues.
-TODO : Modifier pour la sortie des Norine Days du la partie erreurs
 Le profil de ces contributions s'est dessiné au fur et à mesure des utilisations de s2m sur des données.
 En testant s2m, nous nous sommes apperçu d'erreurs présentes dans les données annotées manuellement.
 C'est ainsi que nous nous sommes rendu compte du potentiel de correction que représente ce logiciel.
 La première partie de cette section sera composée des deux applications de s2m en temps qu'outil de correction et de prédiction d'erreurs au sein de Norine.
 Ensuite, nous reviendrons sur les applications initiales de s2m~: la création de nouvelles annotations monomériques.
 Nous parlerons de complétion de données existantes ainsi que de récupération de nouvelles par des méthodes semi-automatiques et automatiques, le tout supervisé par s2m.
-
-
-
-
 
 
 ## Les Norine days
@@ -37,61 +32,6 @@ Les Norine days ont été l'occasion de traiter tous ensemble ces données et de
 ### Corrections d'erreurs
 
 
-
-
-
-
-
-
-## Améliorations de l'existant
-
-Norine est constituée d'environ 1200 annotations.
-Toutes ces annotations ont été extraites une à une d'articles scientifiques puis entrées à la main dans la base.
-Bien que le travail ait été réalisé avec beaucoup de rigeur, plusieurs erreurs se sont glissées en base.
-Comme présenté lors des résultats de s2m (voir partie \ref{}), le logiciel permet la détection des erreurs présentes en base.
-Voyons ici les procédures mises en place pour corriger ces erreurs et essayer d'empêcher l'introduction de nouvelles.
-
-
-### s2m pour corriger les erreurs
-
-TODO : figure correction dolastatin
-
-Lors de l'analyse des résultats nous avons détecté quatre types d'erreurs : Les erreurs de structures atomique peptidique, de structure monomérique peptidique, de structure atomique monomérique et d'équivalences structurelles.
-Dans les cas que nous avons analyser, cette dernière erreur est entiérement due à la façon dont s2m est conçu et rien n'est a corriger en base. Pour les 3 autres erreurs, myNorine nous permet facilement de modifier les entrées de la base.
-
-Appliquons une correction d'un peptide dont nous avons découvert une erreur d'annotation.
-Pour la dolastatin 10, à la suite d'une recherche au sein des publications, nous avions déterminé que le monomère Dap de Norine était structurellement incorrect (voir partie \ref{}).
-Effectuons la modification de ce monomère via myNorine (voir figure TODO).
-Nous pouvons lancer la modification depuis la page Norine du monomère.
-Changeons le SMILES du monomère en placant correctement l'azote puis validons.
-Après validation de la modification, l'entrée est désormais correcte.
-
-Pour toutes les erreurs détectées par s2m, nous devons répéter ce processus de recherche des structures correctes puis changement des entrées de Norine.
-Souvent, une modification dans un peptide nous amène à découvrir plusieurs autres modifications mineurs nécessaires comme par exemple de la normalisation de nomenclature.
-C'est un processus qui prend énormément de temps et qui doit être fait collectivement afin de ne pas prendre de décisons contradictoires.
-Le traitement des erreurs est à ce jour toujours en cours et nous avençons au rythme de 1 à 5 peptides par réunion (environ 100 cas à traiter).
-
-
-### s2m pour empêcher les erreurs
-
-Après avoir traité les erreurs existantes, nous allons discuter de la manière de limiter l'introdution de nouvelles erreurs.
-Le seul moyen est d'essayer de détecter automatiquement les annotations fausses lorsqu'elles sont entrées et de demander à l'utilisateur ce qu'il en pense.
-
-TODO : Schéma avertissement.
-
-Dans le cas de Norine, toute nouvelle entrée manuelle est effectuée via MyNorine.
-Pour éviter l'introduction des erreurs, si le SMILES de la molécule à été entré, nous exécutons s2m en arrière plan.
-Si l'annotation obtenue par s2m couvre entiérement le peptide mais que cette annotation diffère de l'annotation entrée manuellement, nous avertissons l'utilisateur et lui demandons de vérifier sa structure avant validation.
-Cela nous a permis plusieurs fois durant les Norine days de nous rendre compte d'erreurs que nous étions en train de commettre et nous penssons donc que cela permettra d'en éviter de nombreuses autres
-
-TODO : Schéma création automatique d'annotation.
-
-Nous proposons également à l'utilisateur d'exécuter s2m avant d'entrer manuellement son annotation.
-Si un SMILES est renseigné, alors s2m peut être déclenché pour obtenir une première annotation.
-L'uilisateur peut ensuite la modifier si celle-ci n'est pas complétement exacte.
-Par ce système nous incitons les contributeurs à ajouter le SMILES de leurs peptides (information trop peu présente dans Norine pour le moment) et nous évitons les erreurs d'innatention et fautes de frappe lors de la saisie utilisateur.
-
-Pour résumer, s2m a permis à MyNorine d'augmenter encore la qualité des annotations entrées par l'évitement d'erreurs humaines.
 
 
 

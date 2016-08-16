@@ -9,3 +9,4 @@ manuscrit.pdf
 *.toc
 *.dvi
 *.~lock*
+*#*

@@ -273,7 +273,7 @@ Ces modules capturent toujours le même type de monomères mais on ne sait actue
 Dans certains peptides ce domaine effectue une liaison entre le dernier monomère et un monomère déjà inclus, créant ainsi un cycle\cite{gao_cyclization_2012}.
 Dans d'autres il lie le dernier monomère avec un monomère spécifique de l'environnement (même procédé que pour le module Cs).
 Comme pour le Cs, la spécificité n'est pas encore expliquée.
-Il est également possible que les deux comportements soient en fait issus de deux sous catégories de Ct mais aucune litérature sur le sujet n'a encore été publiée.
+Il est également possible que les deux comportements soient en fait issus de deux sous catégories de Ct mais aucune littérature sur le sujet n'a encore été publiée.
 
 \paragraph{Le domaine Cy}
 Cette dernière variation du module C standard lie deux monomères voisins en effectuant deux liaisons qui forment un cycle local.
@@ -363,8 +363,8 @@ Dans cette partie nous allons aborder ces deux types de modification/ajout d'un 
 
 \paragraph{}Les clusters de gènes de NRPS ne sont pas uniquement constitués des gènes d'enzymes NRPS.
 De nombreux gènes accompagnateurs sont présents, généralement inclus dans le cluster.
-Parmi ceux-ci, certains gènes servent à modifier les NRP déjà relachés par la NRPS.
-La \textit{vancomycine} est un très bon exemple de peptide ayat subit des modifications enzymatiques post-synthèse.
+Parmi ceux-ci, certains gènes servent à modifier les NRP déjà relâchés par la NRPS.
+La \textit{vancomycine} est un très bon exemple de peptide ayant subit des modifications enzymatiques post-synthèse.
 
 \begin{figure}[h!]
   \begin{center}
@@ -385,7 +385,7 @@ La vancosamine n'étant pas naturellement présente dans l'environement de l'org
 Ces deux atomes sont inhabituels pour des NRP et ne sont pas initialement présents au sein de leurs monomères de rattachement.
 Il n'existe pas non plus de domaine NRPS capable d'inclure ces atomes.
 Van Wageningen dans l'article précédemment cité, montre également que deux enzymes issues du cluster de gènes de la NRPS, sont responsables de ces incorporations.
-Ce type d'enzyme est appelé enzyme d'halogénation car elle est capable d'inclure un atome halogène (Fluore, Clore, Brome, Iode, Astate)
+Ce type d'enzyme est appelé enzyme d'halogénation car elle est capable d'inclure un atome halogène (Fluor, Clore, Brome, Iode, Astate)
 
 \paragraph{}Pour résumer, les enzymes de décoration post-synthèse sont capables d'effectuer 3 tâches que nous avons découvertes sur l'exemple de la vancomycine :
 \begin{itemize}
@@ -467,7 +467,7 @@ Quel que soit le sous domaine des NRP étudié, nous pourrons trouver un outil s
 
 \subsubsection{Détection et identification de domaines NRPS}
 
-\paragraph{}La détection et l'identification des gènes codant pour les domaines est au coeur de l'annotaion des NRPS.
+\paragraph{}La détection et l'identification des gènes codant pour les domaines est au coeur de l'annotation des NRPS.
 Nous allons ici présenter des méthodes identifiant les différents types de domaines (A, C, T, ...) ainsi que des méthodes inférant les spécificités de ces domaines.
 
 % Chapter 8 Methods for In Silico Prediction of Microbial Polyketide and Nonribosomal Peptide Biosynthetic Pathways from DNA Sequence Data
@@ -487,7 +487,7 @@ NRPS predictor~\cite{rottig_nrpspredictor2web_2011,rausch_specificity_2005} est 
 Il analyse une séquence trouvée par un algorithme de détection de modules A et prédit sa spécificité.
 Cet outil est basé sur la recherche par Machines à Vecteurs de Support (Support Vector Machine (SVM)).
 L'idée est de se baser sur les données de domaines A déjà annotés afin de créer des séquences (vecteurs) caractéristiques des domaines.
-Ces vecteurs sont composés des propriétés physicos-chimiques des acides aminés proches (A moins de 8Å) de la ``poche'' d'accueil du monomère.
+Ces vecteurs sont composés des propriétés physiquos-chimiques des acides aminés proches (A moins de 8Å) de la ``poche'' d'accueil du monomère.
 L'outil prédit les domaines A avec différents niveaux de granularité, ce qui donne de l'information même lorsque la spécificité précise du module A n'est pas détectée.
 Le niveau le plus fin correspond à la détection exacte du monomère mais il est également possible de prédire les spécificités par ``groupements'' de monomères.
 Par exemple, l'outil essayera de prédire si le monomère inclus est polaire, hydrophobique, aliphatique... , chacun de ces critères ayant son propre profil SVM.
@@ -511,7 +511,7 @@ Les auteurs font le constat qu'un domaine NRPS ou PKS possède des zones très v
 Ces zones conservées déterminent des coordonnées fixes entre domaines A et ansi de créer le code de Stachelhaus.
 Il existe des zones conservées au sein de tous les domaines.
 Les auteurs des logiciels ont tiré partie de ces zones en créant des HMM pour représenter des archétypes pour chacun des types de domaine.
-Ces logiciels sont extrémement rapide pour les recherches grâce à l'utilisation d'un faible nombre d'archétypes.
+Ces logiciels sont extrêmement rapide pour les recherches grâce à l'utilisation d'un faible nombre d'archétypes.
 
 
 %· antiSMASH: rapid identification, annotation and analysis of secondary metabolite biosynthesis gene clusters in bacterial and fungal genome sequences
@@ -607,7 +607,7 @@ Ces bases donnent par exemple les masses des acides aminés classiques et de leu
 Si la technologie de spectrométrie utilisée casse les molécules au niveau de leurs liaisons peptidiques, la reconstruction peut directement obtenir une annotation monomérique de toutes les parties composées d'acides aminés classiques.
 Cependant, les NRP étant composés de plus de 500 monomères différents, l'annotation monomérique directement issue des analyses de spectres n'est pas suffisante.
 Beaucoup de monomères n'étant pas proches de molécules classiques, ne sont pas répertoriés parmi les masses classiques.
-De plus les peptides comportant des liaisons non peptidiques ne sont pas facilement découpables facilement sur certaines technologies de spectrométries.
+De plus les peptides comportant des liaisons non peptidiques ne sont pas facilement découpables facilement sur certaines technologies de spectrométrie.
 Pour finir l'annotation d'un NRP, il est nécessaire d'avoir recours à un spécialiste du domaine afin qu'il nomme chacun des monomères non annotés.
 
 \paragraph{}L'outil d'analyse CycloBranch~\cite{novak_cyclobranch:_2015} essaye lui de remonter directement à la structure monomérique des NRP.
@@ -622,7 +622,7 @@ De plus les résultats obtenus dans l'article ne semble pas tous être reproduct
 \paragraph{}Il existe également un logiciel appelé NRPQuest~\cite{mohimani_nrpquest:_2014}qui croise les spectres obtenus avec des domaines prédits par des approches d'analyses NRPS (les résultats de l'article sont obtenus avec NRPSPredictor2).
 En mettant en relation les différents domaines prédits de l'ADN avec le graphe de reconstruction d'une molécule issue du spectre, ils arrivent à discriminer facilement les compositions et formes des NRP calculés.
 Cependant, si les prédictions NRPS ne contiennent pas tous les monomères du peptide, alors la reconstruction ne les contiendra pas non plus et ce, même si l'information est présente dans le spectre de masses.
-C'est une limitation forte du logicel que les auteurs pointent eux même à la fin de leur article.
+C'est une limitation forte du logiciel que les auteurs pointent eux même à la fin de leur article.
 
 \paragraph{}Pour résumer, la spectrométrie de masse donne accès à des structures atomiques de molécules avec un degré de certitude très élevé et parfois à des reconstructions NRP fiables.
 De plus, contrairement à l'annotation depuis l'ADN, nous sommes certains que la molécule est produite puisqu'elle est directement tirée de l'environnement étudié.
@@ -664,7 +664,7 @@ MIBiG est la seule base hors Norine encore active et contenant des annotations v
 Comme nous l'avons déjà dit lors de la présentation de cette base, MIBiG est une base surtout dédiée à l'annotation de NRPS.
 Les annotations de NRPS sont accompagnées d'informations sur les peptides produits.
 Ces informations peuvent être de deux types.
-La premiére possibilité est de connaître par ailleurs la structure atomique du NRP produit.
+La première possibilité est de connaître par ailleurs la structure atomique du NRP produit.
 Dans ce cas, l'annotation a pu être vérifiée et la structure présente dans MIBiG est exacte et ce, malgré le fait que parfois nous ne savons pas quels gènes sont venus ajouter/modifier des morceaux du NRP post-synthèse.
 La seconde possibilité est que le NRP provient d'une prédiction depuis le cluster de gènes.
 Dans ce cas, il se peut qu'il ne soit que partiel et potentiellement incorrect.
@@ -757,10 +757,10 @@ Nous allons ici présenter ces deux approches.
 \subsubsection{CHUCKLES, une méthode constructive}
 
 \paragraph{}CHUCKLES est une méthode publiée en 1994 permettant de rechercher des peptides au sein d'une base de donnée.
-Le but est de requéter une base de données de moléules en utilisant des expressions régulières représentant des sous-molécules d'intérêt.
+Le but est de requêter une base de données de molécules en utilisant des expressions régulières représentant des sous-molécules d'intérêt.
 Les recherches peuvent être effectuée à la fois au niveau atomique et au niveau monomérique.
 Le but de CHUCKLES est de convertir rapidement les données du format monomérique vers le format atomique et inversement.
-Les auteurs pensent qu'il est plus utile de converver les formats atomiques en base plutôt que les séquences protéiques.
+Les auteurs pensent qu'il est plus utile de conserver les formats atomiques en base plutôt que les séquences protéiques.
 Sachant que la plupart des peptides de l'époque étaient déjà représenté par leur séquence, les auteurs proposent une méthode de transformation vers la structure atomique.
 Cette transformation est appelée ``Forward-Translation'' (FT).
 
@@ -769,19 +769,19 @@ Cette transformation est appelée ``Forward-Translation'' (FT).
     \includegraphics[width=450px]{Figures/s2m/formalisation/CHUCK_FT.png}
     \caption{\label{chuck_ft}CHUCKLES Forward Translation.
     Transformation des annotations peptidiques en SMILES.
-    Sous l'annotation peptidique est écrite la formile SMILES après concaténation de tous les SMILES des monomères trouvés.
+    Sous l'annotation peptidique est écrite la formule SMILES après concaténation de tous les SMILES des monomères trouvés.
     Schémas issus de la publication}
   \end{center}
 \end{figure}
 
-\paragraph{}Pour mener à bien chaque ST, les auteurs ont besoin d'une table de transformation qui ressence les structures atomiques de chacun des monomères à transformer.
+\paragraph{}Pour mener à bien chaque ST, les auteurs ont besoin d'une table de transformation qui recense les structures atomiques de chacun des monomères à transformer.
 Chaque séquence ne doit pas contenir les atomes qui vont être perdus lors des liaisons avec d'autres monomères.
 Pour les structures linéaires, la méthode indique simplement de concaténer les structures atomiques selon la chaine peptidique.
 Lorsque les structures sont branchées ou cycliques, il est nécessaire d'ajouter dans la séquence initiale l'information de liaison annexe.
 
 Cette méthode de reconstruction des structures atomiques est très intéressante mais souffre du manque d'information des séquences protéiques.
 On peut remarquer que la reconstruction ne peut fonctionner à tous les coups sans plus d'information.
-En effet, si les monomères ne possédent pas de groupement carboxyl et amine, la reconstruction ne peut pas être effectuée sans choix aléatoires d'orientation.
+En effet, si les monomères ne possèdent pas de groupement carboxyl et amine, la reconstruction ne peut pas être effectuée sans choix aléatoires d'orientation.
 
 \begin{figure}[!h]
   \begin{center}
@@ -790,7 +790,7 @@ En effet, si les monomères ne possédent pas de groupement carboxyl et amine, l
     La première partie représente la phase de recherche des monomères au sein de la structure atomique.
     La seconde partie représente la structure monomérique post contraction.
     On peut voir à gauche la chaine principale qui a été extraite à partir du N initial.
-    A droite sont répertoriées les deux ponts disulfures extrait hors de la chaine principale.
+    A droite sont répertoriées les deux ponts disulfure extrait hors de la chaine principale.
     Chaque monomère découvert comporte un identifiant différent de son nom pour éviter d'avoir deux fois le même nom comme cela pourrait être ici.
     Schémas issus de la publication}
   \end{center}
@@ -799,18 +799,18 @@ En effet, si les monomères ne possédent pas de groupement carboxyl et amine, l
 \paragraph{}La seconde partie de la méthode présente la transformation inverse (``Backward-Transformation'' (BT)).
 C'est cette partie qui est très intéressante pour l'annotation car elle part des structures atomiques pour reconstruire les structures monomériques.
 Les auteurs proposent une annotation en deux temps.
-Le premier temps représente la phase de recherche des monomères et le second temps la convertion des moomères trouvés en une annotation.
-L'idée de la première phase est de rechercher chaque monomère connu en masquant les atomes déjà utilisés par des monomères précédamment trouvés.
+Le premier temps représente la phase de recherche des monomères et le second temps la conversion des monomères trouvés en une annotation.
+L'idée de la première phase est de rechercher chaque monomère connu en masquant les atomes déjà utilisés par des monomères précédemment trouvés.
 En recherchant les monomères par nombre d'atomes décroissant, les auteurs s'assurent que de petit monomères ne viendront pas prendre la place de plus gros.
 Lors de la seconde phase, les atomes des molécules sont contractés pour ne plus former qu'un seul noeud par monomère.
 Le N terminal de la chaine peptidique est ensuite recherché afin d'extraire l'annotation de cette chaine en suivant les liaisons peptidiques.
 Enfin les liaisons n'ayant pas encore été explorées sont ajoutées à la représentation monomérique finale.
 
 Comme pour le FT, le BT utilise des techniques intelligentes mais encore faillibles.
-Dans le cas des NRP, certains monomères ne possédent pas les deux domaines pour les liaisons peptidiques.
+Dans le cas des NRP, certains monomères ne possèdent pas les deux domaines pour les liaisons peptidiques.
 Il est donc potentiellement impossible de retrouver une chaine principale.
 De plus, lors de la recherche, si les monomères a rechercher sont structurellement proches, il est possible qu'un gros monomère vienne prendre la place d'un plus petit en débordant sur un ou plusieurs monomères voisins.
-Dans ce cas, vu qu'aucun retrour en arrière n'est effectué, l'annotation sera innexacte voir incomplète.
+Dans ce cas, vu qu'aucun retour en arrière n'est effectué, l'annotation sera inexacte voir incomplète.
 
 
 \subsubsection{molBLOCKS, une méthode destructive}
@@ -839,7 +839,7 @@ Pour des protéines ribosomiques la découpe sera donc parfaite avec cette seule
   \begin{center}
     \includegraphics[width=300px]{Figures/s2m/Intro/molBlocks_problem.png}
     \caption{\label{molBlocks_problem}Dans le cas de ce di-peptide, un sucre est lié à une Hydroxy-Phenil-Glycine (Hpg).
-    En utilisant la règle de découpe à appliquer pour les hydroxyl, une ambiguité et une erreur apparaissent.
+    En utilisant la règle de découpe à appliquer pour les hydroxyl, une ambigüité et une erreur apparaissent.
     Nous ne pouvons savoir de quel côté les découpent vont être les plus pertinentes avant d'essayer de reconnaître les monomères.
     De ce fait, 4 découpes différentes sont possibles.
     De plus, le cycle du sucre se voit ouvert alors que la découpe est inutile.}
@@ -848,7 +848,7 @@ Pour des protéines ribosomiques la découpe sera donc parfaite avec cette seule
 
 \paragraph{}Dans notre cas, nous pourrions utiliser un tel logiciel pour découper les NRP en monomères.
 En effectuant par la suite une étape de reconnaissance de ces monomères il serait alors possible de reconstruire le peptide.
-Cependant certaine réactions effectuées au sein des NRP ne permettent pas de découper entièrement le peptide avec la seule règle énoncée précédammant.
+Cependant certaine réactions effectuées au sein des NRP ne permettent pas de découper entièrement le peptide avec la seule règle énoncée précédemment.
 Toutes les liaisons non peptidiques énoncées au chapitre précédent ne seront pas découpées.
 Il est donc nécessaire de rajouter nombre de nouvelles règles.
 Cependant, la liaison hydroxyl à elle seule ne permet déjà plus d'effectuer une découpe correcte.
@@ -1084,7 +1084,7 @@ Sur la figure \ref{vf2_labels}, on peut voir la recherche d'un graphe $G$ compos
 composé d'un branchement supplémentaire contenant un noeud B.
 Sur ce graphique nous avons représenté deux cas de recherche selon l'ordre dans lequel nous prenons $G$.
 Nous pouvons remarquer que dans les deux cas, la taille de l'arbre est bien plus faible que pour un graphe non labellé.
-Les labels des noeuds font office de filtres de recherche et accélérent fortement la recherche.
+Les labels des noeuds font office de filtres de recherche et accélèrent fortement la recherche.
 On voit également que la recherche est d'autant plus rapide que l'on choisi prioritairement les noeuds avec des labels de faible
 fréquence.
 
@@ -1167,7 +1167,7 @@ s'attarderont à la recherche de chaînes performantes (ie les plus rapide) lors
   \caption{\label{chaine_fail}Deux exemple de chaîne pour un motif simple}
 \end{figure}
 
-\paragraph{}Une bonne chaîne est donc une chaîne rapide mais a quoi ressemble une telle chaîne ? Déterminons quel(s) critère(s)
+\paragraph{}Une bonne chaîne est donc une chaîne rapide ; mais a quoi ressemble une telle chaîne ? Déterminons quel(s) critère(s)
 simple(s) nous permettent de supposer qu'une chaîne est bonne. Avec ce ou ces critères nous pourrons ensuite déterminer un
 moyen d'ordonner les noeuds de manière gloutonne. Partons de l'exemple présenté sur la figure \ref{chaine_fail}. A gauche est
 dessiné un motif simple suivi de deux chaînes pouvant le représenter (lecture de l'ordre des chaînes de gauche à droite). Pour
@@ -1260,7 +1260,7 @@ donc tester tous les noeuds de tous les peptides d'apprentissage pour la premiè
 
 \begin{figure}
   \includegraphics[width=300px]{Figures/s2m/indexation/glouton.png}
-  \caption{\label{arrite}Arrité restante pour les différents noeuds d'un graphe chimique simple}
+  \caption{\label{arrite}Arité restante pour les différents noeuds d'un graphe chimique simple}
 \end{figure}
 
 \paragraph{}Lors d'une recherche d'une chaîne $c_{n-1}$, il est possible de trouver isomorphismes sur la cible
@@ -1527,7 +1527,7 @@ isomorphismes découvert par atome.
 L'étape de pavage consiste à choisir un sous ensemble des isomorphismes trouvés, de manière à maximiser les atomes couverts par ces
 isomorphismes en ayant pour chaque atome au plus un seul isomorphisme présent dans ce sous ensemble.
 
-Faisons une analogie avec un puzzle. La phase d'isomorphisme obtenient de nombreuses pièces de puzzle.
+Faisons une analogie avec un puzzle. La phase d'isomorphisme obtennient de nombreuses pièces de puzzle.
 Une reconstruction complète du puzzle n'est pas forcément faisable uniquement à partir de ces pièces.
 De plus, parmi celles dont nous disposons, certaines se chevauchent.
 La phase de pavage consiste à choisir parmi les pièces, celles que l'on souhaite garder en maximisant le remplissage de notre puzzle et sans avoir de pièces chevauchantes (figure \ref{puzzle}).
@@ -1549,20 +1549,21 @@ purement algorithmique de choisir quelle est la meilleure façon de découper ce
   \caption{\label{reconstruction}Les différents types de reconstruction que l'on peut obtenir par le pavage}
 \end{figure}
 
+
 \subsubsection{Preuve de NP-Complétude}
 
 \paragraph{}En 2015 j'ai eu la chance de participer, avec mes amis Thomas Nachtergale et Alexandre Temperville, à la finale du concours d'algorithmique ``Google Hashcode''.
 La veille de l'épreuve finale, un petit problème test nous a été proposé.
-Le but était de découper une pizza (matrice), composée de cases de jambon (H dans la matrice) et de cases de sauce (T dans la matrice), en part dites ``royales'', tout en minimisant le gachis de pizza.
-Les part royales sont des parts rectangulaires contenant au minimum 3 cases de jambon et représentant une surface max de 12 cases.
+Le but était de découper une pizza (matrice), composée de cases de jambon (H dans la matrice) et de cases de sauce (T dans la matrice), en parts dites ``royales'', en minimisant le gâchis de pizza (morceaux ne contenant pas de parts).
+Les part royales sont des parts rectangulaires contenant au minimum 3 cases de jambon et représentant une surface maximale de 12 cases.
 
 \paragraph{TODO : schéma pizzas}
 
-\paragraph{}Ce problème a été prouvé NP-Complet sur le forum stackexchange\cite{de_biasi_complexity_2015} suite à la question d'un paticipant.
+\paragraph{}Ce problème a été prouvé NP-Complet sur le forum stackexchange~\cite{de_biasi_complexity_2015} suite à la question d'un participant.
 La preuve a été faite par réduction du problème ``Monotone cubic planar 1-3 SAT''.
-Prouvons que le problème est NP-Complet par réduction du problème ``Pizza''.
+Prouvons que le problème ``Pavage'' est également NP-Complet en utilisant une réduction du problème ``Pizza''.
 
-\paragraph{}Premiérement, il est très facile de montrer par certificat que le problème de pavage est NP.
+\paragraph{}Premièrement, il est très facile de montrer par certificat que pavage est NP.
 Le certificat contient l'ensemble des résidus pavés.
 Leur nombre est borné par le nombre de résidus issus de l'isomorphisme.
 Le certificat est donc de taille proportionnelle au problème.
@@ -1572,11 +1573,13 @@ La vérification du certificat peut être faite de manière quadratique, ce qui 
 
 \paragraph{}Prouvons ensuite que nous pouvons résoudre le problème Pizza en utilisant le problème Pavage.
 Nous avons besoin de définir 3 notions pour notre codage :
-- Les atomes du peptide : Les atomes du peptide représenteront les cases de la matrice pizza.
-- Les liens entre atomes : Les liens représentent les voisinage de deux cases.
+\begin{itemize}
+	\item Les atomes du peptide : Les atomes du peptide représenteront les cases de la matrice pizza.
+	\item Les liens entre atomes : Les liens représentent les voisinage de deux cases.
 Si deux cases sont voisine (voisinage de Manhattan), alors un lien existe entre les deux atomes qui les représentent.
-- Les résidus : Les résidus correspondent aux parts royales de pizza.
+	\item Les résidus : Les résidus correspondent aux parts royales de pizza.
 Chaque case faisant partie de la case sera représentée par un atome du résidu.
+\end{itemize}
 
 Avec ce codage, si nous arrivons à résoudre le problème de pavage il devient possible de résoudre le problème de pizza.
 
@@ -1649,7 +1652,7 @@ Proposons également une heuristique rapide pour résoudre le problème.
 \label{TM_p}
 
 \paragraph{}L'un des moyen d'obtenir très rapidement une solution est de trier les résidus dans un ordre voulu puis de parcourir la liste triée en ajoutant le résidu courant à la solution uniquement si il ne chevauche aucun autre résidu de la solution.
-On pourra toujours trouver au moins un tri de la liste qui atteingne la solution optimale.
+On pourra toujours trouver au moins un tri de la liste qui atteigne la solution optimale.
 En faisant cela nous reportons la difficulté du problème sur les critères de tri de la liste mais nous garantissons une très grande rapidité d'exécution.
 
 \paragraph{}
@@ -1848,12 +1851,12 @@ Ensuite vient la phase de pavage effectuée soit par une résolution de MIP (voi
 Enfin, pour les cas plus difficile, nous effectuons plusieurs passes de recherche d'isomorphismes light (voir \ref{light_p}) et de nouveaux pavages.
 
 L'algorithme global est paramétrable.
-Pour le précalcul, nous pouvons fixer la variable $k$ qui définiera la taille de chaine calculée avec le modèle markovien.
+Pour le précalcul, nous pouvons fixer la variable $k$ qui définira la taille de chaine calculée avec le modèle markovien.
 Nous rappelons encore une fois que cette taille n'aura pas d'influence sur le résultat mais uniquement sur le temps de calcul.
 Pour la partie recherche, nous devrons choisir le nombre de fois où nous effectuerons la ``boucle light''.
-L'un des paramêtres est la limite max de nombre de tours.
+L'un des paramètres est la limite max de nombre de tours.
 Enfin, si nous optons pour la méthode heuristique de modulation, il est également nécessaire de définir une profondeur maximale de modulation.
-L'influence de ces paramêtres sur l'exécution de l'algorithme sera étudiée durant la partie résultats.
+L'influence de ces paramètres sur l'exécution de l'algorithme sera étudiée durant la partie résultats.
 
 
 
@@ -1946,7 +1949,165 @@ Les pourcentages de l'un à l'autre peuvent être fort différents dû à la var
 
 
 
+\subsection{Choisir les paramètres}
 
+\paragraph{}Nous lalons tout d'abord nous poser la question de comment choisir les bons paramètres pour effectuer nos tests.
+Pour cela, commençons par définir nos mesures.
+
+\subsubsection{Mesures}
+
+\paragraph{}Classiquement, lorsque l'on souhaite évaluer les résultats d'une prédiction, on utilise les statistiques découlant des vrai/faux positifs/négatifs.
+Commençons par définir chacune de ces catégories dans notre cas :
+\begin{itemize}
+ \item Vrai positif (VP) : Un vrai positif est obtenu lorsque le résultat de la prédiction est identique au résultat attendu.
+Dans notre cas, une annotation peptidique est un VP si tous les monomères présents dans l'annotation de s2m sont également présent au sein de l'annotation du jeu de test et inversement.
+Nous aurons donc une couverture et un correctness de 100\%.
+ \item Faux positif (FP) : Un faux positif est obtenu lorsque le résultat de la prédiction parait correct mais qu'il diffère du résultat attendu.
+Dans notre cas, une annotation est un FP si tout ses atomes sont couverts par l'annotation mais que celle-ci diffère du jeu test.
+Nous aurons donc une couverture de 100\% et un correctness inférieur à 100\%
+ \item Faux négatif (FN) : Un faux négatif est obtenu lorsque le résultat ne parait pas correct alors qu'il est possible de l'obtenir.
+Dans notre cas, une annotation est un FN lorsque nous n'arrivons pas à produire une annotation complète du peptide.
+C'est à dire que nous aurons une couverture et une correctness inférieure à 100\%.
+ \item Vrai négatif (VN) : Un vrai négatif est obtenu lorsque le résultat ne parait pas correct et qu'il n'est pas possible d'en obtenir un.
+Dans notre cas, si les annotations test sont correctes, ce n'est pas possible.
+Il est toujours possible d'obtenir une annotation couvrante vu qu'elles sont toutes présentes dans le jeu test.
+\end{itemize}
+
+
+\subsubsection{Exécutions sur les jeux de données}
+
+\label{resultats_s2m_p}
+
+\paragraph{}Pour le choix des paramètres, nous n'allons pour le moment pas prendre en compte le temps d'exécution.
+Les but ici est d'exposer uniquement la qualité des résultats.
+Pour cela nous allons prendre comme indicateurs la couverture atomique moyenne, le corectness atomique moyen et les taux de VP/FP/FN.
+Nous allons faire varier le paramètre du nombre de tour de la boucle light ainsi que la profondeur de modulation pour le pavage avec modulation.
+Nous testerons également les deux algorithmes algorithmes de pavage (MIP et heuristique).
+
+
+\paragraph{TODO : Tableau de chiffres pour les exécutions}
+
+
+\paragraph{}Comme nous voyons sur le tableau de la figure TODO, l'algorithme de pavage par optimisation linéaire n'est pas du tout sensible au changement de paramètres.
+Ceci s'explique par le fait qu'il n'a besoin que d'une seule phase light pour parvenir à son optimal local.
+En effet, dans certains cas, le problème et tout de suite résolu après la première phase de pavage succédant l'isomorphisme light car toutes les briques ont été correctement découvertes.
+Dans les autres cas, l'algorithme du MIP a tellement cherché à optimiser les nombre d'atomes couverts à la suite du premier pavage, que la solution intermédiaire est trop distante de la vraie solution pour pouvoir être rattrapée.
+
+Pour le pavage heuristique, la sensibilité aux paramètres est bien différente.
+On peut voir que l'augmentation du nombre de modulations déclenche une augmentation du nombre de VP.
+Le nombre de vrais positifs augmente significativement en passant le paramètre de 1 à 2.
+Cette sensibilité s'explique par le fait que la solution optimale et la solution gloutonne ne sont pas immédiatement voisines.
+Il est souvent nécéssaire de déplacer non pas un mais deux monomères pour atteindre l'optimal.
+Le paramètre de nombre de boucle light n'a que très peu d'influence et vient seulement compléter 3 résultats sur les données Norine.
+
+\paragraph{}En conparant les résultats des deux algorithmes, on s'apperçoit que l'algorithme comprenant l'heuristique de pavage obtient de meilleurs résultats (pour une modulation >= 2) que l'algorithme incluant un pavage exact.
+A nouveau, ce résultat s'explique par le fait que le pavage exact va trop loin dans l'optimisation.
+Si aucune solution totalement couvrante n'est possible avec les résidus issus de l'isomorphisme strict, alors le pavage maximal exact pourra potentiellement créer des solutions optimisées farfelues.
+Dans ce cas, la recherche de résidus par isomorphisme light sert peu car les trous dans l'annotation ont été déplacés par l'optimisation.
+Il n'est souvent plus facilement possible de construire l'annotation.
+
+
+\paragraph{TODO : Temps de calcul}
+
+
+
+\subsection{Analyse des résultats}
+
+\paragraph{}Pour analyser les résultats, nous avons exécuté s2m avec l'algorithme de pavage heuristique.
+La modulation est réglée à 2 de profondeur et le nombre de tours de boucle à 2 également.s
+Vous pourrez trouver tous les résultats sur les polymères testés à ces adresses :
+- CCD : www.TODO.com
+- Norine : www.TODO.com
+
+\paragraph{TODO : schéma des résultats globaux de s2m}
+
+\paragraph{}Revenons sur les chiffres qui ont été présentés dans le tableau TODO.
+Environ 74\% des annotations peptidiques issus de Norine et 85\% de celles de CCD sont entiérement retrouvées par le logiciel.
+Mais il faut se rappeler que les annotations ne sont plus considérées comme correctes dès lors qu'au moins un monomère est faux.
+En regrdant le taux d'atomes correctement attribués au sein des peptides, le taux de réussite augmente à plus de 93\% pour les annotations de Norine et plus de 98\% pour CCD.
+
+Cependant, même ces très bons taux de résussite ne sont pas représentatif de la qualité des annotations.
+En effet, en analysant les résultats de plus près, nous nous sommes aperçu qu'il était possible de détecter des erreurs au sein des bases de données utilisées pour les tests.
+Analysons ensemble plusieurs cas afin de comprendre les raisons de ces erreurs.
+
+
+\subsubsection{Des peptides aux structures atomiques fausses}
+
+\paragraph{TODO : figure s2m enniati I}
+
+\paragraph{}Beaucoup d'annotations fausses proviennent d'erreurs de structures atomiques pour les peptides.
+Prenons l'exemple de l'``enniatin I''.
+L'annotation en sortie de s2m présente une couverture de 100\% mais un correctness de 66\%.
+En regardant les 3 listes de monomères, on peut s'appercevoir que l'annotation attendue comporte deux monomères nommés Hmp alors que le logiciel trouve deux 4Me-Hva.
+Les deux monomères se ressemblant et il est fort probable que, soit l'annotation monomérique, soit l'annotation atomique ait été mal entrée.
+Pour comprendre l'erreur, remontons les sources des données.
+Sur la page Norine de la molécule, nous trouvons un lien vers Pubchem pour nous permettre d'obtenir la structure atomique et un lien vers la publication qui nous permet d'obtenir la structure monomérique.
+
+\paragraph{TODO : Figure structures PubChem et publi}
+
+\paragraph{}En regardant la molécule présente sur PubChem, nous pouvons constater que c'est effectivement la structure atomique qui a été utilisée pour le test.
+En lisant désormais la publication, on s'apperçoit que la structure monomérique correspond à ce qui est présent sur Norine.
+Accompagnant cette annotation monomérique est présent un schéma de la structure atomique venant confirmer la structure monomérique.
+Sans aucun doute, l'erreur provient des données issues de PubChem.
+A priori le lien PubChem entré sur Norine n'est pas le bon et pointe vers un peptide similaire.
+
+\paragraph{}Nous n'avons pas fini de traiter manuellement toutes les données issues de s2m mais au moins 50\% des erreurs sont de ce type.
+
+
+\subsubsection{Des monomères aux structures atomiques fausses}
+
+\label{dolastatin_p}
+
+\paragraph{TODO : Figure de la dolastatin 10}
+
+\paragraph{}Lorsque le taux de couverture de l'annotation issue de s2m est inférieur à 100\%, par définition, au moins un monomère n'a pu être trouvé.
+Il est possible que ce monomère n'ait jamais été répertorié, que la structure atomique du peptide soit incorrecte ou que la structure d'un monomère le soit également.
+Dans le cas de l'annotation de la dolastatin, c'est une erreur de structure atomique qui s'est glissée dans la base Norine.
+Le monomère Dap qui est sensé être présent n'est pas reconnu car l'atome d'azote n'est pas placé au même endroit au sein du monomère seul et du monomère dans le peptide.
+En cherchant sur Norine on peut s'appercevoir qu'aucun autre peptide de la base ne comporte ce monomère, ce qui veut dire qu'il a été ajouté spécifiquement pour ce peptide.
+Donc, le changement de structure du monomère n'est probablement pas du à une modification de la molécule mais plutôt à une erreur d'annotation.
+En parcourant l'article qui publia le peptide et la structure atomique présente sur PubChem, on s'apperçoit que c'est une erreur uniquement présente sur Norine.
+
+
+\subsubsection{Erreurs d'annotations}
+
+\paragraph{TODO : Figure de la fengycine A (ci.inria)}
+
+\paragraph{}Il arrive parfois que des molécules soient trompeuses.
+En entrant à la main les annotations, il est possible de confondre un monomère avec un de ses dérivés proches.
+C'est ce qui est arrivé avec la fengycine A.
+L'annotation effectuée par s2m détecte un monomère Gln alors que l'annotation présente dans Norine détecte un Glu.
+En effectuant à nouveau toutes les opérations de vérification de la structure atomique et monomérique, on s'apperçoit rapidement que l'article donne raison à s2m.
+Cette fois-ci c'est l'annotation monomérique présente dans Norine qui est à changer pour obtenir une information juste.
+
+
+\subsubsection{Les équivalences}
+
+\paragraph{TODO : Schéma cyclotheonamide E}
+
+\paragraph{}Le dernier type d'erreurs d'annotations commises par s2m est strictement dut aux algorithmes utilisés pour le pavage.
+C'est un problème d'annotations équivalentes.
+Comme nous le voyons sur le schéma de la ``cyclotheonamide E'', le peptide est couvert à 100\%.
+De plus, l'annotation présente dans Norine propose deux monomères visuellement très proches des monomères suggérés par s2m.
+En regardant dans le détail, on peut observer que c'est un problème dut à une formilation entre deux monomères.
+L'un des deux monomère à été formylé, ce qui fait qu'un groupement C=O est présent entre les monomères Arg et Ile du peptide.
+L'un des monomères à donc été modifié mais il pourrait a priori s'agir de l'un comme de l'autre.
+Dans les deux cas, l'annotation qui en résulte reste couvrante à 100\%.
+N'ayant aucun moyen algorithmique de faire la différence, ici s2m a choisit la première solution sur laquelle il est tombé.
+Pour connaître l'annotation réelle, il faut remonter à la production du peptide et comprendre les mécanismes de modifications de monomère ici en jeu.
+Cette erreur est présente moins d'une dizaine de fois dans les données déjà vérifiées et ne pourra pas être corigée sans ajouter plus d'information en entrée de s2m.
+
+
+\subsubsection{Les analyses d'erreur pour CCD}
+
+\paragraph{TODO : Figure équivalence obvious}
+
+\paragraph{}Durant toutes les analyses, je ne me suis attardé que sur des erreurs issues des peptides de Norine.
+Pour nous, il est très facile de vérifier toutes les informations de cette base car de nombreux liens vers les origines des données sont présents en son sein.
+Pour les données issues de CCD, nous détectons le même genre de problème que dans Norine mais il est très difficile de les analyser en profondeur.
+Nous avons accès aux structures mais difficilement à des publications associées.
+Nous pouvons donc détecter la présence d'erreurs mais sans forcément pouvoir expliquer pourquoi.
+Seules les erreurs dues aux équivalences sont facilement détectables (voir par exemple TODO).
 
 
 
@@ -1956,7 +2117,231 @@ Les pourcentages de l'un à l'autre peuvent être fort différents dû à la var
 
 \section{Norine}
 
-\section{Les contributions de s2m à dans Norine}
+\subsection{Généralités}
+
+\paragraph{}Nous avons déjà plusieurs fois abordé la base de données Norine au sein de ce manuscrit mais nous allons ici décrire en détail son fonctionnement.
+Norine à été créée durant la thèse de Ségolène Caboche (2006-2009) dans le but de centraliser l'information sur les NRP.
+Avant cette base, il n'existait rien permettant de croiser directement les données NRP.
+Les structures atomiques et monomériques de NRP étaient publiées dans des articles scientifiques puis parfois mises en ligne au sein de bases généralistes.
+Il n'existait souvent aucune annotation monomérique renseignée en dehors de ces publications.
+Norine a été créée dans le but de centraliser et rendre accessible les annotations NRP connues.
+Sans cette centralisation, il est très difficile de créer des modèles de prédiction autour des NRP.
+Les données de Norine ont par exemple été très utiles pour la création de modèles de prédiction d'activités NRP.
+
+\paragraph{TODO : Schéma SQL simplifié}
+
+\paragraph{}Norine est une base de données postgres contenant plusieurs disaines de tables, toutes articulées autour de la notion de peptide (voir la version très simplifiée de la figure TODO).
+La table centrale des peptides contient toutes les informations centrales telles que le nom, la famille ou les différentes stuctures.
+Les information d'activités, d'organismes producteurs ou le détail de chaque monomères sont quant à eux présent dans des tables annexes, reliées soit par clef externe soit par des tables d'associations.
+Par exemple, une table est dédiée aux activités.
+Ces activités sont ensuite mises en relation avec les peptides via une table ``produit par''.
+Au sein de cette table d'association, il est possible de trouver plusieurs activités par peptide et plusieurs peptides par activité.
+
+\paragraph{}La base de donnée est accompagnée d'une interface web et un serveur Java J2EE.
+Cette interface a pour but de rendre les données simples d'accès pour tous les utilisateurs.
+L'interface est accessible via le serveur de logiciels de l'équipe Bonsai à l'adresse http://bioinfo.lifl.fr/norine/.
+Au travers de cette interface, toutes les informations présentes en base sont disponibles.
+Chaque peptide et chaque monomère y possèdent leur page dédiée.
+Sur ces pages se trouvent tous les détails présents en base de donnée.
+Elles sont accessibles via des formulaires de recherche par nom/type/organismes producteurs/activité etc.
+Pour les peptides, il existe également une recherche par sous graphe dont nous donnerons plus de détail par la suite.
+
+
+
+\subsection{Les peptides}
+
+\subsubsection{L'interface web}
+
+\paragraph{TODO impression écran page peptide}
+
+\paragraph{}Comme nous l'avons déjà évoqué, toute la base de données est axée autour de notre matière première : les peptides.
+Les pages centrale du site web sont donc logiquement les pages d'information correspondant à chaque NRP.
+Ces pages sont divisées en trois parties.
+En haut de la page se trouvent les informations générales comme le nom, l'identifiant ou la liste des activités connues de ce peptide.
+La masse moléculaire est également présente et est particuliairement utile en spectrométrie de masses.
+Cette première partie est purement factuelle et ne fait que reprendre les éléments basiques potentiellement présents dans d'autres bases.
+
+\paragraph{}La seconde partie de la page représente la plus grande contribution de Norine.
+Cette partie donne toutes les information à propos des structures.
+Au minimum, elle contient la structure monomérique du NRP.
+Cette structure est donnée à la fois par un format textuel représentant un graphe et par une image des monomères et des liens qui existent entre eux.
+Chaque monomère entrant dans la composition est affiché dans une liste.
+Les liens au sein de cette liste permettent d'accéder au détail de chacun de ces monomères.
+Sur les pages des monomères sont présentes les structures atomiques, une image de leur structure atomique 2D et toutes les informations générales les concernant.
+Dans le meilleur des cas, la structure monomérique est accompagnée d'un SMILES et depuis peu, d'un dessin de la structure atomique dont les monomères ont été colorés par s2m.
+
+\paragraph{}Enfin, la dernière partie de la page est consacrée aux références et liens.
+Ce sont toutes les informations qui permettrons de replacer le peptide dans son contexte et d'en savoir plus au trvers d'autres bases de données.
+Les organismes producteurs sont détaillés à cet endroit et un lien vers leur classification NCBI est disponible.
+C'est également ici que sont répertoriés les articles de recherche qui ont permis la découverte du peptide et l'établissement de son statut non ribosomique.
+Enfin, lorsqu'ils sont référencés, sont présent des liens vers d'autres bases de données.
+Actuellement, pour apprendre plus de détail sur les structures chimiques des molécules, sont présent des liens vers pubchem et uniprot.
+
+
+\subsubsection{Les méthodes de recherche}
+
+\paragraph{}Comme dans toutes les autres bases de données, il est possible de rechercher un peptide via un grand nombre de critères.
+En idiquant le nom ou l'identifiant, un peptide unique pourra être trouvé.
+En indiquant un nom partiel ou tout autre critière (avec la possibilité de combiner les critères), une liste de peptide sera retournée.
+Cependant, Norine propose également un autre type de recherche très intéressant pour notre type de données.
+Il est possible de rechercher les peptides par structures monomériques \cite{caboche_structural_2009}.
+Plus précisément, il est possible des créer des expressions régulières de structures pour les rechercher dans la base.
+Prenons un exemple.
+Si nous souhaitons effectuer des recherches de peptides qui contiennent une Valine liée à n'impote quel variant d'une Cystéine ou Leucine, il nous faut écrire la requête : Val,[Cys*|Leu*]@1@0.
+Ce format est un format de graphe.
+Les noms séparés par des virgules représentent les noeuds (un noeud Val et un noeud Cys* ou Leu*) et les valeurs séparées par des @, les arêtes.
+Pour résumer cette requête, nous avons :
+\begin{itemize}
+ \item Le noeud 0 labellé par Val
+ \item Le noeud 1 labellé par Cys* (n'importe quel dérivé de Cys) ou Leu*
+ \item Un lien sortant du premier noeud (noeud 0) pour joindre le noeud 1 (la @1 en première position)
+ \item Un lien sortant du deuxième noeud (noeud 1) pour joindre le noeud 0 (la @0)
+\end{itemize}
+
+\paragraph{TODO : Shéma résultats requête}
+
+\paragraph{}Une fois la requête formatée, il est possible d'exécuter deux algorithmes différents.
+L'un des deux est un isomorphisme de sous graphe.
+Nnous avons déjà longement abordé le problème d'isomorphisme durant le second chapitre (TODO ref).
+La requête est croisée avec toutes les structures monomériques présentes en base et retourne tous les peptides dont la structure monomérique contient le motif recherché.
+
+\paragraph{}Le second algorithme ne prend pas en compte la structure mais uniquement la composition.
+C'est une recherche par fingerprint composée des comptages de monomères et des comptages par groupe de monomères.
+Plusieurs groupements sont définis dans Norine.
+Par exemple Cys* cité précédemment est un groupement contenant la Cystéine, la D-Cystéine, l'alpha-méthyl-Cystéine et bien d'autres dérivés de la Cystéine.
+Les fingerprints des peptides en base sont pré-calculés et le fingerprint de la requête est créé à la volée.
+Le fingerprint requête est comparé aux fingerprints de la base et une distance est calculée.
+Les résultats sont affichés par distance décroissante.
+Cette recherche ne prends pas en compte les structures mais permet une souplesse dans les monomères inclus.
+Par exemple si le peptide possède une D-Cystéine alors que le motif a été renseigné avec un Cystéine, le fingerprint sera toujours identique au niveau des groupements.
+Les fingerprints différents de 1 en Cystéine et 1 en D-Cystéine mais préservent la valeur de Cys*.
+Les regroupement permettent de préserver une proximité élevée malgré la différence de monomère présent.
+
+
+
+\subsection{Les outils liés}
+
+\paragraph{}Depuis la création de la base et du serveur web, beaucoup d'améliorations ont été effectuées.
+Ici nous allons parler des trois dernières évolutions majeures.
+
+
+\subsubsection{Éditeur graphique}
+
+\paragraph{TODO schéma interface graphique}
+
+\paragraph{}Mise à jour en 2015 par Juraj Michalik, l'interface de recherche dans la base posséde désormais une interface graphique de création dynamique des requêtes.
+L'interface permet de générer facilement des requêtes complexes (voir figure TODO).
+Le menu de gauche permet de sélectionner les différents monomères que nous souhaitons ajouter à une requête et la page principale permet d'ajouter des liens entre monomères par des simples clics.
+Au fur et à mesure de la création la requête textuelle s'affiche au dessus de l'éditeur.
+Une version sans interface de cet éditeur est également utilisée sur les pages des peptides de Norine afin d'avoir une représentation graphique de ceux-ci.
+
+Cet éditeur est d'un réel intérêt pour la base car il permet une interaction utilisateur simple qui n'était pas possible auparavant.
+Ce genre d'interface est nécessaire pour rendre les outils bioinformatiques accessible au plus grand nombre.
+
+
+
+\subsubsection{Services REST}
+
+\paragraph{}Créé en 2014 par Areski Flissi, une interface de récupération de données de la base Norine est disponible (interface REST).
+Cette interface a pour but la simplification de l'interfacage des données Norine avec d'autres logiciels.
+Elle permet de récupérer un grand nombre de données de Norine par des requêtes HTTP complexes, sans avoir besoin de passer par l'interface web.
+C'est cette interface que nous avons utilisé pour récupérer les données de Norine afin de tester Smiles2Monomers.
+Une explication d'utilisation de l'interface est disponible à l'adresse http://bioinfo.lifl.fr/norine/service.jsp
+
+
+
+\subsubsection{Crowdsourcing via MyNorine}
+
+\paragraph{}Le dernier outil que nous allons présenter s'appelle MyNorine.
+C'est un outil de crowdsourcing d'annotations NRP~\cite{flissi_norine_2016}.
+Ceci veut dire que toute personne, même extérieure à l'équipe de développement de Norine, peut facilement soumettre de nouvelles entrées.
+Tout comme l'interface REST, il a été développé par Areski Flissi.
+
+\paragraph{}MyNorine est en ligne depuis 2015 mais le développement de nouvelles fonctionnalités est toujours en cours.
+L'outil utilise une interface intuitive pour l'utilisateur.
+Il est possible d'entrer de nombreuses information mais seuls les informations importantes sont obligatoires.
+Parmi les informations obligatoires, on retrouve toutes les informations de base comme le nom, le type de structure, la structure monomérique et au moins une référence bibliographique.
+Pour ne pas avoir à construire la chaine de caractères compliquée représentant la structure, l'interface javascript décrite ci-dessus est disponible aux moments opportuns.
+Tout peptide soumis par un utilisateur sera ensuite envoyé à l'équipe de curateurs qui devra vérifier la validité et la pertinence de la soumission.
+Pour l'instant, cette équipe de curateur est composée de Maude Pupin, Valérie Leclère, Areski Flissi et moi même.
+
+\paragraph{}La mise à disposition de cette interface est une véritable plus-value pour la base de donnée.
+Elle permet de donner du poid à la communauté en leur délégant une part du travail d'archivage des NRP.
+À l'été 2015, nous avons organisé un workshop autour de la thématique NRPS/PKS durant lequel nous avons incité les membres de la communauté à partager leur travail au travers de MyNorine.
+Quelques peptides ont été soumis mais il est encore nécessaire de communiquer pour rendre récurrent ce partage d'informations pour chaque nouveau peptide découvert.
+
+
+\subsection{Statistiques de Norine}
+
+
+
+
+
+
+
+
+\section{Mes contributions au sein de Norine}
+
+\paragraph{TODO : intro}
+
+
+\subsection{Améliorations de l'existant}
+
+\paragraph{}Norine est constituée d'environ 1200 annotations.
+Toutes ces annotations ont été extraites une à une d'articles scientifiques puis entrées dans la base à la main.
+Bien que le travail ait été réalisé avec beaucoup de rigeur, plusieurs erreurs se sont glissées en base.
+Comme présenté lors des résultats de s2m (voir partie \ref{resultats_s2m_p}), le logiciel permet la détection des erreurs présentes en base.
+Voyons ici les procédures mises en place pour corriger ces erreurs et essayer d'empêcher l'introduction de nouvelles.
+
+
+\subsubsection{s2m pour corriger les erreurs}
+
+\paragraph{TODO : figure correction dolastatin}
+
+\paragraph{}Lors de l'analyse des résultats nous avons détecté quatre types d'erreurs : Les erreurs de structure atomique peptidique, d'annotation peptidique, de structure atomique monomérique et d'équivalences structurelles.
+Cette dernière erreur est entiérement due à la façon dont s2m est conçu et rien n'est a corriger en base.
+Pour les 3 autres erreurs, myNorine nous permet facilement de modifier les entrées de la base.
+
+\paragraph{}Appliquons une correction d'un peptide dont nous avons découvert une erreur d'annotation.
+Pour la dolastatin 10, à la suite d'une recherche au sein des publications, nous avions déterminé que le monomère Dap de Norine était structurellement incorrect (voir partie \ref{dolastatin_p}).
+Effectuons la modification de ce monomère via myNorine (voir figure TODO).
+Nous pouvons lancer la modification depuis la page Norine du monomère.
+Changeons le SMILES du monomère en plaçant correctement l'azote puis validons.
+Après validation de la modification, l'entrée est correcte en base.
+
+\paragraph{}Pour toutes les erreurs détectées par s2m, nous devons répéter ce processus de recherche des structures correctes puis changement des entrées de Norine.
+Souvent, une modification dans un peptide nous amène à découvrir plusieurs autres modifications mineurs nécessaires.
+Il nous est par exemple plusieurs fois arrivé de découvrir des incohérence de nomenclature et de finalement passer un long moment sur une procédure de normalisation.
+C'est un processus qui prend énormément de temps et qui doit être effectué collectivement afin de ne pas prendre de décisons contradictoires.
+Le traitement des erreurs est à ce jour toujours en cours et nous avençons au rythme de 1 à 5 peptides par réunion (environ 100 cas d'erreur à traiter).
+
+
+\subsubsection{s2m pour empêcher les erreurs}
+
+\paragraph{}Après avoir traité les erreurs existantes, nous allons discuter de la manière de limiter l'introdution de nouvelles erreurs.
+Le seul moyen est d'essayer de détecter automatiquement les annotations fausses lorsqu'elles sont entrées et de proposer à l'utilisateur le choix entre notre correction et ce qu'il a entré.
+
+\paragraph{TODO : Schéma avertissement}
+
+\paragraph{}Dans le cas de Norine, toute nouvelle entrée manuelle est effectuée via MyNorine.
+Pour éviter l'introduction des erreurs, si le SMILES de la molécule est entré, nous exécutons s2m en arrière plan.
+Si l'annotation obtenue par s2m couvre entiérement le peptide mais que cette annotation diffère de l'annotation entrée manuellement, nous avertissons l'utilisateur et lui demandons de vérifier sa structure avant validation.
+Cela nous a permis plusieurs fois durant les Norine days de nous rendre compte d'erreurs que nous étions en train de commettre et nous pensons que cela permettra d'en éviter de nombreuses autres.
+
+\paragraph{TODO : Schéma création automatique d'annotation}
+
+\paragraph{}Nous proposons également à l'utilisateur d'exécuter s2m avant d'entrer manuellement son annotation.
+Si un SMILES est renseigné, alors s2m peut être déclenché pour obtenir une première annotation.
+L'uilisateur peut ensuite la modifier si celle-ci n'est pas complétement exacte.
+Par ce système nous incitons les contributeurs à ajouter le SMILES de leurs peptides (information trop peu présente dans Norine pour le moment) et nous évitons les erreurs d'innatention et fautes de frappe lors de la saisie utilisateur.
+
+\paragraph{}Pour résumer, s2m a permis à MyNorine d'augmenter encore la qualité des annotations entrées par l'évitement d'erreurs humaines.
+
+
+
+
+
+
 
 \section{Vers la biologie de synthèse}
 
