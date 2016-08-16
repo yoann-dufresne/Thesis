@@ -54,14 +54,27 @@ Voyons ici les procédures mises en place pour corriger ces erreurs et essayer d
 
 ### s2m pour corriger les erreurs
 
-Lors de l'analyse des résultats nous avons détecté quatre types d'erreurs : Les erreurs de structures atomique peptidique, de structure monomérique peptidique, de structure atomique monomérique et d'équivalences structurelles.
+TODO : figure correction dolastatin
 
+Lors de l'analyse des résultats nous avons détecté quatre types d'erreurs : Les erreurs de structures atomique peptidique, de structure monomérique peptidique, de structure atomique monomérique et d'équivalences structurelles.
+Dans les cas que nous avons analyser, cette dernière erreur est entiérement due à la façon dont s2m est conçu et rien n'est a corriger en base. Pour les 3 autres erreurs, myNorine nous permet facilement de modifier les entrées de la base.
+
+Appliquons une correction d'un peptide dont nous avons découvert une erreur d'annotation.
+Pour la dolastatin 10, à la suite d'une recherche au sein des publications, nous avions déterminé que le monomère Dap de Norine était structurellement incorrect (voir partie \ref{}).
+Effectuons la modification de ce monomère via myNorine (voir figure TODO).
+Nous pouvons lancer la modification depuis la page Norine du monomère.
+Changeons le SMILES du monomère en placant correctement l'azote puis validons.
+Après validation de la modification, l'entrée est désormais correcte.
+
+Pour toutes les erreurs détectées par s2m, nous devons répéter ce processus de recherche des structures correctes puis changement des entrées de Norine.
+Souvent, une modification dans un peptide nous amène à découvrir plusieurs autres modifications mineurs nécessaires comme par exemple de la normalisation de nomenclature.
+C'est un processus qui prend énormément de temps et qui doit être fait collectivement afin de ne pas prendre de décisons contradictoires.
+Le traitement des erreurs est à ce jour toujours en cours et nous avençons au rythme de 1 à 5 peptides par réunion (environ 100 cas à traiter).
 
 
 ### s2m pour empêcher les erreurs
 
-Comme nous avons pu le voir (TODO ref chap 2), Smiles2Monomers nous a permis de détecter des erreurs au sein des structures atomiques et monomériques présentes dans des bases de données telles que Norine.
-Comment pouvons nous alors faire en sorte d'essayer d'éviter ces erreurs avant qu'elles ne soient introduites en base.
+Après avoir traité les erreurs existantes, nous allons discuter de la manière de limiter l'introdution de nouvelles erreurs.
 Le seul moyen est d'essayer de détecter automatiquement les annotations fausses lorsqu'elles sont entrées et de demander à l'utilisateur ce qu'il en pense.
 
 TODO : Schéma avertissement.
@@ -98,7 +111,7 @@ De l'autre côté nous voyons apparaître de nombreux NRP non présents dans Nor
 Certaines bases possèdent des molécules annotées NRP mais sans forcément avoir le découpage monomérique et les référeces d'articles les publiant.
 Ces molécules nous intéressent beaucoup car elles peuvent venir compléter notre base de connaissance et aider aux développements d'outils d'apprentissage.
 
-Dans cette section, nous allons parler des différents mises à jour que nous avons effectué sur la structure de la base et les modifications de données qui ont suivies pour effectuer les amélirations citées ci-dessus.
+Dans cette section, nous allons présenter les différents mises à jour que nous avons effectué sur la structure de la base et les modifications de données qui ont suivies pour effectuer les amélirations citées ci-dessus.
 
 
 
