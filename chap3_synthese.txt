@@ -1,2 +1,25 @@
 
 # Vers la biologie de synthèse
+
+La biologie de synthèse est un domaine de la biologie qui vise à faire de l'ingénieurie du vivant.
+Le but est très souvent de faire faire une action particulière à un organisme ou de lui faire produire des composés que nous souhaitons obtenir.
+Dans cette section nous allons parler de la biologie de synthèse appliquée aux peptides non ribosomiques.
+Plus précisément, aborderons la création de molécules d'intérêt par ingénieurie des voies de synthèse non ribosomiques.
+
+
+## L'existant
+
+Faisont d'abord un petit tour d'horizon des travaux en cours au sein de ce domaine en s'appuyant sur le travail de revue qui a été effectué par Hajo Kries~\cite{}.
+Les approches pour la biologie de synthèse peuvent être divisées en trois grandes catégories que nous allons présenter ici.
+
+
+### L'approche par mutations
+
+L'une des approches pour obtenir de nouvelles structures peptidiques est de faire varier les structures existantes.
+Dans le cas des NRP, il est parfois possible de changer un monomère caturé par un domaine A en changeant la forme de la poche de d'accueil.
+
+
+### L'approche par modulation
+
+
+### L'approche de novo
