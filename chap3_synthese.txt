@@ -1,25 +1,117 @@
 
 # Vers la biologie de synthèse
 
-La biologie de synthèse est un domaine de la biologie qui vise à faire de l'ingénieurie du vivant.
-Le but est très souvent de faire faire une action particulière à un organisme ou de lui faire produire des composés que nous souhaitons obtenir.
-Dans cette section nous allons parler de la biologie de synthèse appliquée aux peptides non ribosomiques.
-Plus précisément, aborderons la création de molécules d'intérêt par ingénieurie des voies de synthèse non ribosomiques.
+Depuis quelques années, les bactéries développent de plus en plus de résistances aux antibiotiques utilisés en médecine animale.
+Les NRP étant une source très riche de molécules antibiotiques, de nombreuses équipes essayent de créer de nouvelles molécules à partir de ceux-ci.
+C'est dans le but de contribuer à la création de ces nouvelles molécules que nous allons ici aborder la thématique de la biologie de synthèse.
+La biologie de synthèse est un domaine qui vise à modifier certains organismes pour les pousser à effectuer des tâches que nous souhaitons.
+Le but est très souvent de leur faire produire des composés d'intérêt.
+Dans cette section nous allons parler de la modification de bactéries pour la production de peptides non ribosomiques nouveaux.
 
 
 ## L'existant
 
-Faisont d'abord un petit tour d'horizon des travaux en cours au sein de ce domaine en s'appuyant sur le travail de revue qui a été effectué par Hajo Kries~\cite{}.
-Les approches pour la biologie de synthèse peuvent être divisées en trois grandes catégories que nous allons présenter ici.
+Commençons par un tour d'horizon des travaux de ce domaine.
+Nous nous appuierons sur le travail de revue réalisé par Hajo Kries~\cite{}.
+Effectuons un survol des techniques en commançant par de petites modifications monomériques pour arriver finalement à la création totale d'un NRP.
 
 
-### L'approche par mutations
+### Les modifications peptidiques
+% Recent advances in engineering nonribosomal peptide assembly lines
+% Ribosome-independent biosynthesis of biologically active peptides: Application of synthetic biology to generate structural diversity
 
 L'une des approches pour obtenir de nouvelles structures peptidiques est de faire varier les structures existantes.
-Dans le cas des NRP, il est parfois possible de changer un monomère caturé par un domaine A en changeant la forme de la poche de d'accueil.
+La structure peut être modifiée post-synthèse NRPS, par des enzymes présentes dans le cluster de gènes.
+C'est ce qu'il se passe par exemple lors d'incorporations de sucres dans un NRP.
+Nous avons déjà parlé dans le premier chapitre à la section TODO.
+En ajoutant des gènes ou modifiant des enzymes du cluster de gènes certaines équipes réussissent à ajouter de nouveaux monomères ou à modifier certains monomères inclus~\cite{}.
+
+TODO : schéma modification post-synthèse 
+
+\cite{Recent advances} propose également d'aller plus loin en effectuant parfois cette modification avant l'assemblage NRPS.
+Ils publient par exemple plusieurs modifications de la Pacidamycin qui ont été effectuées près assemblage.
+Ce sont des enzymes modificatrices d'un monomères qui agissent avant la capture de celui-ci par le C-terminal.
+La surface en contact lors de la capture et de l'assemblage n'étant pas modifiée, les monomères alternatifs sont intégrés de la même que l'original.
+Certains monomères ne sont plus facilement modifiables une fois inclus du fait des contraintes structurelles et la modification de monomères pré-synthèse ouvre la voie vers de nouvelles structures peptidiques.
 
 
-### L'approche par modulation
+
+### Les modifications ponctuelles de synthétases
+% Introduction of a Non-Natural Amino Acid into a Nonribosomal Peptide Antibiotic by Modification of Adenylation Domain Specificity
+% Mapping the Limits of Substrate Specificity of the Adenylation Domain of TycA
+% Reprogramming Nonribosomal Peptide Synthetases for “Clickable” Amino Acids
+
+TODO : schéma modification module
+
+La seconde possibilité de modification de NRP passe par la modification des synthétases.
+Plus exactement par la modification d'un domaine A d'une synthétase.
+Les travaux \cite{} partent du constat également fait par Stachelhaus~\cite{} que les domaines A sont spécifiques aux monomères qu'ils capturent.
+En modifiant certains acides aminés composant un module A, la spécificité de celui-ci change.
+Après quelques modifications bien effectuées la poche d'accueil du monomère est suffisamment modifée pour accueillir un nouveau type de monomère.
+Les modifications à effectuer sont découvertes via des techniques d'évolution dirigée.
+Les auteurs génèrent des mutations aléatoires (partiellement dirigées) sur les modules A puis ne gardent que ceux qui changent de fonction.
+Par ce procédé, ils arrivent à capturer des monomères nouveaux parfois non naturels comme dans \cite{Introduction}.
 
 
-### L'approche de novo
+
+### Les modifications de domaines de synthétases
+% Reinvigorating natural product combinatorial biosynthesis with synthetic biology
+% Harnessing the Biosynthetic Code: Combinations, Permutations, and Mutations
+
+TODO : schéma échange module
+
+Les modifications qui paraissent les plus évidentes sont celles qui font appel à des échanges de domaines.
+Des exemples sont présentés au sein des articles \cite{}.
+Intuitivement, nous pourrions nous dire qu'il est facile d'échanger par exemple deux modules A de deux synthétases comme on échangerait deux pièces de LEGO dans une construction.
+Malheureusement, ces modifications ne sont pas si faciles car les modules doivent respecter des contraintes spatiales pour que le NRPS ait une cohérence structurelle.
+De plus, certaines recombinaisons ne fonctionnent pas mais sans aucune raison à ce jour connue.
+
+% A Subdomain Swap Strategy for Reengineering Nonribosomal Peptides
+
+Pour outrepasser ce genre de dificultés, les auteurs de \cite{} procédent uniquement à un échange de sous domaine A.
+Ils modifient une partie de la zone spécifique en essayant de préserver la structure globale du module.
+Per cette technique, ils arrivent à modifier la forme de la poche et capter de nouveaux monomères.
+
+
+### La création de peptide de novo
+
+Nous arrivons désormais au graal de l'ingénieurie NRP : créer un peptide de toutes pièces.
+Sans trop de surprise, il n'existe pour le moment aucune technique pour effectuer ce genre de tâche.
+Comme nous l'avons vu précédamment, modifier un module A est déjà très difficile et nécessite beaucoup d'astuces.
+Cependant, certains travaux cherchent déjà à concevoir des briques de base qui nous permettraient un jour de construire un peptide complet.
+Ainsi, les travaux menés par K.M. Wilcoxen et al~\cite{} ont mené à la création d'un petit peptide synthétique mimiquant le comportement d'un domaine C.
+Ils sont parvenu à lier deux monomères via leur peptide.
+Nous sommes encore loin d'un domaine C universel fonctionnel mais c'est ce genre de travaux qui permettra de mener à bien cette quête du graal.
+
+
+Nous avons globalement présenté plusieurs techniques d'ingénieurie de NRP sans quasiement laisser transparaitre de failles de ces techniques.
+Cependant, quelle que soit la technique, rares sont les productions de NRP qui soient capable de passer à l'échelle.
+Comme le dit si bien la revue, nous sommes pour le moment très bon en création de nombreux ``mauvais'' NRP.
+En effet, les NRP créés sont soit très faiblement actifs soit très faiblement produits à cause des modifications.
+Il reste encore beaucoup de chemin à parcourir pour un jour pouvoir produire des antibiotiques synthétiques issus de la pensée humaine.
+
+
+
+
+
+## Aider les techniques de recombinaisons modulaires
+
+Durant ma seconde année de thèse, je suis allé séjourner un mois au Danemark dans l'équipe dirigée Tilmann Weber afin de découvrir réciproquement nos travaux.
+Son équipe a pour principale activité la découverte de nouveaux métabolites secondaires ainsi que la création d'outils dédiés à ces découvertes.
+C'est cette équipe qui a créé, maintient et met à jour le logiciel antiSMASH (voir chapitre 1 section TODO).
+Pour rappel, antiSMASH est un logiciel qui à partir d'un génome génère des annotations pour la découverte de métabolites secondaires.
+En particulier, c'est la découverte de NRP qui motiva mon voyage.
+
+Mon objectif en allant là bas était de préparer la création d'un outil qui fait l'inverse de antiSMASH, c'est à dire remonter du peptide vers le cluster de gène qui aurrait pu le produire.
+L'outil idéal (mais évidemment irréalisable) permettrait à partir d'un NRP de générer du code génétique capable de produire ce NRP.
+C'est dans cet optique que nous avons créé une première version d'un outil appelé Monomers2Clusters (m2c).
+Cette section sera dédiée à l'explication des premiers algorithmes le constituant.
+
+
+### Idée de base
+
+L'idée est de modifier un peu le but de l'outil idéal pour en faire un outil réaliste.
+Nous penssons que la première étape vers la création de NRP de novo est le mélange de gènes NRPS déjà existants.
+Les techniques les plus prometteuses pour le moment sont celles qui utilisent un NRPS existant et le modifient à leur fin.
+Via la première version de m2c, nous souhaitons proposer les clusters de gènes qui pourraient être les plus proches du NRP à produire.
+
