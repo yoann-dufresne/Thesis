@@ -112,6 +112,84 @@ Cette section sera dédiée à l'explication des premiers algorithmes le constit
 
 L'idée est de modifier un peu le but de l'outil idéal pour en faire un outil réaliste.
 Nous penssons que la première étape vers la création de NRP de novo est le mélange de gènes NRPS déjà existants.
-Les techniques les plus prometteuses pour le moment sont celles qui utilisent un NRPS existant et le modifient à leur fin.
-Via la première version de m2c, nous souhaitons proposer les clusters de gènes qui pourraient être les plus proches du NRP à produire.
+Les techniques les plus prometteuses pour le moment sont celles qui utilisent un NRPS existant et le modifient.
+m2c sera donc un logiciel d'aide à la création de nouveaux NRP.
+Nous souhaitons proposer à l'utilisateur plusieurs clusters de gènes proches existants.
+Le but est qu'il tente des recombinaisons de modules NRPS afin de produire son NRP d'intérêt.
+
+TODO : schéma idée de recombinaison
+
+Formellement, m2c sera un logiciel qui prend une structure monomérique en entrée et qui donne une liste ordonnée de clusters de gènes NRPS en sortie.
+Cette liste sera ordonnée par proximité du NRP produit avec le NRP souhaité.
+Pour commencer simplement, nous étudierons uniquement la présence ou absence de modules A dans la NRPS.
+A partir des différents modules NRPS et des monomères présents dans le NRP d'intérêt nous établierons une distance.
+Cette distance permettra d'ordonner les clusters les uns par rapport aux autres.
+Prenons l'exemple d'un peptide d'intérêt contenant une leucine et de deux NRPS identiques excepté pour un domaine A.
+Pour cet exemple, si l'un des deux clusters possède un domaine A incluant une leucine, le score de distance devra être plus faible que pour l'autre.
+
+
+### Recherche par fingerprint
+
+La première approche que nous avons utilisé est une approche par fingerprint.
+En informatique, les fingerprints sont des structures représentant des données par une réduction de celles-ci à certains de leurs caractéristiques essentielles.
+Dans notre cas, un fingerprint est un vecteur représentant la composition d'un NRP ou un NRPS.
+Dans le cas des NRP c'est la composition en monomères qui nous intéresse et dans le cas des NRPS la composition en domaines A.
+La composition peut être un simple compage de chacun des monomères, un comptage de tous les di-mères, de tous les tri-mères etc.
+
+TODO : schéma fingerprint
+
+Dans notre cas, le vecteur sera composé des comptages de monomères seuls et des comptages de di-mères (voir schéma TODO).
+Pour le NRP, il est très smple d'obtenur ce vecteur.
+Chaque monomère est compté indépendament puis chaque lien est compté comme un di-mère comportant les deux monomères liés.
+Bien évidemment, un di-mère A-B est équivalent à un di-mère B-A.
+Pour les NRPS, nous ne connaissons pas tous les voisinages.
+La connaissance actuelle du fonctionnement des enzymes NRPS ne nous permet pas, à partir du génome, de dire si un cycle va s'effectuer à un endroit ou un autre.
+Nous ne sommes pas non plus capable de donner des règles générales d'assemblage des différents sous peptides créés par différents gènes NRPS.
+La première partie des compatges est facile à obtenir.
+En analysant les domaines A, il est possible de déterminer leur spécificité (Via par exemple NRPSPredictor) et ainsi d'augmenter la valeur de la case correspondant au monomère dans le vecteur.
+Pour ce qui est des di-mères, il faut analyser les gènes NRPS.
+Deux modules A dans deux gènes différents ne doivent pas générer de di-mères.
+Nous anajouton uniquement des dimère pour deux modules A successifs trouvé dans un même gène.
+
+% Etude comparative de la distribution florale dans une portion des Alpes et du Jura
+
+Une fois les vecteurs formés, il faut pouvoir comparer le fingerprint NRP aux fingerprints des clusters.
+Pour cela, nous avons choisi de comparer les figerprints NRPS un à un et de calculer une valeur de distance.
+Cette valeur de distance permettra de classer les clusters par proximité et de ainsi proposer les plus proche du NRP.
+Pour générer cette distance il est nécessaire de prendre en compte à la fois les présences communes entre deux fingerprints mais également les divergeances.
+Pour répondre à ce besoin, nous avons choisi d'utiliser une distance de Jaccard~\cite{}.
+La distance de jacard compare la présence de critères communs entre les deux vecteurs au nombre de critères totaux.
+Dans notre cas nous comparerons les monomères et di-mères communs à ceux divergeants.
+
+\begin{equation}
+  J(A,B) = \frac{A \cap B}{A \cup B}
+\end{equatuion}
+
+TODO : figure exemple Jaccard
+
+TODO : Commenter l'exemple
+
+TODO : dire que c'est naïf et qu'il faudrait changer le score.
+
+
+
+### Recherche par isomorphismes de sous graphe
+
+TODO : schéma SI NRP/NRPS
+
+En constatant sur quelques exemple que la première méthode serait sans doute trop naïve, nous avons réfléchi à un second modèle.
+Nous essayons de trouver des sous morceau du NRP qui pourraient être synthétisés par des clusters.
+Nous cherchons donc des gènes qui fabriqueraient de un à plusieurs monomères du NRP.
+Pour simplifier, nous imposerons que les gènes choisis ne produisent rien d'autre que des monomères du NRP d'intérêt.
+Ce problème simplifié se réduit en problème d'isomorphisme de sous graphe.
+Représentons chaque gène NRPS par un graphe linéaire dont les noeuds sont les spécificités des domaines A.
+Dans ce cas, un gène d'intérêt est un gène dont le graphe monomérique linéaire est un ismorphisme de sous graphe du NRP.
+
+Une fois différents morceaux NRPS sélectionnés, il faut encore les classer.
+Pour les classer nous allons chercher à obtenir le maximum d'intérêt'.
+
+
+### Tester les modèles
+
+### Perspectives
 
