@@ -191,5 +191,47 @@ Pour les classer nous allons chercher à obtenir le maximum d'intérêt'.
 
 ### Tester les modèles
 
+Afin de tester les modèles nous avons choisi de prendre des peptides réels.
+A partir de ces peptides, nous espérons retrouver leur vrai cluster de gène au sein d'un ensemble de clusters.
+Pour cela, il nous est nécessaire de constituer une base de données test.
+Malheureusement, la constitution d'une telle base est très difficile.
+Il existe très peu de sources de données mettant en relation des NRP constatés dans l'environnement avec des NRPS réels.
+Nous devons constituer cette base par nous même.
+
+La première piste que nous avions envisagé était de récupérer des données NRPS sûres (analysées à la main) et de les mettre en relation avec les données NRP de Norine.
+Nous avons donc récupéré les données de gènes de MiBIG car la qualité des annotations nous intéressaient.
+Cette source de données a été un double calvaire.
+Premièrement, les données téléchargées ne sont pas normalisées.
+Par exemple, les noms des monomères assemblés par un NRPS sont parfois complets et parfois résumés à quelques lettres.
+Ces mêmes monomères peuvent également être présents sous plusieurs noms sans avoir aucun lien entre eux.
+Enfin, les strructures de données (fichiers json) ne sont pas non plus tous structurés de la même manière.
+Résultat, plusieurs données ont dues être écartées car trop contraignantes pour des récupération automatiques.
+Le second problème (le plus problématique) est que quasiement aucun des clusters de gènes restant n'a le NRP correspondant sur Norine.
+Les structures ne peuvent donc pas être controlées et confirmées.
+C'est à la suite de tout ces problèmes que nous avons choisi de changer de source de données pour des données moins fiables.
+
+A l'aide de Kai Blin (chercheur de l'équipe de Tilmann Weber), nous avons utilisé antiSMASH pour générer des annotations de NRPS sur l'ensemble des génomes de bactéries présentes sur le NCBI.
+ce second jeu de données est beaucoup plus abondant que le premier mais pose également beaucoup plus de problèmes.
+Il n'existe par exemple aucun lien entre les NRP de Norine et les génomes qui ont été analysés.
+Il faudrait manuellement faire les rapprochement pour avoir les bionomes NRP/NRPS.
+De plus, les anotations de antiSMASH ne sont que des prédictions et n'ont été vérifiées par personne.
+Par exemple, de nombreux petits clusters de génes ne contiennent qu'un ou deux domaines A et il est difficile voir impossible de savoir si ils sont artefactuels ou mal annotés.
+
+Nous avons fini par exécuter m2c en utilisant d'un côté tous les peptides de Norine et de l'autre toutes les annotations issues de antiSMASH.
+N'ayant pas de liens directs entre les deux jeux de données, la vérification doit être effectuée à la main.
+Nous avons sorti un top 10 des clusters les plus proches de chacun des peptides.
+Après l'analyse de nombreux peptides le résultat est mitigé.
+
+TODO : résultats
+
+
 ### Perspectives
+
+Pour le moment les résultats ne permettent pas de dire qui du logiciel ou des données pose les problèmes observés.
+Pour moi, les deux côtés doivent être améliorés pour parvenir à des résultats.
+Les modèles naïf que nous avons développé nous paraissent pour le moment trop simple pour donner de bons résultats généraux mais ils devraient déjà mener à quelques résultats visibles.
+D'un autre côté, il est nécessaire de constituer une base de connaissance NRP/NRPS solide afin de pouvoir tester correctement ces modèles ainsi que d'autres.
+La constitution d'une telle base serait même bénéfique pour l'ensemble de la communauté.
+Pour le moment, nous avons stoppé notre travail sur les modèles en attendant de constituer cette base.
+C'est un travail en suspend qui nous parait plein d'intérêts et qui continuera d'être développé après cette thèse.
 
