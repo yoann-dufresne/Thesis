@@ -8,3 +8,5 @@ manuscrit.pdf
 *.cls
 *.toc
 *.dvi
+*.~lock*
+*#*

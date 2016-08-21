@@ -1,0 +1,62 @@
+# Mes contributions
+
+\paragraph{}Après avoir présenté en détail la base Norine et les outils qui gravittent autour, je vais ici vous décrire les différentes améliorations auxquelles j'ai participé.
+Il est à noter que certaines des contributions que je vais citer ici sont des applications s2m que nous n'avions pas initialement prévues.
+Le profil de ces contributions s'est dessiné au fur et à mesure des utilisations de s2m sur des données.
+En testant s2m, nous nous sommes apperçu d'erreurs présentes dans les données annotées manuellement.
+C'est ainsi que nous nous sommes rendu compte du potentiel de correction que représente ce logiciel.
+La première partie de cette section sera composée des deux applications de s2m en temps qu'outil de correction et de prédiction d'erreurs au sein de Norine.
+Ensuite, nous reviendrons sur les applications initiales de s2m~: la création de nouvelles annotations monomériques.
+Nous parlerons de complétion de données existantes ainsi que de récupération de nouvelles par des méthodes semi-automatiques et automatiques, le tout supervisé par s2m.
+
+
+## Les Norine days
+
+La mise en ligne de l'outil MyNorine ainsi que l'arrivée massive de résultats de s2m nous a poussé à réguliérement réunir l'équipe de personnes travaillant autour de Norine.
+Réguliérement, nous effectuons des ``Norine days'' pour analyser ces données et prendre des décisions sur l'avenir de Norine.
+Durant ces journées nous analysons plusieurs types de données et je vais présenter ici notre façon de procéder.
+
+
+### Validation de données externe
+
+En 2015, l'équipe de Norine accompagnée de l'équipe de antiSMASH, ont organisé un workshop autour des outils d'analyse des NRPS et PKS.
+Lors de cet événement, pour la première fois nous avons fait la promotion de MyNorine (tout juste mis en ligne) ce qui nous a permis de récolter quelques données externes.
+Les Norine days ont été l'occasion de traiter tous ensemble ces données et de nous mettre d'accord sur un protocol d'acceptation des nouveaux peptides.
+
++ Ajout des dérivés
+
+
+### Définition et concept des monomères
+
+
+### Corrections d'erreurs
+
+
+
+
+
+
+
+
+
+## Mises à jour de Norine
+
+En parcourant de nombreuses bases de connaissances biologiques et chimiques, nous avons mis à jour deux améliorations possible de la base Norine.
+D'un côté, cette exploration nous pointé le vieillissement des données de Norine.
+En effet, de nombreuses données présentes sur Norine ont des noms des références ou des taxonomies qui ont été changées depuis leur entrée en base.
+Par exemple certains liens vers PubChem, censés contenir les détails moléculaires des NRP correspondant, pointent désormais vers des molécules différentes.
+Suite aux mises à jour d'éléments de PubChem certains liens sont corrompus.
+
+De l'autre côté nous voyons apparaître de nombreux NRP non présents dans Norine.
+Certaines bases possèdent des molécules annotées NRP mais sans forcément avoir le découpage monomérique et les référeces d'articles les publiant.
+Ces molécules nous intéressent beaucoup car elles peuvent venir compléter notre base de connaissance et aider aux développements d'outils d'apprentissage.
+
+Dans cette section, nous allons présenter les différents mises à jour que nous avons effectué sur la structure de la base et les modifications de données qui ont suivies pour effectuer les amélirations citées ci-dessus.
+
+
+
+### Mise à jour des données de Norine
+
+### Récupération massive de NRP
+
+### Fouille en bases de données

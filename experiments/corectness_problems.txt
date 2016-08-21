@@ -1,0 +1,18 @@
+
+
+SMILES peptide :
+- enniatin I
+- dolastatin 12 (Pubchem entry)
+- surfactin aC15
+
+
+
+SMILES peptide / structure :
+- somamide B
+- largamide A -> ontologie
+
+
+s2m :
+- desmethylDestruxin B (Equivalence)
+- harzianin HC I (Equivalence + liens)
+- cyclotheonamide E (Equivalence)
