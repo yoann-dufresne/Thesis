@@ -697,6 +697,15 @@ Dans ce cas, il se peut qu'il ne soit que partiel et potentiellement incorrect.
 
 
 
+
+
+
+
+
+
+
+
+
 \chapter{Smiles2Monomers : Des atomes vers les monomères}
 
 \section{Introduction}
@@ -705,7 +714,7 @@ Dans ce cas, il se peut qu'il ne soit que partiel et potentiellement incorrect.
 Au delà du simple catalogage qui peut être fait, comprendre les actions moléculaires permet d'utiliser voir d'inventer de nouvelles substances pour l'industrie.
 Afin de comprendre ces activités, un postulat simple a été posé : Deux molécules proches auront deux activités proches.
 Ce postulat simple parait raisonnable puisqu'il s'appuie sur le fait que l'activité d'une molécule est portée par la configuration spatiale des différents éléments qui la composent.
-On sait aujourd'hui que ce postulat est faux car il existe quelques contre exemples~\cite{patani_bioisosterism:_1996}.
+On sait aujourd'hui que ce postulat est en partie faux car il existe quelques contre exemples~\cite{patani_bioisosterism:_1996}.
 Cependant, dans la majorité des cas, cette approximation fonctionne bien et tout un domaine de chemoinformatique s'est développé dans ce sens.
 Toutes les techniques cherchant à rapprocher les structures des activités moléculaires sont regroupées derrière l'acronyme QSAR (Quantitative structure-activity relationship).
 Les techniques QSAR sont nombreuses et variées~\cite{patani_bioisosterism:_1996,leach_molecular_2001,helma_predictive_2005}.
@@ -894,7 +903,7 @@ Cette tâche très importante n'est pas suffisante pour répondre à nos attente
 
 \paragraph{}Pour concevoir notre logiciel d'annotation, nous allons nous inspirer des techniques existantes en essayant d'outrepasser leurs difficultés.
 Nous possédons au sein de Norine, une grande base de connaissance de monomères existants (plus de 500) et nous pouvons nous appuyer sur cette base bien établie pour assurer l'existence des monomères lors des annotations.
-Cette base étant, nous pouvons essayer de concevoir un algorithme constructif.
+Cette base étant, essayons de concevoir un algorithme constructif.
 
 
 \subsubsection{Une histoire de sous problèmes}
@@ -906,12 +915,14 @@ Il sera nécessaire de modifier les solutions incomplètes pour essayer de les a
 Contrairement à CHUCKLES, nous aurons donc besoin de connaître les différents monomères candidats à la composition du polymère même lorsqu'ils sont chevauchant à des monomères déjà placés.
 Si d'un côté nous recherchons les monomères au sein du NRP puis de l'autre nous assemblons ceux trouvés, alors nous pouvons séparer notre programme en deux sous-problèmes complètement distincts.
 
+\paragraph{TODO : Schéma étape 1}
+
 \paragraph{}Dans un premier temps, nous allons chercher à déterminer quels sont les monomères qui pourraient composer le peptide étudié.
 En utilisant la base Norine, nous pouvons indépendamment rechercher chacun des monomères connus au sein de la molécule à annoter.
 La recherche exacte d'un monomère au sein d'un peptide est donc notre premier sous problème à résoudre.
 Ce sous problème sera appelé la ``recherche''.
 
-\paragraph{TODO : Schéma étape 1}
+\paragraph{TODO : Schéma étape 2}
 
 \paragraph{}Dans un second temps, nous devrons choisir parmi tous les monomères candidats issus de la recherche, lesquels composent réellement le polymère.
 Nous aurons plusieurs contraintes associées à ce problème.
@@ -974,31 +985,35 @@ Cette étape donnant accès à un lien direct entre atomes et monomères, une é
 
 \section{Isomorphisme de Sous-graphe et Sous-graphe Maximum Commun}
 
-\paragraph{}Nous avons vu que nous pouvions faire correspondre deux problèmes de graphes différents avec notre problème
-de recherche de monomère. Le but de cette partie est d'étudier les différents algorithmes existant pour chacun de ces
-problèmes
+\paragraph{}Nous venons de voir que la recherche de monomères pouvait correspondre à deux problèmes différent de recherche dans des graphes.
+Formalisons et étudions ici ces deux problèmes.
+Voyons les différentes façon de les résoudre ainsi que les forces et faiblesses de ces approches.
 
-\subsection{Sous-graphe Maximum Commun : définition}
+\subsection{Sous-graphe Maximum Commun}
 
-\paragraph{}Commençons par définir clairement le sous graphe maximum commun.
+\subsubsection{Définition}
 
-\begin{definition}\textbf{Sous-graphe Maximum Commun :}
-  Soient deux graphes $G(V, E)$ et $G'(V', E')$, composés respectivement de $V$, $V'$ leur ensembles de noeuds et de $E$, $E'$
-  leur ensembles d'arêtes. Soit $f(V, V')$ une fonction de comparaison qui retourne vrai si le sommet de $V$ passé en paramètre
-  est identiques au sommet
-  de $V'$. Le Sous-graphe Maximum Commun est défini comme un graphe $H(M, N)$ avec $M$ et $N$ construits comme suit. $\forall
-  s(u,v)\in~M, f(u, v)$ et $|M|$ est  maximal. $a(s, t) \in N$ ($s \in M$ et $t \in M$) avec $s_1$, $s_2$ les sommets de
-  $G$ et $G'$ composants $s$ et $t_1$, $t_2$ les ceux composants $t$, ssi $\exists v \in V$ entre $s_1$ et $t_1$ et $v' \in
-  V'$ entre $s_2$ et $t_2$.
-\end{definition}
-
-\paragraph{}TODO : Image de MCS
+\paragraph{}Commençons par définir précisément le problème MCS.
+Comme le nom l'indique, le problème MCS cherche à trouver la sous partie commune maximale de deux graphes.
 
 
+% \paragraph{}Commençons par définir mathématiquement le sous graphe maximum commun.
+% 
+% \begin{definition}\textbf{Sous-graphe Maximum Commun :}
+%   Soient deux graphes $G(V, E)$ et $G'(V', E')$, composés respectivement de $V$, $V'$ leur ensembles de noeuds et de $E$, $E'$
+%   leur ensembles d'arêtes. Soit $f(V, V')$ une fonction de comparaison qui retourne vrai si le sommet de $V$ passé en paramètre
+%   est identiques au sommet
+%   de $V'$. Le Sous-graphe Maximum Commun est défini comme un graphe $H(M, N)$ avec $M$ et $N$ construits comme suit. $\forall
+%   s(u,v)\in~M, f(u, v)$ et $|M|$ est  maximal. $a(s, t) \in N$ ($s \in M$ et $t \in M$) avec $s_1$, $s_2$ les sommets de
+%   $G$ et $G'$ composants $s$ et $t_1$, $t_2$ les ceux composants $t$, ssi $\exists v \in V$ entre $s_1$ et $t_1$ et $v' \in
+%   V'$ entre $s_2$ et $t_2$.
+% \end{definition}
 
-\subsection{Isomorphisme de Sous-graphe : définition}
 
-\paragraph{}De la même manière que pour le MCS, définissons précisément ce qu'est l'Isomorphisme de Sous-graphe
+
+\subsection{Isomorphisme de Sous-graphe}
+
+\paragraph{}De la même manière que pour le MCS, définissons mathématiquement ce qu'est l'Isomorphisme de Sous-graphe
 
 \begin{definition}\textbf{Isomorphisme de Sous-graphe :}
  Soient un graphe $G(V, E)$ et un graphe requête $R(M, N)$ plus petit que $G$. Un Isomorphisme de Sous-graphe de $R$ sur $G$ est
@@ -1011,10 +1026,15 @@ problèmes
 \end{definition}
 
 
-\paragraph{}TODO : Image de SI
 
 
-\paragraph{TODO}Conclure la section par la décision de isomorphisme + tiling
+
+
+
+
+
+
+
 
 \section{Algorithmes}
 
