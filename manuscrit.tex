@@ -989,47 +989,98 @@ Cette étape donnant accès à un lien direct entre atomes et monomères, une é
 Formalisons et étudions ici ces deux problèmes afin de choisir celui qui nous utiliserons au sein de notr logiciel d'annotations.
 Voyons les différentes façon de les résoudre ainsi que les forces et faiblesses de ces approches.
 
+
 \subsection{Sous-graphe Maximum Commun}
 
 \subsubsection{Définition}
 
-\paragraph{}Commençons par définir précisément le problème MCS.
-Comme le nom l'indique, le problème MCS cherche à trouver la sous partie commune maximale de deux graphes.
+\paragraph{TODO : schéma MCS}
+
+\paragraph{}Commençons par définir précisément le problème du MCS.
+Comme le nom l'indique, le problème du MCS est un problème de recherche de la sous partie commune maximale entre deux graphes (Voir figure TODO).
+C'est à dire trouver un ensemble de noeuds et de liens entre ces noeuds, qui sont présents à la fois dans les deux graphes.
+Dans la définition de base du MCS, le graphe commun à trouver peut comporter plusieurs composantes connexes.
+Les problème de recherche de sous graphe commun connexe maximal (MCCS) est un problème encore plus difficile car il impose de fortes contraintes supplémentaires.
+Le problème du MCS à été prouvé NP-Complet\cite{garey_computers_1979}, ce qui empèche (en tout cas pour le moment) l'émergence d'algorithmes de résolution polynomiaux efficaces.
+
+\paragraph{}Dans notre cas, nous pouvons effectuer une réduction vers ce problème pour la recherche des monomères.
+Si l'on considère qu'un monomère et un polymère sont des graphes atomiques, alors trouver une sous partie commune à ces deux graphes revient à trouver un endroit où un morceau du monomère est retrouvé dans le peptide.
+En imposant que le graphe commun soit d'une taille minimale fixée, nous pourrons éviter d'avoir des résultats ne contenant que quelques atomes par hasard.
+
+\paragraph{}Du fait de la NP-complétude du problème, trouver des solutions est très compliqué.
+Il existe tout de même quelques algorithmes de résolution exacts mais la majorité des articles à propos de MCS traitent d'heuristiques de résolution rapide.
+Voyons ensemble ces deux catégories d'algorithmes en s'appuyant sur les reviews~\cite{raymond_maximum_2002, ehrlich_maximum_2011}.
 
 
-% \paragraph{}Commençons par définir mathématiquement le sous graphe maximum commun.
-% 
-% \begin{definition}\textbf{Sous-graphe Maximum Commun :}
-%   Soient deux graphes $G(V, E)$ et $G'(V', E')$, composés respectivement de $V$, $V'$ leur ensembles de noeuds et de $E$, $E'$
-%   leur ensembles d'arêtes. Soit $f(V, V')$ une fonction de comparaison qui retourne vrai si le sommet de $V$ passé en paramètre
-%   est identiques au sommet
-%   de $V'$. Le Sous-graphe Maximum Commun est défini comme un graphe $H(M, N)$ avec $M$ et $N$ construits comme suit. $\forall
-%   s(u,v)\in~M, f(u, v)$ et $|M|$ est  maximal. $a(s, t) \in N$ ($s \in M$ et $t \in M$) avec $s_1$, $s_2$ les sommets de
-%   $G$ et $G'$ composants $s$ et $t_1$, $t_2$ les ceux composants $t$, ssi $\exists v \in V$ entre $s_1$ et $t_1$ et $v' \in
-%   V'$ entre $s_2$ et $t_2$.
-% \end{definition}
+\subsubsection{Les méthodes de résolution exactes}
+
+\paragraph{}Au sein des algorithmes de résolution exacte du MCS, il existe deux grandes écoles.
+D'un côté certains algorithmes ne font une réduction du problème en un problème de clique maximale puis résolvent ce second problème.
+D'un autre côté les méthodes de résolution se basent sur des méthodes de backtracking.
+
+
+\paragraph{TODO : schéma clique maximale}
+
+\paragraph{La réduction en clique maximale}
+Il est possible de réduire le problème MCS en un problème de résolution de clique maximale~\cite{pelillo_matching_1999,grosso_simple_2008,rahman_small_2009}.
+Une clique est un ensemble de noeuds dans un graphe tel que tous les noeuds de cet ensemble soient reliés entre eux.
+Rechercher la clique maximale revient à rechercher le sous ensemble maximal de noeuds d'un graphe pour lequels tous les noeuds sont liés les uns aux autres.
+Il est possible d'obtenir plusieurs cliques maximales dans un même graphe.
+Ce problème est également NP-Complet~\cite{akkoyunlu_enumeration_1973}.
+Les résolutions de ce problème sont toutes des dérivées de la recherche exhaustive par force brute.
+Il est possible de ne pas passer par toutes les possibilités en réduisant l'espace de recherche en fonction de l'arité des noeuds ou de leur contexte local mais les algorithmes sont toujours exponentiels.
+Les algorithmes les plus utilisés en pratique sont ceux qui effectuent des recherche par branch \& cut avec des coupes locales intelligentes~\cite{tomita_worst-case_2004}.
+
+\paragraph{TODO : schéma graph compatibilité + résolution MCCS}
+
+\paragraph{}Pour obtenir un MCS à partir de solveur de clique maximale, il est nécessaire de construire un graphe de compatibilité.
+Un graphe de compatibilité (GC) est un graphé créé à partir du croisement des deux graphes (qu'on appélera G et H).
+Pour les noeuds du GC, on génère tous les couples possibles de noeuds issus de G et H dont les labels sont identiques.
+Ensuite on ajoute un lien entre deux noeuds A et B de GC si les deux noeuds issus de G dans A et B sont différents et les deux noeuds de H également.
+Il est à noter que cette étape ajoute beaucoup de liens dans le GC.
+Lorsque l'on recherche un MCCS, il faut en plus que les noeuds issus de G et H soient voisins dans leurs graphes respectifs~\cite{mccreesh_clique_2016}.
+Il ne reste plus qu'à utiliser une méthode de branch \& cut adaptée à la topologie des données pour pouvoir obtenir notre max-clique et par transition notre MCS.
+
+
+\paragraph{TODO : schéma backtrack}
+
+\paragraph{Recherche par Backtracking}
+La majorité des algorithmes exacts effectuent des recherches via des méthodes de backtracking~\cite{manic_branch&cut_2009,mcgregor_backtrack_1982,kawabata_build-up_2011}.
+Un MCS est une bijectection entre deux sous ensemble de noeuds dans deux graphes distincts.
+Les méthodes de backtrack effectuent une reconstruction itérative de cette bijection.
+Les couples de noeuds compatibles, n'étant pas encore présent au sein de la bijection, sont ajoutés un à un.
+Lorsque l'algorithme arrive dans une impasse (plus aucune possibilité d'ajouter un couple), il revient en arrière sur une assoction puis fait un choix différent.
+En sauvegardant l'ensemble qui a contenu le plus de noeuds, on obtient la clique maximale après le parcours de tout l'arbre des possibilités.
+Encore une fois, certaines des techniques citées permettent des accélérations pratiques en coupant des branches de recherhce mais jamais l'ordre de grandeur de la complexité n'est changé.
+Dans le cas des MCCS, il faut obliger une contrainte supplémentaire d'ajout de couple au sein de la bijection~\cite{chang_moderately_2014}.
+Chacun des noeuds du couple à ajouter doit être voisin de l'un des noeuds d'un même couple précédemment inclus dans la bijection.
+
+\paragraph{}Il existe bien d'autres méthodes exactes pour résoudre des MCS pour des graphes particuliers.
+Cependant aucun de ces cas particuliers ne correspond à la réalité des molécules que nous allons traiter.
+Nous ne détaillerons donc pas celles-ci ici.
 
 
 
-\subsection{Isomorphisme de Sous-graphe}
+\subsubsection{Les méthodes heuristiques}
 
-\paragraph{}De la même manière que pour le MCS, définissons mathématiquement ce qu'est l'Isomorphisme de Sous-graphe
+\paragraph{}Il existe une très grande quantité d'heuristiques de résolution du MCS.
+La méthode qui revient le plus souvent est une méthode de recherche par similarités locales~\cite{yan_substructure_2005,willett_similarity_2011}.
+Ce sont des algorithmes utilisés au sein de bases de données pour rechercher des structures chimiques par ressemblance avec une requête.
+Chaque molécule de la base est décomposée en un grand nombre de critères topologiques locaux.
+Ces critères sont entrés dans un vecteur appelé fingerprint.
+Lors d'une requête, le motif recherché est à son tour tranformé en fingerprint et une mesure de similarité est effectuée avec les vecteurs présents en base.
+Les fingerprints les plus proches (fonction de score selon les méthodes~\cite{maggiora_molecular_2011,ndiaye_cp_2011}) sont déclarés en possession d'une sous partie commune.
+Cette méthode ne donne aucune assurance quant à l'obtention de réels MCS.
+C'est la rapidité d'exécution de l'algorithme qui est recherchée.
+Dans notre cas, cette méthode est inutile puisque nous cherchons de vrais MCS.
 
-\begin{definition}\textbf{Isomorphisme de Sous-graphe :}
- Soient un graphe $G(V, E)$ et un graphe requête $R(M, N)$ plus petit que $G$. Un Isomorphisme de Sous-graphe de $R$ sur $G$ est
- une association isomorphe d'une sous partie de $G$ avec $R$. Définissons une fonction booléenne $f(a, b)$ d'association
- de noeuds qui est vraie lorsque les noeuds $a$ de $R$ et $b$ de $G$ sont isomorphes. Un SI peut alors être défini par :
- \begin{itemize}
-  \item $\forall m \in M, \exists v \in V$ tel que $f(m, v)$ est vrai. On appel alors $A(m, v)$ l'association de m et v.
-  \item $\forall \{A(a, b) , A(c, d)\}$ si $\exists n \in N$ reliant $a$ et $c$ alors $\exists e \in E$ reliant $b$ et $d$.
- \end{itemize}
-\end{definition}
-
-
-
-
-
-
+\paragraph{}D'autres méthodes sont plus proches des méthodes exactes par recherche backtracking~\cite{grosso_simple_2008, wang_fmcsr:_2013}.
+Ici, les auteurs construisent plusieurs bijections en parallèle.
+La différence avec les méthodes exactes est qu'ils ne reviennent jamais sur les décisions prises pour construire les MCS.
+Un nombre fixe de bijections est maintenu en permanance.
+Ces bijections ont été sélectionnées par une fonction de score comme étant celles qui avaient le plus de chance de mener à un MCS.
+Au final les bijections trouvées ne seront pas forcément les vrais MCS.
+Cette seconde méthode est très itéressante lorsque l'on cherche un bon raport rapidité/qualité.
 
 
 
@@ -1038,7 +1089,7 @@ Comme le nom l'indique, le problème MCS cherche à trouver la sous partie commu
 
 \section{Algorithmes}
 
-\subsection{Isomorphisme de sous graphe}
+\subsection{Isomorphisme de sous graphe appliqué à la recherche de monomères}
 
 \label{isomorphisme_p}
 
@@ -1080,7 +1131,7 @@ isomorphismes de graphe ou de sous-graphe non labellés d'un graphe $G$ sur un g
     }
   \end{algorithm}
 
-\begin{figure}
+\begin{figure}[!h]
   \includegraphics[width=200px]{Figures/s2m/recherche/VF2.pdf}
   \caption{\label{vf2}Représentation sous forme d'arbre d'une recherche de d'isomorphisme de sous graphe par l'algorithme VF2}
 \end{figure}
@@ -1106,7 +1157,7 @@ trouvé mais en l'enregistrant dans un ensemble puis en continuant l'exploration
 Vu que tout l'arbre est exploré à chaque recherche, l'algorithme est exponentiel.
 Pour être plus précis il est en $O(n^m)$, donc pas calculable dans les pires des cas.
 
-\begin{figure}
+\begin{figure}[!h]
   \includegraphics[width=200px]{Figures/s2m/recherche/VF2_labels.pdf}
   \caption{\label{vf2_labels}Représentation sous forme d'arbre de recherches pour l'algorithme VF2 appliqué aux graphes labellés}
 \end{figure}
