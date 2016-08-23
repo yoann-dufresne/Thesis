@@ -983,10 +983,10 @@ Cette étape donnant accès à un lien direct entre atomes et monomères, une é
 
 
 
-\section{Isomorphisme de Sous-graphe et Sous-graphe Maximum Commun}
+\section{Isomorphisme de Sous-graphe vs Sous-graphe Maximum Commun}
 
-\paragraph{}Nous venons de voir que la recherche de monomères pouvait correspondre à deux problèmes différent de recherche dans des graphes.
-Formalisons et étudions ici ces deux problèmes.
+\paragraph{}Nous venons de voir que la recherche de monomères pouvait correspondre à deux problèmes différents en recherche de graphe.
+Formalisons et étudions ici ces deux problèmes afin de choisir celui qui nous utiliserons au sein de notr logiciel d'annotations.
 Voyons les différentes façon de les résoudre ainsi que les forces et faiblesses de ces approches.
 
 \subsection{Sous-graphe Maximum Commun}
@@ -1890,8 +1890,8 @@ L'algorithme global est paramétrable.
 Pour le précalcul, nous pouvons fixer la variable $k$ qui définira la taille de chaine calculée avec le modèle markovien.
 Nous rappelons encore une fois que cette taille n'aura pas d'influence sur le résultat mais uniquement sur le temps de calcul.
 Pour la partie recherche, nous devrons choisir le nombre de fois où nous effectuerons la ``boucle light''.
-L'un des paramètres est la limite max de nombre de tours.
-Enfin, si nous optons pour la méthode heuristique de modulation, il est également nécessaire de définir une profondeur maximale de modulation.
+Ce paramètre est appelé ``retry'' dans le logiciel (nombre de fois où l'on réexécute la boucle).
+Si nous optons pour la méthode heuristique de modulation, il est également nécessaire de définir une profondeur maximale de modulation (paramètre appelé ``modulation'' dans le logiciel).
 L'influence de ces paramètres sur l'exécution de l'algorithme sera étudiée durant la partie résultats.
 
 
@@ -1904,10 +1904,10 @@ L'influence de ces paramètres sur l'exécution de l'algorithme sera étudiée d
 \subsubsection{Les constituants des jeux de données}
 
 \paragraph{}Nous souhaitons connaître la pertinence des annotations issues de s2m.
-Pour cela, il est nécessaire de construire des jeux de données tests au sein desquels les annotations attendues seront déjà connues.
-Ces bases de test doivent être composées de polymères comprenant leur SMILES, représentation de leur structure atomique ainsi que de l'annotation attendue (un graphe monomérique).
-Pour les entrées de s2m, il est également nécessaire de constituer une base de monomères pour chaque jeu de données différent.
-s2m pré-calculera les indexes pour chaque base de monomère puis sera exécuté sur chaque polymère.
+Pour cela, nous avons construit deux jeux de données tests, au sein desquels les annotations attendues sont déjà connues.
+Ces bases de test sont composées de polymères comprenant leur SMILES, représentation de leur structure atomique ainsi que de l'annotation attendue (un graphe monomérique).
+Pour les entrées de s2m, nous constituons une base de monomères pour chaqun des jeux de données.
+s2m pré-calculera les indexes pour chaque base de monomère puis s'exécutera sur chaque polymère.
 L'annotation de sortie sera alors comparée à l'annotation préexistante pour en définir la qualité.
 
 
@@ -1926,7 +1926,7 @@ La base de monomères est quant à elle constituée de l'ensemble des monomères
 
 \paragraph{}CCD~\cite{westbrook_chemical_2015} est une sous partie de la base de données PDB~\cite{berman_protein_2000} (Protein Data Bank).
 Cette base regroupe toutes les petites molécules présentes dans PDB.
-Parmi celles-ci se trouvent de nombreux petits polymères annotés ainsi que les monomères les constituant.
+Parmi celles-ci se trouvent de nombreux polymères annotés ainsi que les monomères les constituant.
 L'avantage de cette base est que toute molécule y étant présente est accompagnée de son smiles.
 En extrayant les molécules annotées comme polymères, nous avons constitué un second jeu de données.
 Pour constituer la base de monomères dont s2m à besoin en pré-traitement, il nous a suffit d'extraire les molécules présentes dans les annotations polymériques.
@@ -2020,11 +2020,68 @@ Pour cela nous allons prendre comme indicateurs la couverture atomique moyenne, 
 Nous allons faire varier le paramètre du nombre de tour de la boucle light ainsi que la profondeur de modulation pour le pavage avec modulation.
 Nous testerons également les deux algorithmes algorithmes de pavage (MIP et heuristique).
 
+\begin{table}[!h]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+    \hline
+    & \multicolumn{4}{c|}{Heurisitique} & \multicolumn{4}{c|}{MIP} \\
+    \hline
+    Params (R-M) & FN & FP & VP & Sensibilité & VP & FP & FN & Sensibilité \\
+    \hline
+    1 - 1 & 69 & 56 & 217 & 0.759 & 243 & 68 & 31 & 0.887 \\
+    \hline
+    2 - 1 & 69 & 56 & 217 & 0.759 & 243 & 68 & 31 & 0.887 \\
+    \hline
+    1 - 2 & 30 & 62 & 250 & 0.893 & 243 & 68 & 31 & 0.887 \\
+    \hline
+    2 - 2 & 26 & 63 & 253 & 0.907 & 243 & 68 & 31 & 0.887 \\
+    \hline
+    3 - 3 & 26 & 63 & 253 & 0.907 & 243 & 68 & 31 & 0.887 \\
+    \hline
+  \end{tabular}
+  \caption{\label{nor_results}Résultats de s2m sur les données de Norine.
+  Dans la première colonne se trouvent les binomes des valeurs des paramètres retry et modulation}
+\end{table}
 
-\paragraph{TODO : Tableau de chiffres pour les exécutions}
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=450px]{Figures/s2m/results/Norine.png}
+    \caption{\label{nor_graph}Diagramme en barre des résultats sur Norine}
+  \end{center}
+\end{figure}
+
+\begin{table}[!h]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+    \hline
+    & \multicolumn{4}{c|}{Heurisitique} & \multicolumn{4}{c|}{MIP} \\
+    \hline
+    Params (R-M) & FN & FP & VP & Sensibilité & VP & FP & FN & Sensibilité \\
+    \hline
+    1 - 1 & 45 & 44 & 289 & 0.865 & 310 & 56 & 12 & 0.963 \\
+    \hline
+    2 - 1 & 45 & 44 & 289 & 0.865 & 310 & 56 & 12 & 0.963 \\
+    \hline
+    1 - 2 & 10 & 50 & 318 & 0.970 & 310 & 56 & 12 & 0.963 \\
+    \hline
+    2 - 2 & 9 & 51 & 318 & 0.972 & 310 & 56 & 12 & 0.963 \\
+    \hline
+    3 - 3 & 9 & 51 & 318 & 0.972 & 310 & 56 & 12 & 0.963 \\
+    \hline
+  \end{tabular}
+  \caption{\label{ccd_results}Résultats de s2m sur les données de CCD.
+  Dans la première colonne se trouvent les binomes des valeurs des paramètres retry et modulation}
+\end{table}
+
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=450px]{Figures/s2m/results/CCD.png}
+    \caption{\label{nor_graph}Diagramme en barre des résultats sur CCD}
+  \end{center}
+\end{figure}
 
 
-\paragraph{}Comme nous voyons sur le tableau de la figure TODO, l'algorithme de pavage par optimisation linéaire n'est pas du tout sensible au changement de paramètres.
+\paragraph{}Comme nous voyons au sein des tableaux \ref{nor_results} et \ref{ccd_results}, l'algorithme de pavage par optimisation linéaire n'est pas du tout sensible au changement de paramètres.
 Ceci s'explique par le fait qu'il n'a besoin que d'une seule phase light pour parvenir à son optimal local.
 En effet, dans certains cas, le problème et tout de suite résolu après la première phase de pavage succédant l'isomorphisme light car toutes les briques ont été correctement découvertes.
 Dans les autres cas, l'algorithme du MIP a tellement cherché à optimiser les nombre d'atomes couverts à la suite du premier pavage, que la solution intermédiaire est trop distante de la vraie solution pour pouvoir être rattrapée.
@@ -2034,11 +2091,11 @@ On peut voir que l'augmentation du nombre de modulations déclenche une augmenta
 Le nombre de vrais positifs augmente significativement en passant le paramètre de 1 à 2.
 Cette sensibilité s'explique par le fait que la solution optimale et la solution gloutonne ne sont pas immédiatement voisines.
 Il est souvent nécéssaire de déplacer non pas un mais deux monomères pour atteindre l'optimal.
-Le paramètre de nombre de boucle light n'a que très peu d'influence et vient seulement compléter 3 résultats sur les données Norine.
+Le paramètre de nombre de boucle light n'a que très peu d'influence et vient seulement compléter 3 résultats sur les données Norine et un seul sur les données de CCD.
 
-\paragraph{}En conparant les résultats des deux algorithmes, on s'apperçoit que l'algorithme comprenant l'heuristique de pavage obtient de meilleurs résultats (pour une modulation >= 2) que l'algorithme incluant un pavage exact.
+\paragraph{}En comparant les résultats des deux algorithmes, on s'apperçoit que l'algorithme comprenant l'heuristique de pavage obtient de meilleurs résultats (pour une modulation $\ge$ 2) que l'algorithme incluant un pavage exact.
 A nouveau, ce résultat s'explique par le fait que le pavage exact va trop loin dans l'optimisation.
-Si aucune solution totalement couvrante n'est possible avec les résidus issus de l'isomorphisme strict, alors le pavage maximal exact pourra potentiellement créer des solutions optimisées farfelues.
+Si aucune solution totalement couvrante n'est possible avec les résidus issus de l'isomorphisme strict, alors le pavage maximal exact ira parfois créer des solutions optimisées globalement mais farfelues.
 Dans ce cas, la recherche de résidus par isomorphisme light sert peu car les trous dans l'annotation ont été déplacés par l'optimisation.
 Il n'est souvent plus facilement possible de construire l'annotation.
 
