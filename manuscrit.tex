@@ -757,14 +757,19 @@ La génération d'annotations peut se baser sur la recherche d'informations à p
 Dans notre cas, nous n'avons pas choisi de démarrer des clusters de gènes NRPS puisque des modèles déjà bien éprouvés existent déjà (NRPSpredictor, NaPDoS, ...) mais que leurs prédictions ne sont pas garanties.
 Les avancées dans ce domaines viendront avec le nombre d'annotations fiables de binômes clusters/NRP qui permettrons l'amélioration des modèles d'apprentissage actuels.
 
-\paragraph{}Dans notre cas, nous allons partir des structures atomiques pour déduire les composants monomériques.
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=400px]{Figures/s2m/Intro/structures.png}
+    \caption{\label{structures}Structures atomique et monomérique de la Caprieomycin IIA.}
+  \end{center}
+\end{figure}
+
+\paragraph{}Dans notre cas, nous allons partir des structures atomiques pour déduire les composants monomériques (voir figure \ref{structures}).
 De telles structures sont présentes dans de nombreuses bases de données publiques telles que PDB ou PubChem.
 Il est possible de trouver au sein de ces BDD de nombreuses structures atomiques de NRP dont on ne possède pas d'annotation monomérique facilement accessible.
 Notre objectif sera d'être capable pour toute structure moléculaire NRP de déduire sa composition en monomères.
 Ainsi toutes les structures atomiques présentes dans les bases généralistes pourront être annotées et ajoutées à des bases spécialisées telles que Norine.
 Ce type d'annotation pourra également être effectué sur toutes les nouvelles structures atomiques ajoutées.
-
-\paragraph{TODO : figure structure atomique vers monomérique}
 
 
 
@@ -915,21 +920,31 @@ Il sera nécessaire de modifier les solutions incomplètes pour essayer de les a
 Contrairement à CHUCKLES, nous aurons donc besoin de connaître les différents monomères candidats à la composition du polymère même lorsqu'ils sont chevauchant à des monomères déjà placés.
 Si d'un côté nous recherchons les monomères au sein du NRP puis de l'autre nous assemblons ceux trouvés, alors nous pouvons séparer notre programme en deux sous-problèmes complètement distincts.
 
-\paragraph{TODO : Schéma étape 1}
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=400px]{Figures/s2m/Intro/searching.png}
+    \caption{\label{search_fig}Première étape : Recherche des monomères (elipses colorées) sur le peptide à annoter (fil noir bouclé).}
+  \end{center}
+\end{figure}
 
 \paragraph{}Dans un premier temps, nous allons chercher à déterminer quels sont les monomères qui pourraient composer le peptide étudié.
 En utilisant la base Norine, nous pouvons indépendamment rechercher chacun des monomères connus au sein de la molécule à annoter.
 La recherche exacte d'un monomère au sein d'un peptide est donc notre premier sous problème à résoudre.
-Ce sous problème sera appelé la ``recherche''.
+Ce sous problème sera appelé la ``recherche'' (voir figure \ref{search_fig}).
 
-\paragraph{TODO : Schéma étape 2}
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=400px]{Figures/s2m/Intro/tiling.png}
+    \caption{\label{tiling_fig}Seconde étape : Tri des monomères trouvés pour former une structure monomérique non chevauchante de couverture maximale.}
+  \end{center}
+\end{figure}
 
 \paragraph{}Dans un second temps, nous devrons choisir parmi tous les monomères candidats issus de la recherche, lesquels composent réellement le polymère.
 Nous aurons plusieurs contraintes associées à ce problème.
 Aucun des monomères choisis dans la solution ne peux être chevauchant avec un autre.
 En effet, aucun atome ne peut provenir de deux molécules différentes et donc aucune sous partie de monomères ne peut être chevauchante avec un autre monomère.
 De plus nous allons chercher à obtenir une annotation complète des peptides, ce qui correspond maximiser les atomes du polymère couvert par des monomères.
-On appèlera cette étape, l'étape de pavage.
+On appèlera cette étape, l'étape de ``pavage'' (voir figure \ref{tiling_fig}.
 
 
 \subsubsection{Des molécules aux graphes}
