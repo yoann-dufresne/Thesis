@@ -599,7 +599,7 @@ Dans le cas des NRP, l'interprétation de l'ADN indique uniquement les séquence
 Il est nécessaire ensuite de comprendre précisément le fonctionnement de ces NRPS pour le NRP depuis leur séquence.
 Cependant, comme nous l'avons vu lors des descriptions de logiciels d'analyse de NRPS, cette compréhension ne donne pas encore de résultats parfaits et complets.
 Les logiciels ne prédisent pas précisément les monomères capturés par les domaines A.
-Par exemple il est possible d'obtenir une prédiction de type ``c'un monomère polaire'' sans avoir plus de détails.
+Par exemple, il est possible d'obtenir une prédiction de type ``c'un monomère polaire'' sans avoir plus de détails.
 Il est également possible d'obtenir des structures monomériques incomplètes, en manquant par exemple les composés capturés par des domaines C starter.
 Enfin, dans la majorité des cas, il est impossible de prédire la forme exacte pour des structures non linéaires.
 
@@ -620,18 +620,18 @@ Enfin, à partir des morceaux identifiés, il est parfois possible de reconstrui
 Ces bases donnent par exemple les masses des acides aminés classiques et de leur dérivés proches.
 Si la technologie de spectrométrie utilisée casse les molécules au niveau de leurs liaisons peptidiques, la reconstruction peut directement obtenir une annotation monomérique de toutes les parties composées d'acides aminés classiques.
 Cependant, les NRP étant composés de plus de 500 monomères différents, l'annotation monomérique directement issue des analyses de spectres n'est pas suffisante.
-Beaucoup de monomères n'étant pas proches de molécules classiques, ne sont pas répertoriés parmi les masses classiques.
-De plus les peptides comportant des liaisons non peptidiques ne sont pas facilement découpables facilement sur certaines technologies de spectrométrie.
+Beaucoup de monomères, n'étant pas proches de molécules classiques, ne sont pas répertoriés parmi les masses classiques.
+De plus, les peptides comportant des liaisons non peptidiques ne sont pas découpables facilement sur certaines technologies de spectrométrie.
 Pour finir l'annotation d'un NRP, il est nécessaire d'avoir recours à un spécialiste du domaine afin qu'il nomme chacun des monomères non annotés.
 
-\paragraph{}L'outil d'analyse CycloBranch~\cite{novak_cyclobranch:_2015} essaye lui de remonter directement à la structure monomérique des NRP.
+\paragraph{}L'outil d'analyse CycloBranch~\cite{novak_cyclobranch:_2015} essaie, lui, de remonter directement à la structure monomérique des NRP.
 En essayant de casser les molécules uniquement au niveau des liaisons NRP attendues, le logiciel génère des spectres qu'il analyse ensuite informatiquement.
 Ayant constitué une base de données de masses de monomères NRP, il arrive à contourner une partie du problème de manque de masses de référence.
 Les auteurs construisent ensuite une multitude de graphes monomériques possibles en essayant différentes formes branchées et cyclisées.
 Puis, pour choisir parmi les différents peptides probables, ils utilisent une méthode de génération de spectres théoriques afin de les comparer au spectre réel.
 Cette re-génération de spectre élimine de nombreux candidats et de parfois remonter jusqu'à la structure monomérique du NRP.
 Cependant, la méthode n'obtient pas toujours une unique reconstruction.
-De plus les résultats obtenus dans l'article ne semble pas tous être reproductibles (communication personnelle).
+De plus, les résultats obtenus dans l'article ne semblent pas tous être reproductibles (communication personnelle).
 
 \paragraph{}Il existe également un logiciel appelé NRPQuest~\cite{mohimani_nrpquest:_2014}qui croise les spectres obtenus avec des domaines prédits par des approches d'analyses NRPS (les résultats de l'article sont obtenus avec NRPSPredictor2).
 En mettant en relation les différents domaines prédits de l'ADN avec le graphe de reconstruction d'une molécule issue du spectre, ils arrivent à discriminer facilement les compositions et formes des NRP calculés.
@@ -656,13 +656,13 @@ Cette technique est également très coûteuse de part les équipements nécessa
 \subsection{Les bases de connaissance de NRP}
 
 \paragraph{}Les bases de NRP sont très rares en comparaison des bases de NRPS.
-Quasiment toutes les bases de NRPS que nous avons précédemment présentées comportent également les structures de NRP prédis.
+Quasiment toutes les bases de NRPS que nous avons précédemment présentées comportent également les structures de NRP prédits.
 Cependant, comme nous l'avons déjà dit plusieurs fois, ces données ne sont pas toutes fiables.
 Beaucoup des structures sont inexactes, voir incomplètes, à cause des prédictions.
 
 \paragraph{Norine, la base de référence des NRP}
 Norine~\cite{caboche_norine:_2008} est la base de données de référence pour les peptides non ribosomiques annotés.
-Cette base de donnée a été développé et est entretenue par l'équipe Bonsai de l'université de Lille 1, équipe au sein de laquelle j'effectue ma thèse.
+Cette base de données a été développée et est entretenue par l'équipe Bonsai de l'université de Lille 1, équipe au sein de laquelle j'effectue ma thèse.
 Contrairement aux autres bases, c'est une base entièrement dédiée aux NRP.
 Tous sont extraits de publications présentant les molécules et déterminant leur caractère NRP.
 Chaque molécule entrée dans la base est accompagnée de sa structure monomérique (et parfois de sa structure atomique).
@@ -673,7 +673,7 @@ Cependant, le processus d'ajout d'informations, strict pour préserver la qualit
 Soulignons tout de même le travail effectué par les auteurs initiaux qui ont entré plus de 1200 annotations à la main.
 
 
-\paragraph{MIBiG}Revenons sur MIBiG, la base que nous avions présenté parmi les bases NRPS.
+\paragraph{MIBiG}Revenons sur MIBiG, la base que nous avions présentée parmi les bases NRPS.
 MIBiG est la seule base hors Norine encore active et contenant des annotations vérifiées de NRP.
 Comme nous l'avons déjà dit lors de la présentation de cette base, MIBiG est une base surtout dédiée à l'annotation de NRPS.
 Les annotations de NRPS sont accompagnées d'informations sur les peptides produits.
