@@ -1060,7 +1060,6 @@ Cependant aucun de ces cas particuliers ne correspond à la réalité des moléc
 Nous ne détaillerons donc pas celles-ci ici.
 
 
-
 \subsubsection{Les méthodes heuristiques}
 
 \paragraph{}Il existe une très grande quantité d'heuristiques de résolution du MCS.
@@ -1083,11 +1082,86 @@ Au final les bijections trouvées ne seront pas forcément les vrais MCS.
 Cette seconde méthode est très itéressante lorsque l'on cherche un bon raport rapidité/qualité.
 
 
+\subsection{Isomorphisme de sous graphe}
+
+\subsubsection{Définition}
+
+\paragraph{TODO : schéma SI}
+
+\paragraph{}Définissions à son tour le problème SI.
+Comme le nom l'indique, le problème SI est un problème de recherche d'un graphe dans une sous partie d'un autre.
+C'est à dire qu'un graphe G est sous graphe d'un graphe H si tous les noeuds et arétes de G doivent être retrouvés dans H structurés de la même manière pour dire que G et un SI de H.
+Tout comme le MCS, le problème du SI à été prouvé NP-Complet\cite{garey_computers_1979}.
+
+\paragraph{}Pour notre problème, nous pouvons à nouveau effectuer une réduction vers le problème SI puis résoudre ce problème par des algorithmes déjà publiés.
+Nous souhaitons rechercher des monomères au sein de peptides, ce qui reviendrait à chercher plusieurs fois un petit graphe atomique monomérique dans un gros graphe atomique peptidique.
+
+\paragraph{}Les méthodes de résolution actuelles ne sont toutes très similaires et dérivent d'une même technique de backtracking.
+La plupart de ces méthodes sont des résolutions exactes.
+Bien que NP-complet, ces algorithmes restent très praticable lorsqu'on ne recherche pas au sein de graphes répétitifs (qui sont constitués de multiples répétitions d'un même morceau).
+Voyons ensemble quelques uns de ces algorithmes.
+
+
+\subsubsection{L'algorithme de Ullman}
+
+\paragraph{TODO : figure Ullman}
+
+\paragraph{}L'algorithme de Ullman est l'un des premiers à avoir été proposé dans les années 70~\cite{ullmann_algorithm_1976}.
+Certaines de ses variantes sont toujours utilisées dans certaies librairies telles que Openbabel~\cite{oboyle_open_2011}.
+L'algorithme se base sur la matrice de compatibilité entre les graphes (voir figure TODO).
+Une matrice de compatibilité est une matrice dont chaque ligne représente les noeuds de G et chaque colonne les noeuds de H.
+Une case de la matrice comporte un 1 si les labels des noeuds de la case sont compatibles (labels) et que le degré du noeuds de H est suppérieur ou égal au degré du noeud de G.
+Pour obtenir un SI à partir de cette matrice il faut retirer certains 1 de la matrice jusqu'à obtenir un 1 par ligne et 0 ou 1 par colonne.
+A chaque étape une ligne est choisie (de préférence celles contenant le moins de 1 en priorité).
+Au sein de cette ligne l'algorithme choisi une colonne contenant un 1 et considère que c'est le binome des noeuds ligne/colonne qui fait partie de l'isomorphisme.
+De ce fait tous les autres 1 de la ligne et de la colonne sont mis à 0.
+À ce moment, si au moins une ligne a été vidée de tout ses 1, c'est que l'isomorphisme n'est pas possible et il faut revenir à l'étape précédente.
+Sinon, il suffit de continuer récurssivement jusqu'à obtenir un unique 1 par ligne.
+En choisissant bien les lignes et les colonnes par lesquels l'algorithme commence, on arrive à obtenir des temps d'exécution très courts pour la recherche d'un SI.
+Cependant, pour obtenir tous les SI, il faut parcourir tout l'arbre des possibles, ce qui ralentit l'algorithme.
+
+
+\subsubsection{Les algorithmes de backtracking classique}
+
+\paragraph{TODO : schéma arbre}
+
+\paragraph{}Tout comme pour le MCS, le SI peut être résolu par un backtracking classique par pairage de noeuds.
+C'est la méthode majoritairement utilisée puisqu'elle fonctionne très bien en pratique.
+Contrairement à l'algorithme d'Ullman qui nécessite d'effectuer des opération sur de potentiellement très grandes matrices, la méthode par backtracking classique n'a pas besoin de grands espaces mémoire.
+L'algorithme VF2~\cite{cordella_subgraph_2004} utilisent ce principe.
+Les SI se forment par ajout successif de couples de noeuds compatibles avec retour en arrière si il n'est plus possible d'avoir un couple.
+Nous donnerons plus de détails sur cet algorithme en section \ref{VF2_p}.
+Cet algorithme est utilisé dans les grandes librairies logicielles de chimie comme CDK~\cite{steinbeck_chemistry_2003}.
+
+
+\subsubsection{D'autres algorithmes de SI}
+
+\paragraph{}Contrairement à la recherche de MCS, il n'existe pas beaucoup d'alternatives heuristiques pour ce problème.
+Ceci peut s'expliquer par le fait que des algorithmes praticables existent pour trouver les SI.
+De plus, les heuristiques de MCS permettent d'obtenir des résultats de SI en ajoutant des contraintes (Le SI étant un cas particulier du MCS).
+Dans tous les cas, ces heuristiques de SI sont des dérivés de la technique par backtracking~\cite{kaijar_developing_2012}.
+Ces algorithmes essayent en supplément d'éviter l'exploration de toutes les branches par de la sélection des plus ``prometteuses''.
+
+\paragraph{}Il existe également de nombreux algorithmes pour des cas particuliers de SI.
+Par exemple il est possible de résoudre le problème en temps polynomial pour des arbres~\cite{shamir_faster_1997}, des graphes planaires~\cite{eppstein_subgraph_1995,dorn_planar_2009} ou des graphes de treewidth bornés~\cite{hajiaghayi_subgraph_2007}.
+Dans tous les cas, il est possible de trouver au moins une molécule ne répondant pas à l'un de ces critère et c'est pour cela que nous ne les utiliserons pas.
+
+
+\subsection{Choisir l'algorithme de recherche de monomères}
+
+\paragraph{}Pour pouvoir rechercher les monomères nous devions choisir entre toutes les appoches algorithmiques citées ci-dessus.
+Premièrement, lorsque nous recherchons un monomère dans un peptide, nous souhaitons connaître tous les endroits où il peut apparaitre.
+Nous ne souhaitons donc pas utiliser d'approches heuristiques.
+Secondement, le MCS ne parait pas très pratique dans notre cas.
+En effet, les NRP regorgent de monomères proches les uns des autres.
+Il n'est donc pas facile lorsque l'on obtient un résultat, de savoir si la molécule trouvée est la bonne ou si c'est le monomère voisin à un atome de distance qui a été détecté.
+Enfin, en comparant les algorithmes de recherche exacte de solutions, ceux de résolution de SI sont plus adaptés et rapide en pratique.
+C'est pourquoi nous avons choisi d'effectuer la recherche des monomères en utilisant l'algorithme le plus communément utilisé par la communauté : VF2.
 
 
 
 
-\section{Algorithmes}
+\section{Construction algorithmique}
 
 \subsection{Isomorphisme de sous graphe appliqué à la recherche de monomères}
 
@@ -1099,6 +1173,8 @@ Dans cette partie nous allons présenter en détail l'algorithme classique de re
 Puis nous montrerons en quoi les labels des noeuds du graphes influencent le temps de calcul afin en déduire une méthode de recherche efficace.
 
 \subsubsection{L'algorithme originel VF2}
+
+\label{VF2_p}
 
 \paragraph{}Comme nous l'avons déjà évoqué dans l'état de l'art de cette partie, l'algorithme VF2 permet d'effectuer des
 isomorphismes de graphe ou de sous-graphe non labellés d'un graphe $G$ sur un graphe $H$.
