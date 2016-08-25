@@ -60,7 +60,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
-     inkscape:cx="558.95638"
+     inkscape:cx="211.09924"
      inkscape:cy="235.07665"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -88,7 +88,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -295,80 +295,65 @@
          inkscape:export-xdpi="220"
          inkscape:export-ydpi="220" />
     </g>
-    <g
-       id="g5100"
-       transform="translate(92.857143,11.428572)">
-      <path
-         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:3.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="m 547.83739,-357.31837 -160,0"
-         id="path5073"
-         inkscape:connector-curvature="0" />
-      <path
-         inkscape:connector-curvature="0"
-         id="path5096"
-         d="m 707.12311,-357.67552 -160,0"
-         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:3.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <path
-         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:3.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="m 706.40882,-198.74694 0,-160"
-         id="path5098"
-         inkscape:connector-curvature="0" />
-      <ellipse
-         inkscape:export-ydpi="220"
-         inkscape:export-xdpi="220"
-         inkscape:export-filename="/media/dufresne/XUBUNTU/Work/Bonsai/présentations/monomeric_color.png"
-         ry="33.62442"
-         rx="35.288189"
-         transform="scale(-1,-1)"
-         cy="357.79178"
-         cx="-547.11407"
-         id="ellipse5075"
-         style="opacity:0.98999999;fill:#5fc6ed;fill-opacity:1;stroke:#0071af;stroke-width:1.01385164;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <ellipse
-         inkscape:export-ydpi="220"
-         inkscape:export-xdpi="220"
-         inkscape:export-filename="/media/dufresne/XUBUNTU/Work/Bonsai/présentations/monomeric_color.png"
-         ry="33.636143"
-         rx="33.66275"
-         transform="scale(1,-1)"
-         cy="358.42917"
-         cx="388.19925"
-         id="ellipse5066"
-         style="opacity:0.98999999;fill:#4ed04e;fill-opacity:1;stroke:#00640c;stroke-width:0.99039912;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-      <ellipse
-         cy="207.94525"
-         cx="476.12531"
-         id="ellipse5077"
-         style="opacity:0.98999999;fill:#ff8787;fill-opacity:1;stroke:#980000;stroke-width:0.99769413;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         transform="scale(1,-1)"
-         rx="34.164181"
-         ry="33.632496"
-         inkscape:export-filename="/media/dufresne/XUBUNTU/Work/Bonsai/présentations/monomeric_color.png"
-         inkscape:export-xdpi="220"
-         inkscape:export-ydpi="220" />
-      <ellipse
-         style="opacity:0.98999999;fill:#4ed04e;fill-opacity:1;stroke:#00640c;stroke-width:0.99039912;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         id="ellipse5092"
-         cx="706.77069"
-         cy="203.07202"
-         transform="scale(1,-1)"
-         rx="33.66275"
-         ry="33.636143"
-         inkscape:export-filename="/media/dufresne/XUBUNTU/Work/Bonsai/présentations/monomeric_color.png"
-         inkscape:export-xdpi="220"
-         inkscape:export-ydpi="220" />
-      <ellipse
-         inkscape:export-ydpi="220"
-         inkscape:export-xdpi="220"
-         inkscape:export-filename="/media/dufresne/XUBUNTU/Work/Bonsai/présentations/monomeric_color.png"
-         ry="33.636143"
-         rx="33.66275"
-         transform="scale(1,-1)"
-         cy="358.07202"
-         cx="706.41357"
-         id="ellipse5094"
-         style="opacity:0.98999999;fill:#4ed04e;fill-opacity:1;stroke:#00640c;stroke-width:0.99039912;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-    </g>
+    <path
+       inkscape:connector-curvature="0"
+       id="path5073"
+       d="m 640.69453,-345.8898 -160,0"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:3.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:3.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 799.98025,-346.24695 -160,0"
+       id="path5096"
+       inkscape:connector-curvature="0" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path5098"
+       d="m 799.26596,-187.31837 0,-160"
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:3.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <ellipse
+       style="opacity:0.98999999;fill:#5fc6ed;fill-opacity:1;stroke:#0071af;stroke-width:1.01385164;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="ellipse5075"
+       cx="-639.97119"
+       cy="346.36322"
+       transform="scale(-1,-1)"
+       rx="35.288189"
+       ry="33.62442"
+       inkscape:export-filename="/media/dufresne/XUBUNTU/Work/Bonsai/présentations/monomeric_color.png"
+       inkscape:export-xdpi="220"
+       inkscape:export-ydpi="220" />
+    <ellipse
+       style="opacity:0.98999999;fill:#4ed04e;fill-opacity:1;stroke:#00640c;stroke-width:0.99039912;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="ellipse5066"
+       cx="481.0564"
+       cy="347.00061"
+       transform="scale(1,-1)"
+       rx="33.66275"
+       ry="33.636143"
+       inkscape:export-filename="/media/dufresne/XUBUNTU/Work/Bonsai/présentations/monomeric_color.png"
+       inkscape:export-xdpi="220"
+       inkscape:export-ydpi="220" />
+    <ellipse
+       inkscape:export-ydpi="220"
+       inkscape:export-xdpi="220"
+       inkscape:export-filename="/media/dufresne/XUBUNTU/Work/Bonsai/présentations/monomeric_color.png"
+       ry="33.636143"
+       rx="33.66275"
+       transform="scale(1,-1)"
+       cy="191.64345"
+       cx="799.62781"
+       id="ellipse5092"
+       style="opacity:0.98999999;fill:#4ed04e;fill-opacity:1;stroke:#00640c;stroke-width:0.99039912;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <ellipse
+       style="opacity:0.98999999;fill:#4ed04e;fill-opacity:1;stroke:#00640c;stroke-width:0.99039912;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="ellipse5094"
+       cx="799.27069"
+       cy="346.64346"
+       transform="scale(1,-1)"
+       rx="33.66275"
+       ry="33.636143"
+       inkscape:export-filename="/media/dufresne/XUBUNTU/Work/Bonsai/présentations/monomeric_color.png"
+       inkscape:export-xdpi="220"
+       inkscape:export-ydpi="220" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow2Mend)"
        d="m 970,-267.63781 c -25,-15 -65,-20 -115,-10"
