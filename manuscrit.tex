@@ -1120,17 +1120,28 @@ Voyons ensemble quelques uns de ces algorithmes.
 
 \subsubsection{L'algorithme de Ullman}
 
-\paragraph{TODO : figure Ullman}
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=450px]{Figures/s2m/MCS-SI/ullman.png}
+    \caption{\label{ullman_fig}Recherche d'un isomorphiqme de sous graphe par l'algorithme d'Ullman.
+    Dans la partie construction, vous pouvez voir la matrice créée à partir des graphes G et H.
+    Dans la partie recherche sont présentées les étapes successives de création d'un SI (voir texte pour détail).
+    Si nous avions voulu obtenir tous les isomorphismes (et pas juste un seul) il aurait fallu continuer le backtracking jusqu'au bout.}
+  \end{center}
+\end{figure}\paragraph{TODO : figure Ullman}
 
 \paragraph{}L'algorithme de Ullman est l'un des premiers à avoir été proposé dans les années 70~\cite{ullmann_algorithm_1976}.
 Certaines de ses variantes sont toujours utilisées dans certaines librairies telles que Openbabel~\cite{oboyle_open_2011}.
-L'algorithme se base sur la matrice de compatibilité entre les graphes (voir figure TODO).
+L'algorithme se base sur la matrice de compatibilité entre les graphes (voir figure \ref{ullman_fig}).
 Une matrice de compatibilité est une matrice dont chaque ligne représente les noeuds de G et chaque colonne les noeuds de H.
 Une case de la matrice comporte un 1 si les labels des noeuds de la case sont compatibles (labels) et que le degré du noeuds de H est supérieur ou égal au degré du noeud de G.
-Pour obtenir un SI à partir de cette matrice il faut retirer certains 1 de la matrice jusqu'à obtenir un 1 par ligne et 0 ou 1 par colonne.
-A chaque étape une ligne est choisie (de préférence celles contenant le moins de 1 en priorité).
-Au sein de cette ligne l'algorithme choisi une colonne contenant un 1 et considère que c'est le binôme des noeuds ligne/colonne qui fait partie de l'isomorphisme.
-De ce fait tous les autres 1 de la ligne et de la colonne sont mis à 0.
+Pour obtenir un SI à partir de cette matrice il faut retirer des 1 de la matrice jusqu'à en obtenir uns seul 1 par ligne.
+A chaque étape, un noeud de G est choisi pour pratiquer continuer l'isomorphisme.
+Ce noeud correspond à une ligne.
+Puis une colonne est choisie parmis celles dont la colonne contient un 1 sur la ligne précédemment choisie.
+Le couple ligne/colonne nous donne le couple noeud de G/noeud de H à peut être ajouter à l'isomorphisme.
+Avant cet ajout, il faut également vérifier que tous les voisins du noeud de H correspondent bien aux voisins du noeud de G (condition non respectée à l'étape 2 et 5 de la partie recherche du schéma).
+Puisque nous ajoutons ce binome à l'isomorphisme, il faut remplacer tous les 1 de la ligne et la colonne choisies par des 0 (excepté pour la case du binome).
 À ce moment, si au moins une ligne a été vidée de tout ses 1, c'est que l'isomorphisme n'est pas possible et il faut revenir à l'étape précédente.
 Sinon, il suffit de continuer récursivement jusqu'à obtenir un unique 1 par ligne.
 En choisissant bien les lignes et les colonnes par lesquels l'algorithme commence, on arrive à obtenir des temps d'exécution très courts pour la recherche d'un SI.
