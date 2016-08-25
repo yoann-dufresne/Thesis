@@ -1030,12 +1030,7 @@ Voyons ensemble ces deux catégories d'algorithmes en s'appuyant sur les reviews
 D'un côté certains algorithmes ne font une réduction du problème en un problème de clique maximale puis résolvent ce second problème.
 D'un autre côté les méthodes de résolution se basent sur des méthodes de backtracking.
 
-\begin{figure}[!h]
-  \begin{center}
-    \includegraphics[width=450px]{Figures/s2m/MCS-SI/clique_solve.png}
-    \caption{\label{clique_solve_fig}Résolution d'un MCS par réduction en clique maximale.}
-  \end{center}
-\end{figure}
+
 
 \paragraph{La réduction en clique maximale}
 Il est possible de réduire le problème MCS en un problème de résolution de clique maximale~\cite{pelillo_matching_1999,grosso_simple_2008,rahman_small_2009}.
@@ -1046,9 +1041,14 @@ Ce problème est également NP-Complet~\cite{akkoyunlu_enumeration_1973}.
 Les résolutions de ce problème sont toutes des dérivées de la recherche exhaustive par backtracking.
 Il est possible de ne pas passer par toutes les combinaisons possibles en réduisant l'espace de recherche en fonction de l'arité des noeuds ou de leur contexte local mais les algorithmes restent exponentiels~\cite{tomita_worst-case_2004}.
 
-\paragraph{TODO : schéma graph compatibilité + résolution MCS}
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=400px]{Figures/s2m/MCS-SI/clique_solve.png}
+    \caption{\label{clique_solve_fig}Résolution d'un MCS par réduction en clique maximale.}
+  \end{center}
+\end{figure}
 
-\paragraph{}Pour obtenir un MCS à partir de solveur de clique maximale, il est nécessaire de construire un graphe de compatibilité.
+\paragraph{}Pour obtenir un MCS à partir de solveur de clique maximale, il est nécessaire de construire un graphe de compatibilité (voir schéma \ref{clique_solve_fig}).
 Un graphe de compatibilité (GC) est un graphe créé à partir du croisement des deux graphes (qu'on appellera G et H).
 Pour les noeuds du GC, on génère tous les couples $(x, y)$ possibles avec $x$ issu de G et $y$ de H et dont les labels sont identiques.
 Ensuite on ajoute un lien entre deux couples $(x_1 , y_1)$ et $(x_2 , y_2)$ de GC si $x_1$ est voisin de $x_2$ dans G et $y_1$ voisin de $y_2$ dans H.
@@ -1056,7 +1056,17 @@ On ajoute églament un lien si les $x$ sont non voisins et les $y$ également.
 En résolvant le problème de clique maximale sur le GC, on obtient le MCS.
 
 
-\paragraph{TODO : schéma backtrack}
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=400px]{Figures/s2m/MCS-SI/backtracking_solve.png}
+    \caption{\label{backtracking_solve}Exemple de résolution de MCS par un backtracking naïf.
+    L'arbre part d'une bijection vide et ajoute un couple à chaque étape.
+    Parfois l'algorithme tombe sur un couple compatible mais dont les voisins ne sont pas le bijection.
+    La solution est alors rejetée (croix rouge).
+    La solution est trouvé par l'ensemble des chemins qui mènent aux feuilles valides les plus profondes dans l'arbre.}
+  \end{center}
+\end{figure}
+
 
 \paragraph{Recherche par Backtracking}
 La majorité des algorithmes exacts effectuent des recherches via des méthodes de backtracking~\cite{manic_branch&cut_2009,mcgregor_backtrack_1982,kawabata_build-up_2011}.
@@ -1153,8 +1163,6 @@ Cependant, pour obtenir tous les SI, il faut parcourir tout l'arbre des possible
 
 
 \subsubsection{Les algorithmes de backtracking classique}
-
-\paragraph{TODO : schéma arbre}
 
 \paragraph{}Tout comme pour le MCS, le SI peut être résolu par un backtracking classique par pairage de noeuds.
 C'est la méthode majoritairement utilisée puisqu'elle fonctionne très bien en pratique.
