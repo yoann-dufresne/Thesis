@@ -964,17 +964,6 @@ Dans ce cas, les noeuds sont les monomères et leur labels leurs noms.
 Les liens sont les liaisons formées entre les monomères pour construire le peptide.
 Passer du graphe atomique au graphe monomérique revient donc à une contraction de noeuds.
 
-\paragraph{TODO : Schéma graph atomique + graph monomérique}
-
-
-
-\paragraph{Recherche de monomère}Rechercher un monomère dans un polymère revient à rechercher un petit graphe atomique $S$ dans un plus gros graphe $G$.
-Deux cas sont alors possibles, soit nous recherchons à trouver exactement $S$ dans $G$, soit nous cherchons une approximation de $S$ dans $G$.
-Dans le premier cas, nous devons nous intéresser à un problème appelé ``Isomorphisme de Sous-graphe'' (en anglais Subgraph Isomorphism (SI)).
-Dans le second cas, nous nous intéresserons au problème du ``Sous-graphe Maximum Commun'' (en anglais Maximum Common Subgraph (MCS)).
-Les recherches de SI ou de MCS ont toutes deux été prouvées NP-Complet dans le cas général.
-Heureusement, il existe pour chacun plusieurs algorithmes praticable en fonction des propriétés des graphes auxquels ils s'appliquent.
-
 
 \subsubsection{Formalisation en problèmes de graphes}
 
@@ -1009,10 +998,16 @@ Voyons les différentes façon de les résoudre ainsi que les forces et faibless
 
 \subsubsection{Définition}
 
-\paragraph{TODO : schéma MCS}
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=450px]{Figures/s2m/MCS-SI/mcs.png}
+    \caption{\label{mcs_fig}MCS obtenu à partir des graphes G et H.
+    Le MCS obtenu n'est pas connexe à cause du fait que les liens vers le noeud rouge ne soient pas les mêmes das G et H.}
+  \end{center}
+\end{figure}
 
 \paragraph{}Commençons par définir précisément le problème du MCS.
-Comme le nom l'indique, le problème du MCS est un problème de recherche de la sous partie commune maximale entre deux graphes (Voir figure TODO).
+Comme le nom l'indique, le problème du MCS est un problème de recherche de la sous partie commune maximale entre deux graphes (Voir figure \ref{mcs_fig}).
 C'est à dire trouver un ensemble de noeuds et de liens entre ces noeuds, qui sont présents à la fois dans les deux graphes.
 Dans la définition de base du MCS, le graphe commun à trouver peut comporter plusieurs composantes connexes.
 Les problème de recherche de sous graphe commun connexe maximal (MCCS) est un problème encore plus difficile car il impose de fortes contraintes supplémentaires.
@@ -1101,11 +1096,17 @@ Cette seconde méthode est très intéressante lorsque l'on cherche un bon rappo
 
 \subsubsection{Définition}
 
-\paragraph{TODO : schéma SI}
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=450px]{Figures/s2m/MCS-SI/si.png}
+    \caption{\label{SI_fig}SI obtenu à partir de la recherche du graphe G dans H.
+    Sur cet exemple il n'y a qu'une seule possibilité mais si nous avions cherché une chaine comme Vert-Rouge-Bleu, nous aurions eu deux SI différents.}
+  \end{center}
+\end{figure}
 
 \paragraph{}Définissions à son tour le problème SI.
 Comme le nom l'indique, le problème SI est un problème de recherche d'un graphe dans une sous partie d'un autre.
-C'est à dire qu'un graphe G est sous graphe d'un graphe H si tous les noeuds et arêtes de G doivent être retrouvés dans H structurés de la même manière pour dire que G et un SI de H.
+C'est à dire qu'un graphe G est sous graphe d'un graphe H si tous les noeuds et arêtes de G doivent être retrouvés dans H structurés de la même manière pour dire que G et un SI de H (voir figure \ref{SI_fig}).
 Tout comme le MCS, le problème du SI à été prouvé NP-Complet\cite{garey_computers_1979}.
 
 \paragraph{}Pour notre problème, nous pouvons à nouveau effectuer une réduction vers le problème SI puis résoudre ce problème par des algorithmes déjà publiés.
@@ -1914,9 +1915,13 @@ Si la solution n'est pas complète, nous pouvons relancer la procédure récursi
 La récursion se termine soit lorsqu'une solution complète est trouvée soit lorsqu'il n'est plus possible de choisir de résidus
 couvrant des zones non couvertes de la solution partielle.
 
-\begin{figure}
-  \includegraphics[width=300px]{Figures/s2m/pavage/modulation.png}
-  \caption{\label{modulation}En vert le chemin prit par l'algorithme glouton pour générer la chaîne du motif a-b-d}
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=350px]{Figures/s2m/pavage/modulation.png}
+    \caption{\label{modulation}Modulation de la solution initiale (à gauche) pour obtenir une solution optimale (à droite) en remplaçant des monomères choisis par d'autres laissés de côté après l'étape de pavage.
+    En haut, les monomères issus de la recherche.
+    C'est parmi ceux-ci que la modulation va choisir des remplacants de la solution actuelle.}
+  \end{center}
 \end{figure}
 
 \paragraph{}
@@ -1986,8 +1991,10 @@ de voisin. Cette charge positive déplacée est compensée par une charge négat
 d'électron se concrétise par le déplacement d'un liaison double.
 
 \begin{figure}
-  \includegraphics[width=300px]{Figures/s2m/residues/tautomers.png}
-  \caption{\label{tautomer}Tautomérie d'une molécule}
+  \begin{center}
+    \includegraphics[width=300px]{Figures/s2m/residues/tautomers.png}
+    \caption{\label{tautomer}Tautomérie d'une molécule}
+  \end{center}
 \end{figure}
 
 \paragraph{}Les deux transformations présentées ont pour point commun de ne pas modifier en profondeur la structure des molécules.
@@ -2013,8 +2020,10 @@ de revenir sur les cas plus difficiles avec des algorithmes plus sensibles.
 \subsubsection{Vue globale des algorithmes}
 
 \begin{figure}
-  \includegraphics[width=300px]{Figures/s2m/algo/s2m.pdf}
-  \caption{\label{global_s2m}Schéma global de Smiles2Monomers (TODO : refaire avec les deux alternatives)}
+  \begin{center}
+    \includegraphics[width=300px]{Figures/s2m/algo/s2m.pdf}
+    \caption{\label{global_s2m}Schéma global de Smiles2Monomers (TODO : refaire avec les deux alternatives)}
+  \end{center}
 \end{figure}
 
 \paragraph{}Tout au long cette partie, nous avons présenté par morceaux les différentes parties de Smiles2Monomers.
@@ -2254,7 +2263,6 @@ Vous pourrez trouver tous les résultats sur les polymères testés à ces adres
 - CCD : www.TODO.com
 - Norine : www.TODO.com
 
-\paragraph{TODO : schéma des résultats globaux de s2m}
 
 \paragraph{}Revenons sur les chiffres qui ont été présentés dans le tableau TODO.
 Environ 74\% des annotations peptidiques issus de Norine et 85\% de celles de CCD sont entièrement retrouvées par le logiciel.
@@ -2268,10 +2276,16 @@ Analysons ensemble plusieurs cas afin de comprendre les raisons de ces erreurs.
 
 \subsubsection{Des peptides aux structures atomiques fausses}
 
-\paragraph{TODO : figure s2m enniati I}
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=400px]{Figures/s2m/results/s2m_enniati.png}
+    \caption{\label{s2m_enniati}Résultat de s2m pour l'enniatin I.
+    Deux monomères sont annotés faux ce qui nous mène à dire qu'une erreur s'est glissée soit dans le SMILES de la molécule soit dans l'annotation monomérique.}
+  \end{center}
+\end{figure}
 
 \paragraph{}Beaucoup d'annotations fausses proviennent d'erreurs de structures atomiques pour les peptides.
-Prenons l'exemple de l'``enniatin I''.
+Prenons l'exemple de l'``enniatin I'' (voir figure \ref{s2m_enniati}).
 L'annotation en sortie de s2m présente une couverture de 100\% mais un correctness de 66\%.
 En regardant les 3 listes de monomères, on peut s'apercevoir que l'annotation attendue comporte deux monomères nommés Hmp alors que le logiciel trouve deux 4Me-Hva.
 Les deux monomères se ressemblant et il est fort probable que, soit l'annotation monomérique, soit l'annotation atomique ait été mal entrée.
