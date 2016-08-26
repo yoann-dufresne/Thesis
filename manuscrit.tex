@@ -1,4 +1,6 @@
 \documentclass[12pt,french,twoside]{report}
+\usepackage[cyr]{aeguill}
+\usepackage[french]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{amsthm}
 \usepackage{amssymb}
@@ -757,7 +759,7 @@ La génération d'annotations peut se baser sur la recherche d'informations à p
 Dans notre cas, nous n'avons pas choisi de démarrer des clusters de gènes NRPS puisque des modèles déjà bien éprouvés existent déjà (NRPSpredictor, NaPDoS, ...) mais que leurs prédictions ne sont pas garanties.
 Les avancées dans ce domaines viendront avec le nombre d'annotations fiables de binômes clusters/NRP qui permettrons l'amélioration des modèles d'apprentissage actuels.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=400px]{Figures/s2m/Intro/structures.png}
     \caption{\label{structures}Structures atomique et monomérique de la Caprieomycin IIA.}
@@ -792,7 +794,7 @@ Les auteurs pensent qu'il est plus utile de conserver les formats atomiques en b
 Sachant que la plupart des peptides de l'époque étaient déjà représentés par leur séquence, les auteurs proposent une méthode de transformation vers la structure atomique.
 Cette transformation est appelée ``Forward-Translation'' (FT).
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=450px]{Figures/s2m/formalisation/CHUCK_FT.png}
     \caption{\label{chuck_ft}CHUCKLES Forward Translation.
@@ -811,7 +813,7 @@ Cette méthode de reconstruction des structures atomiques est très intéressant
 On peut remarquer que la reconstruction ne peut fonctionner à tous les coups sans plus d'information.
 En effet, si les monomères ne possèdent pas de groupement carboxyl et amine, la reconstruction ne peut pas être effectuée sans choix aléatoires d'orientation.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=300px]{Figures/s2m/formalisation/CHUCK_BT.png}
     \caption{\label{chuck_bt}CHUCKLES Backward Translation.
@@ -843,7 +845,7 @@ Dans ce cas, vu qu'aucun retour en arrière n'est effectué, l'annotation sera i
 
 \subsubsection{molBLOCKS, une méthode destructive}
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=400px]{Figures/s2m/Intro/molBlocks.png}
     \caption{\label{molBlocks}Application de la méthode molBlocks sur le polymère ACV.
@@ -863,7 +865,7 @@ Par exemple en donnant comme règle
 toutes les liaisons peptidiques seront ciblées et déconnectées (voir figure \ref{molBlocks}).
 Pour des protéines ribosomiques, la découpe sera donc parfaite avec cette seule règle et les monomères seront découverts.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=300px]{Figures/s2m/Intro/molBlocks_problem.png}
     \caption{\label{molBlocks_problem}Dans le cas de ce di-peptide, un sucre est lié à une Hydroxy-Phenil-Glycine (Hpg).
@@ -920,7 +922,7 @@ Il sera nécessaire de modifier les solutions incomplètes pour essayer de les a
 Contrairement à CHUCKLES, nous aurons donc besoin de connaître les différents monomères candidats à la composition du polymère même lorsqu'ils sont chevauchant à des monomères déjà placés.
 Si d'un côté nous recherchons les monomères au sein du NRP puis de l'autre nous assemblons ceux trouvés, alors nous pouvons séparer notre programme en deux sous-problèmes complètement distincts.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=400px]{Figures/s2m/Intro/searching.png}
     \caption{\label{search_fig}Première étape : Recherche des monomères (elipses colorées) sur le peptide à annoter (fil noir bouclé).}
@@ -932,7 +934,7 @@ En utilisant la base Norine, nous pouvons indépendamment rechercher chacun des 
 La recherche exacte d'un monomère au sein d'un peptide est donc notre premier sous problème à résoudre.
 Ce sous problème sera appelé la ``recherche'' (voir figure \ref{search_fig}).
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=400px]{Figures/s2m/Intro/tiling.png}
     \caption{\label{tiling_fig}Seconde étape : Tri des monomères trouvés pour former une structure monomérique non chevauchante de couverture maximale.}
@@ -998,7 +1000,7 @@ Voyons les différentes façon de les résoudre ainsi que les forces et faibless
 
 \subsubsection{Définition}
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=450px]{Figures/s2m/MCS-SI/mcs.png}
     \caption{\label{mcs_fig}MCS obtenu à partir des graphes G et H.
@@ -1041,7 +1043,7 @@ Ce problème est également NP-Complet~\cite{akkoyunlu_enumeration_1973}.
 Les résolutions de ce problème sont toutes des dérivées de la recherche exhaustive par backtracking.
 Il est possible de ne pas passer par toutes les combinaisons possibles en réduisant l'espace de recherche en fonction de l'arité des noeuds ou de leur contexte local mais les algorithmes restent exponentiels~\cite{tomita_worst-case_2004}.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=400px]{Figures/s2m/MCS-SI/clique_solve.png}
     \caption{\label{clique_solve_fig}Résolution d'un MCS par réduction en clique maximale.}
@@ -1056,7 +1058,7 @@ On ajoute églament un lien si les $x$ sont non voisins et les $y$ également.
 En résolvant le problème de clique maximale sur le GC, on obtient le MCS.
 
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=400px]{Figures/s2m/MCS-SI/backtracking_solve.png}
     \caption{\label{backtracking_solve}Exemple de résolution de MCS par un backtracking naïf.
@@ -1110,7 +1112,7 @@ Cette seconde méthode est très intéressante lorsque l'on cherche un bon rappo
 
 \subsubsection{Définition}
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=450px]{Figures/s2m/MCS-SI/si.png}
     \caption{\label{SI_fig}SI obtenu à partir de la recherche du graphe G dans H.
@@ -1134,10 +1136,10 @@ Voyons ensemble quelques uns de ces algorithmes.
 
 \subsubsection{L'algorithme de Ullman}
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=450px]{Figures/s2m/MCS-SI/ullman.png}
-    \caption{\label{ullman_fig}Recherche d'un isomorphiqme de sous graphe par l'algorithme d'Ullman.
+    \caption{\label{ullman_fig}Recherche d'un isomorphisme de sous graphe par l'algorithme d'Ullman.
     Dans la partie construction, vous pouvez voir la matrice créée à partir des graphes G et H.
     Dans la partie recherche sont présentées les étapes successives de création d'un SI (voir texte pour détail).
     Si nous avions voulu obtenir tous les isomorphismes (et pas juste un seul) il aurait fallu continuer le backtracking jusqu'au bout.}
@@ -1246,7 +1248,7 @@ isomorphismes de graphe ou de sous-graphe non labellés d'un graphe $G$ sur un g
     }
   \end{algorithm}
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
   \includegraphics[width=200px]{Figures/s2m/recherche/VF2.pdf}
   \caption{\label{vf2}Représentation sous forme d'arbre d'une recherche de d'isomorphisme de sous graphe par l'algorithme VF2}
 \end{figure}
@@ -1272,7 +1274,7 @@ trouvé mais en l'enregistrant dans un ensemble puis en continuant l'exploration
 Vu que tout l'arbre est exploré à chaque recherche, l'algorithme est exponentiel.
 Pour être plus précis il est en $O(n^m)$, donc pas calculable dans les pires des cas.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
   \includegraphics[width=200px]{Figures/s2m/recherche/VF2_labels.pdf}
   \caption{\label{vf2_labels}Représentation sous forme d'arbre de recherches pour l'algorithme VF2 appliqué aux graphes labellés}
 \end{figure}
@@ -1747,7 +1749,7 @@ il est également possible que nous ne trouvions pas qu'une seule solution de re
 purement algorithmique de choisir quelle est la meilleure façon de découper ces peptides.
 
 \begin{figure}
-  \includegraphics[width=300px]{Figures/s2m/pavage/reconstructions.pdf}
+  \includegraphics[width=300px]{Figures/s2m/pavage/reconstructions.png}
   \caption{\label{reconstruction}Les différents types de reconstruction que l'on peut obtenir par le pavage}
 \end{figure}
 
@@ -1938,7 +1940,7 @@ Si la solution n'est pas complète, nous pouvons relancer la procédure récursi
 La récursion se termine soit lorsqu'une solution complète est trouvée soit lorsqu'il n'est plus possible de choisir de résidus
 couvrant des zones non couvertes de la solution partielle.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=350px]{Figures/s2m/pavage/modulation.png}
     \caption{\label{modulation}Modulation de la solution initiale (à gauche) pour obtenir une solution optimale (à droite) en remplaçant des monomères choisis par d'autres laissés de côté après l'étape de pavage.
@@ -2115,7 +2117,7 @@ Le second jeu est issu de la base CCD et comporte 378 polymères et 507 monomèr
 Il est à noté qu'aucun des polymères présent dans une base n'est présent dans l'autre et que seuls 63 monomères sont communs.
 Ces monomères identiques sont en très grande majorité des acides aminés classiques et leurs variants proches.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=250px]{Figures/s2m/results/data.png}
     \caption{\label{data}Répartition des données de validation}
@@ -2130,7 +2132,7 @@ Ces monomères identiques sont en très grande majorité des acides aminés clas
 Il est possible par exemple de générer un format textuel json permettant facilement de recharger ces résultats dans d'autres logiciels.
 Lorsque nous présenterons un résultat ici, nous le présenterons via le format graphique html.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=450px]{Figures/s2m/results/apicidinC.png}
     \caption{\label{s2m_HTML}Le résultat HTML de l'exécution de s2m sur l'apicidine C}
@@ -2162,7 +2164,15 @@ Les pourcentages de l'un à l'autre peuvent être fort différents dû à la var
 \subsection{Choisir les paramètres}
 
 \paragraph{}Nous allons tout d'abord nous poser la question de comment choisir les bons paramètres pour effectuer nos tests.
-Pour cela, commençons par définir nos mesures.
+Nous reviendrons d'abord sur la façon de fixer le paramètre d'apprentissage pour le précalcul.
+Rappelons que de ce paramétre découlera le temps de calcul pour les peptides mais que la qualité des résultats ne variera pas.
+Puis nous parlerons de la qualité des résultats obtenus en exécutant le programme pour plusieurs paramètres.
+Enfin nous étudierons le temps de calcul pour estimer les rapports temps/qualité et ainsi pouvoir recommander les meilleurs calibrations de l'outil.
+
+\subsubsection{Choisir le k du précalcul}
+
+\paragraph{TODO}
+
 
 \subsubsection{Mesures}
 
@@ -2194,7 +2204,7 @@ Pour cela nous allons prendre comme indicateurs la couverture atomique moyenne, 
 Nous allons faire varier le paramètre du nombre de tour de la boucle light ainsi que la profondeur de modulation pour le pavage avec modulation.
 Nous testerons également les deux algorithmes algorithmes de pavage (MIP et heuristique).
 
-\begin{table}[!h]
+\begin{table}[!ht]
   \centering
   \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
     \hline
@@ -2217,14 +2227,14 @@ Nous testerons également les deux algorithmes algorithmes de pavage (MIP et heu
   Dans la première colonne se trouvent les binômes des valeurs des paramètres retry et modulation}
 \end{table}
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=450px]{Figures/s2m/results/Norine.png}
     \caption{\label{nor_graph}Diagramme en barre des résultats sur Norine}
   \end{center}
 \end{figure}
 
-\begin{table}[!h]
+\begin{table}[!ht]
   \centering
   \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
     \hline
@@ -2247,10 +2257,10 @@ Nous testerons également les deux algorithmes algorithmes de pavage (MIP et heu
   Dans la première colonne se trouvent les binômes des valeurs des paramètres retry et modulation}
 \end{table}
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=450px]{Figures/s2m/results/CCD.png}
-    \caption{\label{nor_graph}Diagramme en barre des résultats sur CCD}
+    \caption{\label{ccd_graph}Diagramme en barre des résultats sur CCD}
   \end{center}
 \end{figure}
 
@@ -2273,8 +2283,90 @@ Si aucune solution totalement couvrante n'est possible avec les résidus issus d
 Dans ce cas, la recherche de résidus par isomorphisme light sert peu car les trous dans l'annotation ont été déplacés par l'optimisation.
 Il n'est souvent plus facilement possible de construire l'annotation.
 
+\paragraph{}Au final, les résultats obtenus sont strictement meilleurs en utilisant l'heuristique gloutonne de pavage avec une modulation de profondeur 2 et deux phases de recherche light.
+Nous ne nous attendions pas à ces résultats et la sur-optimisation du pavage par MIP nous a surprit mais 
 
-\paragraph{TODO : Temps de calcul}
+
+\subsubsection{Temps de calcul global}
+
+\begin{figure}[!ht]
+  \begin{center}
+    \includegraphics[width=400px]{Figures/s2m/results/temps.png}
+    \caption{\label{temps_general}Temps d'exécution moyen par peptide (en ms) en utilisant les deux pavages différents et différents parètres pour chacun d'eux.}
+  \end{center}
+\end{figure}
+
+\paragraph{}Pour choisir les paramètres il ne faut pas prendre que les résultats en considération mais également le temps qu'il faut pour les générer.
+Pour cela, nous avons effectué une analyse comparative des algorithmes en utilisant les différents paramètres cités précédemment.
+Comme nous pouvons le remarquer sur le schéma \ref{temps_general}, l'heuristique de pavage permet un temps d'exécution beaucoup plus faible le pavage MIP (Excepté pour le pavage heuristique 3-3 qui n'a pas d'importance puisqu'il n'apporte pas de résultats).
+Ce résultat était attendu mais l'écart flagrant vient confirmer la nécessité d'utiliser l'heuristique de pavage plutôt que le MIP.
+Après les contres-performances du pavage MIP à la fois en qualité de résultats qu'en temps d'exécution, nous excluons ce paramètre des recommandations d'utilisation.
+
+\paragraph{}Comparons désormais les temps d'exécution en fonction des paramètres passés au programme.
+Le pramètre du nombre de boucles light semble avoir le plus d'influence sur le temps d'exécution.
+Nous pouvons expliquer cette augmentation par la difficulté rencontrée par l'algorithme d'isomorphisme lorsque peut de labels sont présents.
+Répéter l'opération plusieurs fois multiplie logiquement le temps d'exécution.
+
+Si l'on regarde bien les temps d'exécution on peut également s'appercevoir que l'augmentation du second paramètre (la profondeur de modulation) permet de diminuer le temps d'exécution pour un nombre de boucles light fixe.
+En effet, plusieurs solutions sont bloquées par le manque de profondeur de modulation et non pas par le nombre de boucles.
+Les monomères pour reconstruire le peptide ont tous été trouvés mais la solution gloutonne n'est pas immédiatement voisine de la solution optimale.
+
+\paragraph{}Pour conclure cette partie  sur la sélection des paramètres, nous pouvons dire qu'il faudra toujours privilégier l'utilisation de l'algorithme de pavage heuristique par rapport au pavage MIP.
+Cependant, il ne faut pas utiliser n'importe quels paramètres.
+Pousser les paramètres de modulation ou de nombre de boucle à 3 ou au dela est parfaitement inutile en terme de résultats et consommera énormément de temps.
+Utiliser un paramètre de modulation de 1 sera également une erreur puisque la qualité des résultats ne sera pas au rendez-vous.
+Il reste finalement deux alternatives intéressantes.
+Soit nous privilégions la qualité à la vitesse et nous réglons les deux paramètres à la valeur 2, soit nous acceptons de perdre quelques poucents de bons résultats au profit de 30\% d'économie de temps en réglant uniquement la modulation à 2.
+
+
+
+\subsection{Répartition des temps de calcul et analyse}
+
+\paragraph{}Maintenant que nous avons choisi les paramètres analysons attentivement chacune des étapes pour comprendre les points critiques pour de futures améliorations.
+Pour cela, nous avons exécuté le logiciel sur tous les peptides des jeux test en utilisant un pavage heuristique, une valeur de k de 4, une modulation de 2 et un nombre de tour de boucle de 2.
+Pour chacun des peptides, nous avons stoqué séparément les temps pour l'isomorphisme strict, le light, le pavage et la modulation.
+Les résultats sont affichés sur la figure \ref{temps_calcul}.
+
+\begin{figure}[!ht]
+  \begin{center}
+    \includegraphics[width=450px]{Figures/s2m/results/temps_detail.png}
+    \caption{\label{temps_calcul}Temps d'exécution de s2m pour un extrait aléatoire de 350 molécules.
+    Les données ont été tronquées au dela de 50ms pour ne pas écraser le graphique.}
+  \end{center}
+\end{figure}
+
+\paragraph{}Certains points de la figure ont été tronqués car ils écrasaient les résultats.
+15 valeurs sur les 350 ont été redescendues à 50ms alors que certaines allaient jusqu'à plusieurs centaines de ms (Le point max atteint 1s à lui seul).
+On distingue nettement deux comportements différents sur cette courbe.
+Soit les peptides ont été complétement analysés à la suite d'une seule passe de pavage suite à la recherche stricte ; dans ce cas, le temps d'exécution épouse une courbe qui augmente progressivement avec le nombre d'atomes ; soit le matching light et la modulation qui suit entrent en action et dans ce cas le temps est fortement dépendant de la topologie du peptide (tous les points disparates).
+
+Pour ce qui est de la première catégorie de peptide, on peut voir que la quasi-intégralité du temps est dépensé sur la recherche d'isomorphismes de sous graphe.
+Comme nous le supposions au début de ce projet, les isomorphismes sont des goulot d'étranglement du fait de la complexité des algorithmes de résolution.
+Pour quelques peptide, le temps est complété par une petite phase de modulation qui ne prend que quelques milisecondes.
+Dans le pire des cas, le temps est doublé.
+L'étape de pavage ne prend jamais plus de 3ms et n'est pas un problème pour le temps d'exécution.
+
+Pour les points de la seconde catégorie, c'est encore l'étape de recherche qui prend le plus de temps.
+Sauf que cette fois-ci, ce sont les étapes de recherche light qui prédominent le temps de calcul.
+Comme nous l'avions évoqué lors de la présentation de cette amélioration, le manque de labels disponibles diminue fortement l'efficacité de l'algorithme.
+En moyenne, un isomorphisme light est de 10 à 100 fois plus lent qu'un strict.
+De plus, les cas qui posent problème et ont besoin de l'isomorphisme light sont très souvent accompagnés de longues exécutions de modulation.
+Cependant, ce temps d'attente vaut le coup puisque la majorité des cas sont résolus.
+Sur l'extrait des peptides ici présent, seules 20 d'entre eux finissent sur des impasses.
+Toutes les autres exécutions s'arrêtent en obtenant 100\% de couverture.
+
+\paragraph{}Pour finir cette analyse des temps de calcul individuels, nous allons parler des cas extrèmes.
+Ces cas pathologiques masquent les réelles performances du logiciel.
+La moyenne de temps d'exécution globale est de 18ms par peptide mais lorsque nous retirons les 15 cas qui débordent de la figure, cette moyenne chutte à 10ms.
+À eux seuls, ces 15 peptides représentent plus de la moitié du temps d'exécution du logiciel.
+Le cas le plus critique à lui seul représente un cinquième du temps d'exécution total.
+Ce qu'il faut conclure de cela est qu'il faut éviter d'utiliser des boucles light sur des données dont on ne connait pas grand chose.
+Si nous souhaitons par exemple analyser à l'aveugle un très grad nombre de molécules, il est préférable de se restreindre à une utilisation basique du logiciel, quitte à venir affiner les résultats intéressants par la suite.
+
+
+
+
+
 
 
 
@@ -2299,7 +2391,7 @@ Analysons ensemble plusieurs cas afin de comprendre les raisons de ces erreurs.
 
 \subsubsection{Des peptides aux structures atomiques fausses}
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=400px]{Figures/s2m/results/s2m_enniati.png}
     \caption{\label{s2m_enniati}Résultat de s2m pour l'enniatin I.
