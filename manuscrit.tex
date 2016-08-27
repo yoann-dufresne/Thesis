@@ -188,7 +188,7 @@ Cependant les avantages obtenus grâce aux activités des NRP ont préservé ces
 Chaque NRPS est un complexe enzymatique extrêmement grand dont la taille est parfois à comparer à un ribosome (TODO : exemple taille en aa).
 Cependant, contrairement à un ribosome, les NRPS sont spécialisés.
 Un NRPS ne peut produire qu'un seul type de NRP.
-Elles sont organisées en modules consécutifs qui capturent modifient et intégrent un monomère au NRP\cite{schwarzer_nonribosomal_2003,marahiel_modular_1997}.
+Elles sont organisées en modules consécutifs qui capturent modifient et intègrent un monomère au NRP\cite{schwarzer_nonribosomal_2003,marahiel_modular_1997}.
 Chacun de ces modules peut à son tour être découpé en domaines fonctionnels.
 Généralement un module est constitué de 3 domaines principaux et éventuellement de domaines optionnels\cite{finking_biosynthesis_2004}.
 Un module standard est d'abord composé d'un domaine de condensation (C) effectuant la liaison du peptide déjà formé au monomère en cours d'inclusion puis d'un module d'adénilation (A) permettant la capture du monomère à insérer et d'un module thiolation (T) effectuant la fixation du monomère capturé et le transfert du NRP depuis le domaine C précédent au domaine C suivant.
@@ -713,7 +713,7 @@ Dans ce cas, il se peut qu'il ne soit que partiel et potentiellement incorrect.
 \section{Introduction}
 
 \paragraph{}Pour comprendre un système biologique, il est nécessaire de comprendre les interactions chimiques qui s'y déroulent.
-Au delà du simple cataloguage qui peut être fait, comprendre les actions moléculaires permet d'utiliser voire d'inventer de nouvelles substances pour l'industrie.
+Au delà du simple catalogage qui peut être fait, comprendre les actions moléculaires permet d'utiliser voire d'inventer de nouvelles substances pour l'industrie.
 Afin de comprendre ces activités, un postulat simple a été posé : deux molécules proches auront deux activités proches.
 Ce postulat simple parait raisonnable puisqu'il s'appuie sur le fait que l'activité d'une molécule est portée par la configuration spatiale des différents éléments qui la composent.
 On sait aujourd'hui que ce postulat est en partie faux car il existe quelques contre-exemples~\cite{patani_bioisosterism:_1996}.
@@ -886,7 +886,7 @@ Pour pouvoir la délier, il faudrait une règle du type
 \begin{chemmath}
   COC \longrightarrow CO + C
 \end{chemmath}
-Mais ce genre de règle est ambigü.
+Mais ce genre de règle est ambigüe.
 Comment savoir de quel côté du O la liaison doit être rompue ?
 De plus, certains monomères comme le glucose sont initialement composés de $COC$.
 Ces monomères seront donc découpés alors qu'ils ne devraient pas l'être.
@@ -925,7 +925,7 @@ Si d'un côté nous recherchons les monomères au sein du NRP puis de l'autre no
 \begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=400px]{Figures/s2m/Intro/searching.png}
-    \caption{\label{search_fig}Première étape : Recherche des monomères (elipses colorées) sur le peptide à annoter (fil noir bouclé).}
+    \caption{\label{search_fig}Première étape : Recherche des monomères (ellipses colorées) sur le peptide à annoter (fil noir bouclé).}
   \end{center}
 \end{figure}
 
@@ -1011,8 +1011,8 @@ Voyons les différentes façon de les résoudre ainsi que les forces et faibless
 \paragraph{}Commençons par définir précisément le problème du MCS.
 Comme le nom l'indique, le problème du MCS est un problème de recherche de la sous partie commune maximale entre deux graphes (Voir figure \ref{mcs_fig}).
 C'est à dire trouver un ensemble de noeuds présents dans les deux graphes.
-Il faut non seulement que les noeuds partagent les même labels mais également les mêms voisins.
-Si deux noeuds ont le même label mais ne partagent pas les mêms voisins dans les deux graphes, alors ils ne font pas partie du MCS.
+Il faut non seulement que les noeuds partagent les même labels mais également les mêmes voisins.
+Si deux noeuds ont le même label mais ne partagent pas les mêmes voisins dans les deux graphes, alors ils ne font pas partie du MCS.
 C'est par exemple le cas du noeud rouge au sein de la figure.
 Les problème de recherche de sous graphe commun connexe maximal (MCCS) est un problème encore plus difficile car il impose de fortes contraintes supplémentaires.
 Le problème du MCS à été prouvé NP-Complet\cite{garey_computers_1979}, ce qui empêche (en tout cas pour le moment) l'émergence d'algorithmes de résolution polynomiaux efficaces.
@@ -1054,7 +1054,7 @@ Il est possible de ne pas passer par toutes les combinaisons possibles en rédui
 Un graphe de compatibilité (GC) est un graphe créé à partir du croisement des deux graphes (qu'on appellera G et H).
 Pour les noeuds du GC, on génère tous les couples $(x, y)$ possibles avec $x$ issu de G et $y$ de H et dont les labels sont identiques.
 Ensuite on ajoute un lien entre deux couples $(x_1 , y_1)$ et $(x_2 , y_2)$ de GC si $x_1$ est voisin de $x_2$ dans G et $y_1$ voisin de $y_2$ dans H.
-On ajoute églament un lien si les $x$ sont non voisins et les $y$ également.
+On ajoute également un lien si les $x$ sont non voisins et les $y$ également.
 En résolvant le problème de clique maximale sur le GC, on obtient le MCS.
 
 
@@ -1154,10 +1154,10 @@ Une case de la matrice comporte un 1 si les labels des noeuds de la case sont co
 Pour obtenir un SI à partir de cette matrice il faut retirer des 1 de la matrice jusqu'à en obtenir uns seul 1 par ligne.
 A chaque étape, un noeud de G est choisi pour pratiquer continuer l'isomorphisme.
 Ce noeud correspond à une ligne.
-Puis une colonne est choisie parmis celles dont la colonne contient un 1 sur la ligne précédemment choisie.
+Puis une colonne est choisie parmi celles dont la colonne contient un 1 sur la ligne précédemment choisie.
 Le couple ligne/colonne nous donne le couple noeud de G/noeud de H à peut être ajouter à l'isomorphisme.
 Avant cet ajout, il faut également vérifier que tous les voisins du noeud de H correspondent bien aux voisins du noeud de G (condition non respectée à l'étape 2 et 5 de la partie recherche du schéma).
-Puisque nous ajoutons ce binome à l'isomorphisme, il faut remplacer tous les 1 de la ligne et la colonne choisies par des 0 (excepté pour la case du binome).
+Puisque nous ajoutons ce binôme à l'isomorphisme, il faut remplacer tous les 1 de la ligne et la colonne choisies par des 0 (excepté pour la case du binôme).
 À ce moment, si au moins une ligne a été vidée de tout ses 1, c'est que l'isomorphisme n'est pas possible et il faut revenir à l'étape précédente.
 Sinon, il suffit de continuer récursivement jusqu'à obtenir un unique 1 par ligne.
 En choisissant bien les lignes et les colonnes par lesquels l'algorithme commence, on arrive à obtenir des temps d'exécution très courts pour la recherche d'un SI.
@@ -1731,7 +1731,7 @@ isomorphismes découvert par atome.
 L'étape de pavage consiste à choisir un sous ensemble des isomorphismes trouvés, de manière à maximiser les atomes couverts par ces
 isomorphismes en ayant pour chaque atome au plus un seul isomorphisme présent dans ce sous ensemble.
 
-Faisons une analogie avec un puzzle. La phase d'isomorphisme obtennient de nombreuses pièces de puzzle.
+Faisons une analogie avec un puzzle. La phase d'isomorphisme créée de nombreuses pièces de puzzle.
 Une reconstruction complète du puzzle n'est pas forcément faisable uniquement à partir de ces pièces.
 De plus, parmi celles dont nous disposons, certaines se chevauchent.
 La phase de pavage consiste à choisir parmi les pièces, celles que l'on souhaite garder en maximisant le remplissage de notre puzzle et sans avoir de pièces chevauchantes (figure \ref{puzzle}).
@@ -1862,7 +1862,7 @@ En faisant cela nous reportons la difficulté du problème sur les critères de 
 \paragraph{}
 \begin{algorithm}[H]
   \caption{Algorithme de pavage glouton}
-  \KwData{Un peptide requête $P$ et une liste de résidus $RES$ mappés sur $P$ lors de la phase d'isomorphisme}
+  \KwData{Un peptide requête $P$ et une liste de résidus $RES$ pavés sur $P$ lors de la phase d'isomorphisme}
   \KwResult{Un sous-ensemble de $RES$ de pièces non chevauchantes sélectionnées par l'algorithme glouton.}
   Soit $SOL$ un ensemble solution de résidus, initialement vide\;
   
@@ -1945,14 +1945,14 @@ couvrant des zones non couvertes de la solution partielle.
     \includegraphics[width=350px]{Figures/s2m/pavage/modulation.png}
     \caption{\label{modulation}Modulation de la solution initiale (à gauche) pour obtenir une solution optimale (à droite) en remplaçant des monomères choisis par d'autres laissés de côté après l'étape de pavage.
     En haut, les monomères issus de la recherche.
-    C'est parmi ceux-ci que la modulation va choisir des remplacants de la solution actuelle.}
+    C'est parmi ceux-ci que la modulation va choisir des remplaçants de la solution actuelle.}
   \end{center}
 \end{figure}
 
 \paragraph{}
 \begin{algorithm}[H]
   \caption{Algorithme de modulation du pavage}
-  \KwData{Un peptide requête $P$ et une liste de résidus $RES$ mappés sur $P$ lors de la phase d'isomorphisme et triés par
+  \KwData{Un peptide requête $P$ et une liste de résidus $RES$ pavés sur $P$ lors de la phase d'isomorphisme et triés par
   l'algorithme glouton, une pré-solution $SOL$ et un ensemble $INT$ de résidus interdits d'utilisation.}
   \KwResult{$SOL$, un sous-ensemble de $RES$ de pièces non chevauchantes sélectionnées par la modulation}
   
@@ -1999,7 +1999,7 @@ pas. On peut donc limiter la profondeur de notre algorithme de modulation en pro
 possible après $i$ appels récursifs ($i$ paramétrable).
 
 
-\subsection{Recherche approximative}
+\subsection{Recherche approximative (light)}
 
 \label{light_p}
 
@@ -2066,7 +2066,7 @@ L'algorithme global est paramétrable.
 Pour le précalcul, nous pouvons fixer la variable $k$ qui définira la taille de chaine calculée avec le modèle markovien.
 Nous rappelons encore une fois que cette taille n'aura pas d'influence sur le résultat mais uniquement sur le temps de calcul.
 Pour la partie recherche, nous devrons choisir le nombre de fois où nous effectuerons la ``boucle light''.
-Ce paramètre est appelé ``retry'' dans le logiciel (nombre de fois où l'on réexécute la boucle).
+Ce paramètre est appelé ``retry'' dans le logiciel (nombre de fois où l'on ré-exécute la boucle).
 Si nous optons pour la méthode heuristique de modulation, il est également nécessaire de définir une profondeur maximale de modulation (paramètre appelé ``modulation'' dans le logiciel).
 L'influence de ces paramètres sur l'exécution de l'algorithme sera étudiée durant la partie résultats.
 
@@ -2165,7 +2165,7 @@ Les pourcentages de l'un à l'autre peuvent être fort différents dû à la var
 
 \paragraph{}Nous allons tout d'abord nous poser la question de comment choisir les bons paramètres pour effectuer nos tests.
 Nous reviendrons d'abord sur la façon de fixer le paramètre d'apprentissage pour le précalcul.
-Rappelons que de ce paramétre découlera le temps de calcul pour les peptides mais que la qualité des résultats ne variera pas.
+Rappelons que de ce paramêtre découlera le temps de calcul pour les peptides mais que la qualité des résultats ne variera pas.
 Puis nous parlerons de la qualité des résultats obtenus en exécutant le programme pour plusieurs paramètres.
 Enfin nous étudierons le temps de calcul pour estimer les rapports temps/qualité et ainsi pouvoir recommander les meilleurs calibrations de l'outil.
 
@@ -2292,7 +2292,7 @@ Nous ne nous attendions pas à ces résultats et la sur-optimisation du pavage p
 \begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=400px]{Figures/s2m/results/temps.png}
-    \caption{\label{temps_general}Temps d'exécution moyen par peptide (en ms) en utilisant les deux pavages différents et différents parètres pour chacun d'eux.}
+    \caption{\label{temps_general}Temps d'exécution moyen par peptide (en ms) en utilisant les deux pavages différents et différents parêtres pour chacun d'eux.}
   \end{center}
 \end{figure}
 
@@ -2307,16 +2307,16 @@ Le pramètre du nombre de boucles light semble avoir le plus d'influence sur le 
 Nous pouvons expliquer cette augmentation par la difficulté rencontrée par l'algorithme d'isomorphisme lorsque peut de labels sont présents.
 Répéter l'opération plusieurs fois multiplie logiquement le temps d'exécution.
 
-Si l'on regarde bien les temps d'exécution on peut également s'appercevoir que l'augmentation du second paramètre (la profondeur de modulation) permet de diminuer le temps d'exécution pour un nombre de boucles light fixe.
+Si l'on regarde bien les temps d'exécution on peut également s'apercevoir que l'augmentation du second paramètre (la profondeur de modulation) permet de diminuer le temps d'exécution pour un nombre de boucles light fixe.
 En effet, plusieurs solutions sont bloquées par le manque de profondeur de modulation et non pas par le nombre de boucles.
 Les monomères pour reconstruire le peptide ont tous été trouvés mais la solution gloutonne n'est pas immédiatement voisine de la solution optimale.
 
 \paragraph{}Pour conclure cette partie  sur la sélection des paramètres, nous pouvons dire qu'il faudra toujours privilégier l'utilisation de l'algorithme de pavage heuristique par rapport au pavage MIP.
 Cependant, il ne faut pas utiliser n'importe quels paramètres.
-Pousser les paramètres de modulation ou de nombre de boucle à 3 ou au dela est parfaitement inutile en terme de résultats et consommera énormément de temps.
+Pousser les paramètres de modulation ou de nombre de boucle à 3 ou au delà est parfaitement inutile en terme de résultats et consommera énormément de temps.
 Utiliser un paramètre de modulation de 1 sera également une erreur puisque la qualité des résultats ne sera pas au rendez-vous.
 Il reste finalement deux alternatives intéressantes.
-Soit nous privilégions la qualité à la vitesse et nous réglons les deux paramètres à la valeur 2, soit nous acceptons de perdre quelques poucents de bons résultats au profit de 30\% d'économie de temps en réglant uniquement la modulation à 2.
+Soit nous privilégions la qualité à la vitesse et nous réglons les deux paramètres à la valeur 2, soit nous acceptons de perdre quelques pourcents de bons résultats au profit de 30\% d'économie de temps en réglant uniquement la modulation à 2.
 
 
 
@@ -2324,25 +2324,25 @@ Soit nous privilégions la qualité à la vitesse et nous réglons les deux para
 
 \paragraph{}Maintenant que nous avons choisi les paramètres analysons attentivement chacune des étapes pour comprendre les points critiques pour de futures améliorations.
 Pour cela, nous avons exécuté le logiciel sur tous les peptides des jeux test en utilisant un pavage heuristique, une valeur de k de 4, une modulation de 2 et un nombre de tour de boucle de 2.
-Pour chacun des peptides, nous avons stoqué séparément les temps pour l'isomorphisme strict, le light, le pavage et la modulation.
+Pour chacun des peptides, nous avons stocké séparément les temps pour l'isomorphisme strict, le light, le pavage et la modulation.
 Les résultats sont affichés sur la figure \ref{temps_calcul}.
 
 \begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=450px]{Figures/s2m/results/temps_detail.png}
     \caption{\label{temps_calcul}Temps d'exécution de s2m pour un extrait aléatoire de 350 molécules.
-    Les données ont été tronquées au dela de 50ms pour ne pas écraser le graphique.}
+    Les données ont été tronquées au delà de 50ms pour ne pas écraser le graphique.}
   \end{center}
 \end{figure}
 
 \paragraph{}Certains points de la figure ont été tronqués car ils écrasaient les résultats.
 15 valeurs sur les 350 ont été redescendues à 50ms alors que certaines allaient jusqu'à plusieurs centaines de ms (Le point max atteint 1s à lui seul).
 On distingue nettement deux comportements différents sur cette courbe.
-Soit les peptides ont été complétement analysés à la suite d'une seule passe de pavage suite à la recherche stricte ; dans ce cas, le temps d'exécution épouse une courbe qui augmente progressivement avec le nombre d'atomes ; soit le matching light et la modulation qui suit entrent en action et dans ce cas le temps est fortement dépendant de la topologie du peptide (tous les points disparates).
+Soit les peptides ont été complètement analysés à la suite d'une seule passe de pavage suite à la recherche stricte ; dans ce cas, le temps d'exécution épouse une courbe qui augmente progressivement avec le nombre d'atomes ; soit le matching light et la modulation qui suit entrent en action et dans ce cas le temps est fortement dépendant de la topologie du peptide (tous les points disparates).
 
 Pour ce qui est de la première catégorie de peptide, on peut voir que la quasi-intégralité du temps est dépensé sur la recherche d'isomorphismes de sous graphe.
 Comme nous le supposions au début de ce projet, les isomorphismes sont des goulot d'étranglement du fait de la complexité des algorithmes de résolution.
-Pour quelques peptide, le temps est complété par une petite phase de modulation qui ne prend que quelques milisecondes.
+Pour quelques peptide, le temps est complété par une petite phase de modulation qui ne prend que quelques millisecondes.
 Dans le pire des cas, le temps est doublé.
 L'étape de pavage ne prend jamais plus de 3ms et n'est pas un problème pour le temps d'exécution.
 
@@ -2355,9 +2355,9 @@ Cependant, ce temps d'attente vaut le coup puisque la majorité des cas sont ré
 Sur l'extrait des peptides ici présent, seules 20 d'entre eux finissent sur des impasses.
 Toutes les autres exécutions s'arrêtent en obtenant 100\% de couverture.
 
-\paragraph{}Pour finir cette analyse des temps de calcul individuels, nous allons parler des cas extrèmes.
+\paragraph{}Pour finir cette analyse des temps de calcul individuels, nous allons parler des cas extrêmes.
 Ces cas pathologiques masquent les réelles performances du logiciel.
-La moyenne de temps d'exécution globale est de 18ms par peptide mais lorsque nous retirons les 15 cas qui débordent de la figure, cette moyenne chutte à 10ms.
+La moyenne de temps d'exécution globale est de 18ms par peptide mais lorsque nous retirons les 15 cas qui débordent de la figure, cette moyenne chute à 10ms.
 À eux seuls, ces 15 peptides représentent plus de la moitié du temps d'exécution du logiciel.
 Le cas le plus critique à lui seul représente un cinquième du temps d'exécution total.
 Ce qu'il faut conclure de cela est qu'il faut éviter d'utiliser des boucles light sur des données dont on ne connait pas grand chose.
@@ -2593,7 +2593,7 @@ Ici nous allons parler des trois dernières évolutions majeures.
 
 \paragraph{TODO schéma interface graphique}
 
-\paragraph{}Mise à jour en 2015 par Juraj Michalik, l'interface de recherche dans la base posséde désormais une interface graphique de création dynamique des requêtes.
+\paragraph{}Mise à jour en 2015 par Juraj Michalik, l'interface de recherche dans la base possède désormais une interface graphique de création dynamique des requêtes.
 L'interface permet de générer facilement des requêtes complexes (voir figure TODO).
 Le menu de gauche permet de sélectionner les différents monomères que nous souhaitons ajouter à une requête et la page principale permet d'ajouter des liens entre monomères par des simples clics.
 Au fur et à mesure de la création la requête textuelle s'affiche au dessus de l'éditeur.
@@ -2653,7 +2653,7 @@ Quelques peptides ont été soumis mais il est encore nécessaire de communiquer
 
 \paragraph{}Norine est constituée d'environ 1200 annotations.
 Toutes ces annotations ont été extraites une à une d'articles scientifiques puis entrées dans la base à la main.
-Bien que le travail ait été réalisé avec beaucoup de rigeur, plusieurs erreurs se sont glissées en base.
+Bien que le travail ait été réalisé avec beaucoup de rigueur, plusieurs erreurs se sont glissées en base.
 Comme présenté lors des résultats de s2m (voir partie \ref{resultats_s2m_p}), le logiciel permet la détection des erreurs présentes en base.
 Voyons ici les procédures mises en place pour corriger ces erreurs et essayer d'empêcher l'introduction de nouvelles.
 
@@ -2663,7 +2663,7 @@ Voyons ici les procédures mises en place pour corriger ces erreurs et essayer d
 \paragraph{TODO : figure correction dolastatin}
 
 \paragraph{}Lors de l'analyse des résultats nous avons détecté quatre types d'erreurs : Les erreurs de structure atomique peptidique, d'annotation peptidique, de structure atomique monomérique et d'équivalences structurelles.
-Cette dernière erreur est entiérement due à la façon dont s2m est conçu et rien n'est a corriger en base.
+Cette dernière erreur est entièrement due à la façon dont s2m est conçu et rien n'est a corriger en base.
 Pour les 3 autres erreurs, myNorine nous permet facilement de modifier les entrées de la base.
 
 \paragraph{}Appliquons une correction d'un peptide dont nous avons découvert une erreur d'annotation.
@@ -2676,28 +2676,28 @@ Après validation de la modification, l'entrée est correcte en base.
 \paragraph{}Pour toutes les erreurs détectées par s2m, nous devons répéter ce processus de recherche des structures correctes puis changement des entrées de Norine.
 Souvent, une modification dans un peptide nous amène à découvrir plusieurs autres modifications mineurs nécessaires.
 Il nous est par exemple plusieurs fois arrivé de découvrir des incohérence de nomenclature et de finalement passer un long moment sur une procédure de normalisation.
-C'est un processus qui prend énormément de temps et qui doit être effectué collectivement afin de ne pas prendre de décisons contradictoires.
-Le traitement des erreurs est à ce jour toujours en cours et nous avençons au rythme de 1 à 5 peptides par réunion (environ 100 cas d'erreur à traiter).
+C'est un processus qui prend énormément de temps et qui doit être effectué collectivement afin de ne pas prendre de décisions contradictoires.
+Le traitement des erreurs est à ce jour toujours en cours et nous avançons au rythme de 1 à 5 peptides par réunion (environ 100 cas d'erreur à traiter).
 
 
 \subsubsection{s2m pour empêcher les erreurs}
 
-\paragraph{}Après avoir traité les erreurs existantes, nous allons discuter de la manière de limiter l'introdution de nouvelles erreurs.
+\paragraph{}Après avoir traité les erreurs existantes, nous allons discuter de la manière de limiter l'introduction de nouvelles erreurs.
 Le seul moyen est d'essayer de détecter automatiquement les annotations fausses lorsqu'elles sont entrées et de proposer à l'utilisateur le choix entre notre correction et ce qu'il a entré.
 
 \paragraph{TODO : Schéma avertissement}
 
 \paragraph{}Dans le cas de Norine, toute nouvelle entrée manuelle est effectuée via MyNorine.
 Pour éviter l'introduction des erreurs, si le SMILES de la molécule est entré, nous exécutons s2m en arrière plan.
-Si l'annotation obtenue par s2m couvre entiérement le peptide mais que cette annotation diffère de l'annotation entrée manuellement, nous avertissons l'utilisateur et lui demandons de vérifier sa structure avant validation.
+Si l'annotation obtenue par s2m couvre entièrement le peptide mais que cette annotation diffère de l'annotation entrée manuellement, nous avertissons l'utilisateur et lui demandons de vérifier sa structure avant validation.
 Cela nous a permis plusieurs fois durant les Norine days de nous rendre compte d'erreurs que nous étions en train de commettre et nous pensons que cela permettra d'en éviter de nombreuses autres.
 
 \paragraph{TODO : Schéma création automatique d'annotation}
 
 \paragraph{}Nous proposons également à l'utilisateur d'exécuter s2m avant d'entrer manuellement son annotation.
 Si un SMILES est renseigné, alors s2m peut être déclenché pour obtenir une première annotation.
-L'uilisateur peut ensuite la modifier si celle-ci n'est pas complétement exacte.
-Par ce système nous incitons les contributeurs à ajouter le SMILES de leurs peptides (information trop peu présente dans Norine pour le moment) et nous évitons les erreurs d'innatention et fautes de frappe lors de la saisie utilisateur.
+L'utilisateur peut ensuite la modifier si celle-ci n'est pas complètement exacte.
+Par ce système nous incitons les contributeurs à ajouter le SMILES de leurs peptides (information trop peu présente dans Norine pour le moment) et nous évitons les erreurs d'inattention et fautes de frappe lors de la saisie utilisateur.
 
 \paragraph{}Pour résumer, s2m a permis à MyNorine d'augmenter encore la qualité des annotations entrées par l'évitement d'erreurs humaines.
 
