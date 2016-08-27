@@ -1439,6 +1439,8 @@ labellé $a$ (fréquence la plus faible dans le jeu d'apprentissage) suivi de $b
 
 \subsubsection{Indexation Markovienne}
 
+\label{index_markov}
+
 \paragraph{}En utilisant la méthode gloutonne, nous obtenons rapidement les chaînes de tous les motifs que nous
 souhaitons indexer. Cependant, dans certains cas, une chaîne générée de cette manière peut ne pas du tout être optimale.
 Dès le tout début de la chaîne il est possible que l'algorithme fasse des choix optimaux localement qui vont ensuite mener à un
@@ -2165,13 +2167,41 @@ Les pourcentages de l'un à l'autre peuvent être fort différents dû à la var
 
 \paragraph{}Nous allons tout d'abord nous poser la question de comment choisir les bons paramètres pour effectuer nos tests.
 Nous reviendrons d'abord sur la façon de fixer le paramètre d'apprentissage pour le précalcul.
-Rappelons que de ce paramêtre découlera le temps de calcul pour les peptides mais que la qualité des résultats ne variera pas.
+Rappelons que de ce paramètre découlera le temps de calcul pour les peptides mais que la qualité des résultats ne variera pas.
 Puis nous parlerons de la qualité des résultats obtenus en exécutant le programme pour plusieurs paramètres.
 Enfin nous étudierons le temps de calcul pour estimer les rapports temps/qualité et ainsi pouvoir recommander les meilleurs calibrations de l'outil.
 
 \subsubsection{Choisir le k du précalcul}
 
-\paragraph{TODO}
+\paragraph{}Pour rappel, l'isomorphisme de sous graphe est effectué à partir de chaines pré-calculées afin d'optimiser le temps de recherche (voir partie \ref{index_markov}).
+Ces chaines sont formées de deux sous-parties.
+La première, de taille k, est optimale sur la base d'apprentissage.
+La seconde est générée de manière gloutonne.
+
+Ici, nous allons faire varier ce paramètre k et tester les temps de calcul sur les jeux de données.
+Pour ne pas parasiter la mesure du temps, nous allons désactiver toutes les autres optimisations logicielles qui augmentent l'efficacité.
+
+\begin{figure}[!ht]
+  \begin{center}
+    \includegraphics[width=450px]{Figures/s2m/results/k.png}
+    \caption{\label{k_graph}Évaluation de l'efficacité d'apprentissage des chaînes.
+    A gauche : représentation du temps de recherche moyen d'une chaine dans un peptide pour plusieurs valeurs de k.
+    A droite : temps d'apprentissage pour tous les monomères pour plusieurs valeurs de k.}
+  \end{center}
+\end{figure}
+
+\paragraph{}Observons les résultats sur le schéma \ref{k_graph}.
+Le graphique de gauche représente le temps d'exécution moyen d'un isomorphisme (ie recherche d'une chaine dans un peptide) en fonction de k.
+Le graphique de droite représente le temps d'apprentissage en fonction du k.
+
+Quels que soient les valeurs de k, la recherche est très rapide.
+On parle ici en centièmes de millisecondes.
+Lorsque la chaine est entiérement générée de manière gloutonne, chaque isomorphisme prend environ 8 centièmes de ms.
+Ce temps descend à 5 centièmes à partir d'un k valant 3.
+Ce résultat est très intéressant car il nous montre que seuls les 3 premiers noeuds sont utiles pour l'optimisation des chaînes.
+Les monomères non trouvables dans une peptide donné (même ceux étant constitués de plusieurs dizaines d'atomes), peuvent déjà tous être éliminés après 3 atomes si les chaines sont correctement formées.
+Il n'est donc pas nécessaire de précalculer (sur nos données) des chaines avec un k supérieur à 3.
+Ce précalcul fait gagner près de 35\% d'efficacité à chaque recherche de SI.
 
 
 \subsubsection{Mesures}
@@ -2298,11 +2328,11 @@ Nous ne nous attendions pas à ces résultats et la sur-optimisation du pavage p
 
 \paragraph{}Pour choisir les paramètres il ne faut pas prendre que les résultats en considération mais également le temps qu'il faut pour les générer.
 Pour cela, nous avons effectué une analyse comparative des algorithmes en utilisant les différents paramètres cités précédemment.
-Comme nous pouvons le remarquer sur le schéma \ref{temps_general}, l'heuristique de pavage permet un temps d'exécution beaucoup plus faible le pavage MIP (Excepté pour le pavage heuristique 3-3 qui n'a pas d'importance puisqu'il n'apporte pas de résultats).
+Comme nous pouvons le remarquer sur le schéma \ref{temps_general}, l'heuristique de pavage permet un temps d'exécution beaucoup plus faible le pavage MIP (Excepté pour le pavage heuristique 3-3 qui n'a pas d'importance puisqu'il n'apporte pas de qualité).
 Ce résultat était attendu mais l'écart flagrant vient confirmer la nécessité d'utiliser l'heuristique de pavage plutôt que le MIP.
-Après les contres-performances du pavage MIP à la fois en qualité de résultats qu'en temps d'exécution, nous excluons ce paramètre des recommandations d'utilisation.
+Après les contres-performances du pavage MIP, à la fois en qualité de résultats qu'en temps d'exécution, nous excluons cet algorithme des recommandations d'utilisation.
 
-\paragraph{}Comparons désormais les temps d'exécution en fonction des paramètres passés au programme.
+\paragraph{}Comparons désormais les temps d'exécution pour l'heuristique en fonction des paramètres passés au programme.
 Le pramètre du nombre de boucles light semble avoir le plus d'influence sur le temps d'exécution.
 Nous pouvons expliquer cette augmentation par la difficulté rencontrée par l'algorithme d'isomorphisme lorsque peut de labels sont présents.
 Répéter l'opération plusieurs fois multiplie logiquement le temps d'exécution.
@@ -2310,6 +2340,7 @@ Répéter l'opération plusieurs fois multiplie logiquement le temps d'exécutio
 Si l'on regarde bien les temps d'exécution on peut également s'apercevoir que l'augmentation du second paramètre (la profondeur de modulation) permet de diminuer le temps d'exécution pour un nombre de boucles light fixe.
 En effet, plusieurs solutions sont bloquées par le manque de profondeur de modulation et non pas par le nombre de boucles.
 Les monomères pour reconstruire le peptide ont tous été trouvés mais la solution gloutonne n'est pas immédiatement voisine de la solution optimale.
+Effectuer une modulation plus poussée permet d'arriver beaucoup plus vite à une solution.
 
 \paragraph{}Pour conclure cette partie  sur la sélection des paramètres, nous pouvons dire qu'il faudra toujours privilégier l'utilisation de l'algorithme de pavage heuristique par rapport au pavage MIP.
 Cependant, il ne faut pas utiliser n'importe quels paramètres.
@@ -2322,8 +2353,8 @@ Soit nous privilégions la qualité à la vitesse et nous réglons les deux para
 
 \subsection{Répartition des temps de calcul et analyse}
 
-\paragraph{}Maintenant que nous avons choisi les paramètres analysons attentivement chacune des étapes pour comprendre les points critiques pour de futures améliorations.
-Pour cela, nous avons exécuté le logiciel sur tous les peptides des jeux test en utilisant un pavage heuristique, une valeur de k de 4, une modulation de 2 et un nombre de tour de boucle de 2.
+\paragraph{}Maintenant que nous avons choisi les paramètres analysons attentivement chacune des étapes pour comprendre les points critiques et préparer de futures améliorations.
+Pour cela, nous avons exécuté le logiciel sur tous les peptides des jeux test en utilisant un pavage heuristique, une valeur de k de 3, une modulation de 2 et un nombre de tour de boucle de 2.
 Pour chacun des peptides, nous avons stocké séparément les temps pour l'isomorphisme strict, le light, le pavage et la modulation.
 Les résultats sont affichés sur la figure \ref{temps_calcul}.
 
@@ -2338,19 +2369,19 @@ Les résultats sont affichés sur la figure \ref{temps_calcul}.
 \paragraph{}Certains points de la figure ont été tronqués car ils écrasaient les résultats.
 15 valeurs sur les 350 ont été redescendues à 50ms alors que certaines allaient jusqu'à plusieurs centaines de ms (Le point max atteint 1s à lui seul).
 On distingue nettement deux comportements différents sur cette courbe.
-Soit les peptides ont été complètement analysés à la suite d'une seule passe de pavage suite à la recherche stricte ; dans ce cas, le temps d'exécution épouse une courbe qui augmente progressivement avec le nombre d'atomes ; soit le matching light et la modulation qui suit entrent en action et dans ce cas le temps est fortement dépendant de la topologie du peptide (tous les points disparates).
+Soit les peptides ont été complètement analysés à la suite d'une seule passe de pavage suite (celle succédant la recherche stricte) ; dans ce cas, le temps d'exécution épouse une courbe qui augmente progressivement avec le nombre d'atomes ; soit le matching light et la modulation qui suit entrent en action et le temps devient fortement dépendant de la topologie du peptide (tous les points disparates).
 
 Pour ce qui est de la première catégorie de peptide, on peut voir que la quasi-intégralité du temps est dépensé sur la recherche d'isomorphismes de sous graphe.
-Comme nous le supposions au début de ce projet, les isomorphismes sont des goulot d'étranglement du fait de la complexité des algorithmes de résolution.
-Pour quelques peptide, le temps est complété par une petite phase de modulation qui ne prend que quelques millisecondes.
-Dans le pire des cas, le temps est doublé.
+Comme nous le supposions au début de ce projet, les isomorphismes sont des goulots d'étranglement du fait de la complexité des algorithmes de résolution.
+Pour quelques peptide, le temps est complété par une phase de modulation qui ne prend que quelques millisecondes.
+Dans le pire des cas, le temps est doublé par cette modulation.
 L'étape de pavage ne prend jamais plus de 3ms et n'est pas un problème pour le temps d'exécution.
 
 Pour les points de la seconde catégorie, c'est encore l'étape de recherche qui prend le plus de temps.
 Sauf que cette fois-ci, ce sont les étapes de recherche light qui prédominent le temps de calcul.
 Comme nous l'avions évoqué lors de la présentation de cette amélioration, le manque de labels disponibles diminue fortement l'efficacité de l'algorithme.
 En moyenne, un isomorphisme light est de 10 à 100 fois plus lent qu'un strict.
-De plus, les cas qui posent problème et ont besoin de l'isomorphisme light sont très souvent accompagnés de longues exécutions de modulation.
+De plus, les cas qui posent problème sont très souvent accompagnés de longues exécutions de modulation.
 Cependant, ce temps d'attente vaut le coup puisque la majorité des cas sont résolus.
 Sur l'extrait des peptides ici présent, seules 20 d'entre eux finissent sur des impasses.
 Toutes les autres exécutions s'arrêtent en obtenant 100\% de couverture.
@@ -2359,9 +2390,9 @@ Toutes les autres exécutions s'arrêtent en obtenant 100\% de couverture.
 Ces cas pathologiques masquent les réelles performances du logiciel.
 La moyenne de temps d'exécution globale est de 18ms par peptide mais lorsque nous retirons les 15 cas qui débordent de la figure, cette moyenne chute à 10ms.
 À eux seuls, ces 15 peptides représentent plus de la moitié du temps d'exécution du logiciel.
-Le cas le plus critique à lui seul représente un cinquième du temps d'exécution total.
+Le cas le plus critique à lui seul représente un cinquième du temps d'exécution total (plus de 1s).
 Ce qu'il faut conclure de cela est qu'il faut éviter d'utiliser des boucles light sur des données dont on ne connait pas grand chose.
-Si nous souhaitons par exemple analyser à l'aveugle un très grad nombre de molécules, il est préférable de se restreindre à une utilisation basique du logiciel, quitte à venir affiner les résultats intéressants par la suite.
+Si nous souhaitons par exemple analyser à l'aveugle un très grand nombre de molécules, il est préférable de se restreindre à une utilisation basique du logiciel, quitte à venir affiner les résultats intéressants par la suite.
 
 
 
