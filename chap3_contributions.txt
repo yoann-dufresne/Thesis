@@ -1,97 +1,17 @@
 
 
 
-### Mise à jour des données de Norine
-
-Revenons sur le vieillissement des données de Norine.
-Il existe au sein de Norine, de nombreuses ``petites'' informations (qui ne remettent pas en cause la présence du peptide en base) qui sont obsolètes ou du moins imprécises.
-Nous pouvons regrouper le type d'information sous quatres catégories : Les liens externes rompus (liens vers PubChem et Uniprot), les taxonomies plus à jour, les molécules/organismes ayant changé de nom et les mises à jour de peptides par de nouvelles publications.
-Analysons un à un chacun de ces cas.
-
-
-#### Les liens externes
-
-Les liens rompus sont peut être la catégorie la plus facile à traiter et nous avons construit un script permettant de les corriger.
-Un à un, nous suivons automatiquement les liens vers les bases.
-Certain d'entre eux ne mènent plus à rien et nous pouvons alors les supprimer.
-Dans ce cas, nous cherchons ensuite le nom du peptide via l'API de PubChem pour espérer trouver une autre page correspondante.
-Lorsqu'une structure est retrouvée, nous la faisons annoter par s2m afin de vérifier la cohérence de structure avec l'annotation manuelle de Norine.
-Si l'annotation correspond, le nouveau lien est ajouté.
-De la même manière, il est possible de vérifier les liens encore fonctionnel et d'ajouter des liens à certains peptides n'en possédant pas.
-TODO : stats de maj
-
-
-#### Remises à jour de la taxonomie
-
-La taxonomie pose un peu plus de problème car elle dépendante du moment où on la relève.
-La taxonomie du vivant a fortement évolué au fur et à mesure des découvertes et des nouvelles méthodes de classification et il n'y
-a aucun doute sur le fait qu'elle continura a évoluer rapidement.
-Au sein de Norine ce n'est pas une ressource critique mais il est bon de connaître les lignées d'espèces productrices de NRP pour pouvoir faire des rapprochements entre NRP/NRPS.
-Les données de taxonomie peuvent être récupérées depuis le site ou l'API du NCBI.
-Le NCBI étant un organisme de référence, beaucoup de contributeurs maintiennent les classifications à jour.
-En effectuant réguliérement une recherche sur le NCBI de la taxonomie des espèces présente dans Norine, il est possible de maintenir les données suffisamment à jour.
-
-TODO : figures arbre des taxons
-
-Les données de taxonomie de Norine sont pour le moment maintenues comme des chaines de caractère au sein de la table des organismes.
-Cette structure est très redondante et ne permet pas des mises à jour efficaces.
-Nous avons profité de la création d'un script de récupération depuis le NCBI pour revoir complétement notre facçon de stocker les taxons.
-La chaine de caractère présente dans l'organisme est remplacée par un identifiant dans la nouvelle table des taxons de Norine.
-Cette table est organisée comme un arbre pour permettre une mise à jour taxon par taxon sans avoir besoin de modifier des dizaines d'entrés.
-La construction de toute la chaine taxonomique d'une espèce prend désormais beaucoup plus de temps (beaucoup plus de requêtes) mais ce problème est facilement contournable par la création de vues sql.
-TODO : stats maj
-
-
-#### Les changements de nomenclature
-
-Les deux scripts de mise à jour dont nous venons de parler ne fonctionnent pas dans 100\% des cas.
-Depuis leur publication (parfois il y a très longtemps), certaines molécules et certains organismes ont changé de nom.
-Heureusement, à la fois le NCBI et PubChem gardent en mémoire une liste conséquente de synonymes permettant de les retrouver.
-Cependant, nos scripts ne trouvent pas toujours de synonymes ou certains synonymes ne correspondent pas vraiment, ce qui nous empèche d'effectuer les mises à jour.
-Dans ce cas, nous levons des alertes qui devront être analysées à la main (probablement durant des Norine days).
-
-
-#### Publications mises à jour
-
-En analysant les annotations issues de s2m, nous nous sommes parfois aperçu de l'existance de nouveaux articles à propos des molécules étudiées.
-Certains articles nous permettaient alors de remettre à jour l'annotation présente dans Norine, de créer entrées pour des variants nouvellement connus et parfois d'infirmer la production non ribosomique du peptide.
-Ce dernier cas est très problématique car pour le moment, il n'a pas été prévu dans Norine de retirer les informations d'une quelconque manière.
-Il est toujours possible de retirer les informations directement en sql mais cette solution ne permet pas aux utilisateurs de comprendre la disparition de la molécule.
-Après concertation sur la nomenclature et les procédure d'évolution des données nous nous sommes mis d'accord pour ajouter un status ``deprecated'' au sein de la base.
-Pour le moment il existe les status ``curated'' et ``putative''.
-L'ajout de ce nouveau status permettra de regrouper tous les peptides qui ont un jour été considéré NRP mais qui depuis ont été prouvés produits par d'autres voies de synthèse.
-Encore une fois, cette mise à jour n'est pas automatisable et nécessite un traitement particulier.
-La procédure devait un jour être ajoutée à myNorine.
-
-
-
-### Récupération massive de NRP
-
-L'exploration des bases de données proches des NRP permet de se rendre compte que de nombreuses molécules NRP connues ne sont pas répertoriées au sein de Norine.
-Nous avons créer des script de récupération de NRP depuis les bases MiBIG (ref) et BIRD.
-BIRD (TODO : citer) (The Biologically Interesting Molecule Reference Dictionary) est une une base de données regroupant de petits polymères antibiotiques et inhibiteurs.
-Les deux bases ont pour avantage de contenir des annotations permettant de savoir quelles sont les molécules NRP et pouvoir facilement accéder aux données via des logiciels externes (via téléchargement de fichiers).
-
-Une fois les molécules récupérées, nous utilisons s2m pour produire l'annotation monomérique nécessaire à l'entrée d'un NRP en base.
-Cependant, en ajoutant automatiquement de nombreuses nouvelles molécules automatiquement, nous ne respectons plus la charte de qualité que s'étaient fixés les créateurs.
-C'est pourquoi chacune des données importées automatiquement porte un status nouveau appelé ``automated''.
-Lorsqu'un utilisateur recherchera des peptides sur l'interface web, les annotation non automatiques seront plus mises en avant que celles qui le sont.
-Les pages de ces nouveaux peptides seront évidemment marquées avec la provenance des données et un lien vers celle-ci apparaîtra.
-
-Par ce script, 471 nouvelles annotations NRP vont être ajoutées à la prochaine version de Norine (+40\% de peptides).
-Un troisième script est en cours d'intégration afin de centraliser les données de ClustScan database (ref).
-Ce travail a été effectué en collaboration forte avec Juraj Michalik lorsqu'il était en contrat d'ingénieur au sein de notre équipe.
 
 
 
 ### Fouille en bases de données
 
-La dernière méthode de mise à jour de Norine est un peu plus exploratoire.
+La dernière méthode de mise à jour de Norine est plus exploratoire.
 L'idée est de scanner d'immenses bases de données à la recherche de peptides dont la structure monomérique nous fait penser à un NRP.
-Ces structures seront générées par s2m.
-Le fait ue nous ayons optimisé le temps de calcul de s2m va nous permettre de passer à l'échelle et de scanner des dizaines de milliers de molécules.
+Ces structures seront générées par s2m à partir des SMILES de la base.
+L'optimisation effectuée sur le temps de calcul de s2m va nous permet de passer à l'échelle et de scanner des dizaines de milliers de molécules.
 Sans aucune modification de s2m, nous sommes capable de charger et d'analyser environ 250 molécules par minute.
-En désactivant le matching light pour tous les peptides qui n'ont pas une couverture suffisante, il est possible d'annoter 3 fois plus de structures dans le même temps.
+En désactivant la recherche light pour tous les peptides qui n'ont pas une couverture suffisante, il est possible d'annoter 3 fois plus de structures dans le même temps.
 
 Par la suite, les entrées annotées doivent être triées pour en extraire les potentiels candidats NRP.
 Nous prendrons comme premier critère le taux de couverture obtenu par s2m.
