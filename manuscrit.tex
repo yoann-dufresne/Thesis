@@ -2523,9 +2523,15 @@ Norine a été créée dans le but de centraliser et rendre accessible les annot
 Sans cette centralisation, il est très difficile de créer des modèles de prédiction autour des NRP.
 Les données de Norine ont par exemple été très utiles pour la création de modèles de prédiction d'activités NRP.
 
-\paragraph{TODO : Schéma SQL simplifié}
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=350px]{Figures/Norine/sql.png}
+    \caption{\label{sql}Schéma simplifié de la base de données Norine.
+    Figure extraite de la thèse de Ségolène Caboche avec son accord.}
+  \end{center}
+\end{figure}
 
-\paragraph{}Norine est une base de données postgres contenant plusieurs dizaines de tables, toutes articulées autour de la notion de peptide (voir la version très simplifiée de la figure TODO).
+\paragraph{}Norine est une base de données postgres contenant plusieurs dizaines de tables, toutes articulées autour de la notion de peptide (voir la version très simplifiée de la figure \ref{sql}).
 La table centrale des peptides contient toutes les informations centrales telles que le nom, la famille ou les différentes structures.
 Les information d'activités, d'organismes producteurs ou le détail de chaque monomères sont quant à eux présent dans des tables annexes, reliées soit par clef externe soit par des tables d'associations.
 Par exemple, une table est dédiée aux activités.
@@ -2675,9 +2681,25 @@ Quelques peptides ont été soumis mais il est encore nécessaire de communiquer
 
 
 
-\section{Mes contributions au sein de Norine}
+\section{Les contributions de s2m à Norine}
 
-\paragraph{TODO : intro}
+\paragraph{}Jusqu'à présent, tout le travail que nous avons présenté se constitue de méthodes informatiques pour générer des données.
+Cette section sera consacrée à la partie bioanalyse qui suit forcément ce genre de production.
+Comme tout au long de ma thèse, ce travail a été réalisé en étroite collaboration avec les membres du sous-groupe Norine.
+Les travaux que je vais présenter ici sont issus des analyses en réunion lors de nos ``Norine days'' et de collaborations avec des stagiaires et ingénieurs.
+
+\paragraph{}Les Norine days sont des réunions de travail qui réunissent tous les acteurs de Norine.
+Ces réunions sur demi-journées nous permettent de discuter rapidement de problèmes et solutions qui concernent tout le monde.
+Elles m'ont été d'une grande aide pour me permettre d'acquérir les notions de biologie et de chimie nécessaires.
+Lors de ces réunions, j'ai apporté les résultats de s2m, ce qui nous a mené à la découverte des erreurs d'annotation présentes en base.
+Je présenterai par la suite les différents étapes de la correction et de la mise en place de gardes fous pour faire disparaître ce genre d'erreurs.
+
+Durant ces journées nous prenons également beaucoup de temps à analyser les nouvelles entrées soumises par des contributeurs extérieurs.
+Ces contributions nous ont d'ailleurs plusieurs fois menées à des changements au sein de l'ontologie de Norine et à la normalisation de concepts déjà présents.
+Nous ne présenterons pas ce travail en détail car il une oeuvre collective fortement éclatée en de nombreuses petites tâches.
+
+\paragraph{}La seconde partie de cette section sera consacrée aux collaborations avec des stagiaires et ingénieurs qui ont menées à la création de nouveaux contenus pour la base de données.
+Dans les deux cas que nous verrons, nous aborderons l'utilisation de s2m pour l'ajout automatique d'annotations.
 
 
 \subsection{Améliorations de l'existant}
@@ -2734,6 +2756,24 @@ Par ce système nous incitons les contributeurs à ajouter le SMILES de leurs pe
 
 
 
+
+\subsection{Mises à jour de Norine}
+
+\paragraph{}Les Norine days, nous ont poussé à beaucoup travailler sur les données de Norine ainsi que sur des données d'autres bases.
+Cette exploration en profondeur nous a révélé plusieurs faits.
+Premiérement, les données de Norine sont vieillissantes.
+Par exemple en suivant des liens Pubchem, nous nous sommes apperçu qu'ils ne pointaient plus tous vers les les bonnes structures.
+Nous avons également mis à jour le fait que l'évolution de la taxonomie au cours des années, a rendue obsolète certaines classifications d'organismes dans Norine.
+Plusieurs autres détails ont également changé et nous font dire qu'une mise à niveau s'impose.
+Cette mise à niveau sera le premier point que nous aborderons dans cette section.
+
+\paragraph{}Secondement, en parcourant des bases telles que MiBIG qui répertorient des NRP et NRPS, nous avons constaté qu'il existe une grande quantité de NRP facilement accessibles et candidats pour un ajout au sein de Norine.
+Ces données sont en général bien structurées et pourraient facilement être indexées par Norine.
+
+\paragraph{}Enfin, il existe également de nombreuses molécules NRP présentes dans des bases de données généralistes.
+Nombre d'entre elles sont sans annoations monomériques.
+En utilisant s2m sur de très grandes bases telles que PubChem, nous essayerons d'obtenir des annotations monomériques afin d'extraire des candidats NRP.
+Ces molécules pourront ensuite être analysées manuellement pour les entrer ou non en base.
 
 
 
