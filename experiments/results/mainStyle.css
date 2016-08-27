@@ -1,0 +1,44 @@
+.coverage {
+border: black solid 1px;
+padding: 10px;
+margin-bottom: 20px;
+}
+
+.peptide>* {
+display: inline-block;
+vertical-align: middle;
+}
+
+.colors {
+text-align: center;
+}
+
+.monomer>p {
+text-align: center;
+}
+
+.list {
+overflow: auto;
+white-space: nowrap;
+}
+
+.miniImg {
+width: 150px;
+height: 150px;
+}
+
+.covImage {
+width: 500px;
+height: 500px;
+}
+
+.list>div {
+display: inline-block;
+}
+
+.colors>.color {
+display: inline-block;
+width: 20px;
+height: 20px;
+}
+
