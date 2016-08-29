@@ -2859,6 +2859,57 @@ Ce travail a été effectué en collaboration forte avec Juraj Michalik lorsqu'i
 
 
 
+\subsubsection{Fouille en bases de données}
+
+\paragraph{}La dernière méthode de mise à jour de Norine est la plus exploratoire.
+L'idée est de scanner d'immenses bases de données à la recherche de peptides dont la structure monomérique nous fait penser à un NRP.
+Ces structures seront générées par s2m à partir des SMILES présents dans cette base.
+L'optimisation effectuée sur le temps de calcul de s2m permet de passer à l'échelle et de scanner des dizaines de milliers de molécules.
+Sans aucune modification de s2m, nous sommes capable de charger et d'analyser environ 250 molécules par minute.
+En désactivant la recherche light pour tous les peptides qui n'ont pas une couverture suffisante, il est possible d'annoter 3 fois plus de structures dans le même temps.
+
+\paragraph{}Pour effectuer un premier test, nous avons choisi d'extraire de PubChem toutes les molécules qui répondent à la requête ``peptide''.
+Ce premier filtre limite le nombre d'entrées que nous avons à évaluer lors d'un premier test.
+Au total c'est 1~626~461 composés qui ont été récupérés.
+Les annotations de ces peptides par s2m on été faites en plus de 36 heures sur une seule machine.
+
+Une fois les annotations obtenues, nous cherchons à séparer les NRP du reste des molécules en utilisant plusieurs critères de filtration.
+Obtenir un bon taux de couverture lors du passage de s2m sera notre premier critère.
+Pour commencer, soyons très exigeants et réclamons de n'obtenir que les peptides 100\% découverts.
+Nous obtenons 12830 peptides.
+
+En regardant rapidement, on s'apperçoit que de nombreuses molécules sont constituées de seulement un ou deux monomères.
+Ajoutons un filtre de nombre de monomères minimal.
+Dans les statistique de Norine, la plupart des peptides possédent au moins 7 monomères.
+Filtrons donc toutes les annotations de moins de 7 monomères.
+Nous obtenons désormais 5342 peptides.
+
+Enfin, les NRP sont noyés au milieu de nombreuses protéines classiques.
+Rappellons que les protéines classiques sont constituées uniquement de 20 acides aminiés différents.
+Leur voie de synthèse n'effectue que des assemblages linéaires.
+En filtrant tous les peptides qui ne contiennent que des acides aminés protéinogènes ainsi que ceux qui sont linéaires, nous devrions augmenter la densité de NRP dans notre sortie.
+Nous ajoutons comme filtre l'impossibilité d'être linéaire (nombre de liaisons suppérieurs ou égal à nombre de noeuds) et l'obligation de posséder au moins deux monomères ne faisant pas partie des 20 de base.
+Finalement nous obtenons 1097 peptides.
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=450px]{Figures/contributions/didemnin_B.png}
+    \caption{\label{didemin}À gauche une des sorties après processus de filtration et à droite le NRP corespondant dans la base Norine.}
+  \end{center}
+\end{figure}
+
+\paragraph{}Bien évidemment, ces 1097 structures ne sont pas toutes des peptides non ribosomiques.
+Les protéines classiques sont modifiées par de nombreuses enzymes qui permettent parfois la cyclisation et la transformation de monomères.
+Ces protéines peuvent être modifiées au point de les faire ressembler à des NRP.
+Nous ne pouvons donc pas être certains que les molécules rescapées du processus de filtration soient bien NRP.
+Cependant un bon indice de la qualité de la méthode est que nous retrouvons à l'aveugle des NRP de Norine.
+Nous avons par exemple retrouvé le ``didemnin B'' (figure \ref{didemin}).
+En effectuant une recherche par structure depuis l'interface de Norine, nous avons retrouvé ce NRP.
+Quelques exemples n'étant pas des preuves, il faudra revenir sur ces données afin les valider manuellement.
+C'est à nouveau un très long travail de bioanalyse qui viendra compléter les données de Norine.
+
+
+
 
 \section{Vers la biologie de synthèse}
 

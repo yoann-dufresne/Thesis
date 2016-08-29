@@ -1,0 +1,8 @@
+z4607.zip
+1.0	4/7	Dpy;Dov;D-NMe-Val,NMe-Val;D-Pro,Pro;D-Pro,Pro;D-Val,Val;D-Hiv,Hiv	[(2S)-1-[(2R)-2-benzyl-3-methoxy-5-oxo-2H-pyrrol-1-yl]-3-methyl-1-oxobutan-2-yl] (2S)-1-[(2S)-1-[(2S)-2-[[(2S)-2-[[(2S)-2-(dimethylamino)-3-methylbutanoyl]amino]-3-methylbutanoyl]-methylamino]-3-methylbutanoyl]pyrrolidine-2-carbonyl]pyrrolidine-2-carboxylate
+O=C1C=C(OC)C(N1C(=O)C(OC(=O)C3N(C(=O)C2N(C(=O)C(N(C(=O)C(NC(=O)C(N(C)C)C(C)C)C(C)C)C)C(C)C)CCC2)CCC3)C(C)C)Cc4ccccc4
+
+z4640.zip
+(2S)-N-[(2S)-1-[[(3S,6S,8S,12R,13R,16S,17R,20S,23S)-13-[(2S)-butan-2-yl]-12-hydroxy-20-[(4-methoxyphenyl)methyl]-6,17,21-trimethyl-3-(2-methylpropyl)-2,5,7,10,15,19,22-heptaoxo-8-propan-2-yl-9,18-dioxa-1,4,14,21-tetrazabicyclo[21.3.0]hexacosan-16-yl]amino]-4-methyl-1-oxopentan-2-yl]-1-[(2R)-2-hydroxypropanoyl]-N-methylpyrrolidine-2-carboxamide
+O=C2OC(C(=O)C(C(=O)NC(C(=O)N4CCCC4(C(=O)N(C)C(C(=O)OC(C)C(NC(=O)C(N(C(=O)C1N(C(=O)C(O)C)CCC1)C)CC(C)C)C(=O)NC(C(O)C2)C(C)CC)Cc3ccc(OC)cc3))CC(C)C)C)C(C)C
+=> didemnin B
