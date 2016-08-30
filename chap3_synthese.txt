@@ -7,6 +7,15 @@ C'est dans le but de contribuer à la création de ces nouvelles molécules que 
 La biologie de synthèse est un domaine qui vise à modifier des organismes pour les pousser à effectuer des tâches que nous souhaitons.
 Dans notre cas le but est de faire produire en masse par une bactérie, des NRP qui nous intéressent.
 
+Cette section va parler de la suite du travail présenté jusqu'à présent.
+L'annotation NRP n'est pas une fin en soit mais une donnée précieuse pour décrire les voies de synthèse.
+La question derrière cette partie est : Est-il possible de construire des voies de synthèse à partir d'un graphe monomérique voulu ?
+Comme nous le verrons par la suite, cette question est beaucoup trop large pour l'avancée des connaissances actuelles.
+Nous nous restreindrons à essayer de rapprocher des données génétiques (ie des voies de synthèse) à des données de structures monomériques.
+
+
+
+
 TODO : parler de notre méthode en introduisant état de l'art.
 Dans cette section nous allons parler de la modification de bactéries pour la production de peptides non ribosomiques nouveaux.
 
