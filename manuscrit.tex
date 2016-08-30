@@ -377,6 +377,8 @@ Dans cette partie, nous allons aborder ces deux types de modification/ajout d'un
 
 \subsubsection{Les enzymes de décoration}
 
+\label{sucres}
+
 \paragraph{}Les clusters de gènes de NRPS ne sont pas uniquement constitués des gènes d'enzymes NRPS.
 De nombreux gènes accompagnateurs sont présents, généralement inclus dans le cluster.
 Parmi ceux-ci, certains gènes servent à modifier les NRP déjà relâchés par la NRPS.
@@ -2912,6 +2914,101 @@ C'est à nouveau un très long travail de bioanalyse qui viendra compléter les 
 
 
 \section{Vers la biologie de synthèse}
+
+\paragraph{}Depuis quelques années, les bactéries développent de plus en plus de résistances aux antibiotiques utilisés en médecine animale.
+Les NRP étant une source très riche d'antibiotiques, de nombreuses équipes essayent de créer de nouvelles molécules à partir de ceux-ci.
+C'est dans le but de contribuer à la création de ces nouvelles molécules que nous allons ici aborder la thématique de la biologie de synthèse.
+La biologie de synthèse est un domaine qui vise à modifier des organismes pour les pousser à effectuer des tâches que nous souhaitons.
+Dans notre cas le but est de faire produire en masse par une bactérie, des NRP qui nous intéresse.
+
+\paragraph{}Cette section va parler de la suite du travail présenté précédemment.
+L'annotation NRP n'est pas une fin en soit mais une donnée précieuse pour comprendre l'assemblage moléculaire et de fait, les voies de synthèse.
+Le grâal de la biologie de synthèse des NRP est de savoir comment produire nos propres assemblages monomériques en manipulant les gènes NRPS.
+Comme nous le verrons par la suite, cette question est beaucoup trop large pour l'avancée des connaissances actuelles.
+Notre première étape sera de mettre en relation les NRP avec les clusters de géne qui les produisent.
+Cette information double sera très utile par la suite pour tout modèle d'apprentissage qui souhaiterait designer de nouvelles molécules.
+L'archivage de ces binômes n'étant pour le moment pas fait, nous proposerons d'utiliser Norine pour référencer les informations de production.
+
+
+\subsection{L'existant}
+
+\paragraph{}Commençons par un tour d'horizon des travaux de ce domaine.
+Nous nous appuierons sur le travail de revue réalisé par Hajo Kries~\cite{kries_biosynthetic_2016}.
+Effectuons un survol des techniques en commançant par de petites modifications monomériques pour arriver finalement à la création totale d'un NRP.
+
+
+\subsubsection{Les modifications peptidiques}
+% Recent advances in engineering nonribosomal peptide assembly lines
+% Ribosome-independent biosynthesis of biologically active peptides: Application of synthetic biology to generate structural diversity
+
+\paragraph{}L'une des approches pour obtenir de nouvelles structures peptidiques est de faire varier les structures existantes.
+La structure peut être modifiée post-synthèse NRPS, par des enzymes présentes dans le cluster de gènes.
+C'est ce qu'il se passe par exemple naturellement lors d'incorporations de sucres dans un NRP (voir section \ref{sucres}).
+En ajoutant des gènes ou modifiant des enzymes du cluster de gènes certaines équipes réussissent à ajouter de nouveaux monomères ou à modifier certains monomères inclus~\cite{giessen_ribosome-independent_2012}.
+
+\paragraph{TODO : schéma modification post-synthèse}
+
+\paragraph{}\cite{winn_recent_2016} propose également d'aller plus loin en effectuant parfois cette modification avant l'assemblage NRPS.
+Ils publient par exemple plusieurs modifications de la Pacidamycin qui ont été effectuées près assemblage.
+Ce sont des enzymes modificatrices qui agissent sur un monomère cible avant sa capture par le domaine C-terminal.
+La surface en contact lors de la capture et de l'assemblage n'étant pas modifiée, les monomères alternatifs sont intégrés de la même manière que l'original.
+Certains monomères ne sont plus facilement modifiables une fois inclus du fait des contraintes structurelles et la modification de monomères pré-synthèse ouvre la voie vers de nouvelles structures peptidiques.
+
+
+\subsubsection{Les modifications ponctuelles de synthétases}
+% Introduction of a Non-Natural Amino Acid into a Nonribosomal Peptide Antibiotic by Modification of Adenylation Domain Specificity
+% Mapping the Limits of Substrate Specificity of the Adenylation Domain of TycA
+% Reprogramming Nonribosomal Peptide Synthetases for “Clickable” Amino Acids
+
+\paragraph{TODO : schéma modification module}
+
+\paragraph{}La seconde possibilité de modification de NRP passe par la modification des synthétases.
+Plus exactement par la modification d'un domaine A d'une synthétase.
+Les travaux \cite{villiers_mapping_2009, kries_reprogramming_2014, williams_engineering_2013} partent du constat également fait par Stachelhaus~\cite{stachelhaus_specificity-conferring_1999} que les domaines A sont spécifiques aux monomères qu'ils capturent.
+En modifiant certains acides aminés composant un module A, la spécificité de celui-ci change.
+Après quelques modifications bien effectuées la poche d'accueil du monomère est suffisamment modifée pour accueillir un nouveau type de monomère.
+Les modifications à effectuer sont découvertes via des techniques d'évolution dirigée.
+Les auteurs génèrent des mutations aléatoires (partiellement dirigées) sur les modules A puis ne gardent que ceux qui changent de fonction.
+Par ce procédé, ils arrivent à capturer des monomères nouveaux, parfois non naturels~\cite{thirlway_introduction_2012}.
+
+
+
+\subsubsection{Les modifications de domaines de synthétases}
+% Reinvigorating natural product combinatorial biosynthesis with synthetic biology
+% Harnessing the Biosynthetic Code: Combinations, Permutations, and Mutations
+
+\paragraph{TODO : schéma échange module}
+
+\paragraph{}Les modifications qui paraissent les plus évidentes sont celles qui font appel à des échanges de domaines.
+Des exemples sont présentés au sein des articles \cite{cane_harnessing_1998,kim_reinvigorating_2015}.
+Intuitivement, nous pourrions nous dire qu'il est facile d'échanger par exemple deux modules A de deux synthétases comme on échangerait deux pièces de LEGO dans une construction.
+Malheureusement, ces modifications ne sont pas si directes car les modules doivent respecter des contraintes spatiales et physico-chimiques pour que le NRPS ait une cohérence structurelle.
+De plus, certaines recombinaisons ne fonctionnent pas mais sans aucune raison à ce jour connue.
+
+% A Subdomain Swap Strategy for Reengineering Nonribosomal Peptides
+
+\paragraph{}Pour outrepasser ce genre de dificultés, les auteurs de \cite{kries_subdomain_2015} procédent uniquement à un échange de sous domaine A.
+Ils modifient une partie de la zone spécifique en essayant de préserver la structure globale du module.
+Par cette technique, ils arrivent à modifier la forme de la poche et capter de nouveaux monomères.
+
+
+\subsubsection{La création de peptide de novo}
+
+\paragraph{}Nous arrivons désormais au graal de l'ingénieurie NRP : créer un peptide de toutes pièces.
+Sans trop de surprise, il n'existe pour le moment aucune technique pour effectuer ce genre de tâche.
+Comme nous l'avons vu précédamment, modifier un module A est déjà très difficile et nécessite beaucoup d'astuces.
+Cependant, certains travaux cherchent déjà à concevoir des briques de base qui nous permettraient un jour de construire un peptide complet.
+Ainsi, les travaux menés par K.M. Wilcoxen et al~\cite{wilcoxen_biomimetic_2007} ont mené à la création d'un petit peptide synthétique mimiquant le comportement d'un domaine C.
+Ils sont parvenu à lier deux monomères via leur peptide-module.
+Nous sommes encore loin d'un domaine C universel fonctionnel mais c'est ce genre de travaux qui permettra de mener à bien cette quête du graal.
+
+
+\paragraph{}Nous avons globalement présenté plusieurs techniques d'ingénieurie de NRP sans quasiement laisser transparaitre de failles de ces techniques.
+Cependant, quelle que soit la technique, rares sont les productions de NRP qui soient capable de passer à l'échelle.
+Comme le dit si bien la revue, nous sommes pour le moment très bon en création de nombreux ``mauvais'' NRP.
+En effet, les NRP créés sont soit très faiblement actifs soit très faiblement produits à cause des modifications.
+Il reste encore beaucoup de chemin à parcourir pour un jour pouvoir produire des antibiotiques synthétiques issus de la pensée humaine.
+
 
 \bibliography{these}
 \bibliographystyle{plain}

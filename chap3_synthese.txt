@@ -11,8 +11,9 @@ Cette section va parler de la suite du travail présenté jusqu'à présent.
 L'annotation NRP n'est pas une fin en soit mais une donnée précieuse pour décrire les voies de synthèse.
 La question derrière cette partie est : Est-il possible de construire des voies de synthèse à partir d'un graphe monomérique voulu ?
 Comme nous le verrons par la suite, cette question est beaucoup trop large pour l'avancée des connaissances actuelles.
-Nous nous restreindrons à essayer de rapprocher des données génétiques (ie des voies de synthèse) à des données de structures monomériques.
-
+La première étape pour les NRPS sera de mettre en relation les NRP avec le cluster de géne les produisant.
+Cette information double sera très utile par la suite pour tout modèle d'apprentissage qui souhaiterait designer des voies de synthèse.
+L'archivage de ces binômes n'étant pour le moment pas fait, nous proposerons d'utiliser Norine pour référencer les informations de production.
 
 
 
