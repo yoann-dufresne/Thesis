@@ -2,10 +2,12 @@
 # Vers la biologie de synthèse
 
 Depuis quelques années, les bactéries développent de plus en plus de résistances aux antibiotiques utilisés en médecine animale.
-Les NRP étant une source très riche de molécules antibiotiques, de nombreuses équipes essayent de créer de nouvelles molécules à partir de ceux-ci.
+Les NRP étant une source très riche d'antibiotiques, de nombreuses équipes essayent de créer de nouvelles molécules à partir de ceux-ci.
 C'est dans le but de contribuer à la création de ces nouvelles molécules que nous allons ici aborder la thématique de la biologie de synthèse.
-La biologie de synthèse est un domaine qui vise à modifier certains organismes pour les pousser à effectuer des tâches que nous souhaitons.
-Le but est très souvent de leur faire produire des composés d'intérêt.
+La biologie de synthèse est un domaine qui vise à modifier des organismes pour les pousser à effectuer des tâches que nous souhaitons.
+Dans notre cas le but est de faire produire en masse par une bactérie, des NRP qui nous intéressent.
+
+TODO : parler de notre méthode en introduisant état de l'art.
 Dans cette section nous allons parler de la modification de bactéries pour la production de peptides non ribosomiques nouveaux.
 
 
