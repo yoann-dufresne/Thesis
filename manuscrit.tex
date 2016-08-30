@@ -34,7 +34,7 @@ Les ARN messagers sont les vecteurs de l'information génétique.
 Ils sont la réplication d'un morceau d'ADN qui sera traduit par triplets de nucléotides (appelés codons) en chaine d'acides aminés.
 Les 64 codons possibles ($4^3$ nucléotides) sont traduits en 20 acides aminés appelés acides aminés protéinogènes (justement car ils interviennent dans la synthèse classique de protéines).
 Ces acides aminés sont tous composés d'un même squelette atomique autorisant deux liaisons et permettant ainsi la formation de chaines peptidiques.
-Sur le squelette est ancrée une chaine latérale variant d'un acide aminé à l'autre, leur donnant leur spécificités (Voir figure \ref{chaine_pep}).
+Sur le squelette est ancrée une chaine latérale variant d'un acide aminé à l'autre, leur donnant leur spécificité (voir figure \ref{chaine_pep}).
 Les deux liaisons qu'effectuent le squelette sont supportées par un groupement amine ($NH_2$) et un groupement carboxyle ($C(=O)OH$).
 Ces deux groupements se lient entre eux en chaine et créent ainsi la protéine.
 
@@ -42,11 +42,11 @@ Ces deux groupements se lient entre eux en chaine et créent ainsi la protéine.
   \begin{center}
     \includegraphics[width=350px]{Figures/bio/Intro/chaine_pep.jpg}
     \caption{\label{chaine_pep}Présentation d'une chaîne peptidique.
-    Chaque trait pointillé vertical sépare un acide aminé d'un autre et chaque trait horizontal sépare le squelette de la chaîne latérale des acides aminés.}
+    Chaque trait pointillé vertical sépare un acide aminé d'un autre et le trait horizontal sépare le squelette de la chaîne latérale des acides aminés.}
   \end{center}
 \end{figure}
 
-\paragraph{}Une fois assemblée, une protéine se replie sur elle même et ses caractéristiques structurelles et physico-chimiques qui en découlent lui donnent son activité.
+\paragraph{}Une fois assemblée, une protéine se replie sur elle même et les caractéristiques structurelles et physico-chimiques qui en découlent lui donnent son activité.
 Plus précisément, les propriétés des éléments en contact avec l'extérieur de la protéine (les atomes qui ne se retrouvent pas enfermés au milieu du repliement) déterminent l'activité de celle-ci.
 Ces propriétés sont donc très dépendantes du repliement et des types de radicaux exposés.
 
@@ -85,7 +85,7 @@ Ces complexes sont appelés des synthétases (Non Ribosomal Peptide Synthetase (
   \end{center}
 \end{figure}
 
-\paragraph{}Là où les protéines classiques sont à majorité composées des 20 acides aminés standards, la synthèse non ribosomique incorpore plusieurs centaines de briques de bases différentes.
+\paragraph{}Là où les protéines classiques sont à majorité composées des 20 acides aminés standards, la synthèse non ribosomique incorpore plusieurs centaines de briques de base différentes.
 Ces briques de base sont appelées des {\em monomères}.
 La base de données de référence des NRP compte pour le moment 533 monomères différents.
 Les monomères peuvent provenir de différents groupes.
@@ -101,13 +101,13 @@ On peut également citer les sucres et les acides gras comme faisant partie des 
     \includegraphics[width=400px]{Figures/bio/Intro/Dpr/2-3_liaisons.png}
     \caption{\label{DPR_incl}Deux exemples d'inclusion du monomère Dp~:
     Au sein de l'Edeine A, seules les deux liaisons classiques du squelette peptidique sont effectuées entre le Dpr (en rose) et les autres monomères.
-    Au sein de de la Capreomycin IA, une troisième liaison est effectuée par le Dpr (en rouge) depuis son groupement amine de la chaine latérale.}
+    Au sein de la Capreomycin IA, une troisième liaison est effectuée par le Dpr (en rouge) depuis son groupement amine ($NH_2$) de la chaine latérale.}
   \end{center}
 \end{figure}
 
 \paragraph{}Les NRPS peuvent arranger les monomères au sein des NRP avec une certaine souplesse.
 Certains monomères possèdent plus de deux groupements capables de se lier.
-Ainsi sur l'exemple (voir figure \ref{DPR_incl}), on peut constater que le monomère nommé Dpr (acide 2,3-diamonopropionique) possède un groupement amine supplémentaire à celui déjà présent dans le squelette des acides aminés classiques.
+Ainsi sur l'exemple de la figure \ref{DPR_incl}, on peut constater que le monomère nommé Dpr (acide 2,3-diamonopropionique) possède un groupement amine supplémentaire à celui déjà présent dans le squelette des acides aminés classiques.
 Ce groupement en bout de chaine latérale autorise le Dpr à se lier 3 fois et ainsi casser la linéarité de la molécule assemblée.
 Ces monomères permettent ainsi d'obtenir des structures à embranchements.
 
@@ -127,7 +127,7 @@ Comme nous le verrons plus tard lors de la description des modules NRPS Cy, l'at
 \begin{figure}[h!]
   \begin{center}
     \includegraphics[width=400px]{Figures/bio/Intro/reactions/Cy.jpg}
-    \caption{\label{Cy_link}Exemple de liaison effectuée par un module Cy}
+    \caption{\label{Cy_link}Exemple de liaison effectuée par un domaine Cy}
   \end{center}
 \end{figure}
 
@@ -191,7 +191,7 @@ Un NRPS ne peut produire qu'un seul type de NRP.
 Elles sont organisées en modules consécutifs qui capturent modifient et intègrent un monomère au NRP\cite{schwarzer_nonribosomal_2003,marahiel_modular_1997}.
 Chacun de ces modules peut à son tour être découpé en domaines fonctionnels.
 Généralement un module est constitué de 3 domaines principaux et éventuellement de domaines optionnels\cite{finking_biosynthesis_2004}.
-Un module standard est d'abord composé d'un domaine de condensation (C) effectuant la liaison du peptide déjà formé au monomère en cours d'inclusion puis d'un module d'adénilation (A) permettant la capture du monomère à insérer et d'un module thiolation (T) effectuant la fixation du monomère capturé et le transfert du NRP depuis le domaine C précédent au domaine C suivant.
+Un module standard est d'abord composé d'un domaine de condensation (C) effectuant la liaison du peptide déjà formé au monomère en cours d'inclusion puis d'un module d'adénilation (A) permettant la capture du monomère à insérer et d'un module de thiolation (T) effectuant la fixation du monomère capturé et le transfert du NRP depuis le domaine C précédent au domaine C suivant.
 Il se peut qu'un ou plusieurs domaines modifiant le monomère inclus, soient présents entre le domaine A et le domaine T.
 Le premier module est également une exception à la règle du C-A-T car il ne possède normalement pas de domaine C (Car il n'y a rien à lier).
 
@@ -269,7 +269,7 @@ Durant cette étape, le peptide est libéré du domaine T courant pour être lai
 C'est un domaine qui lie le morceau de peptide assemblé par les modules précédents avec le monomère capturé par le domaine A du module courant.
 Bien que sa fonction principale reste toujours la même, il existe plusieurs variants~\cite{rausch_phylogenetic_2007} de ce domaine que nous allons décrire par la suite.
 
-\paragraph{Les domaine LCL et DCL}
+\paragraph{Les domaines LCL et DCL}
 Les acides aminés capturés par les domaines A existent dans deux configurations différentes dites configurations L (Leavus) et D (Dexter).
 Il existe deux domaines C différents pour lier ces molécules.
 Le plus standard, lie deux monomères de type L. Le domaine est alors appelé domaine LCL.
@@ -330,7 +330,7 @@ Elles sont appelées Leavus (L) et Dexter (D).
   \end{center}
 \end{figure}
 
-\paragraph{}Alors que la majorité de la vie est ``gauchère'' (ne contient que des acides aminés L), les NRPS autorisent l'inclusion de monomères de forme D par la capture d'un monomère L puis en sa transformation en conformation D.
+\paragraph{}Alors que la majorité de la vie est ``gauchère'' (ne contient que des acides aminés L), les NRPS autorisent l'inclusion de monomères de forme D par la capture d'un monomère L puis sa transformation en conformation D.
 Les domaines responsables de ces transformations sont appelés domaines d'\textit{épimérisation}~\cite{calcott_portability_2015}.
 Une fois le monomère L lié au reste du peptide par le domaine C, il est emmené auprès du domaine E afin de changer son orientation.
 Le fait que cette transformation soit postérieure à la fixation sur le reste du peptide explique l'absence de domaines DCD (Les monomères de droite seront toujours présentés au domaine C avant transformation).
@@ -380,7 +380,7 @@ Dans cette partie, nous allons aborder ces deux types de modification/ajout d'un
 \paragraph{}Les clusters de gènes de NRPS ne sont pas uniquement constitués des gènes d'enzymes NRPS.
 De nombreux gènes accompagnateurs sont présents, généralement inclus dans le cluster.
 Parmi ceux-ci, certains gènes servent à modifier les NRP déjà relâchés par la NRPS.
-La \textit{vancomycine} est un très bon exemple de peptide ayant subi des modifications enzymatiques post-synthèse.
+La \textit{vancomycine} est un très bon exemple de peptide subissant des modifications enzymatiques post-synthèse.
 
 \begin{figure}[h!]
   \begin{center}
@@ -395,7 +395,7 @@ Les sucres sont des monomères qui ne peuvent pas être capturés par des domain
 Ce sont des gènes extérieurs à la NRPS mais faisant partie du cluster, qui sont dédiés à leur capture, transformation et liaison avec la NRP.
 Ce phénomène d'ajout de sucre est appelé \textit{glycosylation}.
 Comme le suggère \cite{van_wageningen_sequencing_1998}, trois enzymes entrent en action pour incorporer la vancosamine.
-La vancosamine n'étant pas naturellement présente dans l'environement de l'organisme producteur, l'une des enzymes est dédiée à la création de ce sucre à partir du \textit{NDP-4-keto-6-deoxyglucose}.
+La vancosamine n'étant pas naturellement présente dans l'environnement de l'organisme producteur, l'une des enzymes est dédiée à la création de ce sucre à partir du \textit{NDP-4-keto-6-deoxyglucose}.
 
 \paragraph{}La vancomycine possède également deux atomes de Chlore.
 Ces deux atomes sont inhabituels pour des NRP et ne sont pas initialement présents au sein de leurs monomères de rattachement.
@@ -536,7 +536,7 @@ Ces logiciels sont extrêmement rapides pour les recherches grâce à l'utilisat
 antiSMASH~\cite{weber_antismash_2015,medema_antismash:_2011} est sans doute le logiciel qui est venu révolutionner ces dernières années la prédiction de métabolites secondaires depuis l'ADN.
 Le logiciel est un pipline incluant de nombreux outils dont certains de ceux que nous avons décrits précédemment.
 Les outils sont lancés les uns à la suite des autres en analysant les séquences avec une granularité de plus en plus fine.
-A un instant donné, en fonction des spécificité des génomes et des annotations réalisées précédemment sur le génome en cours d'analyse, antiSMASH va choisir les logiciels à lancer pour raffiner les prédictions.
+A un instant donné, en fonction des spécificités des génomes et des annotations réalisées précédemment sur le génome en cours d'analyse, antiSMASH va choisir les logiciels à lancer pour affiner les prédictions.
 Par exemple, en lançant une analyse sur un génome bactérien, antiSMASH va commencer par la recherche de clusters de gènes, puis identifier parmi les clusters détectés, ceux qui permettent la production de métabolites secondaires pour finir par lancer les outils spécifiques à chaque métabolite comme NRPSpredictor et NaPDoS sur les clusters NRPS.
 
 %Streptomyces coelicolor
@@ -596,12 +596,12 @@ Ce lien fort entre clusters de gènes et produit est très intéressant mais n'e
 
 \paragraph{Annotations automatiques depuis l'ADN}
 Le séquençage de polymères autres que l'ADN/ARN, est une tâche difficile.
-C'est pourquoi les protéines ne sont pas directement séquencées mais inférées depuis le séquençage de l'ADN.
+C'est pourquoi les protéines ne sont pas directement séquencées mais inférées depuis les séquences d'ADN obtenues elles par séquençage.
 Dans le cas des NRP, l'interprétation de l'ADN indique uniquement les séquences protéiques des NRPS.
-Il est nécessaire ensuite de comprendre précisément le fonctionnement de ces NRPS pour le NRP depuis leur séquence.
+Il est nécessaire ensuite de comprendre précisément le fonctionnement de ces NRPS pour prédire le NRP depuis leur séquence.
 Cependant, comme nous l'avons vu lors des descriptions de logiciels d'analyse de NRPS, cette compréhension ne donne pas encore de résultats parfaits et complets.
 Les logiciels ne prédisent pas précisément les monomères capturés par les domaines A.
-Par exemple, il est possible d'obtenir une prédiction de type ``c'un monomère polaire'' sans avoir plus de détails.
+Par exemple, il est possible d'obtenir une prédiction de type ``c'est un monomère polaire'' sans avoir plus de détails.
 Il est également possible d'obtenir des structures monomériques incomplètes, en manquant par exemple les composés capturés par des domaines C starter.
 Enfin, dans la majorité des cas, il est impossible de prédire la forme exacte pour des structures non linéaires.
 
@@ -671,7 +671,7 @@ Chaque molécule entrée dans la base est accompagnée de sa structure monoméri
 Depuis 2015, la base de données est entièrement ouverte aux contributions extérieures.
 En quelques clics et en appuyant sa soumission par des articles de preuve de la voie de synthèse, toute personne peut soumettre de nouvelles entrées.
 Les structures présentes dans cette base sont fiables, ce qui est un avantage comparé aux prédictions présentées jusqu'à présent.
-Cependant, le processus d'ajout d'informations, strict pour préserver la qualité, ne permet d'ajouter de nouvelles entrées par centaines.
+Cependant, le processus d'ajout d'informations, strict pour préserver la qualité, ne permet pas d'ajouter de nouvelles entrées par centaines.
 Soulignons tout de même le travail effectué par les auteurs initiaux qui ont entré plus de 1200 annotations à la main.
 
 
@@ -724,7 +724,7 @@ Certaines s'attardent sur les ressemblances de structures atomiques 2D ou 3D, ce
 Beaucoup ne se cantonnent pas à une seule des ressemblances citées ci-dessus mais essaient de les combiner pour prédire le mieux possible.
 Cependant, ces techniques ont deux contraintes limitantes.
 Premièrement, pour connaître l'activité d'une molécule, il est nécessaire de connaître les activités de molécules ``proches''.
-Secondement, les temps de calcul nécessaires augmentent rapidement avec le nombre de critères à comparer et le détail d'analyse de chaque critère.
+Deuxièmement, les temps de calcul nécessaires augmentent rapidement avec le nombre de critères à comparer et le détail d'analyse de chaque critère.
 Le but de ces méthodes est donc d'inclure les critères les plus sélectifs afin de se rapprocher des activités connues dans un temps raisonnable.
 
 \paragraph{}Beaucoup de NRP possèdent des activités très intéressantes (antibiotiques, anti-tumeurs, antidouleurs, ...).
@@ -735,8 +735,8 @@ Dans les deux cas, les prédictions sont effectuées à partir des compositions 
 Dans le premier article, la prédiction est effectuée en créant pour chaque activité connue un fingerprint.
 Ces fingerprints sont composés, pour chaque type de monomère, d'un nombre représentant la composition moyenne de l'activité. 
 Prédire l'activité d'un nouveau NRP revient alors à déterminer celle dont le fingerprint est le plus proche.
-Dans le second article, c'est un classifieur par réseau Bayésien qui est entrainé sur les compositions en monomères.
-Une fois les réseau entrainé, il suffit de fournir une composition en entrée pour avoir les probabilités de chaque activité en sortie.
+Dans le second article, c'est un classifieur par réseau Bayésien qui est entraîné sur les compositions en monomères.
+Une fois les réseaux entraînés, il suffit de fournir une composition en entrée pour avoir les probabilités de chaque activité en sortie.
 Dans les deux cas, il est important de constater que l'abstraction monomérique est suffisante pour une prédiction de qualité.
 De plus, les structures ne sont pas utilisées, ce qui laisse encore beaucoup de possibilités d'améliorations.
 
@@ -886,7 +886,7 @@ Pour pouvoir la délier, il faudrait une règle du type
 \begin{chemmath}
   COC \longrightarrow CO + C
 \end{chemmath}
-Mais ce genre de règle est ambigüe.
+Mais ce genre de règle est ambiguë.
 Comment savoir de quel côté du O la liaison doit être rompue ?
 De plus, certains monomères comme le glucose sont initialement composés de $COC$.
 Ces monomères seront donc découpés alors qu'ils ne devraient pas l'être.
@@ -896,7 +896,7 @@ Pour ces deux raisons, nous ne pourrons pas directement utiliser ce logiciel afi
 \subsubsection{Vue générale}
 
 \paragraph{}En dehors des deux logiciels que nous venons de présenter, rien n'est dédié spécifiquement à la tâche que nous cherchons à accomplir.
-Un grand nombre de techniques que j'ai étudiées ne nous permettent que la résolution de sous problèmes.
+Un grand nombre de techniques que j'ai étudiées ne permettent que la résolution de sous problèmes.
 Par exemple, lors de la présentation de CHUCKLES, nous citons une implémentation des SMARTS appelée AMBIT-SMARTS.
 Les SMARTS sont des expressions régulières moléculaires qui permettent de définir des motifs à rechercher.
 En appliquant un SMARTS sur une molécule (comme le permet AMBIT-SMARTS), nous pouvons savoir si cette molécule contient ce motif.
@@ -909,7 +909,7 @@ Cette tâche très importante n'est pas suffisante pour répondre à nos attente
 \subsection{Vers des problèmes informatiques}
 
 \paragraph{}Pour concevoir notre logiciel d'annotation, nous allons nous inspirer des techniques existantes en essayant d'outrepasser leurs difficultés.
-Nous possédons au sein de Norine, une grande base de connaissance de monomères existants (plus de 500) et nous pouvons nous appuyer sur cette base bien établie pour assurer l'existence des monomères lors des annotations.
+Nous possédons au sein de Norine, une grande base de connaissances de monomères existants (plus de 500) et nous pouvons nous appuyer sur cette base bien établie pour assurer l'existence des monomères lors des annotations.
 Cette base étant, essayons de concevoir un algorithme constructif.
 
 
@@ -945,8 +945,8 @@ Ce sous problème sera appelé la ``recherche'' (voir figure \ref{search_fig}).
 Nous aurons plusieurs contraintes associées à ce problème.
 Aucun des monomères choisis dans la solution ne peux être chevauchant avec un autre.
 En effet, aucun atome ne peut provenir de deux molécules différentes et donc aucune sous partie de monomères ne peut être chevauchante avec un autre monomère.
-De plus nous allons chercher à obtenir une annotation complète des peptides, ce qui correspond maximiser les atomes du polymère couvert par des monomères.
-On appèlera cette étape, l'étape de ``pavage'' (voir figure \ref{tiling_fig}.
+De plus nous allons chercher à obtenir une annotation complète des peptides, ce qui correspond à maximiser les atomes du polymère couvert par des monomères.
+On appellera cette étape, l'étape de ``pavage'' (voir figure \ref{tiling_fig}).
 
 
 \subsubsection{Des molécules aux graphes}
@@ -1193,7 +1193,7 @@ Dans tous les cas, il est possible de trouver au moins une molécule ne réponda
 \paragraph{}Pour pouvoir rechercher les monomères nous devions choisir entre toutes les approches algorithmiques citées ci-dessus.
 Premièrement, lorsque nous recherchons un monomère dans un peptide, nous souhaitons connaître tous les endroits où il peut apparaitre.
 Nous ne souhaitons donc pas utiliser d'approches heuristiques.
-Secondement, le MCS ne parait pas très pratique dans notre cas.
+Deuxièmement, le MCS ne parait pas très pratique dans notre cas.
 En effet, les NRP regorgent de monomères proches les uns des autres.
 Il n'est donc pas facile lorsque l'on obtient un résultat, de savoir si la molécule trouvée est la bonne ou si c'est le monomère voisin à un atome de distance qui a été détecté.
 Enfin, en comparant les algorithmes de recherche exacte de solutions, ceux de résolution de SI sont plus adaptés et rapide en pratique.
@@ -1773,7 +1773,7 @@ Prouvons que le problème ``Pavage'' est également NP-Complet en utilisant une 
 Le certificat contient l'ensemble des résidus pavés.
 Leur nombre est borné par le nombre de résidus issus de l'isomorphisme.
 Le certificat est donc de taille proportionnelle au problème.
-Secondement, le validateur de certificat doit vérifier qu'aucun résidu ne se chevauche.
+Deuxièmement, le validateur de certificat doit vérifier qu'aucun résidu ne se chevauche.
 Pour cela, il est possible de vérifier les chevauchements pour toutes les paires de résidus du certificat.
 La vérification du certificat peut être faite de manière quadratique, ce qui permet de dire que le problème est NP.
 
