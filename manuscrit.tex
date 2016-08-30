@@ -836,7 +836,7 @@ L'idée de la première phase est de rechercher chaque monomère connu en masqua
 En recherchant les monomères par nombre d'atomes décroissant, les auteurs s'assurent que de petits monomères ne viendront pas prendre la place de plus gros.
 Lors de la seconde phase, les atomes des molécules sont contractés pour ne plus former qu'un seul noeud par monomère.
 Le N terminal de la chaine peptidique est ensuite recherché afin d'extraire l'annotation de cette chaine en suivant les liaisons peptidiques.
-Enfin les liaisons n'ayant pas encore été explorées sont ajoutées à la représentation monomérique finale.
+Enfin, les liaisons n'ayant pas encore été explorées sont ajoutées à la représentation monomérique finale.
 
 Comme pour le FT, le BT utilise des techniques intelligentes mais encore faillibles.
 Dans le cas des NRP, certains monomères ne possèdent pas les deux domaines pour les liaisons peptidiques.
@@ -888,7 +888,7 @@ Pour pouvoir la délier, il faudrait une règle du type
 \begin{chemmath}
   COC \longrightarrow CO + C
 \end{chemmath}
-Mais ce genre de règle est ambigüe.
+Mais ce genre de règle est ambigü.
 Comment savoir de quel côté du O la liaison doit être rompue ?
 De plus, certains monomères comme le glucose sont initialement composés de $COC$.
 Ces monomères seront donc découpés alors qu'ils ne devraient pas l'être.
@@ -903,7 +903,7 @@ Par exemple, lors de la présentation de CHUCKLES, nous citons une implémentati
 Les SMARTS sont des expressions régulières moléculaires qui permettent de définir des motifs à rechercher.
 En appliquant un SMARTS sur une molécule (comme le permet AMBIT-SMARTS), nous pouvons savoir si cette molécule contient ce motif.
 Ce type de technique permet de savoir si une molécule est contenue dans une autre, ce qui dans notre cas reviendrait à savoir si un monomère est contenu dans un polymère.
-Cette tâche très importante n'est pas suffisante pour répondre à nos attentes mais peut éventuellement faire partie des sous techniques à utiliser.
+Cette tâche très importante n'est pas suffisante pour répondre à nos attentes, mais peut éventuellement faire partie des sous techniques à utiliser.
 
 
 
@@ -911,7 +911,7 @@ Cette tâche très importante n'est pas suffisante pour répondre à nos attente
 \subsection{Vers des problèmes informatiques}
 
 \paragraph{}Pour concevoir notre logiciel d'annotation, nous allons nous inspirer des techniques existantes en essayant d'outrepasser leurs difficultés.
-Nous possédons au sein de Norine, une grande base de connaissance de monomères existants (plus de 500) et nous pouvons nous appuyer sur cette base bien établie pour assurer l'existence des monomères lors des annotations.
+Nous possédons, au sein de Norine, une grande base de connaissance de monomères existants (plus de 500) et nous pouvons nous appuyer sur cette base bien établie pour assurer l'existence des monomères lors des annotations.
 Cette base étant, essayons de concevoir un algorithme constructif.
 
 
@@ -921,7 +921,7 @@ Cette base étant, essayons de concevoir un algorithme constructif.
 Rechercher les monomères par taille (en nombre d'atomes) décroissante est un choix pertinent car il permet d'éviter de reconnaître partout les petits acides aminés.
 Dans notre cas, la proximité entre certains monomères ne nous permettra pas de les départager grâce à un tri par taille.
 Il sera nécessaire de modifier les solutions incomplètes pour essayer de les améliorer.
-Contrairement à CHUCKLES, nous aurons donc besoin de connaître les différents monomères candidats à la composition du polymère même lorsqu'ils sont chevauchant à des monomères déjà placés.
+Contrairement à CHUCKLES, nous aurons donc besoin de connaître les différents monomères candidats à la composition du polymère même lorsqu'ils sont chevauchants à des monomères déjà placés.
 Si d'un côté nous recherchons les monomères au sein du NRP puis de l'autre nous assemblons ceux trouvés, alors nous pouvons séparer notre programme en deux sous-problèmes complètement distincts.
 
 \begin{figure}[!ht]
@@ -947,8 +947,8 @@ Ce sous problème sera appelé la ``recherche'' (voir figure \ref{search_fig}).
 Nous aurons plusieurs contraintes associées à ce problème.
 Aucun des monomères choisis dans la solution ne peux être chevauchant avec un autre.
 En effet, aucun atome ne peut provenir de deux molécules différentes et donc aucune sous partie de monomères ne peut être chevauchante avec un autre monomère.
-De plus nous allons chercher à obtenir une annotation complète des peptides, ce qui correspond maximiser les atomes du polymère couvert par des monomères.
-On appèlera cette étape, l'étape de ``pavage'' (voir figure \ref{tiling_fig}.
+De plus, nous allons chercher à obtenir une annotation complète des peptides, ce qui correspond maximiser les atomes du polymère couvert par des monomères.
+On appellera cette étape l'étape de ``pavage'' (voir figure \ref{tiling_fig}.
 
 
 \subsubsection{Des molécules aux graphes}
@@ -956,7 +956,7 @@ On appèlera cette étape, l'étape de ``pavage'' (voir figure \ref{tiling_fig}.
 \newtheorem{definition}{Definition}
 \begin{definition}\textbf{Graphe :}
  Un graphe est une représentation mathématique d'un ensemble d'objets où chacun des objets est appelé un sommet et
- chaque relation entre deux objets est représentée par un lien entre les deux sommets correspondant.
+ chaque relation entre deux objets est représentée par un lien entre les deux sommets correspondants.
 \end{definition}
 
 \paragraph{}En informatique, les graphes sont utilisés pour représenter de nombreuses données.
@@ -976,12 +976,12 @@ plus petit problèmes : un problème de recherche de monomères et un problème 
 donc séparément ces deux problèmes.
 
 \paragraph{Recherche de monomères}Rechercher un monomère dans un polymère revient à rechercher un petit graphe atomique
-$S$ dans un plus gros graphe $G$. Deux cas sont alors possibles, soit nous recherchons à trouver exactement $S$ dans
+$S$ dans un plus gros graphe $G$. Deux cas sont alors possibles : soit nous cherchons à trouver exactement $S$ dans
 $G$, soit nous cherchons une approximation de $S$ dans $G$. Dans le premier cas, nous allons nous intéresser à l'
 ``Isomorphisme de Sous-graphe'' (en anglais Subgraph Isomorphism (SI)). Dans le second cas, nous nous intéresserons au
 ``Sous-graphe Maximum Commun'' (en anglais Maximum Common Subgraph (MCS)). Les recherches de SI ou de MCS ont toutes
-deux été prouvées NP-Complet mais pour chacun des problème il existe des algorithmes rapides en pratique pour des graphes
-aux propriétés particulières dont nous parlerons dans la sous partie suivante.
+deux été prouvées NP-Complet mais, pour chacun des problème, il existe des algorithmes rapides en pratique pour des graphes
+aux propriétés particulières dont nous parlerons dans la sous-partie suivante.
 
 \paragraph{Placements des monomères}Une fois les monomères détectés, il est nécessaire de prendre une décision pour les parties du polymère où plusieurs d'entre eux ont été détectés au même endroit.
 L'objectif est donc de faire un choix entre les différents morceaux possibles afin de chercher à ne garder que les pièces non chevauchantes qui permettent de couvrir au mieux le polymère (Si possible totalement).
@@ -994,8 +994,8 @@ Cette étape donnant accès à un lien direct entre atomes et monomères, une é
 \section{Isomorphisme de Sous-graphe vs Sous-graphe Maximum Commun}
 
 \paragraph{}Nous venons de voir que la recherche de monomères pouvait correspondre à deux problèmes différents en recherche de graphe.
-Formalisons et étudions ici ces deux problèmes afin de choisir celui qui nous utiliserons au sein de notr logiciel d'annotations.
-Voyons les différentes façon de les résoudre ainsi que les forces et faiblesses de ces approches.
+Formalisons et étudions ici ces deux problèmes afin de choisir celui qui nous utiliserons au sein de notre logiciel d'annotations.
+Voyons les différentes façons de les résoudre ainsi que les forces et faiblesses de ces approches.
 
 
 \subsection{Sous-graphe Maximum Commun}
@@ -1006,7 +1006,7 @@ Voyons les différentes façon de les résoudre ainsi que les forces et faibless
   \begin{center}
     \includegraphics[width=450px]{Figures/s2m/MCS-SI/mcs.png}
     \caption{\label{mcs_fig}MCS obtenu à partir des graphes G et H.
-    Le MCS obtenu n'est pas connexe à cause du fait que les liens vers le noeud rouge ne soient pas les mêmes das G et H.}
+    Le MCS obtenu n'est pas connexe du fait des liens vers le noeud rouge, qui ne sont pas les mêmes dans G et H.}
   \end{center}
 \end{figure}
 
@@ -1016,7 +1016,7 @@ C'est à dire trouver un ensemble de noeuds présents dans les deux graphes.
 Il faut non seulement que les noeuds partagent les même labels mais également les mêmes voisins.
 Si deux noeuds ont le même label mais ne partagent pas les mêmes voisins dans les deux graphes, alors ils ne font pas partie du MCS.
 C'est par exemple le cas du noeud rouge au sein de la figure.
-Les problème de recherche de sous graphe commun connexe maximal (MCCS) est un problème encore plus difficile car il impose de fortes contraintes supplémentaires.
+Le problème de recherche de sous graphe commun connexe maximal (MCCS) est un problème encore plus difficile car il impose de fortes contraintes supplémentaires.
 Le problème du MCS à été prouvé NP-Complet\cite{garey_computers_1979}, ce qui empêche (en tout cas pour le moment) l'émergence d'algorithmes de résolution polynomiaux efficaces.
 
 \paragraph{}Dans notre cas, nous pouvons effectuer une réduction vers ce problème pour la recherche des monomères.
@@ -1031,14 +1031,14 @@ Voyons ensemble ces deux catégories d'algorithmes en s'appuyant sur les reviews
 \subsubsection{Les méthodes de résolution exactes}
 
 \paragraph{}Au sein des algorithmes de résolution exacte du MCS, il existe deux grandes écoles.
-D'un côté certains algorithmes ne font une réduction du problème en un problème de clique maximale puis résolvent ce second problème.
-D'un autre côté les méthodes de résolution se basent sur des méthodes de backtracking.
+D'un côté, certains algorithmes ne font une réduction du problème en un problème de clique maximale puis résolvent ce second problème.
+D'un autre côté, les méthodes de résolution se basent sur des méthodes de backtracking.
 
 
 
 \paragraph{La réduction en clique maximale}
 Il est possible de réduire le problème MCS en un problème de résolution de clique maximale~\cite{pelillo_matching_1999,grosso_simple_2008,rahman_small_2009}.
-Une clique est un ensemble de noeuds dans un graphe tel que tous les noeuds de cet ensemble soient reliés entre eux.
+Une clique est un ensemble de noeuds dans un graphe tel que tous les noeuds de cet ensemble sont reliés entre eux.
 Rechercher la clique maximale revient à rechercher le sous ensemble maximal de noeuds d'un graphe pour lequel tous les noeuds sont liés les uns aux autres.
 Il est possible d'obtenir plusieurs cliques maximales dans un même graphe.
 Ce problème est également NP-Complet~\cite{akkoyunlu_enumeration_1973}.
@@ -1067,16 +1067,16 @@ En résolvant le problème de clique maximale sur le GC, on obtient le MCS.
     L'arbre part d'une bijection vide et ajoute un couple à chaque étape.
     Parfois l'algorithme tombe sur un couple compatible mais dont les voisins ne sont pas le bijection.
     La solution est alors rejetée (croix rouge).
-    La solution est trouvé par l'ensemble des chemins qui mènent aux feuilles valides les plus profondes dans l'arbre.}
+    La solution est trouvée par l'ensemble des chemins qui mènent aux feuilles valides les plus profondes dans l'arbre.}
   \end{center}
 \end{figure}
 
 
 \paragraph{Recherche par Backtracking}
 La majorité des algorithmes exacts effectuent des recherches via des méthodes de backtracking~\cite{manic_branch&cut_2009,mcgregor_backtrack_1982,kawabata_build-up_2011}.
-Un MCS est une bijection entre deux sous ensemble de noeuds dans deux graphes distincts.
+Un MCS est une bijection entre deux sous ensembles de noeuds dans deux graphes distincts.
 Les méthodes de backtrack effectuent une reconstruction itérative de cette bijection.
-Les couples de noeuds compatibles, n'étant pas encore présent au sein de la bijection, sont ajoutés un à un.
+Les couples de noeuds compatibles, n'étant pas encore présents au sein de la bijection, sont ajoutés un à un.
 Lorsque l'algorithme arrive dans une impasse (plus aucune possibilité d'ajouter un couple), il revient en arrière sur une association puis fait un choix différent.
 En sauvegardant l'ensemble qui a contenu le plus de noeuds, on obtient la clique maximale après le parcours de tout l'arbre des possibilités.
 Encore une fois, certaines des techniques citées permettent des accélérations pratiques en coupant des branches de recherche mais jamais l'ordre de grandeur de la complexité n'est changé.
@@ -1084,7 +1084,7 @@ Dans le cas des MCCS, il faut obliger une contrainte supplémentaire d'ajout de 
 Chacun des noeuds du couple à ajouter doit être voisin de l'un des noeuds d'un même couple précédemment inclus dans la bijection.
 
 \paragraph{}Il existe bien d'autres méthodes exactes pour résoudre des MCS pour des graphes particuliers.
-Cependant aucun de ces cas particuliers ne correspond à la réalité des molécules que nous allons traiter.
+Cependant, aucun de ces cas particuliers ne correspond à la réalité des molécules que nous allons traiter.
 Nous ne détaillerons donc pas celles-ci ici.
 
 
@@ -1106,7 +1106,7 @@ Ici, les auteurs construisent plusieurs bijections en parallèle.
 La différence avec les méthodes exactes est qu'ils ne reviennent jamais sur les décisions prises pour construire les MCS.
 Un nombre fixe de bijections est maintenu en permanence.
 Ces bijections ont été sélectionnées par une fonction de score comme étant celles qui avaient le plus de chance de mener à un MCS.
-Au final les bijections trouvées ne seront pas forcément les vrais MCS.
+Au final, les bijections trouvées ne seront pas forcément les vrais MCS.
 Cette seconde méthode est très intéressante lorsque l'on cherche un bon rapport rapidité/qualité.
 
 
@@ -1118,7 +1118,7 @@ Cette seconde méthode est très intéressante lorsque l'on cherche un bon rappo
   \begin{center}
     \includegraphics[width=450px]{Figures/s2m/MCS-SI/si.png}
     \caption{\label{SI_fig}SI obtenu à partir de la recherche du graphe G dans H.
-    Sur cet exemple il n'y a qu'une seule possibilité mais si nous avions cherché une chaine comme Vert-Rouge-Bleu, nous aurions eu deux SI différents.}
+    Sur cet exemple, il n'y a qu'une seule possibilité mais si nous avions cherché une chaine comme Vert-Rouge-Bleu, nous aurions eu deux SI différents.}
   \end{center}
 \end{figure}
 
@@ -1127,12 +1127,12 @@ Comme le nom l'indique, le problème SI est un problème de recherche d'un graph
 C'est à dire qu'un graphe G est sous graphe d'un graphe H si tous les noeuds et arêtes de G doivent être retrouvés dans H structurés de la même manière pour dire que G et un SI de H (voir figure \ref{SI_fig}).
 Tout comme le MCS, le problème du SI à été prouvé NP-Complet\cite{garey_computers_1979}.
 
-\paragraph{}Pour notre problème, nous pouvons à nouveau effectuer une réduction vers le problème SI puis résoudre ce problème par des algorithmes déjà publiés.
+\paragraph{}Pour notre problème, nous pouvons à nouveau effectuer une réduction vers le problème SI, puis résoudre ce problème par des algorithmes déjà publiés.
 Nous souhaitons rechercher des monomères au sein de peptides, ce qui reviendrait à chercher plusieurs fois un petit graphe atomique monomérique dans un gros graphe atomique peptidique.
 
-\paragraph{}Les méthodes de résolution actuelles ne sont toutes très similaires et dérivent d'une même technique de backtracking.
+\paragraph{}Les méthodes de résolution actuelles sont toutes très similaires et dérivent d'une même technique de backtracking.
 La plupart de ces méthodes sont des résolutions exactes.
-Bien que NP-complet, ces algorithmes restent très praticable lorsqu'on ne recherche pas au sein de graphes répétitifs (qui sont constitués de multiples répétitions d'un même morceau).
+Bien que NP-complet, ces algorithmes restent très praticables lorsqu'on ne recherche pas au sein de graphes répétitifs (qui sont constitués de multiples répétitions d'un même morceau).
 Voyons ensemble quelques uns de ces algorithmes.
 
 
@@ -1144,7 +1144,7 @@ Voyons ensemble quelques uns de ces algorithmes.
     \caption{\label{ullman_fig}Recherche d'un isomorphisme de sous graphe par l'algorithme d'Ullman.
     Dans la partie construction, vous pouvez voir la matrice créée à partir des graphes G et H.
     Dans la partie recherche sont présentées les étapes successives de création d'un SI (voir texte pour détail).
-    Si nous avions voulu obtenir tous les isomorphismes (et pas juste un seul) il aurait fallu continuer le backtracking jusqu'au bout.}
+    Si nous avions voulu obtenir tous les isomorphismes (et pas juste un seul), il aurait fallu continuer le backtracking jusqu'au bout.}
   \end{center}
 \end{figure}
 
@@ -1153,16 +1153,16 @@ Certaines de ses variantes sont toujours utilisées dans certaines librairies te
 L'algorithme se base sur la matrice de compatibilité entre les graphes (voir figure \ref{ullman_fig}).
 Une matrice de compatibilité est une matrice dont chaque ligne représente les noeuds de G et chaque colonne les noeuds de H.
 Une case de la matrice comporte un 1 si les labels des noeuds de la case sont compatibles (labels) et que le degré du noeuds de H est supérieur ou égal au degré du noeud de G.
-Pour obtenir un SI à partir de cette matrice il faut retirer des 1 de la matrice jusqu'à en obtenir uns seul 1 par ligne.
+Pour obtenir un SI à partir de cette matrice, il faut retirer des 1 de la matrice jusqu'à en obtenir uns seul 1 par ligne.
 A chaque étape, un noeud de G est choisi pour pratiquer continuer l'isomorphisme.
 Ce noeud correspond à une ligne.
 Puis une colonne est choisie parmi celles dont la colonne contient un 1 sur la ligne précédemment choisie.
-Le couple ligne/colonne nous donne le couple noeud de G/noeud de H à peut être ajouter à l'isomorphisme.
+Le couple ligne/colonne nous donne le couple noeud de G/noeud de H a peut être ajouter à l'isomorphisme.
 Avant cet ajout, il faut également vérifier que tous les voisins du noeud de H correspondent bien aux voisins du noeud de G (condition non respectée à l'étape 2 et 5 de la partie recherche du schéma).
 Puisque nous ajoutons ce binôme à l'isomorphisme, il faut remplacer tous les 1 de la ligne et la colonne choisies par des 0 (excepté pour la case du binôme).
-À ce moment, si au moins une ligne a été vidée de tout ses 1, c'est que l'isomorphisme n'est pas possible et il faut revenir à l'étape précédente.
+À ce moment, si au moins une ligne a été vidée de tous ses 1, c'est que l'isomorphisme n'est pas possible et il faut revenir à l'étape précédente.
 Sinon, il suffit de continuer récursivement jusqu'à obtenir un unique 1 par ligne.
-En choisissant bien les lignes et les colonnes par lesquels l'algorithme commence, on arrive à obtenir des temps d'exécution très courts pour la recherche d'un SI.
+En choisissant bien les lignes et les colonnes par lesquelles l'algorithme commence, on arrive à obtenir des temps d'exécution très courts pour la recherche d'un SI.
 Cependant, pour obtenir tous les SI, il faut parcourir tout l'arbre des possibles, ce qui ralentit l'algorithme.
 
 
@@ -1170,9 +1170,9 @@ Cependant, pour obtenir tous les SI, il faut parcourir tout l'arbre des possible
 
 \paragraph{}Tout comme pour le MCS, le SI peut être résolu par un backtracking classique par pairage de noeuds.
 C'est la méthode majoritairement utilisée puisqu'elle fonctionne très bien en pratique.
-Contrairement à l'algorithme d'Ullman qui nécessite d'effectuer des opération sur de potentiellement très grandes matrices, la méthode par backtracking classique n'a pas besoin de grands espaces mémoire.
+Contrairement à l'algorithme d'Ullman qui nécessite d'effectuer des opérations sur des matrices potentiellement très grandes, la méthode par backtracking classique n'a pas besoin de grands espaces mémoire.
 L'algorithme VF2~\cite{cordella_subgraph_2004} utilisent ce principe.
-Les SI se forment par ajout successif de couples de noeuds compatibles avec retour en arrière si il n'est plus possible d'avoir un couple.
+Les SI se forment par ajouts successifs de couples de noeuds compatibles avec retour en arrière s'il n'est plus possible d'avoir un couple.
 Nous donnerons plus de détails sur cet algorithme en section \ref{VF2_p}.
 Cet algorithme est utilisé dans les grandes librairies logicielles de chimie comme CDK~\cite{steinbeck_chemistry_2003}.
 
@@ -1183,11 +1183,11 @@ Cet algorithme est utilisé dans les grandes librairies logicielles de chimie co
 Ceci peut s'expliquer par le fait que des algorithmes praticables existent pour trouver les SI.
 De plus, les heuristiques de MCS permettent d'obtenir des résultats de SI en ajoutant des contraintes (Le SI étant un cas particulier du MCS).
 Dans tous les cas, ces heuristiques de SI sont des dérivés de la technique par backtracking~\cite{kaijar_developing_2012}.
-Ces algorithmes essayent en supplément d'éviter l'exploration de toutes les branches par de la sélection des plus ``prometteuses''.
+Ces algorithmes essaient en supplément d'éviter l'exploration de toutes les branches par de la sélection des plus ``prometteuses''.
 
 \paragraph{}Il existe également de nombreux algorithmes pour des cas particuliers de SI.
-Par exemple il est possible de résoudre le problème en temps polynomial pour des arbres~\cite{shamir_faster_1997}, des graphes planaires~\cite{eppstein_subgraph_1995,dorn_planar_2009} ou des graphes de treewidth bornés~\cite{hajiaghayi_subgraph_2007}.
-Dans tous les cas, il est possible de trouver au moins une molécule ne répondant pas à l'un de ces critère et c'est pour cela que nous ne les utiliserons pas.
+Par exemple, il est possible de résoudre le problème en temps polynomial pour des arbres~\cite{shamir_faster_1997}, des graphes planaires~\cite{eppstein_subgraph_1995,dorn_planar_2009} ou des graphes de treewidth bornés~\cite{hajiaghayi_subgraph_2007}.
+Dans tous les cas, il est possible de trouver au moins une molécule ne répondant pas à l'un de ces critères et c'est pour cela que nous ne les utiliserons pas.
 
 
 \subsection{Choisir l'algorithme de recherche de monomères}
@@ -1195,9 +1195,9 @@ Dans tous les cas, il est possible de trouver au moins une molécule ne réponda
 \paragraph{}Pour pouvoir rechercher les monomères nous devions choisir entre toutes les approches algorithmiques citées ci-dessus.
 Premièrement, lorsque nous recherchons un monomère dans un peptide, nous souhaitons connaître tous les endroits où il peut apparaitre.
 Nous ne souhaitons donc pas utiliser d'approches heuristiques.
-Secondement, le MCS ne parait pas très pratique dans notre cas.
+Secondement, le MCS ne paraît pas très pratique dans notre cas.
 En effet, les NRP regorgent de monomères proches les uns des autres.
-Il n'est donc pas facile lorsque l'on obtient un résultat, de savoir si la molécule trouvée est la bonne ou si c'est le monomère voisin à un atome de distance qui a été détecté.
+Il n'est donc pas facile, lorsque l'on obtient un résultat, de savoir si la molécule trouvée est la bonne ou si c'est le monomère voisin à un atome de distance qui a été détecté.
 Enfin, en comparant les algorithmes de recherche exacte de solutions, ceux de résolution de SI sont plus adaptés et rapide en pratique.
 C'est pourquoi nous avons choisi d'effectuer la recherche des monomères en utilisant l'algorithme le plus communément utilisé par la communauté : VF2.
 
@@ -1212,7 +1212,7 @@ C'est pourquoi nous avons choisi d'effectuer la recherche des monomères en util
 
 \paragraph{}La première partie Smiles2Monomers doit rechercher l'ensemble des monomères au sein d'un polymère cible.
 Comme nous l'avons vu dans l'état de l'art, nous pouvons transformer ce problème en un problème de graphe appelé isomorphisme de sous graphe.
-Dans cette partie nous allons présenter en détail l'algorithme classique de recherche de SI nommé VF2 en l'étendant à des graphes labellés.
+Dans cette partie, nous allons présenter en détail l'algorithme classique de recherche de SI nommé VF2 en l'étendant à des graphes labellés.
 Puis nous montrerons en quoi les labels des noeuds du graphes influencent le temps de calcul afin en déduire une méthode de recherche efficace.
 
 \subsubsection{L'algorithme originel VF2}
@@ -1220,7 +1220,7 @@ Puis nous montrerons en quoi les labels des noeuds du graphes influencent le tem
 \label{VF2_p}
 
 \paragraph{}Comme nous l'avons déjà évoqué dans l'état de l'art de cette partie, l'algorithme VF2 permet d'effectuer des
-isomorphismes de graphe ou de sous-graphe non labellés d'un graphe $G$ sur un graphe $H$.
+isomorphismes de graphes ou de sous-graphes non labellés d'un graphe $G$ sur un graphe $H$.
 Écrivons l'algorithme tel qu'il est décrit dans l'article d'origine :
 
 \paragraph{}
@@ -1256,25 +1256,25 @@ isomorphismes de graphe ou de sous-graphe non labellés d'un graphe $G$ sur un g
 \end{figure}
 
 \paragraph{}Expliquons cet algorithme en utilisant le schéma \ref{vf2}.
-A la première étape nous nous trouvons avec un ensemble vide de noeuds pairés de $G$ et $H$.
+A la première étape, nous nous trouvons avec un ensemble vide de noeuds pairés de $G$ et $H$.
 Nous générons donc toutes les possibilités d'assemblage entre tous les noeuds des deux graphes (Il est à noter que l'algorithme
 est décrit de cette façon dans l'article mais qu'il n'est nécessaire de générer que les couples à partir d'un seul noeud de $G$
-et de l'ensemble des noeuds de $H$.
+et de l'ensemble des noeuds de $H$.)
 Une fois ces assemblages créés, nous les parcourons tous en appelant récursivement la fonction.
-Dans l'exemple le premier appel récursif est effectué après avoir assemblé '1' à 'a'.
+Dans l'exemple, le premier appel récursif est effectué après avoir assemblé '1' à 'a'.
 Cette voie est sans issue car quel que soit l'assemblage entre '2' et un noeud de $H$, plus aucun couple de voisins ne pourra être
 généré.
-En effet pour générer l'ensemble $P$ il est nécessaire de regarder tous les voisins de 'b' alors que le noeud ne possède plus
+En effet, pour générer l'ensemble $P$, il est nécessaire de regarder tous les voisins de 'b' alors que le noeud ne possède plus
 de voisins hors de $s$.
 Une fois toutes les tentatives échouées, l'algorithme remonte dans l'arbre et change l'association '1'-'a' pour l'association
 '1'-'b'.
 Récursivement l'algorithme conclut à un isomorphisme {(1,b);(2,a);(3,c)}.
 
-\paragraph{}En l'état l'algorithme VF2 ne reconnaît qu'un seul et unique isomorphisme.
+\paragraph{}En l'état, l'algorithme VF2 ne reconnaît qu'un seul et unique isomorphisme.
 On peut modifier simplement l'algorithme afin de récupérer tous les isomorphismes en ne retournant pas une fois que l'un d'eux est
 trouvé mais en l'enregistrant dans un ensemble puis en continuant l'exploration de l'arbre jusqu'au bout.
 Vu que tout l'arbre est exploré à chaque recherche, l'algorithme est exponentiel.
-Pour être plus précis il est en $O(n^m)$, donc pas calculable dans les pires des cas.
+Pour être plus précis il est en $O(n^m)$, donc non calculable dans les pires des cas.
 
 \begin{figure}[!ht]
   \includegraphics[width=200px]{Figures/s2m/recherche/VF2_labels.pdf}
@@ -1289,12 +1289,12 @@ composé d'un branchement supplémentaire contenant un noeud B.
 Sur ce graphique nous avons représenté deux cas de recherche selon l'ordre dans lequel nous prenons $G$.
 Nous pouvons remarquer que dans les deux cas, la taille de l'arbre est bien plus faible que pour un graphe non labellé.
 Les labels des noeuds font office de filtres de recherche et accélèrent fortement la recherche.
-On voit également que la recherche est d'autant plus rapide que l'on choisi prioritairement les noeuds avec des labels de faible
+On voit également que la recherche est d'autant plus rapide que l'on choisit prioritairement les noeuds avec des labels de faible
 fréquence.
 
 Là où l'algorithme général VF2 était en $O(n^m)$, la complexité est ici réduite dans le pire des cas à $O(k^n)$ où $k$ est le
-comptage du nombre de noeud du label le moins filtrant.
-La taille de l'arbre de recherche est diminué par la sélectivité des labels de noeuds.
+comptage du nombre de noeuds du label le moins filtrant.
+La taille de l'arbre de recherche est diminuée par la sélectivité des labels de noeuds.
 Pour optimiser la recherche, nous devons donc étudier la façon dont nous représentons les molécules afin d'avoir une sélectivité
 la plus grande possible.
 
@@ -1305,31 +1305,31 @@ liaison=arête). Dans cette représentation, nous pouvons considérer chaque lab
 figure \ref{representations}, première partie). Évidemment, les hydrogènes sont les atomes les plus représentés et ne filtrent
 pas les recherches par eux-mêmes. Cependant, ils sont un bon moyen de donner des précisions sur l'atome auquel ils sont liés.
 Ainsi, trouver un $CH_{3}$ ou un $CH$ donne une information différente sur la topologie.
-En prenant en compte la remarque précédente nous avons créé une seconde représentation qui compresse les hydrogènes à l'intérieur
+En prenant en compte la remarque précédente, nous avons créé une seconde représentation qui compresse les hydrogènes à l'intérieur
 des noeuds représentant les atomes plus lourds.
 Ainsi, plusieurs labels différents peuvent
 désormais être créés pour un même atome et ce, en fonction de ses compagnons hydrogènes (Voir figure \ref{representations},
 seconde partie). Par exemple $NH_2$, $NH$, $N$ sont les
-trois labels variant depuis l'ancien label unique $N$ qui était accompagné de voisins hydrogènes. Les labels sont plus nombreux et leur fréquences à la fois moins élevée et plus homogène, ce qui les rend plus sélectifs.
+trois labels variants depuis l'ancien label unique $N$ qui était accompagné de voisins hydrogènes. Les labels sont plus nombreux et leur fréquence à la fois moins élevée et plus homogène, ce qui les rend plus sélectifs.
 
 \begin{figure}
   \includegraphics[width=300px]{Figures/s2m/representations/all_tmp.pdf}
   \caption{\label{representations}Manque fréquences et titres dans l'image}
 \end{figure}
 
-\paragraph{}Globalement, plus le nombre de labels est élevé et leur fréquences homogènes et moins l'algorithme VF2 aura de
-difficultés à effectuer un isomorphisme. En effet la lenteur qui peut venir de cet algorithme est dû au nombreux chemins qu'il
+\paragraph{}Globalement, plus le nombre de labels est élevé et leurs fréquences homogènes, et moins l'algorithme VF2 aura de
+difficultés à effectuer un isomorphisme. En effet, la lenteur qui peut venir de cet algorithme est due au nombreux chemins qu'il
 peut prendre lors de l'exploration.
 
-\paragraph{}Cherchons encore à augmenter la sélectivité des labels en augmentant leur nombre. A partir d'un graphe $G$ il est
+\paragraph{}Cherchons encore à augmenter la sélectivité des labels en augmentant leur nombre. A partir d'un graphe $G$, il est
 possible de représenter ses relations d'adjacence au sein d'un second graphe $L$. Pour cela, deux noeuds voisins de $G$ sont
 représentés dans $L$ comme un seul noeud. Chaque ancienne arrête devient un noeud et chaque ancien noeud devient une multitude
-d'arête (une clique entre tous les nouveaux noeuds représentant les anciennes arête de cet ancien noeud). Nous étendons le 
+d'arêtes (une clique entre tous les nouveaux noeuds représentant les anciennes arête de cet ancien noeud). Nous étendons le 
 raisonnement pour les labels en disant que le label d'un noeud du nouveau graphe est la composition des labels des anciens
-noeuds ainsi que de l'arrité entre ces deux noeuds (Dans notre cas, les labels sont mis dans l'ordre lexicographique pour ne pas
+noeuds ainsi que de l'arité entre ces deux noeuds (Dans notre cas, les labels sont mis dans l'ordre lexicographique pour ne pas
 avoir deux labels possibles à partir des labels d'origine)(Voir figure \ref{representations},
 troisième partie). Un tel type de graphe est appelé line graph~\cite{orlin_line-digraphs_1978}. L'un des
-gros avantage de cette représentation est d'inclure directement dans les labels des noeuds ce qui touche à l'arité entre noeuds.
+gros avantages de cette représentation est d'inclure directement dans les labels des noeuds ce qui touche à l'arité entre noeuds.
 La fonction
 de recherche n'aura donc plus du tout à s'attarder sur les liens mais uniquement sur les noeuds. De plus, transformer les graphes
 de cette manière nous permet de répondre à la volonté d'augmentation du nombre de labels. Là où la représentation précédente
@@ -1339,7 +1339,7 @@ noeuds).
 \paragraph{}Le raisonnement des line graphe peut être étendu récursivement. On peut ainsi créer des line-graph de line-graph.
 Cependant cela pose plusieurs problèmes de répéter cette opération dans notre cas. Certains graphes vont diminuer de taille
 jusqu'à disparaître complètement (ce qui est peu pratique pour la comparaison) alors que d'autres vont grossir de plus en plus
-et ajouter de plus en plus de phases de comparaison de labels et d'étapes dans l'algorithme VF2. Pour ces raisons nous avons
+et ajouter de plus en plus de phases de comparaison de labels et d'étapes dans l'algorithme VF2. Pour ces raisons, nous avons
 choisi de n'effectuer qu'une seule étape de line-graph.
 
 \begin{figure}
