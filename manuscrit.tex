@@ -657,6 +657,8 @@ Cette technique est également très coûteuse de part les équipements nécessa
 
 \subsection{Les bases de connaissance de NRP}
 
+\label{bdd_nrp}
+
 \paragraph{}Les bases de NRP sont très rares en comparaison des bases de NRPS.
 Quasiment toutes les bases de NRPS que nous avons précédemment présentées comportent également les structures de NRP prédits.
 Cependant, comme nous l'avons déjà dit plusieurs fois, ces données ne sont pas toutes fiables.
@@ -834,7 +836,7 @@ L'idée de la première phase est de rechercher chaque monomère connu en masqua
 En recherchant les monomères par nombre d'atomes décroissant, les auteurs s'assurent que de petits monomères ne viendront pas prendre la place de plus gros.
 Lors de la seconde phase, les atomes des molécules sont contractés pour ne plus former qu'un seul noeud par monomère.
 Le N terminal de la chaine peptidique est ensuite recherché afin d'extraire l'annotation de cette chaine en suivant les liaisons peptidiques.
-Enfin les liaisons n'ayant pas encore été explorées sont ajoutées à la représentation monomérique finale.
+Enfin, les liaisons n'ayant pas encore été explorées sont ajoutées à la représentation monomérique finale.
 
 Comme pour le FT, le BT utilise des techniques intelligentes mais encore faillibles.
 Dans le cas des NRP, certains monomères ne possèdent pas les deux domaines pour les liaisons peptidiques.
@@ -886,7 +888,7 @@ Pour pouvoir la délier, il faudrait une règle du type
 \begin{chemmath}
   COC \longrightarrow CO + C
 \end{chemmath}
-Mais ce genre de règle est ambiguë.
+Mais ce genre de règle est ambigu.
 Comment savoir de quel côté du O la liaison doit être rompue ?
 De plus, certains monomères comme le glucose sont initialement composés de $COC$.
 Ces monomères seront donc découpés alors qu'ils ne devraient pas l'être.
@@ -901,7 +903,7 @@ Par exemple, lors de la présentation de CHUCKLES, nous citons une implémentati
 Les SMARTS sont des expressions régulières moléculaires qui permettent de définir des motifs à rechercher.
 En appliquant un SMARTS sur une molécule (comme le permet AMBIT-SMARTS), nous pouvons savoir si cette molécule contient ce motif.
 Ce type de technique permet de savoir si une molécule est contenue dans une autre, ce qui dans notre cas reviendrait à savoir si un monomère est contenu dans un polymère.
-Cette tâche très importante n'est pas suffisante pour répondre à nos attentes mais peut éventuellement faire partie des sous techniques à utiliser.
+Cette tâche très importante n'est pas suffisante pour répondre à nos attentes, mais peut éventuellement faire partie des sous techniques à utiliser.
 
 
 
@@ -909,7 +911,7 @@ Cette tâche très importante n'est pas suffisante pour répondre à nos attente
 \subsection{Vers des problèmes informatiques}
 
 \paragraph{}Pour concevoir notre logiciel d'annotation, nous allons nous inspirer des techniques existantes en essayant d'outrepasser leurs difficultés.
-Nous possédons au sein de Norine, une grande base de connaissances de monomères existants (plus de 500) et nous pouvons nous appuyer sur cette base bien établie pour assurer l'existence des monomères lors des annotations.
+Nous possédons, au sein de Norine, une grande base de connaissances de monomères existants (plus de 500) et nous pouvons nous appuyer sur cette base bien établie pour assurer l'existence des monomères lors des annotations.
 Cette base étant, essayons de concevoir un algorithme constructif.
 
 
@@ -919,7 +921,7 @@ Cette base étant, essayons de concevoir un algorithme constructif.
 Rechercher les monomères par taille (en nombre d'atomes) décroissante est un choix pertinent car il permet d'éviter de reconnaître partout les petits acides aminés.
 Dans notre cas, la proximité entre certains monomères ne nous permettra pas de les départager grâce à un tri par taille.
 Il sera nécessaire de modifier les solutions incomplètes pour essayer de les améliorer.
-Contrairement à CHUCKLES, nous aurons donc besoin de connaître les différents monomères candidats à la composition du polymère même lorsqu'ils sont chevauchant à des monomères déjà placés.
+Contrairement à CHUCKLES, nous aurons donc besoin de connaître les différents monomères candidats à la composition du polymère même lorsqu'ils sont chevauchants à des monomères déjà placés.
 Si d'un côté nous recherchons les monomères au sein du NRP puis de l'autre nous assemblons ceux trouvés, alors nous pouvons séparer notre programme en deux sous-problèmes complètement distincts.
 
 \begin{figure}[!ht]
@@ -946,15 +948,14 @@ Nous aurons plusieurs contraintes associées à ce problème.
 Aucun des monomères choisis dans la solution ne peux être chevauchant avec un autre.
 En effet, aucun atome ne peut provenir de deux molécules différentes et donc aucune sous partie de monomères ne peut être chevauchante avec un autre monomère.
 De plus nous allons chercher à obtenir une annotation complète des peptides, ce qui correspond à maximiser les atomes du polymère couvert par des monomères.
-On appellera cette étape, l'étape de ``pavage'' (voir figure \ref{tiling_fig}).
-
+On appellera cette étape l'étape de ``pavage'' (voir figure \ref{tiling_fig}).
 
 \subsubsection{Des molécules aux graphes}
 
 \newtheorem{definition}{Definition}
 \begin{definition}\textbf{Graphe :}
  Un graphe est une représentation mathématique d'un ensemble d'objets où chacun des objets est appelé un sommet et
- chaque relation entre deux objets est représentée par un lien entre les deux sommets correspondant.
+ chaque relation entre deux objets est représentée par un lien entre les deux sommets correspondants.
 \end{definition}
 
 \paragraph{}En informatique, les graphes sont utilisés pour représenter de nombreuses données.
@@ -974,12 +975,12 @@ plus petit problèmes : un problème de recherche de monomères et un problème 
 donc séparément ces deux problèmes.
 
 \paragraph{Recherche de monomères}Rechercher un monomère dans un polymère revient à rechercher un petit graphe atomique
-$S$ dans un plus gros graphe $G$. Deux cas sont alors possibles, soit nous recherchons à trouver exactement $S$ dans
+$S$ dans un plus gros graphe $G$. Deux cas sont alors possibles : soit nous cherchons à trouver exactement $S$ dans
 $G$, soit nous cherchons une approximation de $S$ dans $G$. Dans le premier cas, nous allons nous intéresser à l'
 ``Isomorphisme de Sous-graphe'' (en anglais Subgraph Isomorphism (SI)). Dans le second cas, nous nous intéresserons au
 ``Sous-graphe Maximum Commun'' (en anglais Maximum Common Subgraph (MCS)). Les recherches de SI ou de MCS ont toutes
-deux été prouvées NP-Complet mais pour chacun des problème il existe des algorithmes rapides en pratique pour des graphes
-aux propriétés particulières dont nous parlerons dans la sous partie suivante.
+deux été prouvées NP-Complet mais, pour chacun des problème, il existe des algorithmes rapides en pratique pour des graphes
+aux propriétés particulières dont nous parlerons dans la sous-partie suivante.
 
 \paragraph{Placements des monomères}Une fois les monomères détectés, il est nécessaire de prendre une décision pour les parties du polymère où plusieurs d'entre eux ont été détectés au même endroit.
 L'objectif est donc de faire un choix entre les différents morceaux possibles afin de chercher à ne garder que les pièces non chevauchantes qui permettent de couvrir au mieux le polymère (Si possible totalement).
@@ -992,8 +993,8 @@ Cette étape donnant accès à un lien direct entre atomes et monomères, une é
 \section{Isomorphisme de Sous-graphe vs Sous-graphe Maximum Commun}
 
 \paragraph{}Nous venons de voir que la recherche de monomères pouvait correspondre à deux problèmes différents en recherche de graphe.
-Formalisons et étudions ici ces deux problèmes afin de choisir celui qui nous utiliserons au sein de notr logiciel d'annotations.
-Voyons les différentes façon de les résoudre ainsi que les forces et faiblesses de ces approches.
+Formalisons et étudions ici ces deux problèmes afin de choisir celui qui nous utiliserons au sein de notre logiciel d'annotations.
+Voyons les différentes façons de les résoudre ainsi que les forces et faiblesses de ces approches.
 
 
 \subsection{Sous-graphe Maximum Commun}
@@ -1004,7 +1005,7 @@ Voyons les différentes façon de les résoudre ainsi que les forces et faibless
   \begin{center}
     \includegraphics[width=450px]{Figures/s2m/MCS-SI/mcs.png}
     \caption{\label{mcs_fig}MCS obtenu à partir des graphes G et H.
-    Le MCS obtenu n'est pas connexe à cause du fait que les liens vers le noeud rouge ne soient pas les mêmes das G et H.}
+    Le MCS obtenu n'est pas connexe du fait des liens vers le noeud rouge, qui ne sont pas les mêmes dans G et H.}
   \end{center}
 \end{figure}
 
@@ -1014,7 +1015,7 @@ C'est à dire trouver un ensemble de noeuds présents dans les deux graphes.
 Il faut non seulement que les noeuds partagent les même labels mais également les mêmes voisins.
 Si deux noeuds ont le même label mais ne partagent pas les mêmes voisins dans les deux graphes, alors ils ne font pas partie du MCS.
 C'est par exemple le cas du noeud rouge au sein de la figure.
-Les problème de recherche de sous graphe commun connexe maximal (MCCS) est un problème encore plus difficile car il impose de fortes contraintes supplémentaires.
+Le problème de recherche de sous graphe commun connexe maximal (MCCS) est un problème encore plus difficile car il impose de fortes contraintes supplémentaires.
 Le problème du MCS à été prouvé NP-Complet\cite{garey_computers_1979}, ce qui empêche (en tout cas pour le moment) l'émergence d'algorithmes de résolution polynomiaux efficaces.
 
 \paragraph{}Dans notre cas, nous pouvons effectuer une réduction vers ce problème pour la recherche des monomères.
@@ -1029,14 +1030,14 @@ Voyons ensemble ces deux catégories d'algorithmes en s'appuyant sur les reviews
 \subsubsection{Les méthodes de résolution exactes}
 
 \paragraph{}Au sein des algorithmes de résolution exacte du MCS, il existe deux grandes écoles.
-D'un côté certains algorithmes ne font une réduction du problème en un problème de clique maximale puis résolvent ce second problème.
-D'un autre côté les méthodes de résolution se basent sur des méthodes de backtracking.
+D'un côté, certains algorithmes ne font une réduction du problème en un problème de clique maximale puis résolvent ce second problème.
+D'un autre côté, les méthodes de résolution se basent sur des méthodes de backtracking.
 
 
 
 \paragraph{La réduction en clique maximale}
 Il est possible de réduire le problème MCS en un problème de résolution de clique maximale~\cite{pelillo_matching_1999,grosso_simple_2008,rahman_small_2009}.
-Une clique est un ensemble de noeuds dans un graphe tel que tous les noeuds de cet ensemble soient reliés entre eux.
+Une clique est un ensemble de noeuds dans un graphe tel que tous les noeuds de cet ensemble sont reliés entre eux.
 Rechercher la clique maximale revient à rechercher le sous ensemble maximal de noeuds d'un graphe pour lequel tous les noeuds sont liés les uns aux autres.
 Il est possible d'obtenir plusieurs cliques maximales dans un même graphe.
 Ce problème est également NP-Complet~\cite{akkoyunlu_enumeration_1973}.
@@ -1065,16 +1066,16 @@ En résolvant le problème de clique maximale sur le GC, on obtient le MCS.
     L'arbre part d'une bijection vide et ajoute un couple à chaque étape.
     Parfois l'algorithme tombe sur un couple compatible mais dont les voisins ne sont pas le bijection.
     La solution est alors rejetée (croix rouge).
-    La solution est trouvé par l'ensemble des chemins qui mènent aux feuilles valides les plus profondes dans l'arbre.}
+    La solution est trouvée par l'ensemble des chemins qui mènent aux feuilles valides les plus profondes dans l'arbre.}
   \end{center}
 \end{figure}
 
 
 \paragraph{Recherche par Backtracking}
 La majorité des algorithmes exacts effectuent des recherches via des méthodes de backtracking~\cite{manic_branch&cut_2009,mcgregor_backtrack_1982,kawabata_build-up_2011}.
-Un MCS est une bijection entre deux sous ensemble de noeuds dans deux graphes distincts.
+Un MCS est une bijection entre deux sous ensembles de noeuds dans deux graphes distincts.
 Les méthodes de backtrack effectuent une reconstruction itérative de cette bijection.
-Les couples de noeuds compatibles, n'étant pas encore présent au sein de la bijection, sont ajoutés un à un.
+Les couples de noeuds compatibles, n'étant pas encore présents au sein de la bijection, sont ajoutés un à un.
 Lorsque l'algorithme arrive dans une impasse (plus aucune possibilité d'ajouter un couple), il revient en arrière sur une association puis fait un choix différent.
 En sauvegardant l'ensemble qui a contenu le plus de noeuds, on obtient la clique maximale après le parcours de tout l'arbre des possibilités.
 Encore une fois, certaines des techniques citées permettent des accélérations pratiques en coupant des branches de recherche mais jamais l'ordre de grandeur de la complexité n'est changé.
@@ -1082,7 +1083,7 @@ Dans le cas des MCCS, il faut obliger une contrainte supplémentaire d'ajout de 
 Chacun des noeuds du couple à ajouter doit être voisin de l'un des noeuds d'un même couple précédemment inclus dans la bijection.
 
 \paragraph{}Il existe bien d'autres méthodes exactes pour résoudre des MCS pour des graphes particuliers.
-Cependant aucun de ces cas particuliers ne correspond à la réalité des molécules que nous allons traiter.
+Cependant, aucun de ces cas particuliers ne correspond à la réalité des molécules que nous allons traiter.
 Nous ne détaillerons donc pas celles-ci ici.
 
 
@@ -1104,7 +1105,7 @@ Ici, les auteurs construisent plusieurs bijections en parallèle.
 La différence avec les méthodes exactes est qu'ils ne reviennent jamais sur les décisions prises pour construire les MCS.
 Un nombre fixe de bijections est maintenu en permanence.
 Ces bijections ont été sélectionnées par une fonction de score comme étant celles qui avaient le plus de chance de mener à un MCS.
-Au final les bijections trouvées ne seront pas forcément les vrais MCS.
+Au final, les bijections trouvées ne seront pas forcément les vrais MCS.
 Cette seconde méthode est très intéressante lorsque l'on cherche un bon rapport rapidité/qualité.
 
 
@@ -1116,7 +1117,7 @@ Cette seconde méthode est très intéressante lorsque l'on cherche un bon rappo
   \begin{center}
     \includegraphics[width=450px]{Figures/s2m/MCS-SI/si.png}
     \caption{\label{SI_fig}SI obtenu à partir de la recherche du graphe G dans H.
-    Sur cet exemple il n'y a qu'une seule possibilité mais si nous avions cherché une chaine comme Vert-Rouge-Bleu, nous aurions eu deux SI différents.}
+    Sur cet exemple, il n'y a qu'une seule possibilité mais si nous avions cherché une chaine comme Vert-Rouge-Bleu, nous aurions eu deux SI différents.}
   \end{center}
 \end{figure}
 
@@ -1125,12 +1126,12 @@ Comme le nom l'indique, le problème SI est un problème de recherche d'un graph
 C'est à dire qu'un graphe G est sous graphe d'un graphe H si tous les noeuds et arêtes de G doivent être retrouvés dans H structurés de la même manière pour dire que G et un SI de H (voir figure \ref{SI_fig}).
 Tout comme le MCS, le problème du SI à été prouvé NP-Complet\cite{garey_computers_1979}.
 
-\paragraph{}Pour notre problème, nous pouvons à nouveau effectuer une réduction vers le problème SI puis résoudre ce problème par des algorithmes déjà publiés.
+\paragraph{}Pour notre problème, nous pouvons à nouveau effectuer une réduction vers le problème SI, puis résoudre ce problème par des algorithmes déjà publiés.
 Nous souhaitons rechercher des monomères au sein de peptides, ce qui reviendrait à chercher plusieurs fois un petit graphe atomique monomérique dans un gros graphe atomique peptidique.
 
-\paragraph{}Les méthodes de résolution actuelles ne sont toutes très similaires et dérivent d'une même technique de backtracking.
+\paragraph{}Les méthodes de résolution actuelles sont toutes très similaires et dérivent d'une même technique de backtracking.
 La plupart de ces méthodes sont des résolutions exactes.
-Bien que NP-complet, ces algorithmes restent très praticable lorsqu'on ne recherche pas au sein de graphes répétitifs (qui sont constitués de multiples répétitions d'un même morceau).
+Bien que NP-complet, ces algorithmes restent très praticables lorsqu'on ne recherche pas au sein de graphes répétitifs (qui sont constitués de multiples répétitions d'un même morceau).
 Voyons ensemble quelques uns de ces algorithmes.
 
 
@@ -1142,7 +1143,7 @@ Voyons ensemble quelques uns de ces algorithmes.
     \caption{\label{ullman_fig}Recherche d'un isomorphisme de sous graphe par l'algorithme d'Ullman.
     Dans la partie construction, vous pouvez voir la matrice créée à partir des graphes G et H.
     Dans la partie recherche sont présentées les étapes successives de création d'un SI (voir texte pour détail).
-    Si nous avions voulu obtenir tous les isomorphismes (et pas juste un seul) il aurait fallu continuer le backtracking jusqu'au bout.}
+    Si nous avions voulu obtenir tous les isomorphismes (et pas juste un seul), il aurait fallu continuer le backtracking jusqu'au bout.}
   \end{center}
 \end{figure}
 
@@ -1151,16 +1152,16 @@ Certaines de ses variantes sont toujours utilisées dans certaines librairies te
 L'algorithme se base sur la matrice de compatibilité entre les graphes (voir figure \ref{ullman_fig}).
 Une matrice de compatibilité est une matrice dont chaque ligne représente les noeuds de G et chaque colonne les noeuds de H.
 Une case de la matrice comporte un 1 si les labels des noeuds de la case sont compatibles (labels) et que le degré du noeuds de H est supérieur ou égal au degré du noeud de G.
-Pour obtenir un SI à partir de cette matrice il faut retirer des 1 de la matrice jusqu'à en obtenir uns seul 1 par ligne.
+Pour obtenir un SI à partir de cette matrice, il faut retirer des 1 de la matrice jusqu'à en obtenir uns seul 1 par ligne.
 A chaque étape, un noeud de G est choisi pour pratiquer continuer l'isomorphisme.
 Ce noeud correspond à une ligne.
 Puis une colonne est choisie parmi celles dont la colonne contient un 1 sur la ligne précédemment choisie.
-Le couple ligne/colonne nous donne le couple noeud de G/noeud de H à peut être ajouter à l'isomorphisme.
+Le couple ligne/colonne nous donne le couple noeud de G/noeud de H a peut être ajouter à l'isomorphisme.
 Avant cet ajout, il faut également vérifier que tous les voisins du noeud de H correspondent bien aux voisins du noeud de G (condition non respectée à l'étape 2 et 5 de la partie recherche du schéma).
 Puisque nous ajoutons ce binôme à l'isomorphisme, il faut remplacer tous les 1 de la ligne et la colonne choisies par des 0 (excepté pour la case du binôme).
-À ce moment, si au moins une ligne a été vidée de tout ses 1, c'est que l'isomorphisme n'est pas possible et il faut revenir à l'étape précédente.
+À ce moment, si au moins une ligne a été vidée de tous ses 1, c'est que l'isomorphisme n'est pas possible et il faut revenir à l'étape précédente.
 Sinon, il suffit de continuer récursivement jusqu'à obtenir un unique 1 par ligne.
-En choisissant bien les lignes et les colonnes par lesquels l'algorithme commence, on arrive à obtenir des temps d'exécution très courts pour la recherche d'un SI.
+En choisissant bien les lignes et les colonnes par lesquelles l'algorithme commence, on arrive à obtenir des temps d'exécution très courts pour la recherche d'un SI.
 Cependant, pour obtenir tous les SI, il faut parcourir tout l'arbre des possibles, ce qui ralentit l'algorithme.
 
 
@@ -1168,9 +1169,9 @@ Cependant, pour obtenir tous les SI, il faut parcourir tout l'arbre des possible
 
 \paragraph{}Tout comme pour le MCS, le SI peut être résolu par un backtracking classique par pairage de noeuds.
 C'est la méthode majoritairement utilisée puisqu'elle fonctionne très bien en pratique.
-Contrairement à l'algorithme d'Ullman qui nécessite d'effectuer des opération sur de potentiellement très grandes matrices, la méthode par backtracking classique n'a pas besoin de grands espaces mémoire.
+Contrairement à l'algorithme d'Ullman qui nécessite d'effectuer des opérations sur des matrices potentiellement très grandes, la méthode par backtracking classique n'a pas besoin de grands espaces mémoire.
 L'algorithme VF2~\cite{cordella_subgraph_2004} utilisent ce principe.
-Les SI se forment par ajout successif de couples de noeuds compatibles avec retour en arrière si il n'est plus possible d'avoir un couple.
+Les SI se forment par ajouts successifs de couples de noeuds compatibles avec retour en arrière s'il n'est plus possible d'avoir un couple.
 Nous donnerons plus de détails sur cet algorithme en section \ref{VF2_p}.
 Cet algorithme est utilisé dans les grandes librairies logicielles de chimie comme CDK~\cite{steinbeck_chemistry_2003}.
 
@@ -1181,11 +1182,11 @@ Cet algorithme est utilisé dans les grandes librairies logicielles de chimie co
 Ceci peut s'expliquer par le fait que des algorithmes praticables existent pour trouver les SI.
 De plus, les heuristiques de MCS permettent d'obtenir des résultats de SI en ajoutant des contraintes (Le SI étant un cas particulier du MCS).
 Dans tous les cas, ces heuristiques de SI sont des dérivés de la technique par backtracking~\cite{kaijar_developing_2012}.
-Ces algorithmes essayent en supplément d'éviter l'exploration de toutes les branches par de la sélection des plus ``prometteuses''.
+Ces algorithmes essaient en supplément d'éviter l'exploration de toutes les branches par de la sélection des plus ``prometteuses''.
 
 \paragraph{}Il existe également de nombreux algorithmes pour des cas particuliers de SI.
-Par exemple il est possible de résoudre le problème en temps polynomial pour des arbres~\cite{shamir_faster_1997}, des graphes planaires~\cite{eppstein_subgraph_1995,dorn_planar_2009} ou des graphes de treewidth bornés~\cite{hajiaghayi_subgraph_2007}.
-Dans tous les cas, il est possible de trouver au moins une molécule ne répondant pas à l'un de ces critère et c'est pour cela que nous ne les utiliserons pas.
+Par exemple, il est possible de résoudre le problème en temps polynomial pour des arbres~\cite{shamir_faster_1997}, des graphes planaires~\cite{eppstein_subgraph_1995,dorn_planar_2009} ou des graphes de treewidth bornés~\cite{hajiaghayi_subgraph_2007}.
+Dans tous les cas, il est possible de trouver au moins une molécule ne répondant pas à l'un de ces critères et c'est pour cela que nous ne les utiliserons pas.
 
 
 \subsection{Choisir l'algorithme de recherche de monomères}
@@ -1193,9 +1194,9 @@ Dans tous les cas, il est possible de trouver au moins une molécule ne réponda
 \paragraph{}Pour pouvoir rechercher les monomères nous devions choisir entre toutes les approches algorithmiques citées ci-dessus.
 Premièrement, lorsque nous recherchons un monomère dans un peptide, nous souhaitons connaître tous les endroits où il peut apparaitre.
 Nous ne souhaitons donc pas utiliser d'approches heuristiques.
-Deuxièmement, le MCS ne parait pas très pratique dans notre cas.
+Deuxièmement, le MCS ne paraît pas très pratique dans notre cas.
 En effet, les NRP regorgent de monomères proches les uns des autres.
-Il n'est donc pas facile lorsque l'on obtient un résultat, de savoir si la molécule trouvée est la bonne ou si c'est le monomère voisin à un atome de distance qui a été détecté.
+Il n'est donc pas facile, lorsque l'on obtient un résultat, de savoir si la molécule trouvée est la bonne ou si c'est le monomère voisin à un atome de distance qui a été détecté.
 Enfin, en comparant les algorithmes de recherche exacte de solutions, ceux de résolution de SI sont plus adaptés et rapide en pratique.
 C'est pourquoi nous avons choisi d'effectuer la recherche des monomères en utilisant l'algorithme le plus communément utilisé par la communauté : VF2.
 
@@ -1210,7 +1211,7 @@ C'est pourquoi nous avons choisi d'effectuer la recherche des monomères en util
 
 \paragraph{}La première partie Smiles2Monomers doit rechercher l'ensemble des monomères au sein d'un polymère cible.
 Comme nous l'avons vu dans l'état de l'art, nous pouvons transformer ce problème en un problème de graphe appelé isomorphisme de sous graphe.
-Dans cette partie nous allons présenter en détail l'algorithme classique de recherche de SI nommé VF2 en l'étendant à des graphes labellés.
+Dans cette partie, nous allons présenter en détail l'algorithme classique de recherche de SI nommé VF2 en l'étendant à des graphes labellés.
 Puis nous montrerons en quoi les labels des noeuds du graphes influencent le temps de calcul afin en déduire une méthode de recherche efficace.
 
 \subsubsection{L'algorithme originel VF2}
@@ -1218,7 +1219,7 @@ Puis nous montrerons en quoi les labels des noeuds du graphes influencent le tem
 \label{VF2_p}
 
 \paragraph{}Comme nous l'avons déjà évoqué dans l'état de l'art de cette partie, l'algorithme VF2 permet d'effectuer des
-isomorphismes de graphe ou de sous-graphe non labellés d'un graphe $G$ sur un graphe $H$.
+isomorphismes de graphes ou de sous-graphes non labellés d'un graphe $G$ sur un graphe $H$.
 Écrivons l'algorithme tel qu'il est décrit dans l'article d'origine :
 
 \paragraph{}
@@ -1254,25 +1255,25 @@ isomorphismes de graphe ou de sous-graphe non labellés d'un graphe $G$ sur un g
 \end{figure}
 
 \paragraph{}Expliquons cet algorithme en utilisant le schéma \ref{vf2}.
-A la première étape nous nous trouvons avec un ensemble vide de noeuds pairés de $G$ et $H$.
+A la première étape, nous nous trouvons avec un ensemble vide de noeuds pairés de $G$ et $H$.
 Nous générons donc toutes les possibilités d'assemblage entre tous les noeuds des deux graphes (Il est à noter que l'algorithme
 est décrit de cette façon dans l'article mais qu'il n'est nécessaire de générer que les couples à partir d'un seul noeud de $G$
-et de l'ensemble des noeuds de $H$.
+et de l'ensemble des noeuds de $H$.)
 Une fois ces assemblages créés, nous les parcourons tous en appelant récursivement la fonction.
-Dans l'exemple le premier appel récursif est effectué après avoir assemblé '1' à 'a'.
+Dans l'exemple, le premier appel récursif est effectué après avoir assemblé '1' à 'a'.
 Cette voie est sans issue car quel que soit l'assemblage entre '2' et un noeud de $H$, plus aucun couple de voisins ne pourra être
 généré.
-En effet pour générer l'ensemble $P$ il est nécessaire de regarder tous les voisins de 'b' alors que le noeud ne possède plus
+En effet, pour générer l'ensemble $P$, il est nécessaire de regarder tous les voisins de 'b' alors que le noeud ne possède plus
 de voisins hors de $s$.
 Une fois toutes les tentatives échouées, l'algorithme remonte dans l'arbre et change l'association '1'-'a' pour l'association
 '1'-'b'.
 Récursivement l'algorithme conclut à un isomorphisme {(1,b);(2,a);(3,c)}.
 
-\paragraph{}En l'état l'algorithme VF2 ne reconnaît qu'un seul et unique isomorphisme.
+\paragraph{}En l'état, l'algorithme VF2 ne reconnaît qu'un seul et unique isomorphisme.
 On peut modifier simplement l'algorithme afin de récupérer tous les isomorphismes en ne retournant pas une fois que l'un d'eux est
 trouvé mais en l'enregistrant dans un ensemble puis en continuant l'exploration de l'arbre jusqu'au bout.
 Vu que tout l'arbre est exploré à chaque recherche, l'algorithme est exponentiel.
-Pour être plus précis il est en $O(n^m)$, donc pas calculable dans les pires des cas.
+Pour être plus précis il est en $O(n^m)$, donc non calculable dans les pires des cas.
 
 \begin{figure}[!ht]
   \includegraphics[width=200px]{Figures/s2m/recherche/VF2_labels.pdf}
@@ -1287,12 +1288,12 @@ composé d'un branchement supplémentaire contenant un noeud B.
 Sur ce graphique nous avons représenté deux cas de recherche selon l'ordre dans lequel nous prenons $G$.
 Nous pouvons remarquer que dans les deux cas, la taille de l'arbre est bien plus faible que pour un graphe non labellé.
 Les labels des noeuds font office de filtres de recherche et accélèrent fortement la recherche.
-On voit également que la recherche est d'autant plus rapide que l'on choisi prioritairement les noeuds avec des labels de faible
+On voit également que la recherche est d'autant plus rapide que l'on choisit prioritairement les noeuds avec des labels de faible
 fréquence.
 
 Là où l'algorithme général VF2 était en $O(n^m)$, la complexité est ici réduite dans le pire des cas à $O(k^n)$ où $k$ est le
-comptage du nombre de noeud du label le moins filtrant.
-La taille de l'arbre de recherche est diminué par la sélectivité des labels de noeuds.
+comptage du nombre de noeuds du label le moins filtrant.
+La taille de l'arbre de recherche est diminuée par la sélectivité des labels de noeuds.
 Pour optimiser la recherche, nous devons donc étudier la façon dont nous représentons les molécules afin d'avoir une sélectivité
 la plus grande possible.
 
@@ -1303,31 +1304,31 @@ liaison=arête). Dans cette représentation, nous pouvons considérer chaque lab
 figure \ref{representations}, première partie). Évidemment, les hydrogènes sont les atomes les plus représentés et ne filtrent
 pas les recherches par eux-mêmes. Cependant, ils sont un bon moyen de donner des précisions sur l'atome auquel ils sont liés.
 Ainsi, trouver un $CH_{3}$ ou un $CH$ donne une information différente sur la topologie.
-En prenant en compte la remarque précédente nous avons créé une seconde représentation qui compresse les hydrogènes à l'intérieur
+En prenant en compte la remarque précédente, nous avons créé une seconde représentation qui compresse les hydrogènes à l'intérieur
 des noeuds représentant les atomes plus lourds.
 Ainsi, plusieurs labels différents peuvent
 désormais être créés pour un même atome et ce, en fonction de ses compagnons hydrogènes (Voir figure \ref{representations},
 seconde partie). Par exemple $NH_2$, $NH$, $N$ sont les
-trois labels variant depuis l'ancien label unique $N$ qui était accompagné de voisins hydrogènes. Les labels sont plus nombreux et leur fréquences à la fois moins élevée et plus homogène, ce qui les rend plus sélectifs.
+trois labels variants depuis l'ancien label unique $N$ qui était accompagné de voisins hydrogènes. Les labels sont plus nombreux et leur fréquence à la fois moins élevée et plus homogène, ce qui les rend plus sélectifs.
 
 \begin{figure}
   \includegraphics[width=300px]{Figures/s2m/representations/all_tmp.pdf}
   \caption{\label{representations}Manque fréquences et titres dans l'image}
 \end{figure}
 
-\paragraph{}Globalement, plus le nombre de labels est élevé et leur fréquences homogènes et moins l'algorithme VF2 aura de
-difficultés à effectuer un isomorphisme. En effet la lenteur qui peut venir de cet algorithme est dû au nombreux chemins qu'il
+\paragraph{}Globalement, plus le nombre de labels est élevé et leurs fréquences homogènes, et moins l'algorithme VF2 aura de
+difficultés à effectuer un isomorphisme. En effet, la lenteur qui peut venir de cet algorithme est due au nombreux chemins qu'il
 peut prendre lors de l'exploration.
 
-\paragraph{}Cherchons encore à augmenter la sélectivité des labels en augmentant leur nombre. A partir d'un graphe $G$ il est
+\paragraph{}Cherchons encore à augmenter la sélectivité des labels en augmentant leur nombre. A partir d'un graphe $G$, il est
 possible de représenter ses relations d'adjacence au sein d'un second graphe $L$. Pour cela, deux noeuds voisins de $G$ sont
 représentés dans $L$ comme un seul noeud. Chaque ancienne arrête devient un noeud et chaque ancien noeud devient une multitude
-d'arête (une clique entre tous les nouveaux noeuds représentant les anciennes arête de cet ancien noeud). Nous étendons le 
+d'arêtes (une clique entre tous les nouveaux noeuds représentant les anciennes arête de cet ancien noeud). Nous étendons le 
 raisonnement pour les labels en disant que le label d'un noeud du nouveau graphe est la composition des labels des anciens
-noeuds ainsi que de l'arrité entre ces deux noeuds (Dans notre cas, les labels sont mis dans l'ordre lexicographique pour ne pas
+noeuds ainsi que de l'arité entre ces deux noeuds (Dans notre cas, les labels sont mis dans l'ordre lexicographique pour ne pas
 avoir deux labels possibles à partir des labels d'origine)(Voir figure \ref{representations},
 troisième partie). Un tel type de graphe est appelé line graph~\cite{orlin_line-digraphs_1978}. L'un des
-gros avantage de cette représentation est d'inclure directement dans les labels des noeuds ce qui touche à l'arité entre noeuds.
+gros avantages de cette représentation est d'inclure directement dans les labels des noeuds ce qui touche à l'arité entre noeuds.
 La fonction
 de recherche n'aura donc plus du tout à s'attarder sur les liens mais uniquement sur les noeuds. De plus, transformer les graphes
 de cette manière nous permet de répondre à la volonté d'augmentation du nombre de labels. Là où la représentation précédente
@@ -1337,7 +1338,7 @@ noeuds).
 \paragraph{}Le raisonnement des line graphe peut être étendu récursivement. On peut ainsi créer des line-graph de line-graph.
 Cependant cela pose plusieurs problèmes de répéter cette opération dans notre cas. Certains graphes vont diminuer de taille
 jusqu'à disparaître complètement (ce qui est peu pratique pour la comparaison) alors que d'autres vont grossir de plus en plus
-et ajouter de plus en plus de phases de comparaison de labels et d'étapes dans l'algorithme VF2. Pour ces raisons nous avons
+et ajouter de plus en plus de phases de comparaison de labels et d'étapes dans l'algorithme VF2. Pour ces raisons, nous avons
 choisi de n'effectuer qu'une seule étape de line-graph.
 
 \begin{figure}
@@ -1357,7 +1358,7 @@ on peut avoir plusieurs chaînes représentant le même motif mais avec des ordr
 indexation sera donc la phase de recherche d'une chaîne pour représenter chaque motif d'intérêt en essayant de minimiser le temps
 que prendra la recherche de cette chaîne. Pour la recherche de monomères dans
 des peptides non ribosomiques, la phase d'indexation revient donc à choisir, pour chaque monomère, l'ordre dans lequel nous allons
-rechercher les noeuds du graphe le représentant. Ainsi on peut voir que quelque soit la chaîne représentant le graphe, le même
+rechercher les noeuds du graphe le représentant. Ainsi, on peut voir que quelque soit la chaîne représentant le graphe, le même
 motif sera toujours recherché. La seule différence sera la rapidité d'exécution de la recherche. Les deux sections suivantes
 s'attarderont à la recherche de chaînes performantes (ie les plus rapide) lors la recherche d'un motif.
 
@@ -1369,12 +1370,12 @@ s'attarderont à la recherche de chaînes performantes (ie les plus rapide) lors
   \caption{\label{chaine_fail}Deux exemple de chaîne pour un motif simple}
 \end{figure}
 
-\paragraph{}Une bonne chaîne est donc une chaîne rapide ; mais a quoi ressemble une telle chaîne ? Déterminons quel(s) critère(s)
-simple(s) nous permettent de supposer qu'une chaîne est bonne. Avec ce ou ces critères nous pourrons ensuite déterminer un
+\paragraph{}Une bonne chaîne est donc une chaîne rapide ; mais à quoi ressemble une telle chaîne ? Déterminons quel(s) critère(s)
+simple(s) nous permettent de supposer qu'une chaîne est bonne. Avec ce ou ces critères, nous pourrons ensuite déterminer un
 moyen d'ordonner les noeuds de manière gloutonne. Partons de l'exemple présenté sur la figure \ref{chaine_fail}. A gauche est
 dessiné un motif simple suivi de deux chaînes pouvant le représenter (lecture de l'ordre des chaînes de gauche à droite). Pour
 la première chaîne, en partant du motif ne contenant qu'un A, on obtiendra 3 isomorphismes. En étendant ces chaînes à deux A
-voisins, on conserve toujours trois isomorphismes puis deux en ajoutant B et enfin un seul avec le dernier A. Au total on aura
+voisins, on conserve toujours trois isomorphismes puis deux en ajoutant B et enfin un seul avec le dernier A. Au total, on aura
 étendu 9 isomorphismes durant la recherche. En regardant maintenant la seconde chaîne, on se rend compte que le nombre de ces
 isomorphismes intermédiaires est bien plus faible grâce à la sélectivité du B recherché en tout premier (5 isomorphismes
 intermédiaires sont étendus). La différence décisive entre les deux chaînes est donc le moment où le noeud avec un label sélectif
@@ -1390,14 +1391,14 @@ est plus sélectif qu'un autre à partir du moment où sa fréquence d'apparitio
   indexé ainsi que les fréquences d'apparition de chacun de ses noeuds dans la base d'apprentissage}
 \end{figure}
 
-\paragraph{}Essayons d'estimer ces fréquences afin d'éviter les cas qui pourraient être critiques. Pour ce faire nous pouvons
+\paragraph{}Essayons d'estimer ces fréquences afin d'éviter les cas qui pourraient être critiques. Pour ce faire, nous pouvons
 constituer un ensemble représentatif du type de molécules que nous allons chercher.
 Dans notre cas, nous cherchons à étudier des peptides non ribosomiques. La base d'apprentissage
 des fréquences sera donc constituée de NRP dont la composition atomique est déjà connue. Le raisonnement est extensible à
 n'importe quel type de molécules et le fait d'avoir un jeu d'apprentissage non représentatif n'influencera pas le résultat mais
 uniquement le temps de calcul. Une fois cette base créée, nous pouvons estimer les fréquences d'apparition de chacun des labels
 présents dans les monomères en effectuant une recherche exhaustive (Figure \ref{apprentissage}). L'algorithme glouton naïf qui
-vient tout de suite en tête est de choisir un a un les noeuds que l'on souhaite ajouter au motif en choisissant toujours celui
+vient tout de suite en tête est de choisir un à un les noeuds que l'on souhaite ajouter au motif en choisissant toujours celui
 avec le label le moins fréquent.
 
 \paragraph{}
@@ -1428,13 +1429,13 @@ avec le label le moins fréquent.
 un ensemble des voisinages. L'algorithme glouton naïf est donc linéaire par rapport à la taille du graphe. À l'exécution, la
 création de chaînes par cette méthode est instantanée (<< 0.1s). Toutefois, rien ne garantit la qualité des chaînes obtenues.
 Prenons l'exemple de la figure \ref{apprentissage}. Sur cet exemple, le motif à indexer est a-b-d. Les comptages des différents
-labels nécessaire sont également présent sur cette même figure. La chaîne qui sera générée commence forcément par le noeud
+labels nécessaire sont également présents sur cette même figure. La chaîne qui sera générée commence forcément par le noeud
 labellé $a$ (fréquence la plus faible dans le jeu d'apprentissage) suivi de $b$ puis enfin $d$ (Le tout est résumé sur la figure
 \ref{glouton}).
 
 \begin{figure}
   \includegraphics[width=300px]{Figures/s2m/indexation/glouton.png}
-  \caption{\label{glouton}En vert le chemin prit par l'algorithme glouton pour générer la chaîne du motif a-b-d}
+  \caption{\label{glouton}En vert le chemin pris par l'algorithme glouton pour générer la chaîne du motif a-b-d}
 \end{figure}
 
 \subsubsection{Indexation Markovienne}
@@ -1443,12 +1444,12 @@ labellé $a$ (fréquence la plus faible dans le jeu d'apprentissage) suivi de $b
 
 \paragraph{}En utilisant la méthode gloutonne, nous obtenons rapidement les chaînes de tous les motifs que nous
 souhaitons indexer. Cependant, dans certains cas, une chaîne générée de cette manière peut ne pas du tout être optimale.
-Dès le tout début de la chaîne il est possible que l'algorithme fasse des choix optimaux localement qui vont ensuite mener à un
+Dès le tout début de la chaîne, il est possible que l'algorithme fasse des choix optimaux localement qui vont ensuite mener à un
 enlisement global. Nous allons nous appuyer sur les figures \ref{apprentissage} et \ref{glouton} pour monter que même sur un si
-petit exemple l'algorithme glouton n'a pas choisi le meilleur chemin.
+petit exemple, l'algorithme glouton n'a pas choisi le meilleur chemin.
 
 \paragraph{}Afin d'évaluer la qualité d'une chaîne, nous allons calculer son temps d'exécution sur notre base d'apprentissage.
-Partons de la définition d'une chaîne : Une chaîne est composée d'une succession de noeuds. Ces noeuds vont lors de l'isomorphisme
+Partons de la définition d'une chaîne : une chaîne est composée d'une succession de noeuds. Ces noeuds vont, lors de l'isomorphisme,
 être recherchés dans l'ordre. Pour rechercher une chaîne de taille $n$ ($c_n$), il faut donc $n$ extensions successives. On
 peut donc écrire que le temps de recherche d'une chaîne est le temps cumulé de recherche de ses extensions :
 
@@ -1495,10 +1496,10 @@ labels (ce temps peut être considéré constant)
   \caption{\label{app_compt}Base d'apprentissage accompagnée des comptages de tous les $n_{p_{n}}$}
 \end{figure}
 
-\paragraph{}En utilisant les comptages fait sur la base d'apprentissage (Voir \ref{app_compt}) ainsi que le calcul de l'arrité
+\paragraph{}En utilisant les comptages faits sur la base d'apprentissage (Voir \ref{app_compt}) ainsi que le calcul de l'arité
 restante de chaque noeud à chaque étape, nous allons pouvoir estimer sur la base, un temps d'exécution de la recherche d'une
 chaîne. Ce temps est un coût exact de le recherche sur la base d'apprentissage. En normalisant cette valeur par le nombre de
-noeuds de la base nous pouvons obtenir le coût de recherche par noeud et ainsi pouvoir estimer le temps de calcul quelque soit
+noeuds de la base, nous pouvons obtenir le coût de recherche par noeud et ainsi pouvoir estimer le temps de calcul quelle que soit
 la taille de la ou les molécules à analyser.
 
 \begin{equation}
@@ -1540,7 +1541,7 @@ jusque $\delta$.
 \end{array}
 \]
 
-Naïvement, on peut appliquer la formule sur chacune des chaînes possible et trouver la chaîne optimale qui minimise la fonction de
+Naïvement, on peut appliquer la formule sur chacune des chaînes possibles et trouver la chaîne optimale qui minimise la fonction de
 coût. Développons l'exemple pour la chaîne $c_{\alpha}$.
 
 \[
@@ -1554,9 +1555,9 @@ coût. Développons l'exemple pour la chaîne $c_{\alpha}$.
 \end{array}
 \]
 
-\paragraph{}En appliquant cette formule sur toutes les chaînes on peut se rendre compte que certains de nos calculs sont inutiles.
+\paragraph{}En appliquant cette formule sur toutes les chaînes, on peut se rendre compte que certains de nos calculs sont inutiles.
 Prenons l'exemple des chaînes $c_{\alpha}$ et $c_{\beta}$. Le dernier calcul de la chaîne $c_{\beta}$ est inutile. Lors
-du calcul des deux chaînes, on aurait pu se rendre compte que l'on pouvais déjà décider de quelle chaîne était la meilleure à
+du calcul des deux chaînes, on aurait pu se rendre compte que l'on pouvait déjà décider de quelle chaîne était la meilleure à
 partir du résultat de la sous chaîne $a-b$. Ceci nous amène à transformer le calcul sous forme de programmation dynamique dont les
 formules de récurrence sont les suivantes.
 
@@ -1569,12 +1570,12 @@ formules de récurrence sont les suivantes.
 \end{equation}
 
 Où la fonction de minimisation s'applique sur l'ensemble des $p'_{n-1}$ et $p'_{n-1}$ est un motif connexe de taille $n-1$ inclus
-dans $p_n$. Pour la recherche de motif dans l'exemple on obtient le chemin $c_{\delta}$ minimisant le coût. On peut voir le
+dans $p_n$. Pour la recherche de motif dans l'exemple, on obtient le chemin $c_{\delta}$ minimisant le coût. On peut voir le
 détail de la recherche de ce motif sur la figure \ref{markov}.
 
 \begin{figure}
   \includegraphics[width=300px]{Figures/s2m/indexation/markov.png}
-  \caption{\label{markov}En vert le chemin prit par l'algorithme markovien pour générer la chaîne du motif a-b-d}
+  \caption{\label{markov}En vert, le chemin pris par l'algorithme markovien pour générer la chaîne du motif a-b-d}
 \end{figure}
 
 \paragraph{}Cette méthode exacte nous permet de garantir la qualité de nos chaînes sur la base d'apprentissage mais cela se paye
@@ -1584,13 +1585,13 @@ labels soit différent (C'est ce que nous avons essayer de faire pour simplifier
 
 Une chaîne (au sens ligne et pas chaîne comme défini ici) représente le motif le plus simple. Pour une chaîne de noeuds de taille 
 $n$, on peut trouver un motif de taille $n$ puis deux de taille $n-1$ puis 3 de taille $n-2$, ... Pour calculer le coût du motif
-de taille $n$ il nous faut calculer récursivement tous les motifs de taille inférieure. Dans le meilleur des cas la programmation
+de taille $n$, il nous faut calculer récursivement tous les motifs de taille inférieure. Dans le meilleur des cas la programmation
 dynamique sera donc de complexité de l'ordre de $n^2$.
 
-Le pire motif qui peut être défini est une clique. Dans le cas d'une clique de taille $n$ pour calculer le coût du motif il faudra
+Le pire motif qui peut être défini est une clique. Dans le cas d'une clique de taille $n$, pour calculer le coût du motif, il faudra
 calculer $n-1$ parmi $n$ valeurs puis $n-2$ parmi $n$, ... Dans ce cas, la complexité sera de l'ordre de $2^n$.
 
-La redondance des labels permet quant à elle de couper certaines branches lors de l'indexation et ainsi de diminue un peu
+La redondance des labels permet quant à elle de couper certaines branches lors de l'indexation et ainsi de diminuer un peu
 la complexité. Cependant, l'ordre de grandeur n'en est pas modifié.
 
 \begin{equation}
@@ -1605,7 +1606,7 @@ la complexité. Cependant, l'ordre de grandeur n'en est pas modifié.
 
 \paragraph{}Dans un exemple précédent (TODO : ref), nous avons montré que le début d'une chaîne est très critique pour le temps
 de recherche de celle-ci. L'idée est donc de générer la chaîne par un mélange des deux techniques précédentes. Les débuts de la 
-chaîne seront être recherchés en exact jusqu'à une taille $k$ définie à l'avance puis le reste des extensions se feront en
+chaîne seront recherchés en exact jusqu'à une taille $k$ définie à l'avance, puis le reste des extensions se feront en
 utilisant l'algorithme glouton. Cette découpe des chaînes en deux parties garantit une recherche très rapide d'un
 motif sur la base d'apprentissage tout en limitant fortement le temps de pré-calcul nécessaire pour la construction de l'index.
 
@@ -2523,9 +2524,15 @@ Norine a été créée dans le but de centraliser et rendre accessible les annot
 Sans cette centralisation, il est très difficile de créer des modèles de prédiction autour des NRP.
 Les données de Norine ont par exemple été très utiles pour la création de modèles de prédiction d'activités NRP.
 
-\paragraph{TODO : Schéma SQL simplifié}
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=350px]{Figures/Norine/sql.png}
+    \caption{\label{sql}Schéma simplifié de la base de données Norine.
+    Figure extraite de la thèse de Ségolène Caboche avec son accord.}
+  \end{center}
+\end{figure}
 
-\paragraph{}Norine est une base de données postgres contenant plusieurs dizaines de tables, toutes articulées autour de la notion de peptide (voir la version très simplifiée de la figure TODO).
+\paragraph{}Norine est une base de données postgres contenant plusieurs dizaines de tables, toutes articulées autour de la notion de peptide (voir la version très simplifiée de la figure \ref{sql}).
 La table centrale des peptides contient toutes les informations centrales telles que le nom, la famille ou les différentes structures.
 Les information d'activités, d'organismes producteurs ou le détail de chaque monomères sont quant à eux présent dans des tables annexes, reliées soit par clef externe soit par des tables d'associations.
 Par exemple, une table est dédiée aux activités.
@@ -2675,9 +2682,25 @@ Quelques peptides ont été soumis mais il est encore nécessaire de communiquer
 
 
 
-\section{Mes contributions au sein de Norine}
+\section{Les contributions de s2m à Norine}
 
-\paragraph{TODO : intro}
+\paragraph{}Jusqu'à présent, tout le travail que nous avons présenté se constitue de méthodes informatiques pour générer des données.
+Cette section sera consacrée à la partie bioanalyse qui suit forcément ce genre de production.
+Comme tout au long de ma thèse, ce travail a été réalisé en étroite collaboration avec les membres du sous-groupe Norine.
+Les travaux que je vais présenter ici sont issus des analyses en réunion lors de nos ``Norine days'' et de collaborations avec des stagiaires et ingénieurs.
+
+\paragraph{}Les Norine days sont des réunions de travail qui réunissent tous les acteurs de Norine.
+Ces réunions sur demi-journées nous permettent de discuter rapidement de problèmes et solutions qui concernent tout le monde.
+Elles m'ont été d'une grande aide pour me permettre d'acquérir les notions de biologie et de chimie nécessaires.
+Lors de ces réunions, j'ai apporté les résultats de s2m, ce qui nous a mené à la découverte des erreurs d'annotation présentes en base.
+Je présenterai par la suite les différents étapes de la correction et de la mise en place de gardes fous pour faire disparaître ce genre d'erreurs.
+
+Durant ces journées nous prenons également beaucoup de temps à analyser les nouvelles entrées soumises par des contributeurs extérieurs.
+Ces contributions nous ont d'ailleurs plusieurs fois menées à des changements au sein de l'ontologie de Norine et à la normalisation de concepts déjà présents.
+Nous ne présenterons pas ce travail en détail car il une oeuvre collective fortement éclatée en de nombreuses petites tâches.
+
+\paragraph{}La seconde partie de cette section sera consacrée aux collaborations avec des stagiaires et ingénieurs qui ont menées à la création de nouveaux contenus pour la base de données.
+Dans les deux cas que nous verrons, nous aborderons l'utilisation de s2m pour l'ajout automatique d'annotations.
 
 
 \subsection{Améliorations de l'existant}
@@ -2734,6 +2757,155 @@ Par ce système nous incitons les contributeurs à ajouter le SMILES de leurs pe
 
 
 
+
+\subsection{Mises à jour de Norine}
+
+\paragraph{}Les Norine days, nous ont poussé à beaucoup travailler sur les données de Norine ainsi que sur des données d'autres bases.
+Cette exploration en profondeur nous a révélé plusieurs faits.
+Premiérement, les données de Norine sont vieillissantes.
+Par exemple en suivant des liens Pubchem, nous nous sommes apperçu qu'ils ne pointaient plus tous vers les les bonnes structures.
+Nous avons également mis à jour le fait que l'évolution de la taxonomie au cours des années, a rendue obsolète certaines classifications d'organismes dans Norine.
+Plusieurs autres détails ont également changé et nous font dire qu'une mise à niveau s'impose.
+Cette mise à niveau sera le premier point que nous aborderons dans cette section.
+
+\paragraph{}Secondement, en parcourant des bases telles que MiBIG qui répertorient des NRP et NRPS, nous avons constaté qu'il existe une grande quantité de NRP facilement accessibles et candidats pour un ajout au sein de Norine.
+Ces données sont en général bien structurées et pourraient facilement être indexées par Norine.
+
+\paragraph{}Enfin, il existe également de nombreuses molécules NRP présentes dans des bases de données généralistes.
+Nombre d'entre elles sont sans annoations monomériques.
+En utilisant s2m sur de très grandes bases telles que PubChem, nous essayerons d'obtenir des annotations monomériques afin d'extraire des candidats NRP.
+Ces molécules pourront ensuite être analysées manuellement pour les entrer ou non en base.
+
+
+\subsubsection{Mise à jour des données de Norine}
+
+\paragraph{}Nous allons ici parler du vieillissement des données de Norine.
+Il existe au sein de Norine, de nombreuses ``petites'' informations (qui ne remettent pas en cause la présence du peptide en base) qui sont obsolètes ou du moins imprécises.
+Nous pouvons regrouper le type d'information sous quatres catégories : Les liens externes rompus (liens vers PubChem et Uniprot), les taxonomies plus à jour, les molécules/organismes ayant changé de nom et les mises à jour de peptides par de nouvelles publications.
+Analysons un à un chacun de ces cas.
+
+
+\paragraph{Les liens externes}
+Les liens rompus représentent la catégorie la plus facile à traiter.
+Il nous a suffit d'un script simple pour les corriger.
+Un à un, nous suivons automatiquement les liens vers les bases.
+Certain d'entre eux ne mènent plus à rien et nous pouvons alors les supprimer.
+Dans ce cas, nous cherchons ensuite le nom du peptide via l'API de PubChem pour espérer trouver une autre page correspondante.
+Lorsqu'une structure est retrouvée, nous la faisons annoter par s2m afin de vérifier la cohérence de structure avec l'annotation manuelle de Norine.
+Si l'annotation correspond, le nouveau lien est ajouté.
+De la même manière, il est possible de vérifier les liens encore fonctionnels ou d'ajouter des liens à certains peptides n'en possédant pas.
+De cette manière nous avons remis à jour plusieurs dizaines de liens.
+
+
+\paragraph{Remises à jour de la taxonomie}
+La taxonomie pose un peu plus de problème car elle évolue au cours du temps.
+La taxonomie du vivant a évolué au fur et à mesure des découvertes et des nouvelles méthodes de classification.
+Il n'y a aucun doute sur le fait qu'elle continura a évoluer rapidement.
+Au sein de Norine ce n'est pas une ressource critique mais il est bon de connaître les lignées d'espèces productrices de NRP pour pouvoir faire des rapprochements entre NRP/NRPS.
+Ces données de taxonomie peuvent être récupérées depuis le site ou l'API du NCBI.
+Le NCBI étant un organisme de référence, beaucoup de contributeurs maintiennent les classifications à jour.
+En effectuant réguliérement une recherche sur le NCBI de la taxonomie des espèces présente dans Norine, il est possible de maintenir les données suffisamment à jour.
+
+\paragraph{TODO : figures arbre des taxons}
+
+\paragraph{}Les données de taxonomie de Norine sont pour le moment maintenues comme des chaines de caractère au sein de la table des organismes.
+Cette structure est très redondante et ne permet pas des mises à jour efficaces.
+Nous avons profité de la création du script de mises à jour pour revoir complétement notre facçon de stocker les taxons.
+La chaine de caractère présente dans l'organisme est remplacée par un identifiant dans la nouvelle table des taxons de Norine.
+Cette table est organisée comme un arbre pour permettre une mise à jour taxon par taxon sans avoir besoin de modifier des dizaines d'entrés.
+La construction de toute la chaine taxonomique d'une espèce prend désormais beaucoup plus de temps (beaucoup plus de requêtes) mais ce problème est facilement contournable par la création de vues sql.
+Par ce script c'est l'ensemble des données de Norine qui ont été remises à jour.
+
+
+\paragraph{Les changements de nomenclature}
+Les deux scripts de mise à jour dont nous venons de parler ne peuvent pas fonctionner dans 100\% des cas.
+Depuis leur publication (parfois il y a très longtemps), certaines molécules et certains organismes ont changé de nom.
+Heureusement, à la fois le NCBI et PubChem gardent en mémoire une liste conséquente de synonymes permettant de les retrouver.
+Cependant, nos scripts ne trouvent pas toujours de synonymes ou certains synonymes ne correspondent pas vraiment, ce qui nous empèche d'effectuer les mises à jour.
+Dans ce cas, nous levons des alertes qui devront être analysées à la main (probablement durant des Norine days).
+
+
+\paragraph{Publications mises à jour}
+En analysant les annotations issues de s2m, nous nous sommes parfois aperçu de l'existance de nouveaux articles à propos des molécules étudiées.
+Certains articles nous permettaient alors de remettre à jour l'annotation présente dans Norine, de créer entrées pour des variants nouvellement connus et parfois d'infirmer la production non ribosomique du peptide.
+Ce dernier cas est très problématique car pour le moment, il n'a pas été prévu dans Norine de retirer les informations d'une quelconque manière.
+Il est toujours possible de retirer les informations directement en sql mais cette solution ne permet pas aux utilisateurs de comprendre la disparition de la molécule.
+Après concertation sur la nomenclature et les procédure d'évolution des données nous nous sommes mis d'accord pour ajouter un status ``deprecated'' au sein de la base.
+Pour le moment il existe les status ``curated'' et ``putative'' associé à chauqe peptide.
+L'ajout de ce nouveau status permettra de regrouper tous les peptides qui ont un jour été considéré NRP mais qui depuis ont été prouvés produits par d'autres voies de synthèse.
+Encore une fois, cette mise à jour n'est pas automatisable et nécessite un traitement particulier.
+La procédure devait un jour être ajoutée à myNorine.
+
+
+\subsubsection{Récupération massive de NRP}
+
+\paragraph{}L'exploration des bases de données proches des NRP permet de se rendre compte que de nombreuses molécules NRP connues ne sont pas répertoriées au sein de Norine.
+Afin d'essayer de combler le retard d'annotation de ces peptides, nous avons décider d'automatiser leur indexation.
+Encore une fois à partir d'un script nous analysons et ajoutons les NRP présents au sein des bases MiBIG (voir \ref{bdd_nrp}) et BIRD.
+BIRD (TODO : citer) (The Biologically Interesting Molecule Reference Dictionary) est une une base de données regroupant de petits polymères antibiotiques et inhibiteurs.
+Les deux bases ont pour avantage de contenir des entrées permettant la différentiation des NRP du reste.
+Cela nous facilite la tâche en nous assurant du status des molécules que nous ajoutons à Norine.
+
+\paragraph{}Une fois les molécules récupérées, nous utilisons s2m pour produire l'annotation monomérique nécessaire à l'entrée d'un NRP en base.
+Cependant, en ajoutant automatiquement de nombreuses nouvelles molécules automatiquement, nous ne respectons plus la charte de qualité que s'étaient fixés les créateurs de Norine.
+C'est pourquoi chacune des données importées automatiquement porte un status nouveau appelé ``automated''.
+Lorsqu'un utilisateur recherchera des peptides sur l'interface web, les annotation manuelles seront plus mises en avant que celles générées automatiquement.
+Les pages de ces nouveaux peptides seront également marquées avec la provenance des données et un lien vers celle-ci apparaîtra.
+
+\paragraph{}Par ce script, 471 nouvelles annotations NRP vont être ajoutées à la prochaine version de Norine (+40\% de peptides).
+Une troisième partie de script est en cours d'intégration afin d'indexer les données issues de ClustScan database.
+Ce travail a été effectué en collaboration forte avec Juraj Michalik lorsqu'il était en contrat d'ingénieur au sein de notre équipe.
+
+
+
+\subsubsection{Fouille en bases de données}
+
+\paragraph{}La dernière méthode de mise à jour de Norine est la plus exploratoire.
+L'idée est de scanner d'immenses bases de données à la recherche de peptides dont la structure monomérique nous fait penser à un NRP.
+Ces structures seront générées par s2m à partir des SMILES présents dans cette base.
+L'optimisation effectuée sur le temps de calcul de s2m permet de passer à l'échelle et de scanner des dizaines de milliers de molécules.
+Sans aucune modification de s2m, nous sommes capable de charger et d'analyser environ 250 molécules par minute.
+En désactivant la recherche light pour tous les peptides qui n'ont pas une couverture suffisante, il est possible d'annoter 3 fois plus de structures dans le même temps.
+
+\paragraph{}Pour effectuer un premier test, nous avons choisi d'extraire de PubChem toutes les molécules qui répondent à la requête ``peptide''.
+Ce premier filtre limite le nombre d'entrées que nous avons à évaluer lors d'un premier test.
+Au total c'est 1~626~461 composés qui ont été récupérés.
+Les annotations de ces peptides par s2m on été faites en plus de 36 heures sur une seule machine.
+
+Une fois les annotations obtenues, nous cherchons à séparer les NRP du reste des molécules en utilisant plusieurs critères de filtration.
+Obtenir un bon taux de couverture lors du passage de s2m sera notre premier critère.
+Pour commencer, soyons très exigeants et réclamons de n'obtenir que les peptides 100\% découverts.
+Nous obtenons 12830 peptides.
+
+En regardant rapidement, on s'apperçoit que de nombreuses molécules sont constituées de seulement un ou deux monomères.
+Ajoutons un filtre de nombre de monomères minimal.
+Dans les statistique de Norine, la plupart des peptides possédent au moins 7 monomères.
+Filtrons donc toutes les annotations de moins de 7 monomères.
+Nous obtenons désormais 5342 peptides.
+
+Enfin, les NRP sont noyés au milieu de nombreuses protéines classiques.
+Rappellons que les protéines classiques sont constituées uniquement de 20 acides aminiés différents.
+Leur voie de synthèse n'effectue que des assemblages linéaires.
+En filtrant tous les peptides qui ne contiennent que des acides aminés protéinogènes ainsi que ceux qui sont linéaires, nous devrions augmenter la densité de NRP dans notre sortie.
+Nous ajoutons comme filtre l'impossibilité d'être linéaire (nombre de liaisons suppérieurs ou égal à nombre de noeuds) et l'obligation de posséder au moins deux monomères ne faisant pas partie des 20 de base.
+Finalement nous obtenons 1097 peptides.
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=450px]{Figures/contributions/didemnin_B.png}
+    \caption{\label{didemin}À gauche une des sorties après processus de filtration et à droite le NRP corespondant dans la base Norine.}
+  \end{center}
+\end{figure}
+
+\paragraph{}Bien évidemment, ces 1097 structures ne sont pas toutes des peptides non ribosomiques.
+Les protéines classiques sont modifiées par de nombreuses enzymes qui permettent parfois la cyclisation et la transformation de monomères.
+Ces protéines peuvent être modifiées au point de les faire ressembler à des NRP.
+Nous ne pouvons donc pas être certains que les molécules rescapées du processus de filtration soient bien NRP.
+Cependant un bon indice de la qualité de la méthode est que nous retrouvons à l'aveugle des NRP de Norine.
+Nous avons par exemple retrouvé le ``didemnin B'' (figure \ref{didemin}).
+En effectuant une recherche par structure depuis l'interface de Norine, nous avons retrouvé ce NRP.
+Quelques exemples n'étant pas des preuves, il faudra revenir sur ces données afin les valider manuellement.
+C'est à nouveau un très long travail de bioanalyse qui viendra compléter les données de Norine.
 
 
 
