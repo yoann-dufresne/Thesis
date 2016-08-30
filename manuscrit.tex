@@ -1359,7 +1359,7 @@ on peut avoir plusieurs chaînes représentant le même motif mais avec des ordr
 indexation sera donc la phase de recherche d'une chaîne pour représenter chaque motif d'intérêt en essayant de minimiser le temps
 que prendra la recherche de cette chaîne. Pour la recherche de monomères dans
 des peptides non ribosomiques, la phase d'indexation revient donc à choisir, pour chaque monomère, l'ordre dans lequel nous allons
-rechercher les noeuds du graphe le représentant. Ainsi on peut voir que quelque soit la chaîne représentant le graphe, le même
+rechercher les noeuds du graphe le représentant. Ainsi, on peut voir que quelque soit la chaîne représentant le graphe, le même
 motif sera toujours recherché. La seule différence sera la rapidité d'exécution de la recherche. Les deux sections suivantes
 s'attarderont à la recherche de chaînes performantes (ie les plus rapide) lors la recherche d'un motif.
 
@@ -1371,12 +1371,12 @@ s'attarderont à la recherche de chaînes performantes (ie les plus rapide) lors
   \caption{\label{chaine_fail}Deux exemple de chaîne pour un motif simple}
 \end{figure}
 
-\paragraph{}Une bonne chaîne est donc une chaîne rapide ; mais a quoi ressemble une telle chaîne ? Déterminons quel(s) critère(s)
-simple(s) nous permettent de supposer qu'une chaîne est bonne. Avec ce ou ces critères nous pourrons ensuite déterminer un
+\paragraph{}Une bonne chaîne est donc une chaîne rapide ; mais à quoi ressemble une telle chaîne ? Déterminons quel(s) critère(s)
+simple(s) nous permettent de supposer qu'une chaîne est bonne. Avec ce ou ces critères, nous pourrons ensuite déterminer un
 moyen d'ordonner les noeuds de manière gloutonne. Partons de l'exemple présenté sur la figure \ref{chaine_fail}. A gauche est
 dessiné un motif simple suivi de deux chaînes pouvant le représenter (lecture de l'ordre des chaînes de gauche à droite). Pour
 la première chaîne, en partant du motif ne contenant qu'un A, on obtiendra 3 isomorphismes. En étendant ces chaînes à deux A
-voisins, on conserve toujours trois isomorphismes puis deux en ajoutant B et enfin un seul avec le dernier A. Au total on aura
+voisins, on conserve toujours trois isomorphismes puis deux en ajoutant B et enfin un seul avec le dernier A. Au total, on aura
 étendu 9 isomorphismes durant la recherche. En regardant maintenant la seconde chaîne, on se rend compte que le nombre de ces
 isomorphismes intermédiaires est bien plus faible grâce à la sélectivité du B recherché en tout premier (5 isomorphismes
 intermédiaires sont étendus). La différence décisive entre les deux chaînes est donc le moment où le noeud avec un label sélectif
@@ -1392,14 +1392,14 @@ est plus sélectif qu'un autre à partir du moment où sa fréquence d'apparitio
   indexé ainsi que les fréquences d'apparition de chacun de ses noeuds dans la base d'apprentissage}
 \end{figure}
 
-\paragraph{}Essayons d'estimer ces fréquences afin d'éviter les cas qui pourraient être critiques. Pour ce faire nous pouvons
+\paragraph{}Essayons d'estimer ces fréquences afin d'éviter les cas qui pourraient être critiques. Pour ce faire, nous pouvons
 constituer un ensemble représentatif du type de molécules que nous allons chercher.
 Dans notre cas, nous cherchons à étudier des peptides non ribosomiques. La base d'apprentissage
 des fréquences sera donc constituée de NRP dont la composition atomique est déjà connue. Le raisonnement est extensible à
 n'importe quel type de molécules et le fait d'avoir un jeu d'apprentissage non représentatif n'influencera pas le résultat mais
 uniquement le temps de calcul. Une fois cette base créée, nous pouvons estimer les fréquences d'apparition de chacun des labels
 présents dans les monomères en effectuant une recherche exhaustive (Figure \ref{apprentissage}). L'algorithme glouton naïf qui
-vient tout de suite en tête est de choisir un a un les noeuds que l'on souhaite ajouter au motif en choisissant toujours celui
+vient tout de suite en tête est de choisir un à un les noeuds que l'on souhaite ajouter au motif en choisissant toujours celui
 avec le label le moins fréquent.
 
 \paragraph{}
@@ -1430,13 +1430,13 @@ avec le label le moins fréquent.
 un ensemble des voisinages. L'algorithme glouton naïf est donc linéaire par rapport à la taille du graphe. À l'exécution, la
 création de chaînes par cette méthode est instantanée (<< 0.1s). Toutefois, rien ne garantit la qualité des chaînes obtenues.
 Prenons l'exemple de la figure \ref{apprentissage}. Sur cet exemple, le motif à indexer est a-b-d. Les comptages des différents
-labels nécessaire sont également présent sur cette même figure. La chaîne qui sera générée commence forcément par le noeud
+labels nécessaire sont également présents sur cette même figure. La chaîne qui sera générée commence forcément par le noeud
 labellé $a$ (fréquence la plus faible dans le jeu d'apprentissage) suivi de $b$ puis enfin $d$ (Le tout est résumé sur la figure
 \ref{glouton}).
 
 \begin{figure}
   \includegraphics[width=300px]{Figures/s2m/indexation/glouton.png}
-  \caption{\label{glouton}En vert le chemin prit par l'algorithme glouton pour générer la chaîne du motif a-b-d}
+  \caption{\label{glouton}En vert le chemin pris par l'algorithme glouton pour générer la chaîne du motif a-b-d}
 \end{figure}
 
 \subsubsection{Indexation Markovienne}
@@ -1445,12 +1445,12 @@ labellé $a$ (fréquence la plus faible dans le jeu d'apprentissage) suivi de $b
 
 \paragraph{}En utilisant la méthode gloutonne, nous obtenons rapidement les chaînes de tous les motifs que nous
 souhaitons indexer. Cependant, dans certains cas, une chaîne générée de cette manière peut ne pas du tout être optimale.
-Dès le tout début de la chaîne il est possible que l'algorithme fasse des choix optimaux localement qui vont ensuite mener à un
+Dès le tout début de la chaîne, il est possible que l'algorithme fasse des choix optimaux localement qui vont ensuite mener à un
 enlisement global. Nous allons nous appuyer sur les figures \ref{apprentissage} et \ref{glouton} pour monter que même sur un si
-petit exemple l'algorithme glouton n'a pas choisi le meilleur chemin.
+petit exemple, l'algorithme glouton n'a pas choisi le meilleur chemin.
 
 \paragraph{}Afin d'évaluer la qualité d'une chaîne, nous allons calculer son temps d'exécution sur notre base d'apprentissage.
-Partons de la définition d'une chaîne : Une chaîne est composée d'une succession de noeuds. Ces noeuds vont lors de l'isomorphisme
+Partons de la définition d'une chaîne : une chaîne est composée d'une succession de noeuds. Ces noeuds vont, lors de l'isomorphisme,
 être recherchés dans l'ordre. Pour rechercher une chaîne de taille $n$ ($c_n$), il faut donc $n$ extensions successives. On
 peut donc écrire que le temps de recherche d'une chaîne est le temps cumulé de recherche de ses extensions :
 
@@ -1497,10 +1497,10 @@ labels (ce temps peut être considéré constant)
   \caption{\label{app_compt}Base d'apprentissage accompagnée des comptages de tous les $n_{p_{n}}$}
 \end{figure}
 
-\paragraph{}En utilisant les comptages fait sur la base d'apprentissage (Voir \ref{app_compt}) ainsi que le calcul de l'arrité
+\paragraph{}En utilisant les comptages faits sur la base d'apprentissage (Voir \ref{app_compt}) ainsi que le calcul de l'arité
 restante de chaque noeud à chaque étape, nous allons pouvoir estimer sur la base, un temps d'exécution de la recherche d'une
 chaîne. Ce temps est un coût exact de le recherche sur la base d'apprentissage. En normalisant cette valeur par le nombre de
-noeuds de la base nous pouvons obtenir le coût de recherche par noeud et ainsi pouvoir estimer le temps de calcul quelque soit
+noeuds de la base, nous pouvons obtenir le coût de recherche par noeud et ainsi pouvoir estimer le temps de calcul quelle que soit
 la taille de la ou les molécules à analyser.
 
 \begin{equation}
@@ -1542,7 +1542,7 @@ jusque $\delta$.
 \end{array}
 \]
 
-Naïvement, on peut appliquer la formule sur chacune des chaînes possible et trouver la chaîne optimale qui minimise la fonction de
+Naïvement, on peut appliquer la formule sur chacune des chaînes possibles et trouver la chaîne optimale qui minimise la fonction de
 coût. Développons l'exemple pour la chaîne $c_{\alpha}$.
 
 \[
@@ -1556,9 +1556,9 @@ coût. Développons l'exemple pour la chaîne $c_{\alpha}$.
 \end{array}
 \]
 
-\paragraph{}En appliquant cette formule sur toutes les chaînes on peut se rendre compte que certains de nos calculs sont inutiles.
+\paragraph{}En appliquant cette formule sur toutes les chaînes, on peut se rendre compte que certains de nos calculs sont inutiles.
 Prenons l'exemple des chaînes $c_{\alpha}$ et $c_{\beta}$. Le dernier calcul de la chaîne $c_{\beta}$ est inutile. Lors
-du calcul des deux chaînes, on aurait pu se rendre compte que l'on pouvais déjà décider de quelle chaîne était la meilleure à
+du calcul des deux chaînes, on aurait pu se rendre compte que l'on pouvait déjà décider de quelle chaîne était la meilleure à
 partir du résultat de la sous chaîne $a-b$. Ceci nous amène à transformer le calcul sous forme de programmation dynamique dont les
 formules de récurrence sont les suivantes.
 
@@ -1571,12 +1571,12 @@ formules de récurrence sont les suivantes.
 \end{equation}
 
 Où la fonction de minimisation s'applique sur l'ensemble des $p'_{n-1}$ et $p'_{n-1}$ est un motif connexe de taille $n-1$ inclus
-dans $p_n$. Pour la recherche de motif dans l'exemple on obtient le chemin $c_{\delta}$ minimisant le coût. On peut voir le
+dans $p_n$. Pour la recherche de motif dans l'exemple, on obtient le chemin $c_{\delta}$ minimisant le coût. On peut voir le
 détail de la recherche de ce motif sur la figure \ref{markov}.
 
 \begin{figure}
   \includegraphics[width=300px]{Figures/s2m/indexation/markov.png}
-  \caption{\label{markov}En vert le chemin prit par l'algorithme markovien pour générer la chaîne du motif a-b-d}
+  \caption{\label{markov}En vert, le chemin pris par l'algorithme markovien pour générer la chaîne du motif a-b-d}
 \end{figure}
 
 \paragraph{}Cette méthode exacte nous permet de garantir la qualité de nos chaînes sur la base d'apprentissage mais cela se paye
@@ -1586,13 +1586,13 @@ labels soit différent (C'est ce que nous avons essayer de faire pour simplifier
 
 Une chaîne (au sens ligne et pas chaîne comme défini ici) représente le motif le plus simple. Pour une chaîne de noeuds de taille 
 $n$, on peut trouver un motif de taille $n$ puis deux de taille $n-1$ puis 3 de taille $n-2$, ... Pour calculer le coût du motif
-de taille $n$ il nous faut calculer récursivement tous les motifs de taille inférieure. Dans le meilleur des cas la programmation
+de taille $n$, il nous faut calculer récursivement tous les motifs de taille inférieure. Dans le meilleur des cas la programmation
 dynamique sera donc de complexité de l'ordre de $n^2$.
 
-Le pire motif qui peut être défini est une clique. Dans le cas d'une clique de taille $n$ pour calculer le coût du motif il faudra
+Le pire motif qui peut être défini est une clique. Dans le cas d'une clique de taille $n$, pour calculer le coût du motif, il faudra
 calculer $n-1$ parmi $n$ valeurs puis $n-2$ parmi $n$, ... Dans ce cas, la complexité sera de l'ordre de $2^n$.
 
-La redondance des labels permet quant à elle de couper certaines branches lors de l'indexation et ainsi de diminue un peu
+La redondance des labels permet quant à elle de couper certaines branches lors de l'indexation et ainsi de diminuer un peu
 la complexité. Cependant, l'ordre de grandeur n'en est pas modifié.
 
 \begin{equation}
@@ -1607,7 +1607,7 @@ la complexité. Cependant, l'ordre de grandeur n'en est pas modifié.
 
 \paragraph{}Dans un exemple précédent (TODO : ref), nous avons montré que le début d'une chaîne est très critique pour le temps
 de recherche de celle-ci. L'idée est donc de générer la chaîne par un mélange des deux techniques précédentes. Les débuts de la 
-chaîne seront être recherchés en exact jusqu'à une taille $k$ définie à l'avance puis le reste des extensions se feront en
+chaîne seront recherchés en exact jusqu'à une taille $k$ définie à l'avance, puis le reste des extensions se feront en
 utilisant l'algorithme glouton. Cette découpe des chaînes en deux parties garantit une recherche très rapide d'un
 motif sur la base d'apprentissage tout en limitant fortement le temps de pré-calcul nécessaire pour la construction de l'index.
 
