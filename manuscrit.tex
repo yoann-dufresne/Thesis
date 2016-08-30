@@ -2561,7 +2561,7 @@ Pour les peptides, il existe également une recherche par sous graphe dont nous 
 Les pages centrale du site web sont donc logiquement les pages d'information correspondant à chaque NRP.
 Ces pages sont divisées en trois parties.
 En haut de la page se trouvent les informations générales comme le nom, l'identifiant ou la liste des activités connues de ce peptide.
-La masse moléculaire est également présente et est particuliairement utile en spectrométrie de masses.
+La masse moléculaire est également présente et est particulièrement utile en spectrométrie de masses.
 Cette première partie est purement factuelle et ne fait que reprendre les éléments basiques potentiellement présents dans d'autres bases.
 
 \paragraph{}La seconde partie de la page représente la plus grande contribution de Norine.
@@ -2574,7 +2574,7 @@ Sur les pages des monomères sont présentes les structures atomiques, une image
 Dans le meilleur des cas, la structure monomérique est accompagnée d'un SMILES et depuis peu, d'un dessin de la structure atomique dont les monomères ont été colorés par s2m.
 
 \paragraph{}Enfin, la dernière partie de la page est consacrée aux références et liens.
-Ce sont toutes les informations qui permettrons de replacer le peptide dans son contexte et d'en savoir plus au trvers d'autres bases de données.
+Ce sont toutes les informations qui permettrons de replacer le peptide dans son contexte et d'en savoir plus au travers d'autres bases de données.
 Les organismes producteurs sont détaillés à cet endroit et un lien vers leur classification NCBI est disponible.
 C'est également ici que sont répertoriés les articles de recherche qui ont permis la découverte du peptide et l'établissement de son statut non ribosomique.
 Enfin, lorsqu'ils sont référencés, sont présent des liens vers d'autres bases de données.
@@ -2584,13 +2584,13 @@ Actuellement, pour apprendre plus de détail sur les structures chimiques des mo
 \subsubsection{Les méthodes de recherche}
 
 \paragraph{}Comme dans toutes les autres bases de données, il est possible de rechercher un peptide via un grand nombre de critères.
-En idiquant le nom ou l'identifiant, un peptide unique pourra être trouvé.
-En indiquant un nom partiel ou tout autre critière (avec la possibilité de combiner les critères), une liste de peptide sera retournée.
+En indiquant le nom ou l'identifiant, un peptide unique pourra être trouvé.
+En indiquant un nom partiel ou tout autre critère (avec la possibilité de combiner les critères), une liste de peptide sera retournée.
 Cependant, Norine propose également un autre type de recherche très intéressant pour notre type de données.
 Il est possible de rechercher les peptides par structures monomériques \cite{caboche_structural_2009}.
 Plus précisément, il est possible des créer des expressions régulières de structures pour les rechercher dans la base.
 Prenons un exemple.
-Si nous souhaitons effectuer des recherches de peptides qui contiennent une Valine liée à n'impote quel variant d'une Cystéine ou Leucine, il nous faut écrire la requête : Val,[Cys*|Leu*]@1@0.
+Si nous souhaitons effectuer des recherches de peptides qui contiennent une Valine liée à n'importe quel variant d'une Cystéine ou Leucine, il nous faut écrire la requête : Val,[Cys*|Leu*]@1@0.
 Ce format est un format de graphe.
 Les noms séparés par des virgules représentent les noeuds (un noeud Val et un noeud Cys* ou Leu*) et les valeurs séparées par des @, les arêtes.
 Pour résumer cette requête, nous avons :
@@ -2601,11 +2601,11 @@ Pour résumer cette requête, nous avons :
  \item Un lien sortant du deuxième noeud (noeud 1) pour joindre le noeud 0 (la @0)
 \end{itemize}
 
-\paragraph{TODO : Shéma résultats requête}
+\paragraph{TODO : Schéma résultats requête}
 
 \paragraph{}Une fois la requête formatée, il est possible d'exécuter deux algorithmes différents.
 L'un des deux est un isomorphisme de sous graphe.
-Nnous avons déjà longement abordé le problème d'isomorphisme durant le second chapitre (TODO ref).
+Nous avons déjà longuement abordé le problème d'isomorphisme durant le second chapitre (TODO ref).
 La requête est croisée avec toutes les structures monomériques présentes en base et retourne tous les peptides dont la structure monomérique contient le motif recherché.
 
 \paragraph{}Le second algorithme ne prend pas en compte la structure mais uniquement la composition.
@@ -2669,7 +2669,7 @@ Tout peptide soumis par un utilisateur sera ensuite envoyé à l'équipe de cura
 Pour l'instant, cette équipe de curateur est composée de Maude Pupin, Valérie Leclère, Areski Flissi et moi même.
 
 \paragraph{}La mise à disposition de cette interface est une véritable plus-value pour la base de donnée.
-Elle permet de donner du poid à la communauté en leur délégant une part du travail d'archivage des NRP.
+Elle permet de donner du poids à la communauté en leur délégant une part du travail d'archivage des NRP.
 À l'été 2015, nous avons organisé un workshop autour de la thématique NRPS/PKS durant lequel nous avons incité les membres de la communauté à partager leur travail au travers de MyNorine.
 Quelques peptides ont été soumis mais il est encore nécessaire de communiquer pour rendre récurrent ce partage d'informations pour chaque nouveau peptide découvert.
 
@@ -2763,8 +2763,8 @@ Par ce système nous incitons les contributeurs à ajouter le SMILES de leurs pe
 
 \paragraph{}Les Norine days, nous ont poussé à beaucoup travailler sur les données de Norine ainsi que sur des données d'autres bases.
 Cette exploration en profondeur nous a révélé plusieurs faits.
-Premiérement, les données de Norine sont vieillissantes.
-Par exemple en suivant des liens Pubchem, nous nous sommes apperçu qu'ils ne pointaient plus tous vers les les bonnes structures.
+Premièrement, les données de Norine sont vieillissantes.
+Par exemple en suivant des liens Pubchem, nous nous sommes aperçu qu'ils ne pointaient plus tous vers les les bonnes structures.
 Nous avons également mis à jour le fait que l'évolution de la taxonomie au cours des années, a rendue obsolète certaines classifications d'organismes dans Norine.
 Plusieurs autres détails ont également changé et nous font dire qu'une mise à niveau s'impose.
 Cette mise à niveau sera le premier point que nous aborderons dans cette section.
@@ -2773,7 +2773,7 @@ Cette mise à niveau sera le premier point que nous aborderons dans cette sectio
 Ces données sont en général bien structurées et pourraient facilement être indexées par Norine.
 
 \paragraph{}Enfin, il existe également de nombreuses molécules NRP présentes dans des bases de données généralistes.
-Nombre d'entre elles sont sans annoations monomériques.
+Nombre d'entre elles sont sans annotations monomériques.
 En utilisant s2m sur de très grandes bases telles que PubChem, nous essayerons d'obtenir des annotations monomériques afin d'extraire des candidats NRP.
 Ces molécules pourront ensuite être analysées manuellement pour les entrer ou non en base.
 
@@ -2782,7 +2782,7 @@ Ces molécules pourront ensuite être analysées manuellement pour les entrer ou
 
 \paragraph{}Nous allons ici parler du vieillissement des données de Norine.
 Il existe au sein de Norine, de nombreuses ``petites'' informations (qui ne remettent pas en cause la présence du peptide en base) qui sont obsolètes ou du moins imprécises.
-Nous pouvons regrouper le type d'information sous quatres catégories : Les liens externes rompus (liens vers PubChem et Uniprot), les taxonomies plus à jour, les molécules/organismes ayant changé de nom et les mises à jour de peptides par de nouvelles publications.
+Nous pouvons regrouper le type d'information sous quatre catégories : Les liens externes rompus (liens vers PubChem et Uniprot), les taxonomies plus à jour, les molécules/organismes ayant changé de nom et les mises à jour de peptides par de nouvelles publications.
 Analysons un à un chacun de ces cas.
 
 
@@ -2801,17 +2801,17 @@ De cette manière nous avons remis à jour plusieurs dizaines de liens.
 \paragraph{Remises à jour de la taxonomie}
 La taxonomie pose un peu plus de problème car elle évolue au cours du temps.
 La taxonomie du vivant a évolué au fur et à mesure des découvertes et des nouvelles méthodes de classification.
-Il n'y a aucun doute sur le fait qu'elle continura a évoluer rapidement.
+Il n'y a aucun doute sur le fait qu'elle continuera a évoluer rapidement.
 Au sein de Norine ce n'est pas une ressource critique mais il est bon de connaître les lignées d'espèces productrices de NRP pour pouvoir faire des rapprochements entre NRP/NRPS.
 Ces données de taxonomie peuvent être récupérées depuis le site ou l'API du NCBI.
 Le NCBI étant un organisme de référence, beaucoup de contributeurs maintiennent les classifications à jour.
-En effectuant réguliérement une recherche sur le NCBI de la taxonomie des espèces présente dans Norine, il est possible de maintenir les données suffisamment à jour.
+En effectuant régulièrement une recherche sur le NCBI de la taxonomie des espèces présente dans Norine, il est possible de maintenir les données suffisamment à jour.
 
 \paragraph{TODO : figures arbre des taxons}
 
 \paragraph{}Les données de taxonomie de Norine sont pour le moment maintenues comme des chaines de caractère au sein de la table des organismes.
 Cette structure est très redondante et ne permet pas des mises à jour efficaces.
-Nous avons profité de la création du script de mises à jour pour revoir complétement notre facçon de stocker les taxons.
+Nous avons profité de la création du script de mises à jour pour revoir complètement notre façon de stocker les taxons.
 La chaine de caractère présente dans l'organisme est remplacée par un identifiant dans la nouvelle table des taxons de Norine.
 Cette table est organisée comme un arbre pour permettre une mise à jour taxon par taxon sans avoir besoin de modifier des dizaines d'entrés.
 La construction de toute la chaine taxonomique d'une espèce prend désormais beaucoup plus de temps (beaucoup plus de requêtes) mais ce problème est facilement contournable par la création de vues sql.
@@ -2822,18 +2822,18 @@ Par ce script c'est l'ensemble des données de Norine qui ont été remises à j
 Les deux scripts de mise à jour dont nous venons de parler ne peuvent pas fonctionner dans 100\% des cas.
 Depuis leur publication (parfois il y a très longtemps), certaines molécules et certains organismes ont changé de nom.
 Heureusement, à la fois le NCBI et PubChem gardent en mémoire une liste conséquente de synonymes permettant de les retrouver.
-Cependant, nos scripts ne trouvent pas toujours de synonymes ou certains synonymes ne correspondent pas vraiment, ce qui nous empèche d'effectuer les mises à jour.
+Cependant, nos scripts ne trouvent pas toujours de synonymes ou certains synonymes ne correspondent pas vraiment, ce qui nous empêche d'effectuer les mises à jour.
 Dans ce cas, nous levons des alertes qui devront être analysées à la main (probablement durant des Norine days).
 
 
 \paragraph{Publications mises à jour}
-En analysant les annotations issues de s2m, nous nous sommes parfois aperçu de l'existance de nouveaux articles à propos des molécules étudiées.
+En analysant les annotations issues de s2m, nous nous sommes parfois aperçu de l'existence de nouveaux articles à propos des molécules étudiées.
 Certains articles nous permettaient alors de remettre à jour l'annotation présente dans Norine, de créer entrées pour des variants nouvellement connus et parfois d'infirmer la production non ribosomique du peptide.
 Ce dernier cas est très problématique car pour le moment, il n'a pas été prévu dans Norine de retirer les informations d'une quelconque manière.
 Il est toujours possible de retirer les informations directement en sql mais cette solution ne permet pas aux utilisateurs de comprendre la disparition de la molécule.
-Après concertation sur la nomenclature et les procédure d'évolution des données nous nous sommes mis d'accord pour ajouter un status ``deprecated'' au sein de la base.
-Pour le moment il existe les status ``curated'' et ``putative'' associé à chauqe peptide.
-L'ajout de ce nouveau status permettra de regrouper tous les peptides qui ont un jour été considéré NRP mais qui depuis ont été prouvés produits par d'autres voies de synthèse.
+Après concertation sur la nomenclature et les procédure d'évolution des données nous nous sommes mis d'accord pour ajouter un statut ``deprecated'' au sein de la base.
+Pour le moment il existe les statuts ``curated'' et ``putative'' associé à chaque peptide.
+L'ajout de ce nouveau statuts permettra de regrouper tous les peptides qui ont un jour été considéré NRP mais qui depuis ont été prouvés produits par d'autres voies de synthèse.
 Encore une fois, cette mise à jour n'est pas automatisable et nécessite un traitement particulier.
 La procédure devait un jour être ajoutée à myNorine.
 
@@ -2845,11 +2845,11 @@ Afin d'essayer de combler le retard d'annotation de ces peptides, nous avons dé
 Encore une fois à partir d'un script nous analysons et ajoutons les NRP présents au sein des bases MiBIG (voir \ref{bdd_nrp}) et BIRD.
 BIRD (TODO : citer) (The Biologically Interesting Molecule Reference Dictionary) est une une base de données regroupant de petits polymères antibiotiques et inhibiteurs.
 Les deux bases ont pour avantage de contenir des entrées permettant la différentiation des NRP du reste.
-Cela nous facilite la tâche en nous assurant du status des molécules que nous ajoutons à Norine.
+Cela nous facilite la tâche en nous assurant du statut des molécules que nous ajoutons à Norine.
 
 \paragraph{}Une fois les molécules récupérées, nous utilisons s2m pour produire l'annotation monomérique nécessaire à l'entrée d'un NRP en base.
 Cependant, en ajoutant automatiquement de nombreuses nouvelles molécules automatiquement, nous ne respectons plus la charte de qualité que s'étaient fixés les créateurs de Norine.
-C'est pourquoi chacune des données importées automatiquement porte un status nouveau appelé ``automated''.
+C'est pourquoi chacune des données importées automatiquement porte un statut nouveau appelé ``automated''.
 Lorsqu'un utilisateur recherchera des peptides sur l'interface web, les annotation manuelles seront plus mises en avant que celles générées automatiquement.
 Les pages de ces nouveaux peptides seront également marquées avec la provenance des données et un lien vers celle-ci apparaîtra.
 
@@ -2878,23 +2878,23 @@ Obtenir un bon taux de couverture lors du passage de s2m sera notre premier crit
 Pour commencer, soyons très exigeants et réclamons de n'obtenir que les peptides 100\% découverts.
 Nous obtenons 12830 peptides.
 
-En regardant rapidement, on s'apperçoit que de nombreuses molécules sont constituées de seulement un ou deux monomères.
+En regardant rapidement, on s'aperçoit que de nombreuses molécules sont constituées de seulement un ou deux monomères.
 Ajoutons un filtre de nombre de monomères minimal.
-Dans les statistique de Norine, la plupart des peptides possédent au moins 7 monomères.
+Dans les statistique de Norine, la plupart des peptides possèdent au moins 7 monomères.
 Filtrons donc toutes les annotations de moins de 7 monomères.
 Nous obtenons désormais 5342 peptides.
 
 Enfin, les NRP sont noyés au milieu de nombreuses protéines classiques.
-Rappellons que les protéines classiques sont constituées uniquement de 20 acides aminiés différents.
+Rappellons que les protéines classiques sont constituées uniquement de 20 acides aminés différents.
 Leur voie de synthèse n'effectue que des assemblages linéaires.
 En filtrant tous les peptides qui ne contiennent que des acides aminés protéinogènes ainsi que ceux qui sont linéaires, nous devrions augmenter la densité de NRP dans notre sortie.
-Nous ajoutons comme filtre l'impossibilité d'être linéaire (nombre de liaisons suppérieurs ou égal à nombre de noeuds) et l'obligation de posséder au moins deux monomères ne faisant pas partie des 20 de base.
+Nous ajoutons comme filtre l'impossibilité d'être linéaire (nombre de liaisons supérieurs ou égal à nombre de noeuds) et l'obligation de posséder au moins deux monomères ne faisant pas partie des 20 de base.
 Finalement nous obtenons 1097 peptides.
 
 \begin{figure}[h!]
   \begin{center}
     \includegraphics[width=450px]{Figures/contributions/didemnin_B.png}
-    \caption{\label{didemin}À gauche une des sorties après processus de filtration et à droite le NRP corespondant dans la base Norine.}
+    \caption{\label{didemin}À gauche une des sorties après processus de filtration et à droite le NRP correspondant dans la base Norine.}
   \end{center}
 \end{figure}
 
