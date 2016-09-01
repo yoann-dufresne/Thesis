@@ -3094,7 +3094,7 @@ Au total son indice de Jaccard vaut $5 / 8$, ce qui fait une distance de $1 - 5/
 
 \subsubsection{Tester le modèle}
 
-\paragraph{}Afin de tester les modèles nous avons choisi de prendre des peptides réels présents dans Norine.
+\paragraph{}Afin de tester le modèle nous avons choisi de prendre des peptides réels présents dans Norine.
 A partir de ces peptides, nous espérons retrouver leur vrai cluster de gène au sein d'un ensemble de clusters.
 Pour cela, il nous est nécessaire de constituer une base de données test.
 Malheureusement, la constitution d'une telle base est très difficile.
@@ -3108,15 +3108,15 @@ Premièrement, les données téléchargées ne sont pas normalisées.
 Par exemple, les noms des monomères assemblés par un NRPS sont parfois complets et parfois résumés à quelques lettres.
 Ces mêmes monomères peuvent également être présents sous plusieurs noms sans avoir aucun lien entre eux.
 Enfin, les strructures de données (fichiers json) ne sont pas non plus tous structurés de la même manière.
-Résultat, plusieurs données ont dues être écartées car trop contraignantes pour des récupération automatiques.
+Résultat, de nombreuses données ont dues être écartées car trop contraignantes pour des récupération automatiques.
 Le second problème (le plus embétant) est que quasiement aucun des clusters de gènes restant n'a le NRP correspondant sur Norine.
 Les structures ne peuvent donc pas être controlées et confirmées.
-C'est à la suite de tout ces problèmes que nous avons choisi de changer de source de données pour des données moins fiables.
+C'est à la suite de tout ces problèmes que nous avons choisi de changer de source de données pour nous tourner vers des annotations moins fiables.
 
 \paragraph{}A l'aide de Kai Blin (chercheur de l'équipe de Tilmann Weber), nous avons utilisé antiSMASH pour générer des annotations de NRPS sur l'ensemble des génomes de bactéries présentes sur le NCBI.
-Ce second jeu de données est beaucoup plus abondant que le premier mais pose également beaucoup plus de problèmes.
+Ce second jeu de données est beaucoup plus abondant que le premier mais pose également beaucoup de problèmes.
 Il n'existe par exemple aucun lien entre les NRP de Norine et les génomes qui ont été analysés.
-Il faudrait manuellement faire les rapprochement pour avoir les bionomes NRP/NRPS.
+Il faut faire manuellement les rapprochement pour connaitre les bionomes NRP/NRPS.
 De plus, les annotations de antiSMASH sont des prédictions et n'ont été vérifiées par personne.
 Par exemple, de nombreux petits clusters de gènes ne contiennent qu'un ou deux domaines A et il est difficile voir impossible de savoir si ils sont artefactuels ou mal annotés.
 
@@ -3126,23 +3126,23 @@ Les clusters retrouvés sont quant à eux noyés au milieu de clusters équivale
 Il est très difficile de de donner les causes précises de ces résultats mais ils sont sans doute un cumul de beaucoup de facteurs.
 Premiérement, le fait de ne pas connaître les ``vrais'' clusters par avance ne nous permet pas de faire la différence entre un cluster non retrouvé et un cluster innexistant dans les données d'origine.
 Secondement, les clusters annotés que nous utilisons sont très bruités à cause des prédictions.
-Ce bruit nuit forcément à la qualité des fingerprints et donc augmente les distances artificiellement.
+Ce bruit nuit forcément à la qualité des fingerprints et augmente les distances artificiellement.
 Troisiémement, le modèle que nous avons développé ne prend en compte que les domaines A.
-Nous savons qu'une partie de l'information est portée par les autres domaines et c'est un critère qu'il faut intégrer pour mieux rendre compte de la réalité.
+Nous savons qu'une partie de l'information est portée par les autres domaines et c'est un critère qu'il nous faudra intégrer pour mieux rendre compte de la réalité.
 Enfin, la distance de Jaccard n'est pas forcément très adaptée au problème et il nous faudra tenter des alternatives issues des systèmes de recommandation classique.
 
 
 \subsubsection{Perspectives}
 
-\paragraph{}Ce travail est un travail en cours et les résultats ici présent ne sont très préliminaires.
-Malgré toutes les critiques que nous venons de porter au modèle et aux données, il est très encourageant de retrouver quelques résultats positifs lors des tests.
-Pour pouvoir continuer ce travail, il nous sera nécessaire de commencer par contituer une base de tests propre.
+\paragraph{}Ce travail est un travail en cours et les résultats ici présent sont très préliminaires.
+Malgré les critiques que nous venons de porter au modèle et aux données, il est très encourageant de retrouver quelques résultats positifs lors des tests.
+Pour pouvoir continuer ce travail, il nous sera nécessaire de commencer par la constitution d'une base de tests propre.
 En effet, sans ces tests nous ne pourrons jamais déterminer avec précision la qualité des algorithmes développés.
-Nous sommes actuellement en train de réfléchir à des moyens de constituer ce jeu de données qui pourrait être d'une grande valeur pour de nombreuses personnes.
-La solution que nous commençons à faire émerger s'appuie sur plusieurs bases de données existantes.
+Nous sommes actuellement en train de réfléchir à des moyens de constituer ce jeu de données qui pourrait être d'une grande valeur pour de nombreuses tâches.
+La solution qui commence à émerger s'appuie sur plusieurs bases de données existantes.
 En utilisant à la fois Norine pour les NRP, MIBiG pour les annotations NRPS et le NCBI pour les séquences ADN, nous pouvons créer tout un système d'interconnexion donnant rapidement accès à toutes les informations.
-De notre côté nous commençons un long travail de recensement de NRPS à mettre en relation avec les peptides de Norine.
-En soumettant sur MIBiG les annotations NRPS trouvées et en concrétisant le lien depuis les pages des peptides, il nous est possible de démarer ce jeu de données.
+De notre côté nous commençons un long travail de recensement de NRPS correspondants aux peptides de Norine.
+En soumettant sur MIBiG les annotations NRPS trouvées et en concrétisant le lien depuis les pages des peptides, il nous est possible de démarrer ce jeu de données.
 
 
 \bibliography{these}
