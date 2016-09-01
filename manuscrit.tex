@@ -532,6 +532,7 @@ Les auteurs des logiciels ont tiré parti de ces zones en créant des HMM pour r
 Ces logiciels sont extrêmement rapides pour les recherches grâce à l'utilisation d'un faible nombre d'archétypes.
 
 
+\label{antismash}
 %· antiSMASH: rapid identification, annotation and analysis of secondary metabolite biosynthesis gene clusters in bacterial and fungal genome sequences
 %· antiSMASH 3.0-a comprehensive resource for the genome mining of biosynthetic gene clusters
 \paragraph{antiSMASH, le pipline pour l'identification de métabolites secondaires}
@@ -2922,11 +2923,10 @@ Dans notre cas le but est de faire produire en masse par une bactérie, des NRP 
 
 \paragraph{}Cette section va parler de la suite du travail présenté précédemment.
 L'annotation NRP n'est pas une fin en soit mais une donnée précieuse pour comprendre l'assemblage moléculaire et de fait, les voies de synthèse.
-Le grâal de la biologie de synthèse des NRP est de savoir comment produire nos propres assemblages monomériques en manipulant les gènes NRPS.
+Le grâal de la biologie de synthèse appliquée aux NRP est de savoir comment produire nos propres assemblages monomériques en manipulant les gènes NRPS.
 Comme nous le verrons par la suite, cette question est beaucoup trop large pour l'avancée des connaissances actuelles.
-Notre première étape sera de mettre en relation les NRP avec les clusters de géne qui les produisent.
-Cette information double sera très utile par la suite pour tout modèle d'apprentissage qui souhaiterait designer de nouvelles molécules.
-L'archivage de ces binômes n'étant pour le moment pas fait, nous proposerons d'utiliser Norine pour référencer les informations de production.
+Notre première étape sera de mettre en relation les NRP avec les clusters de gène capables de produire des peptides similaires.
+Cette information sera très utile pour aider au designe de nouveaux NRP à partir de briques déjà existantes.
 
 
 \subsection{L'existant}
@@ -3007,6 +3007,142 @@ Cependant, quelle que soit la technique, rares sont les productions de NRP qui s
 Comme le dit si bien la revue, nous sommes pour le moment très bon en création de nombreux ``mauvais'' NRP.
 En effet, les NRP créés sont soit très faiblement actifs soit très faiblement produits à cause des modifications.
 Il reste encore beaucoup de chemin à parcourir pour un jour pouvoir produire des antibiotiques synthétiques issus de la pensée humaine.
+
+
+\subsection{Aider les techniques de recombinaisons modulaires}
+
+\paragraph{}Durant ma seconde année de thèse, je suis allé séjourner un mois au Danemark dans l'équipe dirigée Tilmann Weber afin de découvrir réciproquement nos travaux.
+Son équipe a pour principale activité la découverte de nouveaux métabolites secondaires ainsi que la création d'outils dédiés à ces découvertes.
+C'est cette équipe qui a créé, maintient et met à jour le logiciel antiSMASH (voir chapitre 1 section \ref{antismash}).
+Pour rappel, antiSMASH est un logiciel qui à partir d'un génome génère des annotations pour la découverte de métabolites secondaires.
+C'est la découverte de NRP en particulier qui motiva mon voyage.
+
+\paragraph{}Mon objectif en allant là bas était de préparer la création d'un outil qui effectue l'opération inverse de antiSMASH, c'est à dire remonter d'un peptide vers son cluster de gène producteur.
+L'outil idéal (mais évidemment irréalisable) permettrait à partir d'un NRP de générer du code génétique capable de produire ce NRP.
+C'est dans cet optique que nous avons créé une première version d'un outil de recommandation de cluster.
+Cette section sera dédiée à l'explication des prémices de cet outil.
+
+
+\subsubsection{Mettre en relation NRP et gènes}
+
+\paragraph{}Toutes les techniques de modification de NRPS dont nous avons parlé durant l'introduction sont très prometteuses mais encore en tout début de développement.
+Pour le moment il n'existe pas de méthode de modification miracle mais uniquement des transformations au cas par cas.
+Pour contribuer aux avancées dans ce domaine, nous souhaitons créer un logiciel d'aide à la décision, permettant à partir d'un NRP souhaité, de trouver les clusters de gènes les plus proches.
+Nous espérons que parmis les diverses sorties se trouvera un cluster de gène ``facilement'' dérivable.
+
+\paragraph{}Le logiciel devra prendre un NRP en entrée et fourir une liste de clusters de gène en sortie.
+Pour commencer simplement, nous étudierons uniquement la présence ou absence de modules A dans la NRPS.
+A partir des différents modules NRPS et des monomères présents dans le NRP d'intérêt nous établierons une distance.
+Cette distance permettra d'ordonner les clusters les uns par rapport aux autres.
+Prenons l'exemple d'un peptide d'intérêt contenant une leucine et de deux NRPS identiques excepté pour un domaine A.
+Pour cet exemple, si l'un des deux clusters possède un domaine A incluant une leucine, le score de distance devra être plus faible que pour l'autre.
+
+\subsubsection{Recherche par fingerprint}
+
+\paragraph{}L'approche que nous avons utilisé est une approche par fingerprint.
+En informatique, les fingerprints sont des structures représentant des données par une réduction de celles-ci à certains de leurs caractéristiques essentielles.
+Dans notre cas, un fingerprint est un vecteur représentant la composition d'un NRP ou un NRPS.
+Dans le cas des NRP c'est la composition en monomères qui nous intéresse et dans le cas des NRPS la composition en domaines A.
+La composition peut être un simple compage de chacun des monomères, un comptage de tous les di-mères, de tous les tri-mères etc.
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=450px]{Figures/synthese/fingerprints.png}
+    \caption{\label{jaccard}Exemple de calcul de distance entre un monomère M et trois clusters de gènes $C_1$, $C_2$ et $C_3$.
+    Dans le tableau sont présents les différents fingerprints pour le monomère et les clusters accompagnés du calcul de la distance de Jaccard.}
+  \end{center}
+\end{figure}
+
+\paragraph{}Dans notre cas, le vecteur sera composé des comptages de monomères seuls et des comptages de di-mères (voir schéma \ref{jaccard}).
+Pour le NRP, il est très simple d'obtenur ce vecteur.
+Chaque monomère est compté indépendament puis chaque lien est compté comme un di-mère comportant les deux monomères liés.
+Un di-mère A-B est équivalent à un di-mère B-A.
+Pour les NRPS, nous ne connaissons pas tous les voisinages.
+La connaissance actuelle du fonctionnement des enzymes NRPS ne nous permet pas tout le temps de connaitre les emplacements exacts de cyclisation.
+Nous ne sommes pas non plus tout le temps capable de donner des règles générales d'assemblage des différents sous peptides créés par différents gènes NRPS.
+La première partie des compatges est facile à obtenir.
+En analysant les domaines A, il est possible de déterminer leur spécificité (Via par exemple NRPSPredictor) et ainsi d'augmenter la valeur de la case correspondant au monomère dans le vecteur.
+Pour ce qui est des di-mères, il faut analyser les gènes NRPS.
+Deux modules A dans deux gènes différents ne doivent pas générer de di-mères.
+Nous ajoutons uniquement des dimère pour deux modules A successifs trouvés dans un même gène.
+
+% Etude comparative de la distribution florale dans une portion des Alpes et du Jura
+
+\paragraph{}Une fois les vecteurs formés, il faut pouvoir comparer le fingerprint NRP aux fingerprints des clusters.
+Pour cela, nous avons choisi de comparer les figerprints NRPS un à un et de calculer une valeur de distance au NRP.
+Cette valeur de distance permettra de classer les clusters par proximité et de ainsi proposer les plus proche du NRP.
+Pour générer cette distance il est nécessaire de prendre en compte à la fois les présences communes entre deux fingerprints mais également les divergeances.
+Pour répondre à ce besoin, nous avons choisi d'utiliser une distance de Jaccard~\cite{jaccard_etude_1901}.
+La distance de jacard compare la présence de critères communs entre les deux vecteurs au nombre de critères totaux.
+Dans notre cas nous comparerons les monomères et di-mères communs à ceux divergeants.
+
+\begin{equation}
+  J(A,B) = 1 - \frac{A \cap B}{A \cup B}
+\end{equation}
+
+\paragraph{}Sur la figure \ref{jaccard}, on peut voir l'application de cette formule à trois clusters de gènes.
+Prenons l'exemple du cluster $C_1$.
+Ce cluster est composé de 3 domaines A chainés : Un rouge puis un vert et enfin un bleu.
+Le vecteur fingerprint représentant du cluster est composé de 5 valeurs non nulles.
+Ces valeurs correspondent aux comptages de chacun des domaines A et des différents di-mères de ces domaines.
+Ce vecteur diverge de celui correspondant au peptide par 1 vert et deux di-mères manquant.
+Au total son indice de Jaccard vaut $5 / 8$, ce qui fait une distance de $1 - 5/8 = 0.375$.
+
+
+
+
+
+\subsubsection{Tester le modèle}
+
+\paragraph{}Afin de tester les modèles nous avons choisi de prendre des peptides réels présents dans Norine.
+A partir de ces peptides, nous espérons retrouver leur vrai cluster de gène au sein d'un ensemble de clusters.
+Pour cela, il nous est nécessaire de constituer une base de données test.
+Malheureusement, la constitution d'une telle base est très difficile.
+Il existe très peu de sources de données mettant en relation des NRP constatés dans l'environnement avec des NRPS réels.
+Nous devons constituer cette base par nous même.
+
+\paragraph{}La première piste que nous avions envisagé était de récupérer des données NRPS sûres (analysées à la main) et de les mettre en relation avec les données NRP de Norine.
+Nous avons donc récupéré les données de gènes de MiBIG car la qualité des annotations nous intéressaient.
+Cette source de données a été doublement une mauvaise idée.
+Premièrement, les données téléchargées ne sont pas normalisées.
+Par exemple, les noms des monomères assemblés par un NRPS sont parfois complets et parfois résumés à quelques lettres.
+Ces mêmes monomères peuvent également être présents sous plusieurs noms sans avoir aucun lien entre eux.
+Enfin, les strructures de données (fichiers json) ne sont pas non plus tous structurés de la même manière.
+Résultat, plusieurs données ont dues être écartées car trop contraignantes pour des récupération automatiques.
+Le second problème (le plus embétant) est que quasiement aucun des clusters de gènes restant n'a le NRP correspondant sur Norine.
+Les structures ne peuvent donc pas être controlées et confirmées.
+C'est à la suite de tout ces problèmes que nous avons choisi de changer de source de données pour des données moins fiables.
+
+\paragraph{}A l'aide de Kai Blin (chercheur de l'équipe de Tilmann Weber), nous avons utilisé antiSMASH pour générer des annotations de NRPS sur l'ensemble des génomes de bactéries présentes sur le NCBI.
+Ce second jeu de données est beaucoup plus abondant que le premier mais pose également beaucoup plus de problèmes.
+Il n'existe par exemple aucun lien entre les NRP de Norine et les génomes qui ont été analysés.
+Il faudrait manuellement faire les rapprochement pour avoir les bionomes NRP/NRPS.
+De plus, les annotations de antiSMASH sont des prédictions et n'ont été vérifiées par personne.
+Par exemple, de nombreux petits clusters de gènes ne contiennent qu'un ou deux domaines A et il est difficile voir impossible de savoir si ils sont artefactuels ou mal annotés.
+
+\paragraph{}Après exécution, les résultats ne sont pour le moment pas très concluants.
+La technique permet de retrouver quelques clusters de peptides de Norine mais la majorité ne donne aucun résultat.
+Les clusters retrouvés sont quant à eux noyés au milieu de clusters équivalents en score.
+Il est très difficile de de donner les causes précises de ces résultats mais ils sont sans doute un cumul de beaucoup de facteurs.
+Premiérement, le fait de ne pas connaître les ``vrais'' clusters par avance ne nous permet pas de faire la différence entre un cluster non retrouvé et un cluster innexistant dans les données d'origine.
+Secondement, les clusters annotés que nous utilisons sont très bruités à cause des prédictions.
+Ce bruit nuit forcément à la qualité des fingerprints et donc augmente les distances artificiellement.
+Troisiémement, le modèle que nous avons développé ne prend en compte que les domaines A.
+Nous savons qu'une partie de l'information est portée par les autres domaines et c'est un critère qu'il faut intégrer pour mieux rendre compte de la réalité.
+Enfin, la distance de Jaccard n'est pas forcément très adaptée au problème et il nous faudra tenter des alternatives issues des systèmes de recommandation classique.
+
+
+\subsubsection{Perspectives}
+
+\paragraph{}Ce travail est un travail en cours et les résultats ici présent ne sont très préliminaires.
+Malgré toutes les critiques que nous venons de porter au modèle et aux données, il est très encourageant de retrouver quelques résultats positifs lors des tests.
+Pour pouvoir continuer ce travail, il nous sera nécessaire de commencer par contituer une base de tests propre.
+En effet, sans ces tests nous ne pourrons jamais déterminer avec précision la qualité des algorithmes développés.
+Nous sommes actuellement en train de réfléchir à des moyens de constituer ce jeu de données qui pourrait être d'une grande valeur pour de nombreuses personnes.
+La solution que nous commençons à faire émerger s'appuie sur plusieurs bases de données existantes.
+En utilisant à la fois Norine pour les NRP, MIBiG pour les annotations NRPS et le NCBI pour les séquences ADN, nous pouvons créer tout un système d'interconnexion donnant rapidement accès à toutes les informations.
+De notre côté nous commençons un long travail de recensement de NRPS à mettre en relation avec les peptides de Norine.
+En soumettant sur MIBiG les annotations NRPS trouvées et en concrétisant le lien depuis les pages des peptides, il nous est possible de démarer ce jeu de données.
 
 
 \bibliography{these}
