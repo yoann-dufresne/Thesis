@@ -2443,16 +2443,22 @@ Analysons ensemble plusieurs cas afin de comprendre les raisons de ces erreurs.
 \end{figure}
 
 \paragraph{}Beaucoup d'annotations fausses proviennent d'erreurs de structures atomiques pour les peptides.
-Prenons l'exemple de l'``enniatin I'' (voir figure \ref{s2m_enniati}).
+Prenons l'exemple de l'enniatin I (voir figure \ref{s2m_enniati}).
 L'annotation en sortie de s2m présente une couverture de 100\% mais un correctness de 66\%.
 En regardant les 3 listes de monomères, on peut s'apercevoir que l'annotation attendue comporte deux monomères nommés Hmp alors que le logiciel trouve deux 4Me-Hva.
 Les deux monomères se ressemblant et il est fort probable que, soit l'annotation monomérique, soit l'annotation atomique ait été mal entrée.
 Pour comprendre l'erreur, remontons les sources des données.
 Sur la page Norine de la molécule, nous trouvons un lien vers Pubchem pour nous permettre d'obtenir la structure atomique et un lien vers la publication qui nous permet d'obtenir la structure monomérique.
 
-\paragraph{TODO : Figure structures PubChem et publi}
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=450px]{Figures/s2m/results/enniatinI_corrections.png}
+    \caption{\label{enni_cor}Structures atomiques publiées de l'enniatin I.
+    Ces deux structures nous aident à déceler une erreur dans la structure atomique de l'enniatin I sur Norine.}
+  \end{center}
+\end{figure}
 
-\paragraph{}En regardant la molécule présente sur PubChem, nous pouvons constater que c'est effectivement la structure atomique qui a été utilisée pour le test.
+\paragraph{}En regardant la molécule présente sur PubChem (voir figure \ref{enni_cor}), nous pouvons constater que c'est effectivement la structure atomique qui a été utilisée pour le test.
 En lisant désormais la publication, on s'aperçoit que la structure monomérique correspond à ce qui est présent sur Norine.
 Accompagnant cette annotation monomérique est présent un schéma de la structure atomique venant confirmer la structure monomérique.
 Sans aucun doute, l'erreur provient des données issues de PubChem.
@@ -2465,11 +2471,17 @@ A priori le lien PubChem entré sur Norine n'est pas le bon et pointe vers un pe
 
 \label{dolastatin_p}
 
-\paragraph{TODO : Figure de la dolastatin 10}
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=450px]{Figures/s2m/results/dolastatin.png}
+    \caption{\label{dolas}Résultat de s2m pour la Dolastatin (peptide de Norine).
+    Une erreur de SMILES de monomère empêche une couverture totale du peptide.}
+  \end{center}
+\end{figure}
 
 \paragraph{}Lorsque le taux de couverture de l'annotation issue de s2m est inférieur à 100\%, par définition, au moins un monomère n'a pu être trouvé.
 Il est possible que ce monomère n'ait jamais été répertorié, que la structure atomique du peptide soit incorrecte ou que la structure d'un monomère le soit également.
-Dans le cas de l'annotation de la dolastatin, c'est une erreur de structure atomique qui s'est glissée dans la base Norine.
+Dans le cas de l'annotation de la dolastatin (voir figure \ref{dolas}), c'est une erreur de structure atomique qui s'est glissée dans la base Norine.
 Le monomère Dap qui est sensé être présent n'est pas reconnu car l'atome d'azote n'est pas placé au même endroit au sein du monomère seul et du monomère dans le peptide.
 En cherchant sur Norine on peut s'apercevoir qu'aucun autre peptide de la base ne comporte ce monomère, ce qui veut dire qu'il a été ajouté spécifiquement pour ce peptide.
 Donc, le changement de structure du monomère n'est probablement pas du à une modification de la molécule mais plutôt à une erreur d'annotation.
@@ -2478,11 +2490,17 @@ En parcourant l'article qui publia le peptide et la structure atomique présente
 
 \subsubsection{Erreurs d'annotations}
 
-\paragraph{TODO : Figure de la fengycine A (ci.inria)}
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=450px]{Figures/s2m/results/fengycin.png}
+    \caption{\label{fengycin}Résultat de s2m pour la Fengycin (peptide de Norine).
+    Une erreur d'annotation entrée dans Norine réduit la correctness alors que s2m trouve la bonne solution.}
+  \end{center}
+\end{figure}
 
 \paragraph{}Il arrive parfois que des molécules soient trompeuses.
 En entrant à la main les annotations, il est possible de confondre un monomère avec un de ses dérivés proches.
-C'est ce qui est arrivé avec la fengycine A.
+C'est ce qui est arrivé avec la fengycine A (voir figure \ref{fengycin}).
 L'annotation effectuée par s2m détecte un monomère Gln alors que l'annotation présente dans Norine détecte un Glu.
 En effectuant à nouveau toutes les opérations de vérification de la structure atomique et monomérique, on s'aperçoit rapidement que l'article donne raison à s2m.
 Cette fois-ci c'est l'annotation monomérique présente dans Norine qui est à changer pour obtenir une information juste.
