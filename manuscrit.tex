@@ -897,17 +897,17 @@ Comment savoir de quel côté du O la liaison doit être rompue ?
 De plus, certains monomères comme le glucose sont initialement composés de $COC$.
 Ces monomères seront donc découpés alors qu'ils ne devraient pas l'être.
 Pour ces deux raisons, nous ne pourrons pas directement utiliser ce logiciel afin de convertir nos structures atomiques en structures monomériques.
-
-
-\subsubsection{Vue générale}
-
-\paragraph{}En dehors des deux logiciels que nous venons de présenter, rien n'est dédié spécifiquement à la tâche que nous cherchons à accomplir.
-Un grand nombre de techniques que j'ai étudiées ne permettent que la résolution de sous problèmes.
-Par exemple, lors de la présentation de CHUCKLES, nous citons une implémentation des SMARTS appelée AMBIT-SMARTS.
-Les SMARTS sont des expressions régulières moléculaires qui permettent de définir des motifs à rechercher.
-En appliquant un SMARTS sur une molécule (comme le permet AMBIT-SMARTS), nous pouvons savoir si cette molécule contient ce motif.
-Ce type de technique permet de savoir si une molécule est contenue dans une autre, ce qui dans notre cas reviendrait à savoir si un monomère est contenu dans un polymère.
-Cette tâche très importante n'est pas suffisante pour répondre à nos attentes, mais peut éventuellement faire partie des sous techniques à utiliser.
+% 
+% 
+% \subsubsection{Vue générale}
+% 
+% \paragraph{}En dehors des deux logiciels que nous venons de présenter, rien n'est dédié spécifiquement à la tâche que nous cherchons à accomplir.
+% Un grand nombre de techniques que j'ai étudiées ne permettent que la résolution de sous problèmes.
+% Par exemple, lors de la présentation de CHUCKLES, nous citons une implémentation des SMARTS appelée AMBIT-SMARTS.
+% Les SMARTS sont des expressions régulières moléculaires qui permettent de définir des motifs à rechercher.
+% En appliquant un SMARTS sur une molécule (comme le permet AMBIT-SMARTS), nous pouvons savoir si cette molécule contient ce motif.
+% Ce type de technique permet de savoir si une molécule est contenue dans une autre, ce qui dans notre cas reviendrait à savoir si un monomère est contenu dans un polymère.
+% Cette tâche très importante n'est pas suffisante pour répondre à nos attentes, mais peut éventuellement faire partie des sous techniques à utiliser.
 
 
 
@@ -1195,7 +1195,7 @@ Ces algorithmes essaient en supplément d'éviter l'exploration de toutes les br
 
 \paragraph{}Il existe également de nombreux algorithmes pour des cas particuliers de SI.
 Par exemple, il est possible de résoudre le problème en temps polynomial pour des arbres~\cite{shamir_faster_1997}, des graphes planaires~\cite{eppstein_subgraph_1995,dorn_planar_2009} ou des graphes de treewidth bornés~\cite{hajiaghayi_subgraph_2007}.
-Dans tous les cas, il est possible de trouver au moins une molécule ne répondant pas à l'un de ces critères et c'est pour cela que nous ne les utiliserons pas.
+Dans tous les cas, il est possible de trouver au moins une molécule (pas forcément NRP puisque s2m s'applique à n'importe quel type de polymères) ne répondant pas à l'un de ces critères et c'est pour cela que nous ne les utiliserons pas.
 
 
 \subsection{Choisir l'algorithme de recherche de monomères}
@@ -1259,8 +1259,10 @@ isomorphismes de graphes ou de sous-graphes non étiquetés d'un graphe $G$ sur 
   \end{algorithm}
 
 \begin{figure}[!ht]
-  \includegraphics[width=200px]{Figures/s2m/recherche/VF2.pdf}
-  \caption{\label{vf2}Représentation sous forme d'arbre d'une recherche de d'isomorphisme de sous graphe par l'algorithme VF2}
+  \begin{center}
+    \includegraphics[width=350px]{Figures/s2m/recherche/VF2.png}
+    \caption{\label{vf2}Backtracking de VF2 pour extraire l'ensemble de tous les SI possibles.}
+  \end{center}
 \end{figure}
 
 \paragraph{}Expliquons cet algorithme en utilisant le schéma \ref{vf2}.
@@ -1285,8 +1287,11 @@ Vu que tout l'arbre est exploré à chaque recherche, l'algorithme est exponenti
 Pour être plus précis il est en $O(n^m)$, donc non calculable dans les pires des cas ($n$ taille de G et $m$ de H).
 
 \begin{figure}[!ht]
-  \includegraphics[width=200px]{Figures/s2m/recherche/VF2_labels.pdf}
-  \caption{\label{vf2_labels}Représentation sous forme d'arbre de recherches pour l'algorithme VF2 appliqué aux graphes étiquetés}
+  \begin{center}
+    \includegraphics[width=350px]{Figures/s2m/recherche/VF2_labels.png}
+    \caption{\label{vf2_labels}Modification de VF2 pour son application aux graphes étiquetés.
+    On voit nettement sur cet exemple que l'ordre de recherche des labels influence le temps d'exécution de l'algorithme.}
+  \end{center}
 \end{figure}
 
 \paragraph{}Intéressons nous maintenant aux graphes étiquetés.
@@ -2436,7 +2441,7 @@ Analysons ensemble plusieurs cas afin de comprendre les raisons de ces erreurs.
 
 \begin{figure}[!ht]
   \begin{center}
-    \includegraphics[width=400px]{Figures/s2m/results/s2m_enniati.png}
+    \includegraphics[width=450px]{Figures/s2m/results/s2m_enniati.png}
     \caption{\label{s2m_enniati}Résultat de s2m pour l'enniatin I.
     Deux monomères sont annotés faux ce qui nous mène à dire qu'une erreur s'est glissée soit dans le SMILES de la molécule soit dans l'annotation monomérique.}
   \end{center}
@@ -2452,7 +2457,7 @@ Sur la page Norine de la molécule, nous trouvons un lien vers Pubchem pour nous
 
 \begin{figure}[h!]
   \begin{center}
-    \includegraphics[width=450px]{Figures/s2m/results/enniatinI_corrections.png}
+    \includegraphics[width=400px]{Figures/s2m/results/enniatinI_corrections.png}
     \caption{\label{enni_cor}Structures atomiques publiées de l'enniatin I.
     Ces deux structures nous aident à déceler une erreur dans la structure atomique de l'enniatin I sur Norine.}
   \end{center}
