@@ -1400,9 +1400,10 @@ est plus sélectif qu'un autre à partir du moment où sa fréquence d'apparitio
 \paragraph{Étiquettes fréquentes}
 
 \begin{figure}
-  \includegraphics[width=300px]{Figures/s2m/indexation/apprentissage.png}
-  \caption{\label{apprentissage}En haut de l'image est représentée la base d'apprentissage puis en bas, le motif qui doit être
-  indexé ainsi que les fréquences d'apparition de chacun de ses n\oe{}uds dans la base d'apprentissage}
+  \begin{center}
+    \includegraphics[width=350px]{Figures/s2m/indexation/apprentissage.png}
+    \caption{\label{apprentissage}En haut de l'image est représentée la base d'apprentissage puis en bas, le motif qui doit être indexé ainsi que les fréquences d'apparition de chacun de ses n\oe{}uds dans la base d'apprentissage}
+  \end{center}
 \end{figure}
 
 \paragraph{}Essayons d'estimer ces fréquences afin d'éviter les cas qui pourraient être critiques. Pour ce faire, nous pouvons
@@ -1448,8 +1449,10 @@ Prenons l'exemple de la figure \ref{apprentissage}. Sur cet exemple, le motif à
 \ref{glouton}).
 
 \begin{figure}
-  \includegraphics[width=300px]{Figures/s2m/indexation/glouton.png}
-  \caption{\label{glouton}En vert le chemin pris par l'algorithme glouton pour générer la chaîne du motif a-b-d}
+  \begin{center}
+    \includegraphics[width=400px]{Figures/s2m/indexation/glouton.png}
+    \caption{\label{glouton}En vert le chemin pris par l'algorithme glouton pour générer la chaîne du motif a-b-d}
+  \end{center}
 \end{figure}
 
 \subsubsection{Indexation Markovienne}
@@ -1476,11 +1479,13 @@ p_i$ la dernière extension d'une chaîne $c_i$ représentée par le passage du 
 rechercher une chaîne de taille 1 revient à étendre un motif vide. C'est à dire qu'il est nécessaire de parcourir l'intégralité
 des n\oe{}uds de la cible dans laquelle on recherche le motif et ce quel que soit le motif. Sur notre base d'apprentissage il faudra
 donc tester tous les n\oe{}uds de tous les peptides d'apprentissage pour la première extension.
-
-\begin{figure}
-  \includegraphics[width=300px]{Figures/s2m/indexation/glouton.png}
-  \caption{\label{arrite}Arité restante pour les différents n\oe{}uds d'un graphe chimique simple}
-\end{figure}
+% 
+% \begin{figure}
+%   \begin{center}
+%     \includegraphics[width=300px]{Figures/s2m/indexation/arite.pdf}
+%     \caption{\label{arrite}Arité restante pour les différents n\oe{}uds d'un graphe chimique simple}
+%   \end{center}
+% \end{figure}
 
 \paragraph{}Lors d'une recherche d'une chaîne $c_{n-1}$, il est possible de trouver des isomorphismes sur la cible (potentiellement partiellement recouvrant).
 Afin de calculer le temps de recherche de $c_n$ nous devons prendre en compte la quantité de sous isomorphismes précédemment trouvés.
@@ -1509,8 +1514,10 @@ Où $N$ est le temps de calcul pour les chaines de taille 1.
 Ce temps ne varie par car il est nécessaire de parcourir tout le graphe.
 
 \begin{figure}
-  \includegraphics[width=300px]{Figures/s2m/indexation/apprentissage_comptage.png}
-  \caption{\label{app_compt}Base d'apprentissage accompagnée des comptages de tous les $n_{p_{n}}$}
+  \begin{center}
+    \includegraphics[width=400px]{Figures/s2m/indexation/apprentissage_comptage.png}
+    \caption{\label{app_compt}Base d'apprentissage accompagnée des comptages de tous les $n_{p_{n}}$}
+  \end{center}
 \end{figure}
 
 \paragraph{}En utilisant les comptages faits sur la base d'apprentissage (voir \ref{app_compt}) ainsi que le calcul de l'arité
@@ -1591,8 +1598,10 @@ dans $p_n$. Pour la recherche de motif dans l'exemple, on obtient le chemin $c_{
 détail de la recherche de ce motif sur la figure \ref{markov}.
 
 \begin{figure}
-  \includegraphics[width=300px]{Figures/s2m/indexation/markov.png}
-  \caption{\label{markov}En vert, le chemin pris par l'algorithme markovien pour générer la chaîne du motif a-b-d}
+  \begin{center}
+    \includegraphics[width=400px]{Figures/s2m/indexation/markov.png}
+    \caption{\label{markov}En vert, le chemin pris par l'algorithme markovien pour générer la chaîne du motif a-b-d}
+  \end{center}
 \end{figure}
 
 \paragraph{}Cette méthode exacte nous permet de garantir la qualité de nos chaînes sur la base d'apprentissage mais cela se paye en temps de calcul.
@@ -2513,11 +2522,17 @@ Cette fois-ci c'est l'annotation monomérique présente dans Norine qui est à c
 
 \subsubsection{Les équivalences}
 
-\paragraph{TODO : Schéma cyclotheonamide E}
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=450px]{Figures/s2m/results/cyclotheonamide.png}
+    \caption{\label{cycloth}Résultat de s2m pour la Cyclotheonamide E (peptide de Norine).
+    L'annotation monomérique recouvre l'entiéreté des atomes du peptide mais n'est pas correcte à cause d'une équivalence entre monomères.}
+  \end{center}
+\end{figure}
 
 \paragraph{}Le dernier type d'erreurs d'annotations commises par s2m est strictement dut aux algorithmes utilisés pour le pavage.
 C'est un problème d'annotations équivalentes.
-Comme nous le voyons sur le schéma de la ``cyclotheonamide E'', le peptide est couvert à 100\%.
+Comme nous le voyons sur le schéma \ref{cycloth} la ``cyclotheonamide E'', le peptide est couvert à 100\%.
 De plus, l'annotation présente dans Norine propose deux monomères visuellement très proches des monomères suggérés par s2m.
 En regardant dans le détail, on peut observer que c'est un problème dut à une formylation entre deux monomères.
 L'un des deux monomère à été formylé, ce qui fait qu'un groupement C=O est présent entre les monomères Arg et Ile du peptide.
@@ -2530,14 +2545,21 @@ Cette erreur est présente moins d'une dizaine de fois dans les données déjà 
 
 \subsubsection{Les analyses d'erreur pour CCD}
 
-\paragraph{TODO : Figure équivalence obvious}
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=450px]{Figures/s2m/results/CCD_results.png}
+    \caption{\label{CCD_results}Équivalence entre monomères.
+    L'atome d'azote inclus dans le HME pourrait également être inclus par le DLY mais nous n'avons aucun moyen de faire la différence.}
+  \end{center}
+\end{figure}
 
 \paragraph{}Durant toutes les analyses, je ne me suis attardé que sur des erreurs issues des peptides de Norine.
 Pour nous, il est très facile de vérifier toutes les informations de cette base car de nombreux liens vers les origines des données sont présents en son sein.
 Pour les données issues de CCD, nous détectons le même genre de problème que dans Norine mais il est très difficile de les analyser en profondeur.
 Nous avons accès aux structures mais difficilement à des publications associées.
 Nous pouvons donc détecter la présence d'erreurs mais sans forcément pouvoir expliquer pourquoi.
-Seules les erreurs dues aux équivalences sont facilement détectables (voir par exemple TODO).
+Seules les erreurs dues aux équivalences sont facilement détectables (voir par exemple \ref{CCD_results}).
+Pour les autres types d'erreurs, nous ne pouvons que spéculer sans pouvoir vérifier.
 
 
 
