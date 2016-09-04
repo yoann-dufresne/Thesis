@@ -1174,62 +1174,15 @@ En choisissant bien les lignes et les colonnes par lesquelles l'algorithme comme
 Cependant, pour obtenir tous les SI, il faut parcourir tout l'arbre des possibles, ce qui ralentit l'algorithme.
 
 
-\subsubsection{Les algorithmes de backtracking classique}
+\subsubsection{VF2, un algorithme de backtracking classique}
 
 \paragraph{}Tout comme pour le MCS, le SI peut être résolu par un backtracking classique par association de n\oe{}uds deux à deux.
 C'est la méthode majoritairement utilisée puisqu'elle fonctionne très bien en pratique.
 Contrairement à l'algorithme d'Ullman qui nécessite d'effectuer des opérations sur des matrices potentiellement très grandes, la méthode par backtracking classique n'a pas besoin de grands espaces mémoire.
 L'algorithme VF2~\cite{cordella_subgraph_2004} utilisent ce principe.
 Les SI se forment par ajouts successifs de couples de n\oe{}uds compatibles avec retour en arrière s'il n'est plus possible d'avoir un couple.
-Nous donnerons plus de détails sur cet algorithme en section \ref{VF2_p}.
-Cet algorithme est utilisé dans les grandes librairies logicielles de chimie comme CDK~\cite{steinbeck_chemistry_2003}.
-
-
-\subsubsection{D'autres algorithmes de SI}
-
-\paragraph{}Contrairement à la recherche de MCS, il n'existe pas beaucoup d'alternatives heuristiques pour ce problème.
-Ceci peut s'expliquer par le fait que des algorithmes praticables existent pour trouver les SI.
-De plus, les heuristiques de MCS permettent d'obtenir des résultats de SI en ajoutant des contraintes (Le SI étant un cas particulier du MCS).
-Dans tous les cas, ces heuristiques de SI sont des dérivés de la technique par backtracking~\cite{kaijar_developing_2012}.
-Ces algorithmes essaient en supplément d'éviter l'exploration de toutes les branches par de la sélection des plus ``prometteuses''.
-
-\paragraph{}Il existe également de nombreux algorithmes pour des cas particuliers de SI.
-Par exemple, il est possible de résoudre le problème en temps polynomial pour des arbres~\cite{shamir_faster_1997}, des graphes planaires~\cite{eppstein_subgraph_1995,dorn_planar_2009} ou des graphes de treewidth bornés~\cite{hajiaghayi_subgraph_2007}.
-Dans tous les cas, il est possible de trouver au moins une molécule (pas forcément NRP puisque s2m s'applique à n'importe quel type de polymères) ne répondant pas à l'un de ces critères et c'est pour cela que nous ne les utiliserons pas.
-
-
-\subsection{Choisir l'algorithme de recherche de monomères}
-
-\paragraph{}Pour pouvoir rechercher les monomères nous devions choisir entre toutes les approches algorithmiques citées ci-dessus.
-Premièrement, lorsque nous recherchons un monomère dans un peptide, nous souhaitons connaître tous les endroits où il peut apparaitre.
-Nous ne souhaitons donc pas utiliser d'approches heuristiques.
-Deuxièmement, le MCS ne paraît pas très pratique dans notre cas.
-En effet, les NRP regorgent de monomères proches les uns des autres.
-Il n'est donc pas facile, lorsque l'on obtient un résultat, de savoir si la molécule trouvée est la bonne ou si c'est le monomère voisin à un atome de distance qui a été détecté.
-Enfin, en comparant les algorithmes de recherche exacte de solutions, ceux de résolution de SI sont plus adaptés et rapide en pratique.
-C'est pourquoi nous avons choisi d'effectuer la recherche des monomères en utilisant l'algorithme le plus communément utilisé par la communauté : VF2.
-
-
-
-
-\section{Construction algorithmique}
-
-\subsection{Isomorphisme de sous graphe appliqué à la recherche de monomères}
-
-\label{isomorphisme_p}
-
-\paragraph{}La première partie Smiles2Monomers doit rechercher l'ensemble des monomères au sein d'un polymère cible.
-Comme nous l'avons vu dans l'état de l'art, nous pouvons transformer ce problème en un problème de graphe appelé isomorphisme de sous graphe.
-Dans cette partie, nous allons présenter en détail l'algorithme classique de recherche de SI nommé VF2 en l'étendant à des graphes étiquetés.
-Puis nous montrerons en quoi les étiquettes des n\oe{}uds du graphes influencent le temps de calcul afin en déduire une méthode de recherche efficace.
-
-\subsubsection{L'algorithme originel VF2}
-
-\label{VF2_p}
-
-\paragraph{}Comme nous l'avons déjà évoqué dans l'état de l'art de cette partie, l'algorithme VF2 permet d'effectuer des
-isomorphismes de graphes ou de sous-graphes non étiquetés d'un graphe $G$ sur un graphe $H$.
-Écrivons l'algorithme tel qu'il est décrit dans l'article d'origine :
+VF2 est un algorithme de recherche de SI pour des graphes non orientés et non étiquetés.
+Dans l'article l'algorithme est décrit comme suit :
 
 \paragraph{}
   \begin{algorithm}[H]
@@ -1257,6 +1210,8 @@ isomorphismes de graphes ou de sous-graphes non étiquetés d'un graphe $G$ sur 
       \KwRet $\emptyset$ \;
     }
   \end{algorithm}
+  
+\paragraph{}Comme on peut le remarquer, cet algorithme s
 
 \begin{figure}[!ht]
   \begin{center}
@@ -1286,6 +1241,53 @@ trouvé mais en l'enregistrant dans un ensemble puis en continuant l'exploration
 Vu que tout l'arbre est exploré à chaque recherche, l'algorithme est exponentiel.
 Pour être plus précis il est en $O(n^m)$, donc non calculable dans les pires des cas ($n$ taille de G et $m$ de H).
 
+\paragraph{}Cet algorithme est très pratique pour trouver un SI mais pas pour les trouver tous.
+En pratique, il est utlisé au sein de grandes librairies logicielles de chimie comme CDK~\cite{steinbeck_chemistry_2003} pour faire des requêtes par structure sur des ensembles chimiques.
+
+
+\subsubsection{D'autres algorithmes de SI}
+
+\paragraph{}Contrairement à la recherche de MCS, il n'existe pas beaucoup d'alternatives heuristiques pour ce problème.
+Ceci peut s'expliquer par le fait que des algorithmes praticables existent pour trouver les SI.
+De plus, les heuristiques de MCS permettent d'obtenir des résultats de SI en ajoutant des contraintes (Le SI étant un cas particulier du MCS).
+Dans tous les cas, ces heuristiques de SI sont des dérivés de la technique par backtracking~\cite{kaijar_developing_2012}.
+Ces algorithmes essaient en supplément d'éviter l'exploration de toutes les branches par de la sélection des plus ``prometteuses''.
+
+\paragraph{}Il existe également de nombreux algorithmes pour des cas particuliers de SI.
+Par exemple, il est possible de résoudre le problème en temps polynomial pour des arbres~\cite{shamir_faster_1997}, des graphes planaires~\cite{eppstein_subgraph_1995,dorn_planar_2009} ou des graphes de treewidth bornés~\cite{hajiaghayi_subgraph_2007}.
+Dans tous les cas, il est possible de trouver au moins une molécule (pas forcément NRP) ne répondant pas à l'un de ces critères et c'est pour cela que nous ne les utiliserons pas.
+
+
+\subsection{Choisir l'algorithme de recherche de monomères}
+
+\paragraph{}Pour pouvoir rechercher les monomères nous devions choisir entre toutes les approches algorithmiques citées ci-dessus.
+Premièrement, lorsque nous recherchons un monomère dans un peptide, nous souhaitons connaître tous les endroits où il peut apparaitre.
+Nous ne souhaitons donc pas utiliser d'approches heuristiques.
+Deuxièmement, le MCS ne paraît pas très pratique dans notre cas.
+En effet, les NRP regorgent de monomères proches les uns des autres.
+Il n'est donc pas facile, lorsque l'on obtient un résultat, de savoir si la molécule trouvée est la bonne ou si c'est le monomère voisin à un atome de distance qui a été détecté.
+Enfin, en comparant les algorithmes de recherche exacte de solutions, ceux de résolution de SI sont plus adaptés et rapide en pratique.
+Au début, nous ne connaissions pas l'existance de l'algorithme VF2 et aucun des autres algorithmes ne nous convenais en temps de calcul.
+De notre côté, nous avons indépendamment redéveloppé un variant de VF2 appliqué aux graphes étiquetés et suffisamment rapide pour pouvoir trouver tous SI instantanément.
+La section suivante donnera tous les détails concernant cet algorithme et son intégration à s2m.
+
+
+
+
+\section{Construction de Smiles2Monomers}
+
+\subsection{Isomorphisme de sous graphe appliqué à la recherche de monomères}
+
+\label{isomorphisme_p}
+
+\paragraph{}La première partie Smiles2Monomers doit rechercher l'ensemble des monomères au sein d'un polymère cible.
+Comme nous l'avons vu dans l'état de l'art, nous pouvons transformer ce problème en un problème de graphe appelé isomorphisme de sous graphe.
+Dans cette partie, nous allons présenter en détail la variante que nous avons conçu, de l'algorithme de résolution de SI appelé VF2.
+Puis nous montrerons en quoi les étiquettes des n\oe{}uds du graphes influencent le temps de calcul afin en déduire une méthode de recherche efficace.
+
+\subsubsection{L'algorithme pour les graphes étiquetés}
+
+
 \begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=350px]{Figures/s2m/recherche/VF2_labels.png}
@@ -1294,19 +1296,17 @@ Pour être plus précis il est en $O(n^m)$, donc non calculable dans les pires d
   \end{center}
 \end{figure}
 
-\paragraph{}Intéressons nous maintenant aux graphes étiquetés.
-On peut modifier l'algorithme VF2 pour qu'il ne prenne en compte que les paires de n\oe{}uds possédant la même étiquette.
+\paragraph{}Intéressons nous à l'application de VF2 aux graphes étiquetés.
+L'algorithme peut être modifié pour ne former que des paires de n\oe{}uds de même étiquette.
 Prenons à nouveau notre exemple précédent en étiquetant avec A et B les n\oe{}uds.
 Sur la figure \ref{vf2_labels}, on peut voir la recherche d'un graphe $G$ composé de 2 n\oe{}uds A et un n\oe{}ud B au sein d'un graphe $H$
 composé d'un branchement supplémentaire contenant un n\oe{}ud B.
 Sur ce graphique nous avons représenté deux cas de recherche selon l'ordre dans lequel nous prenons $G$.
 Nous pouvons remarquer que dans les deux cas, la taille de l'arbre est bien plus faible que pour un graphe non étiqueté.
 Les étiquettes des n\oe{}uds font office de filtres de recherche et accélèrent fortement la recherche.
-On voit également que la recherche est d'autant plus rapide que l'on choisit prioritairement les n\oe{}uds avec des étiquettes de faible
-fréquence.
+On voit également que la recherche est d'autant plus rapide que l'on choisit prioritairement les n\oe{}uds avec des étiquettes de faible fréquence.
 
-Là où l'algorithme général VF2 était en $O(n^m)$, la complexité est ici réduite dans le pire des cas à $O(k^n)$ où $k$ est le
-comptage du nombre de n\oe{}uds de l'étiquette la moins filtrante.
+Là où l'algorithme général VF2 était en $O(n^m)$, la complexité est ici réduite dans le pire des cas à $O(k^n)$ où $k$ est le comptage du nombre de n\oe{}uds de l'étiquette la moins filtrante.
 La taille de l'arbre de recherche est diminuée par la sélectivité des étiquettes de n\oe{}uds.
 Pour optimiser la recherche, nous devons donc étudier la façon dont nous représentons les molécules afin d'avoir une sélectivité
 la plus grande possible.
@@ -1325,7 +1325,7 @@ désormais être créés pour un même atome et ce, en fonction de ses compagnon
 seconde partie). Par exemple $NH_2$, $NH$, $N$ sont les
 trois étiquettes variants depuis l'ancienne étiquette unique $N$ qui était accompagnée de voisins hydrogènes. Les étiquettes sont plus nombreuses et leur fréquence à la fois moins élevée et plus homogène, ce qui les rend plus sélectives.
 
-\begin{figure}
+\begin{figure}[!ht]
   \includegraphics[width=300px]{Figures/s2m/representations/all_tmp.pdf}
   \caption{\label{representations}Manque fréquences et titres dans l'image}
 \end{figure}
@@ -1355,7 +1355,7 @@ jusqu'à disparaître complètement (ce qui est peu pratique pour la comparaison
 et ajouter de plus en plus de phases de comparaison d'étiquettes et d'étapes dans l'algorithme VF2. Pour ces raisons, nous avons
 choisi de n'effectuer qu'une seule étape de line-graph.
 
-\begin{figure}
+\begin{figure}[!ht]
   \includegraphics[width=200px]{Figures/s2m/recherche/matching.pdf}
   \caption{\label{label_matching}Exemple de fonctionnement de la fonction de matching d'étiquettes}
 \end{figure}
@@ -1379,7 +1379,7 @@ s'attarderont à la recherche de chaînes performantes (\textit{ie} les plus rap
 
 \subsubsection{Indexation gloutonne}
 
-\begin{figure}
+\begin{figure}[!ht]
   \includegraphics[width=300px]{Figures/s2m/indexation/chaine_fail.pdf}
   \caption{\label{chaine_fail}Deux exemple de chaîne pour un motif simple}
 \end{figure}
@@ -1399,7 +1399,7 @@ est plus sélectif qu'un autre à partir du moment où sa fréquence d'apparitio
 
 \paragraph{Étiquettes fréquentes}
 
-\begin{figure}
+\begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=350px]{Figures/s2m/indexation/apprentissage.png}
     \caption{\label{apprentissage}En haut de l'image est représentée la base d'apprentissage puis en bas, le motif qui doit être indexé ainsi que les fréquences d'apparition de chacun de ses n\oe{}uds dans la base d'apprentissage}
@@ -1448,7 +1448,7 @@ Prenons l'exemple de la figure \ref{apprentissage}. Sur cet exemple, le motif à
 étiqueté $a$ (fréquence la plus faible dans le jeu d'apprentissage) suivi de $b$ puis enfin $d$ (Le tout est résumé sur la figure
 \ref{glouton}).
 
-\begin{figure}
+\begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=400px]{Figures/s2m/indexation/glouton.png}
     \caption{\label{glouton}En vert le chemin pris par l'algorithme glouton pour générer la chaîne du motif a-b-d}
@@ -1513,7 +1513,7 @@ de l'atome depuis lequel on étend le motif $p_{n-1}$ vers le motif $p_n$ et $t$
 Où $N$ est le temps de calcul pour les chaines de taille 1.
 Ce temps ne varie par car il est nécessaire de parcourir tout le graphe.
 
-\begin{figure}
+\begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=400px]{Figures/s2m/indexation/apprentissage_comptage.png}
     \caption{\label{app_compt}Base d'apprentissage accompagnée des comptages de tous les $n_{p_{n}}$}
@@ -1597,7 +1597,7 @@ Où la fonction de minimisation s'applique sur l'ensemble des $p'_{n-1}$ et $p'_
 dans $p_n$. Pour la recherche de motif dans l'exemple, on obtient le chemin $c_{\delta}$ minimisant le coût. On peut voir le
 détail de la recherche de ce motif sur la figure \ref{markov}.
 
-\begin{figure}
+\begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=400px]{Figures/s2m/indexation/markov.png}
     \caption{\label{markov}En vert, le chemin pris par l'algorithme markovien pour générer la chaîne du motif a-b-d}
@@ -1661,9 +1661,11 @@ non seulement le monomère n'est jamais inclus en entier mais en plus, il peut �
 différentes. Il est donc nécessaire de connaître les différents résidus possibles pour chaque monomère afin de pouvoir les
 rechercher en utilisant l'algorithme de recherche exact décrit précédemment.
 
-\begin{figure}
-  \includegraphics[width=300px]{Figures/s2m/residues/cys_exemple.pdf}
-  \caption{\label{cys_ex}Deux résidus différents présents dans deux peptides différents tout deux obtenus à partir de la Cystéine}
+\begin{figure}[!ht]
+  \begin{center}
+    \includegraphics[width=400px]{Figures/s2m/residues/cys_exemple.png}
+    \caption{\label{cys_ex}Deux résidus différents présents dans deux peptides différents tout deux obtenus à partir de la Cystéine}
+  \end{center}
 \end{figure}
 
 
@@ -1683,7 +1685,7 @@ dans un cadre de chimie organique que pour tout carbone étant lié à au moins 
 pour former une liaison. Si $n$ est le nombre d'atomes de carbone dans la molécule ($n$ représente une grande proportion d'atomes
 dans une molécule organique), alors on peut générer un nombre de résidus de l'ordre de $n^2$.
 
-\begin{figure}
+\begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=400px]{Figures/s2m/residues/cystein_family.png}
     \caption{\label{sulfure}Représentation de la famille des résidus de la cystéine}
