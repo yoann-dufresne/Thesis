@@ -2815,17 +2815,27 @@ Le traitement des erreurs est à ce jour toujours en cours et nous avançons au 
 \paragraph{}Après avoir traité les erreurs existantes, nous allons discuter de la manière de limiter l'introduction de nouvelles erreurs.
 Le seul moyen est d'essayer de détecter automatiquement les annotations fausses lorsqu'elles sont entrées et de proposer à l'utilisateur le choix entre notre correction et ce qu'il a entré.
 
-\paragraph{TODO : Schéma avertissement}
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=450px]{Figures/contributions/warning.png}
+    \caption{\label{warning}Alerte levée au sein de MyNorine lorsqu'une annotation d'utilisateur ne parait pas correspondre à l'annotation automatique de s2m.}
+  \end{center}
+\end{figure}
 
 \paragraph{}Dans le cas de Norine, toute nouvelle entrée manuelle est effectuée via MyNorine.
 Pour éviter l'introduction des erreurs, si le SMILES de la molécule est entré, nous exécutons s2m en arrière plan.
-Si l'annotation obtenue par s2m couvre entièrement le peptide mais que cette annotation diffère de l'annotation entrée manuellement, nous avertissons l'utilisateur et lui demandons de vérifier sa structure avant validation.
+Si l'annotation obtenue par s2m couvre entièrement le peptide mais que cette annotation diffère de l'annotation entrée manuellement, nous avertissons l'utilisateur et lui demandons de vérifier sa structure avant validation (voir figure \ref{warning}).
 Cela nous a permis plusieurs fois durant les Norine days de nous rendre compte d'erreurs que nous étions en train de commettre et nous pensons que cela permettra d'en éviter de nombreuses autres.
 
-\paragraph{TODO : Schéma création automatique d'annotation}
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=450px]{Figures/contributions/s2m_automatic.png}
+    \caption{\label{s2m_automatic}Création d'annotation à partir d'un SMILES lors d'une création de nouvelle entrée via MyNorine.}
+  \end{center}
+\end{figure}
 
 \paragraph{}Nous proposons également à l'utilisateur d'exécuter s2m avant d'entrer manuellement son annotation.
-Si un SMILES est renseigné, alors s2m peut être déclenché pour obtenir une première annotation.
+Si un SMILES est renseigné, alors s2m peut être déclenché pour obtenir une première annotation (voir figure \ref{s2m_automatic}).
 L'utilisateur peut ensuite la modifier si celle-ci n'est pas complètement exacte.
 Par ce système nous incitons les contributeurs à ajouter le SMILES de leurs peptides (information trop peu présente dans Norine pour le moment) et nous évitons les erreurs d'inattention et fautes de frappe lors de la saisie utilisateur.
 
@@ -2881,8 +2891,6 @@ Au sein de Norine ce n'est pas une ressource critique mais il est bon de connaî
 Ces données de taxonomie peuvent être récupérées depuis le site ou l'API du NCBI.
 Le NCBI étant un organisme de référence, beaucoup de contributeurs maintiennent les classifications à jour.
 En effectuant régulièrement une recherche sur le NCBI de la taxonomie des espèces présente dans Norine, il est possible de maintenir les données suffisamment à jour.
-
-\paragraph{TODO : figures arbre des taxons}
 
 \paragraph{}Les données de taxonomie de Norine sont pour le moment maintenues comme des chaînes de caractère au sein de la table des organismes.
 Cette structure est très redondante et ne permet pas des mises à jour efficaces.
