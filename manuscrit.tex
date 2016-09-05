@@ -1119,6 +1119,8 @@ Cette seconde méthode est très intéressante lorsque l'on cherche un bon rappo
 
 \subsection{Isomorphisme de sous graphe}
 
+\label{SI_p}
+
 \subsubsection{Définition}
 
 \begin{figure}[!ht]
@@ -2666,7 +2668,7 @@ Pour résumer cette requête, nous avons :
 
 \paragraph{}Une fois la requête formatée, il est possible d'exécuter deux algorithmes différents.
 L'un des deux est un isomorphisme de sous graphe.
-Nous avons déjà longuement abordé le problème d'isomorphisme durant le second chapitre (TODO ref).
+Nous avons déjà longuement abordé le problème d'isomorphisme durant le second chapitre (voir \ref{SI_p}).
 La requête est croisée avec toutes les structures monomériques présentes en base et retourne tous les peptides dont la structure monomérique contient le motif recherché.
 
 \paragraph{}Le second algorithme ne prend pas en compte la structure mais uniquement la composition.
@@ -2691,10 +2693,16 @@ Ici nous allons parler des trois dernières évolutions majeures.
 
 \subsubsection{Éditeur graphique}
 
-\paragraph{TODO schéma interface graphique}
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=450px]{Figures/Norine/editor.png}
+    \caption{\label{editor}Éditeur graphique pour les constructions de requête dans Norine.
+    Ici, nous avons construit graphiquement la requête Val,[Cys*|Leu*]@1@0.}
+  \end{center}
+\end{figure}
 
 \paragraph{}Mise à jour en 2015 par Juraj Michalik, l'interface de recherche dans la base possède désormais une interface graphique de création dynamique des requêtes.
-L'interface permet de générer facilement des requêtes complexes (voir figure TODO).
+L'interface permet de générer facilement des requêtes complexes (voir figure \ref{editor}).
 Le menu de gauche permet de sélectionner les différents monomères que nous souhaitons ajouter à une requête et la page principale permet d'ajouter des liens entre monomères par des simples clics.
 Au fur et à mesure de la création la requête textuelle s'affiche au dessus de l'éditeur.
 Une version sans interface de cet éditeur est également utilisée sur les pages des peptides de Norine afin d'avoir une représentation graphique de ceux-ci.
