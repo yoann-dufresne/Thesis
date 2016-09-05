@@ -2778,21 +2778,27 @@ Dans les deux cas que nous verrons, nous aborderons l'utilisation de s2m pour l'
 \paragraph{}Norine est constituée d'environ 1200 annotations.
 Toutes ces annotations ont été extraites une à une d'articles scientifiques puis entrées dans la base à la main.
 Bien que le travail ait été réalisé avec beaucoup de rigueur, plusieurs erreurs se sont glissées en base.
-Comme présenté lors des résultats de s2m (voir partie \ref{resultats_s2m_p}), le logiciel permet la détection des erreurs présentes en base.
+Comme présenté lors des résultats de s2m (voir \ref{resultats_s2m_p}), le logiciel permet la détection des erreurs présentes en base.
 Voyons ici les procédures mises en place pour corriger ces erreurs et essayer d'empêcher l'introduction de nouvelles.
 
 
 \subsubsection{s2m pour corriger les erreurs}
 
-\paragraph{TODO : figure correction dolastatin}
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=450px]{Figures/contributions/dap_modif.png}
+    \caption{\label{dap_modif}En haut, le processus de modification du monomère Dap au sein de Norine, via l'utilisation de MyNorine.
+    En bas, la conséquence de la modification du SMILES du Dap sur la couverture de l'annotation trouvée par s2m.}
+  \end{center}
+\end{figure}
 
 \paragraph{}Lors de l'analyse des résultats nous avons détecté quatre types d'erreurs : Les erreurs de structure atomique peptidique, d'annotation peptidique, de structure atomique monomérique et d'équivalences structurelles.
 Cette dernière erreur est entièrement due à la façon dont s2m est conçu et rien n'est a corriger en base.
 Pour les 3 autres erreurs, myNorine nous permet facilement de modifier les entrées de la base.
 
 \paragraph{}Appliquons une correction d'un peptide dont nous avons découvert une erreur d'annotation.
-Pour la dolastatin 10, à la suite d'une recherche au sein des publications, nous avions déterminé que le monomère Dap de Norine était structurellement incorrect (voir partie \ref{dolastatin_p}).
-Effectuons la modification de ce monomère via myNorine (voir figure TODO).
+Pour la dolastatin 10, à la suite d'une recherche au sein des publications, nous avions déterminé que le monomère Dap de Norine était structurellement incorrect (voir \ref{dolastatin_p}).
+Effectuons la modification de ce monomère via myNorine (voir figure \ref{dap_modif}).
 Nous pouvons lancer la modification depuis la page Norine du monomère.
 Changeons le SMILES du monomère en plaçant correctement l'azote puis validons.
 Après validation de la modification, l'entrée est correcte en base.

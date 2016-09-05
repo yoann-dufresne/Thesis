@@ -1,0 +1,22 @@
+TODO :
+→ 2.2.3.1 : à revoir : le besoin de 2 étapes n'est pas bien expliqué, donner éventuellement un exemple concret de cas qui pose problème
+
+→ pourquoi l'homogénéité des fréquences est importante pour VF2 ?
+
+→ mettre l'exemple de calcul de la chaine c_beta pour que la justification de la prog dynamique soit plus facile à imaginer
+→ "Une chaı̂ne (au sens ligne et pas chaı̂ne comme défini ici) représente le motif le plus simple." ?
+
+Voir avec Maude :
+→ attention, la liaison qui implique les sucres doit passer, en réalité, par la perte d'un PO4 (ou qqchose du genre) car les sucres cycliques sont souvent liés à un phosphate.
+
+Suggestions :
+→ pour les refs : mettre un nom d'auteur et une date au lieu d'un numéro (plus parlant)
+→ fig 1.11 et suivantes : si possible, reprend tes représentations des domaines avec mes schémas de molécules
+
+Réponse :
+→ est-ce que tu as fait des essais de chuckles et molblocks ?
+Non
+→ équation 2.9 : il n'y a qu'un élément dans ton min, ou bien je ne comprends pas bien la notation
+min sur l'ensemble
+→ "Dans tous les cas, il est possible de trouver au moins une molécule ne répondant pas à l’un de ces critères et c’est pour cela que nous ne les utiliserons pas." Est-ce bien vrai ? Je crois bien que les NRP connus sont tous planaires et que l'on pense qu'ils le seront tous...
+s2m pas que pour les NRP.
