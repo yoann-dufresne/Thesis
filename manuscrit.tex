@@ -722,29 +722,29 @@ Dans ce cas, il se peut qu'il ne soit que partiel et potentiellement incorrect.
 Au delà du simple catalogage qui peut être fait, comprendre les actions moléculaires permet d'utiliser voire d'inventer de nouvelles substances pour l'industrie.
 Afin de comprendre ces activités, un postulat simple a été posé : deux molécules proches auront deux activités proches.
 Ce postulat simple parait raisonnable puisqu'il s'appuie sur le fait que l'activité d'une molécule est portée par la configuration spatiale des différents éléments qui la composent.
-On sait aujourd'hui que ce postulat est en partie faux car il existe quelques contre-exemples~\cite{patani_bioisosterism:_1996}.
+On sait aujourd'hui que ce postulat est en partie faux car on connaît quelques contre-exemples~\cite{patani_bioisosterism:_1996}.
 Cependant, dans la majorité des cas, cette approximation fonctionne bien et tout un domaine de chemoinformatique s'est développé dans ce sens.
 Toutes les techniques cherchant à rapprocher les structures des activités moléculaires sont regroupées derrière l'acronyme QSAR (Quantitative structure-activity relationship).
 Les techniques QSAR sont nombreuses et variées~\cite{patani_bioisosterism:_1996,leach_molecular_2001,helma_predictive_2005}.
 Certaines s'attardent sur les ressemblances de structures atomiques 2D ou 3D, certaines sur les propriétés magnétiques, d'autres sur les contraintes de repliement etc.
-Beaucoup ne se cantonnent pas à une seule des ressemblances citées ci-dessus mais essaient de les combiner pour prédire le mieux possible.
-Cependant, ces techniques ont deux contraintes limitantes.
-Premièrement, pour connaître l'activité d'une molécule, il est nécessaire de connaître les activités de molécules ``proches''.
+Beaucoup ne se cantonnent pas à une seule des ressemblances citées ci-dessus mais essaient de les combiner pour prédire du mieux possible l'activité.
+Cependant, ces techniques ont deux limites.
+Premièrement, pour connaître l'activité d'une molécule, il est nécessaire de connaître les activités de molécules ``proches'', qu'il faut donc avoir annoté auparavant.
 Deuxièmement, les temps de calcul nécessaires augmentent rapidement avec le nombre de critères à comparer et le détail d'analyse de chaque critère.
-Le but de ces méthodes est donc d'inclure les critères les plus sélectifs afin de se rapprocher des activités connues dans un temps raisonnable.
+Le but de ces méthodes est donc d'inclure d'abord les critères les plus sélectifs afin de déterminer des activités connues dans un temps raisonnable.
 
 \paragraph{}Beaucoup de NRP possèdent des activités très intéressantes (antibiotiques, anti-tumeurs, antidouleurs, ...).
 À ce titre, nous cherchons en permanence à caractériser les activités de chaque nouvelle molécule découverte.
 Lorsque ces activités ne sont pas déterminées expérimentalement, les logiciels exploitant des techniques de type QSAR permettent d'effectuer une prédiction.
 En 2012 puis 2014, Abdo et al. publient de nouvelles méthodes de prédiction d'activité NRP, se basant sur les spécificités des NRP~\cite{abdo_new_2012, abdo_prediction_2014}.
 Dans les deux cas, les prédictions sont effectuées à partir des compositions monomériques et non pas atomiques.
-Dans le premier article, la prédiction est effectuée en créant pour chaque activité connue un fingerprint.
+Dans le premier article~\cite{abdo_new_2012}, la prédiction est effectuée en créant pour chaque activité connue un \textit{fingerprint}.
 Ces fingerprints sont composés des comptages moyens de monomères de chaque type, pour tous les peptides présentant l'activité.
 Prédire l'activité d'un nouveau NRP revient alors à déterminer celle dont le fingerprint est le plus proche.
-Dans le second article, c'est un classifieur par réseau Bayésien qui est entraîné sur les compositions en monomères.
+Dans le second article~\cite{abdo_prediction_2014}, c'est un classifieur par réseau Bayésien qui est entraîné sur les compositions en monomères.
 Une fois les réseaux entraînés, il suffit de fournir une composition en entrée pour avoir les probabilités de chaque activité en sortie.
 Dans les deux cas, il est important de constater que l'abstraction monomérique est suffisante pour une prédiction de qualité.
-De plus, les structures ne sont pas utilisées, ce qui laisse encore beaucoup de possibilités d'améliorations.
+De plus, les structures des molécules ne sont pas utilisées, ce qui laisse encore beaucoup de possibilités d'améliorations.
 
 \paragraph{}Ce que nous venons de montrer par cet exemple de prédiction d'activité, c'est l'importance de la détermination des structures plus proches de la réalité biologique comme les structures monomériques.
 Connaître ce genre de structure est un enjeu fort pour la détermination de caractéristiques moléculaires haut niveau (activité ou conformation 3D par exemple).
@@ -761,8 +761,8 @@ Il nous a donc paru nécessaire de créer un outil qui infère la structure mono
 \subsection{Définition du problème}
 
 \paragraph{}Nous cherchons à créer un outil bioinformatique permettant l'obtention de nouvelles annotations monomériques NRP fiables.
-La génération d'annotations peut se baser sur la recherche d'informations à partir des gènes ou à partir des molécules dont on connaît la structure.
-Dans notre cas, nous n'avons pas choisi de démarrer des clusters de gènes NRPS puisque des modèles déjà bien éprouvés existent déjà (NRPSpredictor, NaPDoS, ...) mais que leurs prédictions ne sont pas garanties.
+La génération d'annotations peut se baser sur la recherche d'informations à partir des gènes ou à partir des molécules dont pour lesquelles on connaît déjà la structure.
+Dans notre cas, nous n'avons pas choisi de démarrer des clusters de gènes NRPS puisque des modèles déjà bien éprouvés existent (NRPSpredictor, NaPDoS, ...).
 Les avancées dans ce domaines viendront avec le nombre d'annotations fiables de binômes clusters/NRP qui permettrons l'amélioration des modèles d'apprentissage actuels.
 
 \begin{figure}[!ht]
@@ -783,7 +783,7 @@ Ce type d'annotation pourra également être effectué sur toutes les nouvelles 
 
 \subsection{L'existant}
 
-\paragraph{}Parmi l'existant, les logiciels CHUCKLES~\cite{siani_chuckles:_1994} et molBLOCKS~\cite{ghersi_molblocks:_2014} se démarquent des autres.
+\paragraph{}Parmi l'existant, la méthode CHUCKLES~\cite{siani_chuckles:_1994} et le logiciel molBLOCKS~\cite{ghersi_molblocks:_2014} se démarquent des autres.
 Dans les deux cas, les logiciels permettent, à partir d'une structure atomique d'un polymère, de trouver la structure monomérique.
 Les deux logiciels sont opposés dans leur façon de prendre le problème.
 CHUCKLES est constructif car il part des monomères pour reconstituer le polymère alors que molBLOCKS est destructif car il part du polymère pour retrouver les monomères par découpes successives de liens.
@@ -792,7 +792,7 @@ Nous allons ici présenter ces deux approches.
 
 \subsubsection{CHUCKLES, une méthode constructive}
 
-\paragraph{}CHUCKLES~\cite{siani_chuckles:_1994} est une méthode publiée en 1994 permettant de rechercher des peptides au sein d'une base de données.
+\paragraph{}CHUCKLES~\cite{siani_chuckles:_1994} est une méthode publiée en 1994 pour la recherche des peptides au sein d'une base de données.
 Le but est de requêter une base de données de molécules en utilisant des expressions régulières représentant des sous-molécules d'intérêt.
 Les recherches peuvent être effectuées à la fois au niveau atomique et au niveau monomérique.
 Le but de CHUCKLES est de convertir rapidement les données du format monomérique vers le format atomique et inversement.
@@ -810,14 +810,15 @@ Cette transformation est appelée ``Forward-Translation'' (FT).
   \end{center}
 \end{figure}
 
-\paragraph{}Pour mener à bien chaque ST, les auteurs ont besoin d'une table de transformation qui recense les structures atomiques de chacun des monomères à transformer.
+\paragraph{}Pour mener à bien chaque FT, les auteurs utilisent une table de transformation qui recense les structures atomiques de chacun des monomères à transformer.
 Chaque structure ne doit pas contenir les atomes qui vont être perdus lors des liaisons avec d'autres monomères.
 Pour les structures linéaires, la méthode propose une simple concaténation des structures atomiques selon la chaîne peptidique.
 Lorsque les structures sont branchées ou cycliques, il est nécessaire d'ajouter dans la structure initiale l'information de liaison annexe.
 
-Cette méthode de reconstruction des structures atomiques est très intéressante mais souffre du manque d'information des séquences protéiques.
-On peut remarquer que la reconstruction ne peut fonctionner à tous les coups sans plus d'information.
-En effet, si les monomères ne possèdent pas de groupement carboxyl et amine, la reconstruction ne peut pas être effectuée sans choix aléatoires d'orientation.
+Cette méthode de reconstruction des structures atomiques est très intéressante mais souffre du manque d'information sur le sens des monomères inclus.
+On peut remarquer que la reconstruction ne peut fonctionner à tous les coups sans cette d'information.
+En effet, si les monomères ne possèdent pas un groupement carboxyl et un amine, le sens de naturel des liaisons peptidique ne peut être retrouvé.
+La reconstruction se fait alors en utilisant un sens aléatoire pour le monomère.
 
 \begin{figure}[!ht]
   \begin{center}
@@ -835,9 +836,9 @@ En effet, si les monomères ne possèdent pas de groupement carboxyl et amine, l
 \paragraph{}La seconde partie de la méthode présente la transformation inverse (``Backward-Transformation'' (BT)).
 C'est cette partie qui est très intéressante pour l'annotation car elle part des structures atomiques pour reconstruire les structures monomériques.
 Les auteurs proposent une annotation en deux temps.
-Le premier temps représente la phase de recherche des monomères et le second temps la conversion des monomères trouvés en une annotation.
+Tout d'abord, la phase de recherche des monomères et le second temps la conversion des monomères trouvés en une annotation.
 L'idée de la première phase est de rechercher chaque monomère connu en masquant les atomes déjà utilisés par des monomères précédemment trouvés.
-En recherchant les monomères par nombre d'atomes décroissant, les auteurs s'assurent que de petits monomères ne viendront pas prendre la place de plus gros.
+En recherchant les monomères par taille (nombre d'atomes) décroissante, les auteurs s'assurent que de petits monomères ne viendront pas prendre la place de plus gros.
 Lors de la seconde phase, les atomes des molécules sont contractés pour ne plus former qu'un seul n\oe{}ud par monomère.
 Le N terminal de la chaîne peptidique est ensuite recherché afin d'extraire l'annotation de cette chaîne en suivant les liaisons peptidiques.
 Enfin, les liaisons n'ayant pas encore été explorées sont ajoutées à la représentation monomérique finale.
@@ -875,7 +876,7 @@ Pour des protéines ribosomiques, la découpe sera donc parfaite avec cette seul
   \begin{center}
     \includegraphics[width=300px]{Figures/s2m/Intro/molBlocks_problem.png}
     \caption{\label{molBlocks_problem}Dans le cas de ce di-peptide, un sucre est lié à une Hydroxy-Phenil-Glycine (Hpg).
-    En utilisant la règle de découpe à appliquer pour les hydroxyl, une ambigüité et une erreur apparaissent.
+    En utilisant la règle de découpe à appliquer pour les hydroxyl, une ambiguïté et une erreur apparaissent.
     Nous ne pouvons savoir de quel côté les découpes vont être les plus pertinentes avant d'essayer de reconnaître les monomères.
     De ce fait, 4 découpes différentes sont possibles.
     De plus, le cycle du sucre se voit ouvert alors que la découpe est inutile.}
@@ -892,8 +893,8 @@ Pour pouvoir la délier, il faudrait une règle du type
 \begin{chemmath}
   COC \longrightarrow CO + C
 \end{chemmath}
-Mais ce genre de règle est ambigu.
-Comment savoir de quel côté du O la liaison doit être rompue ?
+Mais ce genre de règle est ambiguë.
+Il est impossible de connaître de quel côté du O la liaison doit être rompue.
 De plus, certains monomères comme le glucose sont initialement composés de $COC$.
 Ces monomères seront donc découpés alors qu'ils ne devraient pas l'être.
 Pour ces deux raisons, nous ne pourrons pas directement utiliser ce logiciel afin de convertir nos structures atomiques en structures monomériques.
@@ -921,12 +922,13 @@ Cette base étant, essayons de concevoir un algorithme constructif.
 
 \subsubsection{Une histoire de sous problèmes}
 
-\paragraph{}L'algorithme CHUCKLES tire partie de la différence entre les 20 acides aminés pour se permettre de rechercher les plus gros en premier et de ne jamais revenir sur les choix faits.
+\paragraph{}La méthode CHUCKLES tire partie de la différence entre les 20 acides aminés pour se permettre de rechercher les plus gros en premier et de ne jamais revenir sur les choix faits.
 Rechercher les monomères par taille (en nombre d'atomes) décroissante et en masquant les atomes déjà utilisés est un choix pertinent car il permet d'éviter de reconnaître partout les petits acides aminés.
 Dans notre cas, la proximité entre certains monomères ne nous permettra pas de les départager grâce à un tri par taille.
+Nous risquons d'introduire de trops gros monomères prenant la place d'autres et créant artificiellement des ``trous'' dans l'annotation.
 Il sera nécessaire de modifier les solutions incomplètes pour essayer de les améliorer.
 Contrairement à CHUCKLES, nous aurons donc besoin de connaître les différents monomères candidats à la composition du polymère même lorsqu'ils sont chevauchants à des monomères déjà placés.
-Si d'un côté nous recherchons les monomères au sein du NRP puis de l'autre nous assemblons ceux trouvés, alors nous pouvons séparer notre programme en deux sous-problèmes complètement distincts.
+Si d'un côté nous recherchons les monomères au sein du NRP, puis de l'autre nous assemblons ceux trouvés, alors nous pouvons séparer notre programme en deux sous-problèmes complètement distincts.
 
 \begin{figure}[!ht]
   \begin{center}
@@ -935,10 +937,10 @@ Si d'un côté nous recherchons les monomères au sein du NRP puis de l'autre no
   \end{center}
 \end{figure}
 
-\paragraph{}Dans un premier temps, nous allons chercher à déterminer quels sont les monomères qui pourraient composer le peptide étudié.
+\paragraph{}Dans un premier temps, nous allons chercher à déterminer quels sont les monomères qui pourraient être les candidats pour composer le peptide étudié.
 En utilisant la base Norine, nous pouvons indépendamment rechercher chacun des monomères connus au sein de la molécule à annoter.
 La recherche exacte d'un monomère au sein d'un peptide est donc notre premier sous problème à résoudre.
-Ce sous problème sera appelé la ``recherche'' (voir figure \ref{search_fig}).
+Ce sous problème sera appelé la ``recherche'' et sera expliqué en section \ref{search_fig}.
 
 \begin{figure}[!ht]
   \begin{center}
@@ -953,14 +955,14 @@ Nous aurons plusieurs contraintes associées à ce problème.
 Aucun des monomères choisis dans la solution ne peux être chevauchant avec un autre.
 En effet, aucun atome ne peut provenir de deux molécules différentes et donc aucune sous partie de monomères ne peut être chevauchante avec un autre monomère.
 De plus nous allons chercher à obtenir une annotation complète des peptides, ce qui correspond à maximiser les atomes du polymère couvert par des monomères.
-On appellera cette étape l'étape de ``pavage'' (voir figure \ref{tiling_fig}).
+On appellera cette étape l'étape de ``pavage'' et sera expliqué en section \ref{tiling_fig}.
 
 \subsubsection{Des molécules aux graphes}
 
 \newtheorem{definition}{Definition}
 \begin{definition}\textbf{Graphe :}
  Un graphe est une représentation mathématique d'un ensemble d'objets où chacun des objets est appelé un sommet et
- chaque relation entre deux objets est représentée par un lien entre les deux sommets correspondants.
+ chaque relation entre deux objets est représentée par une arête entre les deux sommets correspondants.
  On appéllera arité d'un noeud dans un graphe, le nombre de liens connectés à ce noeud.
 \end{definition}
 
@@ -976,7 +978,7 @@ Passer du graphe atomique au graphe monomérique revient donc à une contraction
 
 \subsubsection{Formalisation en problèmes de graphes}
 
-\paragraph{}Comme expliqué plus haut le problème de recherche de sous composants d'un polymère peut être divisé en deux
+\paragraph{}Comme expliqué plus haut, le problème de recherche de sous composants d'un polymère peut être divisé en deux
 plus petit problèmes : un problème de recherche de monomères et un problème de placement des monomères trouvés. Traitons
 donc séparément ces deux problèmes.
 
