@@ -2526,7 +2526,7 @@ Cette fois-ci c'est l'annotation monomérique présente dans Norine qui est à c
 
 \begin{figure}[h!]
   \begin{center}
-    \includegraphics[width=450px]{Figures/s2m/results/cyclotheonamide.png}
+    \includegraphics[width=400px]{Figures/s2m/results/cyclotheonamide.png}
     \caption{\label{cycloth}Résultat de s2m pour la Cyclotheonamide E (peptide de Norine).
     L'annotation monomérique recouvre l'entiéreté des atomes du peptide mais n'est pas correcte à cause d'une équivalence entre monomères.}
   \end{center}
@@ -2612,10 +2612,16 @@ Pour les peptides, il existe également une recherche par sous graphe dont nous 
 
 \subsubsection{L'interface web}
 
-\paragraph{TODO impression écran page peptide}
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=450px]{Figures/Norine/malformin_nor.png}
+    \caption{\label{interface}Page de présentation de peptide dans l'interface Norine.
+    L'image a été contractée pour passer en une page.}
+  \end{center}
+\end{figure}
 
 \paragraph{}Comme nous l'avons déjà évoqué, toute la base de données est axée autour de notre matière première : les peptides.
-Les pages centrale du site web sont donc logiquement les pages d'information correspondant à chaque NRP.
+Les pages centrale du site web sont donc logiquement les pages d'information correspondant à chaque NRP (voir figure \ref{interface}).
 Ces pages sont divisées en trois parties.
 En haut de la page se trouvent les informations générales comme le nom, l'identifiant ou la liste des activités connues de ce peptide.
 La masse moléculaire est également présente et est particulièrement utile en spectrométrie de masses.
@@ -2657,8 +2663,6 @@ Pour résumer cette requête, nous avons :
  \item Un lien sortant du premier n\oe{}ud (n\oe{}ud 0) pour joindre le n\oe{}ud 1 (la @1 en première position)
  \item Un lien sortant du deuxième n\oe{}ud (n\oe{}ud 1) pour joindre le n\oe{}ud 0 (la @0)
 \end{itemize}
-
-\paragraph{TODO : Schéma résultats requête}
 
 \paragraph{}Une fois la requête formatée, il est possible d'exécuter deux algorithmes différents.
 L'un des deux est un isomorphisme de sous graphe.
