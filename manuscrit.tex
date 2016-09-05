@@ -1750,8 +1750,6 @@ L'algorithme qui décrit la recherche d'une famille est donc le suivant :
 \end{algorithm}
 
 
-
-
 \subsection{Pavage de monomères}
 
 \subsubsection{Pavage : définition}
@@ -1759,11 +1757,11 @@ L'algorithme qui décrit la recherche d'une famille est donc le suivant :
 \paragraph{}La méthode de recherche des isomorphismes de sous graphe présentée précédemment, trouve toutes les occurrences de chacun des monomères dans un peptide cible.
 
 Puisque nous connaissons les atomes contenus dans chacun des isomorphismes découverts, nous pouvons également connaître chacun des
-isomorphismes découvert par atome.
+isomorphismes découverts par atome.
 L'étape de pavage consiste à choisir un sous ensemble des isomorphismes trouvés, de manière à maximiser les atomes couverts par ces
 isomorphismes en ayant pour chaque atome au plus un seul isomorphisme présent dans ce sous ensemble.
 
-Faisons une analogie avec un puzzle. La phase d'isomorphisme créée de nombreuses pièces de puzzle.
+Faisons une analogie avec un puzzle. La phase d'isomorphisme crée de nombreuses pièces de puzzle.
 Une reconstruction complète du puzzle n'est pas forcément faisable uniquement à partir de ces pièces.
 De plus, parmi celles dont nous disposons, certaines se chevauchent.
 La phase de pavage consiste à choisir parmi les pièces, celles que l'on souhaite garder en maximisant le remplissage de notre puzzle et sans avoir de pièces chevauchantes (figure \ref{puzzle}).
@@ -1773,7 +1771,7 @@ La phase de pavage consiste à choisir parmi les pièces, celles que l'on souhai
   \caption{\label{puzzle}Un pavage est une recherche des meilleures pièces permettant de construire le puzzle des monomères}
 \end{figure}
 
-\paragraph{}Dans l'idéal, toutes les pièces nécessaire à la reconstruction du puzzle complet sont présentes dans l'ensemble des
+\paragraph{}Dans l'idéal, toutes les pièces nécessaires à la reconstruction du puzzle complet sont présentes dans l'ensemble des
 pièces trouvées. Dans le cas contraire, on ne peut pas reconstruire complètement le peptide à partir des résidus trouvés. 
 Dans ce cas, notre
 but sera alors de trouver un assemblage le plus complet possible. Si beaucoup de résidus ont été trouvés lors de la première phase
@@ -1811,8 +1809,8 @@ La vérification du certificat peut être faite de manière quadratique, ce qui 
 Nous avons besoin de définir 3 notions pour notre codage :
 \begin{itemize}
 	\item Les atomes du peptide : Les atomes du peptide représenteront les cases de la matrice pizza.
-	\item Les liens entre atomes : Les liens représentent les voisinage de deux cases.
-Si deux cases sont voisine (voisinage de Manhattan), alors un lien existe entre les deux atomes qui les représentent.
+	\item Les liens entre atomes : Les liens représentent les voisinages de deux cases.
+Si deux cases sont voisines (voisinage de Manhattan), alors un lien existe entre les deux atomes qui les représentent.
 	\item Les résidus : Les résidus correspondent aux parts royales de pizza.
 Chaque case faisant partie de la case sera représentée par un atome du résidu.
 \end{itemize}
@@ -1839,7 +1837,7 @@ Pavage est donc NP-Complet.
 problème de programmation linéaire est un
 problème représenté par un ensemble de variables, une fonction de score ainsi qu'une liste de contraintes sur les variables. La
 fonction de score est accompagnée d'un objectif de maximisation ou de minimisation. Ce type de problème est classiquement résolu
-par l'algorithme du simplexe~\cite{murty_linear_1983}. Depuis la publication, de nombreuses variante de l'algorithme ont été
+par l'algorithme du simplexe~\cite{murty_linear_1983}. Depuis la publication, de nombreuses variantes de l'algorithme ont été
 créées. L'une d'elle, appelée ``Mixed Integer Programming'' (MIP)~\cite{wolsey_mixed_2007}, permet de résoudre des problèmes
 pour lesquels les variables sont des entiers.
 
@@ -1871,7 +1869,7 @@ donc la somme des présences des résidus pondérée par la taille de chaque ré
  score : \sum^{r_i} v_{r_i} * size(r_i)
 \end{equation}
 
-\paragraph{}La réduction de notre problème de pavage en un MIP nous autorise l'utilisation des solveurs déjà existant pour trouver la solution exacte.
+\paragraph{}La réduction de notre problème de pavage en un MIP nous autorise l'utilisation des solveurs déjà existants pour trouver la solution exacte.
 Nous pouvons par exemple utiliser la bibliothèque GLPK (l'une des seules bibliothèques de LP sous licence libre).
 
 \paragraph{Schéma : Vue globale de la réduction en MIP}
@@ -1929,14 +1927,14 @@ C'est un critère classiquement utilisé pour la résolution gloutonne du probl�
 aient exactement le même nombre d'atome.
 Dans ce cas, le critère de taille n'est plus suffisant pour le tri et il nous faut en ajouter d'autres.
 
-En plus de leur taille les résidus peuvent être caractérisés par leurs types de liaisons.
+En plus de leur taille les résidus peuvent être caractérisés par leurs types de liaisons chimiques.
 Chaque résidu forme des liens qui peuvent être différent d'un résidu à l'autre.
 Certains liens apparaissent fréquemment alors que d'autres beaucoup moins, ce qui nous permet en théorie d'estimer les
 probabilités d'apparition d'un lien par rapport à un autre.
 Ainsi, on peut considérer qu'un résidu contenant des liens qui apparaissent très souvent a plus de chance d'être le bon résidu
 face à un second de même taille contenant des liens moins fréquents.
 Cependant, nous ne possédons pas de statistiques sur les fréquences d'apparition des types de lien.
-Pour tout même pouvoir classer les résidus de cette manière, nous requérons l'expertise de l'utilisateur.
+Pour tout de même pouvoir classer les résidus de cette manière, nous requérons l'expertise de l'utilisateur.
 
 Avant la phase d'indexation, l'utilisateur doit définir les différentes
 règles de liaison qu'il veut voir apparaître dans les monomères. C'est à ce moment que nous lui demandons également de remplir
@@ -1946,7 +1944,7 @@ information, nous
 sommes capable pour chaque résidu de donner un poids moyen par liaison et ainsi de comparer la confiance que l'on peut
 avoir en chacun des résidus. Les résidus de poids moyen les plus élevés seront triés au début de la liste.
 
-\paragraph{}Dans le cas où plusieurs résidus ne peuvent être départager lors du tri, nous considérons qu'ils sont équivalents et
+\paragraph{}Dans le cas où plusieurs résidus ne peuvent être départagés lors du tri, nous considérons qu'ils sont équivalents et
 leur ordre sera aléatoire.
 
 
@@ -2023,7 +2021,7 @@ couvrant des zones non couvertes de la solution partielle.
 
 
 \paragraph{}L'algorithme permet d'explorer toutes les solutions possibles jusqu'à obtenir la meilleure. Le problème majeur
-est que si une solution parfaite n'existe pas, l'algorithme de modulation va parcourir tout l'arbre des solution et l'exécution
+est que si une solution parfaite n'existe pas, l'algorithme de modulation va parcourir tout l'arbre des solutions et l'exécution
 ne sera pas plus rapide que l'exécution d'une résolution de MIP. Rappelons que le pavage glouton effectue des choix que nous
 supposons pertinents. Il n'est donc normalement pas nécessaire de modifier la solution en profondeur pour 
 obtenir l'idéal. Si la solution n'est pas trouvée rapidement, il y a fort à parier que la solution idéale n'existe
@@ -2037,15 +2035,15 @@ possible après $i$ appels récursifs ($i$ paramétrable).
 
 \paragraph{}Suite à des variations de composition ou de structure survenant dans certains résidus quelques polymères ne sont pas
 découpés correctement en utilisant les algorithmes précédents. Il y a essentiellement deux cas pour lesquels l'isomorphisme
-ne fonctionne pas. Dans un premier cas, nous avons a faire à un monomère ionisé au sein du peptide. Dans ce cas, il se peut qu'un
-proton ait été perdu et lors de la phase d'isomorphisme, la fonction de matching d'étiquettes ne répond plus correctement car il
-manque un décorateur $H$ sur l'un des atomes. Dans le second cas c'est encore l'isomorphisme qui ne reconnaît pas un résidu car
-celui-ci est intégré sous une forme tautomérique (voir figure \ref{tautomer}).
+ne fonctionne pas. Le premier cas concerne un monomère ionisé au sein du peptide, c'est-à-dire qu'un proton a été perdu. 
+Ainsi, lors de la phase d'isomorphisme, la fonction de matching d'étiquettes ne répond plus correctement car il
+manque un décorateur $H$ sur l'un des atomes. Dans le second cas, c'est encore l'isomorphisme qui ne reconnaît pas un résidu car
+celui-ci est intégré sous un variant tautomérique (voir figure \ref{tautomer}).
 Un tautomère de molécule est un isomère structurel de cette molécule.
 C'est à dire que la molécule tautomérique contient l'ensemble des atomes de la molécule initiale  mais certains
-de ces atomes ne sont plus liés aux même voisins. Dans le cas d'un tautomère, c'est un noyau d'hydrogène qui se déplace et change
+de ces atomes ne sont plus liés aux mêmes voisins. Dans le cas d'un tautomère, c'est un noyau d'hydrogène qui se déplace et change
 de voisin. Cette charge positive déplacée est compensée par une charge négative qui se déplace dans l'autre sens. Ce déplacement
-d'électron se concrétise par le déplacement d'un liaison double.
+d'électron se concrétise par le déplacement d'une liaison double. Ce déplacement peut même avoir lieu entre deux résidus d'un peptide.
 
 \begin{figure}
   \begin{center}
@@ -2058,7 +2056,7 @@ d'électron se concrétise par le déplacement d'un liaison double.
 Dans les deux cas seuls les ``décorateurs'' des étiquettes sont modifiés (hydrogènes et arité de liaison).
 Le moyen simple de reconnaître ce type de molécule est alors d'oublier ces décorateurs lors de la phase d'isomorphisme.
 Dès lors les résidus sont reconnus quel que soient leurs variations sur les hydrogènes ou les liens.
-Cette modification ne fait pas varier la qualité des résultats sur les NRP car les monomères utilisés différent entre eux au delà des atomes d'hydrogène.
+Cette modification ne fait pas varier la qualité des résultats sur les NRP car les monomères utilisés diffèrent entre eux au delà des atomes d'hydrogène.
 Bien que très séduisante cette méthode pose un problème de temps de calcul.
 La plupart des monomères NRP ne contiennent que des atomes C N O et H.
 Ne pouvant plus utiliser les H comme décorateurs et en rendant les liens indifférents les uns des autres, le nombre d'étiquettes différentes chute à 9.
@@ -2067,11 +2065,11 @@ Il est donc compréhensible que le temps de calcul augmente beaucoup.
 \paragraph{}La solution est une nouvelle fois hybride.
 Dans un premier temps, nous cherchons rapidement une solution en effectuant un
 isomorphisme contenant toutes les étiquettes (isomorphisme {\em strict}), puis en effectuant un pavage.
-Dans un second temps si aucune solution complète n'est trouvée, nous relançons tout le processus en commençant par
+Dans un second temps si aucune solution complète n'est trouvée, nous relançons le processus en commençant par
 une nouvelle phase d'isomorphisme sans les décorateurs (isomorphisme {\em light}).
 Cette seconde phase d'isomorphisme est effectuée localement autour des zones qui ont posé problème lors du premier tour de 
 l'algorithme.
-Cette algorithme en deux temps traite rapidement tous les cas simples avec des sous algorithmes efficaces puis
+Cet algorithme en deux temps traite rapidement tous les cas simples avec des sous algorithmes efficaces puis
 de revenir sur les cas plus difficiles avec des algorithmes plus sensibles.
 
 \subsubsection{Vue globale des algorithmes}
@@ -2085,17 +2083,21 @@ de revenir sur les cas plus difficiles avec des algorithmes plus sensibles.
 
 \paragraph{}Tout au long cette partie, nous avons présenté par morceaux les différentes parties de Smiles2Monomers.
 Nous rassemblons ici tous les morceaux au sein d'un schéma global (figure \ref{global_s2m}).
-Le première partie du schéma (au dessus des pointillés) est composée des deux phases de pré-calcul (voir \ref{index_p}).
+La première partie du schéma (au-dessus des pointillés) est composée des deux phases de pré-calcul (voir \ref{index_p}).
 Cette étape de pré-calcul est lourde en temps mais n'est à effectuer qu'une seule fois.
-Chacune des deux phases de cette étape se déroule en temps exponentiel mais reste calculables grâce à la petite taille des
+Chacune des deux phases de cette étape se déroule en temps exponentiel mais reste calculable grâce à la petite taille des
 données.
 La partie principale de s2m possède deux alternatives algorithmiques.
 Dans les deux cas, l'algorithme commence par une phase de recherche d'isomorphismes (voir \ref{isomorphisme_p}) afin de connaître les résidus candidats à la composition du polymère.
 Ensuite vient la phase de pavage effectuée soit par une résolution de MIP (voir \ref{MIP_p}) soit par une heuristique de pavage (voir \ref{TM_p}).
-Enfin, pour les cas plus difficile, nous effectuons plusieurs passes de recherche d'isomorphismes light (voir \ref{light_p}) et de nouveaux pavages.
+Enfin, pour les cas plus difficiles, nous effectuons plusieurs passes de recherche d'isomorphismes light (voir \ref{light_p}) et de nouveaux pavages.
 
 L'algorithme global est paramétrable.
+<<<<<<< HEAD
+Pour le pré-calcul, nous pouvons fixer la variable $k$ qui définira la taille de chaine calculée avec le modèle markovien.
+=======
 Pour le précalcul, nous pouvons fixer la variable $k$ qui définira la taille de chaîne calculée avec le modèle markovien.
+>>>>>>> 8c9a6c9c7d5582e49c30aa7e592f59137e9fab36
 Nous rappelons encore une fois que cette taille n'aura pas d'influence sur le résultat mais uniquement sur le temps de calcul.
 Pour la partie recherche, nous devrons choisir le nombre de fois où nous effectuerons la ``boucle light''.
 Ce paramètre est appelé ``retry'' dans le logiciel (nombre de fois où l'on ré-exécute la boucle).
@@ -2113,7 +2115,7 @@ L'influence de ces paramètres sur l'exécution de l'algorithme sera étudiée d
 
 \paragraph{}Nous souhaitons connaître la pertinence des annotations issues de s2m.
 Pour cela, nous avons construit deux jeux de données tests, au sein desquels les annotations attendues sont déjà connues.
-Ces bases de test sont composées de polymères comprenant leur SMILES, représentation de leur structure atomique ainsi que de l'annotation attendue (un graphe monomérique).
+Ces bases de test sont composées de polymères comprenant leur SMILES (représentation de leur structure atomique) ainsi que l'annotation attendue (graphe monomérique).
 Pour les entrées de s2m, nous constituons une base de monomères pour chacun des jeux de données.
 s2m pré-calculera les indexes pour chaque base de monomère puis s'exécutera sur chaque polymère.
 L'annotation de sortie sera alors comparée à l'annotation préexistante pour en définir la qualité.
@@ -2122,8 +2124,8 @@ L'annotation de sortie sera alors comparée à l'annotation préexistante pour e
 \subsubsection{Premier jeu de données : Norine}
 
 \paragraph{}Puisque le déclenchement de ce travail est dû à la volonté d'accroitre le nombre d'annotations de NRP dans Norine, le premier jeu de données sera logiquement constitué de polymères non ribosomiques déjà annotés issus de cette base.
-Toutes les entrées de Norine sont accompagnées d'annotations monomérique et c'est d'ailleurs ce qui fait la force de cette base.
-Nous avons donc extrait tous les NRP pour lesquels un SMILES était renseigné pour constituer un jeu de polymères test.
+Toutes les entrées de Norine sont accompagnées d'annotations monomériques et c'est d'ailleurs ce qui fait la force de cette base.
+Nous avons donc extrait tous les NRP pour lesquels un SMILES était renseigné pour constituer un jeu de polymères tests.
 La base de monomères est quant à elle constituée de l'ensemble des monomères connus et présents dans Norine.
 
 
@@ -2146,7 +2148,7 @@ Les données de validation seront composées de deux jeux distincts.
 D'un côté les polymères extraits de Norine seront au nombre de 343.
 Les données NRP seront accompagnées des 533 monomères de la base.
 Le second jeu est issu de la base CCD et comporte 378 polymères et 507 monomères issus des annotations.
-Il est à noté qu'aucun des polymères présent dans une base n'est présent dans l'autre et que seuls 63 monomères sont communs.
+Il est à noter qu'aucun des polymères présents dans une base n'est présent dans l'autre et que seuls 63 monomères sont communs.
 Ces monomères identiques sont en très grande majorité des acides aminés classiques et leurs variants proches.
 
 \begin{figure}[!ht]
@@ -2177,8 +2179,8 @@ C'est l'information la plus parlante visuellement car elle permet d'immédiateme
 
 Sous l'image du peptide se trouvent trois listes de monomères.
 La première liste correspond aux monomères découverts dans la structure atomique par s2m et que l'on sait être justes grâce aux annotations déjà connues.
-Le seconde liste correspond également aux monomères découverts par s2m mais qui cette fois-ci ne sont pas présent dans l'annotation initiale.
-La dernière correspond aux monomères qui sont présent dans l'annotation mais qui n'ont pas été trouvés par s2m.
+Le seconde liste correspond également aux monomères découverts par s2m mais qui cette fois-ci ne sont pas présents dans l'annotation initiale.
+La dernière correspond aux monomères qui sont présents dans l'annotation mais qui n'ont pas été trouvés par s2m.
 
 La dernière partie de la figure représente les informations générales sur le polymère.
 Tout d'abord, il y a le nom du polymère puis les statistiques sur celui-ci.
@@ -2186,8 +2188,8 @@ La première statistique est le taux de couverture atomique (Coverage).
 Cette valeur donne le ratio des atomes annotés par s2m comme faisant partie des monomères trouvés par le nombre d'atomes du polymère.
 La seconde valeur donne également un ratio d'atomes mais uniquement pour les atomes correctement annotés.
 Cette valeur ne prend en compte que les atomes faisant partie des monomères de la première des trois listes.
-Lors de la présentation des résultats qui suivront, nous ferons toujours attention de bien mentionner si les chiffres sont des comptages monomériques ou des comptages atomique.
-Les pourcentages de l'un à l'autre peuvent être fort différents dû à la variabilité du nombre d'atomes composant les monomères.
+Lors de la présentation des résultats, nous ferons toujours attention de bien mentionner si les valeurs sont des comptages monomériques ou des comptages atomiques.
+Les pourcentages de l'un à l'autre peuvent être très différents à cause de la variabilité du nombre d'atomes composant les monomères.
 
 
 
@@ -2196,16 +2198,16 @@ Les pourcentages de l'un à l'autre peuvent être fort différents dû à la var
 \subsection{Choisir les paramètres}
 
 \paragraph{}Nous allons tout d'abord nous poser la question de comment choisir les bons paramètres pour effectuer nos tests.
-Nous reviendrons d'abord sur la façon de fixer le paramètre d'apprentissage pour le précalcul.
+Nous reviendrons d'abord sur la façon de fixer le paramètre d'apprentissage pour le pré-calcul.
 Rappelons que de ce paramètre découlera le temps de calcul pour les peptides mais que la qualité des résultats ne variera pas.
 Puis nous parlerons de la qualité des résultats obtenus en exécutant le programme pour plusieurs paramètres.
 Enfin nous étudierons le temps de calcul pour estimer les rapports temps/qualité et ainsi pouvoir recommander les meilleurs calibrations de l'outil.
 
-\subsubsection{Choisir le k du précalcul}
+\subsubsection{Choisir le k du pré-calcul}
 
 \paragraph{}Pour rappel, l'isomorphisme de sous graphe est effectué à partir de chaînes pré-calculées afin d'optimiser le temps de recherche (voir partie \ref{index_markov}).
 Ces chaines sont formées de deux sous-parties.
-La première, de taille k, est optimale sur la base d'apprentissage.
+La première, de taille k, est optimale pour le temps de calcul sur la base d'apprentissage.
 La seconde est générée de manière gloutonne.
 
 Ici, nous allons faire varier ce paramètre k et tester les temps de calcul sur les jeux de données.
@@ -2226,24 +2228,33 @@ Le graphique de droite représente le temps d'apprentissage en fonction du k.
 
 Quels que soient les valeurs de k, la recherche est très rapide.
 On parle ici en centièmes de millisecondes.
+<<<<<<< HEAD
+Lorsque la chaine est entièrement générée de manière gloutonne, chaque isomorphisme prend environ 8 centièmes de ms.
+Ce temps descend à 5 centièmes à partir d'un k valant 3.
+Ce résultat est très intéressant car il nous montre que seuls les 3 premiers n\oe{}uds sont utiles pour l'optimisation des chaînes.
+Les monomères non trouvables dans un peptide donné (même ceux étant constitués de plusieurs dizaines d'atomes), peuvent déjà tous être éliminés après 3 atomes si les chaines sont correctement formées.
+Il n'est donc pas nécessaire de pré-calculer (sur nos données) des chaines avec un k supérieur à 3.
+Ce pré-calcul fait gagner près de 35\% d'efficacité à chaque recherche de SI.
+=======
 Lorsque la chaîne est entiérement générée de manière gloutonne, chaque isomorphisme prend environ 8 centièmes de ms.
 Ce temps descend à 5 centièmes à partir d'un k valant 3.
 Ce résultat est très intéressant car il nous montre que seuls les 3 premiers n\oe{}uds sont utiles pour l'optimisation des chaînes.
 Les monomères non trouvables dans une peptide donné (même ceux étant constitués de plusieurs dizaines d'atomes), peuvent déjà tous être éliminés après 3 atomes si les chaînes sont correctement formées.
 Il n'est donc pas nécessaire de précalculer (sur nos données) des chaînes avec un k supérieur à 3.
 Ce précalcul fait gagner près de 35\% d'efficacité à chaque recherche de SI.
+>>>>>>> 8c9a6c9c7d5582e49c30aa7e592f59137e9fab36
 
 
 \subsubsection{Mesures}
 
-\paragraph{}Classiquement, lorsque l'on souhaite évaluer les résultats d'une prédiction, on utilise les statistiques découlant des vrai/faux positifs/négatifs.
+\paragraph{}Classiquement, lorsque l'on souhaite évaluer les résultats d'une prédiction, on utilise les statistiques découlant des vrais/faux positifs/négatifs.
 Commençons par définir chacune de ces catégories dans notre cas :
 \begin{itemize}
  \item Vrai positif (VP) : Un vrai positif est obtenu lorsque le résultat de la prédiction est identique au résultat attendu.
-Dans notre cas, une annotation peptidique est un VP si tous les monomères présents dans l'annotation de s2m sont également présent au sein de l'annotation du jeu de test et inversement.
+Dans notre cas, une annotation peptidique est un VP si tous les monomères présents dans l'annotation de s2m sont également présents au sein de l'annotation du jeu de test et inversement.
 Nous aurons donc une couverture et un correctness de 100\%.
  \item Faux positif (FP) : Un faux positif est obtenu lorsque le résultat de la prédiction parait correct mais qu'il diffère du résultat attendu.
-Dans notre cas, une annotation est un FP si tout ses atomes sont couverts par l'annotation mais que celle-ci diffère du jeu test.
+Dans notre cas, une annotation est un FP si tous ses atomes sont couverts par l'annotation mais que celle-ci diffère du jeu test.
 Nous aurons donc une couverture de 100\% et un correctness inférieur à 100\%
  \item Faux négatif (FN) : Un faux négatif est obtenu lorsque le résultat ne parait pas correct alors qu'il est possible de l'obtenir.
 Dans notre cas, une annotation est un FN lorsque nous n'arrivons pas à produire une annotation complète du peptide.
@@ -2261,8 +2272,8 @@ Il est toujours possible d'obtenir une annotation couvrante vu qu'elles sont tou
 \paragraph{}Pour le choix des paramètres, nous n'allons pour le moment pas prendre en compte le temps d'exécution.
 Les but ici est d'exposer uniquement la qualité des résultats.
 Pour cela nous allons prendre comme indicateurs la couverture atomique moyenne, le correctness atomique moyen et les taux de VP/FP/FN.
-Nous allons faire varier le paramètre du nombre de tour de la boucle light ainsi que la profondeur de modulation pour le pavage avec modulation.
-Nous testerons également les deux algorithmes algorithmes de pavage (MIP et heuristique).
+Nous allons faire varier le paramètre du nombre de tour de la boucle light (R) ainsi que la profondeur de modulation pour le pavage avec modulation (M).
+Nous testerons également les deux algorithmes de pavage (MIP et heuristique).
 
 \begin{table}[!ht]
   \centering
@@ -2325,26 +2336,26 @@ Nous testerons également les deux algorithmes algorithmes de pavage (MIP et heu
 \end{figure}
 
 
-\paragraph{}Comme nous voyons au sein des tableaux \ref{nor_results} et \ref{ccd_results}, l'algorithme de pavage par optimisation linéaire n'est pas du tout sensible au changement de paramètres.
+\paragraph{}Comme nous voyons au sein des tableaux \ref{nor_results} et \ref{ccd_results}, l'algorithme de pavage par optimisation linéaire n'est pas du tout sensible aux changements de paramètres.
 Ceci s'explique par le fait qu'il n'a besoin que d'une seule phase light pour parvenir à son optimal local.
-En effet, dans certains cas, le problème et tout de suite résolu après la première phase de pavage succédant l'isomorphisme light car toutes les briques ont été correctement découvertes.
+En effet, dans certains cas, le problème est tout de suite résolu après la première phase de pavage succédant l'isomorphisme light car toutes les briques ont été correctement découvertes.
 Dans les autres cas, l'algorithme du MIP a tellement cherché à optimiser les nombre d'atomes couverts à la suite du premier pavage, que la solution intermédiaire est trop distante de la vraie solution pour pouvoir être rattrapée.
 
-Pour le pavage heuristique, la sensibilité aux paramètres est bien différente.
+Pour le pavage heuristique, la sensibilité aux paramètres est élevée.
 On peut voir que l'augmentation du nombre de modulations déclenche une augmentation du nombre de VP.
 Le nombre de vrais positifs augmente significativement en passant le paramètre de 1 à 2.
 Cette sensibilité s'explique par le fait que la solution optimale et la solution gloutonne ne sont pas immédiatement voisines.
-Il est souvent nécéssaire de déplacer non pas un mais deux monomères pour atteindre l'optimal.
+Il est souvent nécessaire de déplacer non pas un mais deux monomères pour atteindre l'optimal.
 Le paramètre de nombre de boucle light n'a que très peu d'influence et vient seulement compléter 3 résultats sur les données Norine et un seul sur les données de CCD.
 
 \paragraph{}En comparant les résultats des deux algorithmes, on s'aperçoit que l'algorithme comprenant l'heuristique de pavage obtient de meilleurs résultats (pour une modulation $\ge$ 2) que l'algorithme incluant un pavage exact.
 A nouveau, ce résultat s'explique par le fait que le pavage exact va trop loin dans l'optimisation.
 Si aucune solution totalement couvrante n'est possible avec les résidus issus de l'isomorphisme strict, alors le pavage maximal exact ira parfois créer des solutions optimisées globalement mais farfelues.
 Dans ce cas, la recherche de résidus par isomorphisme light sert peu car les trous dans l'annotation ont été déplacés par l'optimisation.
-Il n'est souvent plus facilement possible de construire l'annotation.
+Il n'est souvent plus possible de construire l'annotation réelle, à moins de déplacer de nombreux résidus.
 
 \paragraph{}Au final, les résultats obtenus sont strictement meilleurs en utilisant l'heuristique gloutonne de pavage avec une modulation de profondeur 2 et deux phases de recherche light.
-Nous ne nous attendions pas à ces résultats et la sur-optimisation du pavage par MIP nous a surprit mais 
+Nous ne nous attendions pas à ces résultats et la sur-optimisation du pavage par MIP nous a surpris mais 
 
 
 \subsubsection{Temps de calcul global}
@@ -2352,18 +2363,18 @@ Nous ne nous attendions pas à ces résultats et la sur-optimisation du pavage p
 \begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=400px]{Figures/s2m/results/temps.png}
-    \caption{\label{temps_general}Temps d'exécution moyen par peptide (en ms) en utilisant les deux pavages différents et différents parêtres pour chacun d'eux.}
+    \caption{\label{temps_general}Temps d'exécution moyen par peptide (en ms) en utilisant les deux pavages et différents paramètres pour chacun d'eux.}
   \end{center}
 \end{figure}
 
 \paragraph{}Pour choisir les paramètres il ne faut pas prendre que les résultats en considération mais également le temps qu'il faut pour les générer.
 Pour cela, nous avons effectué une analyse comparative des algorithmes en utilisant les différents paramètres cités précédemment.
-Comme nous pouvons le remarquer sur le schéma \ref{temps_general}, l'heuristique de pavage permet un temps d'exécution beaucoup plus faible le pavage MIP (Excepté pour le pavage heuristique 3-3 qui n'a pas d'importance puisqu'il n'apporte pas de qualité).
+Comme nous pouvons le remarquer sur le schéma \ref{temps_general}, l'heuristique de pavage obtient un temps d'exécution beaucoup plus faible que le pavage MIP (excepté pour le pavage heuristique 3-3 qui n'a pas d'importance puisqu'il n'apporte pas d'amélioration de qualité).
 Ce résultat était attendu mais l'écart flagrant vient confirmer la nécessité d'utiliser l'heuristique de pavage plutôt que le MIP.
-Après les contres-performances du pavage MIP, à la fois en qualité de résultats qu'en temps d'exécution, nous excluons cet algorithme des recommandations d'utilisation.
+Après les contres-performances du pavage MIP, à la fois en qualité de résultats et en temps d'exécution, nous excluons cet algorithme des recommandations d'utilisation.
 
 \paragraph{}Comparons désormais les temps d'exécution pour l'heuristique en fonction des paramètres passés au programme.
-Le pramètre du nombre de boucles light semble avoir le plus d'influence sur le temps d'exécution.
+Le paramètre du nombre de boucles light semble avoir le plus d'influence sur le temps d'exécution.
 Nous pouvons expliquer cette augmentation par la difficulté rencontrée par l'algorithme d'isomorphisme lorsque peu d'étiquettes sont présentes.
 Répéter l'opération plusieurs fois multiplie logiquement le temps d'exécution.
 
@@ -2374,10 +2385,12 @@ Effectuer une modulation plus poussée permet d'arriver beaucoup plus vite à un
 
 \paragraph{}Pour conclure cette partie  sur la sélection des paramètres, nous pouvons dire qu'il faudra toujours privilégier l'utilisation de l'algorithme de pavage heuristique par rapport au pavage MIP.
 Cependant, il ne faut pas utiliser n'importe quels paramètres.
-Pousser les paramètres de modulation ou de nombre de boucle à 3 ou au delà est parfaitement inutile en terme de résultats et consommera énormément de temps.
+Pousser les paramètres de modulation ou de nombre de boucle à 3 ou au delà est parfaitement inutile en terme de qualité de résultats et consommera énormément de temps.
 Utiliser un paramètre de modulation de 1 sera également une erreur puisque la qualité des résultats ne sera pas au rendez-vous.
 Il reste finalement deux alternatives intéressantes.
-Soit nous privilégions la qualité à la vitesse et nous réglons les deux paramètres à la valeur 2, soit nous acceptons de perdre quelques pourcents de bons résultats au profit de 30\% d'économie de temps en réglant uniquement la modulation à 2.
+Soit nous privilégions la qualité à la vitesse et nous réglons les deux paramètres à la valeur 2, soit nous acceptons de perdre quelques bons résultats au profit de 30\% d'économie de temps en réglant uniquement la modulation à 2.
+
+
 
 
 
