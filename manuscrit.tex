@@ -979,19 +979,19 @@ Passer du graphe atomique au graphe monomérique revient donc à une contraction
 \subsubsection{Formalisation en problèmes de graphes}
 
 \paragraph{}Comme expliqué plus haut, le problème de recherche de sous composants d'un polymère peut être divisé en deux
-plus petit problèmes : un problème de recherche de monomères et un problème de placement des monomères trouvés. Traitons
+plus petit problèmes : un problème de recherche de monomères et un problème de pavage des monomères trouvés. Traitons
 donc séparément ces deux problèmes.
 
 \paragraph{Recherche de monomères}Rechercher un monomère dans un polymère revient à rechercher un petit graphe atomique
 $S$ dans un plus gros graphe $G$. Deux cas sont alors possibles : soit nous cherchons à trouver exactement $S$ dans
 $G$, soit nous cherchons une approximation de $S$ dans $G$. Dans le premier cas, nous allons nous intéresser à l'
-``Isomorphisme de Sous-graphe'' (en anglais Subgraph Isomorphism (SI)). Dans le second cas, nous nous intéresserons au
-``Sous-graphe Maximum Commun'' (en anglais Maximum Common Subgraph (MCS)). Les recherches de SI ou de MCS ont toutes
+``Isomorphisme de Sous-graphe'' (en anglais \textit{Subgraph Isomorphism} (SI)). Dans le second cas, nous nous intéresserons au
+``Sous-graphe Maximum Commun'' (en anglais \textit{Maximum Common Subgraph} (MCS)). Les recherches de SI ou de MCS ont toutes
 deux été prouvées NP-Complet mais, pour chacun des problème, il existe des algorithmes rapides en pratique pour des graphes
 aux propriétés particulières dont nous parlerons dans la sous-partie suivante.
 
-\paragraph{Placements des monomères}Une fois les monomères détectés, il est nécessaire de prendre une décision pour les parties du polymère où plusieurs d'entre eux ont été détectés au même endroit.
-L'objectif est donc de faire un choix entre les différents morceaux possibles afin de chercher à ne garder que les pièces non chevauchantes qui permettent de couvrir au mieux le polymère (Si possible totalement).
+\paragraph{Pavage des monomères}Une fois les monomères détectés, il est nécessaire de prendre une décision pour les parties du polymère où plusieurs d'entre eux entre en conflit.
+L'objectif est donc de faire un choix entre les différents morceaux possibles afin de chercher à ne garder que les pièces non chevauchantes qui permettent de couvrir au mieux le polymère (si possible totalement).
 Ce genre de méthode est appelée pavage sans recouvrement.
 Cette étape donnant accès à un lien direct entre atomes et monomères, une étape de contraction de graphe permettra d'obtenir le graphe monomérique.
 
