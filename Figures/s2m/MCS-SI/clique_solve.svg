@@ -16,7 +16,7 @@
    version="1.1"
    inkscape:version="0.91 r13725"
    sodipodi:docname="clique_solve.svg"
-   inkscape:export-filename="/home/dufresne/Bonsai/These/Figures/s2m/MCS-SI/mcs.png"
+   inkscape:export-filename="/home/dufresne/Bonsai/These/Figures/s2m/MCS-SI/clique_solve.png"
    inkscape:export-xdpi="220"
    inkscape:export-ydpi="220">
   <defs
@@ -74,15 +74,15 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="665.80709"
-     inkscape:cy="450.21138"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="306.82656"
+     inkscape:cy="517.2054"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
-     inkscape:window-width="1855"
-     inkscape:window-height="1176"
-     inkscape:window-x="65"
+     inkscape:window-width="1615"
+     inkscape:window-height="1026"
+     inkscape:window-x="1985"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
      fit-margin-top="0"
@@ -103,7 +103,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -466,7 +466,7 @@
            y="-382.8891"
            x="1011.4137"
            id="tspan9780"
-           sodipodi:role="line">1</tspan></text>
+           sodipodi:role="line">a</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text9782"
@@ -477,7 +477,7 @@
            y="-383.3942"
            x="1170.1014"
            id="tspan9784"
-           sodipodi:role="line">2</tspan></text>
+           sodipodi:role="line">b</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text9786"
@@ -488,7 +488,7 @@
            y="-382.8891"
            x="1327.576"
            id="tspan9788"
-           sodipodi:role="line">3</tspan></text>
+           sodipodi:role="line">c</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text9790"
@@ -499,7 +499,7 @@
            y="-123.2952"
            x="1327.0709"
            id="tspan9792"
-           sodipodi:role="line">4</tspan></text>
+           sodipodi:role="line">d</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text9794"
@@ -510,7 +510,7 @@
            y="-123.09215"
            x="1169.5963"
            id="tspan9796"
-           sodipodi:role="line">5</tspan></text>
+           sodipodi:role="line">e</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text9798"
@@ -521,7 +521,7 @@
            y="-123.09215"
            x="1010.4036"
            id="tspan9800"
-           sodipodi:role="line">6</tspan></text>
+           sodipodi:role="line">f</tspan></text>
     </g>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2.00000024;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -686,7 +686,7 @@
          sodipodi:role="line"
          id="tspan10055"
          x="250.93834"
-         y="-13.555173">1-2</tspan></text>
+         y="-13.555173">1-b</tspan></text>
     <ellipse
        inkscape:export-ydpi="220"
        inkscape:export-xdpi="220"
@@ -730,7 +730,7 @@
          sodipodi:role="line"
          x="357.7074"
          y="14.798334"
-         id="tspan10061">2-1</tspan></text>
+         id="tspan10061">2-a</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -741,7 +741,7 @@
          sodipodi:role="line"
          id="tspan10067"
          x="427.6059"
-         y="90.151093">2-3</tspan></text>
+         y="90.151093">2-c</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -752,7 +752,7 @@
          sodipodi:role="line"
          id="tspan10071"
          x="440.83936"
-         y="184.69934">2-4</tspan></text>
+         y="184.69934">2-d</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -763,7 +763,7 @@
          sodipodi:role="line"
          id="tspan10075"
          x="392.65662"
-         y="269.65112">3-1</tspan></text>
+         y="269.65112">3-a</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -774,7 +774,7 @@
          sodipodi:role="line"
          id="tspan10079"
          x="297.8064"
-         y="321.87448">3-3</tspan></text>
+         y="321.87448">3-c</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -785,7 +785,7 @@
          sodipodi:role="line"
          id="tspan10083"
          x="205.38255"
-         y="321.97598">3-4</tspan></text>
+         y="321.97598">3-d</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -796,7 +796,7 @@
          sodipodi:role="line"
          id="tspan10087"
          x="111.64397"
-         y="270.96585">4-6</tspan></text>
+         y="270.96585">4-f</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -807,7 +807,7 @@
          sodipodi:role="line"
          id="tspan10091"
          x="63.661694"
-         y="183.69174">5-1</tspan></text>
+         y="183.69174">5-a</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -818,7 +818,7 @@
          sodipodi:role="line"
          id="tspan10095"
          x="76.590622"
-         y="89.75013">5-3</tspan></text>
+         y="89.75013">5-c</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -829,7 +829,7 @@
          sodipodi:role="line"
          id="tspan10099"
          x="148.61348"
-         y="15.404942">5-4</tspan></text>
+         y="15.404942">5-d</tspan></text>
     <flowRoot
        xml:space="preserve"
        id="flowRoot10279"
@@ -869,7 +869,7 @@
          y="-13.555173"
          x="250.93834"
          id="tspan10407"
-         sodipodi:role="line">1-2</tspan></text>
+         sodipodi:role="line" /></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -880,7 +880,7 @@
          sodipodi:role="line"
          id="tspan10411"
          x="793.08118"
-         y="97.873398">1-2</tspan></text>
+         y="97.873398">1-b</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text10413"
@@ -891,7 +891,7 @@
          y="98.691742"
          x="635.80457"
          id="tspan10415"
-         sodipodi:role="line">5-1</tspan></text>
+         sodipodi:role="line">5-a</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text10417"
@@ -902,7 +902,7 @@
          y="99.436806"
          x="954.03448"
          id="tspan10419"
-         sodipodi:role="line">2-3</tspan></text>
+         sodipodi:role="line">2-c</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text10421"
@@ -913,6 +913,6 @@
          y="250.54741"
          x="952.52539"
          id="tspan10423"
-         sodipodi:role="line">3-4</tspan></text>
+         sodipodi:role="line">3-d</tspan></text>
   </g>
 </svg>

@@ -15,8 +15,8 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="clique_backtrack.svg"
-   inkscape:export-filename="/home/dufresne/Bonsai/These/Figures/s2m/MCS-SI/clique_solve.png"
+   sodipodi:docname="backtrack_solve.svg"
+   inkscape:export-filename="/home/dufresne/Bonsai/These/Figures/s2m/MCS-SI/backtracking_solve.png"
    inkscape:export-xdpi="220"
    inkscape:export-ydpi="220">
   <defs
@@ -333,15 +333,15 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="516.41137"
-     inkscape:cy="730.75889"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="662.25301"
+     inkscape:cy="598.61982"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
-     inkscape:window-width="1855"
-     inkscape:window-height="1176"
-     inkscape:window-x="65"
+     inkscape:window-width="1615"
+     inkscape:window-height="1026"
+     inkscape:window-x="1985"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
      fit-margin-top="0"
@@ -362,7 +362,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -725,7 +725,7 @@
            y="-382.8891"
            x="1011.4137"
            id="tspan9780"
-           sodipodi:role="line">1</tspan></text>
+           sodipodi:role="line">a</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text9782"
@@ -736,7 +736,7 @@
            y="-383.3942"
            x="1170.1014"
            id="tspan9784"
-           sodipodi:role="line">2</tspan></text>
+           sodipodi:role="line">b</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text9786"
@@ -747,7 +747,7 @@
            y="-382.8891"
            x="1327.576"
            id="tspan9788"
-           sodipodi:role="line">3</tspan></text>
+           sodipodi:role="line">c</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text9790"
@@ -758,7 +758,7 @@
            y="-123.2952"
            x="1327.0709"
            id="tspan9792"
-           sodipodi:role="line">4</tspan></text>
+           sodipodi:role="line">d</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text9794"
@@ -769,7 +769,7 @@
            y="-123.09215"
            x="1169.5963"
            id="tspan9796"
-           sodipodi:role="line">5</tspan></text>
+           sodipodi:role="line">e</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text9798"
@@ -780,7 +780,7 @@
            y="-123.09215"
            x="1010.4036"
            id="tspan9800"
-           sodipodi:role="line">6</tspan></text>
+           sodipodi:role="line">f</tspan></text>
     </g>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -797,7 +797,7 @@
          sodipodi:role="line"
          id="tspan10411"
          x="520.49927"
-         y="631.77045">1-2</tspan></text>
+         y="631.77045">1-b</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text10413"
@@ -808,7 +808,7 @@
          y="632.58875"
          x="363.22263"
          id="tspan10415"
-         sodipodi:role="line">5-1</tspan></text>
+         sodipodi:role="line">5-a</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text10417"
@@ -819,7 +819,7 @@
          y="633.33386"
          x="681.45258"
          id="tspan10419"
-         sodipodi:role="line">2-3</tspan></text>
+         sodipodi:role="line">2-c</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text10421"
@@ -830,7 +830,7 @@
          y="784.44446"
          x="679.94348"
          id="tspan10423"
-         sodipodi:role="line">3-4</tspan></text>
+         sodipodi:role="line">3-d</tspan></text>
     <g
        id="g4357"
        transform="translate(-10,-12.857143)">
@@ -932,7 +932,7 @@
            y="117.8734"
            x="543.79547"
            id="tspan10055"
-           sodipodi:role="line">1-2</tspan></text>
+           sodipodi:role="line">1-b</tspan></text>
       <ellipse
          style="opacity:0.98999999;fill:#4ed04e;fill-opacity:1;stroke:#00640c;stroke-width:1.50000012;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          id="ellipse10158"
@@ -976,7 +976,7 @@
            id="tspan10061"
            y="118.36977"
            x="759.85022"
-           sodipodi:role="line">2-1</tspan></text>
+           sodipodi:role="line">2-a</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text10065"
@@ -987,7 +987,7 @@
            y="229.4368"
            x="676.17731"
            id="tspan10067"
-           sodipodi:role="line">2-3</tspan></text>
+           sodipodi:role="line">2-c</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text10069"
@@ -998,7 +998,7 @@
            y="227.55649"
            x="945.83942"
            id="tspan10071"
-           sodipodi:role="line">2-4</tspan></text>
+           sodipodi:role="line">2-d</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text10073"
@@ -1009,7 +1009,7 @@
            y="338.93683"
            x="527.65662"
            id="tspan10075"
-           sodipodi:role="line">3-1</tspan></text>
+           sodipodi:role="line">3-a</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text10077"
@@ -1020,7 +1020,7 @@
            y="340.44589"
            x="6.3778"
            id="tspan10079"
-           sodipodi:role="line">3-3</tspan></text>
+           sodipodi:role="line">3-c</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text10081"
@@ -1031,7 +1031,7 @@
            y="339.8331"
            x="104.66824"
            id="tspan10083"
-           sodipodi:role="line">3-4</tspan></text>
+           sodipodi:role="line">3-d</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text10085"
@@ -1042,7 +1042,7 @@
            y="340.25156"
            x="205.21539"
            id="tspan10087"
-           sodipodi:role="line">4-6</tspan></text>
+           sodipodi:role="line">4-f</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text10089"
@@ -1053,7 +1053,7 @@
            y="337.97745"
            x="825.80457"
            id="tspan10091"
-           sodipodi:role="line">5-1</tspan></text>
+           sodipodi:role="line">5-a</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text10093"
@@ -1064,7 +1064,7 @@
            y="340.46439"
            x="305.87634"
            id="tspan10095"
-           sodipodi:role="line">5-3</tspan></text>
+           sodipodi:role="line">5-c</tspan></text>
       <text
          sodipodi:linespacing="125%"
          id="text10097"
@@ -1075,7 +1075,7 @@
            y="339.69064"
            x="407.18491"
            id="tspan10099"
-           sodipodi:role="line">5-4</tspan></text>
+           sodipodi:role="line">5-d</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -1086,7 +1086,7 @@
            sodipodi:role="line"
            id="tspan10407"
            x="543.79547"
-           y="117.8734">1-2</tspan></text>
+           y="117.8734" /></text>
       <ellipse
          inkscape:export-ydpi="220"
          inkscape:export-xdpi="220"
@@ -1108,7 +1108,7 @@
            sodipodi:role="line"
            x="207.70738"
            y="228.36978"
-           id="tspan4319">2-1</tspan></text>
+           id="tspan4319">2-a</tspan></text>
       <ellipse
          style="opacity:0.98999999;fill:#4ed04e;fill-opacity:1;stroke:#00640c;stroke-width:1.50000012;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          id="ellipse4321"
@@ -1130,7 +1130,7 @@
            sodipodi:role="line"
            id="tspan4325"
            x="625.38251"
-           y="339.8331">3-4</tspan></text>
+           y="339.8331">3-d</tspan></text>
       <ellipse
          inkscape:export-ydpi="220"
          inkscape:export-xdpi="220"
@@ -1152,7 +1152,7 @@
            sodipodi:role="line"
            id="tspan4331"
            x="725.21539"
-           y="339.53726">4-6</tspan></text>
+           y="339.53726">4-f</tspan></text>
       <ellipse
          style="opacity:0.98999999;fill:#4ed04e;fill-opacity:1;stroke:#00640c;stroke-width:1.50000012;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          id="ellipse4333"
@@ -1174,7 +1174,7 @@
            sodipodi:role="line"
            id="tspan4337"
            x="858.32019"
-           y="120.15108">2-3</tspan></text>
+           y="120.15108">2-c</tspan></text>
       <ellipse
          inkscape:export-ydpi="220"
          inkscape:export-xdpi="220"
@@ -1196,7 +1196,7 @@
            sodipodi:role="line"
            id="tspan4343"
            x="954.41083"
-           y="120.41363">2-4</tspan></text>
+           y="120.41363">2-d</tspan></text>
       <ellipse
          style="opacity:0.98999999;fill:#4ed04e;fill-opacity:1;stroke:#00640c;stroke-width:1.50000012;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          id="ellipse4345"
@@ -1218,7 +1218,7 @@
            sodipodi:role="line"
            id="tspan4349"
            x="676.302"
-           y="453.13483">5-1</tspan></text>
+           y="453.13483">5-a</tspan></text>
       <ellipse
          style="opacity:0.98999999;fill:#ff8787;fill-opacity:1;stroke:#980000;stroke-width:1.50000012;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          id="ellipse4351"
@@ -1240,7 +1240,7 @@
            y="454.69464"
            x="575.71283"
            id="tspan4355"
-           sodipodi:role="line">4-6</tspan></text>
+           sodipodi:role="line">4-f</tspan></text>
     </g>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker5454)"
@@ -1464,7 +1464,7 @@
          id="tspan5491"
          x="760"
          y="-20.494946"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:justify;writing-mode:lr-tb;text-anchor:start">ø</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:35px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:justify;writing-mode:lr-tb;text-anchor:start">Ɛ </tspan></text>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker5737)"
        d="m 750,-20.494943 -160,90"

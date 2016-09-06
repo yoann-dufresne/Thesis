@@ -6,7 +6,7 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{chemist}
-\usepackage[french]{algorithm2e}
+\usepackage[french,onelanguage]{algorithm2e}
 \usepackage[margin=2.5cm]{geometry}
 
 
@@ -988,17 +988,18 @@ $G$, soit nous cherchons une approximation de $S$ dans $G$. Dans le premier cas,
 ``Isomorphisme de Sous-graphe'' (en anglais \textit{Subgraph Isomorphism} (SI)). Dans le second cas, nous nous intéresserons au
 ``Sous-graphe Maximum Commun'' (en anglais \textit{Maximum Common Subgraph} (MCS)). Les recherches de SI ou de MCS ont toutes
 deux été prouvées NP-Complet mais, pour chacun des problème, il existe des algorithmes rapides en pratique pour des graphes
-aux propriétés particulières dont nous parlerons dans la sous-partie suivante.
+aux propriétés particulières dont nous parlerons dans en \ref{SI_MCS}.
 
-\paragraph{Pavage des monomères}Une fois les monomères détectés, il est nécessaire de prendre une décision pour les parties du polymère où plusieurs d'entre eux entre en conflit.
+\paragraph{Pavage des monomères}Une fois les monomères détectés, il est nécessaire de prendre une décision pour les parties du polymère où plusieurs d'entre eux entre en conflit (plusieurs monomères possibles pour les mêmes atomes).
 L'objectif est donc de faire un choix entre les différents morceaux possibles afin de chercher à ne garder que les pièces non chevauchantes qui permettent de couvrir au mieux le polymère (si possible totalement).
-Ce genre de méthode est appelée pavage sans recouvrement.
+Ce genre de méthode est appelée ``pavage sans recouvrement''.
 Cette étape donnant accès à un lien direct entre atomes et monomères, une étape de contraction de graphe permettra d'obtenir le graphe monomérique.
 
 
 
 
 \section{Isomorphisme de Sous-graphe vs Sous-graphe Maximum Commun}
+\label{SI_MCS}
 
 \paragraph{}Nous venons de voir que la recherche de monomères pouvait correspondre à deux problèmes différents en recherche de graphe.
 Formalisons et étudions ici ces deux problèmes afin de choisir celui qui nous utiliserons au sein de notre logiciel d'annotations.
@@ -1019,7 +1020,7 @@ Voyons les différentes façons de les résoudre ainsi que les forces et faibles
 
 \paragraph{}Commençons par définir précisément le problème du MCS.
 Comme le nom l'indique, le problème du MCS est un problème de recherche de la sous partie commune maximale entre deux graphes (Voir figure \ref{mcs_fig}).
-C'est à dire trouver un ensemble de n\oe{}uds présents dans les deux graphes.
+C'est à dire trouver un ensemble de n\oe{}uds présents dans les deux graphes et dont les arêtes qui les inter-connectent sont les mêmes.
 Il faut non seulement que les n\oe{}uds partagent les même étiquettes mais également les mêmes voisins.
 Si deux n\oe{}uds ont la même étiquette mais ne partagent pas les mêmes voisins dans les deux graphes, alors ils ne font pas partie du MCS.
 C'est par exemple le cas du n\oe{}ud rouge au sein de la figure.
@@ -1030,7 +1031,7 @@ Le problème du MCS à été prouvé NP-Complet\cite{garey_computers_1979}, ce q
 Si l'on considère qu'un monomère et un polymère sont des graphes atomiques, alors trouver une sous partie commune à ces deux graphes revient à trouver un endroit où un morceau du monomère est retrouvé dans le peptide.
 En imposant que le graphe commun soit d'une taille minimale fixée, nous pourrons éviter d'avoir des résultats ne contenant que quelques atomes par hasard.
 
-\paragraph{}Du fait de la NP-complétude du problème, trouver des solutions est très compliqué.
+\paragraph{}Du fait de la NP-complétude du problème, trouver des solutions exactes est très compliqué.
 Il existe tout de même quelques algorithmes de résolution exacts mais la majorité des articles à propos de MCS traitent d'heuristiques de résolution rapide.
 Voyons ensemble ces deux catégories d'algorithmes en s'appuyant sur les reviews~\cite{raymond_maximum_2002, ehrlich_maximum_2011}.
 
@@ -1063,9 +1064,9 @@ Il est possible de ne pas passer par toutes les combinaisons possibles en rédui
 
 \paragraph{}Pour obtenir un MCS à partir de solveur de clique maximale, il est nécessaire de construire un graphe de compatibilité (voir schéma \ref{clique_solve_fig}).
 Un graphe de compatibilité (GC) est un graphe créé à partir du croisement des deux graphes (qu'on appellera G et H).
-Pour les n\oe{}uds du GC, on génère tous les couples $(x, y)$ possibles avec $x$ issu de G et $y$ de H et dont les étiquettes sont identiques.
-Ensuite on ajoute un lien entre deux couples $(x_1 , y_1)$ et $(x_2 , y_2)$ de GC si $x_1$ est voisin de $x_2$ dans G et $y_1$ voisin de $y_2$ dans H.
-On ajoute également un lien si les $x$ sont non voisins et les $y$ également.
+Pour les n\oe{}uds du GC, on génère tous les couples de noeuds $(x, y)$ possibles avec $x$ issu de G et $y$ de H et dont les étiquettes sont identiques.
+Ensuite on ajoute une arête entre deux couples $(x_1 , y_1)$ et $(x_2 , y_2)$ de GC si $x_1$ est voisin de $x_2$ dans G et $y_1$ voisin de $y_2$ dans H.
+On ajoute également une arête si les $x$ sont non voisins et les $y$ également.
 En résolvant le problème de clique maximale sur le GC, on obtient le MCS.
 
 
@@ -1074,7 +1075,7 @@ En résolvant le problème de clique maximale sur le GC, on obtient le MCS.
     \includegraphics[width=400px]{Figures/s2m/MCS-SI/backtracking_solve.png}
     \caption{\label{backtracking_solve}Exemple de résolution de MCS par un backtracking naïf.
     L'arbre part d'une bijection vide et ajoute un couple à chaque étape.
-    Parfois l'algorithme tombe sur un couple compatible mais dont les voisins ne sont pas le bijection.
+    Parfois l'algorithme tombe sur un couple compatible mais dont les voisins ne sont pas présents dans la bijection.
     La solution est alors rejetée (croix rouge).
     La solution est trouvée par l'ensemble des chemins qui mènent aux feuilles valides les plus profondes dans l'arbre.}
   \end{center}
@@ -1089,10 +1090,10 @@ Les couples de n\oe{}uds compatibles, n'étant pas encore présents au sein de l
 Lorsque l'algorithme arrive dans une impasse (plus aucune possibilité d'ajouter un couple), il revient en arrière sur une association puis fait un choix différent.
 En sauvegardant l'ensemble qui a contenu le plus de n\oe{}uds, on obtient la clique maximale après le parcours de tout l'arbre des possibilités.
 Encore une fois, certaines des techniques citées permettent des accélérations pratiques en coupant des branches de recherche mais jamais l'ordre de grandeur de la complexité n'est changé.
-Dans le cas des MCCS, il faut obliger une contrainte supplémentaire d'ajout de couple au sein de la bijection~\cite{chang_moderately_2014}.
+Dans le cas des MCCS, il faut inclure une contrainte supplémentaire~\cite{chang_moderately_2014}.
 Chacun des n\oe{}uds du couple à ajouter doit être voisin de l'un des n\oe{}uds d'un même couple précédemment inclus dans la bijection.
 
-\paragraph{}Il existe bien d'autres méthodes exactes pour résoudre des MCS pour des graphes particuliers.
+\paragraph{}Il existe bien d'autres méthodes exactes pour résoudre des MCS pour des graphes particuliers (par exemple pour des quasi-arbres de \textit{treewidth} borné~\cite{yamaguchi_finding_2004}).
 Cependant, aucun de ces cas particuliers ne correspond à la réalité des molécules que nous allons traiter.
 Nous ne détaillerons donc pas celles-ci ici.
 
@@ -1100,17 +1101,17 @@ Nous ne détaillerons donc pas celles-ci ici.
 \subsubsection{Les méthodes heuristiques}
 
 \paragraph{}Il existe une très grande quantité d'heuristiques de résolution du MCS.
-La méthode qui revient le plus souvent est une méthode de recherche par similarités locales~\cite{yan_substructure_2005,willett_similarity_2011}.
+La méthode la plus utilisée est une méthode de recherche par similarités locales~\cite{yan_substructure_2005,willett_similarity_2011}.
 Ce sont des algorithmes utilisés au sein de bases de données pour rechercher des structures chimiques par ressemblance avec une requête.
-Chaque molécule de la base est décomposée en un grand nombre de critères topologiques locaux.
+Chaque molécule de la base est décomposée en un grand nombre de critères topologiques locaux (l'arité des noeuds par exemple).
 Ces critères sont entrés dans un vecteur appelé fingerprint.
 Lors d'une requête, le motif recherché est à son tour transformé en fingerprint et une mesure de similarité est effectuée avec les vecteurs présents en base.
 Les fingerprints les plus proches (fonction de score selon les méthodes~\cite{maggiora_molecular_2011,ndiaye_cp_2011}) sont déclarés en possession d'une sous partie commune.
 Cette méthode ne donne aucune assurance quant à l'obtention de réels MCS.
 C'est la rapidité d'exécution de l'algorithme qui est recherchée.
-Dans notre cas, cette méthode est innappropriée puisque nous cherchons de vrais MCS.
+Dans notre cas, cette méthode est innappropriée puisque nous cherchons des MCS exacts.
 
-\paragraph{}D'autres méthodes sont plus proches des méthodes exactes par recherche backtracking~\cite{grosso_simple_2008, wang_fmcsr:_2013}.
+\paragraph{}D'autres méthodes se rapprochent plus des méthodes exactes par recherche backtracking~\cite{grosso_simple_2008, wang_fmcsr:_2013}.
 Ici, les auteurs construisent plusieurs bijections en parallèle.
 La différence avec les méthodes exactes est qu'ils ne reviennent jamais sur les décisions prises pour construire les MCS.
 Un nombre fixe de bijections est maintenu en permanence.
@@ -1136,7 +1137,7 @@ Cette seconde méthode est très intéressante lorsque l'on cherche un bon rappo
 \paragraph{}Définissions à son tour le problème SI.
 Comme le nom l'indique, le problème SI est un problème de recherche d'un graphe dans une sous partie d'un autre.
 C'est à dire que G est sous graphe de H lorsque tous les n\oe{}uds et toutes les arêtes de G sont retrouvées structurées de la même manière dans H (voir figure \ref{SI_fig}).
-Tout comme le MCS, le problème du SI à été prouvé NP-Complet\cite{garey_computers_1979}.
+Tout comme le MCS, le problème du SI a été prouvé NP-Complet~\cite{garey_computers_1979}.
 
 \paragraph{}Pour notre problème, nous pouvons à nouveau effectuer une réduction vers le problème SI, puis résoudre ce problème par des algorithmes déjà publiés.
 Nous souhaitons rechercher des monomères au sein de peptides, ce qui reviendrait à chercher plusieurs fois un petit graphe atomique monomérique dans un gros graphe atomique peptidique.
@@ -1144,7 +1145,7 @@ Nous souhaitons rechercher des monomères au sein de peptides, ce qui reviendrai
 \paragraph{}Les méthodes de résolution actuelles sont toutes très similaires et dérivent d'une même technique de backtracking.
 La plupart de ces méthodes sont des résolutions exactes.
 Bien que NP-complet, ces algorithmes restent très praticables lorsqu'on ne recherche pas au sein de graphes répétitifs (qui sont constitués de multiples répétitions d'un même morceau).
-Voyons ensemble quelques uns de ces algorithmes.
+Voyons ensemble plusieurs algorithmes représentatifs.
 
 
 \subsubsection{L'algorithme de Ullman}
@@ -1162,7 +1163,7 @@ Voyons ensemble quelques uns de ces algorithmes.
 \paragraph{}L'algorithme de Ullman est l'un des premiers à avoir été proposé dans les années 70~\cite{ullmann_algorithm_1976}.
 Certaines de ses variantes sont toujours utilisées dans certaines librairies telles que Openbabel~\cite{oboyle_open_2011}.
 L'algorithme se base sur la matrice de compatibilité entre les graphes (voir figure \ref{ullman_fig}).
-Une matrice de compatibilité est une matrice dont chaque ligne représente les n\oe{}uds de G et chaque colonne les n\oe{}uds de H.
+Une matrice de compatibilité est une matrice dont chaque ligne représente un n\oe{}ud de G et chaque colonne un n\oe{}ud de H.
 Pour une case de la matrice donnée, on a $g$ le n\oe{}ud de G correspondant à la ligne et $h$ le n\oe{}ud de H correspondant à la colonne.
 La case contient un 1 si $g$ et $h$ ont une étiquette compatible et que l'arrité de $h$ est suppérieure ou égale à l'arrité de $g$.
 Pour obtenir un SI à partir de cette matrice, il faut retirer des 1 de la matrice jusqu'à en obtenir uns seul 1 par ligne.
@@ -1171,7 +1172,7 @@ Ce n\oe{}ud correspond à une ligne.
 Puis une colonne est choisie parmi celles dont la colonne contient un 1 sur la ligne précédemment choisie.
 Le couple ligne/colonne nous donne le couple n\oe{}ud de G/n\oe{}ud de H a peut être ajouter à l'isomorphisme.
 Avant cet ajout, il faut également vérifier que tous les voisins du n\oe{}ud de H correspondent bien aux voisins du n\oe{}ud de G (condition non respectée à l'étape 2 et 5 de la partie recherche du schéma).
-Puisque nous ajoutons ce binôme à l'isomorphisme, il faut remplacer tous les 1 de la ligne et la colonne choisies par des 0 (excepté pour la case du binôme).
+Puisque nous ajoutons ce couple à l'isomorphisme, il faut remplacer tous les 1 de la ligne et la colonne choisies par des 0 (excepté pour la case du binôme).
 À ce moment, si au moins une ligne a été vidée de tous ses 1, c'est que l'isomorphisme n'est pas possible et il faut revenir à l'étape précédente.
 Sinon, il suffit de continuer récursivement jusqu'à obtenir un unique 1 par ligne.
 En choisissant bien les lignes et les colonnes par lesquelles l'algorithme commence, on arrive à obtenir des temps d'exécution très courts pour la recherche d'un SI.
@@ -1214,8 +1215,6 @@ Dans l'article l'algorithme est décrit comme suit :
       \KwRet $\emptyset$ \;
     }
   \end{algorithm}
-  
-\paragraph{}Comme on peut le remarquer, cet algorithme s
 
 \begin{figure}[!ht]
   \begin{center}
@@ -1256,19 +1255,20 @@ Ceci peut s'expliquer par le fait que des algorithmes praticables existent pour 
 De plus, les heuristiques de MCS permettent d'obtenir des résultats de SI en ajoutant des contraintes (Le SI étant un cas particulier du MCS).
 Dans tous les cas, ces heuristiques de SI sont des dérivés de la technique par backtracking~\cite{kaijar_developing_2012}.
 Ces algorithmes essaient en supplément d'éviter l'exploration de toutes les branches par de la sélection des plus ``prometteuses''.
+Par exemple, on préférera explorer des isomorphismes commençant par de paires de noeuds d'arité forte car ils sont un bon ancrage.
 
 \paragraph{}Il existe également de nombreux algorithmes pour des cas particuliers de SI.
-Par exemple, il est possible de résoudre le problème en temps polynomial pour des arbres~\cite{shamir_faster_1997}, des graphes planaires~\cite{eppstein_subgraph_1995,dorn_planar_2009} ou des graphes de treewidth bornés~\cite{hajiaghayi_subgraph_2007}.
-Dans tous les cas, il est possible de trouver au moins une molécule (pas forcément NRP) ne répondant pas à l'un de ces critères et c'est pour cela que nous ne les utiliserons pas.
+Par exemple, il est possible de résoudre le problème en temps polynomial pour des arbres~\cite{shamir_faster_1997}, des graphes planaires~\cite{eppstein_subgraph_1995,dorn_planar_2009} ou des graphes de \textit{treewidth} borné~\cite{hajiaghayi_subgraph_2007}.
+Dans tous les cas, il est possible de trouver au moins une molécule (pas forcément NRP) ne répondant pas à l'un de ces critères et c'est pour cela que nous avons préféré ne pas les utiliser.
 
 
 \subsection{Choisir l'algorithme de recherche de monomères}
 
-\paragraph{}Pour pouvoir rechercher les monomères nous devions choisir entre toutes les approches algorithmiques citées ci-dessus.
+\paragraph{}Pour pouvoir rechercher les monomères, nous devions choisir entre toutes les approches algorithmiques citées ci-dessus.
 Premièrement, lorsque nous recherchons un monomère dans un peptide, nous souhaitons connaître tous les endroits où il peut apparaitre.
 Nous ne souhaitons donc pas utiliser d'approches heuristiques.
 Deuxièmement, le MCS ne paraît pas très pratique dans notre cas.
-En effet, les NRP regorgent de monomères proches les uns des autres.
+En effet, les NRP regorgent de monomères proches les uns des autres (variation de un ou deux atomes/liaisons).
 Il n'est donc pas facile, lorsque l'on obtient un résultat, de savoir si la molécule trouvée est la bonne ou si c'est le monomère voisin à un atome de distance qui a été détecté.
 Enfin, en comparant les algorithmes de recherche exacte de solutions, ceux de résolution de SI sont plus adaptés et rapide en pratique.
 Au début, nous ne connaissions pas l'existance de l'algorithme VF2 et aucun des autres algorithmes ne nous convenais en temps de calcul.
@@ -1284,7 +1284,7 @@ La section suivante donnera tous les détails concernant cet algorithme et son i
 
 \label{isomorphisme_p}
 
-\paragraph{}La première partie Smiles2Monomers doit rechercher l'ensemble des monomères au sein d'un polymère cible.
+\paragraph{}Notre logiciel appelé Smiles2Monomers (s2m), doit débuter par la recherche de l'ensemble des monomères au sein d'un polymère cible.
 Comme nous l'avons vu dans l'état de l'art, nous pouvons transformer ce problème en un problème de graphe appelé isomorphisme de sous graphe.
 Dans cette partie, nous allons présenter en détail la variante que nous avons conçu, de l'algorithme de résolution de SI appelé VF2.
 Puis nous montrerons en quoi les étiquettes des n\oe{}uds du graphes influencent le temps de calcul afin en déduire une méthode de recherche efficace.
@@ -1338,26 +1338,23 @@ trois étiquettes variants depuis l'ancienne étiquette unique $N$ qui était ac
 difficultés à effectuer un isomorphisme. En effet, la lenteur qui peut venir de cet algorithme est due au nombreux chemins qu'il
 peut prendre lors de l'exploration.
 
-\paragraph{}Cherchons encore à augmenter la sélectivité des étiquettes en augmentant leur nombre. A partir d'un graphe $G$, il est
-possible de représenter ses relations d'adjacence au sein d'un second graphe $L$. Pour cela, deux n\oe{}uds voisins de $G$ sont
-représentés dans $L$ comme un seul n\oe{}ud. Chaque ancienne arrête devient un n\oe{}ud et chaque ancien n\oe{}ud devient une multitude
-d'arêtes (une clique entre tous les nouveaux n\oe{}uds représentant les anciennes arête de cet ancien n\oe{}ud). Nous étendons le 
-raisonnement pour les étiquettes en disant que l'étiquette d'un n\oe{}ud du nouveau graphe est la composition des étiquettes des anciens
-n\oe{}uds ainsi que de l'arité entre ces deux n\oe{}uds (Dans notre cas, les étiquettes sont mis dans l'ordre lexicographique pour ne pas
-avoir deux étiquettes possibles à partir des étiquettes d'origine)(Voir figure \ref{representations},
-troisième partie). Un tel type de graphe est appelé line graph~\cite{orlin_line-digraphs_1978}. L'un des
-gros avantages de cette représentation est d'inclure directement dans les étiquettes des n\oe{}uds ce qui touche à l'arité entre n\oe{}uds.
-La fonction
-de recherche n'aura donc plus du tout à s'attarder sur les liens mais uniquement sur les n\oe{}uds. De plus, transformer les graphes
-de cette manière nous permet de répondre à la volonté d'augmentation du nombre d'étiquettes. Là où la représentation précédente
-pouvait avoir $n$ étiquettes différentes, celle-ci pourra générer plus de $n^2$ ($3n^2$ si on compte tous les type de liaison entre
-n\oe{}uds).
+\paragraph{}Cherchons encore à augmenter la sélectivité des étiquettes en augmentant leur nombre.
+A partir d'un graphe $G$, il est possible de représenter ses relations d'adjacence au sein d'un second graphe $L$.
+Pour cela, deux n\oe{}uds voisins de $G$ sont représentés dans $L$ comme un seul n\oe{}ud (voir line-graph2 dans figure \ref{representations}).
+Chaque ancienne arrête devient un n\oe{}ud et chaque ancien n\oe{}ud devient une multitude d'arêtes (une clique entre tous les nouveaux n\oe{}uds représentant les anciennes arête de cet ancien n\oe{}ud).
+Nous étendons le raisonnement pour les étiquettes en disant que l'étiquette d'un n\oe{}ud du nouveau graphe est la composition des étiquettes des anciens n\oe{}uds ainsi que de l'arité entre ces deux n\oe{}uds.
+Dans notre cas, les étiquettes sont mis dans l'ordre lexicographique pour ne pas avoir deux étiquettes possibles à partir des étiquettes d'origine.
+Un tel type de graphe est appelé \textit{line graph}~\cite{orlin_line-digraphs_1978}.
+L'un des gros avantages de cette représentation est d'inclure directement dans les étiquettes de chaque n\oe{}ud.
+La fonction de recherche n'aura donc plus du tout à s'attarder sur le degré des arêtes.
+De plus, transformer les graphes de cette manière nous permet de répondre à la volonté d'augmenter le nombre d'étiquettes.
+Là où la représentation précédente pouvait avoir $n$ étiquettes différentes, celle-ci pourra générer plus de $n^2$ ($3n^2$ si on compte tous le degré des liaisons entre atomes).
 
-\paragraph{}Le raisonnement des line graphe peut être étendu récursivement. On peut ainsi créer des line-graph de line-graph.
-Cependant cela pose plusieurs problèmes de répéter cette opération dans notre cas. Certains graphes vont diminuer de taille
-jusqu'à disparaître complètement (ce qui est peu pratique pour la comparaison) alors que d'autres vont grossir de plus en plus
-et ajouter de plus en plus de phases de comparaison d'étiquettes et d'étapes dans l'algorithme VF2. Pour ces raisons, nous avons
-choisi de n'effectuer qu'une seule étape de line-graph.
+\paragraph{}Le raisonnement des line graphe peut être étendu récursivement.
+On peut ainsi créer des line-graph de line-graph.
+Cependant cela pose plusieurs problèmes de répéter cette opération dans notre cas.
+Certains graphes vont diminuer de taille jusqu'à disparaître complètement (ce qui est peu pratique pour la comparaison) alors que d'autres vont grossir de plus en plus et ajouter de plus en plus de phases de comparaison d'étiquettes et d'étapes dans l'algorithme VF2.
+Pour ces raisons, nous avons choisi de n'effectuer qu'une seule étape de line-graph.
 
 \begin{figure}[!ht]
   \includegraphics[width=200px]{Figures/s2m/recherche/matching.pdf}
@@ -1368,17 +1365,15 @@ choisi de n'effectuer qu'une seule étape de line-graph.
 
 \label{index_p}
 
-\paragraph{}Connaissant la sélectivité pour une étiquette, nous cherchons désormais à savoir l'ordre dans lequel il faut rechercher
-un motif afin de minimiser le temps de recherche.
+\paragraph{}Connaissant la sélectivité pour une étiquette, nous cherchons désormais à savoir l'ordre dans lequel il faut rechercher un motif afin de minimiser le temps de recherche.
 Nous appellerons \textbf{motif} le graphe compressé que nous allons vouloir retrouver dans un plus
-grand graphe. Définissons également une \textbf{chaîne} comme étant un motif plus un ordre dans lequel parcourir ce motif. Ainsi,
-on peut avoir plusieurs chaînes représentant le même motif mais avec des ordres de parcours différents. Ce que nous appellerons
-indexation sera donc la phase de création d'une chaîne pour représenter chaque motif d'intérêt en essayant de minimiser le temps
-que prendra la recherche de cette chaîne. Pour la recherche de monomères dans
-des peptides non ribosomiques, la phase d'indexation revient donc à choisir, pour chaque monomère, l'ordre dans lequel nous allons
-rechercher les n\oe{}uds du graphe le représentant. Ainsi, on peut voir que quelque soit la chaîne représentant le graphe, le même
-motif sera toujours recherché. La seule différence sera la rapidité d'exécution de la recherche. Les deux sections suivantes
-s'attarderont à la recherche de chaînes performantes (\textit{ie} les plus rapide) lors la recherche d'un motif.
+grand graphe. Définissons également une \textbf{chaîne} comme étant un motif plus un \textbf{ordre} dans lequel parcourir ce motif.
+Ainsi, on peut avoir plusieurs chaînes représentant le même motif mais avec des ordres de parcours différents.
+Ce que nous appellerons \textbf{indexation} sera donc la phase de création d'une chaîne pour représenter chaque motif d'intérêt en essayant de minimiser le temps que prendra la recherche de cette chaîne.
+Pour la recherche de monomères dans des peptides non ribosomiques, la phase d'indexation revient donc à choisir, pour chaque monomère, l'ordre dans lequel nous allons rechercher les n\oe{}uds du graphe le représentant.
+Ainsi, on peut voir que quelque soit la chaîne représentant le graphe, le même motif sera toujours recherché.
+La seule différence sera la rapidité d'exécution de la recherche.
+Les deux sections suivantes s'attarderont à la recherche de chaînes performantes (\textit{ie} les plus rapide) lors la recherche d'un motif.
 
 
 \subsubsection{Indexation gloutonne}
@@ -1388,18 +1383,18 @@ s'attarderont à la recherche de chaînes performantes (\textit{ie} les plus rap
   \caption{\label{chaine_fail}Deux exemple de chaîne pour un motif simple}
 \end{figure}
 
-\paragraph{}Une bonne chaîne est donc une chaîne rapide ; mais à quoi ressemble une telle chaîne ? Déterminons quel(s) critère(s)
-simple(s) nous permettent de supposer qu'une chaîne est bonne. Avec ce ou ces critères, nous pourrons ensuite déterminer un
-moyen d'ordonner les n\oe{}uds de manière gloutonne. Partons de l'exemple présenté sur la figure \ref{chaine_fail}. A gauche est
-dessiné un motif simple suivi de deux chaînes pouvant le représenter (lecture de l'ordre des chaînes de gauche à droite). Pour
-la première chaîne, en partant du motif ne contenant qu'un A, on obtiendra 3 isomorphismes. En étendant ces chaînes à deux A
-voisins, on conserve toujours trois isomorphismes puis deux en ajoutant B et enfin un seul avec le dernier A. Au total, on aura
-étendu 9 isomorphismes durant la recherche. En regardant maintenant la seconde chaîne, on se rend compte que le nombre de ces
-isomorphismes intermédiaires est bien plus faible grâce à la sélectivité du B recherché en tout premier (5 isomorphismes
-intermédiaires sont étendus). La différence décisive entre les deux chaînes est donc le moment où le n\oe{}ud avec une étiquette sélective
-est recherché. Si le n\oe{}ud B est recherché dès le début, la solution est ``ancrée'' sur une base solide et ne risque pas de 
-créer trop de solutions intermédiaires qui devront toutes être analysées pour passer à l'étape suivante. On peut dire qu'un n\oe{}ud
-est plus sélectif qu'un autre à partir du moment où sa fréquence d'apparition dans les molécules étudiées est moins élevée.
+\paragraph{}Une chaîne efficace est donc une chaîne rapide.
+Déterminons quel(s) critère(s) simple(s) nous permettent de supposer qu'une chaîne est efficace.
+Avec ce ou ces critères, nous pourrons ensuite déterminer un moyen d'ordonner les n\oe{}uds de manière gloutonne.
+Partons de l'exemple présenté sur la figure \ref{chaine_fail}.
+A gauche est dessiné un motif simple suivi de deux chaînes pouvant le représenter (lecture de l'ordre des chaînes de gauche à droite).
+Pour la première chaîne, en partant du motif ne contenant qu'un A, on obtiendra 3 isomorphismes.
+En étendant ces chaînes à deux A voisins, on conserve toujours trois isomorphismes puis deux en ajoutant B et enfin un seul avec le dernier A.
+Au total, on aura étendu 9 isomorphismes durant la recherche.
+En regardant maintenant la seconde chaîne, on se rend compte que le nombre de ces isomorphismes intermédiaires est bien plus faible grâce à la sélectivité du B recherché en tout premier (5 isomorphismes intermédiaires sont étendus).
+La différence décisive entre les deux chaînes est donc le moment où le n\oe{}ud avec une étiquette sélective est recherché.
+Effectivement, si le n\oe{}ud B est recherché dès le début, la solution est ``ancrée'' sur une base solide et ne risque pas de créer trop de solutions intermédiaires qui devront toutes être analysées pour passer à l'étape suivante.
+On peut dire qu'un n\oe{}ud est plus sélectif qu'un autre à partir du moment où sa fréquence d'apparition dans les molécules étudiées est moins élevée.
 
 \paragraph{Étiquettes fréquentes}
 
@@ -1410,15 +1405,13 @@ est plus sélectif qu'un autre à partir du moment où sa fréquence d'apparitio
   \end{center}
 \end{figure}
 
-\paragraph{}Essayons d'estimer ces fréquences afin d'éviter les cas qui pourraient être critiques. Pour ce faire, nous pouvons
-constituer un ensemble représentatif du type de molécules que nous allons chercher.
-Dans notre cas, nous cherchons à étudier des peptides non ribosomiques. La base d'apprentissage
-des fréquences sera donc constituée de NRP dont la composition atomique est déjà connue. Le raisonnement est extensible à
-n'importe quel type de molécules et le fait d'avoir un jeu d'apprentissage non représentatif n'influencera pas le résultat mais
-uniquement le temps de calcul. Une fois cette base créée, nous pouvons estimer les fréquences d'apparition de chacune des étiquettes
-présents dans les monomères en effectuant une recherche exhaustive (Figure \ref{apprentissage}). L'algorithme glouton naïf qui
-vient tout de suite en tête est de choisir un à un les n\oe{}uds que l'on souhaite ajouter au motif en choisissant toujours celui
-avec l'étiquette la moins fréquente.
+\paragraph{}Essayons d'estimer ces fréquences afin d'éviter les cas qui pourraient être critiques.
+Pour ce faire, nous pouvons constituer un ensemble représentatif du type de molécules que nous allons chercher.
+Dans notre cas, nous cherchons à étudier des peptides non ribosomiques.
+La base d'apprentissage des fréquences sera donc constituée de NRP dont la composition atomique est déjà connue.
+Le raisonnement est extensible à n'importe quel type de molécules et le fait d'avoir un jeu d'apprentissage peu ou pas représentatif n'influencera pas le résultat mais uniquement le temps de calcul.
+Une fois cette base créée, nous pouvons estimer les fréquences d'apparition de chacune des étiquettes présents dans les monomères en effectuant une recherche exhaustive (Figure \ref{apprentissage}).
+L'algorithme glouton naïf qui vient tout de suite en tête est de choisir un à un les n\oe{}uds que l'on souhaite ajouter au motif en choisissant toujours celui avec l'étiquette la moins fréquente.
 
 \paragraph{}
   \begin{algorithm}[H]
@@ -1444,13 +1437,14 @@ avec l'étiquette la moins fréquente.
   \end{algorithm}
 
 
-\paragraph{}Il est nécessaire de préciser que la recherche des n\oe{}uds voisins peut être faite en maintenant
-un ensemble des voisinages. L'algorithme glouton naïf est donc linéaire par rapport à la taille du graphe. À l'exécution, la
-création de chaînes par cette méthode est instantanée ($\ll$ 0.1s). Toutefois, rien ne garantit la qualité des chaînes obtenues.
-Prenons l'exemple de la figure \ref{apprentissage}. Sur cet exemple, le motif à indexer est a-b-d. Les comptages des différentes
-étiquettes nécessaires sont également présents sur cette même figure. La chaîne qui sera générée commence forcément par le n\oe{}ud
-étiqueté $a$ (fréquence la plus faible dans le jeu d'apprentissage) suivi de $b$ puis enfin $d$ (Le tout est résumé sur la figure
-\ref{glouton}).
+\paragraph{}Il est nécessaire de préciser que la recherche des n\oe{}uds voisins peut être faite en maintenant un ensemble des voisinages.
+L'algorithme glouton naïf est donc linéaire par rapport à la taille du graphe.
+À l'exécution, la création de chaînes par cette méthode est instantanée ($\ll$ 0.1s).
+Toutefois, rien ne garantit la qualité des chaînes obtenues.
+Prenons l'exemple de la figure \ref{apprentissage}.
+Sur cet exemple, le motif à indexer est a-b-d.
+Les comptages des différentes étiquettes nécessaires sont également présents sur cette même figure.
+La chaîne qui sera générée commence forcément par le n\oe{}ud étiqueté $a$ (fréquence la plus faible dans le jeu d'apprentissage) suivi de $b$ puis enfin $d$ (le tout est résumé sur la figure \ref{glouton}).
 
 \begin{figure}[!ht]
   \begin{center}
@@ -1463,26 +1457,25 @@ Prenons l'exemple de la figure \ref{apprentissage}. Sur cet exemple, le motif à
 
 \label{index_markov}
 
-\paragraph{}En utilisant la méthode gloutonne, nous obtenons rapidement les chaînes de tous les motifs que nous
-souhaitons indexer. Cependant, dans certains cas, une chaîne générée de cette manière peut ne pas du tout être optimale.
-Dès le tout début de la chaîne, il est possible que l'algorithme fasse des choix optimaux localement qui vont ensuite mener à un
-enlisement global. Nous allons nous appuyer sur les figures \ref{apprentissage} et \ref{glouton} pour monter que même sur un si
-petit exemple, l'algorithme glouton n'a pas choisi le meilleur chemin.
+\paragraph{}En utilisant la méthode gloutonne, nous obtenons rapidement les chaînes de tous les motifs que nous souhaitons indexer.
+Cependant, dans certains cas, une chaîne générée de cette manière peut ne pas être optimale.
+Dès le tout début de la chaîne, il est possible que l'algorithme fasse des choix localement optimaux qui vont ensuite mener à un enlisement global.
+Nous allons nous appuyer sur les figures \ref{apprentissage} et \ref{glouton} pour monter que même sur un si petit exemple, l'algorithme glouton n'a pas choisi le meilleur chemin.
 
 \paragraph{}Afin d'évaluer la qualité d'une chaîne, nous allons calculer son temps d'exécution sur notre base d'apprentissage.
-Partons de la définition d'une chaîne : une chaîne est composée d'une succession de n\oe{}uds. Ces n\oe{}uds vont, lors de l'isomorphisme,
-être recherchés dans l'ordre. Pour rechercher une chaîne de taille $n$ ($c_n$), il faut donc $n$ extensions successives. On
-peut donc écrire que le temps de recherche d'une chaîne est le temps cumulé de recherche de ses extensions :
+Partons de la définition d'une chaîne : une chaîne est composée d'une succession de n\oe{}uds.
+Ces n\oe{}uds vont, lors de l'isomorphisme, être recherchés dans l'ordre donné par la chaîne.
+Pour rechercher une chaîne de taille $n$ ($c_n$), il faut donc $n$ extensions successives.
+On peut donc écrire que le temps de recherche d'une chaîne est le temps cumulé de recherche de ses extensions :
 
 \begin{equation}
  T(c_n) = T(p_0 \rightarrow p_1 \rightarrow ... \rightarrow p_n) = \sum_{i=1}^n T(p_{i-1} \rightarrow cp_i)
 \end{equation}
 
-Où $T()$ est la fonction représentant le temps de recherche d'une chaîne, $p_i$ le un motif de taille $i$ et $p_{i-1} \rightarrow
-p_i$ la dernière extension d'une chaîne $c_i$ représentée par le passage du motif $p_{i-1}$ au motif $p_i$. Il est à noter que
-rechercher une chaîne de taille 1 revient à étendre un motif vide. C'est à dire qu'il est nécessaire de parcourir l'intégralité
-des n\oe{}uds de la cible dans laquelle on recherche le motif et ce quel que soit le motif. Sur notre base d'apprentissage il faudra
-donc tester tous les n\oe{}uds de tous les peptides d'apprentissage pour la première extension.
+Où $T()$ est la fonction représentant le temps de recherche d'une chaîne, $p_i$ le un motif de taille $i$ et $p_{i-1} \rightarrow p_i$ la dernière extension d'une chaîne $c_i$ représentée par le passage du motif $p_{i-1}$ au motif $p_i$.
+Il est à noter que rechercher une chaîne de taille 1 revient à étendre un motif vide.
+C'est à dire qu'il est nécessaire de parcourir l'intégralité des n\oe{}uds de la cible dans laquelle on recherche le motif et ce quel que soit le motif.
+Sur notre base d'apprentissage il faudra donc toujours tester tous les n\oe{}uds de tous les peptides d'apprentissage pour la première extension.
 % 
 % \begin{figure}
 %   \begin{center}
@@ -1492,19 +1485,19 @@ donc tester tous les n\oe{}uds de tous les peptides d'apprentissage pour la prem
 % \end{figure}
 
 \paragraph{}Lors d'une recherche d'une chaîne $c_{n-1}$, il est possible de trouver des isomorphismes sur la cible (potentiellement partiellement recouvrant).
-Afin de calculer le temps de recherche de $c_n$ nous devons prendre en compte la quantité de sous isomorphismes précédemment trouvés.
-Le calcul du temps de recherche de $c_n$ correspondra donc au temps de calcul de $C_{n-1}$ auquel on vient ajouter le temps de recherche de la dernière extension sur chacun des isomorphismes de taille $n-1$.
+Afin de calculer le temps de recherche de $c_n$ nous devons prendre en compte la quantité de sous-isomorphismes précédemment trouvés.
+Le calcul du temps de recherche de $c_n$ correspondra donc au temps de calcul de $c_{n-1}$ auquel on vient ajouter le temps de recherche de la dernière extension sur chacun des isomorphismes de taille $n-1$.
 Il faut également tenir compte du nombre d'extensions qui vont être essayées.
 Par exemple, si l'on cherche à étendre un isomorphisme précédent en suivant un lien qui est enraciné sur un $NH$, il ne reste qu'une liaison à explorer (le $N$ ayant déjà une liaison avec son $H$ et une liaison avec le reste du motif déjà recherché).
-En reprenant la même logique pour un $C$, il resterait donc trois liaisons à suivre.
-Nous appellerons cette quantité l'arrité restante.
+En reprenant la même logique pour un seul carbone, il resterait donc trois autres liaisons à suivre.
+Nous appellerons cette quantité l'\textit{arrité restante}.
 On peut donc écrire :
 
 \begin{equation}
  T(p_{n-1} \rightarrow p_n) = n_{p_{n-1}} \times a_{p_{n-1} \rightarrow p_n} \times t
 \end{equation}
 
-Où $n_{p_{n-1}}$ est le nombre d'isomorphismes trouvés pour le motif $p_{n-1}$, $a_{p_{n-1} \rightarrow p_n}$ est l'arité restante
+où $n_{p_{n-1}}$ est le nombre d'isomorphismes trouvés pour le motif $p_{n-1}$, $a_{p_{n-1} \rightarrow p_n}$ est l'arité restante
 de l'atome depuis lequel on étend le motif $p_{n-1}$ vers le motif $p_n$ et $t$ le temps nécessaire pour une comparaison de deux
 étiquettes (ce temps peut être considéré constant)
 
@@ -1527,8 +1520,7 @@ Ce temps ne varie par car il est nécessaire de parcourir tout le graphe.
 \paragraph{}En utilisant les comptages faits sur la base d'apprentissage (voir \ref{app_compt}) ainsi que le calcul de l'arité
 restante de chaque n\oe{}ud à chaque étape, nous allons pouvoir estimer sur la base, un temps d'exécution de la recherche d'une
 chaîne. Ce temps est un coût exact de le recherche sur la base d'apprentissage. En normalisant cette valeur par le nombre de
-n\oe{}uds de la base, nous pouvons obtenir le coût de recherche par n\oe{}ud et ainsi pouvoir estimer le temps de calcul quelle que soit
-la taille de la ou les molécules à analyser.
+n\oe{}uds de la base, nous pouvons obtenir le coût de recherche par n\oe{}ud et ainsi pouvoir estimer le temps de calcul, quelle que soit la taille de la, ou les, molécule(s) à analyser.
 
 \begin{equation}
  T(c_n) \propto^t 1 + \sum_{i=2}^n ({n_{p_{i-1}} \over N} \times a_{p_{i-1} \rightarrow p_i})
@@ -1594,31 +1586,31 @@ formules de récurrence sont les suivantes.
  T(\epsilon \rightarrow p_1) = 1
 \end{equation}
 \begin{equation}
- T(p_n) = \min^{p'_{n-1} \subset p_n} (T(p'_{n-1}) + T(p'_{n-1} \rightarrow p_n))
+ T(p_n) = \min^{\forall p'_{n-1} \subset p_n} (T(p'_{n-1}) + T(p'_{n-1} \rightarrow p_n))
 \end{equation}
 
-Où la fonction de minimisation s'applique sur l'ensemble des $p'_{n-1}$ et $p'_{n-1}$ est un motif connexe de taille $n-1$ inclus
+où la fonction de minimisation s'applique sur l'ensemble des $p'_{n-1}$ et $p'_{n-1}$ est un motif connexe de taille $n-1$ inclus
 dans $p_n$. Pour la recherche de motif dans l'exemple, on obtient le chemin $c_{\delta}$ minimisant le coût. On peut voir le
 détail de la recherche de ce motif sur la figure \ref{markov}.
 
 \begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=400px]{Figures/s2m/indexation/markov.png}
-    \caption{\label{markov}En vert, le chemin pris par l'algorithme markovien pour générer la chaîne du motif a-b-d}
+    \caption{\label{markov}En vert, le chemin optimal pris par l'algorithme markovien pour générer la chaîne du motif a-b-d}
   \end{center}
 \end{figure}
 
-\paragraph{}Cette méthode exacte nous permet de garantir la qualité de nos chaînes sur la base d'apprentissage mais cela se paye en temps de calcul.
+\paragraph{}Cette méthode exacte nous permet de garantir la qualité de nos chaînes sur la base d'apprentissage mais cela se paye logiquement en temps de pré-calcul.
 En effet, même par programmation dynamique le temps de pré-calcul des chaînes est très élevé si les motifs sont composés de nombreux branchements et d'une grande diversité de n\oe{}uds.
-Calculons la complexité en considérant que chaque étiquette est unique.
+Calculons la complexité, en considérant que chaque étiquette est unique, sur les deux cas extrêmes~: une ligne et une clique.
 
-Une chaîne (au sens ligne et pas chaîne comme défini ici) représente le motif le plus simple. Pour une chaîne de n\oe{}uds de taille 
-$n$, on peut trouver un motif de taille $n$ puis deux de taille $n-1$ puis 3 de taille $n-2$, ... Pour calculer le coût du motif
-de taille $n$, il nous faut calculer récursivement tous les motifs de taille inférieure. Dans le meilleur des cas la programmation
-dynamique sera donc de complexité de l'ordre de $n^2$.
+Une ligne représente le motif le plus simple.
+Pour une ligne de n\oe{}uds de taille $n$, on peut trouver un motif de taille $n$ puis deux de taille $n-1$ puis 3 de taille $n-2$, ...
+Pour calculer le coût du motif de taille $n$, il nous faut calculer récursivement tous les motifs de taille inférieure.
+Dans le meilleur des cas la programmation dynamique sera donc de complexité de l'ordre de $n^2$.
 
-Le pire motif qui peut être défini est une clique. Dans le cas d'une clique de taille $n$, pour calculer le coût du motif, il faudra
-calculer $n-1$ parmi $n$ valeurs puis $n-2$ parmi $n$, ... Dans ce cas, la complexité sera de l'ordre de $2^n$.
+Le pire motif (théorique en non chimique) qui peut être défini est une clique.
+Dans le cas d'une clique de taille $n$, pour calculer le coût du motif, il faudra calculer $n-1$ parmi $n$ valeurs puis $n-2$ parmi $n$, ... Dans ce cas, la complexité sera de l'ordre de $2^n$.
 
 La redondance des étiquettes permet quant à elle de couper certaines branches lors de l'indexation et ainsi de diminuer un peu
 la complexité. Cependant, l'ordre de grandeur n'en est pas modifié.
@@ -2095,11 +2087,7 @@ Ensuite vient la phase de pavage effectuée soit par une résolution de MIP (voi
 Enfin, pour les cas plus difficiles, nous effectuons plusieurs passes de recherche d'isomorphismes light (voir \ref{light_p}) et de nouveaux pavages.
 
 L'algorithme global est paramétrable.
-<<<<<<< HEAD
 Pour le pré-calcul, nous pouvons fixer la variable $k$ qui définira la taille de chaine calculée avec le modèle markovien.
-=======
-Pour le précalcul, nous pouvons fixer la variable $k$ qui définira la taille de chaîne calculée avec le modèle markovien.
->>>>>>> 8c9a6c9c7d5582e49c30aa7e592f59137e9fab36
 Nous rappelons encore une fois que cette taille n'aura pas d'influence sur le résultat mais uniquement sur le temps de calcul.
 Pour la partie recherche, nous devrons choisir le nombre de fois où nous effectuerons la ``boucle light''.
 Ce paramètre est appelé ``retry'' dans le logiciel (nombre de fois où l'on ré-exécute la boucle).
@@ -2230,21 +2218,12 @@ Le graphique de droite représente le temps d'apprentissage en fonction du k.
 
 Quels que soient les valeurs de k, la recherche est très rapide.
 On parle ici en centièmes de millisecondes.
-<<<<<<< HEAD
-Lorsque la chaine est entièrement générée de manière gloutonne, chaque isomorphisme prend environ 8 centièmes de ms.
-Ce temps descend à 5 centièmes à partir d'un k valant 3.
-Ce résultat est très intéressant car il nous montre que seuls les 3 premiers n\oe{}uds sont utiles pour l'optimisation des chaînes.
-Les monomères non trouvables dans un peptide donné (même ceux étant constitués de plusieurs dizaines d'atomes), peuvent déjà tous être éliminés après 3 atomes si les chaines sont correctement formées.
-Il n'est donc pas nécessaire de pré-calculer (sur nos données) des chaines avec un k supérieur à 3.
-Ce pré-calcul fait gagner près de 35\% d'efficacité à chaque recherche de SI.
-=======
 Lorsque la chaîne est entiérement générée de manière gloutonne, chaque isomorphisme prend environ 8 centièmes de ms.
 Ce temps descend à 5 centièmes à partir d'un k valant 3.
 Ce résultat est très intéressant car il nous montre que seuls les 3 premiers n\oe{}uds sont utiles pour l'optimisation des chaînes.
-Les monomères non trouvables dans une peptide donné (même ceux étant constitués de plusieurs dizaines d'atomes), peuvent déjà tous être éliminés après 3 atomes si les chaînes sont correctement formées.
-Il n'est donc pas nécessaire de précalculer (sur nos données) des chaînes avec un k supérieur à 3.
-Ce précalcul fait gagner près de 35\% d'efficacité à chaque recherche de SI.
->>>>>>> 8c9a6c9c7d5582e49c30aa7e592f59137e9fab36
+Les monomères non trouvables dans un peptide donné (même ceux étant constitués de plusieurs dizaines d'atomes), peuvent déjà tous être éliminés après 3 atomes si les chaînes sont correctement formées.
+Il n'est donc pas nécessaire de pré-calculer (sur nos données) des chaînes avec un k supérieur à 3.
+Ce pré-calcul fait gagner près de 35\% d'efficacité à chaque recherche de SI.
 
 
 \subsubsection{Mesures}
