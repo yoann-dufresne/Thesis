@@ -31,12 +31,13 @@
 \paragraph{}Afin de bien comprendre la voie de synthèse non ribosomique, commençons par quelques rappels rapides sur la synthèse des protéines classiques.
 Les protéines sont assemblées dans la cellule par un organite appelé ribosome.
 Les ARN messagers sont les vecteurs de l'information génétique.
-Ils sont la réplication d'un morceau d'ADN qui sera traduit par triplets de nucléotides (appelés codons) en chaîne d'acides aminés.
-Les 64 codons possibles ($4^3$ nucléotides) sont traduits en 20 acides aminés appelés acides aminés protéinogènes (car ils interviennent dans la synthèse classique de protéines).
+Ils sont la transcription d'un morceau d'ADN qui sera traduit par triplets de nucléotides (appelés codons) en chaîne d'acides aminés.
+Les 64 codons possibles ($4^3$ nucléotides) sont traduits en 20 acides aminés appelés acides aminés protéogéniques (car ils interviennent dans la synthèse classique de protéines).
 Ces acides aminés sont tous composés d'un même squelette atomique autorisant deux liaisons et permettant ainsi la formation de chaînes peptidiques.
 Sur le squelette est ancrée une chaîne latérale variant d'un acide aminé à l'autre, leur donnant leur spécificité (voir figure \ref{chaine_pep}).
-Les deux liaisons qu'effectuent le squelette sont supportées par un groupement amine ($NH_2$) et un groupement carboxyle ($C(=O)OH$).
-Ces deux groupements se lient entre eux en chaîne et créent ainsi la protéine.
+Les deux liaisons qu'effectue le squelette sont supportées par un groupement amine ($NH_2$) et un groupement carboxyle ($C(=O)OH$).
+Ces deux groupements se lient entre eux et créent ainsi une protéine linéaire.
+Lorsque la chaîne n'est constitué que de quelques acides aminés (généralement moins de 25) on ne la nomme plus protéine mais peptide.
 
 \begin{figure}[h!]
   \begin{center}
@@ -47,7 +48,8 @@ Ces deux groupements se lient entre eux en chaîne et créent ainsi la protéine
 \end{figure}
 
 \paragraph{}Une fois assemblée, une protéine se replie sur elle même et les caractéristiques structurelles et physico-chimiques qui en découlent lui donnent son activité.
-Plus précisément, les propriétés des éléments en contact avec l'extérieur de la protéine (les atomes qui ne se retrouvent pas enfermés au milieu du repliement) déterminent l'activité de celle-ci.
+Plus précisément, les propriétés des éléments en contact avec d'autres molécules détermineront l'acivité de cette protéine.
+Il est possible que ces surfaces soient à ``l'extérieur'' de la protéine ou à ``l'intérieur'' sous forme de poche.
 Ces propriétés sont donc très dépendantes du repliement et des types des acides aminés exposés.
 
 
@@ -66,8 +68,8 @@ Ces complexes sont appelés des synthétases (Non Ribosomal Peptide Synthetase (
     \includegraphics[width=450px]{Figures/bio/Intro/synthese.png}
     \caption{\label{global}Voie de synthèse non ribosomique~:
     groupés en clusters, les gènes codant la protéine NRPS sont transcrits puis traduits par le ribosome.
-    Les modules A de la NRPS capturent ensuite des monomères (billes de couleur ici) dans l'environnement afin des les assembler.
-    Enfin, le NRP assemblé est relâché pour aller effectuer sa tâche.
+    Les modules A de la NRPS capturent ensuite des monomères (billes de couleur ici) dans l'environnement afin des les assembler en peptide.
+    Enfin, le NRP assemblé est relâché.
     }
   \end{center}
 \end{figure}
@@ -78,12 +80,12 @@ Ces complexes sont appelés des synthétases (Non Ribosomal Peptide Synthetase (
   \begin{center}
     \includegraphics[width=450px]{Figures/bio/Intro/monos/monos.png}
     \caption{\label{monomers_example}Patchwork de monomères NRP.
-    De gauche à droite : deux représentants des acides aminés classique ; plusieurs dérivés d'acides aminés ; deux acides agras ; deux sucres.}
+    De gauche à droite : deux représentants des acides aminés classiques ; plusieurs dérivés d'acides aminés ; un acides gras ; deux sucres.}
   \end{center}
 \end{figure}
 
 \paragraph{}Tandis que les protéines classiques sont majoritairement composées des 20 acides aminés standards, la synthèse non ribosomique incorpore plusieurs centaines de briques de base différentes.
-Ces briques de base sont appelées des {\em monomères}.
+Ces briques de base sont appelées {\em monomères}.
 La base de données de référence des NRP compte pour le moment 533 monomères différents.
 Les monomères peuvent provenir de différents groupes.
 Parmi ces monomères, on compte les 20 acides aminés standards ainsi qu'un grand nombre de dérivés proches.
@@ -102,8 +104,8 @@ On peut également citer les sucres et les acides gras comme faisant partie des 
   \end{center}
 \end{figure}
 
-\paragraph{}Les NRPS peuvent arranger les monomères au sein des NRP avec une certaine souplesse.
-Certains monomères possèdent plus de deux groupements capables de se lier.
+\paragraph{}Contrairement à la création des peptides classiques par le ribosome, les NRPS peuvent arranger les monomères au sein des NRP de manière non linéaire.
+Certains monomères possèdent plus de deux groupements capables de réagir et former une liaison avec un autre monomère.
 Ainsi sur l'exemple de la figure \ref{DPR_incl}, on peut constater que le monomère nommé Dpr (acide 2,3-diamonopropionique) possède un groupement amine supplémentaire à celui déjà présent dans le squelette des acides aminés classiques.
 Ce groupement en bout de chaîne latérale autorise le Dpr à se lier 3 fois et ainsi casser la linéarité de la molécule assemblée.
 Ces monomères permettent ainsi d'obtenir des structures à embranchements.
@@ -111,8 +113,9 @@ Ces monomères permettent ainsi d'obtenir des structures à embranchements.
 
 \subsubsection{Les liaisons inter-monomères}
 
-\paragraph{}Classiquement, les liaisons au sein de peptides se font par le rapprochement d'un groupe carboxyle d'un premier monomère vers le groupe amine d'un second.
-Au sein des NRP plusieurs autres types de liaisons viennent completer l'ensemble des liaisons possibles pour ainsi augmenter la diversité possible des structures.
+\paragraph{}Classiquement, les liaisons au sein de peptides se font par le rapprochement d'un groupement carboxyle d'un premier monomère vers le groupement amine d'un second.
+Au sein des NRP plusieurs autres types de liaisons viennent s'ajouter aux liaisons peptidiques.
+Ceci augmente la diversité structurale des peptides.
 La liaison peptidique classique reste tout de même la principale liaison effectuée entre monomères.
 En dehors de celle-ci, nous pouvons lister trois différents types de liaisons NRP.
 
@@ -130,7 +133,7 @@ Comme nous le verrons plus tard lors de la description des modules NRPS Cy (voir
 
 \paragraph{}Le second type de liaison implique au moins un monomère contenant un cycle aromatique (cycle imidazole ou benzène).
 Dans les deux cas, c'est un atome d'hydrogène qui est arraché au cycle afin de pouvoir y lier un monomère.
-Lors d'une liaison d'un cycle imidazole, c'est l'un des deux carbones voisins dans le cycle qui perdra un de ses hydrogènes au profit de la liaison avec l'autre monomère.
+Lors d'une liaison sur un cycle imidazole, c'est l'un des deux carbones voisins dans le cycle qui perdra un de ses hydrogènes au profit de la liaison avec l'autre monomère.
 Dans le cas d'un benzène (Voir figure \ref{benzene}), c'est la présence d'un oxygène accroché au cycle qui permettra une affinité avec les carbones voisins.
 
 \begin{figure}[h!]
@@ -141,8 +144,8 @@ Dans le cas d'un benzène (Voir figure \ref{benzene}), c'est la présence d'un o
 \end{figure}
 
 \paragraph{}Enfin, le dernier type de liaison que nous allons décrire implique au moins un monomère de la catégorie des sucres (Glucose ou Arabinose par exemple).
-Les sucres inclus dans les NRP connus sont toujours cyclisés.
-Ils se lient par perte d'un groupement OH présent sur un carbone voisin de l'oxygène du cycle.
+Les sucres sont inclus dans les NRP sous leur forme cyclisée.
+Suite à la liaison, un groupement OH à été perdu sur un carbone voisin de l'oxygène dans le cycle (voir figure \ref{ose}).
 Face à eux, le monomère complémentaire ne perdra lui qu'un hydrogène pour former ainsi une molécule d'eau expulsée.
 
 \begin{figure}[h!]
@@ -153,7 +156,7 @@ Face à eux, le monomère complémentaire ne perdra lui qu'un hydrogène pour fo
 \end{figure}
 
 \paragraph{}Cette diversité dans la façon de lier les monomères accompagnée du nombre de sites de liaisons candidats explique la diversité structurelle présente au sein des NRP.
-Sur la figure \ref{peps_example}, vous pouvez voir cette diversité s'exprimer au travers du grand nombre de structures différentes.
+La diversité du nombre de structure se voit aisément au sein des peptides représentés sur la figure \ref{peps_example}.
 
 \begin{figure}[h!]
   \begin{center}
@@ -167,18 +170,18 @@ Sur la figure \ref{peps_example}, vous pouvez voir cette diversité s'exprimer a
 
 \paragraph{}Les NRP présentent une grande diversité d'activités, souvent cruciales pour leurs producteurs.
 Beaucoup de NRP recensés sont des antibiotiques comme par exemple, la célèbre molécule de pénicilline synthétisée à partir d'un précurseur NRP appelé ACV~\cite{queener_molecular_1990}.
-La diversité d'activités peut être expliquée par les grandes variations de structures et de compositions par rapport aux protéines.
+La diversité d'activités peut être expliquée par les grandes variations de structures et de compositions par rapport aux peptides ribosomiques.
 Les structures particulières et divers monomères imposent aux NRP d'opter pour des repliements différents des protéines classiques.
 Les contraintes structurelles permettent des repliements difficiles pour des molécules linéaires.
 Les activités spécifiques aux NRP sont obtenues grâce à ces repliements.
 
 \paragraph{}Effectuer un assemblage non ribosomique est très consommateur en énergie pour l'organisme producteur.
-Les complexes enzymatiques à créer sont énormes et les gènes portant leur information peuvent représenter plusieurs pourcents de l'ADN nucléaire.
+Les complexes enzymatiques à créer sont énormes et les gènes portant leur information peuvent représenter plusieurs pourcents de l'ADN chromosomique.
 De plus, contrairement au ribosome, une NRPS ne peut produire qu'un seul NRP (sauf quelques exceptions qui produisent des variants proches).
 Cependant les avantages obtenus grâce aux activités des NRP semblent avoir préservé ces gènes au cours du temps.
 
 
-\subsection{Généralité sur les synthétases}
+\subsection{Généralités sur les synthétases}
 
 \paragraph{}Comme nous l'avons vu dans la courte introduction précédente, les synthétases assemblant les NRP sont des protéines issues d'une synthèse classique.
 Chaque NRPS est un complexe enzymatique extrêmement grand dont la taille est parfois à comparer à un ribosome.
@@ -187,7 +190,7 @@ Une NRPS ne peut produire qu'un seul type de NRP.
 Elles sont organisées en modules consécutifs qui capturent, modifient et intègrent un monomère au NRP\cite{schwarzer_nonribosomal_2003,marahiel_modular_1997}.
 Chacun de ces modules peut à son tour être découpé en domaines fonctionnels.
 Généralement un module est constitué de 3 domaines principaux et éventuellement de domaines optionnels\cite{finking_biosynthesis_2004}.
-Un module standard est d'abord composé d'un domaine de condensation (C) effectuant la liaison du peptide déjà formé au monomère en cours d'inclusion, puis d'un module d'adénilation (A) permettant la capture du monomère à insérer et d'un module de thiolation (T) effectuant la fixation du monomère capturé et le transfert du NRP depuis le domaine C précédent au domaine C suivant.
+Un module standard est d'abord composé d'un domaine de condensation (C) effectuant la liaison du peptide déjà formé au monomère en cours d'inclusion, puis d'un module d'adénylation (A) permettant la capture du monomère à insérer et d'un module de thiolation (T) effectuant la fixation du monomère capturé et le transfert du NRP depuis le domaine C précédent au domaine C suivant.
 Il se peut qu'un ou plusieurs domaines modifiant le monomère inclu, soient présents entre le domaine A et le domaine T.
 Les premier module est différent du fait qu'il n'y ait aucun monomère à lier auparavant.
 Il est une exception à la règle de succession des modules C, A puis T.
@@ -211,9 +214,9 @@ On peut également voir un domaine d'épimérisation (modification de l'acide am
 
 \subsection{Les domaines principaux}
 
-\subsubsection{Le domaine d'Adénilation (domaine A)}
+\subsubsection{Le domaine d'Adénylation (domaine A)}
 
-\paragraph{}Le domaine d'adénilation (A) réaliste la capture dans l'environnement d'un type de monomère donné.
+\paragraph{}Le domaine d'adénylation (A) réaliste la capture dans l'environnement d'un type de monomère donné.
 Il porte ainsi la spécificité du module dans lequel il se trouve.
 Seules quelques exceptions de domaines A sont capables de capturer plusieurs types de monomères proches les uns des autres.
 La séquence d'acides aminés de ce type de domaine varie fortement d'un domaine A à l'autre.
@@ -998,7 +1001,7 @@ Cette étape donnant accès à un lien direct entre atomes et monomères, une é
 
 
 
-\section{Isomorphisme de Sous-graphe vs Sous-graphe Maximum Commun}
+\section{Sous-graphe Maximum Commun vs Isomorphisme de Sous-graphe}
 \label{SI_MCS}
 
 \paragraph{}Nous venons de voir que la recherche de monomères pouvait correspondre à deux problèmes différents en recherche de graphe.
@@ -1612,8 +1615,8 @@ Dans le meilleur des cas la programmation dynamique sera donc de complexité de 
 Le pire motif (théorique en non chimique) qui peut être défini est une clique.
 Dans le cas d'une clique de taille $n$, pour calculer le coût du motif, il faudra calculer $n-1$ parmi $n$ valeurs puis $n-2$ parmi $n$, ... Dans ce cas, la complexité sera de l'ordre de $2^n$.
 
-La redondance des étiquettes permet quant à elle de couper certaines branches lors de l'indexation et ainsi de diminuer un peu
-la complexité. Cependant, l'ordre de grandeur n'en est pas modifié.
+La redondance des étiquettes permet quant à elle de couper certaines branches lors de l'indexation et ainsi de diminuer un peu la complexité en pratique.
+Cependant, l'ordre de grandeur n'en est pas modifié.
 
 \begin{equation}
  Cplx_{chaine} = n + n-1 + ... + 2 + 1 = \sum_{i=1}^n i = {{n (n+1)} \over 2} = O(n^2)
@@ -1625,11 +1628,10 @@ la complexité. Cependant, l'ordre de grandeur n'en est pas modifié.
 
 \subsubsection{Indexation hybride}
 
-\paragraph{}Dans un exemple précédent (TODO : ref), nous avons montré que le début d'une chaîne est très critique pour le temps
-de recherche de celle-ci. L'idée est donc de générer la chaîne par un mélange des deux techniques précédentes. Les débuts de la 
-chaîne seront recherchés en exact jusqu'à une taille $k$ définie à l'avance, puis le reste des extensions se feront en
-utilisant l'algorithme glouton. Cette découpe des chaînes en deux parties garantit une recherche très rapide d'un
-motif sur la base d'apprentissage tout en limitant fortement le temps de pré-calcul nécessaire pour la construction de l'index.
+\paragraph{}Dans un exemple de la figure \ref{markov}, nous avons montré que le début d'une chaîne est très critique lors de sa recherche dans un graphe.
+L'idée est donc de générer la chaîne par un mélange des deux techniques précédentes.
+Les débuts de la chaîne seront recherchés en exact jusqu'à une taille $k$ (définie par l'utilisateur à l'avance), puis le reste des extensions se feront en utilisant l'algorithme glouton.
+Cette découpe des chaînes en deux parties garantit une recherche très rapide d'un motif sur la base d'apprentissage tout en limitant fortement le temps de pré-calcul nécessaire pour la construction de l'index.
 
 
 
@@ -1638,24 +1640,23 @@ motif sur la base d'apprentissage tout en limitant fortement le temps de pré-ca
 
 \subsubsection{Résidus}
 
-\paragraph{}L'algorithme et les indexes présentés dans la section précédente permettent de retrouver rapidement toutes les
-occurrences d'un motif au sein d'une molécule cible. Jusqu'à présent nous avons laissé supposé que dans notre cas
-nous recherchions des monomères dans des peptides. Ceci n'est en fait pas applicable directement. En effet, on ne retrouve jamais
-un monomère en entier au sein d'un polymère. Lorsque les monomères sont liés ensemble pour former le polymère, chacun perd une
-partie de ses atomes dans ces liaisons. Nous appellerons les molécules incluses des résidus (les monomères sans leurs atomes de
-liaison).
+\paragraph{}L'algorithme et les indexes présentés dans la section précédente permettent de retrouver rapidement toutes les occurrences d'un motif au sein d'une molécule cible.
+Jusqu'à présent nous avons laissé pris l'hypothèse que, dans notre cas, nous recherchions des monomères dans des peptides.
+Ceci n'est en fait pas applicable directement.
+En effet, on ne retrouve jamais un monomère en entier au sein d'un polymère.
+Lorsque les monomères sont liés ensemble pour former le polymère, chacun perd une partie de ses atomes dans ces liaisons.
+Nous appellerons les molécules incluses des résidus (les monomères sans leurs atomes de liaison).
 
 \paragraph{}Prenons l'exemple de la Cystéine pour bien comprendre (Voir figure \ref{cys_ex}).
-La cystéine est présente dans 47 peptides de la base de données
-NORINE. Dans certains peptides comme ACV, la cystéine est incluse en effectuant deux liaisons peptidiques avec ses voisins. D'un
-côté elle perd les atomes $OH$ de son groupement $COOH$ pour aller se lier à un groupe $NH_2$ qui perd un de ses $H$. Le tout
-libère un $H_2O$ pendant la réaction. De l'autre côté elle perd un $H$ de son groupement $NH_2$ pour effectuer la même opération
-inversée. Au total la cystéine présente dans ce peptide a donc perdu trois atomes sur deux sites distincts. Dans d'autre cas
-comme dans la malformin A1, la cystéine effectue une troisième liaison au niveau de son atome de soufre en perdant un atome 
-d'hydrogène pour se lier avec un autre atome de soufre et ainsi réaliser un pont disulfure. Sur ce simple exemple on remarque que
-non seulement le monomère n'est jamais inclus en entier mais en plus, il peut être inclus dans un polymère de plusieurs manières
-différentes. Il est donc nécessaire de connaître les différents résidus possibles pour chaque monomère afin de pouvoir les
-rechercher en utilisant l'algorithme de recherche exact décrit précédemment.
+La cystéine est présente dans 47 peptides de la base de données NORINE.
+Dans certains peptides comme ACV, la cystéine est incluse en effectuant deux liaisons peptidiques avec ses voisins.
+D'un côté, elle perd les atomes $OH$ de son groupement $COOH$ pour aller se lier à un groupe $NH_2$ qui perd un de ses $H$. 
+Le tout libère un $H_2O$ pendant la réaction.
+De l'autre côté, elle perd un $H$ de son groupement $NH_2$ pour effectuer la même opération inversée.
+Au total la cystéine présente dans ce peptide a donc perdu trois atomes sur deux sites distincts.
+Dans d'autre cas comme dans la malformin A1, la cystéine effectue une troisième liaison au niveau de son atome de soufre en perdant un atome d'hydrogène pour se lier avec un autre atome de soufre et ainsi réaliser un pont disulfure.
+Sur ce simple exemple, on remarque que non seulement le monomère n'est jamais inclus en entier mais en plus, il peut être inclus dans un polymère de différentes manières.
+Il est donc nécessaire de connaître les différents résidus possibles pour chaque monomère afin de pouvoir les rechercher en utilisant l'algorithme de recherche exact décrit précédemment.
 
 \begin{figure}[!ht]
   \begin{center}
@@ -1667,19 +1668,19 @@ rechercher en utilisant l'algorithme de recherche exact décrit précédemment.
 
 \subsubsection{Familles de résidus}
 
-\paragraph{}Différents résidus d'un même monomère peuvent être créés selon les contextes. Pour connaître les différents résidus
-possibles pour chaque monomère nous devons donc connaître les règles qui régissent les liaisons. Par exemple pour la liaison
-peptidique précédemment citée, nous pouvons déduire deux règles. Si un $COOH$ est détecté alors le monomère peut potentiellement
-perdre son $OH$. De la même manière pour la seconde moitié de la liaison on peut perdre un $H$ pour un $NH_2$ détecté. En
-regardant précisément les liaisons qui apparaissent pour un type de polymère, nous pouvons créer une liste de règles de perte
-d'atomes. En appliquant ses règles récursivement sur un monomère, nous pouvons générer tous ses résidus candidats. Notons que
-certaines règles comme celles du pont disulfure décrite précédemment, ne s'applique qu'en présence d'une autre liaison. Il n'est
-donc jamais nécessaire de générer le résidu qui contient uniquement cette liaison. Ici nous n'aurons donc jamais de résidus
-uniquement constituée d'une liaison sulfure. Il est
-à noter que moins une règle sera précise et plus le nombre de résidus générés sera important. Imaginons une règle qui nous dirait
-dans un cadre de chimie organique que pour tout carbone étant lié à au moins un hydrogène, l'atome d'hydrogène peut être perdu
-pour former une liaison. Si $n$ est le nombre d'atomes de carbone dans la molécule ($n$ représente une grande proportion d'atomes
-dans une molécule organique), alors on peut générer un nombre de résidus de l'ordre de $n^2$.
+\paragraph{}Différents résidus d'un même monomère peuvent être créés selon les contextes.
+Pour connaître les différents résidus possibles pour chaque monomère nous devons donc connaître les règles qui régissent les liaisons.
+Par exemple, pour la liaison peptidique précédemment citée, nous pouvons déduire deux règles.
+Si un $COOH$ est détecté alors le monomère peut potentiellement perdre son $OH$.
+De la même manière pour la seconde moitié de la liaison on peut perdre un $H$ pour un $NH_2$ détecté.
+En regardant précisément les liaisons qui apparaissent pour un type de polymère, nous pouvons créer une liste de règles de perte d'atomes.
+En appliquant ses règles récursivement sur un monomère, nous pouvons générer tous ses résidus candidats.
+Notons que certaines règles comme celles du pont disulfure décrite précédemment, ne s'applique qu'en présence d'une autre liaison.
+Il n'est donc jamais nécessaire de générer le résidu qui contient uniquement cette liaison.
+Ici nous n'aurons donc jamais de résidus uniquement constituée d'une liaison sulfure.
+Il est à noter que, moins une règle sera précise, plus le nombre de résidus générés sera important.
+Imaginons une règle qui nous dirait dans un cadre de chimie organique, que ``pour tout carbone étant lié à au moins un hydrogène, l'atome d'hydrogène peut être perdu pour former une liaison''.
+Si $n$ est le nombre d'atomes de carbone dans la molécule ($n$ représente une grande proportion d'atomes dans une molécule organique), alors on peut générer un nombre de résidus de l'ordre de $n^2$.
 
 \begin{figure}[!ht]
   \begin{center}
@@ -1688,27 +1689,25 @@ dans une molécule organique), alors on peut générer un nombre de résidus de 
   \end{center}
 \end{figure}
 
-\paragraph{}Comme présenté dans la figure \ref{sulfure}, les différents résidus générés peuvent être représentés sous la forme
-d'un Graphe Orienté Acyclique (GOA). Le monomère de base ainsi que chacun des résidus est un n\oe{}ud du graphe et chaque arc est un
-lien de parenté entre n\oe{}uds. Un arc sera par exemple créé entre un résidu auquel on a appliqué une seule règle et le monomère.
+\paragraph{}Comme présenté dans la figure \ref{sulfure}, les différents résidus générés peuvent être représentés sous la forme d'un Graphe Orienté Acyclique (GOA).
+Le monomère de base ainsi que chacun des résidus est un n\oe{}ud du graphe et chaque arc est un lien de parenté entre n\oe{}uds.
+Un arc sera par exemple créé entre un résidu auquel on a appliqué une seule règle et le monomère.
 Nous appellerons \textbf{famille} cette représentation des résidus sous forme de GOA.
 
-\paragraph{}Le n\oe{}ud le plus éloigné du monomère sera le n\oe{}ud
-qui aura subit le plus de modification. Nous appellerons le résidu de ce n\oe{}ud le \textbf{résidu racine}. Ce résidu à un intérêt
-tout particulier pour la recherche du monomère. En effet, si le résidu racine n'est pas trouvé alors qu'il est celui
-qui possède le moins d'atomes dans la famille, cela veut dire qu'aucun membre de la famille ne pourra être trouvé. On peut même
-aller plus loin en étendant le raisonnement à tous les résidus. Si un résidu de niveau $n$ n'est pas trouvé alors il est inutile
-de rechercher ses résidus parents de niveau $n-1$. Il est également vrai de dire qu'il est inutile de chercher un résidu parent de
-niveau $n-1$ si tout ses enfants de niveau $n$ n'ont pas été trouvés.
+\paragraph{}Le n\oe{}ud le plus éloigné du monomère sera le n\oe{}ud qui aura subi le plus de modification.
+Nous appellerons le résidu de ce n\oe{}ud le \textbf{résidu racine}.
+Ce résidu à un intérêt tout particulier pour la recherche du monomère.
+En effet, si le résidu racine n'est pas trouvé alors qu'il est celui qui possède le moins d'atomes dans la famille, cela veut dire qu'aucun membre de la famille ne pourra être trouvé.
+On peut même aller plus loin en étendant le raisonnement à tous les résidus.
+Si un résidu de niveau $n$ n'est pas trouvé alors il est inutile de rechercher ses résidus parents de niveau $n-1$.
+Il faut également remarquer qu'il est inutile de chercher un résidu parent de niveau $n-1$ si tout ses enfants de niveau $n$ n'ont pas été trouvés.
 
-\paragraph{}En connaissant la structure familiale des résidus ainsi qu'un ordre naturel de recherche pour passer d'un résidu à
-l'autre, nous pouvons déduire une structure globale de recherche. Découle donc de cette structure familiale un ordre de recherche
-naturel depuis le résidu racine jusqu'aux résidus de niveau 1 (Inutile de rechercher le monomère car il n'étant jamais inclus tel
-quel). De plus, il n'est jamais nécessaire de
-recalculer complètement un isomorphisme une fois que la racine trouvée. Pour passer d'un résidu $r$ à l'un de ses parents $p$ il
-suffit de rechercher à étendre l'isomorphisme de $r$ avec les atomes que nous avions considérés perdus pour passer de $p$ à $r$
-lors de la construction de la famille. De plus, le fait de ne pas tout recalculer à chaque étape nous autorise à ne calculer
-l'index que pour les résidus racine. Le reste des résidus n'est indexé que sur les extensions a effectuer depuis leurs enfants.
+\paragraph{}En connaissant la structure familiale des résidus ainsi qu'un ordre naturel de recherche pour passer d'un résidu à l'autre, nous pouvons déduire une structure globale de recherche.
+Découle donc de cette structure de famille de résidus, un ordre de recherche naturel depuis le résidu racine jusqu'aux résidus de niveau 1 (inutile de rechercher le monomère car il n'étant jamais inclus tel quel).
+De plus, il n'est jamais nécessaire de recalculer complètement un isomorphisme une fois que la racine trouvée.
+Pour passer d'un résidu $r$ à l'un de ses parents $p$ il suffit de rechercher à étendre l'isomorphisme de $r$ avec les atomes que nous avions considérés perdus pour passer de $p$ à $r$ lors de la construction de la famille.
+De plus, le fait de ne pas tout recalculer à chaque étape nous autorise à ne calculer l'index que pour les résidus racine.
+Le reste des résidus n'est indexé que sur les extensions à effectuer depuis leurs fils.
 L'algorithme qui décrit la recherche d'une famille est donc le suivant :
 
 \paragraph{}
@@ -1748,17 +1747,15 @@ L'algorithme qui décrit la recherche d'une famille est donc le suivant :
 
 \subsubsection{Pavage : définition}
 
-\paragraph{}La méthode de recherche des isomorphismes de sous graphe présentée précédemment, trouve toutes les occurrences de chacun des monomères dans un peptide cible.
+\paragraph{}La méthode de recherche des isomorphismes de sous-graphe présentée précédemment, trouve toutes les occurrences de chacun des monomères dans un peptide cible.
 
-Puisque nous connaissons les atomes contenus dans chacun des isomorphismes découverts, nous pouvons également connaître chacun des
-isomorphismes découverts par atome.
-L'étape de pavage consiste à choisir un sous ensemble des isomorphismes trouvés, de manière à maximiser les atomes couverts par ces
-isomorphismes en ayant pour chaque atome au plus un seul isomorphisme présent dans ce sous ensemble.
+Puisque nous connaissons les atomes contenus dans chacun des isomorphismes découverts, nous pouvons également connaître chacun des isomorphismes découverts par atome.
+L'étape de pavage consiste à choisir un sous ensemble des isomorphismes trouvés, de manière à maximiser les atomes couverts par ces isomorphismes, en ayant pour chaque atome, au plus un seul isomorphisme présent dans ce sous ensemble.
 
-Faisons une analogie avec un puzzle. La phase d'isomorphisme crée de nombreuses pièces de puzzle.
+Faisons une analogie avec un puzzle. La phase d'isomorphisme créée de nombreuses pièces de puzzle.
 Une reconstruction complète du puzzle n'est pas forcément faisable uniquement à partir de ces pièces.
 De plus, parmi celles dont nous disposons, certaines se chevauchent.
-La phase de pavage consiste à choisir parmi les pièces, celles que l'on souhaite garder en maximisant le remplissage de notre puzzle et sans avoir de pièces chevauchantes (figure \ref{puzzle}).
+La phase de pavage consiste à choisir parmi les pièces, celles que l'on souhaite garder, en maximisant le remplissage de notre puzzle et sans avoir de pièces chevauchantes (figure \ref{puzzle}).
 
 \begin{figure}
   \includegraphics[width=300px]{Figures/s2m/pavage/puzzle.pdf}
@@ -1780,10 +1777,10 @@ purement algorithmique de choisir quelle est la meilleure façon de découper ce
 
 \subsubsection{Preuve de NP-Complétude}
 
-\paragraph{}En 2015 j'ai eu la chance de participer, avec mes amis Thomas Nachtergale et Alexandre Temperville, à la finale du concours d'algorithmique ``Google Hashcode''.
+\paragraph{}En 2015, j'ai eu la chance de participer, avec mes amis Thomas Nachtergale et Alexandre Temperville, à la finale du concours d'algorithmique ``Google Hashcode''.
 La veille de l'épreuve finale, un petit problème test nous a été proposé.
 Le but était de découper une pizza (matrice), composée de cases de jambon (H dans la matrice) et de cases de sauce (T dans la matrice), en parts dites ``royales'', en minimisant le gâchis de pizza (morceaux ne contenant pas de parts).
-Les part royales sont des parts rectangulaires contenant au minimum 3 cases de jambon et représentant une surface maximale de 12 cases.
+Les parts royales sont des parts rectangulaires contenant au minimum 3 cases de jambon et représentant une surface maximale de 12 cases.
 
 \paragraph{TODO : schéma pizzas}
 
@@ -1800,16 +1797,17 @@ Pour cela, il est possible de vérifier les chevauchements pour toutes les paire
 La vérification du certificat peut être faite de manière quadratique, ce qui permet de dire que le problème est NP.
 
 \paragraph{}Prouvons ensuite que nous pouvons résoudre le problème Pizza en utilisant le problème Pavage.
-Nous avons besoin de définir 3 notions pour notre codage :
+Codons donc Pizza dans Pavage~:
 \begin{itemize}
-	\item Les atomes du peptide : Les atomes du peptide représenteront les cases de la matrice pizza.
-	\item Les liens entre atomes : Les liens représentent les voisinages de deux cases.
-Si deux cases sont voisines (voisinage de Manhattan), alors un lien existe entre les deux atomes qui les représentent.
-	\item Les résidus : Les résidus correspondent aux parts royales de pizza.
-Chaque case faisant partie de la case sera représentée par un atome du résidu.
+	\item La pizza sera représentée par un peptide.
+	\item Chaque case de la pizza sera un atome qui ne pourra prendre les deux valeurs H et T selon le remplissage de la case.
+	\item Le voisinage des cases sera représenté par des liens entre les atomes.
+	L'atome correspondant à la case $(i,j)$ sera lié aux atomes correspondants aux case $(i-1,j)$, $(i+1,j)$, $(i,j-1)$ et $(i,j+1)$ (sauf sur les bords).
+	\item L'ensemble des parts possibles sur la pizza sera représenté par un ensemble de résidus trouvés candidats.
+	Par exemple une part allant de $(0,0)$ à $(2,3)$ sera représentée par un résidu couvrant tous les atomes entre ces coordonnées.
 \end{itemize}
 
-Avec ce codage, si nous arrivons à résoudre le problème de pavage il devient possible de résoudre le problème de pizza.
+Avec ce codage, si nous arrivons à résoudre le problème de pavage il devient alors possible de résoudre le problème de pizza.
 
 \paragraph{}Le problème de pavage est NP et il existe un problème NP-Complet qui peut se réduire en lui.
 Pavage est donc NP-Complet.
@@ -1827,34 +1825,32 @@ Pavage est donc NP-Complet.
   solution}
 \end{figure}
 
-\paragraph{}Nous allons ici résoudre le problème de pavage en exact par utilisation de la programmation linéaire (LP). Un
-problème de programmation linéaire est un
-problème représenté par un ensemble de variables, une fonction de score ainsi qu'une liste de contraintes sur les variables. La
-fonction de score est accompagnée d'un objectif de maximisation ou de minimisation. Ce type de problème est classiquement résolu
-par l'algorithme du simplexe~\cite{murty_linear_1983}. Depuis la publication, de nombreuses variantes de l'algorithme ont été
-créées. L'une d'elle, appelée ``Mixed Integer Programming'' (MIP)~\cite{wolsey_mixed_2007}, permet de résoudre des problèmes
-pour lesquels les variables sont des entiers.
+\paragraph{}Nous allons ici résoudre le problème de pavage de manière exacte par utilisation de la programmation linéaire (LP).
+Un problème de programmation linéaire est un problème représenté par un ensemble de variables, une fonction de score ainsi qu'une liste de contraintes sur les variables.
+La fonction de score est accompagnée d'un objectif de maximisation ou de minimisation.
+Ce type de problème est classiquement résolu par l'algorithme du simplexe~\cite{murty_linear_1983}.
+Depuis la publication, de nombreuses variantes de l'algorithme ont été créées.
+L'une d'elle, appelée ``Mixed Integer Programming'' (MIP)~\cite{wolsey_mixed_2007}, permet de résoudre des problèmes pour lesquels les variables sont des entiers.
 
 \paragraph{}Dans notre cas, nous allons rechercher les résidus qui seront utiles pour notre assemblage final.
-Ainsi nous représentons la présence ou l'absence dans la solution finale d'un résidu trouvé durant la première phase par une
+Ainsi, nous modélisons la présence ou l'absence dans la solution finale d'un résidu trouvé durant la première phase par une
 variable binaire (0 pour l'absence et 1 pour la présence).
 
 \begin{equation}
  \forall r_i \exists v_{r_i}, v_{r_i} \in \{0, 1\}
 \end{equation}
 
-Où $r_i$ représente le i-ème résidu et $v_{r_i}$ la variable binaire correspondant à $r_i$.
+où $r_i$ représente le i-ème résidu et $v_{r_i}$ la variable binaire correspondant à $r_i$.
 
-\paragraph{}Nous souhaitons également interdire la possibilité de chevauchement de deux résidus. Nous pouvons caractériser cela
-par la restriction d'avoir au plus un résidu présent sur chaque atome (ie une variable avec la valeur 1). On obtient donc une
-contrainte pour chaque atome ; ces contraintes étant
-représentées par le fait que la somme de toutes les variables des résidus présents sur un atome ne peut être supérieure à 1.
+\paragraph{}Nous souhaitons également interdire la possibilité de chevauchement de deux résidus.
+Nous pouvons caractériser cela par la restriction d'avoir au plus un résidu présent sur chaque atome (\textit{ie} une variable avec la valeur 1).
+On obtient donc une contrainte pour chaque atome ; ces contraintes étant représentées par le fait que la somme de toutes les variables des résidus présents sur un atome ne peut être supérieure à 1.
 
 \begin{equation}
  c_a : \sum^{r_i} v_{r_i} \leqslant 1, a \in r_i
 \end{equation}
 
-Où $a$ est l'atome correspondant à la contrainte $C_a$.
+où $a$ est l'atome correspondant à la contrainte $c_a$.
 
 \paragraph{}Enfin, nous cherchons à maximiser le nombre d'atomes couverts par les résidus présents. La fonction de score sera
 donc la somme des présences des résidus pondérée par la taille de chaque résidu :
@@ -2964,7 +2960,7 @@ Nous obtenons désormais 5342 peptides.
 Enfin, les NRP sont noyés au milieu de nombreuses protéines classiques.
 Rappelons que les protéines classiques sont constituées uniquement de 20 acides aminés différents.
 Leur voie de synthèse n'effectue que des assemblages linéaires.
-En filtrant tous les peptides qui ne contiennent que des acides aminés protéinogènes ainsi que ceux qui sont linéaires, nous devrions augmenter la densité de NRP dans notre sortie.
+En filtrant tous les peptides qui ne contiennent que des acides aminés protéogéniques ainsi que ceux qui sont linéaires, nous devrions augmenter la densité de NRP dans notre sortie.
 Nous ajoutons comme filtre l'impossibilité d'être linéaire (nombre de liaisons supérieurs ou égal à nombre de noeuds) et l'obligation de posséder au moins deux monomères ne faisant pas partie des 20 de base.
 Finalement nous obtenons 1097 peptides.
 
