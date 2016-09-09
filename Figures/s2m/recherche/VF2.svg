@@ -459,20 +459,21 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
-     inkscape:cx="749.60641"
+     inkscape:cx="401.74927"
      inkscape:cy="399.95623"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
-     inkscape:window-width="1855"
-     inkscape:window-height="1176"
-     inkscape:window-x="65"
+     inkscape:window-width="1615"
+     inkscape:window-height="1026"
+     inkscape:window-x="1985"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
-     fit-margin-bottom="0">
+     fit-margin-bottom="0"
+     showguides="false">
     <inkscape:grid
        type="xygrid"
        id="grid4899"
@@ -487,7 +488,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1225,5 +1226,27 @@
        id="path9084"
        d="m 847.99994,112.36225 0,40"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:3.00000048;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:3.00000036, 6.00000072;stroke-dashoffset:0;stroke-opacity:1" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40.00000381px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="488.57141"
+       y="-257.63776"
+       id="text4476"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4478"
+         x="488.57141"
+         y="-257.63776">?</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:52.50000381px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="474.28574"
+       y="-216.2092"
+       id="text4480"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4482"
+         x="474.28574"
+         y="-216.2092">⊆</tspan></text>
   </g>
 </svg>

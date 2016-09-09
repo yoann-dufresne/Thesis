@@ -1,12 +1,10 @@
 TODO :
 → 2.2.3.1 : à revoir : le besoin de 2 étapes n'est pas bien expliqué, donner éventuellement un exemple concret de cas qui pose problème
-
 → pourquoi l'homogénéité des fréquences est importante pour VF2 ?
 
 
 Voir avec Maude :
 → mettre l'exemple de calcul de la chaine c_beta pour que la justification de la prog dynamique soit plus facile à imaginer
-→ "Une chaı̂ne (au sens ligne et pas chaı̂ne comme défini ici) représente le motif le plus simple." ?
 
 Suggestions :
 → pour les refs : mettre un nom d'auteur et une date au lieu d'un numéro (plus parlant)

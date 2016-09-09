@@ -745,7 +745,7 @@ Lorsque ces activités ne sont pas déterminées expérimentalement, les logicie
 En 2012 puis 2014, Abdo et al. publient de nouvelles méthodes de prédiction d'activité NRP, se basant sur les spécificités des NRP~\cite{abdo_new_2012, abdo_prediction_2014}.
 Dans les deux cas, les prédictions sont effectuées à partir des compositions monomériques et non pas atomiques.
 Dans le premier article~\cite{abdo_new_2012}, la prédiction est effectuée en créant pour chaque activité connue un \textit{fingerprint}.
-Ces fingerprints sont composés des comptages moyens de monomères de chaque type, pour tous les peptides présentant l'activité.
+Ces fingerprints barycentre des peptides présentant l'activité.
 Prédire l'activité d'un nouveau NRP revient alors à déterminer celle dont le fingerprint est le plus proche.
 Dans le second article~\cite{abdo_prediction_2014}, c'est un classifieur par réseau Bayésien qui est entraîné sur les compositions en monomères.
 Une fois les réseaux entraînés, il suffit de fournir une composition en entrée pour avoir les probabilités de chaque activité en sortie.
@@ -757,7 +757,7 @@ Connaître ce genre de structure est un enjeu fort pour la détermination de car
 Comme nous l'avons fait remarqué précédemment, il n'existe que peu d'outils permettant des annotations fiables de NRP.
 Les caractérisations fiables de NRP sont en très grande majorité effectuées à la main par des biologistes et chimistes.
 Beaucoup de structures atomiques sont également connues sans annotations monomériques malgré leur présence dans de grandes bases de données.
-Il nous a donc paru nécessaire de créer un outil qui infère la structure monomérique à partir d'une structure atomique et c'est de cela dont nous allons parler par la suite.
+Il nous a donc paru nécessaire de créer un outil qui infère la structure monomérique à partir d'une structure atomique et c'est de cela dont nous allons parler dans la suite de ce chapitre.
 
 
 
@@ -783,7 +783,7 @@ De telles structures sont présentes dans de nombreuses bases de données publiq
 Il est possible de trouver au sein de ces bases de données de nombreuses structures atomiques de NRP dont on ne possède pas d'annotation monomérique facilement accessible.
 Notre objectif sera d'être capable, pour toute structure moléculaire NRP, de déduire sa composition en monomères.
 Ainsi, toutes les structures atomiques présentes dans les bases généralistes pourront être annotées et ajoutées à des bases spécialisées telles que Norine.
-Ce type d'annotation pourra également être effectué sur toutes les nouvelles structures atomiques ajoutées.
+Ce type d'annotation pourra également être effectué pour mettre en relation les structures atomiques non annotées des bases généralistes avec les annotations non liés des bases spécialisées.
 
 
 
@@ -799,7 +799,7 @@ Nous allons ici présenter ces deux approches.
 \subsubsection{CHUCKLES, une méthode constructive}
 
 \paragraph{}CHUCKLES~\cite{siani_chuckles:_1994} est une méthode publiée en 1994 pour la recherche des peptides au sein d'une base de données.
-Le but est de requêter une base de données de molécules en utilisant des expressions régulières représentant des sous-molécules d'intérêt.
+Le but est de requêter une base de données de molécules en utilisant des expressions régulières entrées par l'utilisateur et représentant des sous-molécules d'intérêt.
 Les recherches peuvent être effectuées à la fois au niveau atomique et au niveau monomérique.
 Le but de CHUCKLES est de convertir rapidement les données du format monomérique vers le format atomique et inversement.
 Les auteurs pensent qu'il est plus utile de conserver les formats atomiques en base plutôt que les séquences protéiques.
@@ -1029,12 +1029,12 @@ Comme le nom l'indique, le problème du MCS est un problème de recherche de la 
 C'est à dire trouver un ensemble de n\oe{}uds présents dans les deux graphes et dont les arêtes qui les inter-connectent sont les mêmes.
 Il faut non seulement que les n\oe{}uds partagent les même étiquettes mais également les mêmes voisins.
 Si deux n\oe{}uds ont la même étiquette mais ne partagent pas les mêmes voisins dans les deux graphes, alors ils ne font pas partie du MCS.
-C'est par exemple le cas du n\oe{}ud rouge au sein de la figure.
+C'est par exemple le cas du n\oe{}ud rouge au sein de la figure \ref{mcs_fig}.
 Le problème de recherche de sous graphe commun connexe maximal (MCCS) est un problème encore plus difficile car il impose de fortes contraintes supplémentaires.
-Le problème du MCS à été prouvé NP-Complet\cite{garey_computers_1979}, ce qui empêche (en tout cas pour le moment) l'émergence d'algorithmes de résolution polynomiaux efficaces.
+Le problème du MCS à été prouvé NP-Complet\cite{garey_computers_1979}, ce qui laisse peu de perspectives pour l'émergence d'algorithmes de résolution polynomiaux exacts.
 
 \paragraph{}Dans notre cas, nous pouvons effectuer une réduction vers ce problème pour la recherche des monomères.
-Si l'on considère qu'un monomère et un polymère sont des graphes atomiques, alors trouver une sous partie commune à ces deux graphes revient à trouver un endroit où un morceau du monomère est retrouvé dans le peptide.
+Si l'on considère qu'un monomère et un polymère sont des graphes atomiques, alors trouver une sous partie commune à ces deux graphes revient à trouver un emplacement où un morceau du monomère est retrouvé dans le peptide.
 En imposant que le graphe commun soit d'une taille minimale fixée, nous pourrons éviter d'avoir des résultats ne contenant que quelques atomes par hasard.
 
 \paragraph{}Du fait de la NP-complétude du problème, trouver des solutions exactes est très compliqué.
@@ -1180,7 +1180,7 @@ Le couple ligne/colonne nous donne le couple n\oe{}ud de G/n\oe{}ud de H a peut 
 Avant cet ajout, il faut également vérifier que tous les voisins du n\oe{}ud de H correspondent bien aux voisins du n\oe{}ud de G (condition non respectée à l'étape 2 et 5 de la partie recherche du schéma).
 Puisque nous ajoutons ce couple à l'isomorphisme, il faut remplacer tous les 1 de la ligne et la colonne choisies par des 0 (excepté pour la case du binôme).
 À ce moment, si au moins une ligne a été vidée de tous ses 1, c'est que l'isomorphisme n'est pas possible et il faut revenir à l'étape précédente.
-Sinon, il suffit de continuer récursivement jusqu'à obtenir un unique 1 par ligne.
+L'algorithme continue récursivement jusqu'à obtenir un 1 par ligne ou ne trouver aucun isomorphisme.
 En choisissant bien les lignes et les colonnes par lesquelles l'algorithme commence, on arrive à obtenir des temps d'exécution très courts pour la recherche d'un SI.
 Cependant, pour obtenir tous les SI, il faut parcourir tout l'arbre des possibles, ce qui ralentit l'algorithme.
 
@@ -1195,32 +1195,32 @@ Les SI se forment par ajouts successifs de couples de n\oe{}uds compatibles avec
 VF2 est un algorithme de recherche de SI pour des graphes non orientés et non étiquetés.
 Dans l'article l'algorithme est décrit comme suit :
 
-\paragraph{}
-  \begin{algorithm}[H]
-    \caption{Algorithme VF2 pour graphes non étiquetés}
-    \KwData{Un graphe $G(V,E)$ et un graphe $H(V',E')$ avec $|V| \leq |V'|$ et $s$ un état contenant les mappings déjà effectués
-    entre les deux graphes}
-    \KwResult{Un mapping entre les éléments de $V$ et une sous partie des éléments de $V'$ telle que $H$ soit un isomorphisme de
-    sous graphe de $H$}
-    
-    \uIf {$s$ contient un mapping de tous les éléments de $V$} {
-      \KwRet $Mapping(s)$\;
-    } \uElse {
-      \uIf {$Mapping(s)$ est vide} {
-	$P \gets$ ensemble des $p(x,y)$ tq $x \in V$ et $y \in V'$ \;
-      } \uElse {
-	$P \gets$ ensemble des $p(x,y)$ tq $x \in V$, $y \in V'$ et $\exists p(a,b) \in Mapping(s)$ tq $a$ et $x$ soient voisins dans
-	$G$ et $b$, $y$ voisins dans $H$ \;
-      }
-      
-      \For {$p \in P$} {
-	$s' \gets p \cup s$\;
-	\If {$VF2(G, H, s') != \emptyset$} {\KwRet $Mapping(s')$\;}
-      }
-      
-      \KwRet $\emptyset$ \;
-    }
-  \end{algorithm}
+% \paragraph{}
+%   \begin{algorithm}[H]
+%     \caption{Algorithme VF2 pour graphes non étiquetés}
+%     \KwData{Un graphe $G(V,E)$ et un graphe $H(V',E')$ avec $|V| \leq |V'|$ et $s$ un état contenant les mappings déjà effectués
+%     entre les deux graphes}
+%     \KwResult{Un mapping entre les éléments de $V$ et une sous partie des éléments de $V'$ telle que $H$ soit un isomorphisme de
+%     sous graphe de $H$}
+%     
+%     \uIf {$s$ contient un mapping de tous les éléments de $V$} {
+%       \KwRet $Mapping(s)$\;
+%     } \uElse {
+%       \uIf {$Mapping(s)$ est vide} {
+% 	$P \gets$ ensemble des $p(x,y)$ tq $x \in V$ et $y \in V'$ \;
+%       } \uElse {
+% 	$P \gets$ ensemble des $p(x,y)$ tq $x \in V$, $y \in V'$ et $\exists p(a,b) \in Mapping(s)$ tq $a$ et $x$ soient voisins dans
+% 	$G$ et $b$, $y$ voisins dans $H$ \;
+%       }
+%       
+%       \For {$p \in P$} {
+% 	$s' \gets p \cup s$\;
+% 	\If {$VF2(G, H, s') != \emptyset$} {\KwRet $Mapping(s')$\;}
+%       }
+%       
+%       \KwRet $\emptyset$ \;
+%     }
+%   \end{algorithm}
 
 \begin{figure}[!ht]
   \begin{center}
@@ -1295,7 +1295,7 @@ Comme nous l'avons vu dans l'état de l'art, nous pouvons transformer ce problè
 Dans cette partie, nous allons présenter en détail la variante que nous avons conçu, de l'algorithme de résolution de SI appelé VF2.
 Puis nous montrerons en quoi les étiquettes des n\oe{}uds du graphes influencent le temps de calcul afin en déduire une méthode de recherche efficace.
 
-\subsubsection{L'algorithme pour les graphes étiquetés}
+\subsubsection{Notre algorithme pour les graphes étiquetés}
 
 
 \begin{figure}[!ht]
@@ -1417,33 +1417,33 @@ Dans notre cas, nous cherchons à étudier des peptides non ribosomiques.
 La base d'apprentissage des fréquences sera donc constituée de NRP dont la composition atomique est déjà connue.
 Le raisonnement est extensible à n'importe quel type de molécules et le fait d'avoir un jeu d'apprentissage peu ou pas représentatif n'influencera pas le résultat mais uniquement le temps de calcul.
 Une fois cette base créée, nous pouvons estimer les fréquences d'apparition de chacune des étiquettes présents dans les monomères en effectuant une recherche exhaustive (Figure \ref{apprentissage}).
-L'algorithme glouton naïf qui vient tout de suite en tête est de choisir un à un les n\oe{}uds que l'on souhaite ajouter au motif en choisissant toujours celui avec l'étiquette la moins fréquente.
 
-\paragraph{}
-  \begin{algorithm}[H]
-    \caption{Algorithme glouton de création de l'ordre des n\oe{}uds pour le parcours d'un graphe}
-    \KwData{Un graphe $G(V,E)$}
-    \KwResult{Une liste $N$ contenant tous les n\oe{}uds de V ordonnés pour la recherche}
-    \SetKwFunction{recur}{recur}\SetKwFunction{algo}{trier}
-    \SetKwProg{myalg}{fonction}{}{}
-    \myalg{\algo{$G(V,E)$}}{
-      \KwRet \recur{$G(V,E)$, \{\}}\;
-    }
- 
-    \myalg{\recur{$G(V,E)$, $N$}}{
-      \eIf {$|N| == |V|$}{
-	\KwRet $N$\;
-      } {
-	Prendre tous les voisins des n\oe{}uds présents dans $N$ qui ne sont pas présent dans $N$\;
-	Choisir le n\oe{}uds $n$ avec l'étiquette la moins fréquente\;
-	Ajouter $n$ à la fin de $N$\;
-	\KwRet \recur {$G(V,E)$, $N$}\;
-      }
-    }
-  \end{algorithm}
+% \paragraph{}
+%   \begin{algorithm}[H]
+%     \caption{Algorithme glouton de création de l'ordre des n\oe{}uds pour le parcours d'un graphe}
+%     \KwData{Un graphe $G(V,E)$}
+%     \KwResult{Une liste $N$ contenant tous les n\oe{}uds de V ordonnés pour la recherche}
+%     \SetKwFunction{recur}{recur}\SetKwFunction{algo}{trier}
+%     \SetKwProg{myalg}{fonction}{}{}
+%     \myalg{\algo{$G(V,E)$}}{
+%       \KwRet \recur{$G(V,E)$, \{\}}\;
+%     }
+%  
+%     \myalg{\recur{$G(V,E)$, $N$}}{
+%       \eIf {$|N| == |V|$}{
+% 	\KwRet $N$\;
+%       } {
+% 	Prendre tous les voisins des n\oe{}uds présents dans $N$ qui ne sont pas présent dans $N$\;
+% 	Choisir le n\oe{}uds $n$ avec l'étiquette la moins fréquente\;
+% 	Ajouter $n$ à la fin de $N$\;
+% 	\KwRet \recur {$G(V,E)$, $N$}\;
+%       }
+%     }
+%   \end{algorithm}
 
 
-\paragraph{}Il est nécessaire de préciser que la recherche des n\oe{}uds voisins peut être faite en maintenant un ensemble des voisinages.
+\paragraph{}L'algorithme glouton naïf qui vient tout de suite en tête est de choisir un à un les n\oe{}uds que l'on souhaite ajouter au motif en choisissant toujours celui avec l'étiquette la moins fréquente.
+Il est nécessaire de préciser que la recherche des n\oe{}uds voisins peut être faite en maintenant un ensemble des voisinages.
 L'algorithme glouton naïf est donc linéaire par rapport à la taille du graphe.
 À l'exécution, la création de chaînes par cette méthode est instantanée ($\ll$ 0.1s).
 Toutefois, rien ne garantit la qualité des chaînes obtenues.
@@ -1535,8 +1535,8 @@ n\oe{}uds de la base, nous pouvons obtenir le coût de recherche par n\oe{}ud et
 \paragraph{}Redéfinissons la notation ${n_{p_{i-1}} \over N}$ qui correspond à un taux de filtrage d'un motif de taille $i-1$.
 Appelons ce taux $F_{i-1}$. Cette notation peut à son tour être transformée en
 produit des filtrages de chaque extension d'une chaîne. Les valeurs des filtrages estimés s'obtiennent immédiatement à partir des
-comptages dans la base d'apprentissage (Voir \ref{app_compt} pour un exemple). NB : Le taux de filtrage peut être supérieur à 1
-car il est possible d'obtenir plus d'isomorphismes après une extension que avant.
+comptages dans la base d'apprentissage (Voir \ref{app_compt} pour un exemple).
+Il est à noter que le taux de filtrage peut être supérieur à 1 dans le cas où la recherche obtient plus d'isomorphismes en cours de création après qu'avant l'ajout du n\oe{}ud.
 
 \begin{equation}
  {n_{p_{i-1}} \over N} = F_{i-1} = \prod_{i=0}^{i-1} f_i
@@ -1549,7 +1549,7 @@ car il est possible d'obtenir plus d'isomorphismes après une extension que avan
 \paragraph{}Le temps de recherche optimal d'un motif est donc le temps de recherche de la chaîne qui minimise le coût. Donc :
 
 \begin{equation}
- T(p_n) = \min T(c_n), \forall c_n
+ T(p_n) = \min_{\forall c_n} T(c_n)
 \end{equation}
 
 
@@ -1592,7 +1592,7 @@ formules de récurrence sont les suivantes.
  T(\epsilon \rightarrow p_1) = 1
 \end{equation}
 \begin{equation}
- T(p_n) = \min^{\forall p'_{n-1} \subset p_n} (T(p'_{n-1}) + T(p'_{n-1} \rightarrow p_n))
+ T(p_n) = \min_{\forall p'_{n-1} \subset p_n} (T(p'_{n-1}) + T(p'_{n-1} \rightarrow p_n))
 \end{equation}
 
 où la fonction de minimisation s'applique sur l'ensemble des $p'_{n-1}$ et $p'_{n-1}$ est un motif connexe de taille $n-1$ inclus
@@ -1644,11 +1644,11 @@ Cette découpe des chaînes en deux parties garantit une recherche très rapide 
 \subsubsection{Résidus}
 
 \paragraph{}L'algorithme et les indexes présentés dans la section précédente permettent de retrouver rapidement toutes les occurrences d'un motif au sein d'une molécule cible.
-Jusqu'à présent nous avons laissé pris l'hypothèse que, dans notre cas, nous recherchions des monomères dans des peptides.
+Jusqu'à présent nous avons pris l'hypothèse que nous recherchions des monomères dans des peptides.
 Ceci n'est en fait pas applicable directement.
 En effet, on ne retrouve jamais un monomère en entier au sein d'un polymère.
-Lorsque les monomères sont liés ensemble pour former le polymère, chacun perd une partie de ses atomes dans ces liaisons.
-Nous appellerons les molécules incluses des résidus (les monomères sans leurs atomes de liaison).
+Lorsque les monomères sont liés entre eux pour former le polymère, chacun perd une partie de ses atomes dans ces liaisons.
+Nous appellerons les molécules incluses (monomères sans atomes de liaison) des \textbf{résidus}.
 
 \paragraph{}Prenons l'exemple de la Cystéine pour bien comprendre (Voir figure \ref{cys_ex}).
 La cystéine est présente dans 47 peptides de la base de données NORINE.
@@ -1656,8 +1656,8 @@ Dans certains peptides comme ACV, la cystéine est incluse en effectuant deux li
 D'un côté, elle perd les atomes $OH$ de son groupement $COOH$ pour aller se lier à un groupe $NH_2$ qui perd un de ses $H$. 
 Le tout libère un $H_2O$ pendant la réaction.
 De l'autre côté, elle perd un $H$ de son groupement $NH_2$ pour effectuer la même opération inversée.
-Au total la cystéine présente dans ce peptide a donc perdu trois atomes sur deux sites distincts.
-Dans d'autre cas comme dans la malformin A1, la cystéine effectue une troisième liaison au niveau de son atome de soufre en perdant un atome d'hydrogène pour se lier avec un autre atome de soufre et ainsi réaliser un pont disulfure.
+Au total, la cystéine présente dans ce peptide a donc perdu trois atomes sur deux sites distincts.
+Dans d'autre peptides comme dans la malformin A1, la cystéine effectue une troisième liaison au niveau de son atome de soufre en perdant un atome d'hydrogène pour se lier avec un autre atome de soufre et ainsi réaliser un pont disulfure.
 Sur ce simple exemple, on remarque que non seulement le monomère n'est jamais inclus en entier mais en plus, il peut être inclus dans un polymère de différentes manières.
 Il est donc nécessaire de connaître les différents résidus possibles pour chaque monomère afin de pouvoir les rechercher en utilisant l'algorithme de recherche exact décrit précédemment.
 
@@ -1672,37 +1672,37 @@ Il est donc nécessaire de connaître les différents résidus possibles pour ch
 \subsubsection{Familles de résidus}
 
 \paragraph{}Différents résidus d'un même monomère peuvent être créés selon les contextes.
-Pour connaître les différents résidus possibles pour chaque monomère nous devons donc connaître les règles qui régissent les liaisons.
+Pour connaître les différents résidus possibles pour chaque monomère nous devons connaître les règles qui régissent les liaisons.
 Par exemple, pour la liaison peptidique précédemment citée, nous pouvons déduire deux règles.
 Si un $COOH$ est détecté alors le monomère peut potentiellement perdre son $OH$.
-De la même manière pour la seconde moitié de la liaison on peut perdre un $H$ pour un $NH_2$ détecté.
+De la même manière, pour la seconde moitié de la liaison, le monomère peut perdre un $H$ pour un $NH_2$ détecté.
 En regardant précisément les liaisons qui apparaissent pour un type de polymère, nous pouvons créer une liste de règles de perte d'atomes.
-En appliquant ses règles récursivement sur un monomère, nous pouvons générer tous ses résidus candidats.
-Notons que certaines règles comme celles du pont disulfure décrite précédemment, ne s'applique qu'en présence d'une autre liaison.
-Il n'est donc jamais nécessaire de générer le résidu qui contient uniquement cette liaison.
-Ici nous n'aurons donc jamais de résidus uniquement constituée d'une liaison sulfure.
+En appliquant ces règles récursivement sur un monomère, nous pouvons générer tous ses résidus candidats.
+Notons que certaines règles comme celles du pont disulfure décrite précédemment, ne s'appliquent qu'en présence d'une autre liaison.
+Il n'est donc a priori pas nécessaire de générer le résidu qui contient uniquement cette liaison.
+Ici nous n'aurons normalement pas de résidus uniquement constituée d'une liaison sulfure.
 Il est à noter que, moins une règle sera précise, plus le nombre de résidus générés sera important.
-Imaginons une règle qui nous dirait dans un cadre de chimie organique, que ``pour tout carbone étant lié à au moins un hydrogène, l'atome d'hydrogène peut être perdu pour former une liaison''.
+Imaginons une règle qui nous dirait dans un cadre de chimie organique, que ``pour tout carbone lié à au moins un hydrogène, l'atome d'hydrogène peut être perdu pour former une liaison''.
 Si $n$ est le nombre d'atomes de carbone dans la molécule ($n$ représente une grande proportion d'atomes dans une molécule organique), alors on peut générer un nombre de résidus de l'ordre de $n^2$.
 
 \begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=400px]{Figures/s2m/residues/cystein_family.png}
-    \caption{\label{sulfure}Représentation de la famille des résidus de la cystéine}
+    \caption{\label{family}Représentation de la famille des résidus de la cystéine}
   \end{center}
 \end{figure}
 
-\paragraph{}Comme présenté dans la figure \ref{sulfure}, les différents résidus générés peuvent être représentés sous la forme d'un Graphe Orienté Acyclique (GOA).
-Le monomère de base ainsi que chacun des résidus est un n\oe{}ud du graphe et chaque arc est un lien de parenté entre n\oe{}uds.
+\paragraph{}Comme présenté dans la figure \ref{family}, les différents résidus générés peuvent être représentés sous la forme d'un Graphe Orienté Acyclique (GOA).
+Le monomère de base (en bas sur la figure) ainsi que chacun des résidus est un n\oe{}ud du graphe et chaque arc est un lien de parenté entre n\oe{}uds.
 Un arc sera par exemple créé entre un résidu auquel on a appliqué une seule règle et le monomère.
 Nous appellerons \textbf{famille} cette représentation des résidus sous forme de GOA.
 
-\paragraph{}Le n\oe{}ud le plus éloigné du monomère sera le n\oe{}ud qui aura subi le plus de modification.
+\paragraph{}Le n\oe{}ud le plus éloigné du monomère (en haut sur la figure) sera le n\oe{}ud qui aura subi le plus de modifications.
 Nous appellerons le résidu de ce n\oe{}ud le \textbf{résidu racine}.
 Ce résidu à un intérêt tout particulier pour la recherche du monomère.
-En effet, si le résidu racine n'est pas trouvé alors qu'il est celui qui possède le moins d'atomes dans la famille, cela veut dire qu'aucun membre de la famille ne pourra être trouvé.
+En effet, si le résidu racine n'est pas trouvé alors qu'il est celui qui possède le moins d'atomes dans la famille, cela signifie qu'aucun membre de la famille ne pourra être trouvé.
 On peut même aller plus loin en étendant le raisonnement à tous les résidus.
-Si un résidu de niveau $n$ n'est pas trouvé alors il est inutile de rechercher ses résidus parents de niveau $n-1$.
+Si un résidu de niveau $n$ n'est pas trouvé, alors il est inutile de rechercher ses résidus parents de niveau $n-1$.
 Il faut également remarquer qu'il est inutile de chercher un résidu parent de niveau $n-1$ si tout ses enfants de niveau $n$ n'ont pas été trouvés.
 
 \paragraph{}En connaissant la structure familiale des résidus ainsi qu'un ordre naturel de recherche pour passer d'un résidu à l'autre, nous pouvons déduire une structure globale de recherche.
@@ -1711,49 +1711,58 @@ De plus, il n'est jamais nécessaire de recalculer complètement un isomorphisme
 Pour passer d'un résidu $r$ à l'un de ses parents $p$ il suffit de rechercher à étendre l'isomorphisme de $r$ avec les atomes que nous avions considérés perdus pour passer de $p$ à $r$ lors de la construction de la famille.
 De plus, le fait de ne pas tout recalculer à chaque étape nous autorise à ne calculer l'index que pour les résidus racine.
 Le reste des résidus n'est indexé que sur les extensions à effectuer depuis leurs fils.
-L'algorithme qui décrit la recherche d'une famille est donc le suivant :
 
-\paragraph{}
-\begin{algorithm}[H]
-  \caption{Algorithme de recherche des résidus d'une famille}
-  \KwData{Un graphe $G(V, E)$ représentant le polymère cible et une famille $F_m$ de résidus pour le monomère $m$. Le résidu $r_r$
-  étant le résidu racine de la famille.}
-  \KwResult{Un ensemble de tuples constitués d'un résidu et d'un ensemble de position. Ces tuples représentent chacun un
-  isomorphisme du résidu avec une sous partie du polymère.}
-  Soit $S$ un ensemble de tuples solution initialement vide\;
-  $S \gets subgraphIsomorphism (G, r_r)$\;
-  
-  \If {$S$ est vide} {
-    \KwRet $S$\;
-  }
-  
-  Soit $P$ un ensemble de résidus à procésser initialisé avec les parents de $r_r$\;
-  \While {$P$ n'est pas vide} {
-    $r \gets supprimeUnElement(P)$\;
-    $Tmp \gets subgraphIsomorphism (G, r)$\;
-    
-    \If {$Tmp$ n'est pas vide} {
-      Ajouter $Tmp$ dans $S$\;
-      \For{$p \subset parents(r)$}{
-	\If {Tous les enfants de $p$ ont été trouvés} {
-	  Ajouter $p$ dans $P$\;
-	}
-      }
-    }
-  }
-  
-  \KwRet $S$;
-\end{algorithm}
+% \paragraph{}
+% \begin{algorithm}[H]
+%   \caption{Algorithme de recherche des résidus d'une famille}
+%   \KwData{Un graphe $G(V, E)$ représentant le polymère cible et une famille $F_m$ de résidus pour le monomère $m$. Le résidu $r_r$
+%   étant le résidu racine de la famille.}
+%   \KwResult{Un ensemble de tuples constitués d'un résidu et d'un ensemble de position. Ces tuples représentent chacun un
+%   isomorphisme du résidu avec une sous partie du polymère.}
+%   Soit $S$ un ensemble de tuples solution initialement vide\;
+%   $S \gets subgraphIsomorphism (G, r_r)$\;
+%   
+%   \If {$S$ est vide} {
+%     \KwRet $S$\;
+%   }
+%   
+%   Soit $P$ un ensemble de résidus à procésser initialisé avec les parents de $r_r$\;
+%   \While {$P$ n'est pas vide} {
+%     $r \gets supprimeUnElement(P)$\;
+%     $Tmp \gets subgraphIsomorphism (G, r)$\;
+%     
+%     \If {$Tmp$ n'est pas vide} {
+%       Ajouter $Tmp$ dans $S$\;
+%       \For{$p \subset parents(r)$}{
+% 	\If {Tous les enfants de $p$ ont été trouvés} {
+% 	  Ajouter $p$ dans $P$\;
+% 	}
+%       }
+%     }
+%   }
+%   
+%   \KwRet $S$;
+% \end{algorithm}
+
+\paragraph{TODO : figure famille + recherche}
+
+\paragraph{}L'algorithme de recherche des résidus ressemble fortement à un algorithme de recherche en largeur.
+Nous commençons par rechercher la racine.
+Ci celle-ci est trouvée, alors tout ses résidus fils sont recherchés.
+Sur l'exemple TODO, le résidu racine de la cystéine est trouvé ; les trois résidus de niveau 2 sont alors recherchés.
+Récursivement, lorsqu'un résidu est trouvé, tous ses fils sont recherchés.
+Ainsi, la recherche de la cystéine dans le peptide de l'exemple aboutie sur la découverte de 3 isomorphismes de monomères différents.
+Ces isomorphismes sont tous situés au même endroit et c'est la phase de pavage qui choisira lequel garder.
 
 
 \subsection{Pavage de monomères}
 
 \subsubsection{Pavage : définition}
 
-\paragraph{}La méthode de recherche des isomorphismes de sous-graphe présentée précédemment, trouve toutes les occurrences de chacun des monomères dans un peptide cible.
+\paragraph{}La méthode de recherche des isomorphismes de sous-graphe présentée en section \ref{SI_p}, trouve toutes les occurrences de chacun des monomères dans un peptide cible.
 
 Puisque nous connaissons les atomes contenus dans chacun des isomorphismes découverts, nous pouvons également connaître chacun des isomorphismes découverts par atome.
-L'étape de pavage consiste à choisir un sous ensemble des isomorphismes trouvés, de manière à maximiser les atomes couverts par ces isomorphismes, en ayant pour chaque atome, au plus un seul isomorphisme présent dans ce sous ensemble.
+L'étape de pavage consiste à choisir un sous ensemble des isomorphismes trouvés, de manière à maximiser le nombre d'atomes couverts par un sous ensemble de tout ces isomorphismes, en ayant pour chaque atome, au plus un seul isomorphisme présent dans ce sous ensemble.
 
 Faisons une analogie avec un puzzle. La phase d'isomorphisme créée de nombreuses pièces de puzzle.
 Une reconstruction complète du puzzle n'est pas forcément faisable uniquement à partir de ces pièces.
@@ -1782,7 +1791,7 @@ purement algorithmique de choisir quelle est la meilleure façon de découper ce
 
 \paragraph{}En 2015, j'ai eu la chance de participer, avec mes amis Thomas Nachtergale et Alexandre Temperville, à la finale du concours d'algorithmique ``Google Hashcode''.
 La veille de l'épreuve finale, un petit problème test nous a été proposé.
-Le but était de découper une pizza (matrice), composée de cases de jambon (H dans la matrice) et de cases de sauce (T dans la matrice), en parts dites ``royales'', en minimisant le gâchis de pizza (morceaux ne contenant pas de parts).
+Le but était de découper une pizza (matrice), composée de cases de jambon (H dans la matrice) et de cases de sauce (T dans la matrice), en parts dites ``royales'', en minimisant le gâchis de pizza (morceaux de pizza exclus de toute part royale découpée).
 Les parts royales sont des parts rectangulaires contenant au minimum 3 cases de jambon et représentant une surface maximale de 12 cases.
 
 \paragraph{TODO : schéma pizzas}
@@ -1802,15 +1811,16 @@ La vérification du certificat peut être faite de manière quadratique, ce qui 
 \paragraph{}Prouvons ensuite que nous pouvons résoudre le problème Pizza en utilisant le problème Pavage.
 Codons donc Pizza dans Pavage~:
 \begin{itemize}
-	\item La pizza sera représentée par un peptide.
-	\item Chaque case de la pizza sera un atome qui ne pourra prendre les deux valeurs H et T selon le remplissage de la case.
+	\item La pizza de taille $n \times m$ sera représentée par un peptide rectangulaire de taille $n \times m$.
+	\item Chaque case de la pizza sera représentée par un atome qui ne pourra prendre les deux valeurs H et T selon le remplissage de la case.
 	\item Le voisinage des cases sera représenté par des liens entre les atomes.
 	L'atome correspondant à la case $(i,j)$ sera lié aux atomes correspondants aux case $(i-1,j)$, $(i+1,j)$, $(i,j-1)$ et $(i,j+1)$ (sauf sur les bords).
-	\item L'ensemble des parts possibles sur la pizza sera représenté par un ensemble de résidus trouvés candidats.
+	\item Il possible polynomialement de générer toutes les parts réalisables sur une pizza (car leur taille maxiale est fixée).
+	Chacune de ces parts sera représentée par un résidu placé sur le peptide comme si il avait été trouvé par l'étape de recherche de s2m.
 	Par exemple une part allant de $(0,0)$ à $(2,3)$ sera représentée par un résidu couvrant tous les atomes entre ces coordonnées.
 \end{itemize}
 
-Avec ce codage, si nous arrivons à résoudre le problème de pavage il devient alors possible de résoudre le problème de pizza.
+Avec ce codage, si nous arrivons à résoudre le problème de pavage, alors il devient alors possible de résoudre le problème de pizza.
 
 \paragraph{}Le problème de pavage est NP et il existe un problème NP-Complet qui peut se réduire en lui.
 Pavage est donc NP-Complet.
@@ -1840,7 +1850,7 @@ Ainsi, nous modélisons la présence ou l'absence dans la solution finale d'un r
 variable binaire (0 pour l'absence et 1 pour la présence).
 
 \begin{equation}
- \forall r_i \exists v_{r_i}, v_{r_i} \in \{0, 1\}
+ \forall r_i, \quad \exists v_{r_i}, v_{r_i} \in \{0, 1\}
 \end{equation}
 
 où $r_i$ représente le i-ème résidu et $v_{r_i}$ la variable binaire correspondant à $r_i$.
@@ -1850,7 +1860,7 @@ Nous pouvons caractériser cela par la restriction d'avoir au plus un résidu pr
 On obtient donc une contrainte pour chaque atome ; ces contraintes étant représentées par le fait que la somme de toutes les variables des résidus présents sur un atome ne peut être supérieure à 1.
 
 \begin{equation}
- c_a : \sum^{r_i} v_{r_i} \leqslant 1, a \in r_i
+ c_a : \sum_{r_i, a \in r_i} v_{r_i} \leqslant 1
 \end{equation}
 
 où $a$ est l'atome correspondant à la contrainte $c_a$.
@@ -1859,13 +1869,11 @@ où $a$ est l'atome correspondant à la contrainte $c_a$.
 donc la somme des présences des résidus pondérée par la taille de chaque résidu :
 
 \begin{equation}
- score : \sum^{r_i} v_{r_i} * size(r_i)
+ score : \sum^{r_i} v_{r_i} \times size(r_i)
 \end{equation}
 
 \paragraph{}La réduction de notre problème de pavage en un MIP nous autorise l'utilisation des solveurs déjà existants pour trouver la solution exacte.
 Nous pouvons par exemple utiliser la bibliothèque GLPK (l'une des seules bibliothèques de LP sous licence libre).
-
-\paragraph{Schéma : Vue globale de la réduction en MIP}
 
 \paragraph{}Bien que cette solution soit élégante, MIP dans sa version ne contenant que des variables binaires fait partie des 21 problèmes NP-complets de Karp~\cite{karp_reducibility_1972}.
 Il n'existe donc actuellement aucune méthode de résolution de ce problème en temps polynomial.
@@ -1879,8 +1887,8 @@ Proposons également une heuristique rapide pour résoudre le problème.
 \label{TM_p}
 
 \paragraph{}L'un des moyen d'obtenir très rapidement une solution est de trier les résidus dans un ordre voulu puis de parcourir la liste triée en ajoutant le résidu courant à la solution uniquement si il ne chevauche aucun autre résidu de la solution.
-On pourra toujours trouver au moins un tri de la liste qui atteigne la solution optimale.
-En faisant cela nous reportons la difficulté du problème sur les critères de tri de la liste mais nous garantissons une très grande rapidité d'exécution.
+On pourra toujours trouver au moins arrangement de la liste qui atteigne la solution optimale.
+En faisant cela, nous reportons la difficulté du problème sur les critères de tri de la liste mais nous garantissons une très grande rapidité d'exécution.
 
 \paragraph{}
 \begin{algorithm}[H]
@@ -1890,9 +1898,9 @@ En faisant cela nous reportons la difficulté du problème sur les critères de 
   Soit $SOL$ un ensemble solution de résidus, initialement vide\;
   
   Trier $RES$ selon les critères gloutons\;
-  \For {$r_i \in RES$} {
-    \If {$r_i$ ne chevauche aucun $r_j$ tq $r_j \in SOL$} {
-      Ajouter $r_i$ à $SOL$\;
+  \For {$r \in RES$} {
+    \If {$r$ ne chevauche aucun $r'$ tq $r' \in SOL$} {
+      Ajouter $r$ à $SOL$\;
     }
   }
   
@@ -1902,141 +1910,137 @@ En faisant cela nous reportons la difficulté du problème sur les critères de 
 \paragraph{}Cet algorithme nécessite un tri sur une liste de $n$ résidus ($O(n log n)$) puis consomme ensuite un élément de la
 liste à chaque tour de boucle ($O(n)$). Contrairement à la résolution exacte présentée ci-dessus, si la fonction de comparaison
 pour le tri ne dépendent pas de $n$ cet algorithme est polynomial.
-Nous pouvons donc garantir la rapidité d'exécution à partir du moment où nous choisissons des critères de tri simples.
+Nous pouvons donc garantir la rapidité d'exécution si les critères de tri sont également calculable en temps polynomial.
 
 \paragraph{}Le but est d'opter pour l'efficacité maximale locale en espérant que l'efficacité globale sera également maximale.
-Dans notre cas, la probabilité de trouver par hasard un résidu dans un peptide est
-inversement proportionnelle au nombre d'atomes qu'il contient (La composition intervient également mais nous cherchons ici des
-critères simples). On peut donc dire qu'un résidu est d'autant plus ``efficace'' que sa probabilité d'apparition par hasard est
-faible. Le premier critère consiste donc à trier les résidus par taille décroissante (nombre d'atomes dont hydrogènes).
+Dans notre cas, la probabilité de trouver par hasard un résidu dans un peptide est inversement proportionnelle au nombre d'atomes qu'il contient.
+On peut donc dire qu'un résidu est d'autant plus ``efficace'' que sa probabilité d'apparition par hasard est faible.
+Le premier critère consiste donc à trier les résidus par taille décroissante (nombre d'atomes dont hydrogènes).
 C'est un critère classiquement utilisé pour la résolution gloutonne du problème du sac à dos~\cite{_probleme_2016}.
 
 \begin{figure}
-  \includegraphics[width=300px]{Figures/s2m/pavage/tri_glouton.pdf}
-  \caption{\label{tri_glouton}En vert le chemin prit par l'algorithme glouton pour générer la chaîne du motif a-b-d}
+  \begin{center}
+    \includegraphics[width=400px]{Figures/s2m/pavage/tri.png}
+    \caption{\label{tri_glouton}Tri pour le pavage glouton.
+    Les résidus sont triés par taille puis par vraissemblance.}
+  \end{center}
 \end{figure}
 
 \paragraph{}Lorsque les résidus sont issus de monomères très similaires en taille, il arrive fréquemment que nombre d'entre eux
 aient exactement le même nombre d'atome.
 Dans ce cas, le critère de taille n'est plus suffisant pour le tri et il nous faut en ajouter d'autres.
 
-En plus de leur taille les résidus peuvent être caractérisés par leurs types de liaisons chimiques.
+En plus de leur taille, les résidus peuvent être caractérisés par leurs types de liaisons chimiques.
 Chaque résidu forme des liens qui peuvent être différent d'un résidu à l'autre.
-Certains liens apparaissent fréquemment alors que d'autres beaucoup moins, ce qui nous permet en théorie d'estimer les
+Certains liens apparaissent fréquemment alors que certains autres moins, ce qui nous permet en théorie d'estimer les
 probabilités d'apparition d'un lien par rapport à un autre.
 Ainsi, on peut considérer qu'un résidu contenant des liens qui apparaissent très souvent a plus de chance d'être le bon résidu
 face à un second de même taille contenant des liens moins fréquents.
 Cependant, nous ne possédons pas de statistiques sur les fréquences d'apparition des types de lien.
+
 Pour tout de même pouvoir classer les résidus de cette manière, nous requérons l'expertise de l'utilisateur.
+Avant la phase d'indexation, l'utilisateur doit définir les différentes règles de liaison qu'il veut voir apparaître dans les monomères.
+C'est à ce moment que nous lui demandons également de remplir une valeur pour chacune de ces règles.
+Cette valeur représente le poids que l'utilisateur souhaite donner à chacune des liaisons possibles.
+Ce poids représente la confiance que l'on donne à l'apparition d'un type de liaison.
+Ces poids nous permettent de calculer une valeur moyenne par liaison effectuée par le résidu.
+Plus une moyenne sera élevée, plus la confiance en le résidu sera forte et donc plus il sera présent dans les premiers résidus du tri.
 
-Avant la phase d'indexation, l'utilisateur doit définir les différentes
-règles de liaison qu'il veut voir apparaître dans les monomères. C'est à ce moment que nous lui demandons également de remplir
-une valeur pour chacune de ces règles. Cette valeur représente le poids que l'utilisateur souhaite donner à chacune des liaisons
-possibles. Ce poids représente la confiance que l'on donne à l'apparition d'un type de liaison. En s'appuyant sur cette
-information, nous
-sommes capable pour chaque résidu de donner un poids moyen par liaison et ainsi de comparer la confiance que l'on peut
-avoir en chacun des résidus. Les résidus de poids moyen les plus élevés seront triés au début de la liste.
-
-\paragraph{}Dans le cas où plusieurs résidus ne peuvent être départagés lors du tri, nous considérons qu'ils sont équivalents et
-leur ordre sera aléatoire.
+\paragraph{}Dans le cas où plusieurs résidus ne peuvent être départagés lors du tri, nous considérons qu'ils sont équivalents et leur ordre sera aléatoire.
 
 
 \subsubsection{Modulation de pavage}
 
-\paragraph{}Le pavage glouton est un très bon compromis de rapidité mais il ne garantit pas la qualité du résultat.
-Sur certaines données, alors que la phase d'isomorphisme a identifié tous les monomères qui sont effectivement présents dans le
-peptide, le pavage correct n'est pas trouvé, l'algorithme nous laissant avec une solution partielle.
-Lorsque qu'un cas de pavage incomplet se présente, nous pouvons donc nous demander si il ne serait pas possible de tout de même
-obtenir la solution avec les isomorphismes déjà effectués.
-Nous proposons de repartir de la solution partielle et de chercher intelligemment dans son voisinage afin de nous convaincre qu'il
-n'est pas possible de faire mieux.
-
-\paragraph{}L'algorithme de modulation que nous allons vous présenter permet d'être certain de passer par la meilleure solution si
-elle existe.
-De plus, n s'appuyant sur les critères de l'algorithme glouton nous essayons de rapidement trouver cette solution.
-Nous allons regarder au sein de la liste triée des résidus afin d'ajouter à la solution le premier résidu couvrant au moins un
-atome non couvert dans la solution partielle.
-Puisque ce résidu n'a pas été choisi lors du pavage, il chevauchera au moins un résidu existant dans la solution.
-Pour obtenir une solution viable, nous enlevons les résidus chevauchés de la solution en interdisant de les remettre (les enlever
-pour les remettre ne serait pas productif) puis nous essayons de compléter la solution en relançant un pavage.
-Si la solution n'est pas complète, nous pouvons relancer la procédure récursivement.
-La récursion se termine soit lorsqu'une solution complète est trouvée soit lorsqu'il n'est plus possible de choisir de résidus
-couvrant des zones non couvertes de la solution partielle.
+\paragraph{}Le pavage glouton est un très bon moyen d'obtenir un résultat rapidement, mais il ne garantit pas sa qualité.
+Sur certaines données, alors que la phase d'isomorphisme a identifié tous les monomères qui sont effectivement présents dans le peptide, le pavage correct n'est pas trouvé, l'algorithme nous laissant alors avec une solution partielle.
+Lorsque qu'un cas de pavage incomplet se présente, nous pouvons donc nous demander s'il ne serait pas possible d'obtenir la solution complète avec les isomorphismes déjà effectués.
+Nous proposons de repartir de la solution partielle et d'effectuer une recherche locale afin de nous convaincre qu'il n'est pas possible de faire mieux.
 
 \begin{figure}[!ht]
   \begin{center}
-    \includegraphics[width=350px]{Figures/s2m/pavage/modulation.png}
-    \caption{\label{modulation}Modulation de la solution initiale (à gauche) pour obtenir une solution optimale (à droite) en remplaçant des monomères choisis par d'autres laissés de côté après l'étape de pavage.
-    En haut, les monomères issus de la recherche.
-    C'est parmi ceux-ci que la modulation va choisir des remplaçants de la solution actuelle.}
+    \includegraphics[width=450px]{Figures/s2m/pavage/modulation.png}
+    \caption{\label{modulation}Représentation d'une étape de modulation.
+    La première transition se fait par l'ajout forcé d'un résidu non choisi lors du pavage et de la suppression de tous les résidus le chevauchant.
+    La seconde transition est effectuée par une étape de pavage glouton sur les zones non couvertes du peptide.
+    Si une modulation ne suffit pas, cette étape est répétée de multiple fois au sein d'un algorithme de backtracking.}
   \end{center}
 \end{figure}
 
-\paragraph{}
-\begin{algorithm}[H]
-  \caption{Algorithme de modulation du pavage}
-  \KwData{Un peptide requête $P$ et une liste de résidus $RES$ pavés sur $P$ lors de la phase d'isomorphisme et triés par
-  l'algorithme glouton, une pré-solution $SOL$ et un ensemble $INT$ de résidus interdits d'utilisation.}
-  \KwResult{$SOL$, un sous-ensemble de $RES$ de pièces non chevauchantes sélectionnées par la modulation}
-  
-  $r \gets$ Premier élément de $RES$ couvrant au moins un atome non couvert et n'étant pas présent dans $INT$\;
-  \If {$r$ n'existe pas} {
-    \KwRet Impossible\;
-  }
-  Soit $SUPPR$ une liste de résidus\;
-  \For {$r_i \in SOL$} {
-    \If {$r_i$ chevauche $r$} {
-      Ajouter $r_i$ à $SUPPR$\;
-      Supprimer $r_i$ de $SOL$\;
-      Ajouter $r_i$ à $INT$\;
-    }
-  }
-  
-  Lancer un pavage pour compléter $SOL$\;
-  
-  \If {$SOL$ couvre $P$ à 100\%} {
-    \KwRet $SOL$\;
-  }
-  
-  $SOL \gets$ Modulation récursive\;
-  
-  \If {$SOL = $ Impossible} {
-    Supprimer $r$ de $SOL$\;
-    Ajouter $r$ dans $INT$\;
-    \For {$r_i \in SUPPR$} {
-      Enlever $r_i$ de $INT$\;
-      Ajouter $r_i$ à $SOL$\;
-    }
-  }
-  
-  \KwRet $SOL$\;
-\end{algorithm}
+\paragraph{}L'algorithme de modulation que nous allons vous présenter permet d'être certain de passer par la meilleure solution si elle existe.
+C'est un algorithme de backtracking classique qui passe par chacune des configurations possibles.
+A chaque étape, l'idée est d'utiliser un résidu qui permet de couvrir une zone libre du peptide (qui a donc été écarté par le pavage précédent) et de l'ajouter au pavage (voir figure \ref{modulation}).
+Utiliser ce résidu nous impose d'enlever de la solution les résidus chevauchants.
+En priorisant les résidus non choisis du début de la liste triée utilisée par le pavage (voir \ref{TM_p}), nous essayons de trouver des solutions le plus rapidement possible.
+Si la solution n'est pas complète à la suite de cet échange, nous relançons un pavage sur les zones laissées libres.
+Après ce pavage, si la solution n'est toujours pas complète, nous relançons récursivement la modulation en interdisant de réutiliser les résidus que nous avons enlevé.
+Enfin, si l'appel récursif ne parvient pas à une solution totalement couvrante, nous faisons marche arrière en changeant le résidu que nous avions choisi.
+
+% \paragraph{}
+% \begin{algorithm}[H]
+%   \caption{Algorithme de modulation du pavage}
+%   \KwData{Un peptide requête $P$ et une liste de résidus $RES$ pavés sur $P$ lors de la phase d'isomorphisme et triés par
+%   l'algorithme glouton, une pré-solution $SOL$ et un ensemble $INT$ de résidus interdits d'utilisation.}
+%   \KwResult{$SOL$, un sous-ensemble de $RES$ de pièces non chevauchantes sélectionnées par la modulation}
+%   
+%   $r \gets$ Premier élément de $RES$ couvrant au moins un atome non couvert et n'étant pas présent dans $INT$\;
+%   \If {$r$ n'existe pas} {
+%     \KwRet Impossible\;
+%   }
+%   Soit $SUPPR$ une liste de résidus\;
+%   \For {$r_i \in SOL$} {
+%     \If {$r_i$ chevauche $r$} {
+%       Ajouter $r_i$ à $SUPPR$\;
+%       Supprimer $r_i$ de $SOL$\;
+%       Ajouter $r_i$ à $INT$\;
+%     }
+%   }
+%   
+%   Lancer un pavage pour compléter $SOL$\;
+%   
+%   \If {$SOL$ couvre $P$ à 100\%} {
+%     \KwRet $SOL$\;
+%   }
+%   
+%   $SOL \gets$ Modulation récursive\;
+%   
+%   \If {$SOL = $ Impossible} {
+%     Supprimer $r$ de $SOL$\;
+%     Ajouter $r$ dans $INT$\;
+%     \For {$r_i \in SUPPR$} {
+%       Enlever $r_i$ de $INT$\;
+%       Ajouter $r_i$ à $SOL$\;
+%     }
+%   }
+%   
+%   \KwRet $SOL$\;
+% \end{algorithm}
 
 
-\paragraph{}L'algorithme permet d'explorer toutes les solutions possibles jusqu'à obtenir la meilleure. Le problème majeur
-est que si une solution parfaite n'existe pas, l'algorithme de modulation va parcourir tout l'arbre des solutions et l'exécution
-ne sera pas plus rapide que l'exécution d'une résolution de MIP. Rappelons que le pavage glouton effectue des choix que nous
-supposons pertinents. Il n'est donc normalement pas nécessaire de modifier la solution en profondeur pour 
-obtenir l'idéal. Si la solution n'est pas trouvée rapidement, il y a fort à parier que la solution idéale n'existe
-pas. On peut donc limiter la profondeur de notre algorithme de modulation en proposant de considérer qu'il n'y a pas de solution
-possible après $i$ appels récursifs ($i$ paramétrable).
+\paragraph{}L'algorithme permet d'explorer toutes les solutions possibles jusqu'à obtenir la meilleure.
+Le problème majeur est que si une solution parfaite n'existe pas, l'algorithme de modulation va parcourir tout l'arbre des solutions et l'exécution ne sera pas plus rapide que l'exécution d'une résolution de MIP.
+Rappelons que le pavage glouton effectue des choix que nous supposons pertinents.
+Il n'est donc normalement pas nécessaire de modifier la solution en profondeur pour obtenir l'idéal.
+Si la solution n'est pas trouvée rapidement, il y a fort à parier que la solution idéale n'existe pas.
+On peut donc limiter la profondeur de notre algorithme de modulation limitant la profondeur de la récursion.
+Cette limite de profondeur diminue fortement le temps de calcul mais ne garantit plus de passer par l'optimal.
+Cependant, si une solution n'est pas trouvée en quelques étapes de modulation, il est fort probable qu'aucune solution ne soit possible.
 
 
 \subsection{Recherche approximative (light)}
 
 \label{light_p}
 
-\paragraph{}Suite à des variations de composition ou de structure survenant dans certains résidus quelques polymères ne sont pas
-découpés correctement en utilisant les algorithmes précédents. Il y a essentiellement deux cas pour lesquels l'isomorphisme
-ne fonctionne pas. Le premier cas concerne un monomère ionisé au sein du peptide, c'est-à-dire qu'un proton a été perdu. 
-Ainsi, lors de la phase d'isomorphisme, la fonction de matching d'étiquettes ne répond plus correctement car il
-manque un décorateur $H$ sur l'un des atomes. Dans le second cas, c'est encore l'isomorphisme qui ne reconnaît pas un résidu car
-celui-ci est intégré sous un variant tautomérique (voir figure \ref{tautomer}).
+\paragraph{}Suite à des variations de composition ou de structure survenant dans certains résidus quelques polymères ne sont pas découpés correctement en utilisant les algorithmes précédents.
+Il y a essentiellement deux cas pour lesquels l'isomorphisme ne fonctionne pas.
+Le premier cas concerne un \textit{monomère ionisé} au sein du peptide, c'est-à-dire lorsqu'un proton a été perdu.
+Ainsi, lors de la phase d'isomorphisme, la fonction de comparaison d'étiquettes ne répond plus correctement car il manque un $H$ sur l'un des atomes.
+Dans le second cas, c'est encore l'isomorphisme qui ne reconnaît pas un résidu car celui-ci est intégré sous un variant tautomérique (voir figure \ref{tautomer}).
 Un tautomère de molécule est un isomère structurel de cette molécule.
-C'est à dire que la molécule tautomérique contient l'ensemble des atomes de la molécule initiale  mais certains
-de ces atomes ne sont plus liés aux mêmes voisins. Dans le cas d'un tautomère, c'est un noyau d'hydrogène qui se déplace et change
-de voisin. Cette charge positive déplacée est compensée par une charge négative qui se déplace dans l'autre sens. Ce déplacement
-d'électron se concrétise par le déplacement d'une liaison double. Ce déplacement peut même avoir lieu entre deux résidus d'un peptide.
+C'est à dire que la molécule tautomérique contient l'ensemble des atomes de la molécule initiale  mais certains de ces atomes ne sont plus liés aux mêmes voisins.
+Dans le cas d'un tautomère, c'est un noyau d'hydrogène qui se déplace et change de voisin.
+Cette charge positive déplacée est compensée par une charge négative qui se déplace dans l'autre sens.
+Ce déplacement d'électron se concrétise par le déplacement d'une liaison double.
+Ce déplacement peut même avoir lieu entre deux résidus différents d'un peptide.
 
 \begin{figure}
   \begin{center}
@@ -2053,17 +2057,16 @@ Cette modification ne fait pas varier la qualité des résultats sur les NRP car
 Bien que très séduisante cette méthode pose un problème de temps de calcul.
 La plupart des monomères NRP ne contiennent que des atomes C N O et H.
 Ne pouvant plus utiliser les H comme décorateurs et en rendant les liens indifférents les uns des autres, le nombre d'étiquettes différentes chute à 9.
-Il est donc compréhensible que le temps de calcul augmente beaucoup.
+Il est donc compréhensible que le temps de calcul augmente en conséquence.
 
 \paragraph{}La solution est une nouvelle fois hybride.
 Dans un premier temps, nous cherchons rapidement une solution en effectuant un
 isomorphisme contenant toutes les étiquettes (isomorphisme {\em strict}), puis en effectuant un pavage.
 Dans un second temps si aucune solution complète n'est trouvée, nous relançons le processus en commençant par
-une nouvelle phase d'isomorphisme sans les décorateurs (isomorphisme {\em light}).
+une nouvelle phase d'isomorphisme sans les décorateurs (isomorphisme \textit{light}).
 Cette seconde phase d'isomorphisme est effectuée localement autour des zones qui ont posé problème lors du premier tour de 
 l'algorithme.
-Cet algorithme en deux temps traite rapidement tous les cas simples avec des sous algorithmes efficaces puis
-de revenir sur les cas plus difficiles avec des algorithmes plus sensibles.
+Cet algorithme en deux temps traite rapidement tous les cas simples avec des sous algorithmes efficaces, pour revenir ensuite sur les cas les plus difficiles avec des algorithmes plus sensibles.
 
 \subsubsection{Vue globale des algorithmes}
 
@@ -2074,24 +2077,24 @@ de revenir sur les cas plus difficiles avec des algorithmes plus sensibles.
   \end{center}
 \end{figure}
 
-\paragraph{}Tout au long cette partie, nous avons présenté par morceaux les différentes parties de Smiles2Monomers.
-Nous rassemblons ici tous les morceaux au sein d'un schéma global (figure \ref{global_s2m}).
+\paragraph{}Tout au long cette partie, nous avons présenté par étapes les différentes parties de s2m.
+Nous rassemblons ici tous les étapes au sein d'un schéma global (figure \ref{global_s2m}).
 La première partie du schéma (au-dessus des pointillés) est composée des deux phases de pré-calcul (voir \ref{index_p}).
-Cette étape de pré-calcul est lourde en temps mais n'est à effectuer qu'une seule fois.
+Cette étape de pré-calcul est gourmande en temps et mémoire mais n'est à effectuer qu'une seule fois.
 Chacune des deux phases de cette étape se déroule en temps exponentiel mais reste calculable grâce à la petite taille des
 données.
 La partie principale de s2m possède deux alternatives algorithmiques.
 Dans les deux cas, l'algorithme commence par une phase de recherche d'isomorphismes (voir \ref{isomorphisme_p}) afin de connaître les résidus candidats à la composition du polymère.
-Ensuite vient la phase de pavage effectuée soit par une résolution de MIP (voir \ref{MIP_p}) soit par une heuristique de pavage (voir \ref{TM_p}).
-Enfin, pour les cas plus difficiles, nous effectuons plusieurs passes de recherche d'isomorphismes light (voir \ref{light_p}) et de nouveaux pavages.
+Ensuite vient la phase de pavage, effectuée soit par une résolution de MIP (voir \ref{MIP_p}), soit par une heuristique de pavage (voir \ref{TM_p}).
+Enfin, pour les cas plus difficiles, nous effectuons plusieurs passes de recherche d'isomorphismes \textit{light} (voir \ref{light_p}) suivis par de nouvelles phases de pavage et modulation.
 
 L'algorithme global est paramétrable.
-Pour le pré-calcul, nous pouvons fixer la variable $k$ qui définira la taille de chaine calculée avec le modèle markovien.
-Nous rappelons encore une fois que cette taille n'aura pas d'influence sur le résultat mais uniquement sur le temps de calcul.
-Pour la partie recherche, nous devrons choisir le nombre de fois où nous effectuerons la ``boucle light''.
+Pour le précalcul, nous pouvons fixer la variable $k$ qui définira la taille de chaine calculée avec le modèle markovien.
+Nous rappelons encore une fois que cette taille n'aura pas d'influence sur le résultat, mais uniquement sur le temps de calcul.
+Pour la partie recherche, nous devrons choisir le nombre de fois où nous effectuerons l'isomorphisme \textit{light}''.
 Ce paramètre est appelé ``retry'' dans le logiciel (nombre de fois où l'on ré-exécute la boucle).
 Si nous optons pour la méthode heuristique de modulation, il est également nécessaire de définir une profondeur maximale de modulation (paramètre appelé ``modulation'' dans le logiciel).
-L'influence de ces paramètres sur l'exécution de l'algorithme sera étudiée durant la partie résultats.
+L'influence de ces paramètres sur l'exécution de l'algorithme sera étudiée au sein de la section \ref{parameters_choice}.
 
 
 
@@ -2104,7 +2107,7 @@ L'influence de ces paramètres sur l'exécution de l'algorithme sera étudiée d
 
 \paragraph{}Nous souhaitons connaître la pertinence des annotations issues de s2m.
 Pour cela, nous avons construit deux jeux de données tests, au sein desquels les annotations attendues sont déjà connues.
-Ces bases de test sont composées de polymères comprenant leur SMILES (représentation de leur structure atomique) ainsi que l'annotation attendue (graphe monomérique).
+Ces bases de test sont composées de polymères comprenant à la fois leur SMILES (représentation de leur structure atomique) ainsi que l'annotation attendue (graphe monomérique).
 Pour les entrées de s2m, nous constituons une base de monomères pour chacun des jeux de données.
 s2m pré-calculera les indexes pour chaque base de monomère puis s'exécutera sur chaque polymère.
 L'annotation de sortie sera alors comparée à l'annotation préexistante pour en définir la qualité.
@@ -2126,16 +2129,16 @@ La base de monomères est quant à elle constituée de l'ensemble des monomères
 \paragraph{}CCD~\cite{westbrook_chemical_2015} est une sous partie de la base de données PDB~\cite{berman_protein_2000} (Protein Data Bank).
 Cette base regroupe toutes les petites molécules présentes dans PDB.
 Parmi celles-ci se trouvent de nombreux polymères annotés ainsi que les monomères les constituant.
-L'avantage de cette base est que toute molécule y étant présente est accompagnée de son smiles.
+L'avantage de cette base est que toute molécule y étant présente est accompagnée de son SMILES.
 En extrayant les molécules annotées comme polymères, nous avons constitué un second jeu de données.
 Pour constituer la base de monomères dont s2m à besoin en pré-traitement, il nous a suffit d'extraire les molécules présentes dans les annotations polymériques.
 
 
 \subsubsection{Résumé sur les données}
 
-Les données de validation seront composées de deux jeux distincts.
+Les données de validation seront composées de deux jeux distincts (figure \ref{data}).
 D'un côté les polymères extraits de Norine seront au nombre de 343.
-Les données NRP seront accompagnées des 533 monomères de la base.
+Ces données NRP seront accompagnées des 533 monomères de la base.
 Le second jeu est issu de la base CCD et comporte 378 polymères et 507 monomères issus des annotations.
 Il est à noter qu'aucun des polymères présents dans une base n'est présent dans l'autre et que seuls 63 monomères sont communs.
 Ces monomères identiques sont en très grande majorité des acides aminés classiques et leurs variants proches.
@@ -2152,8 +2155,8 @@ Ces monomères identiques sont en très grande majorité des acides aminés clas
 \subsection{Profil d'un résultat}
 
 \paragraph{}s2m permet de générer des résultats sous différents formats.
-Il est possible par exemple de générer un format textuel json permettant facilement de recharger ces résultats dans d'autres logiciels.
-Lorsque nous présenterons un résultat ici, nous le présenterons via le format graphique html.
+Il est possible par exemple de générer un format textuel \textit{json} permettant facilement de recharger ces résultats dans d'autres logiciels.
+Lorsque nous présenterons un résultat, nous le présenterons via le format graphique \textit{html}.
 
 \begin{figure}[!ht]
   \begin{center}
@@ -2164,31 +2167,33 @@ Lorsque nous présenterons un résultat ici, nous le présenterons via le format
 
 \paragraph{}Une page de résultat peut être décomposée en 3 parties (voit figure \ref{s2m_HTML}).
 En haut à gauche se trouve l'image du polymère étudié, colorée selon les monomères qui y sont présents.
-C'est l'information la plus parlante visuellement car elle permet d'immédiatement interpréter les résultats.
+C'est l'information la plus immédiate car elle permet d'immédiatement visualiser un résultat.
 
 Sous l'image du peptide se trouvent trois listes de monomères.
 La première liste correspond aux monomères découverts dans la structure atomique par s2m et que l'on sait être justes grâce aux annotations déjà connues.
-Le seconde liste correspond également aux monomères découverts par s2m mais qui cette fois-ci ne sont pas présents dans l'annotation initiale.
+Le seconde liste correspond également aux monomères découverts par s2m mais qui ne sont pas présents dans l'annotation initiale.
 La dernière correspond aux monomères qui sont présents dans l'annotation mais qui n'ont pas été trouvés par s2m.
 
-La dernière partie de la figure représente les informations générales sur le polymère.
+La partie restante de la figure représente les informations générales sur le polymère.
 Tout d'abord, il y a le nom du polymère puis les statistiques sur celui-ci.
 La première statistique est le taux de couverture atomique (Coverage).
 Cette valeur donne le ratio des atomes annotés par s2m comme faisant partie des monomères trouvés par le nombre d'atomes du polymère.
-La seconde valeur donne également un ratio d'atomes mais uniquement pour les atomes correctement annotés.
+La seconde valeur appelée correctness, donne également un ratio d'atomes mais uniquement pour les atomes correctement annotés.
 Cette valeur ne prend en compte que les atomes faisant partie des monomères de la première des trois listes.
 Lors de la présentation des résultats, nous ferons toujours attention de bien mentionner si les valeurs sont des comptages monomériques ou des comptages atomiques.
-Les pourcentages de l'un à l'autre peuvent être très différents à cause de la variabilité du nombre d'atomes composant les monomères.
+Les écarts entre ces deux valeurs peuvent être très importants à cause de la variabilité du nombre d'atomes composant les monomères.
 
 
 
 
 
-\subsection{Choisir les paramètres}
+\subsection{Choix les paramètres}
 
-\paragraph{}Nous allons tout d'abord nous poser la question de comment choisir les bons paramètres pour effectuer nos tests.
+\label{parameters_choice}
+
+\paragraph{}Nous allons tout d'abord nous poser la question du choix des bons paramètres pour effectuer nos tests.
 Nous reviendrons d'abord sur la façon de fixer le paramètre d'apprentissage pour le pré-calcul.
-Rappelons que de ce paramètre découlera le temps de calcul pour les peptides mais que la qualité des résultats ne variera pas.
+Rappelons que, de ce paramètre, découlera le temps de calcul pour les peptides mais que la qualité des résultats ne variera pas.
 Puis nous parlerons de la qualité des résultats obtenus en exécutant le programme pour plusieurs paramètres.
 Enfin nous étudierons le temps de calcul pour estimer les rapports temps/qualité et ainsi pouvoir recommander les meilleurs calibrations de l'outil.
 
@@ -2196,18 +2201,18 @@ Enfin nous étudierons le temps de calcul pour estimer les rapports temps/qualit
 
 \paragraph{}Pour rappel, l'isomorphisme de sous graphe est effectué à partir de chaînes pré-calculées afin d'optimiser le temps de recherche (voir partie \ref{index_markov}).
 Ces chaines sont formées de deux sous-parties.
-La première, de taille k, est optimale pour le temps de calcul sur la base d'apprentissage.
-La seconde est générée de manière gloutonne.
+La première sous-partie, de taille k, est optimale en temps de calcul sselon une base d'apprentissage.
+La seconde sous-partie est générée de manière gloutonne.
 
-Ici, nous allons faire varier ce paramètre k et tester les temps de calcul sur les jeux de données.
+Nous allons ici faire varier ce paramètre k et tester les temps de calcul sur les jeux de données.
 Pour ne pas parasiter la mesure du temps, nous allons désactiver toutes les autres optimisations logicielles qui augmentent l'efficacité.
 
 \begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=450px]{Figures/s2m/results/k.png}
     \caption{\label{k_graph}Évaluation de l'efficacité d'apprentissage des chaînes.
-    A gauche : représentation du temps de recherche moyen d'une chaîne dans un peptide pour plusieurs valeurs de k.
-    A droite : temps d'apprentissage pour tous les monomères pour plusieurs valeurs de k.}
+    A gauche : représentation du temps de recherche moyen d'une chaîne dans un peptide selon k.
+    A droite : temps d'apprentissage pour tous les monomères selon k.}
   \end{center}
 \end{figure}
 
@@ -2252,7 +2257,7 @@ Il est toujours possible d'obtenir une annotation couvrante vu qu'elles sont tou
 \paragraph{}Pour le choix des paramètres, nous n'allons pour le moment pas prendre en compte le temps d'exécution.
 Les but ici est d'exposer uniquement la qualité des résultats.
 Pour cela nous allons prendre comme indicateurs la couverture atomique moyenne, le correctness atomique moyen et les taux de VP/FP/FN.
-Nous allons faire varier le paramètre du nombre de tour de la boucle light (R) ainsi que la profondeur de modulation pour le pavage avec modulation (M).
+Nous allons faire varier le paramètre du nombre de tour de la boucle \textit{light} (R) ainsi que la profondeur de modulation pour le pavage avec modulation (M).
 Nous testerons également les deux algorithmes de pavage (MIP et heuristique).
 
 \begin{table}[!ht]
@@ -2317,8 +2322,8 @@ Nous testerons également les deux algorithmes de pavage (MIP et heuristique).
 
 
 \paragraph{}Comme nous voyons au sein des tableaux \ref{nor_results} et \ref{ccd_results}, l'algorithme de pavage par optimisation linéaire n'est pas du tout sensible aux changements de paramètres.
-Ceci s'explique par le fait qu'il n'a besoin que d'une seule phase light pour parvenir à son optimal local.
-En effet, dans certains cas, le problème est tout de suite résolu après la première phase de pavage succédant l'isomorphisme light car toutes les briques ont été correctement découvertes.
+Ceci s'explique par le fait qu'il n'a besoin que d'une seule phase \textit{light} pour parvenir à son optimal local.
+En effet, dans certains cas, le problème est tout de suite résolu après la première phase de pavage succédant l'isomorphisme \textit{light} car toutes les briques ont été correctement découvertes.
 Dans les autres cas, l'algorithme du MIP a tellement cherché à optimiser les nombre d'atomes couverts à la suite du premier pavage, que la solution intermédiaire est trop distante de la vraie solution pour pouvoir être rattrapée.
 
 Pour le pavage heuristique, la sensibilité aux paramètres est élevée.
@@ -2326,12 +2331,12 @@ On peut voir que l'augmentation du nombre de modulations déclenche une augmenta
 Le nombre de vrais positifs augmente significativement en passant le paramètre de 1 à 2.
 Cette sensibilité s'explique par le fait que la solution optimale et la solution gloutonne ne sont pas immédiatement voisines.
 Il est souvent nécessaire de déplacer non pas un mais deux monomères pour atteindre l'optimal.
-Le paramètre de nombre de boucle light n'a que très peu d'influence et vient seulement compléter 3 résultats sur les données Norine et un seul sur les données de CCD.
+Le paramètre de nombre de boucle \textit{light} n'a que très peu d'influence et vient seulement compléter 3 résultats sur les données Norine et un seul sur les données de CCD.
 
 \paragraph{}En comparant les résultats des deux algorithmes, on s'aperçoit que l'algorithme comprenant l'heuristique de pavage obtient de meilleurs résultats (pour une modulation $\ge$ 2) que l'algorithme incluant un pavage exact.
 A nouveau, ce résultat s'explique par le fait que le pavage exact va trop loin dans l'optimisation.
 Si aucune solution totalement couvrante n'est possible avec les résidus issus de l'isomorphisme strict, alors le pavage maximal exact ira parfois créer des solutions optimisées globalement mais farfelues.
-Dans ce cas, la recherche de résidus par isomorphisme light sert peu car les trous dans l'annotation ont été déplacés par l'optimisation.
+Dans ce cas, la recherche de résidus par isomorphisme \textit{light} sert peu car les trous dans l'annotation ont été déplacés par l'optimisation.
 Il n'est souvent plus possible de construire l'annotation réelle, à moins de déplacer de nombreux résidus.
 
 \paragraph{}Au final, les résultats obtenus sont strictement meilleurs en utilisant l'heuristique gloutonne de pavage avec une modulation de profondeur 2 et deux phases de recherche light.
@@ -2354,11 +2359,11 @@ Ce résultat était attendu mais l'écart flagrant vient confirmer la nécessit�
 Après les contres-performances du pavage MIP, à la fois en qualité de résultats et en temps d'exécution, nous excluons cet algorithme des recommandations d'utilisation.
 
 \paragraph{}Comparons désormais les temps d'exécution pour l'heuristique en fonction des paramètres passés au programme.
-Le paramètre du nombre de boucles light semble avoir le plus d'influence sur le temps d'exécution.
+Le paramètre du nombre de boucles \textit{light} semble avoir le plus d'influence sur le temps d'exécution.
 Nous pouvons expliquer cette augmentation par la difficulté rencontrée par l'algorithme d'isomorphisme lorsque peu d'étiquettes sont présentes.
 Répéter l'opération plusieurs fois multiplie logiquement le temps d'exécution.
 
-Si l'on regarde bien les temps d'exécution on peut également s'apercevoir que l'augmentation du second paramètre (la profondeur de modulation) permet de diminuer le temps d'exécution pour un nombre de boucles light fixe.
+Si l'on regarde bien les temps d'exécution on peut également s'apercevoir que l'augmentation du second paramètre (la profondeur de modulation) permet de diminuer le temps d'exécution pour un nombre de boucles \textit{light} fixe.
 En effet, plusieurs solutions sont bloquées par le manque de profondeur de modulation et non pas par le nombre de boucles.
 Les monomères pour reconstruire le peptide ont tous été trouvés mais la solution gloutonne n'est pas immédiatement voisine de la solution optimale.
 Effectuer une modulation plus poussée permet d'arriver beaucoup plus vite à une solution.
@@ -2392,7 +2397,7 @@ Les résultats sont affichés sur la figure \ref{temps_calcul}.
 \paragraph{}Certains points de la figure ont été tronqués car ils écrasaient les résultats.
 15 valeurs sur les 350 ont été redescendues à 50ms alors que certaines allaient jusqu'à plusieurs centaines de ms (Le point max atteint 1s à lui seul).
 On distingue nettement deux comportements différents sur cette courbe.
-Soit les peptides ont été complètement analysés à la suite d'une seule passe de pavage suite (celle succédant la recherche stricte) ; dans ce cas, le temps d'exécution épouse une courbe qui augmente progressivement avec le nombre d'atomes ; soit le matching light et la modulation qui suit entrent en action et le temps devient fortement dépendant de la topologie du peptide (tous les points disparates).
+Soit les peptides ont été complètement analysés à la suite d'une seule passe de pavage suite (celle succédant la recherche stricte) ; dans ce cas, le temps d'exécution épouse une courbe qui augmente progressivement avec le nombre d'atomes ; soit le matching \textit{light} et la modulation qui suit entrent en action et le temps devient fortement dépendant de la topologie du peptide (tous les points disparates).
 
 Pour ce qui est de la première catégorie de peptide, on peut voir que la quasi-intégralité du temps est dépensé sur la recherche d'isomorphismes de sous graphe.
 Comme nous le supposions au début de ce projet, les isomorphismes sont des goulots d'étranglement du fait de la complexité des algorithmes de résolution.
@@ -2401,9 +2406,9 @@ Dans le pire des cas, le temps est doublé par cette modulation.
 L'étape de pavage ne prend jamais plus de 3ms et n'est pas un problème pour le temps d'exécution.
 
 Pour les points de la seconde catégorie, c'est encore l'étape de recherche qui prend le plus de temps.
-Sauf que cette fois-ci, ce sont les étapes de recherche light qui prédominent le temps de calcul.
+Sauf que cette fois-ci, ce sont les étapes de recherche \textit{light} qui prédominent le temps de calcul.
 Comme nous l'avions évoqué lors de la présentation de cette amélioration, le manque d'étiquettes disponibles diminue fortement l'efficacité de l'algorithme.
-En moyenne, un isomorphisme light est de 10 à 100 fois plus lent qu'un strict.
+En moyenne, un isomorphisme \textit{light} est de 10 à 100 fois plus lent qu'un strict.
 De plus, les cas qui posent problème sont très souvent accompagnés de longues exécutions de modulation.
 Cependant, ce temps d'attente vaut le coup puisque la majorité des cas sont résolus.
 Sur l'extrait des peptides ici présent, seules 20 d'entre eux finissent sur des impasses.
@@ -2414,7 +2419,7 @@ Ces cas pathologiques masquent les réelles performances du logiciel.
 La moyenne de temps d'exécution globale est de 18ms par peptide mais lorsque nous retirons les 15 cas qui débordent de la figure, cette moyenne chute à 10ms.
 À eux seuls, ces 15 peptides représentent plus de la moitié du temps d'exécution du logiciel.
 Le cas le plus critique à lui seul représente un cinquième du temps d'exécution total (plus de 1s).
-Ce qu'il faut conclure de cela est qu'il faut éviter d'utiliser des boucles light sur des données dont on ne connait pas grand chose.
+Ce qu'il faut conclure de cela est qu'il faut éviter d'utiliser des boucles \textit{light} sur des données dont on ne connait pas grand chose.
 Si nous souhaitons par exemple analyser à l'aveugle un très grand nombre de molécules, il est préférable de se restreindre à une utilisation basique du logiciel, quitte à venir affiner les résultats intéressants par la suite.
 
 
@@ -2942,7 +2947,7 @@ L'idée est de scanner d'immenses bases de données à la recherche de peptides 
 Ces structures seront générées par s2m à partir des SMILES présents dans cette base.
 L'optimisation effectuée sur le temps de calcul de s2m permet de passer à l'échelle et de scanner des dizaines de milliers de molécules.
 Sans aucune modification de s2m, nous sommes capable de charger et d'analyser environ 250 molécules par minute.
-En désactivant la recherche light pour tous les peptides qui n'ont pas une couverture suffisante, il est possible d'annoter 3 fois plus de structures dans le même temps.
+En désactivant la recherche \textit{light} pour tous les peptides qui n'ont pas une couverture suffisante, il est possible d'annoter 3 fois plus de structures dans le même temps.
 
 \paragraph{}Pour effectuer un premier test, nous avons choisi d'extraire de PubChem toutes les molécules qui répondent à la requête ``peptide''.
 Ce premier filtre limite le nombre d'entrées que nous avons à évaluer lors d'un premier test.
