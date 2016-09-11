@@ -1323,6 +1323,8 @@ la plus grande possible.
 
 \subsubsection{Sélectivité d'un n\oe{}ud}
 
+\label{selectiv_p}
+
 \paragraph{}Premièrement, attachons nous à la représentation la plus basique possible d'un graphe chimique (atome=n\oe{}ud,
 liaison=arête). Dans cette représentation, nous pouvons considérer chaque étiquette comme étant le nom de l'atome du n\oe{}ud (Voir
 figure \ref{representations}, première partie). Évidemment, les hydrogènes sont les atomes les plus représentés et ne filtrent
@@ -2222,9 +2224,9 @@ Le graphique de droite représente le temps d'apprentissage en fonction du k.
 
 Quels que soient les valeurs de k, la recherche est très rapide.
 On parle ici en centièmes de millisecondes.
-Lorsque la chaîne est entiérement générée de manière gloutonne, chaque isomorphisme prend environ 8 centièmes de ms.
+Lorsque la chaîne est entièrement générée de manière gloutonne, chaque isomorphisme prend environ 8 centièmes de ms.
 Ce temps descend à 5 centièmes à partir d'un k valant 3.
-Ce résultat est très intéressant car il nous montre que seuls les 3 premiers n\oe{}uds sont utiles pour l'optimisation des chaînes.
+Ce résultat est très intéressant car il nous montre qu'en moyenne seuls les 3 premiers n\oe{}uds sont utiles pour l'optimisation des chaînes sur nos jeux de données.
 Les monomères non trouvables dans un peptide donné (même ceux étant constitués de plusieurs dizaines d'atomes), peuvent déjà tous être éliminés après 3 atomes si les chaînes sont correctement formées.
 Il n'est donc pas nécessaire de pré-calculer (sur nos données) des chaînes avec un k supérieur à 3.
 Ce pré-calcul fait gagner près de 35\% d'efficacité à chaque recherche de SI.
@@ -2241,11 +2243,11 @@ Nous aurons donc une couverture et un correctness de 100\%.
  \item Faux positif (FP) : Un faux positif est obtenu lorsque le résultat de la prédiction parait correct mais qu'il diffère du résultat attendu.
 Dans notre cas, une annotation est un FP si tous ses atomes sont couverts par l'annotation mais que celle-ci diffère du jeu test.
 Nous aurons donc une couverture de 100\% et un correctness inférieur à 100\%
- \item Faux négatif (FN) : Un faux négatif est obtenu lorsque le résultat ne parait pas correct alors qu'il est possible de l'obtenir.
+ \item Faux négatif (FN) : Un faux négatif est obtenu lorsque le résultat ne parait pas correct alors qu'il est possible d'en obtenir un correct.
 Dans notre cas, une annotation est un FN lorsque nous n'arrivons pas à produire une annotation complète du peptide.
 C'est à dire que nous aurons une couverture et une correctness inférieure à 100\%.
  \item Vrai négatif (VN) : Un vrai négatif est obtenu lorsque le résultat ne parait pas correct et qu'il n'est pas possible d'en obtenir un.
-Dans notre cas, si les annotations test sont correctes, ce n'est pas possible.
+Dans notre cas, les annotations test sont correctes, ce n'est pas possible.
 Il est toujours possible d'obtenir une annotation couvrante vu qu'elles sont toutes présentes dans le jeu test.
 \end{itemize}
 
@@ -2256,8 +2258,8 @@ Il est toujours possible d'obtenir une annotation couvrante vu qu'elles sont tou
 
 \paragraph{}Pour le choix des paramètres, nous n'allons pour le moment pas prendre en compte le temps d'exécution.
 Les but ici est d'exposer uniquement la qualité des résultats.
-Pour cela nous allons prendre comme indicateurs la couverture atomique moyenne, le correctness atomique moyen et les taux de VP/FP/FN.
-Nous allons faire varier le paramètre du nombre de tour de la boucle \textit{light} (R) ainsi que la profondeur de modulation pour le pavage avec modulation (M).
+Pour cela nous allons prendre comme indicateurs la \textbf{couverture atomique moyenne}, le \textbf{correctness atomique moyen} et les taux de VP/FP/FN.
+Nous allons faire varier le paramètre du nombre de d'exécution maximal de la branche \textit{light} (R) ainsi que la profondeur de modulation pour le pavage avec modulation (M).
 Nous testerons également les deux algorithmes de pavage (MIP et heuristique).
 
 \begin{table}[!ht]
@@ -2280,7 +2282,7 @@ Nous testerons également les deux algorithmes de pavage (MIP et heuristique).
     \hline
   \end{tabular}
   \caption{\label{nor_results}Résultats de s2m sur les données de Norine.
-  Dans la première colonne se trouvent les binômes des valeurs des paramètres retry et modulation}
+  Dans la première colonne se trouvent les binômes des valeurs des paramètres retry (R) et modulation (M)}
 \end{table}
 
 \begin{figure}[!ht]
@@ -2310,7 +2312,7 @@ Nous testerons également les deux algorithmes de pavage (MIP et heuristique).
     \hline
   \end{tabular}
   \caption{\label{ccd_results}Résultats de s2m sur les données de CCD.
-  Dans la première colonne se trouvent les binômes des valeurs des paramètres retry et modulation}
+  Dans la première colonne se trouvent les binômes des valeurs des paramètres retry (R) et modulation (M)}
 \end{table}
 
 \begin{figure}[!ht]
@@ -2321,25 +2323,27 @@ Nous testerons également les deux algorithmes de pavage (MIP et heuristique).
 \end{figure}
 
 
-\paragraph{}Comme nous voyons au sein des tableaux \ref{nor_results} et \ref{ccd_results}, l'algorithme de pavage par optimisation linéaire n'est pas du tout sensible aux changements de paramètres.
+\paragraph{}Comme présenté au sein des tableaux \ref{nor_results} et \ref{ccd_results}, l'algorithme de pavage par optimisation linéaire n'est pas du tout sensible aux changements de paramètres.
 Ceci s'explique par le fait qu'il n'a besoin que d'une seule phase \textit{light} pour parvenir à son optimal local.
-En effet, dans certains cas, le problème est tout de suite résolu après la première phase de pavage succédant l'isomorphisme \textit{light} car toutes les briques ont été correctement découvertes.
-Dans les autres cas, l'algorithme du MIP a tellement cherché à optimiser les nombre d'atomes couverts à la suite du premier pavage, que la solution intermédiaire est trop distante de la vraie solution pour pouvoir être rattrapée.
+En effet, dans certains cas, le problème est tout de suite résolu après la première phase de pavage succédant à l'isomorphisme \textit{light} car touts les monomères ont été correctement découverts.
+Dans les autres cas, l'algorithme du MIP effectue une sur-optimisation après le premier pavage.
+Lorsqu'il n'est pas possible d'btenir une couverture complète, l'algorithme a parfois recours à des placement de nombreux petits monomères.
+La solution est alors tellement éloignée de l'optimal qu'il devient innateignable pour notre construction algorithmique.
 
 Pour le pavage heuristique, la sensibilité aux paramètres est élevée.
 On peut voir que l'augmentation du nombre de modulations déclenche une augmentation du nombre de VP.
 Le nombre de vrais positifs augmente significativement en passant le paramètre de 1 à 2.
 Cette sensibilité s'explique par le fait que la solution optimale et la solution gloutonne ne sont pas immédiatement voisines.
-Il est souvent nécessaire de déplacer non pas un mais deux monomères pour atteindre l'optimal.
+Il est souvent nécessaire de déplacer, non pas un, mais deux monomères pour atteindre l'optimal.
 Le paramètre de nombre de boucle \textit{light} n'a que très peu d'influence et vient seulement compléter 3 résultats sur les données Norine et un seul sur les données de CCD.
 
 \paragraph{}En comparant les résultats des deux algorithmes, on s'aperçoit que l'algorithme comprenant l'heuristique de pavage obtient de meilleurs résultats (pour une modulation $\ge$ 2) que l'algorithme incluant un pavage exact.
 A nouveau, ce résultat s'explique par le fait que le pavage exact va trop loin dans l'optimisation.
-Si aucune solution totalement couvrante n'est possible avec les résidus issus de l'isomorphisme strict, alors le pavage maximal exact ira parfois créer des solutions optimisées globalement mais farfelues.
+Si aucune solution totalement couvrante n'est possible avec les résidus issus de l'isomorphisme \textit{strict}, alors le pavage maximal exact ira parfois créer des solutions globalement optimisées mais éloignées de la réalité.
 Dans ce cas, la recherche de résidus par isomorphisme \textit{light} sert peu car les trous dans l'annotation ont été déplacés par l'optimisation.
 Il n'est souvent plus possible de construire l'annotation réelle, à moins de déplacer de nombreux résidus.
 
-\paragraph{}Au final, les résultats obtenus sont strictement meilleurs en utilisant l'heuristique gloutonne de pavage avec une modulation de profondeur 2 et deux phases de recherche light.
+\paragraph{}Au final, les résultats obtenus sont globalement meilleurs en utilisant l'heuristique gloutonne de pavage avec une modulation de profondeur 2 et deux phases de recherche light.
 Nous ne nous attendions pas à ces résultats et la sur-optimisation du pavage par MIP nous a surpris mais 
 
 
@@ -2352,27 +2356,26 @@ Nous ne nous attendions pas à ces résultats et la sur-optimisation du pavage p
   \end{center}
 \end{figure}
 
-\paragraph{}Pour choisir les paramètres il ne faut pas prendre que les résultats en considération mais également le temps qu'il faut pour les générer.
+\paragraph{}Pour choisir un bon jeu de paramètres, il ne faut pas prendre que les résultats en considération, mais également le temps qu'il faut pour les générer.
 Pour cela, nous avons effectué une analyse comparative des algorithmes en utilisant les différents paramètres cités précédemment.
 Comme nous pouvons le remarquer sur le schéma \ref{temps_general}, l'heuristique de pavage obtient un temps d'exécution beaucoup plus faible que le pavage MIP (excepté pour le pavage heuristique 3-3 qui n'a pas d'importance puisqu'il n'apporte pas d'amélioration de qualité).
-Ce résultat était attendu mais l'écart flagrant vient confirmer la nécessité d'utiliser l'heuristique de pavage plutôt que le MIP.
-Après les contres-performances du pavage MIP, à la fois en qualité de résultats et en temps d'exécution, nous excluons cet algorithme des recommandations d'utilisation.
+Ce résultat était attendu mais l'écart expérimental nous pousse fortement à utiliser l'heuristique de pavage plutôt que le MIP sur des données telles que celles présentées ici.
 
 \paragraph{}Comparons désormais les temps d'exécution pour l'heuristique en fonction des paramètres passés au programme.
 Le paramètre du nombre de boucles \textit{light} semble avoir le plus d'influence sur le temps d'exécution.
-Nous pouvons expliquer cette augmentation par la difficulté rencontrée par l'algorithme d'isomorphisme lorsque peu d'étiquettes sont présentes.
+C'est à nouveau un résultat que nous attendions puisque la recherche \textit{light} ne s'appuie que sur une faible diversité d'étiquette sur les noeuds (voir les sections \ref{selectiv_p} pour l'influence du nombre d'étiquettes et \ref{light_p} pour la recherche light).
+Le temps passé à la recherche de motifs en utilisant les critères \textit{light} est important.
 Répéter l'opération plusieurs fois multiplie logiquement le temps d'exécution.
 
-Si l'on regarde bien les temps d'exécution on peut également s'apercevoir que l'augmentation du second paramètre (la profondeur de modulation) permet de diminuer le temps d'exécution pour un nombre de boucles \textit{light} fixe.
-En effet, plusieurs solutions sont bloquées par le manque de profondeur de modulation et non pas par le nombre de boucles.
-Les monomères pour reconstruire le peptide ont tous été trouvés mais la solution gloutonne n'est pas immédiatement voisine de la solution optimale.
-Effectuer une modulation plus poussée permet d'arriver beaucoup plus vite à une solution.
+Si l'on regarde bien les temps d'exécution on peut également s'apercevoir que l'augmentation du second paramètre (la profondeur de modulation) permet de diminuer le temps d'exécution.
+Ceci peut s'expliquer par les cas où tous les résidus nécessaires à une couverture optimale ont été trouvés mais qu'ils n'ont pas été pavés.
+Si la profondeur de modulation nécessaire à l'inclusion de ces résidus n'est pas atteinte, alors le l'algorithme va continuer et perdre du temps, et ce, malgré le fait qu'il aurait pu directement trouver la solution.
 
-\paragraph{}Pour conclure cette partie  sur la sélection des paramètres, nous pouvons dire qu'il faudra toujours privilégier l'utilisation de l'algorithme de pavage heuristique par rapport au pavage MIP.
+\paragraph{}Pour conclure cette partie  sur la sélection des paramètres, nous pouvons dire que nous recommandons l'utilisation de l'algorithme de pavage heuristique par rapport au pavage MIP.
 Cependant, il ne faut pas utiliser n'importe quels paramètres.
 Pousser les paramètres de modulation ou de nombre de boucle à 3 ou au delà est parfaitement inutile en terme de qualité de résultats et consommera énormément de temps.
 Utiliser un paramètre de modulation de 1 sera également une erreur puisque la qualité des résultats ne sera pas au rendez-vous.
-Il reste finalement deux alternatives intéressantes.
+Il reste finalement deux alternatives intéressantes pour des données du même type que les notre.
 Soit nous privilégions la qualité à la vitesse et nous réglons les deux paramètres à la valeur 2, soit nous acceptons de perdre quelques bons résultats au profit de 30\% d'économie de temps en réglant uniquement la modulation à 2.
 
 
@@ -2381,10 +2384,11 @@ Soit nous privilégions la qualité à la vitesse et nous réglons les deux para
 
 \subsection{Répartition des temps de calcul et analyse}
 
-\paragraph{}Maintenant que nous avons choisi les paramètres analysons attentivement chacune des étapes pour comprendre les points critiques et préparer de futures améliorations.
+\paragraph{}Maintenant que nous avons choisi les paramètres, analysons attentivement chacune des étapes pour comprendre les points critiques et préparer de futures améliorations.
 Pour cela, nous avons exécuté le logiciel sur tous les peptides des jeux test en utilisant un pavage heuristique, une valeur de k de 3, une modulation de 2 et un nombre de tour de boucle de 2.
 Pour chacun des peptides, nous avons stocké séparément les temps pour l'isomorphisme strict, le light, le pavage et la modulation.
 Les résultats sont affichés sur la figure \ref{temps_calcul}.
+Les résultats sont triés par taille de peptide (nombre d'atomes).
 
 \begin{figure}[!ht]
   \begin{center}
@@ -2397,7 +2401,7 @@ Les résultats sont affichés sur la figure \ref{temps_calcul}.
 \paragraph{}Certains points de la figure ont été tronqués car ils écrasaient les résultats.
 15 valeurs sur les 350 ont été redescendues à 50ms alors que certaines allaient jusqu'à plusieurs centaines de ms (Le point max atteint 1s à lui seul).
 On distingue nettement deux comportements différents sur cette courbe.
-Soit les peptides ont été complètement analysés à la suite d'une seule passe de pavage suite (celle succédant la recherche stricte) ; dans ce cas, le temps d'exécution épouse une courbe qui augmente progressivement avec le nombre d'atomes ; soit le matching \textit{light} et la modulation qui suit entrent en action et le temps devient fortement dépendant de la topologie du peptide (tous les points disparates).
+Soit les peptides ont été complètement analysés à la suite d'une seule passe de pavage (celle succédant la recherche stricte) ; dans ce cas, le temps d'exécution épouse une courbe qui augmente progressivement avec le nombre d'atomes ; soit le matching \textit{light} et la modulation qui suit entrent en action et le temps devient fortement dépendant de la topologie du peptide (tous les points disparates).
 
 Pour ce qui est de la première catégorie de peptide, on peut voir que la quasi-intégralité du temps est dépensé sur la recherche d'isomorphismes de sous graphe.
 Comme nous le supposions au début de ce projet, les isomorphismes sont des goulots d'étranglement du fait de la complexité des algorithmes de résolution.
@@ -2406,7 +2410,7 @@ Dans le pire des cas, le temps est doublé par cette modulation.
 L'étape de pavage ne prend jamais plus de 3ms et n'est pas un problème pour le temps d'exécution.
 
 Pour les points de la seconde catégorie, c'est encore l'étape de recherche qui prend le plus de temps.
-Sauf que cette fois-ci, ce sont les étapes de recherche \textit{light} qui prédominent le temps de calcul.
+Cette fois-ci, ce sont les étapes de recherche \textit{light} qui prédominent le temps de calcul.
 Comme nous l'avions évoqué lors de la présentation de cette amélioration, le manque d'étiquettes disponibles diminue fortement l'efficacité de l'algorithme.
 En moyenne, un isomorphisme \textit{light} est de 10 à 100 fois plus lent qu'un strict.
 De plus, les cas qui posent problème sont très souvent accompagnés de longues exécutions de modulation.
@@ -2418,7 +2422,9 @@ Toutes les autres exécutions s'arrêtent en obtenant 100\% de couverture.
 Ces cas pathologiques masquent les réelles performances du logiciel.
 La moyenne de temps d'exécution globale est de 18ms par peptide mais lorsque nous retirons les 15 cas qui débordent de la figure, cette moyenne chute à 10ms.
 À eux seuls, ces 15 peptides représentent plus de la moitié du temps d'exécution du logiciel.
-Le cas le plus critique à lui seul représente un cinquième du temps d'exécution total (plus de 1s).
+Le cas le plus critique (avoparcin-beta) à lui seul représente un cinquième du temps d'exécution total (plus de 1s).
+C'est une structure composée de beaucoup de cycles et d'embranchements et dont la structure atomique que nous possédons est fausse.
+L'algorithme passe du coup énormément de temps en boucles \textit{light} et en modulation.
 Ce qu'il faut conclure de cela est qu'il faut éviter d'utiliser des boucles \textit{light} sur des données dont on ne connait pas grand chose.
 Si nous souhaitons par exemple analyser à l'aveugle un très grand nombre de molécules, il est préférable de se restreindre à une utilisation basique du logiciel, quitte à venir affiner les résultats intéressants par la suite.
 
@@ -2438,7 +2444,7 @@ Vous pourrez trouver tous les résultats sur les polymères testés à ces adres
 - Norine : www.TODO.com
 
 
-\paragraph{}Revenons sur les chiffres qui ont été présentés dans le tableau TODO.
+\paragraph{}Revenons sur les chiffres qui ont été présentés dans les tableaux \ref{nor_results} et \ref{ccd_results}.
 Environ 74\% des annotations peptidiques issus de Norine et 85\% de celles de CCD sont entièrement retrouvées par le logiciel.
 Mais il faut se rappeler que les annotations ne sont plus considérées comme correctes dès lors qu'au moins un monomère est faux.
 En regardant le taux d'atomes correctement attribués au sein des peptides, le taux de réussite augmente à plus de 93\% pour les annotations de Norine et plus de 98\% pour CCD.
@@ -2459,7 +2465,7 @@ Analysons ensemble plusieurs cas afin de comprendre les raisons de ces erreurs.
 \end{figure}
 
 \paragraph{}Beaucoup d'annotations fausses proviennent d'erreurs de structures atomiques pour les peptides.
-Prenons l'exemple de l'enniatin I (voir figure \ref{s2m_enniati}).
+Prenons l'exemple de l'\textit{enniatin I} (voir figure \ref{s2m_enniati}).
 L'annotation en sortie de s2m présente une couverture de 100\% mais un correctness de 66\%.
 En regardant les 3 listes de monomères, on peut s'apercevoir que l'annotation attendue comporte deux monomères nommés Hmp alors que le logiciel trouve deux 4Me-Hva.
 Les deux monomères se ressemblant et il est fort probable que, soit l'annotation monomérique, soit l'annotation atomique ait été mal entrée.
@@ -2475,7 +2481,7 @@ Sur la page Norine de la molécule, nous trouvons un lien vers Pubchem pour nous
 \end{figure}
 
 \paragraph{}En regardant la molécule présente sur PubChem (voir figure \ref{enni_cor}), nous pouvons constater que c'est effectivement la structure atomique qui a été utilisée pour le test.
-En lisant désormais la publication, on s'aperçoit que la structure monomérique correspond à ce qui est présent sur Norine.
+En lisant désormais la publication\cite{song_diversity_2008}, on s'aperçoit que la structure monomérique correspond à ce qui est présent sur Norine.
 Accompagnant cette annotation monomérique est présent un schéma de la structure atomique venant confirmer la structure monomérique.
 Sans aucun doute, l'erreur provient des données issues de PubChem.
 A priori le lien PubChem entré sur Norine n'est pas le bon et pointe vers un peptide similaire.
