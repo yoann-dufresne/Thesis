@@ -8,5 +8,8 @@ manuscrit.pdf
 *.cls
 *.toc
 *.dvi
+*.nlo
+*.out
 *.~lock*
 *#*
+AppendixA/*
