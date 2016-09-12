@@ -9,7 +9,7 @@ Les structures atomiques et monomériques de NRP étaient publiées dans des art
 Il n'existait souvent aucune annotation monomérique renseignée en dehors de ces publications.
 Norine a été créée dans le but de centraliser et rendre accessible les annotations NRP connues.
 Sans cette centralisation, il est très difficile de créer des modèles de prédiction autour des NRP.
-Les données de Norine ont par exemple été très utiles pour la création de modèles de prédiction d'activités NRP.
+Les données de Norine ont par exemple été très utiles pour la création de modèles de prédiction d'activités NRP~\cite{abdo_prediction_2014,abdo_new_2012}.
 
 \begin{figure}[h!]
   \begin{center}
@@ -20,7 +20,7 @@ Les données de Norine ont par exemple été très utiles pour la création de m
 \end{figure}
 
 Norine est une base de données postgres contenant plusieurs dizaines de tables, toutes articulées autour de la notion de peptide (voir la version très simplifiée de la figure \ref{sql}).
-La table centrale des peptides contient toutes les informations centrales telles que le nom, la famille ou les différentes structures.
+La table centrale des peptides contient toutes les informations de base telles que le nom, la famille ou les différentes structures.
 Les information d'activités, d'organismes producteurs ou le détail de chaque monomères sont quant à eux présent dans des tables annexes, reliées soit par clef externe soit par des tables d'associations.
 Par exemple, une table est dédiée aux activités.
 Ces activités sont ensuite mises en relation avec les peptides via une table ``produit par''.
@@ -50,7 +50,7 @@ Pour les peptides, il existe également une recherche par sous graphe dont nous 
 \end{figure}
 
 Comme nous l'avons déjà évoqué, toute la base de données est axée autour de notre matière première : les peptides.
-Les pages centrale du site web sont donc logiquement les pages d'information correspondant à chaque NRP (voir figure \ref{interface}).
+Les pages centrales du site web sont donc logiquement les pages d'information correspondant à chaque NRP (voir figure \ref{interface}).
 Ces pages sont divisées en trois parties.
 En haut de la page se trouvent les informations générales comme le nom, l'identifiant ou la liste des activités connues de ce peptide.
 La masse moléculaire est également présente et est particulièrement utile en spectrométrie de masses.
@@ -66,7 +66,7 @@ Sur les pages des monomères sont présentes les structures atomiques, une image
 Dans le meilleur des cas, la structure monomérique est accompagnée d'un SMILES et depuis peu, d'un dessin de la structure atomique dont les monomères ont été colorés par s2m.
 
 Enfin, la dernière partie de la page est consacrée aux références et liens.
-Ce sont toutes les informations qui permettrons de replacer le peptide dans son contexte et d'en savoir plus au travers d'autres bases de données.
+Ce sont toutes les informations qui permettront de replacer le peptide dans son contexte et d'en savoir plus au travers d'autres bases de données.
 Les organismes producteurs sont détaillés à cet endroit et un lien vers leur classification NCBI est disponible.
 C'est également ici que sont répertoriés les articles de recherche qui ont permis la découverte du peptide et l'établissement de son statut non ribosomique.
 Enfin, lorsqu'ils sont référencés, sont présent des liens vers d'autres bases de données.
@@ -99,15 +99,15 @@ Nous avons déjà longuement abordé le problème d'isomorphisme durant le secon
 La requête est croisée avec toutes les structures monomériques présentes en base et retourne tous les peptides dont la structure monomérique contient le motif recherché.
 
 Le second algorithme ne prend pas en compte la structure mais uniquement la composition.
-C'est une recherche par fingerprint composée des comptages de monomères et des comptages par groupe de monomères.
+C'est une recherche par \textit{fingerprint} composée des comptages de monomères et des comptages par groupe de monomères.
 Plusieurs groupements sont définis dans Norine.
 Par exemple Cys* cité précédemment est un groupement contenant la Cystéine, la D-Cystéine, l'alpha-méthyl-Cystéine et bien d'autres dérivés de la Cystéine.
 Les fingerprints des peptides en base sont pré-calculés et le fingerprint de la requête est créé à la volée.
 Le fingerprint requête est comparé aux fingerprints de la base et une distance est calculée.
 Les résultats sont affichés par distance décroissante.
-Cette recherche ne prends pas en compte les structures mais permet une souplesse dans les monomères inclus.
+Cette recherche ne prend pas en compte les structures mais permet une souplesse dans les monomères inclus.
 Par exemple si le peptide possède une D-Cystéine alors que le motif a été renseigné avec un Cystéine, le fingerprint sera toujours identique au niveau des groupements.
-Les fingerprints différents de 1 en Cystéine et 1 en D-Cystéine mais préservent la valeur de Cys*.
+Deux \textit{fingerprints} différents dont l'un possède un comptage en Cystéine suppérieur à l'autre de 1 et inférieur de 1 en D-Cystéine préserveront tout de même la valeur de la case Cys*.
 Les regroupement permettent de préserver une proximité élevée malgré la différence de monomère présent.
 
 
@@ -131,7 +131,7 @@ Ici nous allons parler des trois dernières évolutions majeures.
 Mise à jour en 2015 par Juraj Michalik, l'interface de recherche dans la base possède désormais une interface graphique de création dynamique des requêtes.
 L'interface permet de générer facilement des requêtes complexes (voir figure \ref{editor}).
 Le menu de gauche permet de sélectionner les différents monomères que nous souhaitons ajouter à une requête et la page principale permet d'ajouter des liens entre monomères par des simples clics.
-Au fur et à mesure de la création la requête textuelle s'affiche au dessus de l'éditeur.
+Au fur et à mesure de la création, la requête textuelle s'affiche au dessus de l'éditeur.
 Une version sans interface de cet éditeur est également utilisée sur les pages des peptides de Norine afin d'avoir une représentation graphique de ceux-ci.
 
 Cet éditeur est d'un réel intérêt pour la base car il permet une interaction utilisateur simple qui n'était pas possible auparavant.
@@ -141,7 +141,7 @@ Ce genre d'interface est nécessaire pour rendre les outils bioinformatiques acc
 
 \subsubsection{Services REST}
 
-Créé en 2014 par Areski Flissi, une interface de récupération de données de la base Norine est disponible (interface REST).
+Initié en 2014 par Areski Flissi, une interface de récupération de données de la base Norine est disponible (interface REST).
 Cette interface a pour but la simplification de l'interfacage des données Norine avec d'autres logiciels.
 Elle permet de récupérer un grand nombre de données de Norine par des requêtes HTTP complexes, sans avoir besoin de passer par l'interface web.
 C'est cette interface que nous avons utilisé pour récupérer les données de Norine afin de tester Smiles2Monomers.
@@ -158,16 +158,16 @@ Tout comme l'interface REST, il a été développé par Areski Flissi.
 
 MyNorine est en ligne depuis 2015 mais le développement de nouvelles fonctionnalités est toujours en cours.
 L'outil utilise une interface intuitive pour l'utilisateur.
-Il est possible d'entrer de nombreuses information mais seuls les informations importantes sont obligatoires.
+Il est possible d'entrer de nombreuses information mais seules les informations importantes sont obligatoires.
 Parmi les informations obligatoires, on retrouve toutes les informations de base comme le nom, le type de structure, la structure monomérique et au moins une référence bibliographique.
 Pour ne pas avoir à construire la chaîne de caractères compliquée représentant la structure, l'interface javascript décrite ci-dessus est disponible aux moments opportuns.
 Tout peptide soumis par un utilisateur sera ensuite envoyé à l'équipe de curateurs qui devra vérifier la validité et la pertinence de la soumission.
 Pour l'instant, cette équipe de curateur est composée de Maude Pupin, Valérie Leclère, Areski Flissi et moi même.
 
-La mise à disposition de cette interface est une véritable plus-value pour la base de donnée.
-Elle permet de donner du poids à la communauté en leur délégant une part du travail d'archivage des NRP.
+La mise à disposition de cette interface est une véritable plus-value pour la base de données.
+Elle permet de donner du poids à la communauté en leur confiant une part du travail d'archivage des NRP.
 À l'été 2015, nous avons organisé un workshop autour de la thématique NRPS/PKS durant lequel nous avons incité les membres de la communauté à partager leur travail au travers de MyNorine.
-Quelques peptides ont été soumis mais il est encore nécessaire de communiquer pour rendre récurrent ce partage d'informations pour chaque nouveau peptide découvert.
+Quelques peptides ont été soumis, mais il est encore nécessaire de communiquer pour rendre récurrent ce partage d'informations pour chaque nouveau peptide découvert.
 
 
 \subsection{Statistiques de Norine}
@@ -187,10 +187,10 @@ Comme tout au long de ma thèse, ce travail a été réalisé en étroite collab
 Les travaux que je vais présenter ici sont issus des analyses en réunion lors de nos ``Norine days'' et de collaborations avec des stagiaires et ingénieurs.
 
 Les Norine days sont des réunions de travail qui réunissent tous les acteurs de Norine.
-Ces réunions sur demi-journées nous permettent de discuter rapidement de problèmes et solutions qui concernent tout le monde.
+Ces réunions sur demi-journées nous permettent d'aborder rapidement de problèmes et de proposer rapidement des solutions collectives.
 Elles m'ont été d'une grande aide pour me permettre d'acquérir les notions de biologie et de chimie nécessaires.
 Lors de ces réunions, j'ai apporté les résultats de s2m, ce qui nous a mené à la découverte des erreurs d'annotation présentes en base.
-Je présenterai par la suite les différents étapes de la correction et de la mise en place de gardes fous pour faire disparaître ce genre d'erreurs.
+Je présenterai par la suite les différents étapes de la correction et de la mise en place de gardes fous pour aider à faire disparaître ce genre d'erreurs.
 
 Durant ces journées nous prenons également beaucoup de temps à analyser les nouvelles entrées soumises par des contributeurs extérieurs.
 Ces contributions nous ont d'ailleurs plusieurs fois menées à des changements au sein de l'ontologie de Norine et à la normalisation de concepts déjà présents.
@@ -204,7 +204,7 @@ Dans les deux cas que nous verrons, nous aborderons l'utilisation de s2m pour l'
 
 Norine est constituée d'environ 1200 annotations.
 Toutes ces annotations ont été extraites une à une d'articles scientifiques puis entrées dans la base à la main.
-Bien que le travail ait été réalisé avec beaucoup de rigueur, plusieurs erreurs se sont glissées en base.
+Bien que le travail ait été réalisé avec beaucoup de rigueur, un ceirtain nombre erreurs se sont glissées en base.
 Comme présenté lors des résultats de s2m (voir \ref{resultats_s2m_p}), le logiciel permet la détection des erreurs présentes en base.
 Voyons ici les procédures mises en place pour corriger ces erreurs et essayer d'empêcher l'introduction de nouvelles.
 
@@ -220,7 +220,7 @@ Voyons ici les procédures mises en place pour corriger ces erreurs et essayer d
 \end{figure}
 
 Lors de l'analyse des résultats nous avons détecté quatre types d'erreurs : Les erreurs de structure atomique peptidique, d'annotation peptidique, de structure atomique monomérique et d'équivalences structurelles.
-Cette dernière erreur est entièrement due à la façon dont s2m est conçu et rien n'est a corriger en base.
+Cette dernière erreur est entièrement due à la façon dont s2m est conçu et rien n'est à corriger en base.
 Pour les 3 autres erreurs, myNorine nous permet facilement de modifier les entrées de la base.
 
 Appliquons une correction d'un peptide dont nous avons découvert une erreur d'annotation.
@@ -232,9 +232,9 @@ Après validation de la modification, l'entrée est correcte en base.
 
 Pour toutes les erreurs détectées par s2m, nous devons répéter ce processus de recherche des structures correctes puis changement des entrées de Norine.
 Souvent, une modification dans un peptide nous amène à découvrir plusieurs autres modifications mineurs nécessaires.
-Il nous est par exemple plusieurs fois arrivé de découvrir des incohérence de nomenclature et de finalement passer un long moment sur une procédure de normalisation.
+Il nous est par exemple plusieurs fois arrivé de découvrir des incohérences de nomenclature et de finalement passer un long moment sur une procédure de normalisation.
 C'est un processus qui prend énormément de temps et qui doit être effectué collectivement afin de ne pas prendre de décisions contradictoires.
-Le traitement des erreurs est à ce jour toujours en cours et nous avançons au rythme de 1 à 5 peptides par réunion (environ 100 cas d'erreur à traiter).
+Le traitement des erreurs est à ce jour toujours en cours et nous avançons au rythme de 1 à 5 peptides par réunion (environ 100 cas d'erreurs à traiter).
 
 
 \subsubsection{s2m pour empêcher les erreurs}
@@ -264,16 +264,16 @@ Cela nous a permis plusieurs fois durant les Norine days de nous rendre compte d
 Nous proposons également à l'utilisateur d'exécuter s2m avant d'entrer manuellement son annotation.
 Si un SMILES est renseigné, alors s2m peut être déclenché pour obtenir une première annotation (voir figure \ref{s2m_automatic}).
 L'utilisateur peut ensuite la modifier si celle-ci n'est pas complètement exacte.
-Par ce système nous incitons les contributeurs à ajouter le SMILES de leurs peptides (information trop peu présente dans Norine pour le moment) et nous évitons les erreurs d'inattention et fautes de frappe lors de la saisie utilisateur.
+Par ce système nous incitons les contributeurs à ajouter le SMILES de leurs peptides (information pas toujours présente dans Norine pour le moment) et nous évitons les erreurs d'inattention et fautes de frappe lors de la saisie utilisateur.
 
-Pour résumer, s2m a permis à MyNorine d'augmenter encore la qualité des annotations entrées par l'évitement d'erreurs humaines.
+Pour résumer, s2m a permi à MyNorine d'augmenter encore la qualité des annotations entrées en évitant des erreurs humaines.
 
 
 
 
 \subsection{Mises à jour de Norine}
 
-Les Norine days, nous ont poussé à beaucoup travailler sur les données de Norine ainsi que sur des données d'autres bases.
+Les Norine days, nous ont poussé à travailler trèsréguliérement sur les données de Norine, ainsi que sur des données d'autres bases.
 Cette exploration en profondeur nous a révélé plusieurs faits.
 Premièrement, les données de Norine sont vieillissantes.
 Par exemple en suivant des liens Pubchem, nous nous sommes aperçu qu'ils ne pointaient plus tous vers les les bonnes structures.
@@ -287,7 +287,7 @@ Ces données sont en général bien structurées et pourraient facilement être 
 Enfin, il existe également de nombreuses molécules NRP présentes dans des bases de données généralistes.
 Nombre d'entre elles sont sans annotations monomériques.
 En utilisant s2m sur de très grandes bases telles que PubChem, nous essayerons d'obtenir des annotations monomériques afin d'extraire des candidats NRP.
-Ces molécules pourront ensuite être analysées manuellement pour les entrer ou non en base.
+Ces molécules pourront ensuite être analysées manuellement, pour être enfin entrées en base ou ignorées.
 
 
 \subsubsection{Mise à jour des données de Norine}
@@ -310,42 +310,42 @@ De la même manière, il est possible de vérifier les liens encore fonctionnels
 De cette manière nous avons remis à jour plusieurs dizaines de liens.
 
 
-\textbf{Remises à jour de la taxonomie} \hspace{ \stretch{1} }
-La taxonomie pose un peu plus de problème car elle évolue au cours du temps.
+\textbf{Remises à jour de la taxonomie} \hspace{ \stretch{0.5} }
+La taxonomie pose plus de problème car elle évolue au cours du temps.
 La taxonomie du vivant a évolué au fur et à mesure des découvertes et des nouvelles méthodes de classification.
-Il n'y a aucun doute sur le fait qu'elle continuera a évoluer rapidement.
-Au sein de Norine ce n'est pas une ressource critique mais il est bon de connaître les lignées d'espèces productrices de NRP pour pouvoir faire des rapprochements entre NRP/NRPS.
+Il n'y a aucun doute sur le fait qu'elle continuera à évoluer rapidement.
+Au sein de Norine, ce n'est pas une ressource critique mais il est bon de connaître les lignées d'espèces productrices de NRP pour pouvoir faire des rapprochements entre NRP/NRPS.
 Ces données de taxonomie peuvent être récupérées depuis le site ou l'API du NCBI.
 Le NCBI étant un organisme de référence, beaucoup de contributeurs maintiennent les classifications à jour.
 En effectuant régulièrement une recherche sur le NCBI de la taxonomie des espèces présente dans Norine, il est possible de maintenir les données suffisamment à jour.
 
-Les données de taxonomie de Norine sont pour le moment maintenues comme des chaînes de caractère au sein de la table des organismes.
+Les données de taxonomie de Norine sont, pour le moment, maintenues comme des chaînes de caractère au sein de la table des organismes.
 Cette structure est très redondante et ne permet pas des mises à jour efficaces.
 Nous avons profité de la création du script de mises à jour pour revoir complètement notre façon de stocker les taxons.
 La chaîne de caractère présente dans l'organisme est remplacée par un identifiant dans la nouvelle table des taxons de Norine.
 Cette table est organisée comme un arbre pour permettre une mise à jour taxon par taxon sans avoir besoin de modifier des dizaines d'entrés.
-La construction de toute la chaîne taxonomique d'une espèce prend désormais beaucoup plus de temps (beaucoup plus de requêtes) mais ce problème est facilement contournable par la création de vues sql.
-Par ce script c'est l'ensemble des données de Norine qui ont été remises à jour.
+La construction de toute la chaîne taxonomique d'une espèce prend désormais beaucoup plus de temps (beaucoup plus de requêtes) mais ce problème est facilement contournable par la création de vues SQL.
+Par ce script, c'est l'ensemble des données de Norine qui ont été remises à jour.
 
 
-\textbf{Les changements de nomenclature} \hspace{ \stretch{1} }
+\textbf{Les changements de nomenclature} \hspace{ \stretch{0.5} }
 Les deux scripts de mise à jour dont nous venons de parler ne peuvent pas fonctionner dans 100\% des cas.
-Depuis leur publication (parfois il y a très longtemps), certaines molécules et certains organismes ont changé de nom.
-Heureusement, à la fois le NCBI et PubChem gardent en mémoire une liste conséquente de synonymes permettant de les retrouver.
-Cependant, nos scripts ne trouvent pas toujours de synonymes ou certains synonymes ne correspondent pas vraiment, ce qui nous empêche d'effectuer les mises à jour.
-Dans ce cas, nous levons des alertes qui devront être analysées à la main (probablement durant des Norine days).
+Depuis leur publication (parfois remontant aux années 1980), certaines molécules et certains organismes ont changé de nom.
+Heureusement, à la fois le NCBI et PubChem gardent en mémoire une liste conséquente de synonymes permettant ainsi de les retrouver.
+Cependant, nos scripts ne trouvent pas toujours de synonymes, ce qui nous empêche d'effectuer les mises à jour.
+Dans ce cas, nous levons des alertes qui devront être analysées à la main (probablement durant des ``Norine days'').
 
 
 \textbf{Publications mises à jour} \hspace{ \stretch{1} }
 En analysant les annotations issues de s2m, nous nous sommes parfois aperçu de l'existence de nouveaux articles à propos des molécules étudiées.
-Certains articles nous permettaient alors de remettre à jour l'annotation présente dans Norine, de créer entrées pour des variants nouvellement connus et parfois d'infirmer la production non ribosomique du peptide.
-Ce dernier cas est très problématique car pour le moment, il n'a pas été prévu dans Norine de retirer les informations d'une quelconque manière.
-Il est toujours possible de retirer les informations directement en sql mais cette solution ne permet pas aux utilisateurs de comprendre la disparition de la molécule.
+Certains articles nous permettaient alors de remettre à jour l'annotation présente dans Norine, de créer des entrées pour des variants nouvellement connus et parfois d'infirmer la production non ribosomique du peptide.
+Ce dernier cas est très problématique car, pour le moment, il n'a pas été prévu dans Norine de retirer les informations d'une quelconque manière.
+Il est toujours possible de retirer les informations directement en SQL mais cette solution ne permet pas aux utilisateurs de comprendre la disparition de la molécule.
 Après concertation sur la nomenclature et les procédure d'évolution des données nous nous sommes mis d'accord pour ajouter un statut ``deprecated'' au sein de la base.
 Pour le moment il existe les statuts ``curated'' et ``putative'' associé à chaque peptide.
-L'ajout de ce nouveau statuts permettra de regrouper tous les peptides qui ont un jour été considéré NRP mais qui depuis ont été prouvés produits par d'autres voies de synthèse.
+L'ajout de ce nouveau statuts permettra de regrouper tous les peptides qui ont un jour été considéré NRP mais qui, depuis, ont été prouvés produits par d'autres voies de synthèse.
 Encore une fois, cette mise à jour n'est pas automatisable et nécessite un traitement particulier.
-La procédure devait un jour être ajoutée à myNorine.
+La procédure sera ajoutée à myNorine.
 
 
 \subsubsection{Récupération massive de NRP}
