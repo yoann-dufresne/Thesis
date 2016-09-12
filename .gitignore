@@ -5,9 +5,9 @@
 *.blg
 *.tex.*
 manuscrit.pdf
-*.cls
 *.toc
 *.dvi
+*.sty
 *.nlo
 *.out
 *.~lock*
