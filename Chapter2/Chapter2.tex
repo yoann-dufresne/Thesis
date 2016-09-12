@@ -1785,7 +1785,7 @@ Dans le cas de l'annotation de la dolastatin (voir figure \ref{dolas}), c'est un
 Le monomère Dap qui est sensé être présent n'est pas reconnu car l'atome d'azote n'est pas placé au même endroit au sein du monomère seul et du monomère dans le peptide.
 En cherchant sur Norine on peut s'apercevoir qu'aucun autre peptide de la base ne comporte ce monomère, ce qui veut dire qu'il a été ajouté spécifiquement pour ce peptide.
 Donc, le changement de structure du monomère n'est probablement pas du à une modification de la molécule mais plutôt à une erreur d'annotation.
-En parcourant l'article qui publia le peptide et la structure atomique présente sur PubChem, on s'aperçoit que c'est une erreur uniquement présente sur Norine.
+En parcourant l'article qui publia le peptide~\cite{luesch_isolation_2001} et la structure atomique présente sur PubChem, on s'aperçoit que c'est une erreur uniquement présente sur Norine.
 
 
 \subsubsection{Erreurs d'annotations}
@@ -1802,8 +1802,8 @@ Il arrive parfois que des molécules soient trompeuses.
 En entrant à la main les annotations, il est possible de confondre un monomère avec un de ses dérivés proches.
 C'est ce qui est arrivé avec la fengycine A (voir figure \ref{fengycin}).
 L'annotation effectuée par s2m détecte un monomère Gln alors que l'annotation présente dans Norine détecte un Glu.
-En effectuant à nouveau toutes les opérations de vérification de la structure atomique et monomérique, on s'aperçoit rapidement que l'article donne raison à s2m.
-Cette fois-ci c'est l'annotation monomérique présente dans Norine qui est à changer pour obtenir une information juste.
+En effectuant à nouveau toutes les opérations de vérification de la structure atomique et monomérique, on s'aperçoit rapidement que l'article~\cite{wu_nonribosomal_2007} donne raison à s2m.
+Cette fois ci, c'est l'annotation monomérique présente dans Norine qui est à changer pour obtenir une information juste.
 
 
 \subsubsection{Les équivalences}
@@ -1812,21 +1812,21 @@ Cette fois-ci c'est l'annotation monomérique présente dans Norine qui est à c
   \begin{center}
     \includegraphics[width=400px]{Figures/s2m/results/cyclotheonamide.png}
     \caption{\label{cycloth}Résultat de s2m pour la Cyclotheonamide E (peptide de Norine).
-    L'annotation monomérique recouvre l'entiéreté des atomes du peptide mais n'est pas correcte à cause d'une équivalence entre monomères.}
+    L'annotation monomérique recouvre l'entièreté des atomes du peptide mais n'est pas correcte à cause d'une équivalence entre monomères.}
   \end{center}
 \end{figure}
 
-Le dernier type d'erreurs d'annotations commises par s2m est strictement dut aux algorithmes utilisés pour le pavage.
+Le dernier type d'erreurs d'annotations commises par s2m est strictement du aux algorithmes utilisés pour le pavage.
 C'est un problème d'annotations équivalentes.
-Comme nous le voyons sur le schéma \ref{cycloth} la ``cyclotheonamide E'', le peptide est couvert à 100\%.
+Comme nous le voyons sur le schéma \ref{cycloth}, la ``cyclotheonamide E'' est un peptide couvert à 100\%.
 De plus, l'annotation présente dans Norine propose deux monomères visuellement très proches des monomères suggérés par s2m.
-En regardant dans le détail, on peut observer que c'est un problème dut à une formylation entre deux monomères.
+En regardant dans le détail, on peut observer que c'est un problème du à une formylation entre deux monomères.
 L'un des deux monomère à été formylé, ce qui fait qu'un groupement C=O est présent entre les monomères Arg et Ile du peptide.
-L'un des monomères à donc été modifié mais il pourrait a priori s'agir de l'un comme de l'autre.
+L'un des monomères a donc été modifié mais il pourrait \textit{a priori} s'agir de l'un comme de l'autre.
 Dans les deux cas, l'annotation qui en résulte reste couvrante à 100\%.
-N'ayant aucun moyen algorithmique de faire la différence, ici s2m a choisit la première solution sur laquelle il est tombé.
-Pour connaître l'annotation réelle, il faut remonter à la production du peptide et comprendre les mécanismes de modifications de monomère ici en jeu.
-Cette erreur est présente moins d'une dizaine de fois dans les données déjà vérifiées et ne pourra pas être corrigée sans ajouter plus d'information en entrée de s2m.
+N'ayant aucun moyen algorithmique de faire la différence, ici s2m a choisit la première solution trouvée.
+Pour connaître l'annotation réelle, il faut remonter à la production du peptide et comprendre les mécanismes de modifications de monomère qui entrent ici en jeu.
+Cette erreur est présente moins d'une dizaine de fois dans les données déjà vérifiées et ne pourra pas être corrigée sans prendre en compte plus d'informations biologiques sur le recrutement des monomères.
 
 
 \subsubsection{Les analyses d'erreur pour CCD}
@@ -1839,10 +1839,10 @@ Cette erreur est présente moins d'une dizaine de fois dans les données déjà 
   \end{center}
 \end{figure}
 
-Durant toutes les analyses, je ne me suis attardé que sur des erreurs issues des peptides de Norine.
-Pour nous, il est très facile de vérifier toutes les informations de cette base car de nombreux liens vers les origines des données sont présents en son sein.
+Durant toutes ces analyses, je ne me suis attardé que sur les erreurs issues des peptides de Norine.
+Dans ces cas, il est très facile de vérifier toutes les informations de cette base car de nombreux liens vers les origines des données qui y sont présentes.
 Pour les données issues de CCD, nous détectons le même genre de problème que dans Norine mais il est très difficile de les analyser en profondeur.
-Nous avons accès aux structures mais difficilement à des publications associées.
-Nous pouvons donc détecter la présence d'erreurs mais sans forcément pouvoir expliquer pourquoi.
+Nous avons accès aux structures, mais plus difficilement aux publications associées.
+Nous pouvons donc également détecter la présence d'erreurs, mais sans forcément pouvoir expliquer pourquoi.
 Seules les erreurs dues aux équivalences sont facilement détectables (voir par exemple \ref{CCD_results}).
-Pour les autres types d'erreurs, nous ne pouvons que spéculer sans pouvoir vérifier.
+Pour les autres types d'erreurs, nous ne pouvons que spéculer sur leur origine, sans pouvoir vérifier.
