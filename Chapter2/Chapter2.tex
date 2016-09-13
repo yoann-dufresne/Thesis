@@ -1467,7 +1467,7 @@ Les écarts entre ces deux valeurs peuvent être très importants à cause de la
 
 
 
-\subsection{Choix les paramètres}
+\subsection{Choix des paramètres}
 
 \label{parameters_choice}
 
@@ -1480,8 +1480,8 @@ Enfin nous étudierons le temps de calcul pour estimer les rapports temps/qualit
 \subsubsection{Choisir le k du pré-calcul}
 
 Pour rappel, l'isomorphisme de sous graphe est effectué à partir de chaînes pré-calculées afin d'optimiser le temps de recherche (voir partie \ref{index_markov}).
-Ces chaines sont formées de deux sous-parties.
-La première sous-partie, de taille k, est optimale en temps de calcul sselon une base d'apprentissage.
+Ces chaînes sont formées de deux sous-parties.
+La première sous-partie, de taille k, est optimale en temps de calcul selon une base d'apprentissage.
 La seconde sous-partie est générée de manière gloutonne.
 
 Nous allons ici faire varier ce paramètre k et tester les temps de calcul sur les jeux de données.
@@ -1663,7 +1663,7 @@ Soit nous privilégions la qualité à la vitesse et nous réglons les deux para
 \subsection{Répartition des temps de calcul et analyse}
 
 Maintenant que nous avons choisi les paramètres, analysons attentivement chacune des étapes pour comprendre les points critiques et préparer de futures améliorations.
-Pour cela, nous avons exécuté le logiciel sur tous les peptides des jeux test en utilisant un pavage heuristique, une valeur de k de 3, une modulation de 2 et un nombre de tour de boucle de 2.
+Pour cela, nous avons exécuté le logiciel sur tous les peptides des jeux test en utilisant un pavage heuristique, une valeur de k à 3, une modulation de 2 et un nombre de tour de boucle de 2.
 Pour chacun des peptides, nous avons stocké séparément les temps pour l'isomorphisme strict, le light, le pavage et la modulation.
 Les résultats sont affichés sur la figure \ref{temps_calcul}.
 Les résultats sont triés par taille de peptide (nombre d'atomes).
@@ -1683,7 +1683,7 @@ Soit les peptides ont été complètement analysés à la suite d'une seule pass
 
 Pour ce qui est de la première catégorie de peptide, on peut voir que la quasi-intégralité du temps est dépensé sur la recherche d'isomorphismes de sous graphe.
 Comme nous le supposions au début de ce projet, les isomorphismes sont des goulots d'étranglement du fait de la complexité des algorithmes de résolution.
-Pour quelques peptide, le temps est complété par une phase de modulation qui ne prend que quelques millisecondes.
+Pour quelques peptides, le temps est complété par une phase de modulation qui ne prend que quelques millisecondes.
 Dans le pire des cas, le temps est doublé par cette modulation.
 L'étape de pavage ne prend jamais plus de 3ms et n'est pas un problème pour le temps d'exécution.
 
@@ -1692,18 +1692,18 @@ Cette fois-ci, ce sont les étapes de recherche \textit{light} qui prédominent 
 Comme nous l'avions évoqué lors de la présentation de cette amélioration, le manque d'étiquettes disponibles diminue fortement l'efficacité de l'algorithme.
 En moyenne, un isomorphisme \textit{light} est de 10 à 100 fois plus lent qu'un strict.
 De plus, les cas qui posent problème sont très souvent accompagnés de longues exécutions de modulation.
-Cependant, ce temps d'attente vaut le coup puisque la majorité des cas sont résolus.
-Sur l'extrait des peptides ici présent, seules 20 d'entre eux finissent sur des impasses.
+Cependant, cet allongement du temps d'exécution permet de résoudre la majorité des cas.
+Sur l'extrait des peptides ici présent, seuls 20 d'entre eux finissent sur des impasses.
 Toutes les autres exécutions s'arrêtent en obtenant 100\% de couverture.
 
 Pour finir cette analyse des temps de calcul individuels, nous allons parler des cas extrêmes.
 Ces cas pathologiques masquent les réelles performances du logiciel.
 La moyenne de temps d'exécution globale est de 18ms par peptide mais lorsque nous retirons les 15 cas qui débordent de la figure, cette moyenne chute à 10ms.
 À eux seuls, ces 15 peptides représentent plus de la moitié du temps d'exécution du logiciel.
-Le cas le plus critique (avoparcin-beta) à lui seul représente un cinquième du temps d'exécution total (plus de 1s).
-C'est une structure composée de beaucoup de cycles et d'embranchements et dont la structure atomique que nous possédons est fausse.
-L'algorithme passe du coup énormément de temps en boucles \textit{light} et en modulation.
-Ce qu'il faut conclure de cela est qu'il faut éviter d'utiliser des boucles \textit{light} sur des données dont on ne connait pas grand chose.
+Le cas le plus critique (avoparcin-beta) représente à lui seul un cinquième du temps d'exécution total (plus de 1s).
+C'est une structure composée de beaucoup de cycles et d'embranchements. De plus, la structure atomique que nous possédons est fausse, ce qui rend impossible une couverture à 100\%.
+L'algorithme passe énormément de temps en boucles \textit{light} et en modulation.
+Nous pouvons en conclure qu'il faut éviter d'utiliser des boucles \textit{light} sur des données dont on ne connaît pas grand chose.
 Si nous souhaitons par exemple analyser à l'aveugle un très grand nombre de molécules, il est préférable de se restreindre à une utilisation basique du logiciel, quitte à venir affiner les résultats intéressants par la suite.
 
 
@@ -1716,18 +1716,18 @@ Si nous souhaitons par exemple analyser à l'aveugle un très grand nombre de mo
 \subsection{Analyse des résultats}
 
 Pour analyser les résultats, nous avons exécuté s2m avec l'algorithme de pavage heuristique.
-La modulation est réglée à 2 de profondeur et le nombre de tours de boucle à 2 également.s
-Vous pourrez trouver tous les résultats sur les polymères testés à ces adresses :
+La modulation est réglée à 2 de profondeur et le nombre de tours de boucle à 2 également.
+Vous trouverez tous les résultats sur les polymères testés à ces adresses :
 - CCD : www.TODO.com
 - Norine : www.TODO.com
 
 
 Revenons sur les chiffres qui ont été présentés dans les tableaux \ref{nor_results} et \ref{ccd_results}.
-Environ 74\% des annotations peptidiques issus de Norine et 85\% de celles de CCD sont entièrement retrouvées par le logiciel.
+Environ 74\% des annotations peptidiques issues de Norine et 85\% de celles de CCD sont entièrement retrouvées par le logiciel.
 Mais il faut se rappeler que les annotations ne sont plus considérées comme correctes dès lors qu'au moins un monomère est faux.
 En regardant le taux d'atomes correctement attribués au sein des peptides, le taux de réussite augmente à plus de 93\% pour les annotations de Norine et plus de 98\% pour CCD.
 
-Cependant, même ces très bons taux de réussite ne sont pas représentatif de la qualité des annotations.
+Cependant, même ces très bons taux de réussite ne sont pas représentatifs de la qualité des annotations.
 En effet, en analysant les résultats de plus près, nous nous sommes aperçu qu'il était possible de détecter des erreurs au sein des bases de données utilisées pour les tests.
 Analysons ensemble plusieurs cas afin de comprendre les raisons de ces erreurs.
 
@@ -1746,8 +1746,8 @@ Beaucoup d'annotations fausses proviennent d'erreurs de structures atomiques pou
 Prenons l'exemple de l'\textit{enniatin I} (voir figure \ref{s2m_enniati}).
 L'annotation en sortie de s2m présente une couverture de 100\% mais un correctness de 66\%.
 En regardant les 3 listes de monomères, on peut s'apercevoir que l'annotation attendue comporte deux monomères nommés Hmp alors que le logiciel trouve deux 4Me-Hva.
-Les deux monomères se ressemblant et il est fort probable que, soit l'annotation monomérique, soit l'annotation atomique ait été mal entrée.
-Pour comprendre l'erreur, remontons les sources des données.
+Les deux monomères se ressemblant et il est fort probable que, soit l'annotation monomérique, soit l'annotation atomique ait été mal saisie.
+Pour comprendre l'erreur, remontons aux sources des données.
 Sur la page Norine de la molécule, nous trouvons un lien vers Pubchem pour nous permettre d'obtenir la structure atomique et un lien vers la publication qui nous permet d'obtenir la structure monomérique.
 
 \begin{figure}[h!]
@@ -1760,7 +1760,7 @@ Sur la page Norine de la molécule, nous trouvons un lien vers Pubchem pour nous
 
 En regardant la molécule présente sur PubChem (voir figure \ref{enni_cor}), nous pouvons constater que c'est effectivement la structure atomique qui a été utilisée pour le test.
 En lisant désormais la publication\cite{song_diversity_2008}, on s'aperçoit que la structure monomérique correspond à ce qui est présent sur Norine.
-Accompagnant cette annotation monomérique est présent un schéma de la structure atomique venant confirmer la structure monomérique.
+Cette annotation monomérique est accompagnée d'un schéma de la structure atomique qui vient confirmer la structure monomérique.
 Sans aucun doute, l'erreur provient des données issues de PubChem.
 A priori le lien PubChem entré sur Norine n'est pas le bon et pointe vers un peptide similaire.
 
@@ -1784,8 +1784,8 @@ Il est possible que ce monomère n'ait jamais été répertorié, que la structu
 Dans le cas de l'annotation de la dolastatin (voir figure \ref{dolas}), c'est une erreur de structure atomique qui s'est glissée dans la base Norine.
 Le monomère Dap qui est sensé être présent n'est pas reconnu car l'atome d'azote n'est pas placé au même endroit au sein du monomère seul et du monomère dans le peptide.
 En cherchant sur Norine on peut s'apercevoir qu'aucun autre peptide de la base ne comporte ce monomère, ce qui veut dire qu'il a été ajouté spécifiquement pour ce peptide.
-Donc, le changement de structure du monomère n'est probablement pas du à une modification de la molécule mais plutôt à une erreur d'annotation.
-En parcourant l'article qui publia le peptide~\cite{luesch_isolation_2001} et la structure atomique présente sur PubChem, on s'aperçoit que c'est une erreur uniquement présente sur Norine.
+Donc, le changement de structure du monomère n'est probablement pas dû à une modification de la molécule mais plutôt à une erreur d'annotation.
+En parcourant l'article qui a décrit le peptide~\cite{luesch_isolation_2001} et la structure atomique présente sur PubChem, on s'aperçoit que c'est une erreur uniquement présente sur Norine.
 
 
 \subsubsection{Erreurs d'annotations}
@@ -1802,8 +1802,8 @@ Il arrive parfois que des molécules soient trompeuses.
 En entrant à la main les annotations, il est possible de confondre un monomère avec un de ses dérivés proches.
 C'est ce qui est arrivé avec la fengycine A (voir figure \ref{fengycin}).
 L'annotation effectuée par s2m détecte un monomère Gln alors que l'annotation présente dans Norine détecte un Glu.
-En effectuant à nouveau toutes les opérations de vérification de la structure atomique et monomérique, on s'aperçoit rapidement que l'article~\cite{wu_nonribosomal_2007} donne raison à s2m.
-Cette fois ci, c'est l'annotation monomérique présente dans Norine qui est à changer pour obtenir une information juste.
+En effectuant à nouveau toutes les opérations de vérification de la structure atomique et monomérique, on s'aperçoit que l'article~\cite{wu_nonribosomal_2007} donne raison à s2m.
+Cette fois-ci, c'est l'annotation monomérique présente dans Norine qui est à changer pour obtenir une information juste.
 
 
 \subsubsection{Les équivalences}
@@ -1820,12 +1820,12 @@ Le dernier type d'erreurs d'annotations commises par s2m est strictement du aux 
 C'est un problème d'annotations équivalentes.
 Comme nous le voyons sur le schéma \ref{cycloth}, la ``cyclotheonamide E'' est un peptide couvert à 100\%.
 De plus, l'annotation présente dans Norine propose deux monomères visuellement très proches des monomères suggérés par s2m.
-En regardant dans le détail, on peut observer que c'est un problème du à une formylation entre deux monomères.
-L'un des deux monomère à été formylé, ce qui fait qu'un groupement C=O est présent entre les monomères Arg et Ile du peptide.
+En regardant dans le détail, on peut observer que c'est un problème dû à une formylation entre deux monomères.
+L'un des deux monomères a été formylé, ce qui fait qu'un groupement C=O est présent entre les monomères Arg et Ile du peptide.
 L'un des monomères a donc été modifié mais il pourrait \textit{a priori} s'agir de l'un comme de l'autre.
 Dans les deux cas, l'annotation qui en résulte reste couvrante à 100\%.
-N'ayant aucun moyen algorithmique de faire la différence, ici s2m a choisit la première solution trouvée.
-Pour connaître l'annotation réelle, il faut remonter à la production du peptide et comprendre les mécanismes de modifications de monomère qui entrent ici en jeu.
+N'ayant aucun moyen algorithmique de faire la différence, ici s2m a choisi la première solution trouvée.
+Pour connaître l'annotation réelle, il faut remonter à la production du peptide et comprendre les mécanismes de modification de monomères qui entrent ici en jeu.
 Cette erreur est présente moins d'une dizaine de fois dans les données déjà vérifiées et ne pourra pas être corrigée sans prendre en compte plus d'informations biologiques sur le recrutement des monomères.
 
 
@@ -1840,9 +1840,9 @@ Cette erreur est présente moins d'une dizaine de fois dans les données déjà 
 \end{figure}
 
 Durant toutes ces analyses, je ne me suis attardé que sur les erreurs issues des peptides de Norine.
-Dans ces cas, il est très facile de vérifier toutes les informations de cette base car de nombreux liens vers les origines des données qui y sont présentes.
-Pour les données issues de CCD, nous détectons le même genre de problème que dans Norine mais il est très difficile de les analyser en profondeur.
-Nous avons accès aux structures, mais plus difficilement aux publications associées.
-Nous pouvons donc également détecter la présence d'erreurs, mais sans forcément pouvoir expliquer pourquoi.
+Dans ces cas, il est possible de vérifier toutes les informations de cette base car de nombreux liens vers les origines des données y sont présents.
+Pour les données issues de CCD, nous détectons le même genre de problème que dans Norine mais il est plus difficile de les analyser en profondeur.
+Nous avons accès aux structures, mais pas ou très peu aux publications associées directement à partir de l'entrée CCD.
+Nous pouvons donc également détecter la présence d'erreurs, mais sans forcément pouvoir expliquer leur origine.
 Seules les erreurs dues aux équivalences sont facilement détectables (voir par exemple \ref{CCD_results}).
 Pour les autres types d'erreurs, nous ne pouvons que spéculer sur leur origine, sans pouvoir vérifier.
