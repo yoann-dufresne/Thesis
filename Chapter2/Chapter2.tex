@@ -1044,37 +1044,50 @@ La méthode de recherche des isomorphismes de sous-graphe présentée en section
 Puisque nous connaissons les atomes contenus dans chacun des isomorphismes découverts, nous pouvons également connaître chacun des isomorphismes découverts par atome.
 L'étape de pavage consiste à choisir un sous ensemble des isomorphismes trouvés, de manière à maximiser le nombre d'atomes couverts par un sous ensemble de tout ces isomorphismes, en ayant pour chaque atome, au plus un seul isomorphisme présent dans ce sous ensemble.
 
+\begin{figure}[!ht]
+  \begin{center}
+    \includegraphics[width=300px]{Figures/s2m/pavage/puzzle.png}
+    \caption{\label{puzzle}Phase de pavage.
+    Choix parmi toutes les pièces disponibles pour former le puzzle le plus grand possible}
+  \end{center}
+\end{figure}
+
 Faisons une analogie avec un puzzle. La phase d'isomorphisme créée de nombreuses pièces de puzzle.
 Une reconstruction complète du puzzle n'est pas forcément faisable uniquement à partir de ces pièces.
 De plus, parmi celles dont nous disposons, certaines se chevauchent.
 La phase de pavage consiste à choisir parmi les pièces, celles que l'on souhaite garder, en maximisant le remplissage de notre puzzle et sans avoir de pièces chevauchantes (figure \ref{puzzle}).
 
-\begin{figure}
-  \includegraphics[width=300px]{Figures/s2m/pavage/puzzle.pdf}
-  \caption{\label{puzzle}Un pavage est une recherche des meilleures pièces permettant de construire le puzzle des monomères}
+\begin{figure}[!ht]
+  \begin{center}
+    \includegraphics[width=300px]{Figures/s2m/pavage/couvertures.png}
+    \caption{\label{puzzle_covs}Phase de pavage.
+    Choix parmi toutes les pièces disponibles pour former le puzzle le plus grand possible}
+  \end{center}
 \end{figure}
 
-Dans l'idéal, toutes les pièces nécessaires à la reconstruction du puzzle complet sont présentes dans l'ensemble des
-pièces trouvées. Dans le cas contraire, on ne peut pas reconstruire complètement le peptide à partir des résidus trouvés. 
-Dans ce cas, notre
-but sera alors de trouver un assemblage le plus complet possible. Si beaucoup de résidus ont été trouvés lors de la première phase
-il est également possible que nous ne trouvions pas qu'une seule solution de reconstruction. Nous n'aurons alors aucun moyen
-purement algorithmique de choisir quelle est la meilleure façon de découper ces peptides.
+Dans l'idéal, toutes les pièces nécessaires à la reconstruction du puzzle complet sont présentes dans l'ensemble des pièces trouvées (voir figure \ref{puzzle_covs}).
+Dans le cas contraire, on ne peut pas reconstruire complètement le peptide à partir des résidus trouvés.
+Dans ce cas, notre but sera alors de trouver un assemblage le plus complet possible.
+Si beaucoup de résidus ont été trouvés lors de la première phase il est également possible que nous ne trouvions pas qu'une seule solution de reconstruction.
+Nous n'aurons alors aucun moyen purement algorithmique de choisir quelle est la meilleure façon de découper ces peptides.
 
-\begin{figure}
-  \includegraphics[width=300px]{Figures/s2m/pavage/reconstructions.png}
-  \caption{\label{reconstruction}Les différents types de reconstruction que l'on peut obtenir par le pavage}
-\end{figure}
+
 
 
 \subsubsection{Preuve de NP-Complétude}
 
+\begin{figure}[!ht]
+  \begin{center}
+    \includegraphics[width=250px]{Figures/s2m/pavage/pizza.png}
+    \caption{\label{pizza}Exemple de pavage pour une pizza $7 \times 3$.
+    Ici la pizza à atteint un pavage maximal avec les parts verte et bleu (24 / 28.}
+  \end{center}
+\end{figure}
+
 En 2015, j'ai eu la chance de participer, avec mes amis Thomas Nachtergale et Alexandre Temperville, à la finale du concours d'algorithmique ``Google Hashcode''.
 La veille de l'épreuve finale, un petit problème test nous a été proposé.
-Le but était de découper une pizza (matrice), composée de cases de jambon (H dans la matrice) et de cases de sauce (T dans la matrice), en parts dites ``royales'', en minimisant le gâchis de pizza (morceaux de pizza exclus de toute part royale découpée).
+Le but était de découper une pizza (matrice), composée de cases de jambon (H dans la matrice) et de cases de sauce (T dans la matrice), en parts dites ``royales'', en minimisant le gâchis de pizza (morceaux de pizza exclus de toute part royale découpée) (voir schéma \cite{pizza}).
 Les parts royales sont des parts rectangulaires contenant au minimum 3 cases de jambon et représentant une surface maximale de 12 cases.
-
-\textbf{TODO : schéma pizzas}
 
 Ce problème a été prouvé NP-Complet sur le forum stackexchange~\cite{de_biasi_complexity_2015} suite à la question d'un participant.
 La preuve a été faite par réduction du problème ``Monotone cubic planar 1-3 SAT''.
@@ -1112,10 +1125,12 @@ Pavage est donc NP-Complet.
 
 \label{MIP_p}
 
-\begin{figure}
-  \includegraphics[width=300px]{Figures/s2m/pavage/reduction.pdf}
-  \caption{\label{reduction}Représentation globale de la réduction du problème de pavage en MIP puis reconstruction de la
-  solution}
+\begin{figure}[!ht]
+  \begin{center}
+    \includegraphics[width=350px]{Figures/s2m/pavage/MIP.png}
+    \caption{\label{reduction}Représentation globale de la réduction du problème de pavage en MIP puis reconstruction de la
+    solution}
+  \end{center}
 \end{figure}
 
 Nous allons ici résoudre le problème de pavage de manière exacte par utilisation de la programmation linéaire (LP).
@@ -1842,8 +1857,8 @@ Cette erreur est présente moins d'une dizaine de fois dans les données déjà 
 
 Durant toutes ces analyses, je me suis uniquement attardé sur les erreurs issues des peptides de Norine.
 Dans ces cas, il est très facile de vérifier toutes les informations de cette base car de nombreux liens vers les origines des données qui y sont présentes.
-Pour les données issues de CCD, nous détectons le même type de problème que dans Norine mais il est très difficile de les analyser en profondeur.
+Pour les données issues de CCD, nous détectons le même type de problème que dans Norine mais il est très difficile d'analyser chacun d'eux en profondeur.
 Nous avons accès aux structures, mais plus difficilement aux publications associées.
-Nous pouvons donc également détecter la présence d'erreurs, mais sans forcément pouvoir expliquer pourquoi.
+Nous pouvons donc également détecter la présence d'erreurs, mais sans forcément pouvoir expliquer leur raison.
 Seules les erreurs dues aux équivalences sont facilement détectables (voir par exemple \ref{CCD_results}).
 Pour les autres types d'erreurs, nous ne pouvons que spéculer sur leur origine, sans pouvoir vérifier.
