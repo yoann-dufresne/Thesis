@@ -19,3 +19,75 @@ min sur l'ensemble
 s2m pas que pour les NRP.
 
 
+
+
+
+
+
+
+Chapitre 2 :
+
+◇ "Prouvons que le problème “Pavage” est également NP-Complet en utilisant une réduction du problème “Pizza”." : préciser que tu parles de ton pavage (monomères sur polymère)
+   ◇ "aucun résidu ne se chevauche" : à l'oral cela passe, mais à l'écrit cela pose problème car 2 éléments se chevauchent => je mettrai : aucun résidu ne chevauche un autre résidu
+   ◇ fig 2.25 et 2.26 : mettre aussi l'équivalent en atomes, monomères et peptide (si possible)
+   ◇ "Prouvons ensuite que nous pouvons résoudre le problème Pizza en utilisant le problème Pavage." -> Prouvons ensuite que nous pouvons résoudre le problème Pavage en utilisant le problème Pizza ??
+   ◇ je ne comprends pas la suite du parallèle entre les 2 (il faut que l'on en discute)
+   ◇ "On pourra toujours trouver au moins un tri de la liste qui atteigne la solution optimale. En faisant cela nous reportons la difficulté du problème sur les critères de tri de la liste mais nous garantissons une très grande rapidité d’exécution." : comme tu ne proposes qu'un tri, je ne vois pas trop l'intérêt de cette affirmation
+   ◇ est-ce que tu refais le tri pour chaque polymère ? un tri global des résidus qui sont dans ta base, fait au même moment que la phase d'indexation pourrait faire gagner du temps (pour la recherche stricte).
+   ◇ tu auras surement la remarque sur le fait que la fréquence de chaque type de liaison peut-être estimée sur une base d'apprentissage. Tu peux le mettre dans tes perspectives.
+   ◇ "Ce poids représente la confiance que l’on donne à l’apparition d’un type de liaison." : confiance ? (Tout la paragraphe est un peu confu avec beaucoup de répétitions. Je veux bien essayer de le réécrire pour toi
+   ◇ 2.4.3.5 : dire pourquoi tu ne trouves pas tjs le pavage correct (tu parles de reconstruction parfaite sur ton schéma, ce serait mieux que tu reprennes ce terme). Idem plus loin, tu utilises "solution complète", il vaut mieux utiliser tjs le même terme (celui dont tu as donné une def claire).
+   ◇ j'ai un peu modifié l'intro de la recherche light
+   ◇ "Cette modification ne fait pas varier la qualité des résultats sur les NRP car les monomères utilisés diffèrent entre eux au delà des atomes d'hydrogène." : pas clair et pas nécessaire
+   ◇ C'est embettant que "Vue globale des algorithmes" soit en 2.4.4.1, il faudrait qu'elle soit en 2.4.5. Je pense que cette partie méritera des explications plus longues, à voir avec le schéma.
+   ◇ 2.5.1.1 Les constituants des jeux de données : je pense qu'il faut insister plus sur le fait que pour tester la pertinence biologique de la structure monomérique prédite nous avons besoin de jeux de données pour lesquels on a à la fois le SMILES et la structure monomérique. Tu peux dire qu'il y a très peu de bases dans ce cas et que nous n'avons trouvé que Norine et CCD d'exploitable. Tu dois introduire cette partie en disant bien que plusieurs structures monomériques peuvent être trouvées et qu'une couverture à 100% ne garantit pas la pertinence biologique. Pertinence biologique = ce sont réellement ces monomères qui sont intégrés dans le peptide final par les enzymes de synthèse (NRPS ou autre dans le cas de CCD). Tu peux ajouter un "disclaimer" en disant que l'on considère que les annotations présentes dans les BD sont les structures biologiques réelles, même si on sait qu'il y a des erreurs.
+   ◇ Figure 2.32 – Répartition des données de validation : il vaut mieux mettre polymères à la place de peptides
+   ◇ tu devrais mettre les calculs de coverage et correctness sous forme d'équation, quitte à mettre les formules pour la version atomique et la version monomérique.
+   ◇ Figure 2.34 – Évaluation de l’efficacité d’apprentissage des chaı̂nes. : sur Norine ou CCD ?
+   ◇ "peuvent déjà tous être éliminés après 3 atomes si les chaines sont correctement formées." : tous ou pratiquement tous ?
+   ◇ mettre "correctness" en italique à chaque fois que tu l'utilises
+   ◇ 2.5.3.2 Mesures : tu peux ajouter la formule de la sensibilité
+   ◇ "l'annotation du jeu de test" : je le changerai en annotation biologique pour que cela soit plus percutant
+   ◇ Table 2.1 – Résultats de s2m sur les données de Norine : il manque 0-0 pour voir combien il y a de peptides qui sont couvertsà 100% dès le strict (si je ne me trompe pas dans la combinaison de paramètres). Les VP.. ne sont pas dans le même ordre entre heuristique et MIP.
+   ◇ pour les diagrammes en barre, si tu peux mettre les 3 types de valeurs les unes à côté des autres, ce sera peut-être plus facile de comparer les VP pour chaque jeu de paramètres
+   ◇ "Le paramètre de nombre de boucle light n’a que très peu d’influence et vient seulement compléter 3 résultats sur les données Norine et un seul sur les données de CCD." : les VP changent bcp plus, c'est à dire car c'est le plus important
+   ◇ "Il n’est souvent plus facilement possible de construire l’annotation." je l'ai changé en : Il n'est souvent plus possible de construire l'annotation réelle, à moins de déplacer de nombreux résidus.
+   ◇ "Nous ne nous attendions pas à ces résultats et la sur-optimisation du pavage par MIP nous a surpris mais " phrase incomplète. Il faut être plus positif en disant que la modulation avec le light est adaptée à notre problématique de données avec des variations chimiques. Tu peux aussi ouvrir avec l'utilisation du light dès la 1ère étape du MIP qui devrait donner des résultats au moins aussi bon que la modulation, mais que les tps de calcul de l'étape de matching sont tels que tu n'as pas pu faire les tests.
+   ◇ 2.5.3.4 Temps de calcul global : difficile de comprendre ce que sont MIP-1, MIP-2 et MIP-3. Il vaut mieux que tu reprennes les même notations dans tes différents graphiques et tableaux.
+
+• Suite lecture à partir de 2.5.4
+   ◇ fig : {temps_calcul} : peut-être séparer le graph en 2 (ou plus) : les molécules avec 1 seule "passe de pavage" et les autres. Cela résoud en partie le pb d'échelle et facilatera la lecture. Dans explication fig qui est dans le texte : préciser que tps recherche isomorphisme est à peu près égal au tps strict
+   ◇ "Cependant, ce temps d’attente vaut le coup puisque la majorité des cas sont résolus." : bof, j'ai changé dans le tex
+   ◇ "C’est une structure composée de beaucoup de cycles et d’embranchements et dont la structure atomique que nous possédons est fausse. ..." : changé dans le tex
+   ◇ changer "boucles light" en "itérations light" + toutes les autres fois ou tu utilises boucle avec cette signification
+   ◇ "Ce qu’il faut conclure de cela est qu’il faut éviter d’utiliser des boucles light sur des données dont on ne connait pas grand chose." : j'ai changé un peu la phrase et je ne comprends ce que tu entends par "dont on ne connait pas gran-chose"
+   ◇ "Environ 74\% des annotations peptidiques" : soit tu mets un chiffre après la virgule, soit tu précises "un peu plus de" ou "un peu moins de"
+   ◇ pour avoir une meilleure vue de la performance de s2m, tu pourrai faire un histogramme avec le nombre de peptides qui ont 1 couverture entre 100 et 90, 90 et 80...
+   ◇ il n'est pas nécessaire de mettre les noms des peptides en italique
+   ◇ "Accompagnant cette annotation monomérique est présent un schéma de la structure atomique venant confirmer la structure monomérique." : changé dans le tex
+   ◇ enniatin I : la structure 3D donnée sur Pubchem est plus jolie que la 2D. J'ai l'impression que PubChem est ok, mais que c'est les mono de Norine qui ne sont pas bons + la structure monomérique n'est pas donnée explicitement dans l'article
+   ◇ est-ce qu'il y a des articles dans les données de CCD ?
+
+
+
+
+Chaputre 3 :
+
+   Voir avec Maude :
+   ◇ fig {sql} : maintenant les monomères sont liés aux peptides en n,m
+   Via quelle table ?
+   ◇ "protéogénique à changer en protéinogène (voir wikipédia). Je l'ai fait pour la partie fouille en base.
+
+   TODO :
+   ◇ statistiques : à voir si tu mets certaines infos dans la partie "résultats" du chap 2 pour mettre en avant le challenge relevé par s2m (ex : nb atomes / peptide ; nb atomes / monomères ; nb occ de 3, 4 et 5 liaisons par mono ; nb résidus générés ; nb résidus trouvés par peptide lors SI)
+   ◇ fig dap_modif : si possible, ajoute le % de couverture et/ou entoure le C noir car il faut avoir l'oeil pour voir la différence entre les 2 versions du peptide. Tu peux aussi préciser qu'un autre monomère a été trouvé par s2m et donner son nom. (s2m pour corriger les erreurs) + Partie A, Partie B
+   
+   ◇ "sans quasiment laisser transparaitre de failles de ces techniques." : tu as dit à chauqe fois que cela ne marche pas bien => c'est ce que j'appelle des failles
+   ◇ "nous sommes pour le moment très bons en création de ``mauvais'' NRP." : attention tu utilises des fois "nous parler de toi + d'autres et d'autres fois pour parler de la communauté scientifique
+   ◇ "C'est dans cette optique que nous avons créé un prototype pour la recommandation de cluster."' : qui est nous ? et qu'est-ce que la recommandation de clusters
+   ◇ "3.3.2.1 Mettre en relation NRP et gènes" ton exemple mérite une figure pour être plus facile à comprendre + préciser que tu cherches parmis des NRPS existantes
+   ◇ dans la fig jaccard m est un peptide et non un monomère ? Il faut que tu expliques ta représentation des clusters, même si on peut la deviner ; tu n'as que les dipeptides présents dans au moins M ou un Ci, cela veut dire que le fingerprint est adapté aux données comparées ?
+   ◇ pas besoin de mettre tes phrases au futur
+   ◇ "Cette source de données a été un double échec." : c'est très dur comme remarque, avec ce qui suit. Même si les collègues de MiBIG ne sont pas dans le jury, il faut être plus diplomate
+   ◇ "données json" : je ne suis pas sure que tu aies expliqué ce format avant. Tu peux parler de format pas respecté ou autre
+   ◇ il faut revoir ton bilan sur les tests sur les "données de Kai". Il est évidemment impossible de tirer quelque-chose d'annotations automatiques sans liens avec les peptides de Norine. Il faut que l'on discute de la façon de présenter ce travail
