@@ -82,12 +82,9 @@ Chaputre 3 :
    ◇ statistiques : à voir si tu mets certaines infos dans la partie "résultats" du chap 2 pour mettre en avant le challenge relevé par s2m (ex : nb atomes / peptide ; nb atomes / monomères ; nb occ de 3, 4 et 5 liaisons par mono ; nb résidus générés ; nb résidus trouvés par peptide lors SI)
    ◇ fig dap_modif : si possible, ajoute le % de couverture et/ou entoure le C noir car il faut avoir l'oeil pour voir la différence entre les 2 versions du peptide. Tu peux aussi préciser qu'un autre monomère a été trouvé par s2m et donner son nom. (s2m pour corriger les erreurs) + Partie A, Partie B
    
-   ◇ "sans quasiment laisser transparaitre de failles de ces techniques." : tu as dit à chauqe fois que cela ne marche pas bien => c'est ce que j'appelle des failles
-   ◇ "nous sommes pour le moment très bons en création de ``mauvais'' NRP." : attention tu utilises des fois "nous parler de toi + d'autres et d'autres fois pour parler de la communauté scientifique
+   
    ◇ "C'est dans cette optique que nous avons créé un prototype pour la recommandation de cluster."' : qui est nous ? et qu'est-ce que la recommandation de clusters
    ◇ "3.3.2.1 Mettre en relation NRP et gènes" ton exemple mérite une figure pour être plus facile à comprendre + préciser que tu cherches parmis des NRPS existantes
    ◇ dans la fig jaccard m est un peptide et non un monomère ? Il faut que tu expliques ta représentation des clusters, même si on peut la deviner ; tu n'as que les dipeptides présents dans au moins M ou un Ci, cela veut dire que le fingerprint est adapté aux données comparées ?
    ◇ pas besoin de mettre tes phrases au futur
-   ◇ "Cette source de données a été un double échec." : c'est très dur comme remarque, avec ce qui suit. Même si les collègues de MiBIG ne sont pas dans le jury, il faut être plus diplomate
-   ◇ "données json" : je ne suis pas sure que tu aies expliqué ce format avant. Tu peux parler de format pas respecté ou autre
    ◇ il faut revoir ton bilan sur les tests sur les "données de Kai". Il est évidemment impossible de tirer quelque-chose d'annotations automatiques sans liens avec les peptides de Norine. Il faut que l'on discute de la façon de présenter ce travail

@@ -431,15 +431,15 @@ C'est à nouveau un très long travail de bioanalyse qui viendra compléter les 
 \section{Vers la biologie de synthèse}
 
 Depuis quelques années, les bactéries développent de plus en plus de résistances aux antibiotiques utilisés en médecine animale.
-Les NRP étant une source très riche d'antibiotiques, de nombreuses équipes essayent de créer de nouvelles molécules à partir de NRP pour avoir de nouvelles molécules contres lesquelles, les micro-organismes ne présentent pas de résistance.
+Les NRP étant une source très riche d'antibiotiques, de nombreuses équipes essayent de créer, à partir de NRP, de nouvelles molécules contres lesquelles les micro-organismes ne présentent pas de résistance.
 C'est dans le but de contribuer à la création de ces nouvelles molécules que nous allons ici aborder la thématique de la biologie de synthèse.
 La biologie de synthèse est un domaine qui vise à modifier des organismes pour les pousser à effectuer des tâches que nous souhaitons.
 Dans notre cas, le but est de faire produire en masse par une bactérie, des NRP qui nous intéressent.
 
 Cette section va décrire la suite du travail présenté précédemment.
 L'annotation NRP n'est pas une fin en soi mais une donnée précieuse pour comprendre l'assemblage moléculaire et de fait, les voies de synthèse.
-Le Graal de la biologie de synthèse appliquée aux NRP est de savoir comment produire nos propres assemblages monomériques en manipulant les gènes NRPS.
-Comme nous le verrons par la suite, cette question est beaucoup trop ambitieuse par rapport à l'avancée des connaissances actuelles.
+Le Graal de la biologie de synthèse appliquée aux NRP est de savoir comment produire nos propres assemblages monomériques en manipulant des gènes NRPS.
+Comme nous le verrons par la suite, cette question est très ambitieuse par rapport à l'avancée des connaissances actuelles.
 Notre première étape sera de mettre en relation les NRP avec les clusters de gènes capables de produire des peptides similaires.
 Cette information sera très utile pour aider au design de nouveaux NRP à partir de briques déjà existantes.
 
@@ -455,27 +455,30 @@ Effectuons un survol des techniques en commençant par de petites modifications 
 % Recent advances in engineering nonribosomal peptide assembly lines
 % Ribosome-independent biosynthesis of biologically active peptides: Application of synthetic biology to generate structural diversity
 
-L'une des approches pour obtenir de nouvelles structures peptidiques est de faire varier les structures existantes.
+L'une des approches pour obtenir de nouvelles structures peptidiques est de faire varier des structures déjà produites.
 La structure peut être modifiée post-synthèse NRPS, par des enzymes présentes dans le cluster de gènes.
 C'est ce qui se passe par exemple naturellement lors d'incorporations de sucres dans un NRP (voir section \ref{sucres}).
-En ajoutant des gènes ou modifiant des enzymes du cluster de gènes, certaines équipes réussissent à ajouter de nouveaux monomères ou à modifier certains monomères inclus~\cite{giessen_ribosome-independent_2012}.
+En ajoutant des gènes d'enzymes de modification NRP au cluster de gène ou en en modifiant des déjà présentes, certaines équipes parviennent à l'ajout de nouveaux monomères ou la modification de certains monomères déjà inclus~\cite{giessen_ribosome-independent_2012}.
 
 \begin{figure}[h!]
   \begin{center}
     \includegraphics[width=250px]{Figures/synthese/post_synth.png}
     \caption{\label{post_synth}Modification post-synthèse du NRP par une action enzymatique.
-    Les gènes NRPS contenant l'encodage des domaines A vert et rouge sont transcrits puis traduits depuis l'ADN afin de former les NRPS contenant les domaines de même couleur.
+    Les gènes NRPS contenant l'encodage des domaines A ``vert'' et ``rouge'' sont transcrits puis traduits depuis l'ADN afin de former les NRPS contenant les domaines de même couleur.
     La NRPS assemble ensuite le peptide.
     C'est enfin une enzyme ajoutée au cluster de gènes (ici en bleu), qui vient modifier l'un des monomères du NRP.}
   \end{center}
 \end{figure}
 
-\cite{winn_recent_2016} propose également d'aller plus loin en effectuant parfois cette modification avant l'assemblage NRPS.
+L'article \cite{winn_recent_2016} propose également d'aller plus loin en effectuant parfois cette modification avant l'assemblage NRPS.
 Ils publient par exemple plusieurs modifications pré-synthèse de la Pacidamycin.
-Ce sont des enzymes modificatrices qui agissent sur un monomère cible avant sa capture par le domaine C-terminal.
-La surface en contact lors de la capture et de l'assemblage n'étant pas modifiée, les monomères alternatifs sont intégrés de la même manière que l'original.
-Certains monomères ne sont plus facilement modifiables par des enzymes post-synthèse du fait des contraintes structurelles.
-La modification de monomères pré-synthèse ouvre la voie vers de nouvelles structures peptidiques.
+Ce sont des enzymes modificatrices qui agissent sur un monomère cible avant sa capture (Par exemple, dans l'article, Trp est dérivé en Cl-Trp ou d'autres variants).
+La structure du monomère n'étant pas fondamentalement changée, il est inclus par la synthétase sans changement préalable de celle-ci.
+Les contraintes structurelles des NRP n'autorisent pas toujours une modification post-synthèse de celui-ci.
+La modification pré-synthèse de monomères, lorsqu'elle n'affecte pas la capture du dit monomère, ouvre beaucoup de possibilités de modification.
+% La surface en contact lors de la capture et de l'assemblage n'étant pas modifiée, les monomères alternatifs sont intégrés de la même manière que l'original.
+% Certains monomères ne sont plus facilement modifiables par des enzymes post-synthèse du fait des contraintes structurelles.
+% La modification de monomères pré-synthèse ouvre la voie vers de nouvelles structures peptidiques.
 
 
 \subsubsection{Les modifications ponctuelles de synthétases}
@@ -493,9 +496,9 @@ La modification de monomères pré-synthèse ouvre la voie vers de nouvelles str
 \end{figure}
 
 La seconde possibilité de modification de NRP passe par la modification des synthétases.
-Plus exactement par la modification d'un domaine A d'une synthétase.
+Plus exactement par la modification du code génétique correspondant à un domaine A d'une synthétase.
 Les travaux \cite{villiers_mapping_2009, kries_reprogramming_2014, williams_engineering_2013} partent du constat (également fait par Stachelhaus~\cite{stachelhaus_specificity-conferring_1999}) que les domaines A sont spécifiques aux monomères qu'ils capturent.
-En modifiant certains acides aminés composant un domaine A, la spécificité de ce domaine change.
+En modifiant certains acides aminés composant un domaine A, la spécificité de ce domaine peut changer.
 Après quelques modifications bien effectuées la poche d'accueil du monomère est suffisamment modifiée pour accueillir un nouveau type de monomère.
 Les modifications à effectuer sont découvertes via des techniques d'évolution dirigée.
 Les auteurs génèrent des mutations aléatoires (partiellement dirigées) sur les modules A puis ne gardent que ceux qui changent de fonction.
@@ -518,32 +521,46 @@ Par ce procédé, ils arrivent à capturer des monomères nouveaux, parfois non 
 Les modifications qui paraissent les plus évidentes sont celles qui font appel à des échanges de domaines.
 Des exemples sont présentés au sein des articles \cite{cane_harnessing_1998,kim_reinvigorating_2015}.
 Intuitivement, nous pourrions nous dire qu'il est facile d'échanger par exemple deux modules A de deux synthétases comme on échangerait deux pièces de LEGO dans une construction.
-Malheureusement, ces modifications ne sont pas si directes car les modules doivent respecter des contraintes spatiales et physico-chimiques pour que la NRPS ait une cohérence structurelle.
-De plus, certaines recombinaisons ne fonctionnent pas, mais la ou les raison(s) de cet échec sont inconnues à ce jour.
+Malheureusement, ces modifications ne sont pas si directes car les modules échangés doivent respecter la structure 3D de la NRPS.
+%des contraintes spatiales et physico-chimiques pour que la NRPS ait une cohérence structurelle.
+Les structures 3D n'étant pas souvent connues, il est très difficile de prédire un comportement de NRPS avant d'effectuer l'échange expérimentalement.
+%De plus, certaines recombinaisons ne fonctionnent pas, mais la ou les raison(s) de cet échec sont inconnues à ce jour.
 
 % A Subdomain Swap Strategy for Reengineering Nonribosomal Peptides
 
-Pour outrepasser ce genre de difficultés, les auteurs de \cite{kries_subdomain_2015} procèdent uniquement à un échange de sous domaine A.
-Ils modifient une partie de la zone spécifique en essayant de préserver la structure globale du module.
-Par cette technique, ils arrivent à modifier la forme de la poche et capter de nouveaux monomères.
+Bien que les contraintes structurelles soient des contraintes fortes, certaines équipes ont réussit des preuves de concepts de cette technique.
+Par exemple, les auteurs de \cite{kries_subdomain_2015} procèdent à l'échange d'une sous partie de domaine A afin de modifier sa partie spécifique.
+Ils ont ainsi réussi à modifier le domaine A du premier module de la Gramicidine S tout en gardant une production peptidique chimérique.
+Ce résultat est très encourageant pour la suite et devrait pouvoir mener à la production de variants de peptides existants.
+% Pour outrepasser ce genre de difficultés, les auteurs de \cite{kries_subdomain_2015} procèdent uniquement à un échange de sous domaine A.
+% Ils modifient une partie de la zone spécifique en essayant de préserver la structure globale du module.
+% Par cette technique, ils arrivent à modifier la forme de la poche et capter de nouveaux monomères.
 
 
 \subsubsection{La création de peptide de novo}
 
 Nous arrivons désormais au Graal de l’ingénierie NRP : créer un peptide de toutes pièces.
-Sans trop de surprise, il n'existe pour le moment aucune technique pour effectuer cette tâche.
-Comme nous l'avons vu précédemment, modifier un domaine A est déjà très difficile et nécessite beaucoup de précision.
+Pour le moment, il n'existe aucune technique pour effectuer cette tâche.
+Comme nous l'avons vu précédemment, modifier un domaine A est déjà très difficile et nécessite de l'expertise accompagnée d'un peu de chance.
 Cependant, certains travaux cherchent déjà à concevoir des briques de base qui nous permettraient un jour de construire un peptide complet.
-Ainsi, les travaux menés par Wilcoxen~\cite{wilcoxen_biomimetic_2007} ont permis la création d'un petit peptide synthétique mimant le comportement d'un domaine C.
+Ainsi, les travaux menés par Wilcoxen~\cite{wilcoxen_biomimetic_2007} ont permis la création d'un peptide synthétique mimant le comportement d'un domaine C.
 Ils sont parvenus à lier deux monomères via leur peptide-domaine.
 Nous sommes encore loin d'un domaine C universel fonctionnel mais ces travaux permettront de mener aussi loin que possible cette quête du Graal.
 
 
-Nous avons globalement présenté plusieurs techniques d'ingénierie de NRP sans quasiment laisser transparaître de failles de ces techniques.
-Cependant, quelle que soit la technique, rares sont les productions de NRP capables de passer à l'échelle d'une production de masse.
-Comme le dit bien la revue \cite{kries_biosynthetic_2016}, nous sommes pour le moment très bons en création de ``mauvais'' NRP.
-En effet, les NRP créés sont, soit très faiblement actifs, soit très faiblement produits à cause des modifications.
-Il reste encore beaucoup de chemin à parcourir pour un jour pouvoir produire des antibiotiques synthétiques issus de la pensée humaine.
+Les techniques que nous avons présenté ici sont toutes très encourageantes pour l'avenir de la biologie de synthèse pour les NRP.
+Des preuves de concept expérimentales, complètes ou partielles (pour la création de novo), ont été réalisées dans chacune des directions que nous avons abordé.
+Cependant il reste plusieurs grand obstacles à surmonter pour parvenir à la création d'antibiotiques NRP synthétiques.
+Les différentes preuves de concept doivent être répliquées pour la fabrication de nombreux et divers NRP.
+C'est en multipliant les expérieces que nous tirerons de l'information de ce qui fonctionne ou non.
+De plus, il faudra outrepasser les difficultés de quantité de production.
+Les divers NRP synthétiques créés sont créés avec des débits bien plus faibles que les NRP originaux.
+Il reste donc à comprendre comment outrepasser les règles génétiques qui bloquent ces productions.
+% Nous avons globalement présenté plusieurs techniques d'ingénierie de NRP sans quasiment laisser transparaître de failles de ces techniques.
+% Cependant, quelle que soit la technique, rares sont les productions de NRP capables de passer à l'échelle d'une production de masse.
+% Comme le dit bien la revue \cite{kries_biosynthetic_2016}, nous sommes pour le moment très bons en création de ``mauvais'' NRP.
+% En effet, les NRP créés sont, soit très faiblement actifs, soit très faiblement produits à cause des modifications.
+% Il reste encore beaucoup de chemin à parcourir pour un jour pouvoir produire des antibiotiques synthétiques issus de la pensée humaine.
 
 
 \subsection{Aider les techniques de recombinaisons modulaires}
@@ -640,17 +657,29 @@ Malheureusement, la constitution d'une telle base est très difficile.
 Il existe en effet, très peu de sources de données mettant en relation des NRP constatés dans l'environnement avec des NRPS réelles.
 Nous devons constituer cette base par nous même.
 
-La première piste que nous avions envisagée était de rassembler des données NRPS sûres (annotées manuellement) et de les mettre en relation avec les données NRP de Norine.
-Nous avons donc récupéré les données de gènes de MiBIG car la qualité des annotations nous intéressait.
-Cette source de données a été un double échec.
-Premièrement, les données téléchargées ne sont pas normalisées.
-Par exemple, les noms des monomères assemblés par une NRPS sont parfois complets et parfois résumés à quelques lettres.
-Ces mêmes monomères peuvent également être présents sous plusieurs noms sans avoir aucun lien entre eux.
-Enfin, les données json ne sont pas non plus toutes structurées de la même manière.
-De ce fait, de nombreuses données ont dues être écartées car portant trop de contraintes pour des exploitations automatiques.
-Le second problème majeur est que quasiment aucun des clusters de gènes restant n'a le NRP correspondant sur Norine.
-Les structures ne peuvent donc pas être contrôlées et confirmées.
-C'est à la suite de tout ces problèmes que nous avons choisi de changer de source de données pour nous tourner vers des annotations éventuellement moins fiables.
+La première piste que nous avions envisagée était de rassembler des données NRPS sûres (annotées manuellement) pour ne pas nous préoccuper de la qualité des données.
+Nous avons donc récupéré les données des couples gènes/NRP de MiBIG.
+L'intérêt des données issues de MIBiG sont qu'elles ont été entrées manuellement, c'est à dire que le contributeur avait suffisamment confiance en ses données pour les partager avec la communauté.
+Cependant, il possible que le contributeur ait entré directement les résultats d'une prédiction sans ajouter d'annotations car celles-ci suffiaient pour ses travaux.
+Il nous faut donc vérifier la pertinence des structures NRP présentes en base.
+Pour cela nous avons effectué une validation croisée des peptides avec Norine.
+Malheureusement, sur les quelques centaines de couples NPRS/NRP décrits dans MIBiG, seuls 60 NRP sont également présents dans Norine.
+Pour augmenter nombre, il sera nécessaire de valider d'autres structures manuellement.
+De plus, les données qui ont été soumises sont structurées différemment selon les contributeurs.
+MIBiG laisse une grande liberté dans les champs possibles à l'annotation, ce qui fait que plusieurs utilisateurs entrent des informations semblables sous différents noms.
+Cette diversité de structures des fichiers d'annotation vient empécher la gestion automatique d'un grand nombre d'entrées.
+Suite au retrait des annotations impossible à traiter dans un script (à moins de leur consacrer une excpetion), environ la moitié des annotations des NRP de Norine ne sont plus présentes.
+Ces deux contraintes cumulées nous ont poussé a changer de stratégie et ainsi changer notre jeu de données pour des données issues de prédictions.
+
+% Cette source de données a été un double échec.
+% Premièrement, les données téléchargées ne sont pas normalisées.
+% Par exemple, les noms des monomères assemblés par une NRPS sont parfois complets et parfois résumés à quelques lettres.
+% Ces mêmes monomères peuvent également être présents sous plusieurs noms sans avoir aucun lien entre eux.
+% Enfin, les données json ne sont pas non plus toutes structurées de la même manière.
+% De ce fait, de nombreuses données ont dues être écartées car portant trop de contraintes pour des exploitations automatiques.
+% Le second problème majeur est que quasiment aucun des clusters de gènes restant n'a le NRP correspondant sur Norine.
+% Les structures ne peuvent donc pas être contrôlées et confirmées.
+% C'est à la suite de tout ces problèmes que nous avons choisi de changer de source de données pour nous tourner vers des annotations éventuellement moins fiables.
 
 A l'aide de Kai Blin (chercheur de l'équipe de Tilmann Weber), nous avons utilisé antiSMASH pour générer des annotations de NRPS sur l'ensemble des génomes de bactéries présentes sur le NCBI.
 Ce second jeu de données est beaucoup plus abondant que le premier mais pose également un problème de qualité.
