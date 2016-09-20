@@ -404,7 +404,7 @@ Enfin, les NRP sont noyés au milieu de nombreuses protéines classiques.
 Rappelons que les protéines classiques sont constituées uniquement de 20 acides aminés différents.
 Leur voie de synthèse n'effectue que des assemblages linéaires.
 Excepté quelques modifications enzymatiques post-synthèse, les peptides classiques sont linéaires.
-En filtrant tous les peptides qui ne contiennent que des acides aminés protéinogènes ainsi que ceux qui sont linéaires, nous devrions augmenter la densité de NRP dans notre sortie.
+En filtrant tous les peptides qui ne contiennent que des acides aminés protéogéniques ainsi que ceux qui sont linéaires, nous devrions augmenter la densité de NRP dans notre sortie.
 Nous ajoutons comme filtre l'impossibilité d'être linéaire (nombre de liaisons supérieur ou égal à nombre de nœuds) et l'obligation de posséder au moins deux monomères ne faisant pas partie des 20 de base.
 Finalement nous obtenons 1097 peptides.
 
@@ -573,7 +573,7 @@ C'est la découverte de NRP en particulier qui motiva mon voyage.
 
 Mon objectif en me rendant dans cette équipe, était de préparer la création d'un outil qui effectue l'opération inverse de antiSMASH, c'est à dire remonter d'un peptide vers le cluster de gènes qui l'a produit.
 L'outil idéal (mais évidemment irréalisable) permettrait à partir d'un NRP de générer du code génétique capable de produire ce NRP.
-C'est dans cette optique que nous avons créé un prototype pour la recommandation de cluster.
+C'est dans cette optique que j'ai créé un prototype pour la recommandation de cluster proches.
 Cette section sera dédiée à l'explication des prémices de cet outil.
 
 
@@ -604,7 +604,8 @@ La composition peut être, par exemple, un simple comptage de chacun des monomè
 \begin{figure}[h!]
   \begin{center}
     \includegraphics[width=450px]{Figures/synthese/fingerprints.png}
-    \caption{\label{jaccard}Exemple de calcul de distance entre un monomère M et trois clusters de gènes $C_1$, $C_2$ et $C_3$.
+    \caption{\label{jaccard}Exemple de calcul de distance entre un peptide P et trois clusters de gènes $C_1$, $C_2$ et $C_3$.
+    Les clusters de gènes sont représentés par une suite de modules colorés en fonction de la couleur du monomère qui sera inclus.
     Dans le tableau sont présents les différents fingerprints pour le monomère et les clusters accompagnés du calcul de la distance de Jaccard.}
   \end{center}
 \end{figure}
