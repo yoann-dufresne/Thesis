@@ -1092,6 +1092,7 @@ Les parts royales sont des parts rectangulaires contenant au minimum 3 cases de 
 Ce problème a été prouvé NP-Complet sur le forum stackexchange~\cite{de_biasi_complexity_2015} suite à la question d'un participant.
 La preuve a été faite par réduction du problème ``Monotone cubic planar 1-3 SAT''.
 Prouvons que le problème ``Pavage'' est également NP-Complet en utilisant une réduction du problème ``Pizza''.
+Définissons ce problème Pavage comme le problème de décision suivant : Connaissant tous les monomères candidats au placement sur le peptide, est-il possible de trouver un sous ensemble de ces monomères qui soit non chevauchant et qui couvre 100\% du peptide ?
 
 Premièrement, il est très facile de montrer par certificat que pavage est NP.
 Le certificat contient l'ensemble des résidus pavés.
@@ -1184,6 +1185,7 @@ Proposons également une heuristique rapide pour résoudre le problème.
 L'un des moyen d'obtenir très rapidement une solution est de trier les résidus dans un ordre voulu puis de parcourir la liste triée en ajoutant le résidu courant à la solution uniquement si il ne chevauche aucun autre résidu de la solution.
 On pourra toujours trouver au moins arrangement de la liste qui atteigne la solution optimale.
 En faisant cela, nous reportons la difficulté du problème sur les critères de tri de la liste mais nous garantissons une très grande rapidité d'exécution.
+Le but ici est de s'approcher de ce tri optimal en s'assurant d'une exécution très rapide de l'algorithme.
 
 
 \begin{algorithm}[H]
@@ -1202,7 +1204,7 @@ En faisant cela, nous reportons la difficulté du problème sur les critères de
   \KwRet $SOL$;
 \end{algorithm}
 
-Cet algorithme nécessite un tri sur une liste de $n$ résidus ($O(n log n)$) puis consomme ensuite un élément de la
+Cet algorithme nécessite un tri sur une liste de $n$ résidus candidats ($O(n log n)$) puis consomme ensuite un élément de la
 liste à chaque tour de boucle ($O(n)$). Contrairement à la résolution exacte présentée ci-dessus, si la fonction de comparaison
 pour le tri ne dépendent pas de $n$ cet algorithme est polynomial.
 Nous pouvons donc garantir la rapidité d'exécution si les critères de tri sont également calculable en temps polynomial.
@@ -1238,7 +1240,7 @@ Avant la phase d'indexation, l'utilisateur doit définir les différentes règle
 C'est à ce moment que nous lui demandons également de remplir une valeur pour chacune de ces règles.
 Cette valeur représente le poids que l'utilisateur souhaite donner à chacune des liaisons possibles.
 Ce poids représente la confiance que l'on donne à l'apparition d'un type de liaison.
-Ces poids nous permettent de calculer une valeur moyenne par liaison effectuée par le résidu.
+Ils nous permettent de calculer une valeur moyenne par liaison effectuée par le résidu.
 Plus une moyenne sera élevée, plus la confiance en le résidu sera forte et donc plus il sera présent dans les premiers résidus du tri.
 
 Dans le cas où plusieurs résidus ne peuvent être départagés lors du tri, nous considérons qu'ils sont équivalents et leur ordre sera aléatoire.
@@ -1247,7 +1249,8 @@ Dans le cas où plusieurs résidus ne peuvent être départagés lors du tri, no
 \subsubsection{Modulation de pavage}
 
 Le pavage glouton est un très bon moyen d'obtenir un résultat rapidement, mais il ne garantit pas sa qualité.
-Sur certaines données, alors que la phase d'isomorphisme a identifié tous les monomères qui sont effectivement présents dans le peptide, le pavage correct n'est pas trouvé, l'algorithme nous laissant alors avec une solution partielle.
+Il possible que certains ``gros'' monomères aient pris la place de plus petits et que le pavage soit dans une impasse.
+Dans ce cas, alors que la phase d'isomorphisme a identifié tous les monomères qui sont effectivement présents dans le peptide, le pavage correct n'est pas directement trouvé, l'algorithme nous laissant alors avec une solution partielle.
 Lorsque qu'un cas de pavage incomplet se présente, nous pouvons donc nous demander s'il ne serait pas possible d'obtenir la solution complète avec les isomorphismes déjà effectués.
 Nous proposons de repartir de la solution partielle et d'effectuer une recherche locale afin de nous convaincre qu'il n'est pas possible de faire mieux.
 
@@ -1348,7 +1351,7 @@ Les deux transformations présentées ont pour point commun de ne pas modifier e
 Dans les deux cas seuls les ``décorateurs'' des étiquettes sont modifiés (hydrogènes et arité de liaison).
 Le moyen simple de reconnaître ce type de molécule est alors d'oublier ces décorateurs lors de la phase d'isomorphisme.
 Dès lors les résidus sont reconnus quel que soient leurs variations sur les hydrogènes ou les liens.
-Cette modification ne fait pas varier la qualité des résultats sur les NRP car les monomères utilisés diffèrent entre eux au delà des atomes d'hydrogène.
+% Cette modification ne fait pas varier la qualité des résultats sur les NRP car les monomères utilisés diffèrent entre eux au delà des atomes d'hydrogène.
 Bien que très séduisante cette méthode pose un problème de temps de calcul.
 La plupart des monomères NRP ne contiennent que des atomes C N O et H.
 Ne pouvant plus utiliser les H comme décorateurs et en rendant les liens indifférents les uns des autres, le nombre d'étiquettes différentes chute à 9.
@@ -1403,6 +1406,10 @@ L'influence de ces paramètres sur l'exécution de l'algorithme sera étudiée a
 Nous souhaitons connaître la pertinence des annotations issues de s2m.
 Pour cela, nous avons construit deux jeux de données tests, au sein desquels les annotations attendues sont déjà connues.
 Ces bases de test sont composées de polymères comprenant à la fois leur SMILES (représentation de leur structure atomique) ainsi que l'annotation attendue (graphe monomérique).
+Sans la structure atomique, nous ne pouvons pas lancer s2m et sans structure monomérique, nous ne pouvons pas tester les résultats.
+Il existe très peu de bases de données contenant ces deux informations à la fois.
+Les bases Norine et CCD que nous allons présenter ici sont les seules, à notre connaissance, à posséder une grande quantité de polymères contenant ces deux structures.
+
 Pour les entrées de s2m, nous constituons une base de monomères pour chacun des jeux de données.
 s2m pré-calculera les indexes pour chaque base de monomère puis s'exécutera sur chaque polymère.
 L'annotation de sortie sera alors comparée à l'annotation préexistante pour en définir la qualité.
@@ -1472,8 +1479,19 @@ La dernière correspond aux monomères qui sont présents dans l'annotation mais
 La partie restante de la figure représente les informations générales sur le polymère.
 Tout d'abord, il y a le nom du polymère puis les statistiques sur celui-ci.
 La première statistique est le taux de couverture atomique (Coverage).
+
+\begin{equation}
+  \text{Coverage} = \frac{\text{nb atomes couverts}}{\text{nb atomes}}
+\end{equation}
+
+
 Cette valeur donne le ratio des atomes annotés par s2m comme faisant partie des monomères trouvés par le nombre d'atomes du polymère.
-La seconde valeur appelée correctness, donne également un ratio d'atomes mais uniquement pour les atomes correctement annotés.
+La seconde valeur appelée \textit{correctness}, donne également un ratio d'atomes mais uniquement pour les atomes correctement annotés.
+
+\begin{equation}
+  \text{Correctness} = \frac{\text{nb atomes couverts correctement}}{\text{nb atomes}}
+\end{equation}
+
 Cette valeur ne prend en compte que les atomes faisant partie des monomères de la première des trois listes.
 Lors de la présentation des résultats, nous ferons toujours attention de bien mentionner si les valeurs sont des comptages monomériques ou des comptages atomiques.
 Les écarts entre ces deux valeurs peuvent être très importants à cause de la variabilité du nombre d'atomes composant les monomères.
@@ -1505,7 +1523,7 @@ Pour ne pas parasiter la mesure du temps, nous allons désactiver toutes les aut
 \begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=450px]{Figures/s2m/results/k.png}
-    \caption{\label{k_graph}Évaluation de l'efficacité d'apprentissage des chaînes.
+    \caption{\label{k_graph}Évaluation de l'efficacité d'apprentissage des chaînes sur l'ensemble des monomères des deux jeux de données.
     A gauche : représentation du temps de recherche moyen d'une chaîne dans un peptide selon k.
     A droite : temps d'apprentissage pour tous les monomères selon k.}
   \end{center}
@@ -1531,14 +1549,14 @@ Classiquement, lorsque l'on souhaite évaluer les résultats d'une prédiction, 
 Commençons par définir chacune de ces catégories dans notre cas :
 \begin{itemize}
  \item Vrai positif (VP) : Un vrai positif est obtenu lorsque le résultat de la prédiction est identique au résultat attendu.
-Dans notre cas, une annotation peptidique est un VP si tous les monomères présents dans l'annotation de s2m sont également présents au sein de l'annotation du jeu de test et inversement.
-Nous aurons donc une couverture et un correctness de 100\%.
+Dans notre cas, une annotation peptidique est un VP si tous les monomères présents dans l'annotation de s2m sont également présents au sein de l'annotation biologique et inversement.
+Nous aurons donc une couverture et un \textit{correctness} de 100\%.
  \item Faux positif (FP) : Un faux positif est obtenu lorsque le résultat de la prédiction parait correct mais qu'il diffère du résultat attendu.
 Dans notre cas, une annotation est un FP si tous ses atomes sont couverts par l'annotation mais que celle-ci diffère du jeu test.
-Nous aurons donc une couverture de 100\% et un correctness inférieur à 100\%
+Nous aurons donc une couverture de 100\% et un \textit{correctness} inférieur à 100\%
  \item Faux négatif (FN) : Un faux négatif est obtenu lorsque le résultat ne parait pas correct alors qu'il est possible d'en obtenir un correct.
 Dans notre cas, une annotation est un FN lorsque nous n'arrivons pas à produire une annotation complète du peptide.
-C'est à dire que nous aurons une couverture et une correctness inférieure à 100\%.
+C'est à dire que nous aurons une couverture et une \textit{correctness} inférieure à 100\%.
  \item Vrai négatif (VN) : Un vrai négatif est obtenu lorsque le résultat ne parait pas correct et qu'il n'est pas possible d'en obtenir un.
 Dans notre cas, les annotations test sont correctes, ce n'est pas possible.
 Il est toujours possible d'obtenir une annotation couvrante vu qu'elles sont toutes présentes dans le jeu test.
@@ -1637,7 +1655,9 @@ Dans ce cas, la recherche de résidus par isomorphisme \textit{light} sert peu c
 Il n'est souvent plus possible de construire l'annotation réelle, à moins de déplacer de nombreux résidus.
 
 Au final, les résultats obtenus sont globalement meilleurs en utilisant l'heuristique gloutonne de pavage avec une modulation de profondeur 2 et deux phases de recherche light.
-Nous ne nous attendions pas à ces résultats et la sur-optimisation du pavage par MIP nous a surpris mais 
+Nous ne nous attendions pas à ces résultats et la sur-optimisation du pavage par MIP nous a surpris.
+Il est tout de même possible d'obtenir des résultats au moins aussi bons qu'avec l'heuristique, en effectuant uniquement une phase de recherche light à la place de la recherche stricte.
+Cependant le temps de calcul se voit multipli par 10 sur nos données.
 
 
 \subsubsection{Temps de calcul global}
@@ -1718,7 +1738,7 @@ La moyenne de temps d'exécution globale est de 18ms par peptide mais lorsque no
 Le cas le plus critique (avoparcin-beta) représente à lui seul un cinquième du temps d'exécution total (plus de 1s).
 C'est une structure composée de beaucoup de cycles et d'embranchements. De plus, la structure atomique que nous possédons est fausse, ce qui rend impossible une couverture à 100\%.
 L'algorithme passe énormément de temps en boucles \textit{light} et en modulation.
-Nous pouvons en conclure qu'il faut éviter d'utiliser des boucles \textit{light} sur des données dont on ne connaît pas grand chose.
+Nous pouvons en conclure qu'il faut éviter d'utiliser des boucles \textit{light} sur des données dont les couvertures ne sont vraiment pas bonnes initialement.
 Si nous souhaitons par exemple analyser à l'aveugle un très grand nombre de molécules, il est préférable de se restreindre à une utilisation basique du logiciel, quitte à venir affiner les résultats intéressants par la suite.
 
 
@@ -1738,7 +1758,7 @@ Vous trouverez tous les résultats sur les polymères testés à ces adresses :
 
 
 Revenons sur les chiffres qui ont été présentés dans les tableaux \ref{nor_results} et \ref{ccd_results}.
-Environ 74\% des annotations peptidiques issues de Norine et 85\% de celles de CCD sont entièrement retrouvées par le logiciel.
+Un peu plus de 74\% des annotations peptidiques issues de Norine et 85\% de celles de CCD sont entièrement retrouvées par le logiciel.
 Mais il faut ici rappeler que les annotations ne sont plus considérées comme correctes dès lors qu'au moins un monomère est faussement annoté.
 En regardant le taux d'atomes correctement attribués au sein des peptides, le taux de réussite augmente à plus de 93\% pour les annotations de Norine et plus de 98\% pour CCD.
 
@@ -1810,7 +1830,7 @@ En parcourant l'article qui publia le peptide~\cite{luesch_isolation_2001} et la
   \begin{center}
     \includegraphics[width=450px]{Figures/s2m/results/fengycin.png}
     \caption{\label{fengycin}Résultat de s2m pour la Fengycin (peptide de Norine).
-    Une erreur d'annotation entrée dans Norine réduit la correctness alors que s2m trouve la bonne solution.}
+    Une erreur d'annotation entrée dans Norine réduit la \textit{correctness} alors que s2m trouve la bonne solution.}
   \end{center}
 \end{figure}
 

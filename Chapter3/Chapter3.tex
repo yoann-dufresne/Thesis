@@ -427,7 +427,7 @@ C'est à nouveau un très long travail de bioanalyse qui viendra compléter les 
 
 
 
-
+\newpage
 \section{Vers la biologie de synthèse}
 
 Depuis quelques années, les bactéries développent de plus en plus de résistances aux antibiotiques utilisés en médecine animale.
@@ -584,9 +584,19 @@ Pour le moment il n'existe pas de méthode de modification miracle mais uniqueme
 Pour contribuer aux avancées dans ce domaine, nous souhaitons créer un logiciel d'aide à la décision, permettant à partir d'un NRP souhaité, de trouver les clusters de gènes produisant une molécule la plus proche possible du NRP.
 Nous espérons que parmi les diverses sorties se trouvera un cluster de gènes proche de celui voulu et qui pourra être dérivé.
 
-Le logiciel devra prendre un NRP en entrée et fournir une liste de clusters de gènes en sortie.
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=450px]{Figures/synthese/recommandation.png}
+    \caption{\label{reco}Processus de recommandation de clusters de gènes proches pour la création d'un NRP souhaité.
+    Le logiciel prend en entrée un NRP que l'on souhaite synthétiser.
+    Il doit chercher au sein d'une base de NRPS existants, ceux qui sont le plus proche de ce NRP et classer les meilleurs résultats dans l'ordre de ressemblance.
+    Ces clusters proches devraient pouvoir aider les biologistes à choisir des NRPS suffisament proche du NRP souhaité pour pouvoir les dériver le plus facilement possible.}
+  \end{center}
+\end{figure}
+
+Le logiciel devra prendre un NRP en entrée et fournir une liste de clusters de gènes en sortie, c'est à dire effectuer une recommandation (voir figure \ref{reco}).
 Pour commencer simplement, nous étudierons uniquement la présence ou absence de domaines A dans la NRPS.
-À partir des différents domaines NRPS et des monomères présents dans le NRP d'intérêt nous établirons une distance.
+À partir des différents domaines NRPS existants et des monomères présents dans le NRP d'intérêt nous établirons une distance.
 Cette distance permettra d'ordonner les clusters les uns par rapport aux autres.
 Prenons l'exemple d'un peptide d'intérêt contenant de nombreux monomères ainsi qu'une unique leucine.
 Prenons également deux clusters de gènes identiques à l'exception d'un domaine A.
