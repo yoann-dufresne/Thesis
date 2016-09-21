@@ -1,9 +1,39 @@
-Here comes your Introduction.
+Les peptides non ribosomiques (NRP en anglais) sont des molécules synthétisés par des bactéries et champignons unicellulaires.
+Ces molécules ont une très grande importance pour ces organismes puisqu'ils sont souvent un mécanisme de défense contre d'autres micro-organismes.
+Nous Humains, nous intéressons à ces molécules car elles sont une très grande source de nouvelles molécules pour la pharmacologie.
+En particulier, une très grande partie des NRP découverts à ce jour ont des propriétés antibiotiques.
+La célèbre péniciline, découverte par Alexander Fleming au début du siécle dernier, est une molécule issue d'une transformation d'un précurseur NRP.
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Comme leur nom, l'indique, les peptides non ribosomiques ne sont pas produit par la voie de synthèse classique des protéines (le ribosome).
+Cette voie de synthèse alternative autorise la cellule à créer des molécules de formes et de compositions innabituelles.
+Les molécules sont assemblées à partirs d'éléments de base appelés monomères.
+Il existe actuellement plus de 500 monomères différents répertoriés comme étant inclus dans des NRP.
+Ce sont ces compositions et formes particulières qui conférent leur diversité et efficacité aux NRP.
+Connaître les compositions des NRP est d'une importance cruciale car c'est ce qui nous permet de relier un composé à sa voie de synthèse ainsi que de prédire l'activité qu'aura cette molécule.
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Les structures NRP sont découvertes via deux moyens.
+D'un côté, il existe des logiciels d'analyse d'ADN qui permettent de détecter les gènes menant à la création de ces molécules.
+Ces logiciels prédisent, à partir de l'ADN, les différents constituants potentiels des NRP produits.
+Cependant, en l'état actuel des connaissances, ces techniques ne peuvent pas complétement prédire les formes et compositions complètes des peptides synthétisés.
+D'un autre côté, il est possible de découvrir expérimentalement des NRP en analysant les composés produits par les organismes.
+Ce processus permet d'obtenir, par spectrométrie entre autre, les structures chimiques des molécules.
+Cependant, pour obtenir les informations biologiques (les monomères présents dans le peptide), il est souvent nécessaire d'effectuer une annotation manuelle.
+Là où la première méthode de découverte obtient rapidement de nombreuses annotations incomplètes, la seconde méthode obtient des annotations exactes mais avec un faible débit à cause du traitement manuel.
+Ma thèse et tout ce que je vais présenter dans ce manuscrit, s'articule autour de l'obtention rapide et exacte des annotations biologiques et de leur utilisation.
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+~~
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Le manuscrit sera découpé en trois chapitres.
+Le premier chapitre parlera de biologie et sera découpé en deux sections.
+La section \ref{bio_NRP} abordera dans le détail les voies de sytnhèse des peptides non ribosomiques et la section \ref{bioanalyse} fera une vue globale des différents logiciels de découverte et stockage d'annotation des NRP.
+
+Le second chapitre abordera la génération automatique d'annotations biologiques de NRP et sera découpé en 5 sections.
+Après une courte introduction, la section \ref{problems} définira précisément la problématique informatique liée à l'annotion automatique.
+Elle sera suivie en section \ref{SI_MCS} par un état de l'art de solutions algorithmiques pour résoudre ces problèmes.
+Puis au sein de la section \ref{algos_s2m} nous aborderons notre construction algorithmique pour produire rapidement et automatiquement des annotations biologiques.
+Enfin, en section \ref{res_int}, nous effectuerons de nombreux tests pour valider le modèle algorithmique proposé précédemment.
+
+Le dernier chapitre, découpé en 3 sections, sera quant à lui consacré à l'utilisation des résultats produits par le logiciel d'annotation.
+La section \ref{nor_3} détaillera le fonctionnement de la base de donnée Norine, base au sein de laquelle nous avons intégré les annotations générées.
+Puis nous expliquerons en détail en section \ref{cont_nor}, comment notre logiciel à contribué à l'amélioration de la qualité et de la quantité d'information dans Norine.
+Enfin, en section \ref{bio_synth}, nous aborderons les perspectives d'utilisation des annotations biologiques pour avancer progressivement vers la création de NRP de synthèse.

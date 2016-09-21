@@ -1,6 +1,7 @@
 %
-% LaTeX class for thesis written in the Saint-Venant Laboratory for Hydraulics
+% LaTeX class written in the Saint-Venant Laboratory for Hydraulics
 % Original author  : Antoine Joly
+% Adapted by : Yoann Dufresne
 %
 
 \ProvidesClass{LHSV_thesis}[2014/03/18]
@@ -84,12 +85,12 @@
 %---------------------------------------------------------------------------
 %Page layout
 %---------------------------------------------------------------------------
-\setlength{\parindent}{0cm}
+\setlength{\parindent}{1cm}
 \setlength{\hoffset}{-0.6cm}
-\setlength{\oddsidemargin}{1.5cm}
-\setlength{\evensidemargin}{0.5cm}
+\setlength{\oddsidemargin}{1cm}
+\setlength{\evensidemargin}{0cm}
 \setlength{\marginparwidth}{10pt}
-\setlength{\textwidth}{15cm}
+\setlength{\textwidth}{15.5cm}
 \setlength{\voffset}{0pt}
 \setlength{\marginparsep}{7pt}
 \setlength{\topmargin}{7pt}
