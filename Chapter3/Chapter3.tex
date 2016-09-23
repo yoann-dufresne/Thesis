@@ -138,7 +138,7 @@ Mise à jour en 2015 par Juraj Michalik\footnote{Juraj Michalik était ingénieu
 L'interface permet de générer facilement des requêtes complexes (voir figure \ref{editor}).
 Le menu de gauche permet de sélectionner les différents monomères que nous souhaitons ajouter à une requête et la page principale permet d'ajouter des liens entre monomères par de simples clics.
 Au fur et à mesure de la création, la requête textuelle s'affiche au dessus de l'éditeur.
-Une version sans interface de cet éditeur est également utilisée sur les pages des peptides de Norine afin d'avoir une représentation graphique de ceux-ci.
+Une version sans interface d'interaction de cet éditeur est également utilisée sur les pages des peptides de Norine afin d'avoir une représentation graphique de ceux-ci.
 
 Cet éditeur est d'un réel intérêt pour la base car il permet une interaction utilisateur simple qui n'était pas possible auparavant.
 Une interface intuitive et conviviale est nécessaire pour rendre les outils bioinformatiques accessible au plus grand nombre et correspond à une demande des biologistes utilisateurs.
@@ -330,7 +330,7 @@ En effectuant régulièrement une recherche sur le NCBI de la taxonomie des esp�
 Les données de taxonomie de Norine sont, pour le moment, maintenues comme des chaînes de caractères au sein de la table des organismes.
 Cette structure est très redondante et ne permet pas de mises à jour efficaces.
 Nous avons profité de la création du script de mise à jour pour revoir complètement notre façon de stocker les taxons.
-La chaîne de caractères présente dans l'organisme est remplacée par un identifiant dans la nouvelle table des taxons de Norine.
+La chaîne de caractères du champ organisme est remplacée par un identifiant dans la nouvelle table des taxons de Norine.
 Cette table est organisée comme un arbre pour permettre une mise à jour taxon par taxon sans avoir besoin de modifier des dizaines d'entrées.
 La construction de toute la chaîne taxonomique d'une espèce prend désormais beaucoup plus de temps (beaucoup plus de requêtes) mais ce problème est facilement contournable par la création de vues SQL.
 Par ce script, c'est l'ensemble des données de Norine qui ont été remises à jour.
@@ -362,7 +362,7 @@ La procédure devrait un jour être ajoutée à myNorine.
 L'exploration des bases de données proches des NRP permet de se rendre compte que de nombreuses molécules NRP connues ne sont pas répertoriées au sein de Norine.
 Afin d'essayer de combler le retard d'annotation de ces peptides, nous avons décidé d'automatiser leur intégration dans Norine.
 À partir d'un script, nous analysons et ajoutons les NRP présents au sein des bases MiBIG (voir \ref{bdd_nrp}) et BIRD.
-BIRD (TODO : citer) (The Biologically Interesting molecule Reference Dictionary) est une base de données regroupant de petits polymères antibiotiques et inhibiteurs.
+BIRD~\cite{young_chemical_2013} (The Biologically Interesting molecule Reference Dictionary) est une base de données regroupant de petits polymères antibiotiques et inhibiteurs.
 Les deux bases ont pour avantage de contenir des entrées permettant la différentiation des NRP du reste des molécules.
 Cela nous facilite la tâche en nous assurant du statut des molécules que nous ajoutons à Norine.
 
@@ -463,11 +463,11 @@ Effectuons un survol des techniques en commençant par de petites modifications 
 L'une des approches pour obtenir de nouvelles structures peptidiques est de faire varier des structures déjà produites.
 La structure peut être modifiée post-synthèse NRPS, par des enzymes présentes dans le cluster de gènes.
 C'est ce qui se passe par exemple naturellement lors d'incorporations de sucres dans un NRP (voir section \ref{sucres}).
-En ajoutant des gènes d'enzymes de modification NRP au cluster de gènes ou en modifiant l'activité d'enzymes déjà présentes, certaines équipes parviennent à l'ajout de nouveaux monomères ou la modification de certains monomères déjà inclus~\cite{giessen_ribosome-independent_2012}.
+En ajoutant des gènes d'enzymes de modification NRP au cluster de gènes ou en modifiant l'activité d'enzymes déjà présentes, certaines équipes parviennent à l'ajout de nouveaux monomères ou la modification de certains monomères déjà inclus~\cite{giessen_ribosome-independent_2012} (voir figure \ref{post_synth}).
 
 \begin{figure}[h!]
   \begin{center}
-    \includegraphics[width=250px]{Figures/synthese/post_synth.png}
+    \includegraphics[width=300px]{Figures/synthese/post_synth.png}
     \caption{\label{post_synth}Modification post-synthèse du NRP par une action enzymatique.
     Les gènes NRPS contenant l'encodage des domaines A ``vert'' et ``rouge'' sont transcrits puis traduits depuis l'ADN afin de former les NRPS contenant les domaines de même couleur.
     La NRPS assemble ensuite le peptide.
@@ -495,15 +495,15 @@ La modification pré-synthèse de monomères, lorsqu'elle n'affecte pas la captu
   \begin{center}
     \includegraphics[width=250px]{Figures/synthese/mutations.png}
     \caption{\label{mutation}Des mutations ont été introduites au sein de l'ADN codant la NRPS, au niveau du domaine A vert.
-    L'expression de ce gène est modifiée et le domaine A produit ne correspond plus à un domaine A vert mais à un variant proche.
+    Le domaine A produit ne correspond plus à un domaine A vert mais à un variant proche.
     Le monomère capturé par ce domaine ne correspond plus à un monomère vert mais directement au variant proche correspondant au domaine modifié.}
   \end{center}
 \end{figure}
 
 La seconde possibilité de modification de NRP passe par la modification des synthétases.
-Plus exactement par la modification du code génétique correspondant à un domaine A d'une synthétase.
+Plus exactement par la modification de la séquence génétique correspondant à un domaine A d'une synthétase.
 Les travaux \cite{villiers_mapping_2009, kries_reprogramming_2014, williams_engineering_2013} partent du constat (également fait par Stachelhaus~\cite{stachelhaus_specificity-conferring_1999}) que les domaines A sont spécifiques aux monomères qu'ils capturent.
-En modifiant certains acides aminés composant un domaine A, la spécificité de ce domaine peut changer.
+En modifiant certains acides aminés composant un domaine A, la spécificité de ce domaine peut changer (voir figure \ref{mutation}).
 Après quelques mutations bien effectuées, la poche d'accueil du monomère est suffisamment modifiée pour accueillir un autre monomère.
 Les modifications à effectuer sont découvertes via des techniques d'évolution dirigée.
 Les auteurs génèrent des mutations aléatoires (partiellement dirigées) sur les modules A puis ne gardent que ceux qui changent de fonction.
@@ -518,14 +518,14 @@ Par ce procédé, ils arrivent à capturer des monomères nouveaux, parfois non 
 \begin{figure}[h!]
   \begin{center}
     \includegraphics[width=250px]{Figures/synthese/echange.png}
-    \caption{\label{echange}La sous-partie de gène NRPS correspondant au domaine A incluant un monomère vert est remplacé par un morceau de gène correspondant à un monomère bleu.
+    \caption{\label{echange}La séquence correspondant au domaine A incluant un monomère vert est remplacée par la séquence d'un domaine A correspondant à un monomère bleu.
     En conséquence, le monomère inclus par la synthétase est bleu.}
   \end{center}
 \end{figure}
 
-Les modifications qui paraissent les plus évidentes sont celles qui font appel à des échanges de domaines.
+Les modifications qui paraissent les plus évidentes sont celles qui font appel à des échanges de domaines (voir figure \ref{echange}).
 Des exemples sont présentés au sein des articles \cite{cane_harnessing_1998,kim_reinvigorating_2015}.
-Intuitivement, nous pourrions nous dire qu'il est facile d'échanger par exemple deux modules A de deux synthétases comme on échangerait deux pièces de LEGO dans une construction.
+Intuitivement, nous pourrions nous dire qu'il est facile d'échanger par exemple deux modules A de deux synthétases comme on échangerait deux pièces de LEGO\textregistered dans une construction.
 Malheureusement, ces modifications ne sont pas si directes car les modules échangés doivent respecter la structure 3D de la NRPS.
 %des contraintes spatiales et physico-chimiques pour que la NRPS ait une cohérence structurelle.
 Les structures 3D n'étant pas souvent connues, il est très difficile de prédire un comportement de NRPS avant d'effectuer l'échange expérimentalement.
@@ -542,7 +542,7 @@ Ce résultat est très encourageant pour la suite et devrait pouvoir mener à la
 % Par cette technique, ils arrivent à modifier la forme de la poche et capter de nouveaux monomères.
 
 
-\subsubsection{La création de peptides de novo}
+\subsubsection{La création \textit{de novo} de peptides}
 
 Nous arrivons désormais au Graal de l’ingénierie NRP : créer un peptide de toutes pièces.
 Pour le moment, il n'existe aucune technique pour effectuer cette tâche.
@@ -684,7 +684,7 @@ Pour augmenter leur nombre, il sera nécessaire de valider d'autres structures m
 De plus, les données qui ont été soumises sont structurées différemment selon les contributeurs.
 MIBiG laisse une grande liberté dans les champs possibles à l'annotation, ce qui fait que plusieurs utilisateurs entrent des informations semblables sous différents noms.
 Cette diversité de structuration dans les fichiers d'annotation empêche la gestion automatique d'un grand nombre d'entrées.
-Suite au retrait des annotations impossibles à traiter dans un script (à moins de leur consacrer une exception), environ la moitié des annotations des NRP de Norine ne sont plus présentes.
+Suite au retrait des annotations impossibles à traiter dans un script (à moins de leur consacrer une exception), environ la moitié des liens potentiels entre Norine et MiBIG ne sont plus présentes.
 Ces deux contraintes cumulées nous ont poussé a changer de stratégie et ainsi changer notre jeu de données pour des données issues de prédictions.
 
 % Cette source de données a été un double échec.
@@ -704,9 +704,8 @@ Il faut faire manuellement les rapprochements pour connaitre les binômes NRP/NR
 De plus, les annotations de antiSMASH sont des prédictions et n'ont donc été vérifiées par personne.
 Par exemple, de nombreux petits clusters de gènes ne contiennent qu'un ou deux domaines A et il est difficile voire impossible de savoir s'ils sont artefactuels ou mal annotés.
 
-Après exécution, les résultats ne sont pour le moment pas très concluants.
-La technique permet de retrouver quelques clusters de peptides de Norine mais la majorité ne donne aucun résultat.
-Les clusters retrouvés sont quant à eux noyés au milieu de clusters équivalents en score.
+Le programme a été lancé sur les jeux de donnés précédemment présentés.
+Les problèmes évoqués pour ces jeux de données ne nous permettent pas pour le moment de dégager une quelconque conclusion sur la qualité de prédiction du modèle.
 Il est très difficile de donner les causes précises de ces résultats mais ils sont sans doute un cumul de beaucoup de facteurs.
 Premièrement, le fait de ne pas connaître les ``vrais'' clusters par avance ne nous permet pas de faire la différence entre un cluster non retrouvé et un cluster inexistant dans les données d'origine car non annotés.
 Deuxièmement, les clusters annotés que nous utilisons sont très bruités à cause des prédictions.
