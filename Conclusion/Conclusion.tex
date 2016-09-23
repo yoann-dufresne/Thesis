@@ -1,11 +1,72 @@
-\section{First concluding remarks}
+Comme nous l'avons vu dès le premier chapitre, avant ce travail, il n'existait aucun moyen à la fois rapide et précis pour obtenir des annotations biologiques de peptides non ribosomiques.
+Les annotations étaient soit rapides mais issues de prédictions, soit précises car issues de spectrométrie mais annotées à la main.
+Notre approche propose de venir compléter le processus de découverte de structures par spectrométrie en proposant Smiles2Monomers comme logiciel de création automatique des annotations biologiques.
+s2m a été développé dans l'optique d'être rapide, le plus précis possible dans l'annotation et non spécifique aux NRP.
+Le logiciel effectue une annotation d'un polymère à partir d'une liste de monomères candidats.
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Pour construire s2m, nous avons découpé le problème d'annotation en deux phases d'analyse informatique.
+Dans une première étape nous recherchons individuellement au sein du peptide chacun des monomères définits comme candidats par l'utilisateur.
+Les monomères ne sont pas recherchés tel quel mais dérivés en famille de résidus pour pouvoir utiliser des techniques exactes de recherche de sous graphe.
+Nous avons ensuite créé une structure d'indexation de ces résidus pour minimiser leur temps lors de la recherche.
+Cette optimisation nous permet d'obtenir jusqu'à 35\% de consomation de temps en moins lors des phases de recherche sans erreurs, par rapport à une recherche de sous graphe classique.
+Certains résidus n'étant pas trouvables par une recherche stricte, nous avons également proposé une recherche \textit{light} beaucoup plus lente. Nous utilisons ce type de recherche uniquement en cas d'impossibilité de trouver une annotation à la suite d'une exécution stricte.
 
-\section{Perspectives}
+Dans une seconde étape, nous effectuons un pavage non chevauchant des résidus qui ont été trouvés lors de la première phase.
+Nous avons proposé une méthode de pavage exacte utilisant des résolutions par programmation linéaire ou par une heuristique gloutonne localement raffinée.
+Comme nous nous y attendions, le pavage exact est bien plus lent que le pavage heuristique, mais nous avons également prouvé que, dans le contexte de son utilisation, il donnait de moins bons résultats que le pavage heuritique.
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Globalement, s2m est un logiciel rapide et efficace, ce qui nous a permis de l'utiliser comme controle qualité puis pour l'analyse sur de grands jeux de données.
+Avec un temps d'exécution moyen de 18ms par annotation sur les jeux de données test (Norine et CCD), le logiciel est extrémement rapide et peut analyser des centaines de milliers de molécules si nécessaire.
+De plus, avec 253 sur 342 annotations retrouvées à 100\%, une sensibilité de 0.9 sur les données issues de Norine, 318 annotations trouvées sur 378 pour CCD et une sensibilité 0.97 sur ces mêmes données, les résultats sont d'exellente qualité.
+De plus, comme nous l'avons vu durant l'analyse de ces résultats, ces chiffres sont une minoration de la qualité du logiciel car ils ne prennent pas en compte les erreurs découvertes au sein des jeux de données.
 
-\section{Outcomes}
+Les découvertes de diverses erreurs au sein des bases de données test nous ont démontré l'efficacité du logiciel et ont permis, via les corrections, d'augmenter la qualité globale des données de Norine.
+De plus, en ajoutant s2m dans le pipline d'ajout de nouvelles entrées, nous nous sommes prémunis de nombreuses futures erreurs.
+Enfin, grâce à s2m, nous avons pu analyser en moins d'une journée, des centaines de millier de peptides issus de bases généralistes pour trouver de potentiels candidats NRP inconnus.
+s2m a généré de très importantes quantités de données qui vont désormais mener à l'entrée de nouvelles entrées de qualité dans Norine.
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+~~
+
+
+Désomrais, ce travail ouvre deux perspectives à court terme.
+Tout d'abord, en fin de manuscrit, j'ai présenté le début de création d'un outil qui a pour vocation d'aider la recherche en biologie de synthèse de les NRP.
+Pour le moment, cet outil ne peut être testé dû à la quantité des données de qualité à notre disposition.
+De plus, il est peu probable que le simple modèle présenté nous permette de prédire tout type de NRPS correctement.
+Cependant intégrer d'autres informations que les domaines A dans le modèle permettrait sans doute des prédictions précises mais également vérifierait et approfondirait nos connaissances des structures des domaines et des liaisons inter-domaines NRPS.
+De plus la constituation d'une base de données (ou d'un ensemble de bases) liant toutes les étapes de la construction d'un NRP serait une ressource précieuse en soit.
+Ces données amorceraient très certainement des campagnes de recherches de nouvelles données par apprentissage sur celles connues.
+
+La seconde perspective à court terme est la difusion de s2m.
+Nous avons repéré que plusieurs bases de données comme CCD~\cite{rahman_small_2009} ou consortium comme HELM~\cite{_helm_????} souhaitent maintenir en permanances leurs polymères sous les formes atomiques et monomériques.
+HELM souligne particuliérement qu'il est difficile de trouver les structures monomériques dans les publications et bases de données publiques.
+L'un des défis qu'ils référencent sur leur site est la transformation automatique des formats chimiques vers les formats monomériques.
+s2m est parfaitement capable de relever ce défi puisqu'il a été conçu pour pouvoir fonctionner avec n'importe quel type de polymères.
+
+A plus long terme, ce travail pourra être continué pour accroitre à la fois les connaissances théoriques sur les NRP et NRPS tout en développant l'interaction avec des pharmacologues pour les aspects traitements bactériens et fongiques.
+Notre avenir antibiotique est pour le moment sombre et j'espère que ce travail pourra, au moins en partie, aider à la découverte de nouvelles substances d'intérêt pour la santé.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
