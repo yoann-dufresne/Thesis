@@ -207,6 +207,7 @@ Cette base étant, essayons de concevoir un algorithme constructif.
 
 
 \subsubsection{Une histoire de sous problèmes}
+\label{subproblems}
 
 La méthode CHUCKLES tire partie de la différence entre les 20 acides aminés pour se permettre de rechercher les plus gros en premier et de ne jamais revenir sur les choix faits.
 Rechercher les monomères par taille (en nombre d'atomes) décroissante et en masquant les atomes déjà utilisés est un choix pertinent car il permet d'éviter de reconnaître partout les petits acides aminés.
@@ -923,6 +924,7 @@ Cette découpe des chaînes en deux parties garantit une recherche très rapide 
 
 
 \subsection{Des monomères aux résidus}
+\label{families}
 
 
 \subsubsection{Résidus}
@@ -1040,6 +1042,7 @@ Ces isomorphismes sont tous situés au même endroit et c'est la phase de pavage
 
 
 \subsection{Pavage de monomères}
+\label{pavage_}
 
 \subsubsection{Pavage : définition}
 
@@ -1517,6 +1520,7 @@ Puis nous parlerons de la qualité des résultats obtenus en exécutant le progr
 Enfin nous étudierons le temps de calcul pour estimer les rapports temps/qualité et ainsi pouvoir recommander les meilleurs calibrations de l'outil.
 
 \subsubsection{Choisir le k du pré-calcul}
+\label{k_res}
 
 Pour rappel, l'isomorphisme de sous graphe est effectué à partir de chaînes pré-calculées afin d'optimiser le temps de recherche (voir partie \ref{index_markov}).
 Ces chaînes sont formées de deux sous-parties.
@@ -1702,6 +1706,7 @@ Soit nous privilégions la qualité à la vitesse et nous réglons les deux para
 
 
 \subsection{Répartition des temps de calcul et analyse}
+\label{temps_calcul}
 
 Maintenant que nous avons choisi les paramètres, analysons attentivement chacune des étapes pour comprendre les points critiques et préparer de futures améliorations.
 Pour cela, nous avons exécuté le logiciel sur tous les peptides des jeux test en utilisant un pavage heuristique, une valeur de k à 3, une modulation de 2 et un nombre de tour de boucle de 2.
@@ -1755,6 +1760,7 @@ Si nous souhaitons par exemple analyser à l'aveugle un très grand nombre de mo
 
 
 \subsection{Analyse des résultats}
+\label{res_analyse}
 
 Pour analyser les résultats, nous avons exécuté s2m avec l'algorithme de pavage heuristique.
 La profondeur de modulation paramétrée à 2 et le nombre de passage par une phase \textit{light} à 2 également.
