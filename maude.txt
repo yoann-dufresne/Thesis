@@ -46,22 +46,16 @@ Chaputre 3 :
    - manque la ref de Ségolène sur la recherche de patterns
    - fig{echange} : tu peux mettre une NRPS avec le domaine vert + 1 NRPS avec le domaine bleu et mettre un X entre les 2 pour symboliser l'échange ("cross-over"), c'est une représentation courante en bio
    - je crois que le terme "dériver" n'est pas très biologique. Tu peux utiliser muter, détourner ? (à voir avec Valérie)
-   
+
    TODO :
    ◇ statistiques : à voir si tu mets certaines infos dans la partie "résultats" du chap 2 pour mettre en avant le challenge relevé par s2m (ex : nb atomes / peptide ; nb atomes / monomères ; nb occ de 3, 4 et 5 liaisons par mono ; nb résidus générés ; nb résidus trouvés par peptide lors SI)
    ◇ fig dap_modif : si possible, ajoute le % de couverture et/ou entoure le C noir car il faut avoir l'oeil pour voir la différence entre les 2 versions du peptide. Tu peux aussi préciser qu'un autre monomère a été trouvé par s2m et donner son nom. (s2m pour corriger les erreurs) + Partie A, Partie B
    - "Par exemple si le peptide possède une D-Cystéine alors que le motif a été renseigné avec une Cystéine, le fingerprint sera toujours identique au niveau des groupements. Deux fingerprints différents dont l’un possède un comptage en Cystéine supérieur à l’autre de 1 et inférieur de 1 en D-Cystéine préserveront tout de même la valeur de la case Cys*." : difficile à comprendre. Il faudrait un exemple plus concret (je ne sais pas si tu veux entrer dans ces détails, mais les scores entre 1 groupement et 1 mono ne sont pas les même que entre 2 mono. Ces scores dépendent de nbre de mono dans le groupement)
    - ajouter au début des chap (parties ?) avec qui tu as interagi pour faire le travail (par ex, tu n'as pas dit que tu as travaillé avec Juraj sur l'algo de placement des monomères ; tu as encadré le workshop -aide aux utilisateurs-). Il faut que tes différentes collaborations soient plus mises en avant. Un paragraphe dédié en début de "partie" est bien pour cela. Autre ex : tu parles de collaborations avec des stagiaires et des ingé, mais tu ne dis pas clairement que tu as co-encadré Emilie sur le travail de "scan" de pubchem
-
-
-- "environ la moitié des annotations des NRP de Norine ne sont plus présentes." : pas clair (les moitié des liens possibles entre MIBiG et Norine sont éliminés ?)
-- "Après exécution, les résultats ne sont pour le moment pas très concluants." : tu passes au résultats du programme sans transition. Il te faut une phrase pour dire que tu as fait des tests sur les jeux de données présentés précédemment, mais que les problèmes évoqués dans les données ne permettent pas de conclure sur la qualité de prédiction du logiciel.
-- je ne me souviens plus exactement de ton protocole de test, mais il faut que tu le décrives. Est-ce que tu as pris tous les NRP de Norine et que tu les a comparés aux clusters du NCBI ? Si possible, indiques des résultats chiffrés. Sinon, dis simplement que les jeux de données ne permettent pas de faire des tests et enlève ces phrases :
-"La technique permet de retrouver quelques clusters de peptides de Norine mais la majorité ne donne aucun résultat. Les clusters retrouvés sont quant à eux noyés au milieu de clusters équivalents en score. "
-- la partie sur la biblio sur le côté bioinfo n'a pas été ajouté. Cela peut-être une phrase en disant qu'il n'existe qu'un travail préliminaire sur le sujet. J'ai survolé l'article
-In silico methods for linking genes and secondary metabolites: The way forward
-et ils citent seulement Pep2path comme logiciel qui va aussi des NRP vers les NRPS
-Pour info, ils ont fait leurs tests sur 27 NRPs. Ils donnent leur jeu de données, mais c'est simplement le SMILES des peptides et la suite des réactions prédites. A priori, ils ont vérifié à la main si ce qu'ils prédisent correspond à la réalité. Les NRPS ne sont pas fournies...
+   - la partie sur la biblio sur le côté bioinfo n'a pas été ajouté. Cela peut-être une phrase en disant qu'il n'existe qu'un travail préliminaire sur le sujet. J'ai survolé l'article
+   In silico methods for linking genes and secondary metabolites: The way forward
+   et ils citent seulement Pep2path comme logiciel qui va aussi des NRP vers les NRPS
+   Pour info, ils ont fait leurs tests sur 27 NRPs. Ils donnent leur jeu de données, mais c'est simplement le SMILES des peptides et la suite des réactions prédites. A priori, ils ont vérifié à la main si ce qu'ils prédisent correspond à la réalité. Les NRPS ne sont pas fournies...
 
 - dans les perspectives de tes développements, tu peux dire que s2m permet de connaître la nature des liaisons entre monomères => de prédire les domaines/enzymes qui les ont générées + une travail d'analyse des monomères et de leurs dérivés pourra permettre de détecter d'éventuelles modif monomériques et de prédire leur provenance (pré-, post- ou pendant la synthèse NRP).
 
