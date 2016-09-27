@@ -4,8 +4,8 @@
 \subsection{Généralités}
 
 Nous avons déjà plusieurs fois abordé la base de données Norine au sein de ce manuscrit mais nous allons ici décrire en détail son fonctionnement.
-Norine a été créée durant la thèse de Ségolène Caboche (2006-2009) dans le but de centraliser l'information sur les NRP.
-C'est la première base dédiée aux peptides non ribosomiques à avoir été mise en place et c'est aujourd'hui la base de référence.
+Norine à été créée durant la thèse de Ségolène Caboche (2006-2009) dans le but de centraliser l'information sur les NRP.
+C'est la première base de ce genre a avoir été mise en place et c'est aujourd'hui la base de référence.
 Les structures atomiques et parfois monomériques de NRP étaient publiées dans des articles scientifiques puis parfois mises en ligne au sein de bases généralistes.
 Il n'existait souvent aucune annotation monomérique renseignée en dehors de ces publications.
 Norine a été créée dans le but de centraliser et rendre accessible les annotations NRP connues.
@@ -22,7 +22,7 @@ Les données de Norine ont par exemple été très utiles pour la création de m
 
 Norine est une base de données postgres contenant plusieurs dizaines de tables, toutes articulées autour de la notion de peptide (voir la version très simplifiée en figure \ref{sql}).
 La table centrale des peptides contient toutes les informations propres au peptide telles que le nom, la famille ou les structures atomiques et monomériques.
-Les informations d'activités, d'organismes producteurs ou le détail de chaque monomère sont quant à eux présents dans des tables annexes pour qu'elles puissent être partagées entre différents peptides.
+Les informations d'activités, d'organismes producteurs ou le détail de chaque monomère sont quant à eux présents dans des tables annexes du fait qu'elles puissent être partagées entre différents peptides.
 Par exemple, une table est dédiée aux activités.
 Ces activités sont ensuite mises en relation avec les peptides via une table ``présente''.
 Au sein de cette table d'association, il est possible de trouver plusieurs activités par peptide et plusieurs peptides par activité.
@@ -69,7 +69,7 @@ Ce sont toutes les informations qui permettront de replacer le peptide dans son 
 Les organismes producteurs sont détaillés à cet endroit et un lien vers leur classification NCBI est disponible.
 C'est également ici que sont répertoriés les articles de recherche qui ont permis la découverte du peptide et l'établissement de son statut non ribosomique.
 Enfin, lorsqu'ils sont référencés, sont présents des liens vers d'autres bases de données.
-Actuellement, pour apprendre plus de détails sur les structures chimiques des molécules, sont présents des liens vers Pubchem et pour les enzymes productrices, des liens vers Uniprot.
+Actuellement, pour apprendre plus de détails sur les structures chimiques des molécules, sont présents des liens vers pubchem et uniprot.
 
 
 \subsubsection{Les méthodes de recherche}
@@ -164,8 +164,8 @@ Tout comme l'interface REST, il a été développé par Areski Flissi.
 
 MyNorine est en ligne depuis 2015 mais le développement de nouvelles fonctionnalités est toujours en cours.
 L'outil utilise une interface intuitive pour l'utilisateur.
-Il est possible d'entrer de nombreuses informations mais seules les informations importantes sont obligatoires.
-Parmi les informations obligatoires, on retrouve toutes les informations centrales telles que le nom, le type de structure, la structure monomérique et au moins une référence bibliographique.
+Il est possible d'entrer de nombreuses information mais seules les informations importantes sont obligatoires.
+Parmi les informations obligatoires, on retrouve toutes les informations minimales comme le nom, le type de structure, la structure monomérique et au moins une référence bibliographique.
 Pour ne pas avoir à construire la chaîne de caractères compliquée représentant la structure, l'interface javascript décrite ci-dessus est disponible aux moments opportuns.
 Tout peptide soumis par un utilisateur sera ensuite envoyé à l'équipe de curateurs qui devra vérifier la validité et la pertinence de la soumission.
 Pour l'instant, cette équipe de curateurs est composée de Maude Pupin, Valérie Leclère, Areski Flissi et moi même.
