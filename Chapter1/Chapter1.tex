@@ -2,6 +2,7 @@
 \label{bio_NRP}
 
 \subsection{Introduction}
+\label{intro_bio}
 
 Afin de bien comprendre la voie de synthèse non ribosomique, commençons par quelques rappels rapides sur la synthèse des protéines classiques.
 Les protéines sont assemblées dans la cellule par un organite appelé ribosome.
@@ -32,18 +33,18 @@ Ces propriétés sont donc très dépendantes du repliement et des types des aci
 \subsection{Généralités sur les peptides non ribosomiques}
 Les peptides non ribosomiques (Non Ribosomal Peptide (NRP)) sont des petits polymères synthétisés par certaines bactéries et certains champignons unicellulaires.
 Tout comme les protéines classiques, les NRP sont des molécules résultant d'assemblages de briques de base.
-Cependant, comme le nom l'indique, la voie de synthèse d'un NRP est différente de celle des protéines.
+Cependant, comme le nom l'indique, la voie de synthèse d'un NRP est différente de celle d'une protéine classique.
 Cette voie de synthèse comporte une étape supplémentaire (Voir figure \ref{global}).
-Comme nous venons de le présenter, lors d'une création classique de protéine, l'ADN est transcrit en ARN qui lui même est traduit en protéine.
-Ici, la protéine produite n'est pas le produit final mais une \textit{enzyme modulaire} agissant seule ou en complexe afin d'assembler les NRP.
+Comme nous l'avons présenté en \ref{intro_bio}, lors d'une création classique de protéine, l'ADN est transcrit en ARN qui lui même est traduit en protéine.
+Dans le cas d'une NRPS, la protéine produite n'est pas le produit final mais une \textit{enzyme modulaire} agissant seule ou en complexe afin d'assembler les NRP.
 Ces complexes sont appelés des synthétases (Non Ribosomal Peptide Synthetase (NRPS)).
 
 \begin{figure}[h!]
   \begin{center}
     \includegraphics[width=450px]{Figures/bio/Intro/synthese.png}
     \caption{\label{global}Voie de synthèse non ribosomique~:
-    groupés en clusters, les gènes codant la protéine NRPS sont transcrits puis traduits par le ribosome.
-    Les modules A de la NRPS capturent ensuite des monomères (billes de couleur ici) dans l'environnement afin des les assembler en peptide.
+    groupés en cluster, les gènes codant la protéine NRPS sont transcrits puis traduits par le ribosome.
+    Les domaines A de la NRPS capturent ensuite des monomères (billes de couleur ici) dans l'environnement afin des les assembler en peptide.
     Enfin, le NRP assemblé est relâché.
     }
   \end{center}
@@ -64,7 +65,7 @@ Ces briques de base sont appelées {\em monomères}.
 La base de données de référence des NRP compte pour le moment 533 monomères différents.
 Les monomères peuvent provenir de différents groupes.
 Parmi ces monomères, on compte les 20 acides aminés standards ainsi qu'un grand nombre de dérivés proches.
-Après plusieurs modifications que nous détaillerons plus tard, il est par exemple possible d'obtenir des monomères méthylés ou oxydés (voir figure \ref{monomers_example}).
+Après plusieurs modifications que nous détaillerons en section \ref{mono_modifs}, il est par exemple possible d'obtenir des monomères méthylés ou oxydés (voir figure \ref{monomers_example}).
 On peut également citer les sucres et les acides gras comme faisant partie des monomères candidats à l'inclusion dans des NRP.
 
 
@@ -79,7 +80,7 @@ On peut également citer les sucres et les acides gras comme faisant partie des 
   \end{center}
 \end{figure}
 
-Contrairement à la création des peptides classiques par le ribosome, les NRPS peuvent arranger les monomères au sein des NRP de manière non linéaire.
+Contrairement à la création des peptides classiques par le ribosome, les NRPS peuvent assembler les monomères au sein des NRP de manière non linéaire.
 Certains monomères possèdent plus de deux groupements capables de réagir et former une liaison avec un autre monomère.
 Ainsi sur l'exemple de la figure \ref{DPR_incl}, on peut constater que le monomère nommé Dpr (acide 2,3-diamonopropionique) possède un groupement amine supplémentaire à celui déjà présent dans le squelette des acides aminés classiques.
 Ce groupement en bout de chaîne latérale autorise le Dpr à se lier 3 fois et ainsi casser la linéarité de la molécule assemblée.
@@ -92,7 +93,7 @@ Classiquement, les liaisons au sein de peptides se font par le rapprochement d'u
 Au sein des NRP plusieurs autres types de liaisons viennent s'ajouter aux liaisons peptidiques.
 Ceci augmente la diversité structurale des peptides.
 La liaison peptidique classique reste tout de même la principale liaison effectuée entre monomères.
-En dehors de celle-ci, nous pouvons lister trois différents types de liaisons NRP.
+En dehors de celle-ci, nous pouvons lister trois différentes façons de lier les NRP.
 
 Le premier type de liaison inclut un monomère contenant un atome de soufre.
 Comme pour les protéines classiques, les monomères soufrés peuvent effectuer des ponts disulfure (liaison entre deux atomes de soufre en perdant deux atomes d'hydrogène).
@@ -120,7 +121,7 @@ Dans le cas d'un benzène (Voir figure \ref{benzene}), c'est la présence d'un o
 
 Enfin, le dernier type de liaison que nous allons décrire implique au moins un monomère de la catégorie des sucres (Glucose ou Arabinose par exemple).
 Les sucres sont inclus dans les NRP sous leur forme cyclisée.
-Suite à la liaison, un groupement OH à été perdu sur un carbone voisin de l'oxygène dans le cycle (voir figure \ref{ose}).
+Suite à la liaison, un groupement OH a été perdu sur un carbone voisin de l'oxygène dans le cycle (voir figure \ref{ose}).
 Face à eux, le monomère complémentaire ne perdra lui qu'un hydrogène pour former ainsi une molécule d'eau expulsée.
 
 \begin{figure}[h!]
@@ -147,10 +148,10 @@ Les NRP présentent une grande diversité d'activités, souvent cruciales pour l
 Beaucoup de NRP recensés sont des antibiotiques comme par exemple, la célèbre molécule de pénicilline synthétisée à partir d'un précurseur NRP appelé ACV~\cite{queener_molecular_1990}.
 La diversité d'activités peut être expliquée par les grandes variations de structures et de compositions par rapport aux peptides ribosomiques.
 Les structures particulières et divers monomères imposent aux NRP d'opter pour des repliements différents des protéines classiques.
-Les contraintes structurelles permettent des repliements difficiles pour des molécules linéaires.
+Les contraintes structurelles permettent des repliements spécifiques qui ne sont pas possibles au sein des peptides classiques.
 Les activités spécifiques aux NRP sont obtenues grâce à ces repliements.
 
-Effectuer un assemblage non ribosomique est très consommateur en énergie pour l'organisme producteur.
+Il est à noter qu'effectuer un assemblage non ribosomique est très consommateur en énergie pour l'organisme producteur.
 Les complexes enzymatiques à créer sont énormes et les gènes portant leur information peuvent représenter plusieurs pourcents de l'ADN chromosomique.
 De plus, contrairement au ribosome, une NRPS ne peut produire qu'un seul NRP (sauf quelques exceptions qui produisent des variants proches).
 Cependant les avantages obtenus grâce aux activités des NRP semblent avoir préservé ces gènes au cours du temps.
@@ -159,15 +160,15 @@ Cependant les avantages obtenus grâce aux activités des NRP semblent avoir pr�
 \subsection{Généralités sur les synthétases}
 
 Comme nous l'avons vu dans la courte introduction précédente, les synthétases assemblant les NRP sont des protéines issues d'une synthèse classique.
-Chaque NRPS est un complexe enzymatique extrêmement grand dont la taille est parfois comparable à celle d'un ribosome.
+Chaque NRPS est un complexe enzymatique extrêmement grand, dont la taille est parfois comparable à celle d'un ribosome.
 Cependant, contrairement à un ribosome, les NRPS sont spécialisées.
 Une NRPS ne peut produire qu'un seul type de NRP.
-Elles sont organisées en modules consécutifs qui capturent, modifient et intègrent un monomère au NRP\cite{schwarzer_nonribosomal_2003,marahiel_modular_1997}.
+Elles sont organisées en modules consécutifs qui capturent, modifient et intègrent un monomère au NRP~\cite{schwarzer_nonribosomal_2003,marahiel_modular_1997}.
 Chacun de ces modules peut à son tour être subdivisé en domaines fonctionnels.
-Généralement un module est constitué de 3 domaines principaux et éventuellement de domaines optionnels\cite{finking_biosynthesis_2004}.
+Généralement un module est constitué de 3 domaines principaux et éventuellement de domaines dits optionnels~\cite{finking_biosynthesis_2004}.
 Un module standard est d'abord composé d'un domaine de condensation (C) effectuant la liaison du peptide déjà formé au monomère en cours d'incorporation, puis d'un module d'adénylation (A) permettant la capture du monomère à insérer et d'un module de thiolation (T) effectuant la fixation du monomère capturé et le transfert du NRP depuis le domaine C précédent au domaine C suivant.
 Il se peut qu'un ou plusieurs domaines modifiant le monomère inclus, soient présents entre le domaine A et le domaine T.
-Le premier module est différent du fait qu'il n'y a aucun monomère à lier auparavant.
+Le tout premier module d'une NRPS est différent du fait qu'il n'y a aucun monomère à lier auparavant.
 Il est l'une des exceptions à la règle de succession des modules C, A puis T.
 
 \begin{figure}[h!]
@@ -193,10 +194,10 @@ On peut également voir un domaine d'épimérisation (modification de l'acide am
 
 Le domaine d'adénylation (A) réaliste la capture dans l'environnement d'un type de monomère donné.
 Il porte ainsi la spécificité du module dans lequel il se trouve.
-Seules quelques exceptions de domaines A sont capables de capturer plusieurs types de monomères proches les uns des autres.
 La séquence d'acides aminés de ce type de domaine varie fortement d'un domaine A à l'autre et seuls 16\% des structures primaires sont conservées (sur environ 200 acides aminés codant un domaine).
-Bien que seuls quelques domaines A aient été identifiés, on suppose qu'il en existe un grand nombre (potentiellement plusieurs centaines).
+Bien que seuls quelques domaines A aient été caractérisés, on suppose qu'il en existe un grand nombre (potentiellement plusieurs centaines).
 Plusieurs centaines de monomères différents sont inclus par ces domaines.
+
 Une fois le repliement de la synthétase effectué, les domaines A possèdent une cavité interne effectuant la reconnaissance et l'accueil d'une molécule.
 Les acides aminés de la synthétase en contact avec cette cavité vont ``sélectionner'' le monomère à capturer dans l'environnement.
 La taille de la cavité ainsi que les propriétés physico-chimiques de ces acides aminés en contact permettent une affinité forte avec un unique monomère.
@@ -205,11 +206,11 @@ Cependant, ce cas reste rare et, dans la majorité des cas, une NRPS ne crée qu
 
 En 1999, Stachelhaus et al. publient un article analysant la structure de nombreux domaines A~\cite{stachelhaus_specificity-conferring_1999}.
 Ils alignent un grand nombre de domaines A pour en extraire les zones conservées et les zones spécifiques au monomère à capturer.
-Il apparait que peu d'acides aminés sont conservés d'une structure à l'autre.
+Il apparait tout d'abord que peu d'acides aminés sont conservés d'une structure à l'autre.
 Cependant ces acides aminés permettent de définir le ``squelette'' d'un domaine A.
 Ces alignements permettent également d'identifier une dizaine d'acides aminés qui parraissent spécifiques au monomère inclus.
-A partir de ces acides amiés spécifiques, les auteurs déterminent un codage pour chaque monomère qui deviendra le codage de référence.
-Ce codage est aujourd'hui appelé code de Stachelhaus et permet de mettre en relation une séquence d'un domaine A et le monomère spécifiquement recruté.
+À partir de ces acides aminés spécifiques, les auteurs déterminent un codage pour chaque monomère qui deviendra le codage de référence.
+Ce codage est aujourd'hui appelé \textit{code de Stachelhaus} et permet de mettre en relation une séquence d'un domaine A et le monomère spécifiquement recruté.
 
 
 \subsubsection{Le domaine de Thiolation (domaine T)}
@@ -217,7 +218,7 @@ Ce codage est aujourd'hui appelé code de Stachelhaus et permet de mettre en rel
 %• Biochemical characterization of peptidyl carrier protein (PCP), the thiolation domain of multifunctional peptide synthetases.
 %• Portability of the thiolation domain in recombinant pyoverdine non-ribosomal peptide synthetases
 
-Le domaine T est d'assurer le transport du peptide en cours d'élongation au sein du module~\cite{stachelhaus_biochemical_1996,calcott_portability_2015}.
+Le rôle du domaine T est d'assurer le transport du peptide en cours d'élongation au sein du module~\cite{stachelhaus_biochemical_1996,calcott_portability_2015}.
 Ce domaine est également souvent appelé ``Peptidyl Carrier domain''.
 Chaque domaine T possède un groupement \textit{4’-phosphopantetheinyl} incluant un ``bras flexible'' qui agrippe et déplace les monomères.
 Dans un premier temps, ce bras se plie vers le domaine A voisin pour se lier de manière covalente au monomère.
@@ -246,6 +247,7 @@ Bien que sa fonction principale reste omniprésente, il existe plusieurs variant
 
 \textbf{Les domaines \textsuperscript{L}C\textsubscript{L} et \textsuperscript{D}C\textsubscript{L}}
 Les acides aminés capturés par les domaines A existent dans deux configurations différentes dites configurations L (Levogyre) et D (Dextrogyre).
+Ces configurations seront un peu plus détaillées en section \ref{epimeri}.
 Il existe deux domaines C différents pour lier ces molécules.
 Le plus standard, lie deux monomères de type L. Le domaine est alors appelé domaine \textsuperscript{L}C\textsubscript{L}.
 Le second lui, lie un monomère D à un L, il est alors appelé domaine \textsuperscript{D}C\textsubscript{L}.
@@ -265,7 +267,7 @@ Dans certains peptides, ce domaine effectue une liaison entre le premier et le d
 
 \textbf{Le domaine Cy}
 \label{Cy}
-Cette dernière variation du domaine C lie deux monomères voisins en effectuant deux liaisons qui forment un cycle local (voir figure \ref{domaine_Cy}.
+Cette dernière variation du domaine C lie deux monomères voisins en effectuant deux liaisons qui forment un cycle local (voir figure \ref{domaine_Cy}).
 Cette liaison est toujours effectuée entre un monomère possédant un atome de soufre près d'un groupement amine (la Cystéine et certains de ses dérivés) et un monomère avec un groupement carboxyle.
 
 \begin{figure}[h!]
@@ -286,11 +288,14 @@ Ce domaine de libération n'est pas toujours présent et sa fonction est parfois
 
 \subsection{Les domaines de modification des monomères}
 
+\label{mono_modifs}
+
 Nous allons à présent décrire quelques domaines optionnels modifiant un monomère capturé par un domaine A au cours de la synthèse peptidique.
 Ces transformations permettent aux organismes d'obtenir des configurations monomériques peu fréquentes dans leur environnement.
 
 
 \subsubsection{La fonction d'épimérisation (domaines E et C/E)}
+\label{epimeri}
 
 Lors de la description des domaines \textsuperscript{L}C\textsubscript{L} et \textsuperscript{D}C\textsubscript{L}, nous avons rapidement évoqué la possibilité pour un monomère d'être dans deux conformations différentes tout en possédant pour autant la même composition et structure atomique.
 Ces deux conformations sont symétriques l'une de l'autre.
@@ -306,7 +311,7 @@ Elles sont appelées Levogyre (L) et Dextrogyre (D).
 Alors que la majorité de la vie est ``gauchère'' (ne contient que des acides aminés L), les NRPS autorisent l'inclusion de monomères sous forme D par la capture d'un monomère L qui est ensuite transformé dans sa configuration D.
 Les domaines responsables de ces transformations sont appelés domaines d'\textit{épimérisation}~\cite{calcott_portability_2015}.
 Une fois le monomère L lié au reste du peptide par le domaine C, il est emmené auprès du domaine E qui va changer son orientation.
-Le fait que cette transformation soit postérieure à la fixation sur le reste du peptide explique l'absence de domaines DCD (Les monomères de droite seront toujours présentés au domaine C avant transformation).
+Le fait que cette transformation soit postérieure à la fixation sur le reste du peptide explique l'absence de domaines \textsuperscript{D}C\textsubscript{D} (Les monomères de droite seront toujours présentés au domaine C avant transformation).
 Il arrive parfois que cette transformation du monomère ne soit pas portée par un domaine E mais directement incluse dans le domaine C précédent.
 Ce domaine est alors appelé domaine C/E et assure les deux fonctionnalités~\cite{yin_enduracidin_2006,balibar_generation_2005}.
 Ceci semble spécifique à quelques genres de bactéries.
@@ -343,9 +348,9 @@ Il permet la formylation (ajout d'un groupe C(=O)H) sur le groupement amine du p
 Depuis le début de cette partie, nous parlons de synthèse non ribosomique.
 Cependant, il arrive que le produit délivré par la synthétase et le produit final trouvé dans l'environnement de la cellule ne soient pas les mêmes.
 Lorsque cette différence est constatée, c'est que le peptide a subi une transformation entre la fin de sa synthèse non ribosomique et le moment où il est effectivement en activité.
-Toutes les modifications ponctuelles sont effectuées par des \textit{enzymes de décoration}.
+Toutes les modifications ponctuelles sont effectuées par des \textit{enzymes de décoration} (voir section \ref{sucres}).
 Parfois, il arrive que ce soit une partie complète de la molécule qui ne soit pas NRP.
-Il existe également des molécules très proches des NRP appelés polyketides qui peuvent venir s'hybrider avec des NRP.
+Il existe également des molécules très proches des NRP appelés polyketides qui peuvent venir s'hybrider avec des NRP (voir section \ref{PKS_p}).
 Dans cette partie, nous allons aborder ces deux types de modification/ajout d'un NRP.
 
 
@@ -392,6 +397,8 @@ Toutes ces enzymes augmentent à nouveau la combinatoire des molécules potentie
 
 \subsubsection{Les PKS}
 
+\label{PKS_p}
+
 Les PKS (Polyketide Synthase)~\cite{shen_polyketide_2003,staunton_polyketide_2001} sont, tout comme les NRPS, des enzymes modulaires synthétisant des polymères complexes par assemblage de monomères.
 Cependant, contrairement aux NRPS, les PKS n'incorporent que 4 monomères différents contenant chacun moins de 10 atomes.
 De la même manière que les domaines C, A et T des NRPS capturent des monomères spécifiques, les domaines ACP, At et KS condenssent, capturent et lient les monomères.
@@ -402,22 +409,22 @@ Sur la figure \ref{pks} nous montrons le processus de synthèse d'une PK.
 \begin{figure}
   \begin{center}
     \includegraphics[width=400px]{Figures/bio/Intro/PKS.png}
-    \caption{\label{pks}Synthèse d'une epsilon-rhodomycinone
+    \caption{\label{pks}Synthèse d'une epsilon-rhodomycinone.
     Comme pour les NRPS, les PKS sont constitués de modules fonctionnels.
     Sur cet exemple, on peut voir que certains modules sont utilisés itérativement.
-    La longue chaîne carbonée de la première étape est créée par une utilisation de 9 fois le même module.
+    La longue chaîne carbonée de la première étape est créée par une utilisation, répétée 9 fois, du même module.
     Tout comme les NRP, les PK peuvent être modifiés après libération par le PKS (étapes 5 à 10 ici).
     Source de l'image : en.wikipedia.org/wiki/Polyketide\_synthase}
   \end{center}
 \end{figure}
 
-Il existe des hybrides NRP-PK.
-Les clusters de gènes associés sont alors composé de gènes NRPS et de gènes PKS.
+Il existe également des hybrides NRP-PK.
+Les clusters de gènes associés sont alors composés de gènes NRPS et de gènes PKS.
 Il existe alors deux moyens de créer ces hybrides.
 Soit la PK est créée séparément du NRP et les deux sont liés post-synthèse par des enzymes similaires aux enzymes décoratrices décrites précédemment.
 Soit la PKS et la NRPS sont produites simultanément et s'assemblent pour former un gros complexe enzymatique hybride.
-Le NRP-PK est alors directement formé pendant la synthèse en faisant passer le polymère en formation de module en module (qu'ils soient NRPS ou PKS).
-A nouveau, cette hybridation avec d'autres types de polymères augmente la quantité de molécules différentes possibles.
+Le NRP-PK est alors directement formé à partir de la synthétase hybride en faisant passer le polymère en formation de module en module (qu'ils soient NRPS ou PKS).
+A nouveau, cette hybridation avec d'autres types de polymères augmente la quantité de molécules différentes possibles produites par des NRPS.
 
 
 
