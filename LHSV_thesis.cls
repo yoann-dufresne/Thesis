@@ -131,12 +131,12 @@
   \begin{center}
     \begin{spacing}{1.5}
       ~\vspace{-1.4cm}\\
-      \includegraphics[width=0.4\textwidth]{logo_UPE} \vspace{-0.4cm}\\
+      \includegraphics[width=0.4\textwidth]{logo_UL} \vspace{-0.4cm}\\
       {\fontsize{22}{24}\bfseries\MakeUppercase\selectfont
-        \'{E}cole Doctorale SIE \\
+        \'{E}cole Doctorale SPI \\
       }
       {\fontsize{14}{16}\bfseries\selectfont
-        Laboratoire d'Hydraulique Saint-Venant\\
+        Laboratoire CRIStAL\\
       }
     \end{spacing}
     \vspace*{1cm plus 0cm minus 0.1cm}
@@ -144,7 +144,7 @@
       Th\`ese\par
     }
     {\rmfamily\fontsize{14}{16}\selectfont
-      Pr\'esent\'ee pour l'obtention du grade de DOCTEUR \par DE L'UNIVERSITE PARIS-EST\par
+      Pr\'esent\'ee pour l'obtention du grade de DOCTEUR \par DE L'UNIVERSITE DE LILLE\par
       par\\
     }
     \vspace*{0.3cm plus 0.1cm minus 0.1cm}
