@@ -2,20 +2,20 @@
 
 \section{Introduction}
 
-Pour comprendre un système biologique, il est nécessaire de comprendre les interactions chimiques qui s'y déroulent.
-Au delà du simple catalogage qui peut être fait, comprendre les actions moléculaires permet d'utiliser voire d'inventer de nouvelles substances pour l'industrie.
-Afin de comprendre ces activités, un postulat simple a été posé : deux molécules proches auront deux activités proches.
+Pour comprendre un système biologique, il est nécessaire d'étudier les interactions chimiques qui s'y déroulent.
+Au delà du simple catalogage qui peut en être fait, comprendre les actions moléculaires permet d'utiliser ou même d'inventer de nouvelles substances pour l'industrie.
+Afin d'explorer ces activités, un postulat simple a été posé : deux molécules proches ont deux activités proches.
 Ce postulat simple parait raisonnable puisqu'il s'appuie sur le fait que l'activité d'une molécule est portée par la configuration spatiale des différents éléments qui la composent.
 On sait aujourd'hui que ce postulat est en partie faux car on connaît quelques contre-exemples~\cite{patani_bioisosterism:_1996}.
 Cependant, dans la majorité des cas, cette approximation fonctionne bien et tout un domaine de chemoinformatique s'est développé dans ce sens.
 Toutes les techniques cherchant à rapprocher les structures des activités moléculaires sont regroupées derrière l'acronyme QSAR (Quantitative structure-activity relationship).
-Les techniques QSAR sont nombreuses et variées~\cite{patani_bioisosterism:_1996,leach_molecular_2001,helma_predictive_2005}.
+Les techniques QSAR sont nombreuses et de types variées~\cite{patani_bioisosterism:_1996,leach_molecular_2001,helma_predictive_2005}.
 Certaines s'attardent sur les ressemblances de structures atomiques 2D ou 3D, certaines sur les propriétés magnétiques, d'autres sur les contraintes de repliement etc.
-Beaucoup ne se cantonnent pas à une seule des ressemblances citées ci-dessus mais essaient de les combiner pour prédire du mieux possible l'activité.
+Beaucoup ne se cantonnent pas à une seule des ressemblances citées ci-dessus mais essaient de les combiner pour prédire au mieux l'activité.
 Cependant, ces techniques ont deux limites.
-Premièrement, pour connaître l'activité d'une molécule, il est nécessaire de connaître les activités de molécules ``proches'', qu'il faut donc avoir annoté auparavant.
-Deuxièmement, les temps de calcul nécessaires augmentent rapidement avec le nombre de critères à comparer et le détail d'analyse de chaque critère.
-Le but de ces méthodes est donc d'inclure d'abord les critères les plus sélectifs afin de déterminer des activités connues dans un temps raisonnable.
+Premièrement, pour déterminer l'activité d'une molécule, il est nécessaire de connaître les activités de molécules ``proches'', qu'il faut donc avoir annoté auparavant.
+Deuxièmement, les temps de calcul nécessaires augmentent rapidement avec le nombre de critères à comparer et la complexité d'analyse de ceux-ci.
+Le but de ces méthodes est donc d'inclure d'abord les critères les plus sélectifs afin de déterminer des activités connues en un temps raisonnable.
 
 Beaucoup de NRP possèdent des activités très intéressantes (antibiotiques, anti-tumeurs, antidouleurs, ...).
 À ce titre, nous cherchons en permanence à caractériser les activités de chaque nouvelle molécule découverte.
@@ -23,19 +23,19 @@ Lorsque ces activités ne sont pas déterminées expérimentalement, les logicie
 En 2012 puis 2014, Abdo et al. publient de nouvelles méthodes de prédiction d'activité NRP, se basant sur les spécificités des NRP~\cite{abdo_new_2012, abdo_prediction_2014}.
 Dans les deux cas, les prédictions sont effectuées à partir des compositions monomériques et non pas atomiques.
 Dans le premier article~\cite{abdo_new_2012}, la prédiction est effectuée en créant pour chaque activité connue un \textit{fingerprint}.
-Ces fingerprints barycentre des peptides présentant l'activité.
-Prédire l'activité d'un nouveau NRP revient alors à déterminer celle dont le fingerprint est le plus proche.
+Ces fingerprints sont les barycentres des peptides présentant l'activité.
+Prédire l'activité d'un nouveau NRP revient alors à déterminer le barycentre d'activité le plus proche.
 Dans le second article~\cite{abdo_prediction_2014}, c'est un classifieur par réseau Bayésien qui est entraîné sur les compositions en monomères.
 Une fois les réseaux entraînés, il suffit de fournir une composition en entrée pour avoir les probabilités de chaque activité en sortie.
 Dans les deux cas, il est important de constater que l'abstraction monomérique est suffisante pour une prédiction de qualité.
 De plus, les structures des molécules ne sont pas utilisées, ce qui laisse encore beaucoup de possibilités d'améliorations.
 
 Ce que nous venons de montrer par cet exemple de prédiction d'activité, c'est l'importance de la détermination des structures plus proches de la réalité biologique comme les structures monomériques.
-Connaître ce genre de structure est un enjeu fort pour la détermination de caractéristiques moléculaires haut niveau (activité ou conformation 3D par exemple).
+Connaître ce type de structure est un enjeu fort pour la détermination de caractéristiques moléculaires haut niveau (activité ou conformation 3D par exemple).
 Comme nous l'avons fait remarqué précédemment, il n'existe que peu d'outils permettant des annotations fiables de NRP.
-Les caractérisations fiables de NRP sont en très grande majorité effectuées à la main par des biologistes et chimistes.
+Les caractérisations fiables de NRP sont en très grande majorité effectuées manuellement par des biologistes et chimistes.
 Beaucoup de structures atomiques sont également connues sans annotations monomériques malgré leur présence dans de grandes bases de données.
-Il nous a donc paru nécessaire de créer un outil qui infère la structure monomérique à partir d'une structure atomique et c'est de cela dont nous allons parler dans la suite de ce chapitre.
+Il nous a donc paru nécessaire de créer un outil qui infère la structure monomérique à partir d'une structure atomique et c'est cet outil d'annoation que nous allons décrire durant ce chapitre.
 
 
 
@@ -60,7 +60,7 @@ Les avancées dans ce domaines viendront avec le nombre d'annotations fiables de
 
 Dans notre cas, nous allons partir des structures atomiques pour déduire les composants monomériques (voir figure \ref{structures}).
 De telles structures sont présentes dans de nombreuses bases de données publiques, telles que PDB ou PubChem.
-Il est possible de trouver au sein de ces bases de données de nombreuses structures atomiques de NRP dont on ne possède pas d'annotation monomérique facilement accessible.
+Ces bases contiennent de nombreuses descriptions de molécules NRP sans annotations monomériques directement accessibles.
 Notre objectif sera d'être capable, pour toute structure moléculaire NRP, de déduire sa composition en monomères.
 Ainsi, toutes les structures atomiques présentes dans les bases généralistes pourront être annotées et ajoutées à des bases spécialisées telles que Norine.
 Ce type d'annotation pourra également être effectué pour mettre en relation les structures atomiques non annotées des bases généralistes avec les annotations non liés des bases spécialisées.
@@ -71,7 +71,7 @@ Ce type d'annotation pourra également être effectué pour mettre en relation l
 
 Parmi l'existant, la méthode CHUCKLES~\cite{siani_chuckles:_1994} et le logiciel molBLOCKS~\cite{ghersi_molblocks:_2014} se démarquent des autres.
 Dans les deux cas, les logiciels permettent, à partir d'une structure atomique d'un polymère, de trouver la structure monomérique.
-Les deux logiciels sont opposés dans leur façon de prendre le problème.
+Les deux logiciels sont opposés dans leur façon de traiter le problème.
 CHUCKLES est constructif car il part des monomères pour reconstituer le polymère alors que molBLOCKS est destructif car il part du polymère pour retrouver les monomères par découpes successives de liens.
 Nous allons ici présenter ces deux approches.
 
@@ -115,16 +115,17 @@ La reconstruction se fait alors en utilisant un sens aléatoire pour le monomèr
     On peut voir à gauche la chaîne principale qui a été extraite à partir du N initial.
     A droite sont répertoriés les deux ponts disulfure extraits hors de la chaîne principale.
     Chaque monomère découvert comporte un identifiant différent de son nom pour éviter d'avoir deux fois le même nom comme cela pourrait être le cas ici.
-    Schémas issus de la publication}
+    Schémas issus de la publication~\cite{siani_chuckles:_1994}}
   \end{center}
 \end{figure}
 
-La seconde partie de la méthode présente la transformation inverse (``Backward-Transformation'' (BT)).
+La seconde partie de la méthode, précisément celle qui nous concerne, présente la transformation inverse (``Backward-Transformation'' (BT)).
 C'est cette partie qui est très intéressante pour l'annotation car elle part des structures atomiques pour reconstruire les structures monomériques.
 Les auteurs proposent une annotation en deux temps.
-Tout d'abord, la phase de recherche des monomères et le second temps la conversion des monomères trouvés en une annotation.
+Une phase de recherche des monomères, puis une conversion des monomères trouvés en une annotation.
 L'idée de la première phase est de rechercher chaque monomère connu en masquant les atomes déjà utilisés par des monomères précédemment trouvés.
 En recherchant les monomères par taille (nombre d'atomes) décroissante, les auteurs s'assurent que de petits monomères ne viendront pas prendre la place de plus gros.
+C'est un algorithme glouton sans aucun retour arrière.
 Lors de la seconde phase, les atomes des molécules sont contractés pour ne plus former qu'un seul n\oe{}ud par monomère.
 Le N terminal de la chaîne peptidique est ensuite recherché afin d'extraire l'annotation de cette chaîne en suivant les liaisons peptidiques.
 Enfin, les liaisons n'ayant pas encore été explorées sont ajoutées à la représentation monomérique finale.
@@ -147,9 +148,9 @@ Dans ce cas, vu qu'aucun retour en arrière n'est effectué, l'annotation sera i
   \end{center}
 \end{figure}
 
-Le logiciel molBLOCKS~\cite{ghersi_molblocks:_2014} n'est à la base pas conçu pour le travail que nous cherchons à effectuer.
-C'est un logiciel qui permet de découvrir des monomères en repérant les sous morceaux fréquents au sein d'une population de polymères.
-Pour cela le logiciel découpe les polymères en petits morceaux et effectue des comptages sur ces morceaux.
+Le logiciel molBLOCKS~\cite{ghersi_molblocks:_2014} n'est, à la base, pas conçu pour le travail que nous cherchons à effectuer.
+C'est un logiciel qui permet de découvrir des monomères en repérant les fragments fréquents au sein d'une population de polymères.
+Pour cela le logiciel découpe les polymères en petits fragments et effectue des comptages de ceux-ci.
 Ces découpes suivent des règles entrées par l'utilisateur.
 Par exemple en donnant comme règle
 \begin{equation}
@@ -173,7 +174,7 @@ Dans notre cas, nous pourrions utiliser un tel logiciel pour découper les NRP e
 En effectuant par la suite une étape de reconnaissance de ces monomères, il serait alors possible de reconstruire le peptide.
 Cependant, certaines réactions effectuées au sein des NRP ne permettent pas de découper entièrement le peptide avec la seule règle énoncée précédemment.
 Toutes les liaisons non peptidiques énoncées au chapitre précédent ne seront pas découpées.
-Il est donc nécessaire de rajouter nombre de nouvelles règles.
+Il est donc nécessaire de rajouter de nouvelles règles.
 Cependant, la liaison hydroxyl à elle seule ne permet déjà plus d'effectuer une découpe correcte.
 Pour pouvoir la délier, il faudrait une règle du type
 \begin{equation}
@@ -203,14 +204,14 @@ Pour ces deux raisons, nous ne pourrons pas directement utiliser ce logiciel afi
 
 Pour concevoir notre logiciel d'annotation, nous allons nous inspirer des techniques existantes en essayant de dépasser leurs difficultés.
 Nous possédons, au sein de Norine, une grande base de connaissances de monomères existants (plus de 500) et nous pouvons nous appuyer sur cette base bien établie pour assurer l'existence des monomères lors des annotations.
-Cette base étant, essayons de concevoir un algorithme constructif.
+A partir de ces données, essayons de concevoir un algorithme constructif.
 
 
 \subsubsection{Une histoire de sous problèmes}
 \label{subproblems}
 
-La méthode CHUCKLES tire partie de la différence entre les 20 acides aminés pour se permettre de rechercher les plus gros en premier et de ne jamais revenir sur les choix faits.
-Rechercher les monomères par taille (en nombre d'atomes) décroissante et en masquant les atomes déjà utilisés est un choix pertinent car il permet d'éviter de reconnaître partout les petits acides aminés.
+La méthode CHUCKLES tire partie de la différence entre les 20 acides aminés principaux pour se permettre de rechercher les plus gros en premier et de ne jamais revenir sur les choix faits.
+Rechercher les monomères par taille (en nombre d'atomes) décroissante et en masquant les atomes déjà utilisés est un choix pertinent car il permet d'éviter de détecter partout les petits acides aminés comme la glycine.
 Dans notre cas, la proximité entre certains monomères ne nous permettra pas de les départager grâce à un tri par taille.
 Nous risquons d'introduire de trops gros monomères prenant la place d'autres et créant artificiellement des ``trous'' dans l'annotation.
 Il sera nécessaire de modifier les solutions incomplètes pour essayer de les améliorer.
@@ -224,10 +225,10 @@ Si d'un côté nous recherchons les monomères au sein du NRP, puis de l'autre n
   \end{center}
 \end{figure}
 
-Dans un premier temps, nous allons chercher à déterminer quels sont les monomères qui pourraient être les candidats pour composer le peptide étudié.
+Dans un premier temps, nous allons chercher à déterminer les monomères qui pourraient être les candidats pour composer le peptide étudié.
 En utilisant la base Norine, nous pouvons indépendamment rechercher chacun des monomères connus au sein de la molécule à annoter.
 La recherche exacte d'un monomère au sein d'un peptide est donc notre premier sous problème à résoudre.
-Ce sous problème sera appelé la ``recherche'' et sera expliqué en section \ref{search_fig}.
+Ce sous problème sera appelé la ``recherche'' (voir figure \ref{search_fig}).
 
 \begin{figure}[!ht]
   \begin{center}
@@ -239,28 +240,15 @@ Ce sous problème sera appelé la ``recherche'' et sera expliqué en section \re
 
 Dans un second temps, nous devrons choisir parmi tous les monomères candidats issus de la recherche, lesquels composent réellement le polymère.
 Nous aurons plusieurs contraintes associées à ce problème.
-Aucun des monomères choisis dans la solution ne peux être chevauchant avec un autre.
+Aucun des monomères choisis dans la solution ne peut être chevauchant avec un autre.
 En effet, aucun atome ne peut provenir de deux molécules différentes et donc aucune sous partie de monomères ne peut être chevauchante avec un autre monomère.
-De plus nous allons chercher à obtenir une annotation complète des peptides, ce qui correspond à maximiser les atomes du polymère couvert par des monomères.
-On appellera cette étape l'étape de ``pavage'' et sera expliqué en section \ref{tiling_fig}.
+De plus nous allons chercher à obtenir une annotation complète des peptides, ce qui correspond à maximiser les atomes du polymère couverts par des monomères.
+On appellera cette étape l'étape de ``pavage'' (voir figure \ref{tiling_fig}).
 
 \subsubsection{Des molécules aux graphes}
 
-\newtheorem{definition}{Definition}
-\begin{definition}\textbf{Graphe :}
- Un graphe est une représentation mathématique d'un ensemble d'objets où chacun des objets est appelé un sommet et
- chaque relation entre deux objets est représentée par une arête entre les deux sommets correspondants.
- On appéllera arité d'un noeud dans un graphe, le nombre de liens connectés à ce noeud.
-\end{definition}
-
-En informatique, les graphes sont utilisés pour représenter de nombreuses données.
-Dans notre cas, les molécules peuvent être représentées comme des graphes étiquetés et non orientés.
-Un atome est alors un n\oe{}ud dont l'étiquette est le nom de l'atome.
-Une liaison chimique est une arête du graphe.
-La structure monomérique peut elle aussi être représentée sous forme de graphe.
-Dans ce cas, les n\oe{}uds sont les monomères et leurs étiquettes sont leurs noms.
-Les arêtes sont les liaisons formées entre les monomères pour construire le peptide.
-Passer du graphe atomique au graphe monomérique revient donc à une contraction de n\oe{}uds.
+Pour comprendre la suite du propos, il est nécessaire de comprendre ce qu'est un graphe au sens informatique du terme.
+Pour plus de détails référez-vous au prérequis \ref{graphes}.
 
 
 \subsubsection{Formalisation en problèmes de graphes}
@@ -269,18 +257,21 @@ Comme expliqué plus haut, le problème de recherche de sous composants d'un pol
 plus petit problèmes : un problème de recherche de monomères et un problème de pavage des monomères trouvés. Traitons
 donc séparément ces deux problèmes.
 
-\textbf{Recherche de monomères} \hspace{ \stretch{1} } Rechercher un monomère dans un polymère revient à rechercher un petit graphe atomique
+\textbf{Recherche de monomères}~~~
+Rechercher un monomère dans un polymère revient à rechercher un petit graphe atomique
 $S$ dans un plus gros graphe $G$. Deux cas sont alors possibles : soit nous cherchons à trouver exactement $S$ dans
 $G$, soit nous cherchons une approximation de $S$ dans $G$. Dans le premier cas, nous allons nous intéresser à l'
 ``Isomorphisme de Sous-graphe'' (en anglais \textit{Subgraph Isomorphism} (SI)). Dans le second cas, nous nous intéresserons au
 ``Sous-graphe Maximum Commun'' (en anglais \textit{Maximum Common Subgraph} (MCS)). Les recherches de SI ou de MCS ont toutes
 deux été prouvées NP-Complet mais, pour chacun des problème, il existe des algorithmes rapides en pratique pour des graphes
-aux propriétés particulières dont nous parlerons dans en \ref{SI_MCS}.
+aux propriétés particulières.
+Nous aborderons cela en section \ref{SI_MCS}.
 
-\textbf{Pavage des monomères} \hspace{ \stretch{1} } Une fois les monomères détectés, il est nécessaire de prendre une décision pour les parties du polymère où plusieurs d'entre eux entre en conflit (plusieurs monomères possibles pour les mêmes atomes).
-L'objectif est donc de faire un choix entre les différents morceaux possibles afin de chercher à ne garder que les pièces non chevauchantes qui permettent de couvrir au mieux le polymère (si possible totalement).
+\textbf{Pavage des monomères}~~~
+Une fois les monomères détectés, il est nécessaire de choisir un monomère au sein des parties du polymère pour lequelles un conflit existe (plusieurs monomères possibles pour les mêmes atomes).
+L'objectif est donc de faire un choix entre les différents morceaux possibles afin de chercher à ne garder que les pièces non chevauchantes qui permettent de couvrir au mieux le polymère, si possible dans sa totalité.
 Ce genre de méthode est appelée ``pavage sans recouvrement''.
-Cette étape donnant accès à un lien direct entre atomes et monomères, une étape de contraction de graphe permettra d'obtenir le graphe monomérique.
+Cette étape donnant accès à un lien direct entre atomes et monomères, une étape de contraction de graphe permettra, au final, d'obtenir le graphe monomérique.
 
 
 
@@ -301,21 +292,21 @@ Voyons les différentes façons de les résoudre ainsi que les forces et faibles
   \begin{center}
     \includegraphics[width=450px]{Figures/s2m/MCS-SI/mcs.png}
     \caption{\label{mcs_fig}MCS obtenu à partir des graphes G et H.
-    Le MCS obtenu n'est pas connexe du fait des liens vers le n\oe{}ud rouge, qui ne sont pas les mêmes dans G et H.}
+    Le MCS obtenu ne contient pas le n\oe{}ud étiqueté ``rouge'' du fait des liens vers ce n\oe{}ud qui ne sont pas les mêmes dans G et H.}
   \end{center}
 \end{figure}
 
 Commençons par définir précisément le problème du MCS.
 Comme le nom l'indique, le problème du MCS est un problème de recherche de la sous partie commune maximale entre deux graphes (Voir figure \ref{mcs_fig}).
-C'est à dire trouver un ensemble de n\oe{}uds présents dans les deux graphes et dont les arêtes qui les inter-connectent sont les mêmes.
-Il faut non seulement que les n\oe{}uds partagent les même étiquettes mais également les mêmes voisins.
+C'est à dire trouver un ensemble de n\oe{}uds présents dans les deux graphes et dont les arêtes qui les inter-connectent sont présentes dans les deux graphes.
+Il faut non seulement que les n\oe{}uds partagent les même étiquettes, mais également les mêmes voisins.
 Si deux n\oe{}uds ont la même étiquette mais ne partagent pas les mêmes voisins dans les deux graphes, alors ils ne font pas partie du MCS.
 C'est par exemple le cas du n\oe{}ud rouge au sein de la figure \ref{mcs_fig}.
-Le problème de recherche de sous graphe commun connexe maximal (MCCS) est un problème encore plus difficile car il impose de fortes contraintes supplémentaires.
-Le problème du MCS à été prouvé NP-Complet\cite{garey_computers_1979}, ce qui laisse peu de perspectives pour l'émergence d'algorithmes de résolution polynomiaux exacts.
+Le problème de recherche de sous-graphe commun connexe maximal (MCCS) est un problème encore plus difficile, car il impose de fortes contraintes supplémentaires.
+Le problème du MCS a été prouvé NP-Complet\cite{garey_computers_1979}, ce qui laisse peu de perspectives pour l'émergence d'algorithmes de résolution polynomiaux exacts.
 
 Dans notre cas, nous pouvons effectuer une réduction vers ce problème pour la recherche des monomères.
-Si l'on considère qu'un monomère et un polymère sont des graphes atomiques, alors trouver une sous partie commune à ces deux graphes revient à trouver un emplacement où un morceau du monomère est retrouvé dans le peptide.
+Si l'on considère qu'un monomère et un polymère sont des graphes atomiques, alors trouver une sous partie commune à ces deux graphes revient à trouver un emplacement où une partie du monomère est retrouvée dans le peptide.
 En imposant que le graphe commun soit d'une taille minimale fixée, nous pourrons éviter d'avoir des résultats ne contenant que quelques atomes par hasard.
 
 Du fait de la NP-complétude du problème, trouver des solutions exactes est très compliqué.
@@ -326,12 +317,12 @@ Voyons ensemble ces deux catégories d'algorithmes en s'appuyant sur les reviews
 \subsubsection{Les méthodes exactes de résolution}
 
 Au sein des algorithmes de résolution exacte du MCS, il existe deux grandes écoles.
-D'un côté, le problème du MCS est réduit en un problème de clique maximale avant d'utiliser des solveurs de ce second problème.
+D'un côté, le problème du MCS est réduit en un problème de clique maximale, avant d'utiliser des solveurs dédiés à ce second problème.
 D'un autre côté, les méthodes de résolution se basent sur des méthodes de backtracking.
 
 
 
-\textbf{La réduction en clique maximale}
+\textbf{La réduction en clique maximale}~~~
 Il est possible de réduire le problème MCS en un problème de résolution de clique maximale~\cite{pelillo_matching_1999,grosso_simple_2008,rahman_small_2009}.
 Une clique est un ensemble de n\oe{}uds dans un graphe tel que tous les n\oe{}uds de cet ensemble sont reliés entre eux.
 Rechercher la clique maximale revient à rechercher le sous ensemble maximal de n\oe{}uds d'un graphe pour lequel tous les n\oe{}uds sont liés les uns aux autres.
@@ -369,9 +360,9 @@ En résolvant le problème de clique maximale sur le GC, on obtient le MCS.
 \end{figure}
 
 
-\textbf{Recherche par Backtracking}
+\textbf{Recherche par Backtracking}~~~
 La majorité des algorithmes exacts effectuent des recherches via des méthodes de backtracking~\cite{manic_branch&cut_2009,mcgregor_backtrack_1982,kawabata_build-up_2011}.
-Un MCS est une bijection entre deux sous ensembles de n\oe{}uds dans deux graphes distincts.
+Un MCS est une bijection entre deux sous-ensembles de n\oe{}uds dans deux graphes distincts.
 Les méthodes de backtrack effectuent une reconstruction itérative de cette bijection.
 Les couples de n\oe{}uds compatibles, n'étant pas encore présents au sein de la bijection, sont ajoutés un à un (voir figure \ref{backtracking_solve}).
 Lorsque l'algorithme arrive dans une impasse (plus aucune possibilité d'ajouter un couple), il revient en arrière sur une association puis fait un choix différent.
@@ -381,7 +372,7 @@ Dans le cas des MCCS, il faut inclure une contrainte supplémentaire~\cite{chang
 Chacun des n\oe{}uds du couple à ajouter doit être voisin de l'un des n\oe{}uds d'un même couple précédemment inclus dans la bijection.
 
 Il existe bien d'autres méthodes exactes pour résoudre des MCS pour des graphes particuliers (par exemple pour des quasi-arbres de \textit{treewidth} borné~\cite{yamaguchi_finding_2004}).
-Cependant, aucun de ces cas particuliers ne correspond à la réalité des molécules que nous allons traiter.
+Cependant, si nous souhaitons traiter n'importe quelles molécules, même avec les structures les plus extrêmes, nous ne pouvons utiliser ces méthodes.
 Nous ne détaillerons donc pas celles-ci ici.
 
 
@@ -389,11 +380,11 @@ Nous ne détaillerons donc pas celles-ci ici.
 
 Il existe une très grande quantité d'heuristiques de résolution du MCS.
 La méthode la plus utilisée est une méthode de recherche par similarités locales~\cite{yan_substructure_2005,willett_similarity_2011}.
-Ce sont des algorithmes utilisés au sein de bases de données pour rechercher des structures chimiques par ressemblance avec une requête.
+Ces heuristiques sont utilisées au sein de bases de données pour rechercher des structures chimiques par ressemblance avec une requête.
 Chaque molécule de la base est décomposée en un grand nombre de critères topologiques locaux (l'arité des noeuds par exemple).
 Ces critères sont entrés dans un vecteur appelé fingerprint.
-Lors d'une requête, le motif recherché est à son tour transformé en fingerprint et une mesure de similarité est effectuée avec les vecteurs présents en base.
-Les fingerprints les plus proches (fonction de score selon les méthodes~\cite{maggiora_molecular_2011,ndiaye_cp_2011}) sont déclarés en possession d'une sous partie commune.
+Lors d'une requête, le motif recherché est à son tour transformé en \textit{fingerprint} et une mesure de similarité est effectuée avec les vecteurs présents en base.
+Les \textit{fingerprints} les ``plus proches'' (d'après une fonction de score~\cite{maggiora_molecular_2011,ndiaye_cp_2011}) sont déclarés contenir une sous partie commune.
 Cette méthode ne donne aucune assurance quant à l'obtention de réels MCS.
 C'est la rapidité d'exécution de l'algorithme qui est recherchée.
 Dans notre cas, cette méthode est innappropriée puisque nous cherchons des MCS exacts.
@@ -404,10 +395,10 @@ La différence avec les méthodes exactes est qu'ils ne reviennent jamais sur le
 Un nombre fixe de bijections est maintenu en permanence.
 Ces bijections ont été sélectionnées par une fonction de score comme étant celles qui avaient le plus de chance de mener à un MCS.
 Au final, les bijections trouvées ne seront pas forcément les vrais MCS.
-Cette seconde méthode est très intéressante lorsque l'on cherche un bon rapport rapidité/qualité.
+Cette seconde méthode est très intéressante lorsque l'on cherche un bon rapport entre rapidité et qualité du résultat.
 
 
-\subsection{Isomorphisme de sous graphe}
+\subsection{Isomorphisme de sous-graphe}
 
 \label{SI_p}
 
@@ -421,9 +412,9 @@ Cette seconde méthode est très intéressante lorsque l'on cherche un bon rappo
   \end{center}
 \end{figure}
 
-Définissions à son tour le problème SI.
+Définissions à son tour le problème d'isormorphisme de sous-graphe (Subgraph Isomorphism (SI)).
 Comme le nom l'indique, le problème SI est un problème de recherche d'un graphe dans une sous partie d'un autre.
-C'est à dire que G est sous graphe de H lorsque tous les n\oe{}uds et toutes les arêtes de G sont retrouvées structurées de la même manière dans H (voir figure \ref{SI_fig}).
+C'est à dire que G est sous-graphe de H lorsque tous les n\oe{}uds et toutes les arêtes de G sont retrouvées structurées de la même manière dans H (voir figure \ref{SI_fig}).
 Tout comme le MCS, le problème du SI a été prouvé NP-Complet~\cite{garey_computers_1979}.
 
 Pour notre problème, nous pouvons à nouveau effectuer une réduction vers le problème SI, puis résoudre ce problème par des algorithmes déjà publiés.
@@ -431,7 +422,7 @@ Nous souhaitons rechercher des monomères au sein de peptides, ce qui reviendrai
 
 Les méthodes de résolution actuelles sont toutes très similaires et dérivent d'une même technique de backtracking.
 La plupart de ces méthodes sont des résolutions exactes.
-Bien que NP-complet, ces algorithmes restent très praticables lorsqu'on ne recherche pas au sein de graphes répétitifs (qui sont constitués de multiples répétitions d'un même morceau).
+Bien que NP-complet, ces algorithmes restent très praticables pour des graphes étiquetés, lorsqu'on ne recherche pas au sein de graphes répétitifs (qui sont constitués de multiples répétitions d'un même morceau).
 Voyons ensemble plusieurs algorithmes représentatifs.
 
 
@@ -440,9 +431,9 @@ Voyons ensemble plusieurs algorithmes représentatifs.
 \begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=450px]{Figures/s2m/MCS-SI/ullman.png}
-    \caption{\label{ullman_fig}Recherche d'un isomorphisme de sous graphe par l'algorithme d'Ullman.
-    Dans la partie construction, vous pouvez voir la matrice créée à partir des graphes G et H.
-    Dans la partie recherche sont présentées les étapes successives de création d'un SI (voir texte pour détail).
+    \caption{\label{ullman_fig}Recherche d'un isomorphisme de sous-graphe par l'algorithme d'Ullman.
+    Dans la partie ``construction'', vous pouvez voir la matrice créée à partir des graphes G et H.
+    Dans la partie ``recherche'' sont présentées les étapes successives de création d'un SI (voir texte pour détail).
     Si nous avions voulu obtenir tous les isomorphismes (et pas juste un seul), il aurait fallu continuer le backtracking jusqu'au bout.}
   \end{center}
 \end{figure}
@@ -451,18 +442,19 @@ L'algorithme de Ullman est l'un des premiers à avoir été proposé dans les an
 Certaines de ses variantes sont toujours utilisées dans certaines librairies telles que Openbabel~\cite{oboyle_open_2011}.
 L'algorithme se base sur la matrice de compatibilité entre les graphes (voir figure \ref{ullman_fig}).
 Une matrice de compatibilité est une matrice dont chaque ligne représente un n\oe{}ud de G et chaque colonne un n\oe{}ud de H.
-Pour une case de la matrice donnée, on a $g$ le n\oe{}ud de G correspondant à la ligne et $h$ le n\oe{}ud de H correspondant à la colonne.
-La case contient un 1 si $g$ et $h$ ont une étiquette compatible et que l'arrité de $h$ est suppérieure ou égale à l'arrité de $g$.
-Pour obtenir un SI à partir de cette matrice, il faut retirer des 1 de la matrice jusqu'à en obtenir uns seul 1 par ligne.
-A chaque étape, un n\oe{}ud de G est choisi pour continuer l'isomorphisme.
-Ce n\oe{}ud correspond à une ligne.
-Puis une colonne est choisie parmi celles dont la colonne contient un 1 sur la ligne précédemment choisie.
-Le couple ligne/colonne nous donne le couple n\oe{}ud de G/n\oe{}ud de H a peut être ajouter à l'isomorphisme.
-Avant cet ajout, il faut également vérifier que tous les voisins du n\oe{}ud de H correspondent bien aux voisins du n\oe{}ud de G (condition non respectée à l'étape 2 et 5 de la partie recherche du schéma).
-Puisque nous ajoutons ce couple à l'isomorphisme, il faut remplacer tous les 1 de la ligne et la colonne choisies par des 0 (excepté pour la case du binôme).
+Soient $g$ et $h$ correspondants respectivement à un n\oe{}ud du graphe G et du graphe H.
+Soient $i$ et $j$ les numéros des lignes et colonnes de la matrice correspondants à $g$ et $h$.
+La case de coordonnées $(i,j)$ contient un 1 si $g$ et $h$ ont une étiquette compatible et que l'arrité de $h$ est suppérieure ou égale à l'arrité de $g$.
+Pour obtenir un SI à partir de cette matrice, il faut retirer des 1 de la matrice jusqu'à en obtenir un seul 1 par ligne.
+A chaque étape, un n\oe{}ud $g$ de G est choisi pour continuer l'isomorphisme.
+Ce n\oe{}ud correspond à une ligne $i$.
+Puis une colonne $j$ est choisie de telle manière à ce que la case $(i,j)$ de la matrice contienne un 1.
+Le couple $(i,j)$ nous donne le couple $(g,h)$ qui peut être ajouter à l'isomorphisme.
+Avant cet ajout, il faut également vérifier que tous les voisins de $h$ correspondent bien aux voisins de $g$ (condition non respectée à l'étape 2 et 5 de la partie recherche du schéma).
+Puisque nous ajoutons ce couple à l'isomorphisme, il faut remplacer tous les 1 de la ligne et la colonne choisies par des 0 (excepté pour la case $(i,j)$).
 À ce moment, si au moins une ligne a été vidée de tous ses 1, c'est que l'isomorphisme n'est pas possible et il faut revenir à l'étape précédente.
 L'algorithme continue récursivement jusqu'à obtenir un 1 par ligne ou ne trouver aucun isomorphisme.
-En choisissant bien les lignes et les colonnes par lesquelles l'algorithme commence, on arrive à obtenir des temps d'exécution très courts pour la recherche d'un SI.
+En choisissant bien les lignes et les colonnes par lesquelles l'algorithme commence (par exemple celles pour lesquelles il n'y pas de doute), on arrive à obtenir des temps d'exécution très courts pour la recherche d'un SI.
 Cependant, pour obtenir tous les SI, il faut parcourir tout l'arbre des possibles, ce qui ralentit l'algorithme.
 
 
@@ -474,7 +466,6 @@ Contrairement à l'algorithme d'Ullman qui nécessite d'effectuer des opération
 L'algorithme VF2~\cite{cordella_subgraph_2004} utilisent ce principe.
 Les SI se forment par ajouts successifs de couples de n\oe{}uds compatibles avec retour en arrière s'il n'est plus possible d'avoir un couple.
 VF2 est un algorithme de recherche de SI pour des graphes non orientés et non étiquetés.
-Dans l'article l'algorithme est décrit comme suit :
 
 % 
 %   \begin{algorithm}[H]
@@ -482,7 +473,7 @@ Dans l'article l'algorithme est décrit comme suit :
 %     \KwData{Un graphe $G(V,E)$ et un graphe $H(V',E')$ avec $|V| \leq |V'|$ et $s$ un état contenant les mappings déjà effectués
 %     entre les deux graphes}
 %     \KwResult{Un mapping entre les éléments de $V$ et une sous partie des éléments de $V'$ telle que $H$ soit un isomorphisme de
-%     sous graphe de $H$}
+%     sous-graphe de $H$}
 %     
 %     \uIf {$s$ contient un mapping de tous les éléments de $V$} {
 %       \KwRet $Mapping(s)$\;
@@ -511,11 +502,11 @@ Dans l'article l'algorithme est décrit comme suit :
 \end{figure}
 
 Expliquons cet algorithme en utilisant le schéma \ref{vf2}.
-A la première étape, nous nous trouvons avec un ensemble vide de n\oe{}uds pairés de $G$ et $H$.
-Nous générons donc toutes les possibilités d'assemblage entre tous les n\oe{}uds des deux graphes (Il est à noter que l'algorithme
+A la première étape, nous nous trouvons avec un ensemble vide de n\oe{}uds couplés de $G$ et $H$.
+Nous générons donc toutes les possibilités de couples entre tous les n\oe{}uds des deux graphes (Il est à noter que l'algorithme
 est décrit de cette façon dans l'article mais qu'il n'est nécessaire de générer que les couples à partir d'un seul n\oe{}ud de $G$
 et de l'ensemble des n\oe{}uds de $H$.)
-Une fois ces assemblages créés, nous les parcourons tous en appelant récursivement la fonction.
+Une fois ces couples créés, nous les parcourons tous en appelant récursivement la fonction.
 Dans l'exemple, le premier appel récursif est effectué après avoir assemblé '1' à 'a'.
 Cette voie est sans issue car quel que soit l'assemblage entre '2' et un n\oe{}ud de $H$, plus aucun couple de voisins ne pourra être
 généré.
@@ -523,29 +514,29 @@ En effet, pour générer l'ensemble $P$, il est nécessaire de regarder tous les
 de voisins hors de $s$.
 Une fois toutes les tentatives échouées, l'algorithme remonte dans l'arbre et change l'association '1'-'a' pour l'association
 '1'-'b'.
-Récursivement l'algorithme conclut à un isomorphisme {(1,b);(2,a);(3,c)}.
+Récursivement, l'algorithme conclut à un isomorphisme {(1,b);(2,a);(3,c)}.
 
 En l'état, l'algorithme VF2 ne reconnaît qu'un seul et unique isomorphisme.
 On peut modifier simplement l'algorithme afin de récupérer tous les isomorphismes en ne retournant pas une fois que l'un d'eux est
 trouvé mais en l'enregistrant dans un ensemble puis en continuant l'exploration de l'arbre jusqu'au bout.
-Vu que tout l'arbre est exploré à chaque recherche, l'algorithme est exponentiel.
+Puisque que tout l'arbre est exploré à chaque recherche, l'algorithme est exponentiel.
 Pour être plus précis il est en $O(n^m)$, donc non calculable dans les pires des cas ($n$ taille de G et $m$ de H).
 
-Cet algorithme est très pratique pour trouver un SI mais pas pour les trouver tous.
-En pratique, il est utlisé au sein de grandes librairies logicielles de chimie comme CDK~\cite{steinbeck_chemistry_2003} pour faire des requêtes par structure sur des ensembles chimiques.
+Cet algorithme est très pratique pour trouver un SI, mais pas pour les trouver tous.
+En pratique, il est utilisé au sein de grandes librairies logicielles de chimie comme CDK~\cite{steinbeck_chemistry_2003} pour faire des requêtes par structure sur des ensembles chimiques.
 
 
 \subsubsection{D'autres algorithmes de SI}
 
-Contrairement à la recherche de MCS, il n'existe pas beaucoup d'alternatives heuristiques pour ce problème.
-Ceci peut s'expliquer par le fait que des algorithmes praticables existent pour trouver les SI.
+Contrairement à la recherche de MCS, il n'existe pas beaucoup d'alternatives heuristiques pour le SI.
+Ceci peut s'expliquer par le fait que des algorithmes exacts et praticables existent pour trouver les SI.
 De plus, les heuristiques de MCS permettent d'obtenir des résultats de SI en ajoutant des contraintes (Le SI étant un cas particulier du MCS).
 Dans tous les cas, ces heuristiques de SI sont des dérivés de la technique par backtracking~\cite{kaijar_developing_2012}.
 Ces algorithmes essaient en supplément d'éviter l'exploration de toutes les branches par de la sélection des plus ``prometteuses''.
-Par exemple, on préférera explorer des isomorphismes commençant par de paires de noeuds d'arité forte car ils sont un bon ancrage.
+Par exemple, on préférera explorer des isomorphismes commençant par des paires de noeuds d'arité forte car ils sont un fort indice de ``bon isomorphisme''.
 
 Il existe également de nombreux algorithmes pour des cas particuliers de SI.
-Par exemple, il est possible de résoudre le problème en temps polynomial pour des arbres~\cite{shamir_faster_1997}, des graphes planaires~\cite{eppstein_subgraph_1995,dorn_planar_2009} ou des graphes de \textit{treewidth} borné~\cite{hajiaghayi_subgraph_2007}.
+Par exemple, il est possible de résoudre le problème SI en temps polynomial pour des arbres~\cite{shamir_faster_1997}, des graphes planaires~\cite{eppstein_subgraph_1995,dorn_planar_2009} ou des graphes de \textit{treewidth} faible~\cite{hajiaghayi_subgraph_2007}.
 Dans tous les cas, il est possible de trouver au moins une molécule (pas forcément NRP) ne répondant pas à l'un de ces critères et c'est pour cela que nous avons préféré ne pas les utiliser.
 
 
@@ -558,8 +549,8 @@ Deuxièmement, le MCS ne paraît pas très pratique dans notre cas.
 En effet, les NRP regorgent de monomères proches les uns des autres (variation de un ou deux atomes/liaisons).
 Il n'est donc pas facile, lorsque l'on obtient un résultat, de savoir si la molécule trouvée est la bonne ou si c'est le monomère voisin à un atome de distance qui a été détecté.
 Enfin, en comparant les algorithmes de recherche exacte de solutions, ceux de résolution de SI sont plus adaptés et rapide en pratique.
-Au début, nous ne connaissions pas l'existance de l'algorithme VF2 et aucun des autres algorithmes ne nous convenais en temps de calcul.
-De notre côté, nous avons indépendamment redéveloppé un variant de VF2 appliqué aux graphes étiquetés et suffisamment rapide pour pouvoir trouver tous SI instantanément.
+Au début, nous ne connaissions pas l'existance de l'algorithme VF2 et aucun des autres algorithmes ne nous convenaits en temps de calcul.
+De notre côté, nous avons indépendamment redéveloppé un algorithme étendu de VF2 appliqué aux graphes étiquetés et suffisamment rapide pour pouvoir trouver tout SI quasi-instantanément.
 La section suivante donnera tous les détails concernant cet algorithme et son intégration à s2m.
 
 
@@ -569,12 +560,12 @@ La section suivante donnera tous les détails concernant cet algorithme et son i
 
 \label{algos_s2m}
 
-\subsection{Isomorphisme de sous graphe appliqué à la recherche de monomères}
+\subsection{Isomorphisme de sous-graphe appliqué à la recherche de monomères}
 
 \label{isomorphisme_p}
 
 Notre logiciel appelé Smiles2Monomers (s2m), doit débuter par la recherche de l'ensemble des monomères au sein d'un polymère cible.
-Comme nous l'avons vu dans l'état de l'art, nous pouvons transformer ce problème en un problème de graphe appelé isomorphisme de sous graphe.
+Comme nous l'avons vu dans l'état de l'art, nous pouvons transformer ce problème en un problème de graphe appelé isomorphisme de sous-graphe.
 Dans cette partie, nous allons présenter en détail la variante que nous avons conçu, de l'algorithme de résolution de SI appelé VF2.
 Puis nous montrerons en quoi les étiquettes des n\oe{}uds du graphes influencent le temps de calcul afin en déduire une méthode de recherche efficace.
 
@@ -1522,7 +1513,7 @@ Enfin nous étudierons le temps de calcul pour estimer les rapports temps/qualit
 \subsubsection{Choisir le k du pré-calcul}
 \label{k_res}
 
-Pour rappel, l'isomorphisme de sous graphe est effectué à partir de chaînes pré-calculées afin d'optimiser le temps de recherche (voir partie \ref{index_markov}).
+Pour rappel, l'isomorphisme de sous-graphe est effectué à partir de chaînes pré-calculées afin d'optimiser le temps de recherche (voir partie \ref{index_markov}).
 Ces chaînes sont formées de deux sous-parties.
 La première sous-partie, de taille k, est optimale en temps de calcul selon une base d'apprentissage.
 La seconde sous-partie est générée de manière gloutonne.
@@ -1727,7 +1718,7 @@ Certains points de la figure ont été tronqués car ils écrasaient les résult
 On distingue nettement deux comportements différents sur cette courbe.
 Soit les peptides ont été complètement analysés à la suite d'une seule passe de pavage (celle succédant la recherche stricte) ; dans ce cas, le temps d'exécution épouse une courbe qui augmente progressivement avec le nombre d'atomes ; soit le matching \textit{light} et la modulation qui suit entrent en action et le temps devient fortement dépendant de la topologie du peptide (tous les points disparates).
 
-Pour ce qui est de la première catégorie de peptide, on peut voir que la quasi-intégralité du temps est dépensé sur la recherche d'isomorphismes de sous graphe.
+Pour ce qui est de la première catégorie de peptide, on peut voir que la quasi-intégralité du temps est dépensé sur la recherche d'isomorphismes de sous-graphe.
 Comme nous le supposions au début de ce projet, les isomorphismes sont des goulots d'étranglement du fait de la complexité des algorithmes de résolution.
 Pour quelques peptides, le temps est complété par une phase de modulation qui ne prend que quelques millisecondes.
 Dans le pire des cas, le temps est doublé par cette modulation.
