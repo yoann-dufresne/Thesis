@@ -542,7 +542,6 @@ Dans tous les cas, il est possible de trouver au moins une molécule (pas forcé
 
 \subsection{Choisir l'algorithme de recherche de monomères}
 
-
 Pour pouvoir rechercher les monomères, nous devions choisir entre toutes les approches algorithmiques citées ci-dessus.
 Premièrement, lorsque nous recherchons un monomère dans un peptide, nous souhaitons connaître tous les endroits où il peut apparaitre.
 Nous ne souhaitons donc pas utiliser d'approches heuristiques.
@@ -639,8 +638,14 @@ Dans d'autres graphes, le nombre de n\oe{}uds va grandir avec la répétition et
 Pour ces raisons, nous avons choisi de n'effectuer qu'une seule étape de line-graph.
 
 \begin{figure}[!ht]
-  \includegraphics[width=200px]{Figures/s2m/recherche/matching.pdf}
-  \caption{\label{label_matching}Exemple de fonctionnement de la fonction de matching d'étiquettes}
+  \begin{center}
+    \includegraphics[width=200px]{Figures/s2m/recherche/strict.png}
+    \caption{\label{label_matching}Exemple de fonctionnement de la fonction de matching d'étiquettes.
+    Le premier n\oe{}ud ne correspond pas au n\oe{}ud car l'arité du lien contenue dans l'étiquette est différente.
+    Le deuxième ne correspond pas car les atomes des étiquettes ne correspondent pas.
+    Le troisième ne correspond pas car l'étiquette ne contient pas suffisamment d'hydrogènes liés aux atomes principaux.
+    Enfin, le dernier remplit les 3 critères précédemment cités et la correspondance est possible.}
+  \end{center}
 \end{figure}
 
 \subsubsection{Indexation des monomères}
@@ -661,8 +666,10 @@ Les deux sections suivantes s'attarderont à la recherche de chaînes performant
 \subsubsection{Indexation gloutonne}
 
 \begin{figure}[!ht]
-  \includegraphics[width=300px]{Figures/s2m/indexation/chaine_fail.pdf}
-  \caption{\label{chaine_fail}Deux exemple de chaîne pour un motif simple}
+  \begin{center}
+    \includegraphics[width=450px]{Figures/s2m/indexation/chaines_example.png}
+    \caption{\label{chaine_fail}Deux exemple de chaîne pour un motif simple}
+  \end{center}
 \end{figure}
 
 Une chaîne efficace est donc une chaîne rapide.
@@ -1327,6 +1334,13 @@ Cependant, si une solution n'est pas trouvée en quelques étapes de modulation,
 
 \label{light_p}
 
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=300px]{Figures/s2m/residues/tautomers.png}
+    \caption{\label{tautomer}Tautomérie d'une molécule}
+  \end{center}
+\end{figure}
+
 Suite à des variations de composition ou de structure survenant dans certains résidus quelques polymères ne sont pas découpés correctement en utilisant les algorithmes précédents.
 Il y a essentiellement deux cas pour lesquels l'isomorphisme ne fonctionne pas.
 Le premier cas concerne un \textit{monomère ionisé} au sein du peptide, c'est-à-dire lorsqu'un proton a été perdu.
@@ -1339,16 +1353,17 @@ Cette charge positive déplacée est compensée par une charge négative qui se 
 Ce déplacement d'électron se concrétise par le déplacement d'une liaison double.
 Ce déplacement peut même avoir lieu entre deux résidus différents d'un peptide.
 
-\begin{figure}
+\begin{figure}[!ht]
   \begin{center}
-    \includegraphics[width=300px]{Figures/s2m/residues/tautomers.png}
-    \caption{\label{tautomer}Tautomérie d'une molécule}
+    \includegraphics[width=200px]{Figures/s2m/recherche/light.png}
+    \caption{\label{label_matching}Exemple de fonctionnement de la fonction de matching ligth d'étiquettes.
+    Puisque le nombre d'atomes d'hydrogène n'est plus un critère sélectif et que l'arité de la liaison chimique non plus, la comparaison est valide dès que les deux atomes non hydrogène sont identiques.}
   \end{center}
 \end{figure}
 
 Les deux transformations présentées ont pour point commun de ne pas modifier en profondeur la structure des molécules.
 Dans les deux cas seuls les ``décorateurs'' des étiquettes sont modifiés (hydrogènes et arité de liaison).
-Le moyen simple de reconnaître ce type de molécule est alors d'oublier ces décorateurs lors de la phase d'isomorphisme.
+Le moyen simple de reconnaître ce type de molécule est alors d'oublier ces décorateurs lors de la phase d'isomorphisme (voir figure \ref{label_light}).
 Dès lors les résidus sont reconnus quel que soient leurs variations sur les hydrogènes ou les liens.
 % Cette modification ne fait pas varier la qualité des résultats sur les NRP car les monomères utilisés diffèrent entre eux au delà des atomes d'hydrogène.
 Bien que très séduisante cette méthode pose un problème de temps de calcul.
@@ -1369,8 +1384,8 @@ Cet algorithme en deux temps traite rapidement tous les cas simples avec des sou
 
 \begin{figure}
   \begin{center}
-    \includegraphics[width=300px]{Figures/s2m/algo/s2m.pdf}
-    \caption{\label{global_s2m}Schéma global de Smiles2Monomers (TODO : refaire avec les deux alternatives)}
+    \includegraphics[width=450px]{Figures/s2m/algorithms.png}
+    \caption{\label{global_s2m}Schéma global de Smiles2Monomers}
   \end{center}
 \end{figure}
 
