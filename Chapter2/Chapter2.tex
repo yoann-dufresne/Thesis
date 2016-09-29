@@ -35,7 +35,7 @@ Connaître ce type de structure est un enjeu fort pour la détermination de cara
 Comme nous l'avons fait remarqué précédemment, il n'existe que peu d'outils permettant des annotations fiables de NRP.
 Les caractérisations fiables de NRP sont en très grande majorité effectuées manuellement par des biologistes et chimistes.
 Beaucoup de structures atomiques sont également connues sans annotations monomériques malgré leur présence dans de grandes bases de données.
-Il nous a donc paru nécessaire de créer un outil qui infère la structure monomérique à partir d'une structure atomique et c'est cet outil d'annoation que nous allons décrire durant ce chapitre.
+Il nous a donc paru nécessaire de créer un outil qui infère la structure monomérique à partir d'une structure atomique et c'est cet outil d'annotation que nous allons décrire durant ce chapitre.
 
 
 
@@ -387,7 +387,7 @@ Lors d'une requête, le motif recherché est à son tour transformé en \textit{
 Les \textit{fingerprints} les ``plus proches'' (d'après une fonction de score~\cite{maggiora_molecular_2011,ndiaye_cp_2011}) sont déclarés contenir une sous partie commune.
 Cette méthode ne donne aucune assurance quant à l'obtention de réels MCS.
 C'est la rapidité d'exécution de l'algorithme qui est recherchée.
-Dans notre cas, cette méthode est innappropriée puisque nous cherchons des MCS exacts.
+Dans notre cas, cette méthode est inappropriée puisque nous cherchons des MCS exacts.
 
 D'autres méthodes se rapprochent plus des méthodes exactes par recherche backtracking~\cite{grosso_simple_2008, wang_fmcsr:_2013}.
 Ici, les auteurs construisent plusieurs bijections en parallèle.
@@ -550,7 +550,7 @@ Deuxièmement, le MCS ne paraît pas très pratique dans notre cas.
 En effet, les NRP regorgent de monomères proches les uns des autres (variation de un ou deux atomes/liaisons).
 Il n'est donc pas facile, lorsque l'on obtient un résultat, de savoir si la molécule trouvée est la bonne ou si c'est le monomère voisin à un atome de distance qui a été détecté.
 Enfin, en comparant les algorithmes de recherche exacte de solutions, ceux de résolution de SI sont plus adaptés et rapide en pratique.
-Au début, nous ne connaissions pas l'existance de l'algorithme VF2 et aucun des autres algorithmes ne nous convenaits en temps de calcul.
+Au début, nous ne connaissions pas l'existence de l'algorithme VF2 et aucun des autres algorithmes ne nous convenait en temps de calcul.
 De notre côté, nous avons indépendamment redéveloppé un algorithme étendu de VF2 appliqué aux graphes étiquetés et suffisamment rapide pour pouvoir trouver tout SI quasi-instantanément.
 La section suivante donnera tous les détails concernant cet algorithme et son intégration à s2m.
 
@@ -566,7 +566,7 @@ La section suivante donnera tous les détails concernant cet algorithme et son i
 \label{isomorphisme_p}
 
 Notre logiciel appelé Smiles2Monomers (s2m), doit débuter par la recherche de l'ensemble des monomères au sein d'un polymère cible.
-Comme nous l'avons vu dans l'état de l'art, nous pouvons transformer ce problème en un problème de graphe appelé isomorphisme de sous-graphe.
+Comme nous l'avons vu dans l'état de l'art, nous pouvons transformer ce problème en un problème de graphe appelé isomorphisme de sous-graphe (SI).
 Dans cette partie, nous allons présenter en détail la variante que nous avons conçu, de l'algorithme de résolution de SI appelé VF2.
 Puis nous montrerons en quoi les étiquettes des n\oe{}uds du graphes influencent le temps de calcul afin en déduire une méthode de recherche efficace.
 
@@ -587,7 +587,7 @@ Prenons à nouveau notre exemple précédent en étiquetant avec A et B les n\oe
 Sur la figure \ref{vf2_labels}, on peut voir la recherche d'un graphe $G$ composé de 2 n\oe{}uds A et un n\oe{}ud B au sein d'un graphe $H$
 composé d'un branchement supplémentaire contenant un n\oe{}ud B.
 Sur ce graphique nous avons représenté deux cas de recherche selon l'ordre dans lequel nous prenons $G$.
-Nous pouvons remarquer que dans les deux cas, la taille de l'arbre est bien plus faible que pour un graphe non étiqueté.
+Nous pouvons remarquer que, dans les deux cas, la taille de l'arbre est bien plus faible que pour un graphe non étiqueté.
 Les étiquettes des n\oe{}uds font office de filtres de recherche et accélèrent fortement la recherche.
 On voit également que la recherche est d'autant plus rapide que l'on choisit prioritairement les n\oe{}uds avec des étiquettes de faible fréquence.
 
@@ -600,43 +600,42 @@ la plus grande possible.
 
 \label{selectiv_p}
 
-Premièrement, attachons nous à la représentation la plus basique possible d'un graphe chimique (atome=n\oe{}ud,
-liaison=arête). Dans cette représentation, nous pouvons considérer chaque étiquette comme étant le nom de l'atome du n\oe{}ud (Voir
-figure \ref{representations}, première partie). Évidemment, les hydrogènes sont les atomes les plus représentés et ne filtrent
-pas les recherches par eux-mêmes. Cependant, ils sont un bon moyen de donner des précisions sur l'atome auquel ils sont liés.
+Premièrement, attachons nous à la représentation la plus basique possible d'un graphe chimique (atome=n\oe{}ud, liaison=arête).
+Dans cette représentation, nous pouvons considérer chaque étiquette comme étant le nom de l'atome du n\oe{}ud (Voir figure \ref{representations}, première partie).
+Bien entendu, les hydrogènes sont les atomes les plus représentés et ne filtrent pas les recherches par eux-mêmes.
+Cependant, ils contiennent une information supplémentaire sur l'atome auquel ils sont liés.
 Ainsi, trouver un $CH_{3}$ ou un $CH$ donne une information différente sur la topologie.
-En prenant en compte la remarque précédente, nous avons créé une seconde représentation qui compresse les hydrogènes à l'intérieur
-des n\oe{}uds représentant les atomes plus lourds.
-Ainsi, plusieurs étiquettes différentes peuvent
-désormais être créés pour un même atome et ce, en fonction de ses compagnons hydrogènes (Voir figure \ref{representations},
-seconde partie). Par exemple $NH_2$, $NH$, $N$ sont les
-trois étiquettes variants depuis l'ancienne étiquette unique $N$ qui était accompagnée de voisins hydrogènes. Les étiquettes sont plus nombreuses et leur fréquence à la fois moins élevée et plus homogène, ce qui les rend plus sélectives.
+En prenant en compte la remarque précédente, nous avons créé une seconde représentation qui compresse les hydrogènes à l'intérieur des n\oe{}uds représentant les atomes plus lourds.
+Ainsi, plusieurs étiquettes différentes peuvent désormais être créés pour un même atome et ce, en fonction de ses compagnons hydrogènes (Voir figure \ref{representations}, seconde partie).
+Par exemple $NH_2$, $NH$, $N$ sont les trois étiquettes variants depuis l'ancienne étiquette unique $N$ qui était accompagnée de voisins hydrogènes.
+Les étiquettes sont plus nombreuses et leur fréquence à la fois moins élevée et plus homogène, ce qui les rend plus sélectives.
 
 \begin{figure}[!ht]
   \includegraphics[width=300px]{Figures/s2m/representations/all_tmp.pdf}
   \caption{\label{representations}Manque fréquences et titres dans l'image}
 \end{figure}
 
-Globalement, plus le nombre d'étiquettes est élevé et leurs fréquences sont homogènes, et moins l'algorithme VF2 aura de
-difficultés à effectuer un isomorphisme. En effet, la lenteur qui peut venir de cet algorithme est due au nombreux chemins qu'il
+Globalement, au plus le nombre d'étiquettes est élevé et au plus les fréquences de ces étiquettes sont homogènes, au moins l'algorithme VF2 aura de difficultés à effectuer un isomorphisme.
+En effet, la lenteur qui peut venir de cet algorithme est due aux nombreux chemins qu'il
 peut prendre lors de l'exploration.
 
 Cherchons encore à augmenter la sélectivité des étiquettes en augmentant leur nombre.
-A partir d'un graphe $G$, il est possible de représenter ses relations d'adjacence au sein d'un second graphe $L$.
+A partir d'un graphe $G$, il est possible de représenter ses relations d'adjacence au sein d'un second graphe nommé $L$.
 Pour cela, deux n\oe{}uds voisins de $G$ sont représentés dans $L$ comme un seul n\oe{}ud (voir line-graph2 dans figure \ref{representations}).
-Chaque ancienne arrête devient un n\oe{}ud et chaque ancien n\oe{}ud devient une multitude d'arêtes (une clique entre tous les nouveaux n\oe{}uds représentant les anciennes arête de cet ancien n\oe{}ud).
+Chaque ancienne arrête devient un n\oe{}ud et chaque ancien n\oe{}ud devient une multitude d'arêtes (une clique entre tous les nouveaux n\oe{}uds représentant les anciennes arêtes de cet ancien n\oe{}ud).
 Nous étendons le raisonnement pour les étiquettes en disant que l'étiquette d'un n\oe{}ud du nouveau graphe est la composition des étiquettes des anciens n\oe{}uds ainsi que de l'arité entre ces deux n\oe{}uds.
-Dans notre cas, les étiquettes sont mis dans l'ordre lexicographique pour ne pas avoir deux étiquettes possibles à partir des étiquettes d'origine.
+Dans notre cas, les étiquettes sont mises dans l'ordre lexicographique pour ne pas avoir deux étiquettes possibles à partir des étiquettes d'origine.
 Un tel type de graphe est appelé \textit{line graph}~\cite{orlin_line-digraphs_1978}.
-L'un des gros avantages de cette représentation est d'inclure directement dans les étiquettes de chaque n\oe{}ud.
+L'inclusion de l'arité du lien dans les étiquettes est un très gros avantage de cette représentation.
 La fonction de recherche n'aura donc plus du tout à s'attarder sur le degré des arêtes.
 De plus, transformer les graphes de cette manière nous permet de répondre à la volonté d'augmenter le nombre d'étiquettes.
 Là où la représentation précédente pouvait avoir $n$ étiquettes différentes, celle-ci pourra générer plus de $n^2$ ($3n^2$ si on compte tous le degré des liaisons entre atomes).
 
 Le raisonnement des line graphe peut être étendu récursivement.
-On peut ainsi créer des line-graph de line-graph.
-Cependant cela pose plusieurs problèmes de répéter cette opération dans notre cas.
-Certains graphes vont diminuer de taille jusqu'à disparaître complètement (ce qui est peu pratique pour la comparaison) alors que d'autres vont grossir de plus en plus et ajouter de plus en plus de phases de comparaison d'étiquettes et d'étapes dans l'algorithme VF2.
+On peut ainsi créer des \textit{line-graph} de \textit{line-graph}.
+Cependant, dans notre cas, cela pose plusieurs problèmes de répéter cette opération.
+La répétition de l'opération de transformation diminuera la taille de certains graphes jusqu'à ce qu'ils disparaissent totalement.
+Dans d'autres graphes, le nombre de n\oe{}uds va grandir avec la répétition et ainsi augmenter le nombre de comparaisons nécessaires à la résolution d'un SI.
 Pour ces raisons, nous avons choisi de n'effectuer qu'une seule étape de line-graph.
 
 \begin{figure}[!ht]
@@ -676,7 +675,7 @@ En étendant ces chaînes à deux A voisins, on conserve toujours trois isomorph
 Au total, on aura étendu 9 isomorphismes durant la recherche.
 En regardant maintenant la seconde chaîne, on se rend compte que le nombre de ces isomorphismes intermédiaires est bien plus faible grâce à la sélectivité du B recherché en tout premier (5 isomorphismes intermédiaires sont étendus).
 La différence décisive entre les deux chaînes est donc le moment où le n\oe{}ud avec une étiquette sélective est recherché.
-Effectivement, si le n\oe{}ud B est recherché dès le début, la solution est ``ancrée'' sur une base solide et ne risque pas de créer trop de solutions intermédiaires qui devront toutes être analysées pour passer à l'étape suivante.
+Effectivement, si le n\oe{}ud B est recherché dès le début, la solution est ``ancrée'' sur une base solide et ne risque a priori pas de créer trop de solutions intermédiaires qui devront toutes être analysées pour passer à l'étape suivante.
 On peut dire qu'un n\oe{}ud est plus sélectif qu'un autre à partir du moment où sa fréquence d'apparition dans les molécules étudiées est moins élevée.
 
 \textbf{Étiquettes fréquentes}
@@ -689,11 +688,11 @@ On peut dire qu'un n\oe{}ud est plus sélectif qu'un autre à partir du moment o
 \end{figure}
 
 Essayons d'estimer ces fréquences afin d'éviter les cas qui pourraient être critiques.
-Pour ce faire, nous pouvons constituer un ensemble représentatif du type de molécules que nous allons chercher.
+Pour ce faire, nous pouvons constituer un ensemble représentatif du type de molécules que nous allons analyser.
 Dans notre cas, nous cherchons à étudier des peptides non ribosomiques.
 La base d'apprentissage des fréquences sera donc constituée de NRP dont la composition atomique est déjà connue.
 Le raisonnement est extensible à n'importe quel type de molécules et le fait d'avoir un jeu d'apprentissage peu ou pas représentatif n'influencera pas le résultat mais uniquement le temps de calcul.
-Une fois cette base créée, nous pouvons estimer les fréquences d'apparition de chacune des étiquettes présents dans les monomères en effectuant une recherche exhaustive (Figure \ref{apprentissage}).
+Une fois cette base créée, nous pouvons estimer les fréquences d'apparition de chacune des étiquettes présentes dans les monomères en effectuant une recherche exhaustive (Figure \ref{apprentissage}).
 
 % 
 %   \begin{algorithm}[H]
@@ -719,7 +718,8 @@ Une fois cette base créée, nous pouvons estimer les fréquences d'apparition d
 %   \end{algorithm}
 
 
-L'algorithme glouton naïf qui vient tout de suite en tête est de choisir un à un les n\oe{}uds que l'on souhaite ajouter au motif en choisissant toujours celui avec l'étiquette la moins fréquente.
+Un algorithme glouton naïf vient tout de suite en tête.
+Il est possible de choisir un à un les n\oe{}uds que l'on souhaite ajouter au motif en prennant toujours celui avec l'étiquette la moins fréquente.
 Il est nécessaire de préciser que la recherche des n\oe{}uds voisins peut être faite en maintenant un ensemble des voisinages.
 L'algorithme glouton naïf est donc linéaire par rapport à la taille du graphe.
 À l'exécution, la création de chaînes par cette méthode est instantanée ($\ll$ 0.1s).
@@ -773,7 +773,7 @@ Le calcul du temps de recherche de $c_n$ correspondra donc au temps de calcul de
 Il faut également tenir compte du nombre d'extensions qui vont être essayées.
 Par exemple, si l'on cherche à étendre un isomorphisme précédent en suivant un lien qui est enraciné sur un $NH$, il ne reste qu'une liaison à explorer (le $N$ ayant déjà une liaison avec son $H$ et une liaison avec le reste du motif déjà recherché).
 En reprenant la même logique pour un seul carbone, il resterait donc trois autres liaisons à suivre.
-Nous appellerons cette quantité l'\textit{arrité restante}.
+Nous appellerons cette quantité l'\textit{arité restante}.
 On peut donc écrire :
 
 \begin{equation}
@@ -790,7 +790,7 @@ Combinons les deux équations précédentes, pour obtenir une formule globale :
  T(c_n) \propto^t N + \sum_{i=2}^n (n_{p_{i-1}} \times a_{p_{i-1} \rightarrow p_i})
 \end{equation}
 
-Où $N$ est le temps de calcul pour les chaines de taille 1.
+où $N$ est le temps de calcul pour les chaines de taille 1.
 Ce temps ne varie par car il est nécessaire de parcourir tout le graphe.
 
 \begin{figure}[!ht]
@@ -802,8 +802,8 @@ Ce temps ne varie par car il est nécessaire de parcourir tout le graphe.
 
 En utilisant les comptages faits sur la base d'apprentissage (voir \ref{app_compt}) ainsi que le calcul de l'arité
 restante de chaque n\oe{}ud à chaque étape, nous allons pouvoir estimer sur la base, un temps d'exécution de la recherche d'une
-chaîne. Ce temps est un coût exact de le recherche sur la base d'apprentissage. En normalisant cette valeur par le nombre de
-n\oe{}uds de la base, nous pouvons obtenir le coût de recherche par n\oe{}ud et ainsi pouvoir estimer le temps de calcul, quelle que soit la taille de la, ou les, molécule(s) à analyser.
+chaîne. Ce temps est un coût exact de la recherche sur la base d'apprentissage. En normalisant cette valeur par le nombre de
+n\oe{}uds de la base, nous pouvons ainsi obtenir le coût de recherche par n\oe{}ud et ainsi estimer le temps de calcul, quelle que soit la taille de la, ou des, molécule(s) à analyser.
 
 \begin{equation}
  T(c_n) \propto^t 1 + \sum_{i=2}^n ({n_{p_{i-1}} \over N} \times a_{p_{i-1} \rightarrow p_i})
@@ -812,8 +812,8 @@ n\oe{}uds de la base, nous pouvons obtenir le coût de recherche par n\oe{}ud et
 Redéfinissons la notation ${n_{p_{i-1}} \over N}$ qui correspond à un taux de filtrage d'un motif de taille $i-1$.
 Appelons ce taux $F_{i-1}$. Cette notation peut à son tour être transformée en
 produit des filtrages de chaque extension d'une chaîne. Les valeurs des filtrages estimés s'obtiennent immédiatement à partir des
-comptages dans la base d'apprentissage (Voir \ref{app_compt} pour un exemple).
-Il est à noter que le taux de filtrage peut être supérieur à 1 dans le cas où la recherche obtient plus d'isomorphismes en cours de création après qu'avant l'ajout du n\oe{}ud.
+comptages dans la base d'apprentissage (Voir l'exemple en figure \ref{app_compt}).
+Il est à noter que le taux de filtrage peut être supérieur à 1 dans le cas où la recherche obtient plus d'isomorphismes en cours de création à la suite de l'ajout du n\oe{}ud.
 
 \begin{equation}
  {n_{p_{i-1}} \over N} = F_{i-1} = \prod_{i=0}^{i-1} f_i
@@ -831,7 +831,7 @@ Le temps de recherche optimal d'un motif est donc le temps de recherche de la ch
 
 
 Appliquons maintenant cette formule de calcul du temps sur notre exemple pour trouver la meilleure chaîne possible par
-rapport à la base d'apprentissage. Pour le motif de l'exemple, nous pouvons nommer les différentes chaînes possibles de $\alpha$
+rapport à la base d'apprentissage. Pour le motif de l'exemple de la figure \ref{app_compt}, nous pouvons nommer les différentes chaînes possibles de $\alpha$
 jusque $\delta$.
 
 \[
