@@ -213,7 +213,7 @@ A partir de ces données, essayons de concevoir un algorithme constructif.
 La méthode CHUCKLES tire partie de la différence entre les 20 acides aminés principaux pour se permettre de rechercher les plus gros en premier et de ne jamais revenir sur les choix faits.
 Rechercher les monomères par taille (en nombre d'atomes) décroissante et en masquant les atomes déjà utilisés est un choix pertinent car il permet d'éviter de détecter partout les petits acides aminés comme la glycine.
 Dans notre cas, la proximité entre certains monomères ne nous permettra pas de les départager grâce à un tri par taille.
-Nous risquons d'introduire de trops gros monomères prenant la place d'autres et créant artificiellement des ``trous'' dans l'annotation.
+Nous risquons d'introduire de trop gros monomères prenant la place d'autres et créant artificiellement des ``trous'' dans l'annotation.
 Il sera nécessaire de modifier les solutions incomplètes pour essayer de les améliorer.
 Contrairement à CHUCKLES, nous aurons donc besoin de connaître les différents monomères candidats à la composition du polymère même lorsqu'ils sont chevauchants à des monomères déjà placés.
 Si d'un côté nous recherchons les monomères au sein du NRP, puis de l'autre nous assemblons ceux trouvés, alors nous pouvons séparer notre programme en deux sous-problèmes complètement distincts.
@@ -268,7 +268,7 @@ aux propriétés particulières.
 Nous aborderons cela en section \ref{SI_MCS}.
 
 \textbf{Pavage des monomères}~~~
-Une fois les monomères détectés, il est nécessaire de choisir un monomère au sein des parties du polymère pour lequelles un conflit existe (plusieurs monomères possibles pour les mêmes atomes).
+Une fois les monomères détectés, il est nécessaire de choisir un monomère au sein des parties du polymère pour lequel un conflit existe (plusieurs monomères possibles pour les mêmes atomes).
 L'objectif est donc de faire un choix entre les différents morceaux possibles afin de chercher à ne garder que les pièces non chevauchantes qui permettent de couvrir au mieux le polymère, si possible dans sa totalité.
 Ce genre de méthode est appelée ``pavage sans recouvrement''.
 Cette étape donnant accès à un lien direct entre atomes et monomères, une étape de contraction de graphe permettra, au final, d'obtenir le graphe monomérique.
@@ -412,7 +412,7 @@ Cette seconde méthode est très intéressante lorsque l'on cherche un bon rappo
   \end{center}
 \end{figure}
 
-Définissions à son tour le problème d'isormorphisme de sous-graphe (Subgraph Isomorphism (SI)).
+Définissions à son tour le problème d'isomorphisme de sous-graphe (Subgraph Isomorphism (SI)).
 Comme le nom l'indique, le problème SI est un problème de recherche d'un graphe dans une sous partie d'un autre.
 C'est à dire que G est sous-graphe de H lorsque tous les n\oe{}uds et toutes les arêtes de G sont retrouvées structurées de la même manière dans H (voir figure \ref{SI_fig}).
 Tout comme le MCS, le problème du SI a été prouvé NP-Complet~\cite{garey_computers_1979}.
@@ -444,7 +444,7 @@ L'algorithme se base sur la matrice de compatibilité entre les graphes (voir fi
 Une matrice de compatibilité est une matrice dont chaque ligne représente un n\oe{}ud de G et chaque colonne un n\oe{}ud de H.
 Soient $g$ et $h$ correspondants respectivement à un n\oe{}ud du graphe G et du graphe H.
 Soient $i$ et $j$ les numéros des lignes et colonnes de la matrice correspondants à $g$ et $h$.
-La case de coordonnées $(i,j)$ contient un 1 si $g$ et $h$ ont une étiquette compatible et que l'arrité de $h$ est suppérieure ou égale à l'arrité de $g$.
+La case de coordonnées $(i,j)$ contient un 1 si $g$ et $h$ ont une étiquette compatible et que l'arrité de $h$ est supérieur ou égale à l'arrité de $g$.
 Pour obtenir un SI à partir de cette matrice, il faut retirer des 1 de la matrice jusqu'à en obtenir un seul 1 par ligne.
 A chaque étape, un n\oe{}ud $g$ de G est choisi pour continuer l'isomorphisme.
 Ce n\oe{}ud correspond à une ligne $i$.
@@ -726,7 +726,7 @@ Une fois cette base créée, nous pouvons estimer les fréquences d'apparition d
 
 
 Un algorithme glouton naïf vient tout de suite en tête.
-Il est possible de choisir un à un les n\oe{}uds que l'on souhaite ajouter au motif en prennant toujours celui avec l'étiquette la moins fréquente.
+Il est possible de choisir un à un les n\oe{}uds que l'on souhaite ajouter au motif en prenant toujours celui avec l'étiquette la moins fréquente.
 Il est nécessaire de préciser que la recherche des n\oe{}uds voisins peut être faite en maintenant un ensemble des voisinages.
 L'algorithme glouton naïf est donc linéaire par rapport à la taille du graphe.
 À l'exécution, la création de chaînes par cette méthode est instantanée ($\ll$ 0.1s).
@@ -887,7 +887,7 @@ détail de la recherche de ce motif sur la figure \ref{markov}.
 \begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=400px]{Figures/s2m/indexation/markov.png}
-    \caption{\label{markov}En vert, les chemins prits par la programation dynamique pour finalement obtenir le chemin optimal vers le motif a-b-d.}
+    \caption{\label{markov}En vert, les chemins pris par la programmation dynamique pour finalement obtenir le chemin optimal vers le motif a-b-d.}
   \end{center}
 \end{figure}
 
@@ -1181,7 +1181,7 @@ Nous pouvons par exemple utiliser la bibliothèque GLPK (l'une des seules biblio
 
 Bien que cette solution soit élégante, MIP dans sa version ne contenant que des variables binaires fait partie des 21 problèmes NP-complets de Karp~\cite{karp_reducibility_1972}.
 Il n'existe donc actuellement aucune méthode de résolution de ce problème en temps polynomial.
-Les cas les plus difficiles (ie contenant beaucoup de résidus chevauchants trouvés par isomorphisme) risquent de prendre beaucoup de temps.
+Les cas les plus difficiles (\textit{ie} contenant beaucoup de résidus chevauchants trouvés par isomorphisme) risquent de prendre beaucoup de temps.
 Proposons également une heuristique rapide pour résoudre le problème.
 
 
@@ -1213,7 +1213,7 @@ Le but ici est de s'approcher de ce tri optimal en s'assurant d'une exécution t
 \end{algorithm}
 
 Cet algorithme nécessite un tri sur une liste de $n$ résidus candidats ($O(n log n)$) puis consomme ensuite un élément de la
-liste à chaque tour de boucle ($O(n)$). Contrairement à la résolution exacte présentée précedemment, si la fonction de comparaison
+liste à chaque tour de boucle ($O(n)$). Contrairement à la résolution exacte présentée précédemment, si la fonction de comparaison
 pour le tri ne dépend pas de $n$ cet algorithme est polynomial.
 Nous pouvons donc garantir la rapidité d'exécution si les critères de tri sont également calculable en temps polynomial.
 
@@ -1227,7 +1227,7 @@ C'est un critère classiquement utilisé pour la résolution gloutonne du probl�
   \begin{center}
     \includegraphics[width=400px]{Figures/s2m/pavage/tri.png}
     \caption{\label{tri_glouton}Tri pour le pavage glouton.
-    Les résidus sont triés par taille puis par vraissemblance.}
+    Les résidus sont triés par taille puis par vraisemblance.}
   \end{center}
 \end{figure}
 
@@ -1564,21 +1564,20 @@ Ce pré-calcul fait gagner près de 35\% de temps à chaque recherche de SI par 
 
 \subsubsection{Mesures}
 
-Classiquement, lorsque l'on souhaite évaluer les résultats d'une prédiction, on utilise les statistiques découlant des vrais/faux positifs/négatifs.
+En général, lorsque l'on souhaite évaluer les résultats d'une prédiction, on utilise les statistiques découlant des vrais/faux positifs/négatifs.
 Commençons par définir chacune de ces catégories dans notre cas :
 \begin{itemize}
  \item Vrai positif (VP) : Un vrai positif est obtenu lorsque le résultat de la prédiction est identique au résultat attendu.
 Dans notre cas, une annotation peptidique est un VP si tous les monomères présents dans l'annotation de s2m sont également présents au sein de l'annotation biologique et inversement.
 Nous aurons donc une couverture et un \textit{correctness} de 100\%.
  \item Faux positif (FP) : Un faux positif est obtenu lorsque le résultat de la prédiction parait correct mais qu'il diffère du résultat attendu.
-Dans notre cas, une annotation est un FP si tous ses atomes sont couverts par l'annotation mais que celle-ci diffère du jeu référence.
+Dans notre cas, une annotation est un FP si tous ses atomes sont couverts par l'annotation mais que celle-ci diffère de la référence.
 Nous aurons donc une couverture de 100\% et un \textit{correctness} inférieur à 100\%
- \item Faux négatif (FN) : Un faux négatif est obtenu lorsque le résultat ne parait pas correct alors qu'il est possible d'en obtenir un correct.
+ \item Faux négatif (FN) : Un faux négatif est obtenu qu'un résultat indique une erreur alors qu'il est possible d'obtenir un résultat correct.
 Dans notre cas, une annotation est un FN lorsque nous n'arrivons pas à produire une annotation complète du peptide.
-C'est à dire que nous aurons une couverture et une \textit{correctness} inférieure à 100\%.
+C'est à dire que nous avons à la fois une couverture et une \textit{correctness} inférieures à 100\%.
  \item Vrai négatif (VN) : Un vrai négatif est obtenu lorsque le résultat ne parait pas correct et qu'il n'est pas possible d'en obtenir un.
-Dans notre cas, les annotations de référence sont correctes, ce n'est pas possible.
-Il est toujours possible d'obtenir une annotation couvrante vu qu'elles sont toutes présentes dans le jeu de référence.
+Dans notre cas, les annotations de référence sont correctes : il est toujours possible d'obtenir une annotation couvrante puisque les molécules sont toutes issues d'un jeu d'annotations de référence.
 \end{itemize}
 
 
@@ -1586,9 +1585,9 @@ Il est toujours possible d'obtenir une annotation couvrante vu qu'elles sont tou
 
 \label{resultats_s2m_p}
 
-Pour le choix des paramètres, nous n'allons pour le moment pas prendre en compte le temps d'exécution.
-Les but ici est d'exposer uniquement la qualité des résultats.
-Pour cela nous allons prendre comme indicateurs la \textbf{couverture atomique moyenne}, le \textbf{correctness atomique moyen} et les taux de VP/FP/FN.
+Pour le choix des paramètres, nous n'allons, pour le moment, pas prendre en compte le temps d'exécution.
+Le but ici est d'exposer uniquement la qualité des résultats.
+Pour cela nous allons prendre comme indicateurs la \textbf{couverture atomique moyenne}, le \textbf{\textit{correctness} atomique moyen} et les taux de VP/FP/FN.
 Nous allons faire varier le paramètre du nombre de d'exécution maximal de la branche \textit{light} (R) ainsi que la profondeur de modulation pour le pavage avec modulation (M).
 Nous testerons également les deux algorithmes de pavage (MIP et heuristique).
 
@@ -1612,7 +1611,7 @@ Nous testerons également les deux algorithmes de pavage (MIP et heuristique).
     \hline
   \end{tabular}
   \caption{\label{nor_results}Résultats de s2m sur les données de Norine.
-  Dans la première colonne se trouvent les binômes des valeurs des paramètres retry (R) et modulation (M)}
+  Dans la première colonne se trouvent les couples des valeurs des paramètres retry (R) et modulation (M)}
 \end{table}
 
 \begin{figure}[!ht]
@@ -1657,15 +1656,15 @@ Comme présenté au sein des tableaux \ref{nor_results} et \ref{ccd_results}, l'
 Ceci s'explique par le fait qu'il n'a besoin que d'une seule phase \textit{light} pour parvenir à son optimal local.
 En effet, dans certains cas, le problème est tout de suite résolu après la première phase de pavage succédant à l'isomorphisme \textit{light} car touts les monomères ont été correctement découverts.
 Dans les autres cas, l'algorithme du MIP effectue une sur-optimisation après le premier pavage.
-Lorsqu'il n'est pas possible d'btenir une couverture complète, l'algorithme a parfois recours à des placement de nombreux petits monomères.
-La solution est alors tellement éloignée de l'optimal qu'il devient innateignable pour notre construction algorithmique.
+Lorsqu'il n'est pas possible d'obtenir une couverture complète, l'algorithme a parfois recours à des placement de nombreux petits monomères.
+La solution est alors tellement éloignée de l'optimal qu'il devient inatteignable pour notre construction algorithmique.
 
 Pour le pavage heuristique, la sensibilité aux paramètres est élevée.
 On peut voir que l'augmentation du nombre de modulations déclenche une augmentation du nombre de VP.
-Le nombre de vrais positifs augmente significativement en passant le paramètre de 1 à 2.
+Le nombre de vrais positifs augmente significativement en passant le paramètre M de 1 à 2.
 Cette sensibilité s'explique par le fait que la solution optimale et la solution gloutonne ne sont pas immédiatement voisines.
 Il est souvent nécessaire de déplacer, non pas un, mais deux monomères pour atteindre l'optimal.
-Le paramètre de nombre de boucle \textit{light} n'a que très peu d'influence et vient seulement compléter 3 résultats sur les données Norine et un seul sur les données de CCD.
+Le paramètre R n'a que très peu d'influence et vient seulement compléter 3 résultats sur les données Norine et un seul sur les données de CCD.
 
 En comparant les résultats des deux algorithmes, on s'aperçoit que l'algorithme comprenant l'heuristique de pavage obtient de meilleurs résultats (pour une modulation $\ge$ 2) que l'algorithme incluant un pavage exact.
 A nouveau, ce résultat s'explique par le fait que le pavage exact va trop loin dans l'optimisation.
@@ -1673,10 +1672,10 @@ Si aucune solution totalement couvrante n'est possible avec les résidus issus d
 Dans ce cas, la recherche de résidus par isomorphisme \textit{light} sert peu car les trous dans l'annotation ont été déplacés par l'optimisation.
 Il n'est souvent plus possible de construire l'annotation réelle, à moins de déplacer de nombreux résidus.
 
-Au final, les résultats obtenus sont globalement meilleurs en utilisant l'heuristique gloutonne de pavage avec une modulation de profondeur 2 et deux phases de recherche light.
+Au final, les résultats obtenus sont globalement meilleurs en utilisant l'heuristique gloutonne de pavage avec une modulation de profondeur M=2 et deux phases de recherche \textit{light} avec R=2.
 Nous ne nous attendions pas à ces résultats et la sur-optimisation du pavage par MIP nous a surpris.
 Il est tout de même possible d'obtenir des résultats au moins aussi bons qu'avec l'heuristique, en effectuant uniquement une phase de recherche light à la place de la recherche stricte.
-Cependant le temps de calcul se voit multipli par 10 sur nos données.
+Cependant le temps de calcul se voit multiplié par 10 sur nos données.
 
 
 \subsubsection{Temps de calcul global}
@@ -1694,18 +1693,18 @@ Comme nous pouvons le remarquer sur le schéma \ref{temps_general}, l'heuristiqu
 Ce résultat était attendu mais l'écart expérimental nous pousse fortement à utiliser l'heuristique de pavage plutôt que le MIP sur des données telles que celles présentées ici.
 
 Comparons désormais les temps d'exécution pour l'heuristique en fonction des paramètres passés au programme.
-Le paramètre du nombre de boucles \textit{light} semble avoir le plus d'influence sur le temps d'exécution.
+Le paramètre du nombre de boucles \textit{light} (R) semble avoir le plus d'influence sur le temps d'exécution.
 C'est à nouveau un résultat que nous attendions puisque la recherche \textit{light} ne s'appuie que sur une faible diversité d'étiquette sur les noeuds (voir les sections \ref{selectiv_p} pour l'influence du nombre d'étiquettes et \ref{light_p} pour la recherche light).
 Le temps passé à la recherche de motifs en utilisant les critères \textit{light} est important.
 Répéter l'opération plusieurs fois multiplie logiquement le temps d'exécution.
 
-Si l'on regarde bien les temps d'exécution on peut également s'apercevoir que l'augmentation du second paramètre (la profondeur de modulation) permet de diminuer le temps d'exécution.
-Ceci peut s'expliquer par les cas où tous les résidus nécessaires à une couverture optimale ont été trouvés mais qu'ils n'ont pas été pavés.
-Si la profondeur de modulation nécessaire à l'inclusion de ces résidus n'est pas atteinte, alors le l'algorithme va continuer et perdre du temps, et ce, malgré le fait qu'il aurait pu directement trouver la solution.
+Si l'on regarde bien les temps d'exécution, on peut également s'apercevoir que l'augmentation de la valeur de M permet de diminuer le temps d'exécution.
+Ceci peut s'expliquer par les cas où tous les résidus nécessaires à une couverture optimale ont été trouvés, mais qu'ils n'ont pas été pavés lors de la deuxième phase.
+Si la profondeur de modulation nécessaire à l'inclusion de ces résidus n'est pas atteinte, alors le l'algorithme va passer son temps à effectuer de nombreuses recherches monomériques.
 
 Pour conclure cette partie  sur la sélection des paramètres, nous pouvons dire que nous recommandons l'utilisation de l'algorithme de pavage heuristique par rapport au pavage MIP.
 Cependant, il ne faut pas utiliser n'importe quels paramètres.
-Pousser les paramètres de modulation ou de nombre de boucle à 3 ou au delà est parfaitement inutile en terme de qualité de résultats et consommera énormément de temps.
+Dans notre cas, pousser les paramètres de modulation ou de nombre de boucle à 3 ou au delà est parfaitement inutile en terme de qualité de résultats et consommera énormément de temps.
 Utiliser un paramètre de modulation de 1 sera également une erreur puisque la qualité des résultats ne sera pas au rendez-vous.
 Il reste finalement deux alternatives intéressantes pour des données du même type que les notre.
 Soit nous privilégions la qualité à la vitesse et nous réglons les deux paramètres à la valeur 2, soit nous acceptons de perdre quelques bons résultats au profit de 30\% d'économie de temps en réglant uniquement la modulation à 2.
@@ -1731,10 +1730,10 @@ Les résultats sont triés par taille de peptide (nombre d'atomes).
   \end{center}
 \end{figure}
 
-Certains points de la figure ont été tronqués car ils écrasaient les résultats.
+Certains points extrêmes en temps de la figure ont été tronqués car ils écrasaient les résultats.
 15 valeurs sur les 350 ont été redescendues à 50ms alors que certaines allaient jusqu'à plusieurs centaines de ms (Le point max atteint 1s à lui seul).
 On distingue nettement deux comportements différents sur cette courbe.
-Soit les peptides ont été complètement analysés à la suite d'une seule passe de pavage (celle succédant la recherche stricte) ; dans ce cas, le temps d'exécution épouse une courbe qui augmente progressivement avec le nombre d'atomes ; soit le matching \textit{light} et la modulation qui suit entrent en action et le temps devient fortement dépendant de la topologie du peptide (tous les points disparates).
+Soit les peptides ont été complètement analysés à la suite d'une seule passe de pavage (celle succédant la recherche stricte) ; dans ce cas, le temps d'exécution épouse une courbe qui augmente linéairement avec le nombre d'atomes ; soit le matching \textit{light} et la modulation qui suit entrent en action et le temps devient alors fortement dépendant de la topologie du peptide (tous les points disparates).
 
 Pour ce qui est de la première catégorie de peptide, on peut voir que la quasi-intégralité du temps est dépensé sur la recherche d'isomorphismes de sous-graphe.
 Comme nous le supposions au début de ce projet, les isomorphismes sont des goulots d'étranglement du fait de la complexité des algorithmes de résolution.
@@ -1742,8 +1741,8 @@ Pour quelques peptides, le temps est complété par une phase de modulation qui 
 Dans le pire des cas, le temps est doublé par cette modulation.
 L'étape de pavage ne prend jamais plus de 3ms et n'est pas un problème pour le temps d'exécution.
 
-Pour les points de la seconde catégorie, c'est encore l'étape de recherche qui prend le plus de temps.
-Cette fois-ci, ce sont les étapes de recherche \textit{light} qui prédominent le temps de calcul.
+Pour les points de la seconde catégorie, c'est à nouveau l'étape de recherche d'isomorphismes qui prend le plus de temps.
+Cependant, cette fois-ci, ce sont les étapes de recherche \textit{light} qui prédominent le temps de calcul.
 Comme nous l'avions évoqué lors de la présentation de cette amélioration, le manque d'étiquettes disponibles diminue fortement l'efficacité de l'algorithme.
 En moyenne, un isomorphisme \textit{light} est de 10 à 100 fois plus lent qu'un strict.
 De plus, les cas qui posent problème sont très souvent accompagnés de longues exécutions de modulation.
@@ -1753,7 +1752,7 @@ Toutes les autres exécutions s'arrêtent en obtenant 100\% de couverture.
 
 Pour finir cette analyse des temps de calcul individuels, nous allons parler des cas extrêmes.
 Ces cas pathologiques masquent les réelles performances du logiciel.
-La moyenne de temps d'exécution globale est de 18ms par peptide mais lorsque nous retirons les 15 cas qui débordent de la figure, cette moyenne chute à 10ms.
+La moyenne de temps d'exécution globale est de 18ms par peptide mais lorsque nous retirons les 15 cas les plus critiques (ceux qui ont été tronqués sur la figure), cette moyenne chute à 10ms.
 À eux seuls, ces 15 peptides représentent plus de la moitié du temps d'exécution du logiciel.
 Le cas le plus critique (avoparcin-beta) représente à lui seul un cinquième du temps d'exécution total (plus de 1s).
 C'est une structure composée de beaucoup de cycles et d'embranchements. De plus, la structure atomique que nous possédons est fausse, ce qui rend impossible une couverture à 100\%.
@@ -1780,11 +1779,11 @@ Vous trouverez tous les résultats sur les polymères testés à ces adresses :
 
 Revenons sur les chiffres qui ont été présentés dans les tableaux \ref{nor_results} et \ref{ccd_results}.
 Un peu plus de 74\% des annotations peptidiques issues de Norine et 85\% de celles de CCD sont entièrement retrouvées par le logiciel.
-Mais il faut ici rappeler que les annotations ne sont plus considérées comme correctes dès lors qu'au moins un monomère est faussement annoté.
+Mais il faut ici rappeler que les annotations ne sont plus considérées comme correctes dès lors qu'un seul monomère est faussement annoté.
 En regardant le taux d'atomes correctement attribués au sein des peptides, le taux de réussite augmente à plus de 93\% pour les annotations de Norine et plus de 98\% pour CCD.
 
 Cependant, même ces très bons taux de réussite ne sont pas représentatifs de la qualité des annotations.
-En effet, en analysant les résultats de plus près, nous nous sommes aperçu qu'il était possible de détecter des erreurs au sein des bases de données utilisées pour les tests.
+En effet, en analysant chacun des résultats plus finement, nous nous sommes aperçu qu'il était possible de détecter des erreurs au sein des bases de données utilisées pour les tests.
 Analysons ensemble plusieurs cas afin de comprendre les raisons de ces erreurs.
 
 
@@ -1802,7 +1801,7 @@ Beaucoup d'annotations fausses proviennent d'erreurs de structures atomiques pou
 Prenons l'exemple de l'\textit{enniatin I} (voir figure \ref{s2m_enniati}).
 L'annotation en sortie de s2m présente une couverture de 100\% mais un \textit{correctness} de 66\%.
 En regardant les 3 listes de monomères, on peut s'apercevoir que l'annotation attendue comporte deux monomères nommés Hmp alors que le logiciel trouve deux 4Me-Hva.
-Les deux monomères se ressemblant et il est fort probable que, soit l'annotation monomérique, soit l'annotation atomique ait été mal saisie.
+Les deux monomères se ressemblent : il est fort probable que, soit l'annotation monomérique, soit l'annotation atomique ait été mal saisie.
 Pour comprendre l'erreur, remontons aux sources des données.
 Sur la page Norine de la molécule, nous trouvons un lien vers Pubchem pour nous permettre d'obtenir la structure atomique et un lien vers la publication qui nous permet d'obtenir la structure monomérique.
 
@@ -1810,18 +1809,18 @@ Sur la page Norine de la molécule, nous trouvons un lien vers Pubchem pour nous
   \begin{center}
     \includegraphics[width=400px]{Figures/s2m/results/enniatinI_corrections.png}
     \caption{\label{enni_cor}Structures atomiques publiées de l'enniatin I.
-    Ces deux structures nous aident à déceler une erreur dans la structure atomique de l'enniatin I sur Norine.}
+    Ces deux structures différentes nous aident à déceler une erreur dans la structure atomique de l'enniatin I sur Norine.}
   \end{center}
 \end{figure}
 
 En regardant la molécule présente sur PubChem (voir figure \ref{enni_cor}), nous pouvons constater que c'est effectivement la structure atomique qui a été utilisée pour le test.
-En consultant le contenu de la publication~\cite{song_diversity_2008}, on s'aperçoit que la structure monomérique correspond à ce qui est présent sur Norine.
-Accompagnant cette annotation monomérique est présent un schéma de la structure atomique.
+En consultant le contenu de la publication~\cite{song_diversity_2008}, on s'aperçoit que la structure monomérique correspond bien à ce qui est présent sur Norine.
+Accompagnant cette annotation monomérique, un schéma présente structure atomique.
 Cette seconde structure vient également confirmer la structure monomérique.
-Sans aucun doute, l'erreur provient des données issues de PubChem.
-A priori le lien PubChem entré sur Norine n'est pas le bon et pointe vers un peptide similaire.
+Sans aucun doute, l'erreur provient de mauvaises données de PubChem entrées dans Norine.
+Le lien PubChem entré sur Norine n'est pas le bon et pointe vers un peptide similaire.
 
-Nous n'avons pas fini de traiter manuellement toutes les données issues de s2m mais au moins 50\% des erreurs sont de ce type.
+Nous n'avons pas fini de traiter manuellement toutes les données issues de s2m mais au moins 50\% des erreurs semblent être de ce type.
 
 
 \subsubsection{Des monomères aux structures atomiques fausses}
@@ -1842,7 +1841,7 @@ Dans le cas de l'annotation de la dolastatin (voir figure \ref{dolas}), c'est un
 Le monomère Dap qui est sensé être présent n'est pas reconnu car l'atome d'azote n'est pas placé au même endroit au sein du monomère seul et du monomère dans le peptide.
 En cherchant sur Norine on peut s'apercevoir qu'aucun autre peptide de la base ne comporte ce monomère, ce qui veut dire qu'il a été ajouté spécifiquement pour ce peptide.
 Donc, le changement de structure du monomère n'est a priori pas du à une modification de la molécule, mais ressemblerait plutôt à une erreur d'annotation.
-En parcourant l'article qui publia le peptide~\cite{luesch_isolation_2001} et la structure atomique présente sur PubChem, on s'aperçoit que c'est une erreur de structure atomique uniquement présente sur Norine.
+En parcourant l'article qui publia le peptide~\cite{luesch_isolation_2001} et la structure atomique présente sur PubChem, on s'aperçoit que c'est effectivement une erreur de structure atomique uniquement présente sur Norine.
 
 
 \subsubsection{Erreurs d'annotations}
@@ -1860,7 +1859,7 @@ En entrant manuellement les annotations, il est possible de confondre un monomè
 C'est ce qui est arrivé avec la fengycine A (voir figure \ref{fengycin}).
 L'annotation effectuée par s2m détecte un monomère Gln alors que l'annotation présente dans Norine détecte un Glu.
 En effectuant à nouveau toutes les opérations de vérification de la structure atomique et monomérique, on s'aperçoit que l'article~\cite{wu_nonribosomal_2007} donne raison à s2m.
-Cette fois-ci, c'est l'annotation monomérique présente dans Norine qui est à changer pour obtenir une information juste.
+Cette fois-ci, c'est l'annotation monomérique présente dans Norine qui est à changer pour obtenir une information correcte.
 
 
 \subsubsection{Les équivalences}
@@ -1878,12 +1877,12 @@ C'est un problème d'annotations équivalentes.
 Comme nous le voyons sur le schéma \ref{cycloth}, la ``cyclotheonamide E'' est un peptide couvert à 100\%.
 De plus, l'annotation présente dans Norine propose deux monomères visuellement très proches des monomères suggérés par s2m (Arg/k-Arg et NFo-Ile/Ile).
 En regardant dans le détail, on peut observer que c'est un problème du à une formylation entre deux monomères.
-L'un des deux monomère a été formylé, ce qui fait qu'un groupement C=O est présent entre les monomères Arg et Ile du peptide.
-L'un des monomères a donc été modifié mais il pourrait \textit{a priori} s'agir de celui-ci comme de son variant.
+L'un des deux monomères a été formylé, ce qui fait qu'un groupement C=O est présent entre les monomères Arg et Ile du peptide.
+Cependant, il pourrait \textit{a priori} s'agir de n'importe lequel des variants.
 Dans les deux cas, l'annotation qui en résulte reste couvrante à 100\%.
 N'ayant aucun moyen algorithmique de faire la différence, ici s2m a choisi la première solution trouvée.
 Pour connaître l'annotation réelle, il faut remonter à la production du peptide et comprendre les mécanismes de modification de monomères qui entrent ici en jeu.
-Cette erreur est présente moins d'une dizaine de fois dans les données déjà vérifiées et ne pourra pas être corrigée sans prendre en compte plus d'informations biologiques sur le recrutement des monomères.
+Cette erreur est présente moins d'une dizaine de fois dans les données déjà vérifiées et ne pourra hélas pas être corrigée sans prendre en compte plus d'informations biologiques sur le recrutement des monomères formant ce peptide non ribosomique.
 
 
 \subsubsection{Les analyses d'erreur pour CCD}
@@ -1902,4 +1901,8 @@ Pour les données issues de CCD, nous détectons le même type de problème que 
 Nous avons accès aux structures, mais plus difficilement aux publications associées.
 Nous pouvons donc également détecter la présence d'erreurs, mais sans forcément pouvoir expliquer leur raison.
 Seules les erreurs dues aux équivalences sont facilement détectables (voir par exemple \ref{CCD_results}).
-Pour les autres types d'erreurs, nous ne pouvons que spéculer sur leur origine, sans pouvoir vérifier.
+Pour les autres types d'erreurs, nous ne pouvons que spéculer sur leur origine.
+
+
+
+
