@@ -19,19 +19,12 @@ min sur l'ensemble
 s2m pas que pour les NRP.
 
 
-
-
-
-
-
-
 Chapitre 2 :
 
 Voir avec Maude :
    ◇ "Ce poids représente la confiance que l’on donne à l’apparition d’un type de liaison." : confiance ? (Tout la paragraphe est un peu confu avec beaucoup de répétitions. Je veux bien essayer de le réécrire pour toi
 
 TODO :
-   ◇ 2.5.1.1 Les constituants des jeux de données : je pense qu'il faut insister plus sur le fait que pour tester la pertinence biologique de la structure monomérique prédite nous avons besoin de jeux de données pour lesquels on a à la fois le SMILES et la structure monomérique. Tu peux dire qu'il y a très peu de bases dans ce cas et que nous n'avons trouvé que Norine et CCD d'exploitable. Tu dois introduire cette partie en disant bien que plusieurs structures monomériques peuvent être trouvées et qu'une couverture à 100% ne garantit pas la pertinence biologique. Pertinence biologique = ce sont réellement ces monomères qui sont intégrés dans le peptide final par les enzymes de synthèse (NRPS ou autre dans le cas de CCD). Tu peux ajouter un "disclaimer" en disant que l'on considère que les annotations présentes dans les BD sont les structures biologiques réelles, même si on sait qu'il y a des erreurs.
    ◇ Table 2.1 – Résultats de s2m sur les données de Norine : il manque 0-0 pour voir combien il y a de peptides qui sont couvertsà 100% dès le strict (si je ne me trompe pas dans la combinaison de paramètres). Les VP.. ne sont pas dans le même ordre entre heuristique et MIP.
    ◇ fig : {temps_calcul} : peut-être séparer le graph en 2 (ou plus) : les molécules avec 1 seule "passe de pavage" et les autres. Cela résoud en partie le pb d'échelle et facilatera la lecture. Dans explication fig qui est dans le texte : préciser que tps recherche isomorphisme est à peu près égal au tps strict
 
@@ -45,19 +38,14 @@ Chaputre 3 :
    Via quelle table ?
    - manque la ref de Ségolène sur la recherche de patterns
    - fig{echange} : tu peux mettre une NRPS avec le domaine vert + 1 NRPS avec le domaine bleu et mettre un X entre les 2 pour symboliser l'échange ("cross-over"), c'est une représentation courante en bio
-   - je crois que le terme "dériver" n'est pas très biologique. Tu peux utiliser muter, détourner ? (à voir avec Valérie)
 
    TODO :
    ◇ statistiques : à voir si tu mets certaines infos dans la partie "résultats" du chap 2 pour mettre en avant le challenge relevé par s2m (ex : nb atomes / peptide ; nb atomes / monomères ; nb occ de 3, 4 et 5 liaisons par mono ; nb résidus générés ; nb résidus trouvés par peptide lors SI)
-   ◇ fig dap_modif : si possible, ajoute le % de couverture et/ou entoure le C noir car il faut avoir l'oeil pour voir la différence entre les 2 versions du peptide. Tu peux aussi préciser qu'un autre monomère a été trouvé par s2m et donner son nom. (s2m pour corriger les erreurs) + Partie A, Partie B
-   - "Par exemple si le peptide possède une D-Cystéine alors que le motif a été renseigné avec une Cystéine, le fingerprint sera toujours identique au niveau des groupements. Deux fingerprints différents dont l’un possède un comptage en Cystéine supérieur à l’autre de 1 et inférieur de 1 en D-Cystéine préserveront tout de même la valeur de la case Cys*." : difficile à comprendre. Il faudrait un exemple plus concret (je ne sais pas si tu veux entrer dans ces détails, mais les scores entre 1 groupement et 1 mono ne sont pas les même que entre 2 mono. Ces scores dépendent de nbre de mono dans le groupement)
    - ajouter au début des chap (parties ?) avec qui tu as interagi pour faire le travail (par ex, tu n'as pas dit que tu as travaillé avec Juraj sur l'algo de placement des monomères ; tu as encadré le workshop -aide aux utilisateurs-). Il faut que tes différentes collaborations soient plus mises en avant. Un paragraphe dédié en début de "partie" est bien pour cela. Autre ex : tu parles de collaborations avec des stagiaires et des ingé, mais tu ne dis pas clairement que tu as co-encadré Emilie sur le travail de "scan" de pubchem
    - la partie sur la biblio sur le côté bioinfo n'a pas été ajouté. Cela peut-être une phrase en disant qu'il n'existe qu'un travail préliminaire sur le sujet. J'ai survolé l'article
    In silico methods for linking genes and secondary metabolites: The way forward
    et ils citent seulement Pep2path comme logiciel qui va aussi des NRP vers les NRPS
    Pour info, ils ont fait leurs tests sur 27 NRPs. Ils donnent leur jeu de données, mais c'est simplement le SMILES des peptides et la suite des réactions prédites. A priori, ils ont vérifié à la main si ce qu'ils prédisent correspond à la réalité. Les NRPS ne sont pas fournies...
-
-- dans les perspectives de tes développements, tu peux dire que s2m permet de connaître la nature des liaisons entre monomères => de prédire les domaines/enzymes qui les ont générées + une travail d'analyse des monomères et de leurs dérivés pourra permettre de détecter d'éventuelles modif monomériques et de prédire leur provenance (pré-, post- ou pendant la synthèse NRP).
 
 
 - dans la partie intro sur la spectro de masse tu peux introduire la collaboration avec les Suisse qui développent un nouveau logiciel et qui utilisent s2m

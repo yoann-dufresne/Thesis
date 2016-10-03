@@ -112,8 +112,6 @@ Les fingerprints des peptides en base sont pré-calculés et le fingerprint de l
 Le requête fingerprint est comparée à tous les fingerprints de la base et une distance est calculée.
 Les résultats sont affichés par distance décroissante.
 Cette recherche ne prend pas en compte les structures mais permet une souplesse dans les monomères inclus.
-Par exemple si le peptide possède une D-Cystéine alors que le motif a été renseigné avec une Cystéine, le fingerprint sera toujours identique au niveau des groupements.
-Deux fingerprints différents dont l'un possède un comptage en Cystéine supérieur à l'autre de 1 et inférieur de 1 en D-Cystéine préserveront tout de même la valeur de la case Cys*.
 Les regroupements permettent de préserver une proximité élevée malgré la différence de monomère présent.
 
 
@@ -220,8 +218,8 @@ Voyons ici les procédures mises en place pour corriger ces erreurs et essayer d
 \begin{figure}[h!]
   \begin{center}
     \includegraphics[width=450px]{Figures/contributions/dap_modif.png}
-    \caption{\label{dap_modif}En haut, le processus de modification du monomère Dap au sein de Norine, via l'utilisation de MyNorine.
-    En bas, la conséquence de la modification du SMILES du Dap sur la couverture de l'annotation trouvée par s2m.}
+    \caption{\label{dap_modif}Partie A : le processus de modification du monomère Dap au sein de Norine, via l'utilisation de MyNorine.
+    Partie B : la conséquence de la modification du SMILES du Dap sur la couverture de l'annotation trouvée par s2m.}
   \end{center}
 \end{figure}
 
@@ -720,7 +718,9 @@ Enfin, la distance de Jaccard n'est pas forcément très adaptée au problème e
 
 Ce travail est un travail en cours et les résultats présentés ici sont encore très préliminaires.
 Malgré les critiques que nous venons de porter au modèle et aux données, il est très encourageant de retrouver quelques résultats positifs lors des tests.
-Pour pouvoir continuer ce travail, il nous sera nécessaire de commencer par la constitution d'une base d'apprentissage et de test bien annotée.
+Par exemple, s2m permet de connaître le type de liaison entre deux monomères, ce qui n'est pas forcément le cas depuis une annotation manuelle à disposition en ligne.
+Cette connaissance pourrait être exploitée afin de rechercher les parties de NRPS effectuant ces liaisons.
+Pour pouvoir continuer ce travail, il nous sera également nécessaire de constituer d'une base d'apprentissage et une base de référence bien annotée.
 En effet, sans ces tests nous ne pourrons jamais déterminer avec précision la qualité des algorithmes développés.
 Nous sommes actuellement en train de réfléchir à des moyens de constituer ce jeu de données qui pourrait être d'une grande valeur pour de nombreuses tâches.
 La solution qui commence à émerger s'appuie sur plusieurs bases de données existantes.
