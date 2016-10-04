@@ -582,9 +582,8 @@ Puis nous montrerons en quoi les étiquettes des n\oe{}uds du graphes influencen
 
 Intéressons nous à l'application de VF2 aux graphes étiquetés.
 L'algorithme peut être modifié pour ne former que des paires de n\oe{}uds de même étiquette.
-Prenons à nouveau notre exemple précédent en étiquetant avec A et B les n\oe{}uds.
-Sur la figure \ref{vf2_labels}, on peut voir la recherche d'un graphe $G$ composé de 2 n\oe{}uds A et un n\oe{}ud B au sein d'un graphe $H$
-composé d'un branchement supplémentaire contenant un n\oe{}ud B.
+Prenons à nouveau notre exemple précédent en étiquetant avec ``vert'' et ``rose'' les n\oe{}uds.
+Sur la figure \ref{vf2_labels}, on peut voir la recherche d'un graphe $G$ composé de 2 n\oe{}uds ``vert'' et un n\oe{}ud ``rose'' au sein d'un graphe $H$ composé d'un branchement supplémentaire contenant un n\oe{}ud ``rose''.
 Sur ce graphique nous avons représenté deux cas de recherche selon l'ordre dans lequel nous prenons $G$.
 Nous pouvons remarquer que, dans les deux cas, la taille de l'arbre est bien plus faible que pour un graphe non étiqueté.
 Les étiquettes des n\oe{}uds font office de filtres de recherche et accélèrent fortement la recherche.
@@ -626,16 +625,9 @@ Nous étendons le raisonnement pour les étiquettes en disant que l'étiquette d
 Dans notre cas, les étiquettes sont mises dans l'ordre lexicographique pour ne pas avoir deux étiquettes possibles à partir des étiquettes d'origine.
 Un tel type de graphe est appelé \textit{line graph}~\cite{orlin_line-digraphs_1978}.
 L'inclusion de l'arité du lien dans les étiquettes est un très gros avantage de cette représentation.
-La fonction de recherche n'aura donc plus du tout à s'attarder sur le degré des arêtes.
+La fonction de recherche n'aura donc plus du tout à s'attarder sur le degré des arêtes puisque le tout sera reporté sur la fonction de matching d'étiquettes (voir figure \ref{label_matching}).
 De plus, transformer les graphes de cette manière nous permet de répondre à la volonté d'augmenter le nombre d'étiquettes.
 Là où la représentation précédente pouvait avoir $n$ étiquettes différentes, celle-ci pourra en générer plus de $n^2$ ($3n^2$ si on compte tous le degré des liaisons entre atomes).
-
-Le raisonnement des line graphe peut être étendu récursivement.
-On peut ainsi créer des \textit{line-graph} de \textit{line-graph}.
-Cependant, dans notre cas, cela pose plusieurs problèmes de répéter cette opération.
-La répétition de l'opération de transformation diminuera la taille de certains graphes jusqu'à ce qu'ils disparaissent totalement.
-Dans d'autres graphes, le nombre de n\oe{}uds va grandir avec la répétition et ainsi augmenter le nombre de comparaisons nécessaires à la résolution d'un SI.
-Pour ces raisons, nous avons choisi de n'effectuer qu'une seule étape de line-graph.
 
 \begin{figure}[!ht]
   \begin{center}
@@ -647,6 +639,13 @@ Pour ces raisons, nous avons choisi de n'effectuer qu'une seule étape de line-g
     Enfin, le dernier remplit les 3 critères précédemment cités et la correspondance est possible.}
   \end{center}
 \end{figure}
+
+Le raisonnement des line graphe peut être étendu récursivement.
+On peut ainsi créer des \textit{line-graph} de \textit{line-graph}.
+Cependant, dans notre cas, cela pose plusieurs problèmes de répéter cette opération.
+La répétition de l'opération de transformation diminuera la taille de certains graphes jusqu'à ce qu'ils disparaissent totalement.
+Dans d'autres graphes, le nombre de n\oe{}uds va grandir avec la répétition et ainsi augmenter le nombre de comparaisons nécessaires à la résolution d'un SI.
+Pour ces raisons, nous avons choisi de n'effectuer qu'une seule étape de line-graph.
 
 \subsubsection{Indexation des monomères}
 
@@ -677,13 +676,14 @@ Déterminons quel(s) critère(s) simple(s) nous permettent de supposer qu'une ch
 Avec ce ou ces critères, nous pourrons ensuite déterminer un moyen d'ordonner les n\oe{}uds de manière gloutonne.
 Partons de l'exemple présenté sur la figure \ref{chaine_fail}.
 A gauche est dessiné un motif simple suivi de deux chaînes pouvant le représenter (lecture de l'ordre des chaînes de gauche à droite).
-Pour la première chaîne, en partant du motif ne contenant qu'un A, on obtiendra 3 isomorphismes.
-En étendant ces chaînes à deux A voisins, on conserve toujours trois isomorphismes puis deux en ajoutant B et enfin un seul avec le dernier A.
+Pour la première chaîne, en partant du motif ne contenant qu'un ``vert'', on obtiendra 3 isomorphismes.
+En étendant ces chaînes à deux ``vert'' voisins, on conserve toujours trois isomorphismes puis deux en ajoutant ``rouge'' et enfin un seul avec le dernier ``vert''.
 Au total, on aura étendu 9 isomorphismes durant la recherche.
-En regardant maintenant la seconde chaîne, on se rend compte que le nombre de ces isomorphismes intermédiaires est bien plus faible grâce à la sélectivité du B recherché en tout premier (5 isomorphismes intermédiaires sont étendus).
+En regardant maintenant la seconde chaîne, on se rend compte que le nombre de ces isomorphismes intermédiaires est bien plus faible grâce à la sélectivité de l'étiquette ``rouge'' recherché en tout premier (5 isomorphismes intermédiaires sont étendus).
 La différence décisive entre les deux chaînes est donc le moment où le n\oe{}ud avec une étiquette sélective est recherché.
-Effectivement, si le n\oe{}ud B est recherché dès le début, la solution est ``ancrée'' sur une base solide et ne risque a priori pas de créer trop de solutions intermédiaires qui devront toutes être analysées pour passer à l'étape suivante.
+Effectivement, si le n\oe{}ud ``rouge'' est recherché dès le début, la solution est ``ancrée'' sur une base solide et ne risque a priori pas de créer trop de solutions intermédiaires qui devront toutes être analysées pour passer à l'étape suivante.
 On peut dire qu'un n\oe{}ud est plus sélectif qu'un autre à partir du moment où sa fréquence d'apparition dans les molécules étudiées est moins élevée.
+Comme le suggèrent par exemple les auteurs de l'article~\cite{lacroix_motif_2006}, il sera sans doute plus intéressant de commencer les recherches des motifs par des n\oe{}uds dont l'étiquette est peu fréquente.
 
 \textbf{Étiquettes fréquentes}
 
