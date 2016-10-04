@@ -1029,12 +1029,17 @@ Le reste des résidus n'est indexé que sur les extensions à effectuer depuis l
 %   \KwRet $S$;
 % \end{algorithm}
 
-\textbf{TODO : figure famille + recherche}
+\begin{figure}[!ht]
+  \begin{center}
+    \includegraphics[width=400px]{Figures/s2m/residues/cystein_family_search.png}
+    \caption{\label{family_search}Représentation de la rechercher de la cystéine dans un di-peptide, en utilisant sa famille de résidus.}
+  \end{center}
+\end{figure}
 
 L'algorithme de recherche des résidus ressemble fortement à un algorithme de recherche en largeur.
 Nous commençons par rechercher le résidu racine.
 Ci celui-ci est trouvée, alors tout ses résidus fils sont recherchés.
-Sur l'exemple TODO, le résidu racine de la cystéine est trouvé ; les trois résidus de niveau 2 sont alors recherchés.
+Sur l'exemple de la figure \ref{family_search}, le résidu racine de la cystéine est trouvé ; les trois résidus de niveau 2 sont alors recherchés.
 Récursivement, lorsqu'un résidu est trouvé, tous ses fils sont recherchés.
 Ainsi, la recherche de la cystéine dans le peptide de l'exemple aboutie sur la découverte de 3 isomorphismes de monomères différents.
 Ces isomorphismes sont tous situés au même endroit et c'est la phase de pavage qui choisira celui à garder.
