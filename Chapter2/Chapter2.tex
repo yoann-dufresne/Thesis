@@ -47,9 +47,9 @@ Il nous a donc paru nécessaire de créer un outil qui infère la structure mono
 \subsection{Définition du problème}
 
 Nous cherchons à créer un outil bioinformatique permettant l'obtention de nouvelles annotations monomériques NRP fiables.
-La génération d'annotations peut se baser sur la recherche d'informations à partir des gènes ou à partir des molécules dont pour lesquelles on connaît déjà la structure.
+La génération d'annotations peut se baser sur la recherche d'informations à partir des gènes ou à partir des molécules pour lesquelles on connaît déjà la structure.
 Dans notre cas, nous n'avons pas choisi de démarrer des clusters de gènes NRPS puisque des modèles déjà bien éprouvés existent (NRPSpredictor, NaPDoS, ...).
-Les avancées dans ce domaines viendront avec le nombre d'annotations fiables de binômes clusters/NRP qui permettrons l'amélioration des modèles d'apprentissage actuels.
+Les avancées dans ce domaines viendront avec le nombre d'annotations fiables de binômes clusters/NRP qui permettront l'amélioration des modèles d'apprentissage actuels.
 
 \begin{figure}[!ht]
   \begin{center}
@@ -325,7 +325,7 @@ D'un autre côté, les méthodes de résolution se basent sur des méthodes de b
 \textbf{La réduction en clique maximale}~~~
 Il est possible de réduire le problème MCS en un problème de résolution de clique maximale~\cite{pelillo_matching_1999,grosso_simple_2008,rahman_small_2009}.
 Une clique est un ensemble de n\oe{}uds dans un graphe tel que tous les n\oe{}uds de cet ensemble sont reliés entre eux.
-Rechercher la clique maximale revient à rechercher Un sous ensemble maximal de n\oe{}uds qui forment une clique.
+Rechercher la clique maximale revient à rechercher un sous ensemble maximal de n\oe{}uds qui forment une clique.
 Il est possible d'obtenir plusieurs cliques maximales dans un même graphe.
 Ce problème est également NP-Complet~\cite{akkoyunlu_enumeration_1973}.
 Les résolutions de ce problème sont toutes des dérivées de la recherche exhaustive par backtracking.
@@ -463,7 +463,7 @@ Cependant, pour obtenir tous les SI, il faut parcourir tout l'arbre des possible
 Tout comme pour le MCS, le SI peut être résolu par un backtracking classique par association de n\oe{}uds deux à deux.
 C'est la méthode majoritairement utilisée puisqu'elle fonctionne très bien en pratique.
 Contrairement à l'algorithme d'Ullman qui nécessite d'effectuer des opérations sur des matrices potentiellement très grandes, la méthode par backtracking classique n'a pas besoin de grands espaces mémoire.
-L'algorithme VF2~\cite{cordella_subgraph_2004} utilisent ce principe.
+L'algorithme VF2~\cite{cordella_subgraph_2004} utilise ce principe.
 Les SI se forment par ajouts successifs de couples de n\oe{}uds compatibles avec retour en arrière s'il n'est plus possible d'avoir un couple.
 VF2 est un algorithme de recherche de SI pour des graphes non orientés et non étiquetés.
 
@@ -519,7 +519,7 @@ Récursivement, l'algorithme conclut à un isomorphisme {(1,b);(2,a);(3,c)}.
 En l'état, l'algorithme VF2 ne reconnaît qu'un seul et unique isomorphisme.
 On peut modifier simplement l'algorithme afin de récupérer tous les isomorphismes en ne retournant pas une fois que l'un d'eux est
 trouvé mais en l'enregistrant dans un ensemble puis en continuant l'exploration de l'arbre jusqu'au bout.
-Puisque que tout l'arbre est exploré à chaque recherche, l'algorithme est exponentiel.
+L'arbre est entiérement exploré à chaque recherche, l'algorithme est donc exponentiel.
 Pour être plus précis il est en $O(n^m)$, donc non calculable dans les pires des cas ($n$ taille de G et $m$ de H).
 
 Cet algorithme est très pratique pour trouver un SI, mais pas pour les trouver tous.
@@ -620,7 +620,7 @@ peut prendre lors de l'exploration.
 Cherchons encore à augmenter la sélectivité des étiquettes en augmentant leur nombre.
 A partir d'un graphe $G$, il est possible de représenter ses relations d'adjacence au sein d'un second graphe nommé $L$.
 Pour cela, deux n\oe{}uds voisins de $G$ sont représentés dans $L$ comme un seul n\oe{}ud (voir line-graph2 dans figure \ref{representations}).
-Chaque ancienne arrête devient un n\oe{}ud et chaque ancien n\oe{}ud devient une multitude d'arêtes (une clique entre tous les nouveaux n\oe{}uds représentant les anciennes arêtes de cet ancien n\oe{}ud).
+Chaque ancienne arête devient un n\oe{}ud et chaque ancien n\oe{}ud devient une multitude d'arêtes (une clique entre tous les nouveaux n\oe{}uds représentant les anciennes arêtes de cet ancien n\oe{}ud).
 Nous étendons le raisonnement pour les étiquettes en disant que l'étiquette d'un n\oe{}ud du nouveau graphe est la composition des étiquettes des anciens n\oe{}uds ainsi que de l'arité entre ces deux n\oe{}uds.
 Dans notre cas, les étiquettes sont mises dans l'ordre lexicographique pour ne pas avoir deux étiquettes possibles à partir des étiquettes d'origine.
 Un tel type de graphe est appelé \textit{line graph}~\cite{orlin_line-digraphs_1978}.
@@ -640,7 +640,7 @@ Là où la représentation précédente pouvait avoir $n$ étiquettes différent
   \end{center}
 \end{figure}
 
-Le raisonnement des line graphe peut être étendu récursivement.
+Le raisonnement des \textit{line graphes} peut être étendu récursivement.
 On peut ainsi créer des \textit{line-graph} de \textit{line-graph}.
 Cependant, dans notre cas, cela pose plusieurs problèmes de répéter cette opération.
 La répétition de l'opération de transformation diminuera la taille de certains graphes jusqu'à ce qu'ils disparaissent totalement.
@@ -759,7 +759,7 @@ Pour rechercher une chaîne de taille $n$ ($c_n$), il faut donc $n$ extensions s
 On peut donc écrire que le temps de recherche d'une chaîne est le temps cumulé de recherche de ses extensions :
 
 \begin{equation}
- T(c_n) = T(p_0 \rightarrow p_1 \rightarrow ... \rightarrow p_n) = \sum_{i=1}^n T(p_{i-1} \rightarrow cp_i)
+ T(c_n) = T(p_0 \rightarrow p_1 \rightarrow ... \rightarrow p_n) = \sum_{i=1}^n T(p_{i-1} \rightarrow p_i)
 \end{equation}
 
 Où $T()$ est la fonction représentant le temps de recherche d'une chaîne, $p_i$ le un motif de taille $i$ et $p_{i-1} \rightarrow p_i$ la dernière extension d'une chaîne $c_i$ représentée par le passage du motif $p_{i-1}$ au motif $p_i$.
@@ -918,7 +918,7 @@ Cependant, l'ordre de grandeur n'en est pas modifié.
 
 Dans un exemple de la figure \ref{markov}, nous avons montré que le début d'une chaîne est très critique lors de sa recherche dans un graphe.
 L'idée est donc de générer la chaîne par un mélange des deux techniques précédentes.
-Les débuts de la chaîne sera optimisée de manière exact jusqu'à une taille $k$ (préalablement définie par l'utilisateur), puis le reste des extensions se fera en utilisant l'algorithme glouton.
+Les débuts de la chaîne seront optimisés de manière exacte jusqu'à une taille $k$ (préalablement définie par l'utilisateur), puis le reste des extensions se fera en utilisant l'algorithme glouton.
 Cette découpe des chaînes en deux parties garantit une recherche très rapide d'un motif sur la base d'apprentissage tout en limitant fortement le temps de pré-calcul nécessaire pour la construction de l'index.
 
 
@@ -1041,7 +1041,7 @@ Nous commençons par rechercher le résidu racine.
 Ci celui-ci est trouvée, alors tout ses résidus fils sont recherchés.
 Sur l'exemple de la figure \ref{family_search}, le résidu racine de la cystéine est trouvé ; les trois résidus de niveau 2 sont alors recherchés.
 Récursivement, lorsqu'un résidu est trouvé, tous ses fils sont recherchés.
-Ainsi, la recherche de la cystéine dans le peptide de l'exemple aboutie sur la découverte de 3 isomorphismes de monomères différents.
+Ainsi, la recherche de la cystéine dans le peptide de l'exemple aboutit sur la découverte de 3 isomorphismes de monomères différents.
 Ces isomorphismes sont tous situés au même endroit et c'est la phase de pavage qui choisira celui à garder.
 
 
@@ -1219,7 +1219,7 @@ Le but ici est de s'approcher de ce tri optimal en s'assurant d'une exécution t
 
 Cet algorithme nécessite un tri sur une liste de $n$ résidus candidats ($O(n log n)$) puis consomme ensuite un élément de la
 liste à chaque tour de boucle ($O(n)$). Contrairement à la résolution exacte présentée précédemment, si la fonction de comparaison
-pour le tri ne dépend pas de $n$ cet algorithme est polynomial.
+pour le tri ne dépend pas de $n$ cet algorithme est linéaire.
 Nous pouvons donc garantir la rapidité d'exécution si les critères de tri sont également calculable en temps polynomial.
 
 Le but est d'opter pour l'efficacité maximale locale en espérant que l'efficacité globale sera également maximale.
@@ -1332,7 +1332,7 @@ Le problème majeur est que si une solution parfaite n'existe pas, l'algorithme 
 Rappelons que le pavage glouton effectue des choix que nous supposons pertinents.
 Il n'est donc normalement pas nécessaire de modifier la solution en profondeur pour obtenir l'idéal.
 Si la solution n'est pas trouvée rapidement, il y a fort à parier que la solution idéale n'existe pas.
-On peut donc limiter la profondeur de notre algorithme de modulation limitant la profondeur de la récursion.
+On peut donc limiter la profondeur de notre algorithme de modulation en limitant la profondeur de la récursion.
 Cette limite de profondeur diminue fortement le temps de calcul mais ne garantit plus de passer par l'optimal.
 Cependant, si une solution n'est pas trouvée en quelques étapes de modulation, il est fort probable qu'aucune solution ne soit possible.
 
@@ -1363,7 +1363,7 @@ Ce déplacement peut même avoir lieu entre deux résidus différents d'un pepti
 \begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=200px]{Figures/s2m/recherche/light.png}
-    \caption{\label{label_matching}Exemple de fonctionnement de la fonction de matching ligth d'étiquettes.
+    \caption{\label{label_light}Exemple de fonctionnement de la fonction de matching ligth d'étiquettes.
     Puisque le nombre d'atomes d'hydrogène n'est plus un critère sélectif et que l'arité de la liaison chimique non plus, la comparaison est valide dès que les deux atomes non hydrogène sont identiques.}
   \end{center}
 \end{figure}
