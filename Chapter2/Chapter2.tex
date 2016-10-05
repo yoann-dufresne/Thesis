@@ -14,7 +14,7 @@ Certaines s'attardent sur les ressemblances de structures atomiques 2D ou 3D, ce
 Beaucoup ne se cantonnent pas à une seule des ressemblances citées ci-dessus mais essaient de les combiner pour prédire au mieux l'activité.
 Cependant, ces techniques ont deux limites.
 Premièrement, pour déterminer l'activité d'une molécule, il est nécessaire de connaître les activités de molécules ``proches'', qu'il faut donc avoir annoté auparavant.
-Deuxièmement, les temps de calcul nécessaires augmentent rapidement avec le nombre de critères à comparer et la complexité d'analyse de ceux-ci.
+Deuxièmement, les temps de calcul nécessaires augmentent rapidement avec le nombre de critères à comparer et la complexité d'analyse de chacun de ces critères.
 Le but de ces méthodes est donc d'inclure d'abord les critères les plus sélectifs afin de déterminer des activités connues en un temps raisonnable.
 
 Beaucoup de NRP possèdent des activités très intéressantes (antibiotiques, anti-tumeurs, antidouleurs, ...).
@@ -23,8 +23,8 @@ Lorsque ces activités ne sont pas déterminées expérimentalement, les logicie
 En 2012 puis 2014, Abdo et al. publient de nouvelles méthodes de prédiction d'activité NRP, se basant sur les spécificités des NRP~\cite{abdo_new_2012, abdo_prediction_2014}.
 Dans les deux cas, les prédictions sont effectuées à partir des compositions monomériques et non pas atomiques.
 Dans le premier article~\cite{abdo_new_2012}, la prédiction est effectuée en créant pour chaque activité connue un \textit{fingerprint}.
-Ces fingerprints sont les barycentres des peptides présentant l'activité.
-Prédire l'activité d'un nouveau NRP revient alors à déterminer le barycentre d'activité le plus proche.
+Ces fingerprints sont les barycentres de classes de peptides présentant l'activité.
+Prédire l'activité d'un nouveau NRP revient alors à déterminer l'activité dont le barycentre est le plus proche.
 Dans le second article~\cite{abdo_prediction_2014}, c'est un classifieur par réseau Bayésien qui est entraîné sur les compositions en monomères.
 Une fois les réseaux entraînés, il suffit de fournir une composition en entrée pour avoir les probabilités de chaque activité en sortie.
 Dans les deux cas, il est important de constater que l'abstraction monomérique est suffisante pour une prédiction de qualité.
@@ -47,9 +47,9 @@ Il nous a donc paru nécessaire de créer un outil qui infère la structure mono
 \subsection{Définition du problème}
 
 Nous cherchons à créer un outil bioinformatique permettant l'obtention de nouvelles annotations monomériques NRP fiables.
-La génération d'annotations peut se baser sur la recherche d'informations à partir des gènes ou à partir des molécules dont pour lesquelles on connaît déjà la structure.
+La génération d'annotations peut se baser sur la recherche d'informations à partir des gènes ou à partir des molécules pour lesquelles on connaît déjà la structure.
 Dans notre cas, nous n'avons pas choisi de démarrer des clusters de gènes NRPS puisque des modèles déjà bien éprouvés existent (NRPSpredictor, NaPDoS, ...).
-Les avancées dans ce domaines viendront avec le nombre d'annotations fiables de binômes clusters/NRP qui permettrons l'amélioration des modèles d'apprentissage actuels.
+Les avancées dans ce domaines viendront avec le nombre d'annotations fiables de binômes clusters/NRP qui permettront l'amélioration des modèles d'apprentissage actuels.
 
 \begin{figure}[!ht]
   \begin{center}
@@ -79,11 +79,11 @@ Nous allons ici présenter ces deux approches.
 \subsubsection{CHUCKLES, une méthode constructive}
 
 CHUCKLES~\cite{siani_chuckles:_1994} est une méthode publiée en 1994 pour la recherche des peptides au sein d'une base de données.
-Le but est de requêter une base de données de molécules en utilisant des expressions régulières entrées par l'utilisateur et représentant des sous-molécules d'intérêt.
+Le but est d'interroger une base de données de molécules en utilisant des expressions régulières entrées par l'utilisateur et représentant des sous-molécules d'intérêt.
 Les recherches peuvent être effectuées à la fois au niveau atomique et au niveau monomérique.
 Le but de CHUCKLES est de convertir rapidement les données du format monomérique vers le format atomique et inversement.
 Les auteurs pensent qu'il est plus utile de conserver les formats atomiques en base plutôt que les séquences protéiques.
-Sachant que la plupart des peptides de l'époque étaient déjà représentés par leur séquence, les auteurs proposent une méthode de transformation vers la structure atomique.
+Sachant que la plupart des peptides de l'époque étaient déjà représentés par leur séquence, les auteurs proposent une méthode de transformation de la séquence monomérique vers la structure atomique.
 Cette transformation est appelée ``Forward-Translation'' (FT).
 
 \begin{figure}[!ht]
@@ -114,7 +114,7 @@ La reconstruction se fait alors en utilisant un sens aléatoire pour le monomèr
     La seconde partie représente la structure monomérique post contraction.
     On peut voir à gauche la chaîne principale qui a été extraite à partir du N initial.
     A droite sont répertoriés les deux ponts disulfure extraits hors de la chaîne principale.
-    Chaque monomère découvert comporte un identifiant différent de son nom pour éviter d'avoir deux fois le même nom comme cela pourrait être le cas ici.
+    Chaque monomère découvert comporte un identifiant différent de son nom pour éviter d'avoir deux fois le même nom comme cela pourrait être le cas ici (exemple avec Cysx1 et Cysx2).
     Schémas issus de la publication~\cite{siani_chuckles:_1994}}
   \end{center}
 \end{figure}
@@ -150,7 +150,7 @@ Dans ce cas, vu qu'aucun retour en arrière n'est effectué, l'annotation sera i
 
 Le logiciel molBLOCKS~\cite{ghersi_molblocks:_2014} n'est, à la base, pas conçu pour le travail que nous cherchons à effectuer.
 C'est un logiciel qui permet de découvrir des monomères en repérant les fragments fréquents au sein d'une population de polymères.
-Pour cela le logiciel découpe les polymères en petits fragments et effectue des comptages de ceux-ci.
+Pour cela, le logiciel découpe les polymères en petits fragments et effectue des comptages de ceux-ci.
 Ces découpes suivent des règles entrées par l'utilisateur.
 Par exemple en donnant comme règle
 \begin{equation}
@@ -173,14 +173,13 @@ Pour des protéines ribosomiques, la découpe sera donc parfaite avec cette seul
 Dans notre cas, nous pourrions utiliser un tel logiciel pour découper les NRP en monomères.
 En effectuant par la suite une étape de reconnaissance de ces monomères, il serait alors possible de reconstruire le peptide.
 Cependant, certaines réactions effectuées au sein des NRP ne permettent pas de découper entièrement le peptide avec la seule règle énoncée précédemment.
-Toutes les liaisons non peptidiques énoncées au chapitre précédent ne seront pas découpées.
+En effet, toutes les liaisons non peptidiques énoncées au chapitre précédent ne seront pas découpées.
 Il est donc nécessaire de rajouter de nouvelles règles.
-Cependant, la liaison hydroxyl à elle seule ne permet déjà plus d'effectuer une découpe correcte.
-Pour pouvoir la délier, il faudrait une règle du type
+Cependant, la liaison hydroxyl à elle seule ne permet déjà plus d'effectuer une découpe correcte car pour pouvoir la délier, il faudrait une règle du type
 \begin{equation}
   COC \longrightarrow CO + C
 \end{equation}
-Mais ce genre de règle est ambiguë.
+Ce genre de règle est cependant ambiguë.
 Il est impossible de connaître de quel côté du O la liaison doit être rompue.
 De plus, certains monomères comme le glucose sont initialement composés de $COC$.
 Ces monomères seront donc découpés alors qu'ils ne devraient pas l'être.
@@ -202,7 +201,7 @@ Pour ces deux raisons, nous ne pourrons pas directement utiliser ce logiciel afi
 
 \subsection{Vers des problèmes informatiques}
 
-Pour concevoir notre logiciel d'annotation, nous allons nous inspirer des techniques existantes en essayant de dépasser leurs difficultés.
+Pour concevoir notre logiciel d'annotation, nous allons nous inspirer des techniques existantes en essayant de dépasser leurs limitations.
 Nous possédons, au sein de Norine, une grande base de connaissances de monomères existants (plus de 500) et nous pouvons nous appuyer sur cette base bien établie pour assurer l'existence des monomères lors des annotations.
 A partir de ces données, essayons de concevoir un algorithme constructif.
 
@@ -211,7 +210,7 @@ A partir de ces données, essayons de concevoir un algorithme constructif.
 \label{subproblems}
 
 La méthode CHUCKLES tire partie de la différence entre les 20 acides aminés principaux pour se permettre de rechercher les plus gros en premier et de ne jamais revenir sur les choix faits.
-Rechercher les monomères par taille (en nombre d'atomes) décroissante et en masquant les atomes déjà utilisés est un choix pertinent car il permet d'éviter de détecter partout les petits acides aminés comme la glycine.
+Rechercher les monomères par taille (en nombre d'atomes) décroissante et en masquant les atomes déjà utilisés est un choix pertinent car il permet d'éviter de sur-détecter partout les petits acides aminés comme la glycine.
 Dans notre cas, la proximité entre certains monomères ne nous permettra pas de les départager grâce à un tri par taille.
 Nous risquons d'introduire de trop gros monomères prenant la place d'autres et créant artificiellement des ``trous'' dans l'annotation.
 Il sera nécessaire de modifier les solutions incomplètes pour essayer de les améliorer.
@@ -258,13 +257,11 @@ plus petit problèmes : un problème de recherche de monomères et un problème 
 donc séparément ces deux problèmes.
 
 \textbf{Recherche de monomères}~~~
-Rechercher un monomère dans un polymère revient à rechercher un petit graphe atomique
-$S$ dans un plus gros graphe $G$. Deux cas sont alors possibles : soit nous cherchons à trouver exactement $S$ dans
-$G$, soit nous cherchons une approximation de $S$ dans $G$. Dans le premier cas, nous allons nous intéresser à l'
-``Isomorphisme de Sous-graphe'' (en anglais \textit{Subgraph Isomorphism} (SI)). Dans le second cas, nous nous intéresserons au
-``Sous-graphe Maximum Commun'' (en anglais \textit{Maximum Common Subgraph} (MCS)). Les recherches de SI ou de MCS ont toutes
-deux été prouvées NP-Complet mais, pour chacun des problème, il existe des algorithmes rapides en pratique pour des graphes
-aux propriétés particulières.
+Rechercher un monomère dans un polymère revient à rechercher un petit graphe atomique $S$ dans un plus gros graphe $G$.
+Deux cas sont alors possibles : soit nous cherchons à trouver exactement $S$ dans $G$, soit nous cherchons une ``approximation'' de $S$ dans $G$.
+Dans le premier cas, nous allons nous intéresser à l'``Isomorphisme de Sous-graphe'' (en anglais \textit{Subgraph Isomorphism} (SI)).
+Dans le second cas, nous nous intéresserons au ``Sous-graphe Maximum Commun'' (en anglais \textit{Maximum Common Subgraph} (MCS)).
+Les recherches de SI ou de MCS ont toutes deux été prouvées NP-Complet mais, pour chacun des problème, il existe des algorithmes rapides en pratique pour des graphes aux propriétés particulières.
 Nous aborderons cela en section \ref{SI_MCS}.
 
 \textbf{Pavage des monomères}~~~
@@ -311,25 +308,25 @@ En imposant que le graphe commun soit d'une taille minimale fixée, nous pourron
 
 Du fait de la NP-complétude du problème, trouver des solutions exactes est très compliqué.
 Il existe tout de même quelques algorithmes de résolution exacts mais la majorité des articles à propos de MCS traitent d'heuristiques de résolution rapide.
-Voyons ensemble ces deux catégories d'algorithmes en s'appuyant sur les reviews~\cite{raymond_maximum_2002, ehrlich_maximum_2011}.
+Voyons ensemble ces deux catégories d'algorithmes en s'appuyant sur les articles de synthèses~\cite{raymond_maximum_2002, ehrlich_maximum_2011}.
 
 
 \subsubsection{Les méthodes exactes de résolution}
 
 Au sein des algorithmes de résolution exacte du MCS, il existe deux grandes écoles.
 D'un côté, le problème du MCS est réduit en un problème de clique maximale, avant d'utiliser des solveurs dédiés à ce second problème.
-D'un autre côté, les méthodes de résolution se basent sur des méthodes de backtracking.
+D'un autre côté, les méthodes de résolution se basent sur des méthodes de recherche avec retour arrière (\textit{backtracking}).
 
 
 
 \textbf{La réduction en clique maximale}~~~
 Il est possible de réduire le problème MCS en un problème de résolution de clique maximale~\cite{pelillo_matching_1999,grosso_simple_2008,rahman_small_2009}.
 Une clique est un ensemble de n\oe{}uds dans un graphe tel que tous les n\oe{}uds de cet ensemble sont reliés entre eux.
-Rechercher la clique maximale revient à rechercher Un sous ensemble maximal de n\oe{}uds qui forment une clique.
+Rechercher la clique maximale revient à rechercher un sous ensemble maximal de n\oe{}uds qui forment une clique.
 Il est possible d'obtenir plusieurs cliques maximales dans un même graphe.
 Ce problème est également NP-Complet~\cite{akkoyunlu_enumeration_1973}.
 Les résolutions de ce problème sont toutes des dérivées de la recherche exhaustive par backtracking.
-Il est possible de ne pas passer par toutes les combinaisons possibles en réduisant l'espace de recherche en fonction de l'arité des n\oe{}uds ou de leur contexte local mais les algorithmes restent exponentiels~\cite{tomita_worst-case_2004}.
+Il est possible de ne pas passer par toutes les combinaisons possibles en réduisant l'espace de recherche en fonction de l'arité des n\oe{}uds ou de leur contexte local mais malgré tout, les algorithmes restent exponentiels~\cite{tomita_worst-case_2004}.
 
 \begin{figure}[!ht]
   \begin{center}
@@ -363,7 +360,7 @@ En résolvant le problème de clique maximale sur le GC, on obtient le MCS.
 \textbf{Recherche par Backtracking}~~~
 La majorité des algorithmes exacts effectuent des recherches via des méthodes de backtracking~\cite{manic_branch&cut_2009,mcgregor_backtrack_1982,kawabata_build-up_2011}.
 Un MCS est une bijection entre deux sous-ensembles de n\oe{}uds dans deux graphes distincts.
-Les méthodes de backtrack effectuent une reconstruction itérative de cette bijection.
+Les méthodes de backtracking effectuent une reconstruction itérative de cette bijection.
 Les couples de n\oe{}uds compatibles, n'étant pas encore présents au sein de la bijection, sont ajoutés un à un (voir figure \ref{backtracking_solve}).
 Lorsque l'algorithme arrive dans une impasse (plus aucune possibilité d'ajouter un couple), il revient en arrière sur une association puis fait un choix différent.
 En sauvegardant l'ensemble qui a contenu le plus de n\oe{}uds, on obtient la clique maximale après le parcours de tout l'arbre des possibilités.
@@ -382,14 +379,14 @@ Il existe une très grande quantité d'heuristiques de résolution du MCS.
 La méthode la plus utilisée est une méthode de recherche par similarités locales~\cite{yan_substructure_2005,willett_similarity_2011}.
 Ces heuristiques sont utilisées au sein de bases de données pour rechercher des structures chimiques par ressemblance avec une requête.
 Chaque molécule de la base est décomposée en un grand nombre de critères topologiques locaux (l'arité des noeuds par exemple).
-Ces critères sont entrés dans un vecteur appelé fingerprint.
+Ces critères sont entrés dans un vecteur appelé \textit{fingerprint}.
 Lors d'une requête, le motif recherché est à son tour transformé en \textit{fingerprint} et une mesure de similarité est effectuée avec les vecteurs présents en base.
 Les \textit{fingerprints} les ``plus proches'' (d'après une fonction de score~\cite{maggiora_molecular_2011,ndiaye_cp_2011}) sont déclarés contenir une sous partie commune.
 Cette méthode ne donne aucune assurance quant à l'obtention de réels MCS.
 C'est la rapidité d'exécution de l'algorithme qui est recherchée.
 Dans notre cas, cette méthode est inappropriée puisque nous cherchons des MCS exacts.
 
-D'autres méthodes se rapprochent plus des méthodes exactes par recherche backtracking~\cite{grosso_simple_2008, wang_fmcsr:_2013}.
+D'autres méthodes se rapprochent plus des méthodes citées dans le paragraphe sur le backtracking~\cite{grosso_simple_2008, wang_fmcsr:_2013}.
 Ici, les auteurs construisent plusieurs bijections en parallèle.
 La différence avec les méthodes exactes est qu'ils ne reviennent jamais sur les décisions prises pour construire les MCS.
 Un nombre fixe de bijections est maintenu en permanence.
@@ -412,7 +409,7 @@ Cette seconde méthode est très intéressante lorsque l'on cherche un bon rappo
   \end{center}
 \end{figure}
 
-Définissions à son tour le problème d'isomorphisme de sous-graphe (Subgraph Isomorphism (SI)).
+Définissions désormais le problème d'isomorphisme de sous-graphe (Subgraph Isomorphism (SI)).
 Comme le nom l'indique, le problème SI est un problème de recherche d'un graphe dans une sous partie d'un autre.
 C'est à dire que G est sous-graphe de H lorsque tous les n\oe{}uds et toutes les arêtes de G sont retrouvées structurées de la même manière dans H (voir figure \ref{SI_fig}).
 Tout comme le MCS, le problème du SI a été prouvé NP-Complet~\cite{garey_computers_1979}.
@@ -454,7 +451,7 @@ Avant cet ajout, il faut également vérifier que tous les voisins de $h$ corres
 Puisque nous ajoutons ce couple à l'isomorphisme, il faut remplacer tous les 1 de la ligne et la colonne choisies par des 0 (excepté pour la case $(i,j)$).
 À ce moment, si au moins une ligne a été vidée de tous ses 1, c'est que l'isomorphisme n'est pas possible et il faut revenir à l'étape précédente.
 L'algorithme continue récursivement jusqu'à obtenir un 1 par ligne ou ne trouver aucun isomorphisme.
-En choisissant bien les lignes et les colonnes par lesquelles l'algorithme commence (par exemple celles pour lesquelles il n'y pas de doute), on arrive à obtenir des temps d'exécution très courts pour la recherche d'un SI.
+En choisissant bien les lignes et les colonnes par lesquelles l'algorithme commence (par exemple celles pour lesquelles il n'y pas de choix multiples), on arrive à obtenir des temps d'exécution très courts pour la recherche d'un SI.
 Cependant, pour obtenir tous les SI, il faut parcourir tout l'arbre des possibles, ce qui ralentit l'algorithme.
 
 
@@ -463,7 +460,7 @@ Cependant, pour obtenir tous les SI, il faut parcourir tout l'arbre des possible
 Tout comme pour le MCS, le SI peut être résolu par un backtracking classique par association de n\oe{}uds deux à deux.
 C'est la méthode majoritairement utilisée puisqu'elle fonctionne très bien en pratique.
 Contrairement à l'algorithme d'Ullman qui nécessite d'effectuer des opérations sur des matrices potentiellement très grandes, la méthode par backtracking classique n'a pas besoin de grands espaces mémoire.
-L'algorithme VF2~\cite{cordella_subgraph_2004} utilisent ce principe.
+L'algorithme VF2~\cite{cordella_subgraph_2004} utilise ce principe.
 Les SI se forment par ajouts successifs de couples de n\oe{}uds compatibles avec retour en arrière s'il n'est plus possible d'avoir un couple.
 VF2 est un algorithme de recherche de SI pour des graphes non orientés et non étiquetés.
 
@@ -517,12 +514,12 @@ Une fois toutes les tentatives échouées, l'algorithme remonte dans l'arbre et 
 Récursivement, l'algorithme conclut à un isomorphisme {(1,b);(2,a);(3,c)}.
 
 En l'état, l'algorithme VF2 ne reconnaît qu'un seul et unique isomorphisme.
-On peut modifier simplement l'algorithme afin de récupérer tous les isomorphismes en ne retournant pas une fois que l'un d'eux est
+On peut modifier simplement l'algorithme afin de récupérer tous les isomorphismes en ne s'arrétant pas une fois que l'un d'eux est
 trouvé mais en l'enregistrant dans un ensemble puis en continuant l'exploration de l'arbre jusqu'au bout.
-Puisque que tout l'arbre est exploré à chaque recherche, l'algorithme est exponentiel.
-Pour être plus précis il est en $O(n^m)$, donc non calculable dans les pires des cas ($n$ taille de G et $m$ de H).
+L'arbre est entiérement exploré à chaque recherche, l'algorithme est donc exponentiel.
+Pour être plus précis, il est en $O(n^m)$, donc non calculable dans les pires des cas ($n$ nombre de sommets de G et $m$ de H).
 
-Cet algorithme est très pratique pour trouver un SI, mais pas pour les trouver tous.
+À cause de sa complexité, cet algorithme est très pratique pour trouver un seul SI, mais pas pour les trouver tous.
 En pratique, il est utilisé au sein de grandes librairies logicielles de chimie comme CDK~\cite{steinbeck_chemistry_2003} pour faire des requêtes par structure sur des ensembles chimiques.
 
 
@@ -532,8 +529,8 @@ Contrairement à la recherche de MCS, il n'existe pas beaucoup d'alternatives he
 Ceci peut s'expliquer par le fait que des algorithmes exacts et praticables existent pour trouver les SI.
 De plus, les heuristiques de MCS permettent d'obtenir des résultats de SI en ajoutant des contraintes (Le SI étant un cas particulier du MCS).
 Dans tous les cas, ces heuristiques de SI sont des dérivés de la technique par backtracking~\cite{kaijar_developing_2012}.
-Ces algorithmes essaient en supplément d'éviter l'exploration de toutes les branches par de la sélection des plus ``prometteuses''.
-Par exemple, on préférera explorer des isomorphismes commençant par des paires de noeuds d'arité forte car ils sont un fort indice de ``bon isomorphisme''.
+Ces algorithmes essaient en supplément d'éviter l'exploration de toutes les branches en sélectionnant les plus ``prometteuses''.
+Par exemple, on préférera explorer des isomorphismes commençant par des paires de noeuds d'arité forte car ils sont un indice de ``bon isomorphisme''.
 
 Il existe également de nombreux algorithmes pour des cas particuliers de SI.
 Par exemple, il est possible de résoudre le problème SI en temps polynomial pour des arbres~\cite{shamir_faster_1997}, des graphes planaires~\cite{eppstein_subgraph_1995,dorn_planar_2009} ou des graphes de \textit{treewidth} faible~\cite{hajiaghayi_subgraph_2007}.
@@ -543,7 +540,7 @@ Dans tous les cas, il est possible de trouver au moins une molécule (pas forcé
 \subsection{Choisir l'algorithme de recherche de monomères}
 
 Pour pouvoir rechercher les monomères, nous devions choisir entre toutes les approches algorithmiques citées ci-dessus.
-Premièrement, lorsque nous recherchons un monomère dans un peptide, nous souhaitons connaître tous les endroits où il peut apparaitre.
+Premièrement, lorsque nous recherchons un monomère dans un peptide, nous souhaitons connaître toutes les occurences potentielles.
 Nous ne souhaitons donc pas utiliser d'approches heuristiques.
 Deuxièmement, le MCS ne paraît pas très pratique dans notre cas.
 En effet, les NRP regorgent de monomères proches les uns des autres (variation de un ou deux atomes/liaisons).
@@ -582,9 +579,8 @@ Puis nous montrerons en quoi les étiquettes des n\oe{}uds du graphes influencen
 
 Intéressons nous à l'application de VF2 aux graphes étiquetés.
 L'algorithme peut être modifié pour ne former que des paires de n\oe{}uds de même étiquette.
-Prenons à nouveau notre exemple précédent en étiquetant avec A et B les n\oe{}uds.
-Sur la figure \ref{vf2_labels}, on peut voir la recherche d'un graphe $G$ composé de 2 n\oe{}uds A et un n\oe{}ud B au sein d'un graphe $H$
-composé d'un branchement supplémentaire contenant un n\oe{}ud B.
+Prenons à nouveau notre exemple précédent en étiquetant avec ``vert'' et ``rose'' les n\oe{}uds.
+Sur la figure \ref{vf2_labels}, on peut voir la recherche d'un graphe $G$ composé de 2 n\oe{}uds ``vert'' et un n\oe{}ud ``rose'' au sein d'un graphe $H$ composé d'un branchement supplémentaire contenant un n\oe{}ud ``rose''.
 Sur ce graphique nous avons représenté deux cas de recherche selon l'ordre dans lequel nous prenons $G$.
 Nous pouvons remarquer que, dans les deux cas, la taille de l'arbre est bien plus faible que pour un graphe non étiqueté.
 Les étiquettes des n\oe{}uds font office de filtres de recherche et accélèrent fortement la recherche.
@@ -599,7 +595,7 @@ la plus grande possible.
 
 \label{selectiv_p}
 
-Premièrement, attachons nous à la représentation la plus basique possible d'un graphe chimique (atome=n\oe{}ud, liaison=arête).
+Premièrement, attardons nous sur la représentation la plus basique possible d'un graphe chimique (atome=n\oe{}ud, liaison=arête).
 Dans cette représentation, nous pouvons considérer chaque étiquette comme étant le nom de l'atome du n\oe{}ud (Voir figure \ref{representations}, première partie).
 Bien entendu, les hydrogènes sont les atomes les plus représentés et ne filtrent pas les recherches par eux-mêmes.
 Cependant, ils contiennent une information supplémentaire sur l'atome auquel ils sont liés.
@@ -610,8 +606,10 @@ Par exemple $NH_2$, $NH$, $N$ sont les trois étiquettes variants depuis l'ancie
 Les étiquettes sont plus nombreuses et leur fréquence à la fois moins élevée et plus homogène, ce qui les rend plus sélectives.
 
 \begin{figure}[!ht]
-  \includegraphics[width=300px]{Figures/s2m/representations/all_tmp.pdf}
-  \caption{\label{representations}Manque fréquences et titres dans l'image}
+  \begin{center}
+    \includegraphics[width=400px]{Figures/s2m/representations/all.png}
+    \caption{\label{representations}Triple représentation de la même molécule accompagnée des fréquences de chacunes des étiques possible. Ces fréquences ont été calculé sur un extrait de 200 molécules issues de la base de données Norine.}
+  \end{center}
 \end{figure}
 
 Globalement, au plus le nombre d'étiquettes est élevé et au plus les fréquences de ces étiquettes sont homogènes, au moins l'algorithme VF2 aura de difficultés à effectuer un isomorphisme.
@@ -621,21 +619,14 @@ peut prendre lors de l'exploration.
 Cherchons encore à augmenter la sélectivité des étiquettes en augmentant leur nombre.
 A partir d'un graphe $G$, il est possible de représenter ses relations d'adjacence au sein d'un second graphe nommé $L$.
 Pour cela, deux n\oe{}uds voisins de $G$ sont représentés dans $L$ comme un seul n\oe{}ud (voir line-graph2 dans figure \ref{representations}).
-Chaque ancienne arrête devient un n\oe{}ud et chaque ancien n\oe{}ud devient une multitude d'arêtes (une clique entre tous les nouveaux n\oe{}uds représentant les anciennes arêtes de cet ancien n\oe{}ud).
+Chaque ancienne arête devient un n\oe{}ud et chaque ancien n\oe{}ud devient une multitude d'arêtes (une clique entre tous les nouveaux n\oe{}uds représentant les anciennes arêtes de cet ancien n\oe{}ud).
 Nous étendons le raisonnement pour les étiquettes en disant que l'étiquette d'un n\oe{}ud du nouveau graphe est la composition des étiquettes des anciens n\oe{}uds ainsi que de l'arité entre ces deux n\oe{}uds.
 Dans notre cas, les étiquettes sont mises dans l'ordre lexicographique pour ne pas avoir deux étiquettes possibles à partir des étiquettes d'origine.
 Un tel type de graphe est appelé \textit{line graph}~\cite{orlin_line-digraphs_1978}.
 L'inclusion de l'arité du lien dans les étiquettes est un très gros avantage de cette représentation.
-La fonction de recherche n'aura donc plus du tout à s'attarder sur le degré des arêtes.
+La fonction de recherche n'aura donc plus du tout à s'attarder sur le degré des arêtes puisque le tout sera reporté sur la fonction de matching d'étiquettes (voir figure \ref{label_matching}).
 De plus, transformer les graphes de cette manière nous permet de répondre à la volonté d'augmenter le nombre d'étiquettes.
 Là où la représentation précédente pouvait avoir $n$ étiquettes différentes, celle-ci pourra en générer plus de $n^2$ ($3n^2$ si on compte tous le degré des liaisons entre atomes).
-
-Le raisonnement des line graphe peut être étendu récursivement.
-On peut ainsi créer des \textit{line-graph} de \textit{line-graph}.
-Cependant, dans notre cas, cela pose plusieurs problèmes de répéter cette opération.
-La répétition de l'opération de transformation diminuera la taille de certains graphes jusqu'à ce qu'ils disparaissent totalement.
-Dans d'autres graphes, le nombre de n\oe{}uds va grandir avec la répétition et ainsi augmenter le nombre de comparaisons nécessaires à la résolution d'un SI.
-Pour ces raisons, nous avons choisi de n'effectuer qu'une seule étape de line-graph.
 
 \begin{figure}[!ht]
   \begin{center}
@@ -647,6 +638,13 @@ Pour ces raisons, nous avons choisi de n'effectuer qu'une seule étape de line-g
     Enfin, le dernier remplit les 3 critères précédemment cités et la correspondance est possible.}
   \end{center}
 \end{figure}
+
+Le raisonnement des \textit{line graphes} peut être étendu récursivement.
+On peut ainsi créer des \textit{line-graph} de \textit{line-graph}.
+Cependant, dans notre cas, cela pose plusieurs problèmes de répéter cette opération.
+La répétition de l'opération de transformation diminuera la taille de certains graphes jusqu'à ce qu'ils disparaissent totalement.
+Dans d'autres graphes, le nombre de n\oe{}uds va grandir avec la répétition et ainsi augmenter le nombre de comparaisons nécessaires à la résolution d'un SI.
+Pour ces raisons, nous avons choisi de n'effectuer qu'une seule étape de line-graph.
 
 \subsubsection{Indexation des monomères}
 
@@ -677,13 +675,14 @@ Déterminons quel(s) critère(s) simple(s) nous permettent de supposer qu'une ch
 Avec ce ou ces critères, nous pourrons ensuite déterminer un moyen d'ordonner les n\oe{}uds de manière gloutonne.
 Partons de l'exemple présenté sur la figure \ref{chaine_fail}.
 A gauche est dessiné un motif simple suivi de deux chaînes pouvant le représenter (lecture de l'ordre des chaînes de gauche à droite).
-Pour la première chaîne, en partant du motif ne contenant qu'un A, on obtiendra 3 isomorphismes.
-En étendant ces chaînes à deux A voisins, on conserve toujours trois isomorphismes puis deux en ajoutant B et enfin un seul avec le dernier A.
+Pour la première chaîne, en partant du motif ne contenant qu'un ``vert'', on obtiendra 3 isomorphismes.
+En étendant ces chaînes à deux ``vert'' voisins, on conserve toujours trois isomorphismes puis deux en ajoutant ``rouge'' et enfin un seul avec le dernier ``vert''.
 Au total, on aura étendu 9 isomorphismes durant la recherche.
-En regardant maintenant la seconde chaîne, on se rend compte que le nombre de ces isomorphismes intermédiaires est bien plus faible grâce à la sélectivité du B recherché en tout premier (5 isomorphismes intermédiaires sont étendus).
+En regardant maintenant la seconde chaîne, on se rend compte que le nombre de ces isomorphismes intermédiaires est bien plus faible grâce à la sélectivité de l'étiquette ``rouge'' recherché en tout premier (5 isomorphismes intermédiaires sont étendus).
 La différence décisive entre les deux chaînes est donc le moment où le n\oe{}ud avec une étiquette sélective est recherché.
-Effectivement, si le n\oe{}ud B est recherché dès le début, la solution est ``ancrée'' sur une base solide et ne risque a priori pas de créer trop de solutions intermédiaires qui devront toutes être analysées pour passer à l'étape suivante.
+Effectivement, si le n\oe{}ud ``rouge'' est recherché dès le début, la solution est ``ancrée'' sur une base solide et ne risque a priori pas de créer trop de solutions intermédiaires qui devront toutes être analysées pour passer à l'étape suivante.
 On peut dire qu'un n\oe{}ud est plus sélectif qu'un autre à partir du moment où sa fréquence d'apparition dans les molécules étudiées est moins élevée.
+Comme le suggèrent par exemple les auteurs de l'article~\cite{lacroix_motif_2006}, il sera sans doute plus intéressant de commencer les recherches des motifs par des n\oe{}uds dont l'étiquette est peu fréquente.
 
 \textbf{Étiquettes fréquentes}
 
@@ -755,11 +754,11 @@ Nous allons nous appuyer sur les figures \ref{apprentissage} et \ref{glouton} po
 Afin d'évaluer la qualité d'une chaîne, nous allons calculer son temps d'exécution sur notre base d'apprentissage.
 Partons de la définition d'une chaîne : une chaîne est composée d'une succession de n\oe{}uds.
 Ces n\oe{}uds vont, lors de l'isomorphisme, être recherchés dans l'ordre donné par la chaîne.
-Pour rechercher une chaîne de taille $n$ ($c_n$), il faut donc $n$ extensions successives.
+Pour rechercher une chaîne de taille $n$ ($c_n = p_0 \rightarrow p_1 \rightarrow ... p_n$), il faut donc $n$ extensions successives.
 On peut donc écrire que le temps de recherche d'une chaîne est le temps cumulé de recherche de ses extensions :
 
 \begin{equation}
- T(c_n) = T(p_0 \rightarrow p_1 \rightarrow ... \rightarrow p_n) = \sum_{i=1}^n T(p_{i-1} \rightarrow cp_i)
+ T(c_n) = T(p_0 \rightarrow p_1 \rightarrow ... \rightarrow p_n) = \sum_{i=1}^n T(p_{i-1} \rightarrow p_i)
 \end{equation}
 
 Où $T()$ est la fonction représentant le temps de recherche d'une chaîne, $p_i$ le un motif de taille $i$ et $p_{i-1} \rightarrow p_i$ la dernière extension d'une chaîne $c_i$ représentée par le passage du motif $p_{i-1}$ au motif $p_i$.
@@ -918,7 +917,7 @@ Cependant, l'ordre de grandeur n'en est pas modifié.
 
 Dans un exemple de la figure \ref{markov}, nous avons montré que le début d'une chaîne est très critique lors de sa recherche dans un graphe.
 L'idée est donc de générer la chaîne par un mélange des deux techniques précédentes.
-Les débuts de la chaîne sera optimisée de manière exact jusqu'à une taille $k$ (préalablement définie par l'utilisateur), puis le reste des extensions se fera en utilisant l'algorithme glouton.
+Les débuts de la chaîne seront optimisés de manière exacte jusqu'à une taille $k$ (préalablement définie par l'utilisateur), puis le reste des extensions se fera en utilisant l'algorithme glouton.
 Cette découpe des chaînes en deux parties garantit une recherche très rapide d'un motif sur la base d'apprentissage tout en limitant fortement le temps de pré-calcul nécessaire pour la construction de l'index.
 
 
@@ -1029,14 +1028,19 @@ Le reste des résidus n'est indexé que sur les extensions à effectuer depuis l
 %   \KwRet $S$;
 % \end{algorithm}
 
-\textbf{TODO : figure famille + recherche}
+\begin{figure}[!ht]
+  \begin{center}
+    \includegraphics[width=400px]{Figures/s2m/residues/cystein_family_search.png}
+    \caption{\label{family_search}Représentation de la rechercher de la cystéine dans un di-peptide, en utilisant sa famille de résidus.}
+  \end{center}
+\end{figure}
 
 L'algorithme de recherche des résidus ressemble fortement à un algorithme de recherche en largeur.
 Nous commençons par rechercher le résidu racine.
 Ci celui-ci est trouvée, alors tout ses résidus fils sont recherchés.
-Sur l'exemple TODO, le résidu racine de la cystéine est trouvé ; les trois résidus de niveau 2 sont alors recherchés.
+Sur l'exemple de la figure \ref{family_search}, le résidu racine de la cystéine est trouvé ; les trois résidus de niveau 2 sont alors recherchés.
 Récursivement, lorsqu'un résidu est trouvé, tous ses fils sont recherchés.
-Ainsi, la recherche de la cystéine dans le peptide de l'exemple aboutie sur la découverte de 3 isomorphismes de monomères différents.
+Ainsi, la recherche de la cystéine dans le peptide de l'exemple aboutit sur la découverte de 3 isomorphismes de monomères différents.
 Ces isomorphismes sont tous situés au même endroit et c'est la phase de pavage qui choisira celui à garder.
 
 
@@ -1062,7 +1066,7 @@ Chaque atome provenant d'un unique monomère, il n'est pas possible d'autoriser 
 
 Faisons une analogie avec un puzzle. La phase d'isomorphisme crée de nombreuses pièces de puzzle.
 Une reconstruction complète du puzzle n'est pas forcément faisable uniquement à partir de ces pièces.
-De plus, parmi celles dont nous disposons, certaines se chevauchent.
+De plus, parmi les pièces dont nous disposons, certaines se chevauchent.
 La phase de pavage consiste à choisir parmi les pièces, celles que l'on souhaite garder, en maximisant la couverture de notre puzzle et sans avoir de pièces chevauchantes (figure \ref{puzzle}).
 
 \begin{figure}[!ht]
@@ -1191,7 +1195,7 @@ Proposons également une heuristique rapide pour résoudre le problème.
 \label{TM_p}
 
 L'un des moyen d'obtenir très rapidement une solution est de trier les résidus dans un ordre voulu, puis de parcourir la liste triée en ajoutant le résidu courant à la solution uniquement si il ne chevauche aucun autre résidu de la solution.
-On pourra toujours trouver au moins arrangement de la liste qui atteigne la solution optimale.
+On pourra, en théorie, toujours trouver au moins arrangement de la liste qui atteigne la solution optimale.
 En faisant cela, nous reportons la difficulté du problème sur les critères de tri de la liste mais nous garantissons une très grande rapidité d'exécution.
 Le but ici est de s'approcher de ce tri optimal en s'assurant d'une exécution très rapide de l'algorithme.
 
@@ -1214,7 +1218,7 @@ Le but ici est de s'approcher de ce tri optimal en s'assurant d'une exécution t
 
 Cet algorithme nécessite un tri sur une liste de $n$ résidus candidats ($O(n log n)$) puis consomme ensuite un élément de la
 liste à chaque tour de boucle ($O(n)$). Contrairement à la résolution exacte présentée précédemment, si la fonction de comparaison
-pour le tri ne dépend pas de $n$ cet algorithme est polynomial.
+pour le tri ne dépend pas de $n$ cet algorithme est linéaire.
 Nous pouvons donc garantir la rapidité d'exécution si les critères de tri sont également calculable en temps polynomial.
 
 Le but est d'opter pour l'efficacité maximale locale en espérant que l'efficacité globale sera également maximale.
@@ -1251,7 +1255,7 @@ Ce poids représente la confiance que l'on donne à l'apparition d'un type de li
 Ils nous permettent de calculer une confiance moyenne par liaison effectuée par le résidu.
 Plus une moyenne sera élevée, plus la confiance en le résidu sera forte et donc plus il sera présent dans les premiers résidus du tri.
 
-Dans le cas où plusieurs résidus ne peuvent être départagés lors du tri, nous considérons qu'ils sont équivalents et leur ordre sera aléatoire.
+Dans le cas où plusieurs résidus ne peuvent être départagés lors du tri, nous considérons qu'ils sont équivalents et leur ordre sera arbitraire.
 
 
 \subsubsection{Modulation de pavage}
@@ -1279,7 +1283,7 @@ Utiliser ce résidu nous impose d'enlever de la solution les résidus chevauchan
 En priorisant les résidus non choisis du début de la liste triée utilisée par le pavage (voir \ref{TM_p}), nous essayons de trouver des solutions le plus rapidement possible.
 Si la solution n'est pas complète à la suite de cet échange, nous relançons un pavage sur les zones laissées libres.
 Après ce pavage, si la solution n'est toujours pas complète, nous relançons récursivement la modulation en interdisant de réutiliser les résidus que nous avons enlevé.
-Enfin, si l'appel récursif ne parvient pas à une solution totalement couvrante, nous faisons marche arrière en changeant le résidu que nous avions choisi.
+Enfin, si l'appel récursif ne parvient pas à une solution totalement couvrante, nous faisons un retour en arrière en changeant le résidu que nous avions choisi.
 
 % 
 % \begin{algorithm}[H]
@@ -1327,7 +1331,7 @@ Le problème majeur est que si une solution parfaite n'existe pas, l'algorithme 
 Rappelons que le pavage glouton effectue des choix que nous supposons pertinents.
 Il n'est donc normalement pas nécessaire de modifier la solution en profondeur pour obtenir l'idéal.
 Si la solution n'est pas trouvée rapidement, il y a fort à parier que la solution idéale n'existe pas.
-On peut donc limiter la profondeur de notre algorithme de modulation limitant la profondeur de la récursion.
+On peut donc limiter la profondeur de notre algorithme de modulation en limitant la profondeur de la récursion.
 Cette limite de profondeur diminue fortement le temps de calcul mais ne garantit plus de passer par l'optimal.
 Cependant, si une solution n'est pas trouvée en quelques étapes de modulation, il est fort probable qu'aucune solution ne soit possible.
 
@@ -1336,29 +1340,29 @@ Cependant, si une solution n'est pas trouvée en quelques étapes de modulation,
 
 \label{light_p}
 
-\begin{figure}
+\begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=300px]{Figures/s2m/residues/tautomers.png}
     \caption{\label{tautomer}Tautomérie d'une molécule}
   \end{center}
 \end{figure}
 
-Suite à des variations de composition ou de structure survenant dans certains résidus quelques polymères ne sont pas découpés correctement en utilisant les algorithmes précédents.
+Suite à des variations de composition ou de structure survenant dans certains résidus, quelques polymères ne sont pas découpés correctement en utilisant les algorithmes précédents.
 Il y a essentiellement deux cas pour lesquels l'isomorphisme ne fonctionne pas.
 Le premier cas concerne un \textit{monomère ionisé} au sein du peptide, c'est-à-dire lorsqu'un proton a été perdu.
 Ainsi, lors de la phase d'isomorphisme, la fonction de comparaison d'étiquettes ne répond plus correctement car il manque un $H$ sur l'un des atomes.
-Dans le second cas, c'est encore l'isomorphisme qui ne reconnaît pas un résidu car celui-ci est intégré sous un variant tautomérique (voir figure \ref{tautomer}).
+Dans le second cas, c'est encore l'isomorphisme qui ne reconnaît pas un résidu car celui-ci est intégré sous un variant dit {\em tautomérique} (voir figure \ref{tautomer}).
 Un tautomère de molécule est un isomère structurel de cette molécule.
 C'est à dire que la molécule tautomérique contient l'ensemble des atomes de la molécule initiale  mais certains de ces atomes ne sont plus liés aux mêmes voisins.
-Dans le cas d'un tautomère, c'est un noyau d'hydrogène qui se déplace pour se lier à un atome voisin.
+Dans le cas d'un tautomère, un noyau d'hydrogène se change de position pour se lier à un atome voisin.
 Cette charge positive déplacée est compensée par une charge négative qui se déplace dans l'autre sens.
-Ce déplacement d'électron se concrétise par le déplacement d'une liaison double.
-Ce déplacement peut même avoir lieu entre deux résidus différents d'un peptide.
+Cette migration d'électron se concrétise par la relocalisation d'une liaison double.
+Ce changement peut même avoir lieu entre deux résidus différents d'un peptide.
 
 \begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=200px]{Figures/s2m/recherche/light.png}
-    \caption{\label{label_matching}Exemple de fonctionnement de la fonction de matching ligth d'étiquettes.
+    \caption{\label{label_light}Exemple d'application de la fonction de matching \textit{ligth} d'étiquettes.
     Puisque le nombre d'atomes d'hydrogène n'est plus un critère sélectif et que l'arité de la liaison chimique non plus, la comparaison est valide dès que les deux atomes non hydrogène sont identiques.}
   \end{center}
 \end{figure}
@@ -1366,7 +1370,7 @@ Ce déplacement peut même avoir lieu entre deux résidus différents d'un pepti
 Les deux transformations présentées ont pour point commun de ne pas modifier en profondeur la structure des molécules.
 Dans les deux cas seuls les ``décorateurs'' des étiquettes sont modifiés (hydrogènes et arité de liaison).
 Le moyen simple de reconnaître ce type de molécule est alors d'oublier ces décorateurs lors de la phase d'isomorphisme (voir figure \ref{label_light}).
-Dès lors les résidus sont reconnus quel que soient leurs variations sur les hydrogènes ou les liens.
+Dès lors, les résidus sont reconnus quel que soient leurs variations sur les hydrogènes ou les liens.
 % Cette modification ne fait pas varier la qualité des résultats sur les NRP car les monomères utilisés diffèrent entre eux au delà des atomes d'hydrogène.
 Bien que très séduisante cette méthode pose un problème de temps de calcul.
 La plupart des monomères NRP ne contiennent que des atomes C N O et H.
