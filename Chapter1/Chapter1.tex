@@ -5,9 +5,9 @@
 \label{intro_bio}
 
 Afin de bien comprendre la voie de synthèse non ribosomique, commençons par quelques rappels rapides sur la synthèse des protéines classiques.
-Les protéines sont assemblées dans la cellule par un organite appelé ribosome.
-Les ARN messagers sont les vecteurs de l'information génétique.
-Ils sont la transcription d'un morceau d'ADN qui sera traduit par triplets de nucléotides (appelés codons) en chaîne d'acides aminés.
+Dans la cellule, les protéines sont assemblées par un complexe moléculaire, appelé ribosome, qui lit les  les ARN messagers.
+Ces ARN sont les vecteurs de l’information génétique et sont issus de la transcription d’un morceau d’ADN.
+Ils sont traduits par triplets de nucléotides (appelés codons) en chaînes d’acides aminés.
 Les 64 codons possibles ($4^3$ nucléotides) sont pour la plupart traduits en 20 acides aminés appelés acides aminés protéogéniques (car ils interviennent dans la synthèse classique de protéines).
 Ces acides aminés sont tous composés d'un même squelette atomique autorisant deux liaisons et permettant ainsi la formation de chaînes peptidiques.
 Sur le squelette est ancrée une chaîne latérale variant d'un acide aminé à l'autre, leur donnant leur spécificité (voir figure \ref{chaine_pep}).
@@ -43,7 +43,7 @@ Ces complexes sont appelés des synthétases (Non Ribosomal Peptide Synthetase -
   \begin{center}
     \includegraphics[width=450px]{Figures/bio/Intro/synthese.png}
     \caption{\label{global}Voie de synthèse non ribosomique~:
-    groupés en cluster, les gènes codant la protéine NRPS sont transcrits puis traduits par le ribosome.
+    groupés en cluster, les gènes codant les protéines NRPS sont transcrits puis traduits par le ribosome.
     Les domaines A de la NRPS capturent ensuite des monomères (billes de couleur ici) dans l'environnement afin de les assembler en peptide.
     Enfin, le NRP assemblé est relâché.
     }
@@ -149,7 +149,7 @@ Beaucoup de NRP recensés sont des antibiotiques comme par exemple, la célèbre
 La diversité d'activités peut être expliquée par les grandes variations de structures et de compositions par rapport aux peptides ribosomiques.
 Les structures particulières et les divers monomères imposent aux NRP d'opter pour des repliements différents des protéines classiques.
 Les contraintes structurelles permettent des repliements spécifiques qui ne sont pas possibles au sein des peptides classiques.
-Les activités spécifiques aux NRP sont obtenues grâce à ces repliements.
+Les activités spécifiques aux NRP sont obtenues grâce à ces repliements et aux propriétés physico-chimiques des nombreux monomères.
 
 Il est à noter qu'effectuer un assemblage non ribosomique est très consommateur en énergie pour l'organisme producteur.
 Les complexes enzymatiques à créer sont énormes et les gènes portant leur information peuvent représenter plusieurs pourcents de l'ADN chromosomique.
@@ -185,8 +185,9 @@ D'après la base de données MiBig~\cite{medema_minimum_2015} couplée à celle 
 Cette enzyme peut être séparée en 4 modules, incluant chacun un monomère.
 Chacun des modules est également subdivisé en domaines.
 Le découpage pour ce NRP est représenté sur la figure~\ref{mibig_hc}.
-Aux 4 modules correspondent 4 domaines A, 4 domaines T et 3 domaines C.
-On peut également voir un domaine d'épimérisation (modification de l'acide aminé inclus) présent en fin de premier domaine ainsi qu'un domaine C supplémentaire en fin d'enzyme effectuant la cyclisation du peptide.
+Aux 4 modules correspondent 4 domaines A, 4 domaines T et 4 domaines C.
+On peut également voir un domaine d'épimérisation (modification de l'acide aminé inclus) présent en fin de premier domaine.
+Dans le cas de cette NRPS, le domaine C en fin d'enzyme effectue la cyclisation du peptide.
 
 \subsection{Les domaines principaux}
 
@@ -194,17 +195,17 @@ On peut également voir un domaine d'épimérisation (modification de l'acide am
 
 Le domaine d'adénylation (A) réalise la capture dans l'environnement d'un type de monomère donné.
 Il porte ainsi la spécificité du module dans lequel il se trouve.
-La séquence d'acides aminés de ce type de domaine varie fortement d'un domaine A à l'autre et seuls 16\% des structures primaires sont conservées (sur environ 200 acides aminés codant un domaine).
+La séquence d'acides aminés de ce type de domaine varie fortement d'un domaine A à l'autre et seuls 16\% de séquence du domaine sont conservées (sur environ 200 acides aminés codant un domaine)~\cite{stachelhaus_specificity-conferring_1999}.
 Bien que seuls quelques domaines A aient été caractérisés, on suppose qu'il en existe un grand nombre (potentiellement plusieurs centaines) puisque
 plusieurs centaines de monomères différents sont inclus par ces domaines.
 
 Une fois le repliement de la synthétase effectué, les domaines A possèdent une cavité interne effectuant la reconnaissance et l'accueil d'une molécule.
-Les acides aminés de la synthétase en contact avec cette cavité vont ``sélectionner'' le monomère à capturer dans l'environnement.
+Les acides aminés de la synthétase formant cette cavité vont ``sélectionner'' le monomère à capturer dans l'environnement.
 La taille de la cavité ainsi que les propriétés physico-chimiques de ces acides aminés en contact permettent une affinité forte avec un unique monomère.
 Il arrive parfois que le domaine ne soit pas spécifique à un seul monomère mais plutôt à un petit nombre de monomères très proches les uns des autres.
 Cependant, ce cas reste rare et, dans la majorité des cas, une NRPS ne crée qu'un seul NRP.
 
-En 1999, Stachelhaus et al. publient un article analysant la structure de nombreux domaines A~\cite{stachelhaus_specificity-conferring_1999}.
+En 1999, Stachelhaus \textit{et al}. publient un article analysant la structure de nombreux domaines A~\cite{stachelhaus_specificity-conferring_1999}.
 Ils alignent un grand nombre de domaines A pour en extraire les zones conservées et les zones spécifiques au monomère à capturer.
 Il apparaît tout d'abord que peu d'acides aminés sont conservés d'une structure à l'autre.
 Cependant ces acides aminés permettent de définir le ``squelette'' d'un domaine A.
@@ -214,9 +215,6 @@ Ce codage est aujourd'hui appelé \textit{code de Stachelhaus} et permet de mett
 
 
 \subsubsection{Le domaine de Thiolation (domaine T)}
-%citations : 
-%• Biochemical characterization of peptidyl carrier protein (PCP), the thiolation domain of multifunctional peptide synthetases.
-%• Portability of the thiolation domain in recombinant pyoverdine non-ribosomal peptide synthetases
 
 Le rôle du domaine T est d'assurer le transport du peptide en cours d'élongation au sein du module~\cite{stachelhaus_biochemical_1996,calcott_portability_2015}.
 Ce domaine est également souvent appelé ``Peptidyl Carrier domain''.
@@ -237,9 +235,7 @@ Durant cette étape, le peptide est libéré du domaine T courant pour être lai
 \end{figure}
 
 \subsubsection{Le domaine de Condensation (domaine C)}
-%citations :
-%• Peptide Bond Formation in Nonribosomal Peptide Biosynthesis, CATALYTIC ROLE OF THE CONDENSATION DOMAIN
-%• http://bmcevolbiol.biomedcentral.com/articles/10.1186/1471-2148-7-78
+
 Le domaine C est par convention considéré comme le premier domaine de chaque module~\cite{stachelhaus_peptide_1998}.
 C'est un domaine qui lie le morceau de peptide assemblé par les modules précédents avec le monomère capturé par le domaine A du module courant.
 Bien que sa fonction principale reste omniprésente, il existe plusieurs variants~\cite{rausch_phylogenetic_2007} de ce domaine que nous allons décrire par la suite.
@@ -444,7 +440,7 @@ Pour les NRPS, l'annotation correspond à la phase de recherche de gènes NRPS d
 Pour les NRP, l'annotation correspond à la phase d'identification et de décomposition des structures monomériques présentes dans les molécules.
 La seconde sous-catégorie présentera les moyens d'archivage et de mise à disposition des informations récoltées par les outils d'annotation.
 Cette partie rassemblera les différentes bases de données, dédiées ou non, et contenant une ou plusieurs informations à propos des NRPS ou NRP.
-Pour constituer cette liste, nous nous sommes aidé du portail des outils bioinformatiques dédiés aux métabolites secondaires~\cite{weber_secondary_2016}.
+Cette liste a été constituée à l'aide du portail des outils bioinformatiques dédiés aux métabolites secondaires~\cite{weber_secondary_2016}.
 
 \subsection{Les outils d'annotation de NRPS}
 
@@ -455,7 +451,7 @@ Cette recherche pourra être effectuée par étapes successives en commençant p
 
 L'information des clusters de gènes est très importante pour comprendre les formes finales des NRP.
 La détection des clusters nous permet d'identifier l'ensemble des gènes impliqués dans la synthèse d'un NRP, c'est à dire l'ensemble des gènes NRPS ainsi que des gènes accompagnateurs tels que les gènes pour la création des enzymes de décoration.
-Avoir accès à l'ensemble des gènes d'un cluster nous autorise, par exemple, la détection des modifications post-synthèse qui peuvent modifier un NRP.
+Avoir accès à l'ensemble des gènes d'un cluster facilite, par exemple, la détection des modifications post-synthèse qui peuvent modifier un NRP.
 
 Il existe de nombreuses techniques de recherche de clusters de gènes.
 Certains outils génériques comme CLUSEAN~\cite{weber_clusean:_2009} détectent tous types de clusters.
@@ -502,7 +498,7 @@ Cet outil est bien plus performant que le simple code de Stachelhaus et obtient 
 NaPDoS~\cite{ziemert_natural_2012} est un logiciel issu d'un travail sur la phylogénie des domaines C NRPS.
 Les auteurs ont créé une base de domaines C de NRPS déjà connus.
 À partir de cette base, ils ont aligné tous les domaines les uns contre les autres et construit une phylogénie.
-Comme Raush et al en 2007~\cite{rausch_phylogenetic_2007}, cette phylogénie a permis aux auteurs de diviser les domaines C en plusieurs groupes et ainsi de créer une classification de ces domaines.
+Comme Raush \textit{et al}. en 2007~\cite{rausch_phylogenetic_2007}, cette phylogénie a permis aux auteurs de diviser les domaines C en plusieurs groupes et ainsi de créer une classification de ces domaines.
 Ces groupes ont été transformés en différentes HMM représentatives utilisées pour la classification des domaines au travers du serveur web de l'application.
 
 
@@ -511,7 +507,7 @@ Ces groupes ont été transformés en différentes HMM représentatives utilisé
 Ces deux logiciels sont deux implémentations de la même technique de détection des domaines NRPS et PKS~\cite{bachmann_chapter_2009}.
 La différence entre les deux est que 2metDB est un outil standalone alors que PKS/NRPS web server est une version en ligne.
 Les auteurs font le constat qu'un domaine NRPS ou PKS possède à la fois des zones très variables en composition, ainsi que des zones très conservées.
-Ces zones conservées déterminent des coordonnées fixes entre domaines A et permettent ainsi de créer le code de Stachelhaus.
+Ces zones conservées déterminent des coordonnées fixes entre domaines A et permettent ainsi de localiser les atomes impliqués dans le code de Stachelhaus.
 Il existe des zones conservées au sein de tous les domaines.
 Les auteurs des logiciels ont tiré parti de ces zones en créant des HMM pour représenter des archétypes pour chacun des types de domaine.
 Ces logiciels sont extrêmement rapides pour les recherches grâce à l'utilisation d'un faible nombre d'archétypes.
@@ -520,13 +516,13 @@ Ces logiciels sont extrêmement rapides pour les recherches grâce à l'utilisat
 \label{antismash}
 %· antiSMASH: rapid identification, annotation and analysis of secondary metabolite biosynthesis gene clusters in bacterial and fungal genome sequences
 %· antiSMASH 3.0-a comprehensive resource for the genome mining of biosynthetic gene clusters
-\textbf{antiSMASH, le pipe-line pour l'identification de métabolites secondaires}~~~
+\textbf{antiSMASH, le pipeline pour l'identification de métabolites secondaires}~~~
 antiSMASH~\cite{weber_antismash_2015,medema_antismash:_2011} est sans doute le logiciel qui est venu, ces dernières années, révolutionner la prédiction de métabolites secondaires à partir de l'ADN.
-Le logiciel est un pipe-line incluant de nombreux outils dont certains de ceux que nous avons décrits précédemment.
+Le logiciel est un pipeline incluant de nombreux outils dont certains de ceux que nous avons décrits précédemment.
 Les outils sont lancés automatiquement les uns à la suite des autres en analysant les séquences avec une granularité de plus en plus fine.
 A un instant donné, en fonction des spécificités des génomes et des annotations réalisées précédemment sur le génome en cours d'analyse, antiSMASH va choisir les logiciels à exécuter pour affiner les prédictions.
 Par exemple, en lançant une analyse, antiSMASH va commencer par la recherche de clusters de gènes, puis identifier parmi les clusters détectés, ceux qui permettent la production de métabolites secondaires pour finir par lancer les outils spécifiques à chaque métabolite comme NRPSpredictor et NaPDoS sur les clusters NRPS.
-Si le type de génome a été renseigné, le pipe-line lancera des outils spécifiques aux bactéries ou aux champignons.
+Si le type de génome a été renseigné, le pipeline lancera des outils spécifiques aux bactéries ou aux champignons.
 
 %Streptomyces coelicolor
 \begin{figure}
@@ -541,9 +537,9 @@ Disponible en ligne, il permet l'envoi de génomes ou séquences protéiques pou
 Grâce à ces serveurs, l'utilisateur n'a pas de contraintes sur la machine nécessaire au calcul.
 Après parfois plusieurs heures de calcul, l'utilisateur reçoit un email contenant un lien vers ses résultats.
 La page de résultats comporte les résultats de tous les clusters qui ont été annotés avec des détails sur chacun des métabolites secondaires attendus.
-Cette facilité d'utilisation et la puissance des outils utilisés ont procuré un grand succès au pipe-line auprès de la communauté.
+Cette facilité d'utilisation et la puissance des outils utilisés ont procuré un grand succès au pipeline auprès de la communauté.
 Le succès a été tel que les auteurs ont du recourir à des listes d'attente avec priorité pour pouvoir obtenir des résultats depuis le serveur dédié.
-Cependant, il faut bien rappeler que les structures issues du pipe-line sont des prédictions et qu'elles sont donc à utiliser avec prudence.
+Cependant, il faut bien rappeler que les structures issues du pipeline sont des prédictions et qu'elles sont donc à utiliser avec prudence.
 
 
 
@@ -566,7 +562,7 @@ Malheureusement cette base n'est pas tenue à jour et le dernier article posté 
 ClustScan Database~\cite{diminic_databases_2013} est une base de données créée à partir des résultats de l'outil de prédiction de NRPS et PKS appelé ClustScan.
 Certains clusters ont été vérifiés à la main et sont accompagnés de publications lorsque les utilisateurs de la base les ont ajoutées (113 annotations de NRPS et hybrides NRPS-PKS).
 Le logiciel prédit également des structures NRP.
-Cependant, la prédiction s'arrête aux structures linéaires et aux rares NRP cycliques dont la cyclisation est portées par un domaine de cyclisation.
+Cependant, la prédiction s'arrête aux structures linéaires et à quelques formes cycliques.
 Ces données sont toutes des prédictions de structures NRP et ces structures devront donc être utilisées avec précaution.
 La base ne semble pas avoir été mise à jour récemment mais aucune date explicite n’apparaît sur le site web pour confirmer cette impression.
 
@@ -642,7 +638,7 @@ Les structures obtenues en sortie sont uniquement atomiques.
 Selon la technologie de la machine utilisée, la structure 3D de la molécule peut être accessible.
 Il est donc également nécessaire d'avoir recours à un expert pour effectuer une annotation monomérique.
 Cette technique est également très coûteuse de par les équipements nécessaires pour réaliser les analyses ainsi que le temps nécessaire pour créer un cristal capable de convenir à l'analyse.
-Enfin les quantités et la pureté nécessaires dans les échantillons ne sont souvent pas atteignables pour des chaînes de production NRP.
+Enfin les quantités et la pureté nécessaires dans les échantillons ne sont souvent pas atteignables par des productions NRP.
 
 
 
