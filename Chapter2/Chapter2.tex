@@ -1430,7 +1430,7 @@ Pour cela, nous avons construit deux jeux de données de référence, au sein de
 Il existe très peu de bases permettant d'accéder à ces deux structures simultanément.
 Ces bases de référence sont composées de polymères comprenant à la fois leur SMILES (représentation de leur structure atomique) ainsi que l'annotation attendue (ici, un graphe monomérique).
 Sans la structure atomique, nous ne pouvons pas lancer s2m et sans structure monomérique, nous ne pouvons pas tester les résultats.
-Il existe très peu de bases de données contenant ces deux informations à la fois.
+Il existe très peu de bases de données contenant à la fois ces deux informations.
 Les bases Norine et CCD que nous allons présenter ici sont les seules, à notre connaissance, à posséder une grande quantité de polymères contenant ces deux structures.
 
 Pour les entrées de s2m, nous constituons une base de monomères pour chacun des jeux de données.
@@ -1495,12 +1495,12 @@ En haut à gauche se trouve l'image du polymère étudié, colorée selon les mo
 C'est l'information la plus immédiate car elle permet de visualiser immédiatement un résultat.
 
 Sous l'image du peptide se trouvent trois listes de monomères.
-La première liste correspond aux monomères découverts dans la structure atomique par s2m et que l'on sait être correctes grâce aux annotations de référence.
+La première liste correspond aux monomères découverts dans la structure atomique par s2m et que l'on sait être corrects grâce aux annotations de référence.
 Le seconde liste correspond également aux monomères découverts par s2m mais qui ne sont pas présents dans l'annotation de référence.
 La dernière correspond aux monomères qui sont présents dans l'annotation mais qui n'ont pas été trouvés par s2m.
 
 La partie restante de la figure représente les informations générales sur le polymère.
-Tout d'abord, il y a le nom du polymère puis les statistiques de celui-ci.
+Tout d'abord, il y a le nom du polymère puis les statistiques de ce dernier.
 La première statistique est le taux de ``couverture atomique'' (\textit{Coverage}).
 
 \begin{equation}
@@ -1533,7 +1533,7 @@ Rappelons que, de ce paramètre, découlera le temps de calcul pour les peptides
 Puis nous étudierons la qualité des résultats obtenus en exécutant le programme pour plusieurs jeux de paramètres.
 Enfin nous analyserons le temps de calcul pour estimer les rapports entre temps et qualité et ainsi pouvoir recommander les meilleurs calibrations de l'outil.
 
-\subsubsection{Choisir le k du pré-calcul Markovien}
+\subsubsection{Choisir l'ordre k du pré-calcul Markovien}
 \label{k_res}
 
 Pour rappel, l'isomorphisme de sous-graphe est effectué à partir de chaînes pré-calculées afin d'optimiser le temps de recherche (voir partie \ref{index_markov}).
@@ -1541,7 +1541,7 @@ Ces chaînes sont formées de deux sous-parties.
 La première sous-partie, de taille k, est optimale en temps de calcul selon une base d'apprentissage.
 La seconde sous-partie est générée de manière gloutonne.
 
-Nous allons ici faire varier ce paramètre k et tester les temps de calcul sur les jeux de données.
+Nous allons ici faire varier k et tester les temps de calcul sur les jeux de données.
 Pour ne pas parasiter la mesure du temps, nous allons désactiver toutes les autres optimisations logicielles qui augmentent l'efficacité.
 
 \begin{figure}[!ht]
@@ -1662,7 +1662,7 @@ Ceci s'explique par le fait qu'il n'a besoin que d'une seule phase \textit{light
 En effet, dans certains cas, le problème est tout de suite résolu après la première phase de pavage succédant à l'isomorphisme \textit{light} car touts les monomères ont été correctement découverts.
 Dans les autres cas, l'algorithme du MIP effectue une sur-optimisation après le premier pavage.
 Lorsqu'il n'est pas possible d'obtenir une couverture complète, l'algorithme a parfois recours à des placement de nombreux petits monomères.
-La solution est alors tellement éloignée de l'optimal qu'il devient inatteignable pour notre construction algorithmique.
+La solution est alors tellement éloignée de la réalité qu'il devient inatteignable pour notre construction algorithmique.
 
 Pour le pavage heuristique, la sensibilité aux paramètres est élevée.
 On peut voir que l'augmentation du nombre de modulations déclenche une augmentation du nombre de VP.
@@ -1672,14 +1672,14 @@ Il est souvent nécessaire de déplacer, non pas un, mais deux monomères pour a
 Le paramètre R n'a que très peu d'influence et vient seulement compléter 3 résultats sur les données Norine et un seul sur les données de CCD.
 
 En comparant les résultats des deux algorithmes, on s'aperçoit que l'algorithme comprenant l'heuristique de pavage obtient de meilleurs résultats (pour une modulation $\ge$ 2) que l'algorithme incluant un pavage exact.
-A nouveau, ce résultat s'explique par le fait que le pavage exact va trop loin dans l'optimisation.
+De nouveau, ce résultat s'explique par le fait que le pavage exact va trop loin dans l'optimisation.
 Si aucune solution totalement couvrante n'est possible avec les résidus issus de l'isomorphisme \textit{strict}, alors le pavage maximal exact ira parfois créer des solutions globalement optimisées mais éloignées de la réalité.
 Dans ce cas, la recherche de résidus par isomorphisme \textit{light} sert peu car les trous dans l'annotation ont été déplacés par l'optimisation.
 Il n'est souvent plus possible de construire l'annotation réelle, à moins de déplacer de nombreux résidus.
 
 Au final, les résultats obtenus sont globalement meilleurs en utilisant l'heuristique gloutonne de pavage avec une modulation de profondeur M=2 et deux phases de recherche \textit{light} avec R=2.
 Nous ne nous attendions pas à ces résultats et la sur-optimisation du pavage par MIP nous a surpris.
-Il est tout de même possible d'obtenir des résultats au moins aussi bons qu'avec l'heuristique, en effectuant uniquement une phase de recherche light à la place de la recherche stricte.
+Il est tout de même possible d'obtenir des résultats au moins aussi bons qu'avec l'heuristique, en effectuant uniquement une phase de recherche \textit{light} à la place de la recherche stricte.
 Cependant le temps de calcul se voit multiplié par 10 sur nos données.
 
 
@@ -1708,7 +1708,7 @@ Ceci peut s'expliquer par les cas où tous les résidus nécessaires à une couv
 Si la profondeur de modulation nécessaire à l'inclusion de ces résidus n'est pas atteinte, alors le l'algorithme va passer son temps à effectuer de nombreuses recherches monomériques.
 
 Pour conclure cette partie  sur la sélection des paramètres, nous pouvons dire que nous recommandons l'utilisation de l'algorithme de pavage heuristique par rapport au pavage MIP.
-Cependant, il ne faut pas utiliser n'importe quels paramètres.
+Cependant, il ne faut pas utiliser n'importe quels jeux de paramètres.
 Dans notre cas, pousser les paramètres de modulation ou de nombre de boucle à 3 ou au delà est parfaitement inutile en terme de qualité de résultats et consommera énormément de temps.
 Utiliser un paramètre de modulation de 1 sera également une erreur puisque la qualité des résultats ne sera pas au rendez-vous.
 Il reste finalement deux alternatives intéressantes pour des données du même type que les notre.
@@ -1722,8 +1722,8 @@ Soit nous privilégions la qualité à la vitesse et nous réglons les deux para
 \label{temps_calcul}
 
 Maintenant que nous avons choisi les paramètres, analysons attentivement chacune des étapes pour comprendre les points critiques et préparer de futures améliorations.
-Pour cela, nous avons exécuté le logiciel sur tous les peptides des jeux de référence en utilisant un pavage heuristique, une valeur de k à 3, une modulation de 2 et un nombre de tour de boucle de 2.
-Pour chacun des peptides, nous avons stocké séparément les temps pour l'isomorphisme strict, le light, le pavage et la modulation.
+Pour cela, nous avons exécuté le logiciel sur tous les peptides des jeux de référence en utilisant un pavage heuristique, une valeur de k à 3, une valeur de M à 2 et un R à 2.
+Pour chacun des peptides, nous avons stocké séparément les temps pour l'isomorphisme strict, le \textit{light}, le pavage et la modulation.
 Les résultats sont affichés sur la figure \ref{temps_calcul}.
 Les résultats sont triés par taille de peptide (nombre d'atomes).
 
@@ -1808,7 +1808,7 @@ L'annotation en sortie de s2m présente une couverture de 100\% mais un \textit{
 En regardant les 3 listes de monomères, on peut s'apercevoir que l'annotation attendue comporte deux monomères nommés Hmp alors que le logiciel trouve deux 4Me-Hva.
 Les deux monomères se ressemblent : il est fort probable que, soit l'annotation monomérique, soit l'annotation atomique ait été mal saisie.
 Pour comprendre l'erreur, remontons aux sources des données.
-Sur la page Norine de la molécule, nous trouvons un lien vers Pubchem pour nous permettre d'obtenir la structure atomique et un lien vers la publication qui nous permet d'obtenir la structure monomérique.
+Sur la page Norine de la molécule, nous trouvons un lien vers Pubchem pour accéder à la structure atomique et un lien vers la publication qui nous permet d'accéder à la structure monomérique.
 
 \begin{figure}[h!]
   \begin{center}
@@ -1819,8 +1819,8 @@ Sur la page Norine de la molécule, nous trouvons un lien vers Pubchem pour nous
 \end{figure}
 
 En regardant la molécule présente sur PubChem (voir figure \ref{enni_cor}), nous pouvons constater que c'est effectivement la structure atomique qui a été utilisée pour le test.
-En consultant le contenu de la publication~\cite{song_diversity_2008}, on s'aperçoit que la structure monomérique correspond bien à ce qui est présent sur Norine.
-Accompagnant cette annotation monomérique, un schéma présente structure atomique.
+En consultant le contenu de la publication~\cite{song_diversity_2008}, on s'aperçoit que la structure monomérique correspond également bien à ce qui est présent sur Norine.
+Accompagnant cette annotation monomérique, un schéma présente la structure atomique.
 Cette seconde structure vient également confirmer la structure monomérique.
 Sans aucun doute, l'erreur provient de mauvaises données de PubChem entrées dans Norine.
 Le lien PubChem entré sur Norine n'est pas le bon et pointe vers un peptide similaire.
