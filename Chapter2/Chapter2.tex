@@ -102,8 +102,8 @@ Pour les structures linéaires, la méthode propose une simple concaténation de
 Lorsque les structures sont branchées ou cycliques, il est nécessaire d'ajouter dans la structure initiale l'information de liaison annexe.
 
 Cette méthode de reconstruction des structures atomiques est très intéressante mais souffre du manque d'information sur le sens des monomères inclus.
-On peut remarquer que la reconstruction ne peut fonctionner à tous les coups sans cette d'information.
-En effet, si les monomères ne possèdent pas un groupement carboxyl et un amine, le sens de naturel des liaisons peptidique ne peut être retrouvé.
+On peut remarquer que la reconstruction ne peut fonctionner à tous les coups sans cette information.
+En effet, si les monomères ne possèdent pas un groupement carboxyle et un amine, le sens naturel des liaisons peptidiques ne peut être retrouvé.
 La reconstruction se fait alors en utilisant un sens aléatoire pour le monomère.
 
 \begin{figure}[!ht]
@@ -113,13 +113,13 @@ La reconstruction se fait alors en utilisant un sens aléatoire pour le monomèr
     La première partie représente la phase de recherche des monomères au sein de la structure atomique.
     La seconde partie représente la structure monomérique post contraction.
     On peut voir à gauche la chaîne principale qui a été extraite à partir du N initial.
-    A droite sont répertoriés les deux ponts disulfure extraits hors de la chaîne principale.
+    À droite sont répertoriés les deux ponts disulfure extraits hors de la chaîne principale.
     Chaque monomère découvert comporte un identifiant différent de son nom pour éviter d'avoir deux fois le même nom comme cela pourrait être le cas ici (exemple avec Cysx1 et Cysx2).
     Schémas issus de la publication~\cite{siani_chuckles:_1994}}
   \end{center}
 \end{figure}
 
-La seconde partie de la méthode, précisément celle qui nous concerne, présente la transformation inverse (``Backward-Transformation'' (BT)).
+La seconde partie de la méthode, précisément celle qui nous concerne, présente la transformation inverse (``Backward-Transformation'' -BT-).
 C'est cette partie qui est très intéressante pour l'annotation car elle part des structures atomiques pour reconstruire les structures monomériques.
 Les auteurs proposent une annotation en deux temps.
 Une phase de recherche des monomères, puis une conversion des monomères trouvés en une annotation.
@@ -163,7 +163,7 @@ Pour des protéines ribosomiques, la découpe sera donc parfaite avec cette seul
   \begin{center}
     \includegraphics[width=300px]{Figures/s2m/Intro/molBlocks_problem.png}
     \caption{\label{molBlocks_problem}Dans le cas de ce di-peptide, un sucre est lié à une Hydroxy-Phenil-Glycine (Hpg).
-    En utilisant la règle de découpe à appliquer pour les hydroxyl, une ambiguïté et une erreur apparaissent.
+    En utilisant la règle de découpe à appliquer pour les liaisons hydroxyle, une ambiguïté et une erreur apparaissent.
     Nous ne pouvons savoir de quel côté les découpes vont être les plus pertinentes avant d'essayer de reconnaître les monomères.
     De ce fait, 4 découpes différentes sont possibles.
     De plus, le cycle du sucre se voit ouvert alors que la découpe est inutile.}
@@ -175,12 +175,12 @@ En effectuant par la suite une étape de reconnaissance de ces monomères, il se
 Cependant, certaines réactions effectuées au sein des NRP ne permettent pas de découper entièrement le peptide avec la seule règle énoncée précédemment.
 En effet, toutes les liaisons non peptidiques énoncées au chapitre précédent ne seront pas découpées.
 Il est donc nécessaire de rajouter de nouvelles règles.
-Cependant, la liaison hydroxyl à elle seule ne permet déjà plus d'effectuer une découpe correcte car pour pouvoir la délier, il faudrait une règle du type
+Cependant, la liaison hydroxyle à elle seule ne permet déjà plus d'effectuer une découpe correcte car pour pouvoir la délier, il faudrait une règle du type
 \begin{equation}
   COC \longrightarrow CO + C
 \end{equation}
-Ce genre de règle est cependant ambiguë.
-Il est impossible de connaître de quel côté du O la liaison doit être rompue.
+Cette règle est cependant ambiguë.
+Il est impossible de connaître de quel côté du $O$ la liaison doit être rompue.
 De plus, certains monomères comme le glucose sont initialement composés de $COC$.
 Ces monomères seront donc découpés alors qu'ils ne devraient pas l'être.
 Pour ces deux raisons, nous ne pourrons pas directement utiliser ce logiciel afin de convertir nos structures atomiques en structures monomériques.
@@ -253,15 +253,15 @@ Pour plus de détails référez-vous au prérequis \ref{graphes}.
 \subsubsection{Formalisation en problèmes de graphes}
 
 Comme expliqué plus haut, le problème de recherche de sous composants d'un polymère peut être divisé en deux
-plus petit problèmes : un problème de recherche de monomères et un problème de pavage des monomères trouvés. Traitons
+problèmes plus petits : un problème de recherche de monomères et un problème de pavage des monomères trouvés. Traitons
 donc séparément ces deux problèmes.
 
 \textbf{Recherche de monomères}~~~
 Rechercher un monomère dans un polymère revient à rechercher un petit graphe atomique $S$ dans un plus gros graphe $G$.
 Deux cas sont alors possibles : soit nous cherchons à trouver exactement $S$ dans $G$, soit nous cherchons une ``approximation'' de $S$ dans $G$.
-Dans le premier cas, nous allons nous intéresser à l'``Isomorphisme de Sous-graphe'' (en anglais \textit{Subgraph Isomorphism} (SI)).
-Dans le second cas, nous nous intéresserons au ``Sous-graphe Maximum Commun'' (en anglais \textit{Maximum Common Subgraph} (MCS)).
-Les recherches de SI ou de MCS ont toutes deux été prouvées NP-Complet mais, pour chacun des problème, il existe des algorithmes rapides en pratique pour des graphes aux propriétés particulières.
+Dans le premier cas, nous allons nous intéresser à l'``Isomorphisme de Sous-graphe'' (en anglais \textit{Subgraph Isomorphism} -SI-).
+Dans le second cas, nous nous intéresserons au ``Sous-graphe Maximum Commun'' (en anglais \textit{Maximum Common Subgraph} -MCS-).
+Les recherches de SI ou de MCS ont toutes deux été prouvées NP-Complet mais, pour chacun des problèmes, il existe des algorithmes rapides en pratique pour des graphes aux propriétés particulières.
 Nous aborderons cela en section \ref{SI_MCS}.
 
 \textbf{Pavage des monomères}~~~
@@ -294,8 +294,8 @@ Voyons les différentes façons de les résoudre ainsi que les forces et faibles
 \end{figure}
 
 Commençons par définir précisément le problème du MCS.
-Comme le nom l'indique, le problème du MCS est un problème de recherche de la sous partie commune maximale entre deux graphes (Voir figure \ref{mcs_fig}).
-C'est à dire trouver un ensemble de n\oe{}uds présents dans les deux graphes et dont les arêtes qui les inter-connectent sont présentes dans les deux graphes.
+Comme le nom l'indique, le problème du MCS est un problème de recherche de la sous partie commune maximale entre deux graphes (voir figure \ref{mcs_fig}).
+C'est-à-dire trouver un ensemble de n\oe{}uds présents dans les deux graphes et dont les arêtes qui les inter-connectent sont présentes dans les deux graphes.
 Il faut non seulement que les n\oe{}uds partagent les même étiquettes, mais également les mêmes voisins.
 Si deux n\oe{}uds ont la même étiquette mais ne partagent pas les mêmes voisins dans les deux graphes, alors ils ne font pas partie du MCS.
 C'est par exemple le cas du n\oe{}ud rouge au sein de la figure \ref{mcs_fig}.
@@ -332,14 +332,14 @@ Il est possible de ne pas passer par toutes les combinaisons possibles en rédui
   \begin{center}
     \includegraphics[width=400px]{Figures/s2m/MCS-SI/clique_solve.png}
     \caption{\label{clique_solve_fig}Résolution d'un MCS par réduction en clique maximale.
-    Les couleurs représentent les étiquettes des noeuds.
+    Les couleurs représentent les étiquettes des n\oe{}uds.
     Dans le graphe de compatibilité les arêtes rouges identifient la clique maximale détectée.}
   \end{center}
 \end{figure}
 
-Pour obtenir un MCS à partir de solveur de clique maximale, il est nécessaire de construire un graphe de compatibilité (voir schéma \ref{clique_solve_fig}).
+Pour obtenir un MCS à partir de solveurs de clique maximale, il est nécessaire de construire un graphe de compatibilité (voir schéma \ref{clique_solve_fig}).
 Un graphe de compatibilité (GC) est un graphe créé à partir du croisement des deux graphes (qu'on appellera G et H).
-Pour les n\oe{}uds du GC, on génère tous les couples de noeuds $(x, y)$ possibles avec $x$ issu de G et $y$ de H et dont les étiquettes sont identiques.
+Pour les n\oe{}uds du GC, on génère tous les couples de n\oe{}uds $(x, y)$ possibles avec $x$ issu de G et $y$ de H et dont les étiquettes sont identiques.
 Ensuite on ajoute une arête entre deux couples $(x_1 , y_1)$ et $(x_2 , y_2)$ de GC si $x_1$ est voisin de $x_2$ dans G et $y_1$ voisin de $y_2$ dans H.
 On ajoute également une arête si les $x$ sont non voisins et les $y$ également.
 En résolvant le problème de clique maximale sur le GC, on obtient le MCS.
@@ -378,7 +378,7 @@ Nous ne détaillerons donc pas celles-ci ici.
 Il existe une très grande quantité d'heuristiques de résolution du MCS.
 La méthode la plus utilisée est une méthode de recherche par similarités locales~\cite{yan_substructure_2005,willett_similarity_2011}.
 Ces heuristiques sont utilisées au sein de bases de données pour rechercher des structures chimiques par ressemblance avec une requête.
-Chaque molécule de la base est décomposée en un grand nombre de critères topologiques locaux (l'arité des noeuds par exemple).
+Chaque molécule de la base est décomposée en un grand nombre de critères topologiques locaux (l'arité des n\oe{}uds par exemple).
 Ces critères sont entrés dans un vecteur appelé \textit{fingerprint}.
 Lors d'une requête, le motif recherché est à son tour transformé en \textit{fingerprint} et une mesure de similarité est effectuée avec les vecteurs présents en base.
 Les \textit{fingerprints} les ``plus proches'' (d'après une fonction de score~\cite{maggiora_molecular_2011,ndiaye_cp_2011}) sont déclarés contenir une sous partie commune.
@@ -405,17 +405,17 @@ Cette seconde méthode est très intéressante lorsque l'on cherche un bon rappo
   \begin{center}
     \includegraphics[width=450px]{Figures/s2m/MCS-SI/si.png}
     \caption{\label{SI_fig}SI obtenu à partir de la recherche du graphe G dans H.
-    Sur cet exemple, il n'y a qu'une seule possibilité mais si nous avions cherché une chaîne comme Vert-Rouge-Bleu, nous aurions eu deux SI différents.}
+    Sur cet exemple, il n'y a qu'une seule possibilité mais si nous avions cherché une chaîne comme Vert-Rouge-Bleu, nous aurions obtenu deux SI différents.}
   \end{center}
 \end{figure}
 
-Définissions désormais le problème d'isomorphisme de sous-graphe (Subgraph Isomorphism (SI)).
+Définissions désormais le problème d'isomorphisme de sous-graphe (Subgraph Isomorphism -SI-).
 Comme le nom l'indique, le problème SI est un problème de recherche d'un graphe dans une sous partie d'un autre.
-C'est à dire que G est sous-graphe de H lorsque tous les n\oe{}uds et toutes les arêtes de G sont retrouvées structurées de la même manière dans H (voir figure \ref{SI_fig}).
+C'est-à-dire que G est sous-graphe de H lorsque tous les n\oe{}uds et toutes les arêtes de G sont retrouvées structurées de la même manière dans H (voir figure \ref{SI_fig}).
 Tout comme le MCS, le problème du SI a été prouvé NP-Complet~\cite{garey_computers_1979}.
 
 Pour notre problème, nous pouvons à nouveau effectuer une réduction vers le problème SI, puis résoudre ce problème par des algorithmes déjà publiés.
-Nous souhaitons rechercher des monomères au sein de peptides, ce qui reviendrait à chercher plusieurs fois un petit graphe atomique monomérique dans un gros graphe atomique peptidique.
+Nous souhaitons rechercher des monomères au sein de peptides, ce qui revient à chercher plusieurs fois un petit graphe atomique monomérique dans un gros graphe atomique peptidique.
 
 Les méthodes de résolution actuelles sont toutes très similaires et dérivent d'une même technique de backtracking.
 La plupart de ces méthodes sont des résolutions exactes.
@@ -441,7 +441,7 @@ L'algorithme se base sur la matrice de compatibilité entre les graphes (voir fi
 Une matrice de compatibilité est une matrice dont chaque ligne représente un n\oe{}ud de G et chaque colonne un n\oe{}ud de H.
 Soient $g$ et $h$ correspondants respectivement à un n\oe{}ud du graphe G et du graphe H.
 Soient $i$ et $j$ les numéros des lignes et colonnes de la matrice correspondants à $g$ et $h$.
-La case de coordonnées $(i,j)$ contient un 1 si $g$ et $h$ ont une étiquette compatible et que l'arrité de $h$ est supérieur ou égale à l'arrité de $g$.
+La case de coordonnées $(i,j)$ contient un 1 si $g$ et $h$ ont une étiquette compatible et que l'arité de $h$ est supérieur ou égale à l'arité de $g$.
 Pour obtenir un SI à partir de cette matrice, il faut retirer des 1 de la matrice jusqu'à en obtenir un seul 1 par ligne.
 A chaque étape, un n\oe{}ud $g$ de G est choisi pour continuer l'isomorphisme.
 Ce n\oe{}ud correspond à une ligne $i$.
