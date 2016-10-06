@@ -4,9 +4,9 @@
 \subsection{Généralités}
 
 Nous avons déjà plusieurs fois abordé la base de données Norine au sein de ce manuscrit mais nous allons ici décrire en détail son fonctionnement.
-Norine à été créée durant la thèse de Ségolène Caboche (2006-2009) dans le but de centraliser l'information sur les NRP.
+Norine a été créée durant la thèse de Ségolène Caboche (2006-2009) dans le but de centraliser l'information sur les NRP.
 C'est la première base de ce genre a avoir été mise en place et c'est aujourd'hui la base de référence.
-Les structures atomiques et parfois monomériques de NRP étaient publiées dans des articles scientifiques puis parfois mises en ligne au sein de bases généralistes.
+Les structures atomiques et parfois monomériques de NRP étaient publiées dans des articles scientifiques puis quelquefois mises en ligne au sein de bases généralistes.
 Il n'existait souvent aucune annotation monomérique renseignée en dehors de ces publications.
 Norine a été créée dans le but de centraliser et rendre accessible les annotations NRP connues.
 Sans cette centralisation, il est très difficile de créer des modèles de prédiction autour des NRP.
@@ -79,7 +79,7 @@ En indiquant le nom ou l'identifiant, un peptide unique pourra être trouvé.
 En indiquant un nom partiel ou tout autre critère (avec la possibilité de combiner les critères), une liste de peptides sera retournée.
 Cependant, Norine propose également un autre type de recherche très intéressant pour notre type de données.
 Il est possible de rechercher les peptides par structures monomériques \cite{caboche_structural_2009}.
-Plus précisément, il est possible des créer des expressions régulières de structures pour les rechercher dans la base.
+Plus précisément, il est possible de créer des expressions régulières de structures pour les rechercher dans la base.
 Prenons un exemple.
 Si nous souhaitons effectuer des recherches de peptides qui contiennent une Valine liée à n'importe quel variant d'une Cystéine ou d'une Leucine, il nous faut écrire la requête : Val,[Cys*|Leu*]@1@0.
 Ce format est un format de graphe.
@@ -232,7 +232,7 @@ Nous pouvons lancer la modification depuis la page Norine du monomère.
 Changeons le SMILES du monomère en plaçant correctement l'azote puis validons.
 Après validation de la modification, l'entrée est correcte en base.
 
-Pour toutes les erreurs détectées par s2m, nous devons répéter ce processus de recherche des structures correctes puis changement des entrées de Norine.
+Pour toutes les erreurs détectées par s2m, nous devons répéter ce processus de recherche des structures correctes puis de changement des entrées de Norine.
 Souvent, une modification dans un peptide nous amène à découvrir plusieurs autres modifications mineures nécessaires.
 Il nous est par exemple plusieurs fois arrivé de découvrir des incohérences de nomenclature et de finalement passer un long moment sur une procédure de normalisation.
 C'est un processus qui prend énormément de temps et qui doit être effectué collectivement afin de ne pas prendre de décisions contradictoires.
@@ -279,7 +279,7 @@ Comme le montrent les deux dernières sections, s2m a permis à MyNorine d'augme
 
 Les Norine days, nous ont amené à travailler très régulièrement sur les données de Norine, ainsi que sur des données d'autres bases.
 Cette exploration en profondeur nous a révélé plusieurs faits.
-Premièrement, les données de Norine sont vieillissantes.
+Premièrement, les données de Norine, comme celles de nombreuses bases, sont vieillissantes.
 Par exemple en suivant des liens Pubchem, nous nous sommes aperçus qu'ils ne pointaient plus tous vers les bonnes structures.
 Nous avons également mis à jour le fait que l'évolution de la taxonomie au cours des années, a rendu obsolète certaines classifications d'organismes dans Norine.
 Plusieurs autres détails ont également changé et nous font dire qu'une mise à niveau s'impose.
@@ -302,7 +302,7 @@ Nous pouvons regrouper ces informations sous quatre catégories : les liens exte
 Analysons un à un chacun de ces cas.
 
 
-\textbf{Vérification des liens externes}
+\textbf{Vérification des liens externes}~~~
 Les liens rompus représentent la catégorie la plus facile à traiter.
 Un script simple a suffi pour les corriger.
 Un à un, nous suivons automatiquement les liens vers les bases.
@@ -314,7 +314,7 @@ De la même manière, il est possible de vérifier les liens encore fonctionnels
 De cette manière nous avons remis à jour plusieurs dizaines de liens.
 
 
-\textbf{Mise à jour de la taxonomie}
+\textbf{Mise à jour de la taxonomie}~~~
 La taxonomie pose plus de problèmes car elle évolue au cours du temps.
 La taxonomie du vivant a évolué au fur et à mesure des découvertes et des nouvelles méthodes de classification.
 Il n'y a aucun doute sur le fait qu'elle continuera à évoluer rapidement.
@@ -332,17 +332,17 @@ La construction de toute la chaîne taxonomique d'une espèce prend désormais b
 Par ce script, c'est l'ensemble des données de Norine qui ont été remises à jour.
 
 
-\textbf{Détection des changements de nomenclature}
-Les deux scripts de mise à jour dont nous venons de parler ne peuvent pas fonctionner dans 100\% des cas.
+\textbf{Détection des changements de nomenclature}~~~
+Les deux scripts de mise à jour dont nous venons de décrire ne peuvent pas fonctionner dans 100\% des cas.
 Depuis leur publication (parfois remontant aux années 1980), certaines molécules et certains organismes ont changé de nom.
 Heureusement, à la fois le NCBI et PubChem gardent en mémoire une liste conséquente de synonymes permettant ainsi de les retrouver.
 Cependant, nos scripts ne trouvent pas toujours de synonymes, ce qui nous empêche d'effectuer les mises à jour.
 Dans ce cas, nous levons des alertes qui devront être analysées à la main (probablement durant des ``Norine days'').
 
 
-\textbf{Ajout de publications}
+\textbf{Ajout de publications}~~~
 En analysant les annotations issues de s2m, nous nous sommes parfois aperçu de l'existence de nouveaux articles à propos des molécules étudiées.
-Certains articles nous permettaient alors de mettre à jour l'annotation présente dans Norine, de créer des entrées pour des variants nouvellement connus et parfois d'infirmer la production non ribosomique du peptide (Dans ce cas le peptide n'a plus sa place dans Norine).
+Certains articles nous permettaient alors de mettre à jour l'annotation présente dans Norine, de créer des entrées pour des variants nouvellement connus et parfois d'infirmer la production non ribosomique du peptide (dans ce cas le peptide n'a plus sa place dans Norine).
 Ce dernier cas est très problématique car, pour le moment, il n'a pas été prévu dans Norine de retirer les informations d'une quelconque manière.
 Il est toujours possible de retirer les informations directement en SQL mais cette solution ne permet pas aux utilisateurs de comprendre la disparition de la molécule.
 Après concertation sur la nomenclature et les procédures d'évolution des données nous nous sommes mis d'accord pour ajouter un statut ``deprecated'' au sein de la base.
@@ -358,7 +358,7 @@ La procédure devrait un jour être ajoutée à myNorine.
 L'exploration des bases de données proches des NRP permet de se rendre compte que de nombreuses molécules NRP connues ne sont pas répertoriées au sein de Norine.
 Afin d'essayer de combler le retard d'annotation de ces peptides, nous avons décidé d'automatiser leur intégration dans Norine.
 À partir d'un script, nous analysons et ajoutons les NRP présents au sein des bases MiBIG (voir \ref{bdd_nrp}) et BIRD.
-BIRD~\cite{young_chemical_2013} (The Biologically Interesting molecule Reference Dictionary) est une base de données regroupant de petits polymères antibiotiques et inhibiteurs.
+BIRD~\cite{young_chemical_2013} (the Biologically Interesting molecule Reference Dictionary) est une base de données regroupant de petits polymères antibiotiques et inhibiteurs.
 Les deux bases ont pour avantage de contenir des entrées permettant la différentiation des NRP du reste des molécules.
 Cela nous facilite la tâche en nous assurant du statut des molécules que nous ajoutons à Norine.
 
@@ -412,14 +412,15 @@ Finalement nous obtenons 1097 peptides.
 \begin{figure}[h!]
   \begin{center}
     \includegraphics[width=450px]{Figures/contributions/didemnin_B.png}
-    \caption{\label{didemin}À gauche une des sorties après processus de filtration et à droite le NRP correspondant dans la base Norine.}
+    \caption{\label{didemin}À gauche~: une des sorties après processus de filtration.
+    À droite~: le NRP correspondant dans la base Norine.}
   \end{center}
 \end{figure}
 
 Bien évidemment, ces 1097 structures ne sont pas toutes des peptides non ribosomiques.
 Les protéines classiques sont modifiées par de nombreuses enzymes qui permettent parfois la cyclisation et la transformation de monomères.
 Ces protéines peuvent être modifiées au point de les faire ressembler à des NRP.
-Nous ne pouvons donc pas être certains que les molécules rescapées du processus de filtration soient bien NRP.
+Nous ne pouvons donc pas être certains que les molécules issues du processus de filtration soient bien NRP.
 Cependant un bon indice de la qualité de la méthode est que nous retrouvons à l'aveugle des NRP de Norine.
 Nous avons par exemple retrouvé la ``didemnin B'' (figure \ref{didemin}).
 En effectuant une recherche par structure depuis l'interface de Norine, nous avons retrouvé ce NRP.
@@ -459,7 +460,7 @@ Effectuons un survol des techniques en commençant par de petites modifications 
 
 L'une des approches pour obtenir de nouvelles structures peptidiques est de faire varier des structures déjà produites.
 La structure peut être modifiée post-synthèse NRPS, par des enzymes présentes dans le cluster de gènes.
-C'est ce qui se passe par exemple naturellement lors d'incorporations de sucres dans un NRP (voir section \ref{sucres}).
+Cela se produit naturellement, par exemple, lors d'incorporations de sucres dans un NRP (voir section \ref{sucres}).
 En ajoutant des gènes d'enzymes de modification NRP au cluster de gènes ou en modifiant l'activité d'enzymes déjà présentes, certaines équipes parviennent à l'ajout de nouveaux monomères ou la modification de certains monomères déjà inclus~\cite{giessen_ribosome-independent_2012} (voir figure \ref{post_synth}).
 
 \begin{figure}[h!]
@@ -473,10 +474,10 @@ En ajoutant des gènes d'enzymes de modification NRP au cluster de gènes ou en 
 \end{figure}
 
 L'article \cite{winn_recent_2016} propose également d'aller plus loin en effectuant parfois cette modification avant l'assemblage NRPS.
-Ils publient par exemple plusieurs modifications pré-synthèse de la Pacidamycin.
+Les auteurs publient par exemple plusieurs modifications pré-synthèse de la Pacidamycin.
 Ce sont des enzymes modificatrices qui agissent sur un monomère cible avant sa capture (par exemple, dans l'article, Trp est dérivé en Cl-Trp ou d'autres variants).
 La structure du monomère n'étant pas fondamentalement changée, il est inclus par la synthétase sans changement préalable de celle-ci.
-Les contraintes structurelles des NRP n'autorisent pas toujours une modification post-synthèse de celui-ci.
+Les contraintes structurelles des NRP n'autorisent pas toujours une modification post-synthèse de ce monomère.
 La modification pré-synthèse de monomères, lorsqu'elle n'affecte pas la capture du dit monomère, ouvre beaucoup de possibilités de modification.
 % La surface en contact lors de la capture et de l'assemblage n'étant pas modifiée, les monomères alternatifs sont intégrés de la même manière que l'original.
 % Certains monomères ne sont plus facilement modifiables par des enzymes post-synthèse du fait des contraintes structurelles.
@@ -522,7 +523,7 @@ Par ce procédé, ils arrivent à capturer des monomères nouveaux, parfois non 
 
 Les modifications qui paraissent les plus évidentes sont celles qui font appel à des échanges de domaines (voir figure \ref{echange}).
 Des exemples sont présentés au sein des articles \cite{cane_harnessing_1998,kim_reinvigorating_2015}.
-Intuitivement, nous pourrions nous dire qu'il est facile d'échanger par exemple deux modules A de deux synthétases comme on échangerait deux pièces de LEGO\textregistered dans une construction.
+Intuitivement, nous pourrions nous dire qu'il est facile d'échanger par exemple deux modules A de deux synthétases comme on échangerait deux pièces de LEGO\textregistered ~dans une construction.
 Malheureusement, ces modifications ne sont pas si directes car les modules échangés doivent respecter la structure 3D de la NRPS.
 %des contraintes spatiales et physico-chimiques pour que la NRPS ait une cohérence structurelle.
 Les structures 3D n'étant pas souvent connues, il est très difficile de prédire un comportement de NRPS avant d'effectuer l'échange expérimentalement.
@@ -531,7 +532,7 @@ Les structures 3D n'étant pas souvent connues, il est très difficile de prédi
 % A Subdomain Swap Strategy for Reengineering Nonribosomal Peptides
 
 Bien que les contraintes structurelles soient des contraintes fortes, certaines équipes ont réussi des preuves de concept de cette technique.
-Par exemple, les auteurs de \cite{kries_subdomain_2015} procèdent à l'échange d'une sous partie de domaine A afin de modifier son site actif.
+Par exemple, les auteurs de l'article~\cite{kries_subdomain_2015} procèdent à l'échange d'une sous partie de domaine A afin de modifier son site actif.
 Ils ont ainsi réussi à modifier le domaine A du premier module de la Gramicidine S et ainsi obtenir une production peptidique chimérique.
 Ce résultat est très encourageant pour la suite et devrait pouvoir mener à la production de variants de peptides existants.
 % Pour outrepasser ce genre de difficultés, les auteurs de \cite{kries_subdomain_2015} procèdent uniquement à un échange de sous domaine A.
@@ -545,19 +546,19 @@ Nous arrivons désormais au Graal de l’ingénierie NRP : créer un peptide de 
 Pour le moment, il n'existe aucune technique pour effectuer cette tâche.
 Comme nous l'avons vu précédemment, modifier un domaine A est déjà très difficile et nécessite de l'expertise accompagnée d'un peu de chance.
 Cependant, certains travaux cherchent déjà à concevoir des briques de base qui nous permettraient un jour de construire un peptide complet.
-Ainsi, les travaux menés par Wilcoxen~\cite{wilcoxen_biomimetic_2007} ont permis la création d'un peptide synthétique mimant le comportement d'un domaine C.
+Ainsi, les travaux menés par Wilcoxen \textit{et al}~\cite{wilcoxen_biomimetic_2007} ont permis la création d'un peptide synthétique mimant le comportement d'un domaine C.
 Ils sont parvenus à lier deux monomères via leur peptide-domaine.
 Nous sommes encore loin d'un domaine C universel fonctionnel mais ces travaux permettront de mener aussi loin que possible cette quête du Graal.
 
 
-Les techniques que nous avons présenté ici sont toutes très encourageantes pour l'avenir de la biologie de synthèse pour les NRP.
+Les techniques que nous avons présenté ici sont toutes très encourageantes pour l'avenir de la biologie de synthèse des NRP.
 Des preuves de concept expérimentales, complètes ou partielles (pour la création de novo), ont été réalisées dans chacune des directions que nous avons abordé.
 Cependant il reste plusieurs grands obstacles à surmonter pour parvenir à la création d'antibiotiques NRP synthétiques.
 Les différentes preuves de concept doivent être répliquées pour la fabrication de nombreux et divers NRP.
 C'est en multipliant les expériences que nous tirerons de l'information de ce qui fonctionne ou non.
 De plus, il faudra outrepasser les difficultés de quantité de production.
 Les divers NRP synthétiques sont créés avec des débits bien plus faibles que les NRP originaux.
-Il reste donc à comprendre comment outrepasser les règles génétiques qui bloquent ces productions.
+Il reste donc à comprendre comment dépasser les règles génétiques qui bloquent ces productions.
 % Nous avons globalement présenté plusieurs techniques d'ingénierie de NRP sans quasiment laisser transparaître de failles de ces techniques.
 % Cependant, quelle que soit la technique, rares sont les productions de NRP capables de passer à l'échelle d'une production de masse.
 % Comme le dit bien la revue \cite{kries_biosynthetic_2016}, nous sommes pour le moment très bons en création de ``mauvais'' NRP.
@@ -581,8 +582,8 @@ Cette section sera dédiée à l'explication des prémices de cet outil.
 
 \subsubsection{Mettre en relation NRP et gènes}
 
-Toutes les techniques expérimentales de modification de NRPS dont nous avons parlé durant l'introduction sont très prometteuses mais encore en tout début de développement.
-Pour le moment il n'existe pas de méthode de modification miracle mais uniquement des transformations au cas par cas.
+Toutes les techniques expérimentales de modification de NRPS évoquées durant l'introduction sont très prometteuses mais encore en tout début de développement.
+Pour le moment, il n'existe pas de méthode de modification universelle mais uniquement des transformations au cas par cas.
 Pour contribuer aux avancées dans ce domaine, nous souhaitons créer un logiciel d'aide à la décision, permettant à partir d'un NRP souhaité, de trouver les clusters de gènes produisant une molécule la plus proche possible de ce NRP.
 Nous espérons que parmi les diverses sorties se trouvera un cluster de gènes proche de celui voulu et qui pourra être dérivé.
 
@@ -667,11 +668,11 @@ Afin de tester le modèle nous avons choisi de prendre des peptides réels prés
 À partir de ces peptides, nous espérons retrouver leur vrai cluster de gènes au sein d'un ensemble de clusters.
 Pour cela, il nous est nécessaire de constituer une base de données test.
 Malheureusement, la constitution d'une telle base est très difficile.
-Il existe en effet, très peu de sources de données mettant en relation des NRP constatés dans l'environnement avec des NRPS réelles.
+Il existe en effet très peu de sources de données mettant en relation des NRP constatés dans l'environnement avec des NRPS réelles.
 Nous devons constituer cette base par nous même.
 
 La première piste que nous avions envisagée était de rassembler des données NRPS sûres (annotées manuellement) pour ne pas nous préoccuper de la qualité des données.
-Nous avons donc récupéré les données des couples gènes/NRP de MiBIG.
+Nous avons donc utilisé les données des couples gènes/NRP de MiBIG.
 L'intérêt des données issues de MIBiG sont qu'elles ont été entrées manuellement, c'est à dire que le contributeur avait suffisamment confiance en ses données pour les partager avec la communauté.
 Cependant, il possible que le contributeur ait entré directement les résultats d'une prédiction sans ajouter d'annotations car celles-ci suffisaient pour ses travaux.
 Il nous faut donc vérifier la pertinence des structures NRP présentes en base.
@@ -701,7 +702,7 @@ Il faut faire manuellement les rapprochements pour connaitre les binômes NRP/NR
 De plus, les annotations de antiSMASH sont des prédictions et n'ont donc été vérifiées par personne.
 Par exemple, de nombreux petits clusters de gènes ne contiennent qu'un ou deux domaines A et il est difficile voire impossible de savoir s'ils sont artefactuels ou mal annotés.
 
-Le programme a été lancé sur les jeux de donnés précédemment présentés.
+Le programme a été lancé sur les jeux de donnés précédemment présentés dans cette section.
 Les problèmes évoqués pour ces jeux de données ne nous permettent pas pour le moment de dégager une quelconque conclusion sur la qualité de prédiction du modèle.
 Il est très difficile de donner les causes précises de ces résultats mais ils sont sans doute un cumul de beaucoup de facteurs.
 Premièrement, le fait de ne pas connaître les ``vrais'' clusters par avance ne nous permet pas de faire la différence entre un cluster non retrouvé et un cluster inexistant dans les données d'origine car non annotés.
@@ -715,10 +716,10 @@ Enfin, la distance de Jaccard n'est pas forcément très adaptée au problème e
 \subsubsection{Perspectives}
 
 Ce travail est un travail en cours et les résultats présentés ici sont encore très préliminaires.
-Malgré les critiques que nous venons de porter au modèle et aux données, il est très encourageant de retrouver quelques résultats positifs lors des tests.
+Malgré les critiques que nous venons de porter au modèle et aux données, il est très encourageant de retrouver quelques résultats positifs lors de ces premiers tests.
 Par exemple, s2m permet de connaître le type de liaison entre deux monomères, ce qui n'est pas forcément le cas depuis une annotation manuelle à disposition en ligne.
 Cette connaissance pourrait être exploitée afin de rechercher les parties de NRPS effectuant ces liaisons.
-Pour pouvoir continuer ce travail, il nous sera également nécessaire de constituer d'une base d'apprentissage et une base de référence bien annotée.
+Pour pouvoir continuer ce travail, il nous sera également nécessaire de constituer une base d'apprentissage de référence bien annotée.
 En effet, sans ces tests nous ne pourrons jamais déterminer avec précision la qualité des algorithmes développés.
 Nous sommes actuellement en train de réfléchir à des moyens de constituer ce jeu de données qui pourrait être d'une grande valeur pour de nombreuses tâches.
 La solution qui commence à émerger s'appuie sur plusieurs bases de données existantes.
