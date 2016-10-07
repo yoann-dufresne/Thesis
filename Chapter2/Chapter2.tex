@@ -886,7 +886,9 @@ détail de la recherche de ce motif sur la figure \ref{markov}.
 \begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=400px]{Figures/s2m/indexation/markov.png}
-    \caption{\label{markov}En vert, les chemins pris par la programmation dynamique pour finalement obtenir le chemin optimal vers le motif a-b-d.}
+    \caption{\label{markov}En vert, les chemins pris par la programmation dynamique pour finalement obtenir le chemin optimal vers le motif a-b-d.
+    Il est également possible de rechercher le chemin optimal en utilisant l'algorithme de Dijkstra mais la mise en place des structures de données nécessaires ralentiraient le calcul pour de petites données.
+    Comme nous le verrons en section \ref{k_res}, nous ne calculerons jamais de grandes chaînes exactes sur nos données (chaînes exactes de taille 3 en général).}
   \end{center}
 \end{figure}
 
