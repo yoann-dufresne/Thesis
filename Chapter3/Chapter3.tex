@@ -585,7 +585,13 @@ Cette section sera dédiée à l'explication des prémices de cet outil.
 Toutes les techniques expérimentales de modification de NRPS évoquées durant l'introduction sont très prometteuses mais encore en tout début de développement.
 Pour le moment, il n'existe pas de méthode de modification universelle mais uniquement des transformations au cas par cas.
 Pour contribuer aux avancées dans ce domaine, nous souhaitons créer un logiciel d'aide à la décision, permettant à partir d'un NRP souhaité, de trouver les clusters de gènes produisant une molécule la plus proche possible de ce NRP.
-Nous espérons que parmi les diverses sorties se trouvera un cluster de gènes proche de celui voulu et qui pourra être dérivé.
+Ainsi, nous espérons que parmi les molécules les plus proches, il existera un cluster NRPS modifiable pour synthétiser notre cible.
+
+Pour concevoir notre logiciel de recommandation de NRP proches, nous pouvons nous inspirer de logiciels existants tels que Pep2Path~\cite{medema_pep2path:_2014}.
+Pep2Path est un logiciel qui permet remonter les voies de synthèse pour aller découvrir les gènes NRPS responsables de la création d'un NRP.
+Leur idée est de faire de l'apprentissage sur les liens entre les pics observés dans des spectes de masse et les monomères prédits par NRPSPredictor2 depuis le cluster de gène.
+Ainsi, lorsque le logiciel analyse un nouveau spectre, il se base sur les spectres déjà annotés pour pouvoir remonter au gène correspondant.
+De notre côté, dans une perspective de biologie de synthèse, nous souhaitons pouvoir utiliser une structure monomérique en entrée et non un spectre de masse mais nous pourrons tout de même utiliser ce genre de techniques.
 
 \begin{figure}[h!]
   \begin{center}
