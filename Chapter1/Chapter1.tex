@@ -607,7 +607,7 @@ Cette méthode permet d'obtenir une reconstruction atomique fiable lorsque toute
 Ces bases donnent par exemple les masses des acides aminés classiques et de leur dérivés proches.
 Si la technologie de spectrométrie utilisée casse les molécules au niveau de leurs liaisons peptidiques, la reconstruction peut plus facilement aboutir à une annotation monomérique de toutes les parties composées d'acides aminés classiques.
 Cependant, les NRP étant composés de plus de 500 monomères différents, l'annotation monomérique directement issue des analyses de spectres n'est pas suffisante.
-Beaucoup de monomères, n'étant pas proches de molécules classiques, ne sont pas répertoriés parmi les masses classiques ou avec des masses connues malgré l'effort de certaines banques de données comme MzJava~\cite{horlacher_mzjava:_2015} pour s'étendre aux masses NRP.
+Beaucoup de monomères, n'étant pas proches de molécules classiques, ne sont pas répertoriés parmi les masses classiques.
 De plus, les peptides comportant des liaisons non peptidiques ne peuvent pas être facilement découpés par certaines technologies de spectrométrie.
 Pour finir l'annotation d'un NRP, il est nécessaire d'avoir recours à un spécialiste du domaine afin qu'il nomme chacun des monomères non annotés.
 
@@ -620,15 +620,24 @@ Cette génération de spectres attendus élimine de nombreux candidats et mène 
 Cependant, la reconstruction unique ne représente pas la majorité des cas.
 De plus, les résultats obtenus dans l'article ne semblent pas tous être reproductibles (communication personnelle).
 
-Il existe également un logiciel appelé NRPQuest~\cite{mohimani_nrpquest:_2014} qui croise les spectres obtenus avec des domaines prédits par des approches d'analyses NRPS (les résultats de l'article~\cite{mohimani_nrpquest:_2014} sont obtenus avec NRPSPredictor2).
-D'un côté, ils construisent une annotation NRP depuis l'ADN via un logiciel de prédiction et de l'autre ils reconstruisent un NRP à partir de fragments issus de spectrométrie de masse.
-En mettant en relation ces deux prédictions, ils arrivent à reconstituer des compositions et structures NRP plus fiables que chaque technique séparée.
-Cependant, si les prédictions NRPS ne contiennent pas tous les monomères du peptide, alors la reconstruction ne les contiendra pas non plus et ce, même si l'information est présente dans le spectre de masses.
-C'est une limitation forte du logiciel que les auteurs pointent eux mêmes à la fin de leur article.
-
-Pour résumer, la spectrométrie de masse donne accès à des structures atomiques de molécules avec un degré de certitude très élevé et parfois à des reconstructions NRP fiables~\cite{mohimani_dereplication_2015}.
+Pour résumer, la spectrométrie de masse donne accès à des structures atomiques de molécules avec un degré de certitude très élevé et parfois à des reconstructions de structures biologiques NRP fiables~\cite{mohimani_dereplication_2015}.
 De plus, contrairement à l'annotation depuis l'ADN, nous sommes certains que la molécule est produite puisqu'elle est directement extraite de l'environnement étudié.
 Cependant, le besoin d'une expertise spécifique pour terminer les annotations et le faible débit de génération de données dû aux purifications nécessaires, ne permettent pas une annotation efficace.
+
+
+\textbf{Analyse en tandem ADN-Spectrométrie}~~~
+
+Parmi les logiciels d'analyse de spectres de masse pour la découverte de NRP, quelques uns se démarquent en croisant les informations aux prédictions génomiques.
+C'est nottament le cas des logiciels NRPQuest~\cite{mohimani_nrpquest:_2014} et ``Genomes-to-Natural Products platform'' (GNP)~\cite{johnston_automated_2015}.
+Dans les deux cas, les logiciels construisent une annotation NRP depuis l'ADN, via un ou plusieurs logiciels de prédiction externe, puis essayent de relier ces prédictions aux spectres de masse.
+La différence entre les deux logiciels est au niveau du lien qui est fait entre les deux sources d'informations.
+NRPQuest construit des spectres candidats depuis les prédictions ADN pour les comparer aux spectres de masses réels.
+De son côté, GNP essaye de mettre en corrspondance des pics du spectre avec des prédictions de molécules en utilisant divers algorithmes d'apprentissage.
+En mettant ainsi en relation les deux informations, ils arrivent à reconstituer des compositions et structures NRP plus fiables que chaque technique séparée.
+Cependnat dans les deux cas, les reconstructions NRP sont très fortement dépendantes des algorithmes de prédiction depuis l'ADN.
+Même avec des spectres de très bonne qualité, rien ne sera détectable après de mauvaises prédictions NRPS.
+C'est une limitation forte de ces logiciels que les auteurs de NRPQuest pointent eux mêmes à la fin de leur article.
+
 
 
 \textbf{Analyse par Résonance Magnétique Nucléaire}~~~
