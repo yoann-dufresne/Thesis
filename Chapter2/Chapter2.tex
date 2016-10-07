@@ -430,7 +430,7 @@ Voyons ensemble plusieurs algorithmes représentatifs.
     \includegraphics[width=450px]{Figures/s2m/MCS-SI/ullman.png}
     \caption{\label{ullman_fig}Recherche d'un isomorphisme de sous-graphe par l'algorithme d'Ullman.
     Dans la partie ``construction'', vous pouvez voir la matrice créée à partir des graphes G et H.
-    Dans la partie ``recherche'' sont présentées les étapes successives de création d'un SI (voir texte pour détail).
+    Dans la partie ``recherche'' sont présentées les étapes successives de création d'un SI (voir le texte pour les détails).
     Si nous avions voulu obtenir tous les isomorphismes (et pas juste un seul), il aurait fallu continuer le backtracking jusqu'au bout.}
   \end{center}
 \end{figure}
@@ -441,13 +441,13 @@ L'algorithme se base sur la matrice de compatibilité entre les graphes (voir fi
 Une matrice de compatibilité est une matrice dont chaque ligne représente un n\oe{}ud de G et chaque colonne un n\oe{}ud de H.
 Soient $g$ et $h$ correspondants respectivement à un n\oe{}ud du graphe G et du graphe H.
 Soient $i$ et $j$ les numéros des lignes et colonnes de la matrice correspondants à $g$ et $h$.
-La case de coordonnées $(i,j)$ contient un 1 si $g$ et $h$ ont une étiquette compatible et que l'arité de $h$ est supérieur ou égale à l'arité de $g$.
+La case de coordonnées $(i,j)$ contient un 1 si $g$ et $h$ ont une étiquette compatible et que l'arité de $h$ est supérieure ou égale à l'arité de $g$.
 Pour obtenir un SI à partir de cette matrice, il faut retirer des 1 de la matrice jusqu'à en obtenir un seul 1 par ligne.
 A chaque étape, un n\oe{}ud $g$ de G est choisi pour continuer l'isomorphisme.
 Ce n\oe{}ud correspond à une ligne $i$.
-Puis une colonne $j$ est choisie de telle manière à ce que la case $(i,j)$ de la matrice contienne un 1.
-Le couple $(i,j)$ nous donne le couple $(g,h)$ qui peut être ajouter à l'isomorphisme.
-Avant cet ajout, il faut également vérifier que tous les voisins de $h$ correspondent bien aux voisins de $g$ (condition non respectée à l'étape 2 et 5 de la partie recherche du schéma).
+Puis une colonne $j$ est choisie de manière à ce que la case $(i,j)$ de la matrice contienne un 1.
+Le couple $(i,j)$ nous donne le couple $(g,h)$ qui peut être ajouté à l'isomorphisme.
+Avant cet ajout, il faut également vérifier que tous les voisins de $h$ correspondent bien aux voisins de $g$ (condition non respectée aux étapes 2 et 5 de la partie recherche du schéma).
 Puisque nous ajoutons ce couple à l'isomorphisme, il faut remplacer tous les 1 de la ligne et la colonne choisies par des 0 (excepté pour la case $(i,j)$).
 À ce moment, si au moins une ligne a été vidée de tous ses 1, c'est que l'isomorphisme n'est pas possible et il faut revenir à l'étape précédente.
 L'algorithme continue récursivement jusqu'à obtenir un 1 par ligne ou ne trouver aucun isomorphisme.
@@ -499,11 +499,11 @@ VF2 est un algorithme de recherche de SI pour des graphes non orientés et non �
 \end{figure}
 
 Expliquons cet algorithme en utilisant le schéma \ref{vf2}.
-A la première étape, nous nous trouvons avec un ensemble vide de n\oe{}uds couplés de $G$ et $H$.
+À la première étape, nous nous trouvons avec un ensemble vide de n\oe{}uds couplés de $G$ et $H$.
 Nous générons donc toutes les possibilités de couples entre tous les n\oe{}uds des deux graphes (Il est à noter que l'algorithme
 est décrit de cette façon dans l'article mais qu'il n'est nécessaire de générer que les couples à partir d'un seul n\oe{}ud de $G$
 et de l'ensemble des n\oe{}uds de $H$.)
-Une fois ces couples créés, nous les parcourons tous en appelant récursivement la fonction.
+Une fois ces couples créés, nous les parcourons tout en appelant récursivement la fonction.
 Dans l'exemple, le premier appel récursif est effectué après avoir assemblé '1' à 'a'.
 Cette voie est sans issue car quel que soit l'assemblage entre '2' et un n\oe{}ud de $H$, plus aucun couple de voisins ne pourra être
 généré.
@@ -514,9 +514,9 @@ Une fois toutes les tentatives échouées, l'algorithme remonte dans l'arbre et 
 Récursivement, l'algorithme conclut à un isomorphisme {(1,b);(2,a);(3,c)}.
 
 En l'état, l'algorithme VF2 ne reconnaît qu'un seul et unique isomorphisme.
-On peut modifier simplement l'algorithme afin de récupérer tous les isomorphismes en ne s'arrétant pas une fois que l'un d'eux est
+On peut modifier simplement l'algorithme afin de récupérer tous les isomorphismes en ne s’arrêtant pas une fois que l'un d'eux est
 trouvé mais en l'enregistrant dans un ensemble puis en continuant l'exploration de l'arbre jusqu'au bout.
-L'arbre est entiérement exploré à chaque recherche, l'algorithme est donc exponentiel.
+L'arbre est entièrement exploré à chaque recherche, l'algorithme est donc exponentiel.
 Pour être plus précis, il est en $O(n^m)$, donc non calculable dans les pires des cas ($n$ nombre de sommets de G et $m$ de H).
 
 À cause de sa complexité, cet algorithme est très pratique pour trouver un seul SI, mais pas pour les trouver tous.
@@ -530,7 +530,7 @@ Ceci peut s'expliquer par le fait que des algorithmes exacts et praticables exis
 De plus, les heuristiques de MCS permettent d'obtenir des résultats de SI en ajoutant des contraintes (Le SI étant un cas particulier du MCS).
 Dans tous les cas, ces heuristiques de SI sont des dérivés de la technique par backtracking~\cite{kaijar_developing_2012}.
 Ces algorithmes essaient en supplément d'éviter l'exploration de toutes les branches en sélectionnant les plus ``prometteuses''.
-Par exemple, on préférera explorer des isomorphismes commençant par des paires de noeuds d'arité forte car ils sont un indice de ``bon isomorphisme''.
+Par exemple, on préférera explorer des isomorphismes commençant par des paires de n\oe{}uds d'arité forte car ils sont un indice de ``bon isomorphisme''.
 
 Il existe également de nombreux algorithmes pour des cas particuliers de SI.
 Par exemple, il est possible de résoudre le problème SI en temps polynomial pour des arbres~\cite{shamir_faster_1997}, des graphes planaires~\cite{eppstein_subgraph_1995,dorn_planar_2009} ou des graphes de \textit{treewidth} faible~\cite{hajiaghayi_subgraph_2007}.
@@ -540,12 +540,12 @@ Dans tous les cas, il est possible de trouver au moins une molécule (pas forcé
 \subsection{Choisir l'algorithme de recherche de monomères}
 
 Pour pouvoir rechercher les monomères, nous devions choisir entre toutes les approches algorithmiques citées ci-dessus.
-Premièrement, lorsque nous recherchons un monomère dans un peptide, nous souhaitons connaître toutes les occurences potentielles.
+Premièrement, lorsque nous recherchons un monomère dans un peptide, nous souhaitons connaître toutes les occurrences potentielles.
 Nous ne souhaitons donc pas utiliser d'approches heuristiques.
 Deuxièmement, le MCS ne paraît pas très pratique dans notre cas.
 En effet, les NRP regorgent de monomères proches les uns des autres (variation de un ou deux atomes/liaisons).
 Il n'est donc pas facile, lorsque l'on obtient un résultat, de savoir si la molécule trouvée est la bonne ou si c'est le monomère voisin à un atome de distance qui a été détecté.
-Enfin, en comparant les algorithmes de recherche exacte de solutions, ceux de résolution de SI sont plus adaptés et rapide en pratique.
+Enfin, en comparant les algorithmes de recherche exacte de solutions, ceux de résolution de SI sont plus adaptés et rapides en pratique.
 Au début, nous ne connaissions pas l'existence de l'algorithme VF2 et aucun des autres algorithmes ne nous convenait en temps de calcul.
 De notre côté, nous avons indépendamment redéveloppé un algorithme étendu de VF2 appliqué aux graphes étiquetés et suffisamment rapide pour pouvoir trouver tout SI quasi-instantanément.
 La section suivante donnera tous les détails concernant cet algorithme et son intégration à s2m.
@@ -561,10 +561,10 @@ La section suivante donnera tous les détails concernant cet algorithme et son i
 
 \label{isomorphisme_p}
 
-Notre logiciel appelé Smiles2Monomers (s2m), doit débuter par la recherche de l'ensemble des monomères au sein d'un polymère cible.
+Notre logiciel appelé Smiles2Monomers (s2m), doit débuter par la recherche d'un ensemble de monomères au sein d'un polymère cible.
 Comme nous l'avons vu dans l'état de l'art, nous pouvons transformer ce problème en un problème de graphe appelé isomorphisme de sous-graphe (SI).
-Dans cette partie, nous allons présenter en détail la variante que nous avons conçu, de l'algorithme de résolution de SI appelé VF2.
-Puis nous montrerons en quoi les étiquettes des n\oe{}uds du graphes influencent le temps de calcul afin en déduire une méthode de recherche efficace.
+Dans cette partie, nous allons présenter en détail la variante que nous avons conçue, de l'algorithme de résolution de SI appelé VF2.
+Puis nous montrerons en quoi les étiquettes des n\oe{}uds du graphes influencent le temps de calcul afin d'en déduire une méthode de recherche efficace.
 
 \subsubsection{Notre algorithme pour les graphes étiquetés}
 
@@ -573,7 +573,7 @@ Puis nous montrerons en quoi les étiquettes des n\oe{}uds du graphes influencen
   \begin{center}
     \includegraphics[width=350px]{Figures/s2m/recherche/VF2_labels.png}
     \caption{\label{vf2_labels}Modification de VF2 pour son application aux graphes étiquetés.
-    On voit nettement sur cet exemple que l'ordre de recherche des labels influence le temps d'exécution de l'algorithme.}
+    On voit nettement sur cet exemple que l'ordre de recherche des étiquettes influence le temps d'exécution de l'algorithme.}
   \end{center}
 \end{figure}
 
@@ -588,7 +588,7 @@ On voit également que la recherche est d'autant plus rapide que l'on choisit pr
 
 Là où l'algorithme général VF2 était en $O(n^m)$, la complexité est ici réduite dans le pire des cas à $O(k^n)$ où $k$ est le comptage du nombre de n\oe{}uds de l'étiquette la moins filtrante.
 La taille de l'arbre de recherche est diminuée par la sélectivité des étiquettes de n\oe{}uds.
-Pour optimiser la recherche, nous devons donc étudier la façon dont nous représentons les molécules afin d'avoir une sélectivité
+Pour optimiser la recherche, nous devons donc étudier la façon dont nous représentons les molécules afin d'avoir la sélectivité
 la plus grande possible.
 
 \subsubsection{Sélectivité d'un n\oe{}ud}
@@ -601,24 +601,24 @@ Bien entendu, les hydrogènes sont les atomes les plus représentés et ne filtr
 Cependant, ils contiennent une information supplémentaire sur l'atome auquel ils sont liés.
 Ainsi, trouver un $CH_{3}$ ou un $CH$ donne une information différente sur la topologie.
 En prenant en compte la remarque précédente, nous avons créé une seconde représentation qui compresse les hydrogènes à l'intérieur des n\oe{}uds représentant les atomes plus lourds.
-Ainsi, plusieurs étiquettes différentes peuvent désormais être créés pour un même atome et ce, en fonction de ses compagnons hydrogènes (Voir figure \ref{representations}, seconde partie).
+Ainsi, plusieurs étiquettes différentes peuvent désormais être créées pour un même atome et ce, en fonction de ses compagnons hydrogènes (voir figure \ref{representations}, seconde partie).
 Par exemple $NH_2$, $NH$, $N$ sont les trois étiquettes variants depuis l'ancienne étiquette unique $N$ qui était accompagnée de voisins hydrogènes.
 Les étiquettes sont plus nombreuses et leur fréquence à la fois moins élevée et plus homogène, ce qui les rend plus sélectives.
 
 \begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=400px]{Figures/s2m/representations/all.png}
-    \caption{\label{representations}Triple représentation de la même molécule accompagnée des fréquences de chacunes des étiques possible. Ces fréquences ont été calculé sur un extrait de 200 molécules issues de la base de données Norine.}
+    \caption{\label{representations}Triple représentation de la même molécule accompagnée des fréquences de chacune des étiquettes possibles. Ces fréquences ont été calculées sur un extrait de 200 molécules issues de la base de données Norine.}
   \end{center}
 \end{figure}
-Escherichia coli
+%Escherichia coli
 Globalement, au plus le nombre d'étiquettes est élevé et au plus les fréquences de ces étiquettes sont homogènes, au moins l'algorithme VF2 aura de difficultés à effectuer un isomorphisme.
 En effet, la lenteur qui peut venir de cet algorithme est due aux nombreux chemins qu'il
 peut prendre lors de l'exploration.
 
 Cherchons encore à augmenter la sélectivité des étiquettes en augmentant leur nombre.
 A partir d'un graphe $G$, il est possible de représenter ses relations d'adjacence au sein d'un second graphe nommé $L$.
-Pour cela, deux n\oe{}uds voisins de $G$ sont représentés dans $L$ comme un seul n\oe{}ud (voir line-graph2 dans figure \ref{representations}).
+Pour cela, deux n\oe{}uds voisins de $G$ sont représentés dans $L$ comme un seul n\oe{}ud (voir line-graph2 dans la figure \ref{representations}).
 Chaque ancienne arête devient un n\oe{}ud et chaque ancien n\oe{}ud devient une multitude d'arêtes (une clique entre tous les nouveaux n\oe{}uds représentant les anciennes arêtes de cet ancien n\oe{}ud).
 Nous étendons le raisonnement pour les étiquettes en disant que l'étiquette d'un n\oe{}ud du nouveau graphe est la composition des étiquettes des anciens n\oe{}uds ainsi que de l'arité entre ces deux n\oe{}uds.
 Dans notre cas, les étiquettes sont mises dans l'ordre lexicographique pour ne pas avoir deux étiquettes possibles à partir des étiquettes d'origine.
@@ -626,13 +626,13 @@ Un tel type de graphe est appelé \textit{line graph}~\cite{orlin_line-digraphs_
 L'inclusion de l'arité du lien dans les étiquettes est un très gros avantage de cette représentation.
 La fonction de recherche n'aura donc plus du tout à s'attarder sur le degré des arêtes puisque le tout sera reporté sur la fonction de matching d'étiquettes (voir figure \ref{label_matching}).
 De plus, transformer les graphes de cette manière nous permet de répondre à la volonté d'augmenter le nombre d'étiquettes.
-Là où la représentation précédente pouvait avoir $n$ étiquettes différentes, celle-ci pourra en générer plus de $n^2$ ($3n^2$ si on compte tous le degré des liaisons entre atomes).
+Là où la représentation précédente pouvait avoir $n$ étiquettes différentes, celle-ci pourra en générer plus de $n^2$ ($3n^2$ si on compte tous les degrés des liaisons entre atomes).
 
 \begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=200px]{Figures/s2m/recherche/strict.png}
     \caption{\label{label_matching}Exemple de fonctionnement de la fonction de matching d'étiquettes.
-    Le premier n\oe{}ud ne correspond pas au n\oe{}ud car l'arité du lien contenue dans l'étiquette est différente.
+    Le premier n\oe{}ud ne correspond pas au n\oe{}ud cible car l'arité du lien contenue dans l'étiquette est différente.
     Le deuxième ne correspond pas car les atomes des étiquettes ne correspondent pas.
     Le troisième ne correspond pas car l'étiquette ne contient pas suffisamment d'hydrogènes liés aux atomes principaux.
     Enfin, le dernier remplit les 3 critères précédemment cités et la correspondance est possible.}
@@ -656,9 +656,9 @@ grand graphe. Définissons également une \textbf{chaîne} comme étant un motif
 Ainsi, on peut avoir plusieurs chaînes représentant le même motif mais avec des ordres de parcours différents.
 Ce que nous appellerons \textbf{indexation} sera donc la phase de création d'une chaîne pour représenter chaque motif d'intérêt en essayant de minimiser le temps que prendra la recherche de cette chaîne.
 Pour la recherche de monomères dans des peptides non ribosomiques, la phase d'indexation revient donc à choisir, pour chaque monomère, l'ordre dans lequel nous allons rechercher les n\oe{}uds du graphe le représentant.
-Ainsi, on peut voir que quelque soit la chaîne représentant le graphe, le même motif sera toujours recherché.
+Ainsi, on peut voir que quelle que soit la chaîne représentant le graphe, le même motif sera toujours recherché.
 La seule différence sera la rapidité d'exécution de la recherche.
-Les deux sections suivantes s'attarderont à la recherche de chaînes performantes (\textit{ie} les plus rapide) lors la recherche d'un motif.
+Les deux sections suivantes s'attarderont à la recherche de chaînes performantes (\textit{ie} les plus rapides) lors la recherche d'un motif.
 
 
 \subsubsection{Indexation gloutonne}
@@ -666,7 +666,7 @@ Les deux sections suivantes s'attarderont à la recherche de chaînes performant
 \begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=450px]{Figures/s2m/indexation/chaines_example.png}
-    \caption{\label{chaine_fail}Deux exemple de chaîne pour un motif simple}
+    \caption{\label{chaine_fail}Deux exemples de chaîne pour un motif simple}
   \end{center}
 \end{figure}
 
@@ -674,11 +674,11 @@ Une chaîne efficace est donc une chaîne rapide.
 Déterminons quel(s) critère(s) simple(s) nous permettent de supposer qu'une chaîne est efficace.
 Avec ce ou ces critères, nous pourrons ensuite déterminer un moyen d'ordonner les n\oe{}uds de manière gloutonne.
 Partons de l'exemple présenté sur la figure \ref{chaine_fail}.
-A gauche est dessiné un motif simple suivi de deux chaînes pouvant le représenter (lecture de l'ordre des chaînes de gauche à droite).
+À gauche est dessiné un motif simple suivi de deux chaînes pouvant le représenter (lecture de l'ordre des chaînes de gauche à droite).
 Pour la première chaîne, en partant du motif ne contenant qu'un ``vert'', on obtiendra 3 isomorphismes.
 En étendant ces chaînes à deux ``vert'' voisins, on conserve toujours trois isomorphismes puis deux en ajoutant ``rouge'' et enfin un seul avec le dernier ``vert''.
 Au total, on aura étendu 9 isomorphismes durant la recherche.
-En regardant maintenant la seconde chaîne, on se rend compte que le nombre de ces isomorphismes intermédiaires est bien plus faible grâce à la sélectivité de l'étiquette ``rouge'' recherché en tout premier (5 isomorphismes intermédiaires sont étendus).
+En regardant maintenant la seconde chaîne, on se rend compte que le nombre de ces isomorphismes intermédiaires est bien plus faible grâce à la sélectivité de l'étiquette ``rouge'' recherchée en tout premier (5 isomorphismes intermédiaires sont étendus).
 La différence décisive entre les deux chaînes est donc le moment où le n\oe{}ud avec une étiquette sélective est recherché.
 Effectivement, si le n\oe{}ud ``rouge'' est recherché dès le début, la solution est ``ancrée'' sur une base solide et ne risque a priori pas de créer trop de solutions intermédiaires qui devront toutes être analysées pour passer à l'étape suivante.
 On peut dire qu'un n\oe{}ud est plus sélectif qu'un autre à partir du moment où sa fréquence d'apparition dans les molécules étudiées est moins élevée.
@@ -738,7 +738,7 @@ La chaîne qui sera générée commence forcément par le n\oe{}ud étiqueté $a
 \begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=400px]{Figures/s2m/indexation/glouton.png}
-    \caption{\label{glouton}En vert le chemin pris par l'algorithme glouton pour générer la chaîne du motif a-b-d}
+    \caption{\label{glouton}Ensemble des chaînes générées à partir du motif a-b-d avec en vert le chemin pris par l'algorithme glouton.}
   \end{center}
 \end{figure}
 
@@ -796,15 +796,15 @@ Combinons les deux équations précédentes, pour obtenir une formule globale :
  T(c_n) \propto^t N + \sum_{i=2}^n (n_{p_{i-1}} \times a_{p_{i-1} \rightarrow p_i})
 \end{equation}
 
-où $N$ est le temps de calcul pour les chaines de taille 1.
-Ce temps ne varie par car il est nécessaire de parcourir tout le graphe.
+où $N$ est le temps de calcul pour les chaînes de taille 1.
+Ce temps ne varie pas car il est nécessaire de parcourir tout le graphe.
 
 \begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=400px]{Figures/s2m/indexation/apprentissage_comptage.png}
     \caption{\label{app_compt}Reprise de la base d'apprentissage présentée en figure \ref{apprentissage} pour définir le filtrage.
     Les comptages initiaux des fréquences de chacun des n\oe{}uds ont été étendus aux comptages de l'ensemble des sous-motifs possibles.
-    Le taux de filtrage d'un ajout de n\oe{}ud dans un motif est alors défini comme le nombre de détection du motif initial dans la base divisé par le nombre de détection du motif étendu.
+    Le taux de filtrage d'un ajout de n\oe{}ud dans un motif est alors défini comme le nombre de détections du motif initial dans la base divisé par le nombre de détections du motif étendu.
     Ainsi, pour passer d'un motif a à un motif a-b, le taux de filtrage est de 3/2.}
   \end{center}
 \end{figure}
@@ -820,7 +820,7 @@ En normalisant cette valeur par le nombre de n\oe{}uds de la base, nous pouvons 
 Redéfinissons la notation ${n_{p_{i-1}} \over N}$ qui correspond à un taux de filtrage d'un motif de taille $i-1$.
 Appelons ce taux $F_{i-1}$. Cette notation peut à son tour être transformée en
 produit des filtrages de chaque extension d'une chaîne. Les valeurs des filtrages estimés s'obtiennent immédiatement à partir des
-comptages dans la base d'apprentissage (Voir l'exemple en figure \ref{app_compt}).
+comptages dans la base d'apprentissage (voir l'exemple en figure \ref{app_compt}).
 Il est à noter que le taux de filtrage peut être supérieur à 1 dans le cas où la recherche obtient plus d'isomorphismes en cours de création à la suite de l'ajout du n\oe{}ud.
 
 \begin{equation}
@@ -840,7 +840,7 @@ Le temps de recherche optimal d'un motif est donc le temps de recherche de la ch
 
 Appliquons maintenant cette formule de calcul du temps sur notre exemple pour trouver la meilleure chaîne possible par
 rapport à la base d'apprentissage. Pour le motif de l'exemple de la figure \ref{app_compt}, nous pouvons nommer les différentes chaînes possibles de $\alpha$
-jusque $\delta$.
+jusque~$\delta$.
 
 \[
 \begin{array}{ccccccc}
@@ -895,12 +895,12 @@ En effet, même par programmation dynamique, le temps de pré-calcul des chaîne
 Calculons la complexité, en considérant que chaque étiquette est unique, sur les deux cas extrêmes~: une ligne et une clique.
 
 Une ligne représente le motif le plus simple.
-Pour une ligne de n\oe{}uds de taille $n$, on peut trouver un motif de taille $n$ puis deux de taille $n-1$ puis 3 de taille $n-2$, ...
+Pour une ligne de n\oe{}uds de taille $n$, on peut trouver un motif de taille $n$ puis deux de taille $n-1$ puis 3 de taille $n-2$,~...
 Pour calculer le coût du motif de taille $n$, il nous faut calculer récursivement tous les motifs de taille inférieure.
 Dans le meilleur des cas la programmation dynamique sera donc de complexité de l'ordre de $n^2$.
 
 Le pire motif qui peut être défini est une clique.
-Dans le cas d'une clique de taille $n$, pour calculer le coût du motif, il faudra calculer $n-1$ parmi $n$ valeurs puis $n-2$ parmi $n$, ... Dans ce cas, la complexité sera de l'ordre de $2^n$.
+Dans le cas d'une clique de taille $n$, pour calculer le coût du motif, il faudra calculer $n-1$ parmi $n$ valeurs puis $n-2$ parmi $n$,~... Dans ce cas, la complexité sera de l'ordre de $2^n$.
 
 La redondance des étiquettes permet quant à elle de couper certaines branches lors de l'indexation et ainsi de diminuer un peu la complexité en pratique.
 Cependant, l'ordre de grandeur n'en est pas modifié.
@@ -1699,7 +1699,7 @@ Ce résultat était attendu mais l'écart expérimental nous pousse fortement à
 
 Comparons désormais les temps d'exécution pour l'heuristique en fonction des paramètres passés au programme.
 Le paramètre du nombre de boucles \textit{light} (R) semble avoir le plus d'influence sur le temps d'exécution.
-C'est à nouveau un résultat que nous attendions puisque la recherche \textit{light} ne s'appuie que sur une faible diversité d'étiquette sur les noeuds (voir les sections \ref{selectiv_p} pour l'influence du nombre d'étiquettes et \ref{light_p} pour la recherche light).
+C'est à nouveau un résultat que nous attendions puisque la recherche \textit{light} ne s'appuie que sur une faible diversité d'étiquette sur les n\oe{}uds (voir les sections \ref{selectiv_p} pour l'influence du nombre d'étiquettes et \ref{light_p} pour la recherche light).
 Le temps passé à la recherche de motifs en utilisant les critères \textit{light} est important.
 Répéter l'opération plusieurs fois multiplie logiquement le temps d'exécution.
 
