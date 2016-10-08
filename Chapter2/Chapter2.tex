@@ -22,9 +22,8 @@ Beaucoup de NRP possèdent des activités très intéressantes (antibiotiques, a
 Lorsque ces activités ne sont pas déterminées expérimentalement, les logiciels exploitant des techniques de type QSAR permettent d'effectuer une prédiction.
 En 2012 puis 2014, Abdo et al. publient de nouvelles méthodes de prédiction d'activité NRP, se basant sur les spécificités des NRP~\cite{abdo_new_2012, abdo_prediction_2014}.
 Dans les deux cas, les prédictions sont effectuées à partir des compositions monomériques et non pas atomiques.
-Dans le premier article~\cite{abdo_new_2012}, la prédiction est effectuée en créant pour chaque activité connue un \textit{fingerprint}.
-Ces fingerprints sont les barycentres de classes de peptides présentant l'activité.
-Prédire l'activité d'un nouveau NRP revient alors à déterminer l'activité dont le barycentre est le plus proche.
+Dans le premier article~\cite{abdo_new_2012}, la prédiction est effectuée en créant pour chaque peptide connu un \textit{fingerprint} et en ajoutant un fingerprint pour le peptide dont on cherche l'activité.
+Pour prédire l'activité, les auteurs utilisent plusieurs classifieurs présent dans la librairie WEKA~\cite{hall_weka_2009}.
 Dans le second article~\cite{abdo_prediction_2014}, c'est un classifieur par réseau Bayésien qui est entraîné sur les compositions en monomères.
 Une fois les réseaux entraînés, il suffit de fournir une composition en entrée pour avoir les probabilités de chaque activité en sortie.
 Dans les deux cas, il est important de constater que l'abstraction monomérique est suffisante pour une prédiction de qualité.
@@ -47,7 +46,7 @@ Il nous a donc paru nécessaire de créer un outil qui infère la structure mono
 \subsection{Définition du problème}
 
 Nous cherchons à créer un outil bioinformatique permettant l'obtention de nouvelles annotations monomériques NRP fiables.
-La génération d'annotations peut se baser sur la recherche d'informations à partir des gènes ou à partir des molécules pour lesquelles on connaît déjà la structure.
+La génération d'annotations peut se baser sur la recherche d'informations à partir des gènes ou à partir des molécules dont on connaît déjà la structure.
 Dans notre cas, nous n'avons pas choisi de démarrer des clusters de gènes NRPS puisque des modèles déjà bien éprouvés existent (NRPSpredictor, NaPDoS, ...).
 Les avancées dans ce domaines viendront avec le nombre d'annotations fiables de binômes clusters/NRP qui permettront l'amélioration des modèles d'apprentissage actuels.
 
@@ -59,11 +58,11 @@ Les avancées dans ce domaines viendront avec le nombre d'annotations fiables de
 \end{figure}
 
 Dans notre cas, nous allons partir des structures atomiques pour déduire les composants monomériques (voir figure \ref{structures}).
-De telles structures sont présentes dans de nombreuses bases de données publiques, telles que PDB ou PubChem.
+De telles structures sont présentes dans de nombreuses bases de données publiques, telles que PDB~\cite{berman_announcing_2003} ou PubChem~\cite{kim_pubchem_2015}.
 Ces bases contiennent de nombreuses descriptions de molécules NRP sans annotations monomériques directement accessibles.
 Notre objectif sera d'être capable, pour toute structure moléculaire NRP, de déduire sa composition en monomères.
 Ainsi, toutes les structures atomiques présentes dans les bases généralistes pourront être annotées et ajoutées à des bases spécialisées telles que Norine.
-Ce type d'annotation pourra également être effectué pour mettre en relation les structures atomiques non annotées des bases généralistes avec les annotations non liés des bases spécialisées.
+Ce type d'annotation pourra également être effectué pour mettre en relation les structures atomiques non annotées des bases généralistes avec les annotations biologiques présentes dans des bases spécialisées.
 
 
 
@@ -143,7 +142,7 @@ Dans ce cas, vu qu'aucun retour en arrière n'est effectué, l'annotation sera i
   \begin{center}
     \includegraphics[width=400px]{Figures/s2m/Intro/molBlocks.png}
     \caption{\label{molBlocks}Application de la méthode molBlocks sur le polymère ACV.
-    Le polymère est séparé en morceau par une règle de liaison peptidique.
+    Le polymère est séparé en morceau par une règle de liaison peptidique (voir équation~\ref{pep_dec}).
     Les trois morceaux correspondent aux trois monomères réellement inclus, la découpe fonctionne.}
   \end{center}
 \end{figure}
@@ -154,6 +153,7 @@ Pour cela, le logiciel découpe les polymères en petits fragments et effectue d
 Ces découpes suivent des règles entrées par l'utilisateur.
 Par exemple en donnant comme règle
 \begin{equation}
+  \label{pep_dec}
   O=CNH \longrightarrow C=O + NH
 \end{equation}
 toutes les liaisons peptidiques seront ciblées et déconnectées (voir figure \ref{molBlocks}).
@@ -162,7 +162,7 @@ Pour des protéines ribosomiques, la découpe sera donc parfaite avec cette seul
 \begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=300px]{Figures/s2m/Intro/molBlocks_problem.png}
-    \caption{\label{molBlocks_problem}Dans le cas de ce di-peptide, un sucre est lié à une Hydroxy-Phenil-Glycine (Hpg).
+    \caption{\label{molBlocks_problem}Dans le cas de ce dimère, un sucre est lié à une Hydroxy-Phenil-Glycine (Hpg).
     En utilisant la règle de découpe à appliquer pour les liaisons hydroxyle, une ambiguïté et une erreur apparaissent.
     Nous ne pouvons savoir de quel côté les découpes vont être les plus pertinentes avant d'essayer de reconnaître les monomères.
     De ce fait, 4 découpes différentes sont possibles.
@@ -265,10 +265,11 @@ Les recherches de SI ou de MCS ont toutes deux été prouvées NP-Complet mais, 
 Nous aborderons cela en section \ref{SI_MCS}.
 
 \textbf{Pavage des monomères}~~~
-Une fois les monomères détectés, il est nécessaire de choisir un monomère au sein des parties du polymère pour lequel un conflit existe (plusieurs monomères possibles pour les mêmes atomes).
-L'objectif est donc de faire un choix entre les différents morceaux possibles afin de chercher à ne garder que les pièces non chevauchantes qui permettent de couvrir au mieux le polymère, si possible dans sa totalité.
+Une fois les monomères détectés au sein du polymère, il est nécessaire d'effectuer un choix entre les différents monomères candidats se chevauchant sur un ou plusieurs atomes.
+L'objectif est donc de ne garder qu'un des différents monomères possibles tout en couvrant au mieux le polymère, et si possible dans sa totalité.
 Ce genre de méthode est appelée ``pavage sans recouvrement''.
 Cette étape donnant accès à un lien direct entre atomes et monomères, une étape de contraction de graphe permettra, au final, d'obtenir le graphe monomérique.
+Nous aborderons le pavage en section \ref{pavage_}.
 
 
 
@@ -439,8 +440,8 @@ L'algorithme de Ullman est l'un des premiers à avoir été proposé dans les an
 Certaines de ses variantes sont toujours utilisées dans certaines librairies telles que Openbabel~\cite{oboyle_open_2011}.
 L'algorithme se base sur la matrice de compatibilité entre les graphes (voir figure \ref{ullman_fig}).
 Une matrice de compatibilité est une matrice dont chaque ligne représente un n\oe{}ud de G et chaque colonne un n\oe{}ud de H.
-Soient $g$ et $h$ correspondants respectivement à un n\oe{}ud du graphe G et du graphe H.
-Soient $i$ et $j$ les numéros des lignes et colonnes de la matrice correspondants à $g$ et $h$.
+Soient $g$ et $h$ correspondant respectivement à un n\oe{}ud du graphe G et du graphe H.
+Soient $i$ et $j$ les numéros des lignes et colonnes de la matrice correspondant à $g$ et $h$.
 La case de coordonnées $(i,j)$ contient un 1 si $g$ et $h$ ont une étiquette compatible et que l'arité de $h$ est supérieure ou égale à l'arité de $g$.
 Pour obtenir un SI à partir de cette matrice, il faut retirer des 1 de la matrice jusqu'à en obtenir un seul 1 par ligne.
 A chaque étape, un n\oe{}ud $g$ de G est choisi pour continuer l'isomorphisme.
@@ -507,8 +508,6 @@ Une fois ces couples créés, nous les parcourons tout en appelant récursivemen
 Dans l'exemple, le premier appel récursif est effectué après avoir assemblé '1' à 'a'.
 Cette voie est sans issue car quel que soit l'assemblage entre '2' et un n\oe{}ud de $H$, plus aucun couple de voisins ne pourra être
 généré.
-En effet, pour générer l'ensemble $P$, il est nécessaire de regarder tous les voisins de 'b' alors que le n\oe{}ud ne possède plus
-de voisins hors de $s$.
 Une fois toutes les tentatives échouées, l'algorithme remonte dans l'arbre et change l'association '1'-'a' pour l'association
 '1'-'b'.
 Récursivement, l'algorithme conclut à un isomorphisme {(1,b);(2,a);(3,c)}.
@@ -666,7 +665,8 @@ Les deux sections suivantes s'attarderont à la recherche de chaînes performant
 \begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=450px]{Figures/s2m/indexation/chaines_example.png}
-    \caption{\label{chaine_fail}Deux exemples de chaîne pour un motif simple}
+    \caption{\label{chaine_fail}Deux exemples de chaîne pour un motif simple.
+    Le nombre de solutions intermédiaires représente les nombres successif d'isomorphismes de sous}
   \end{center}
 \end{figure}
 
@@ -761,7 +761,7 @@ On peut donc écrire que le temps de recherche d'une chaîne est le temps cumul�
  T(c_n) = T(p_0 \rightarrow p_1 \rightarrow ... \rightarrow p_n) = \sum_{i=1}^n T(p_{i-1} \rightarrow p_i)
 \end{equation}
 
-Où $T()$ est la fonction représentant le temps de recherche d'une chaîne, $p_i$ le un motif de taille $i$ et $p_{i-1} \rightarrow p_i$ la dernière extension d'une chaîne $c_i$ représentée par le passage du motif $p_{i-1}$ au motif $p_i$.
+Où $T()$ est la fonction représentant le temps de recherche d'une chaîne, $p_i$ le motif de taille $i$ et $p_{i-1} \rightarrow p_i$ la dernière extension d'une chaîne $c_i$ représentée par le passage du motif $p_{i-1}$ au motif $p_i$.
 Il est à noter que rechercher une chaîne de taille 1 revient à étendre un motif vide.
 C'est à dire qu'il est nécessaire de parcourir l'intégralité des n\oe{}uds de la cible dans laquelle on recherche le motif et ce quel que soit le motif.
 Sur notre base d'apprentissage il faudra donc toujours tester tous les n\oe{}uds de tous les peptides d'apprentissage pour la première extension.
@@ -804,7 +804,7 @@ Ce temps ne varie pas car il est nécessaire de parcourir tout le graphe.
     \includegraphics[width=400px]{Figures/s2m/indexation/apprentissage_comptage.png}
     \caption{\label{app_compt}Reprise de la base d'apprentissage présentée en figure \ref{apprentissage} pour définir le filtrage.
     Les comptages initiaux des fréquences de chacun des n\oe{}uds ont été étendus aux comptages de l'ensemble des sous-motifs possibles.
-    Le taux de filtrage d'un ajout de n\oe{}ud dans un motif est alors défini comme le nombre de détections du motif initial dans la base divisé par le nombre de détections du motif étendu.
+    Le taux de filtrage d'un ajout de n\oe{}ud dans un motif est alors défini comme le nombre de détections dans la base du motif étendu divisé par le nombre de détections du motif initial.
     Ainsi, pour passer d'un motif a à un motif a-b, le taux de filtrage est de 3/2.}
   \end{center}
 \end{figure}
@@ -1033,7 +1033,8 @@ Le reste des résidus n'est indexé que sur les extensions à effectuer depuis l
 \begin{figure}[!ht]
   \begin{center}
     \includegraphics[width=400px]{Figures/s2m/residues/cystein_family_search.png}
-    \caption{\label{family_search}Représentation de la recherche de la cystéine dans un di-peptide, en utilisant sa famille de résidus.}
+    \caption{\label{family_search}Représentation de la recherche de la cystéine dans un di-peptide, en utilisant sa famille de résidus.
+    En vert, les résidus trouvés dans le NRP cible, en rouge ceux non trouvés et en transparant, les non cherchés.}
   \end{center}
 \end{figure}
 
@@ -1120,10 +1121,10 @@ Prouvons ensuite que nous pouvons résoudre le problème Pizza en utilisant le p
 Codons donc Pizza dans Pavage~:
 \begin{itemize}
 	\item La pizza de taille $n \times m$ sera représentée par un peptide rectangulaire de taille $n \times m$.
-	\item Chaque case de la pizza sera représentée par un atome qui ne pourra prendre les deux valeurs H et T selon le remplissage de la case.
+	\item Chaque case de la pizza sera représentée par un atome qui ne pourra prendre que les deux valeurs H et T selon le remplissage de la case.
 	\item Le voisinage des cases sera représenté par des liens entre les atomes.
 	L'atome correspondant à la case $(i,j)$ sera lié aux atomes correspondants aux cases $(i-1,j)$, $(i+1,j)$, $(i,j-1)$ et $(i,j+1)$ (sauf sur les bords).
-	\item Il est possible polynomialement de générer toutes les parts réalisables sur une pizza (car leur taille maximale est fixée).
+	\item Il est possible de générer en temps polynomial toutes les parts réalisables sur une pizza (car leur taille maximale est fixée).
 	Chacune de ces parts sera représentée par un résidu placé sur le peptide comme si il avait été trouvé par l'étape de recherche de s2m.
 	Par exemple une part allant de $(0,0)$ à $(2,3)$ sera représentée par un résidu couvrant tous les atomes entre ces coordonnées.
 \end{itemize}
@@ -1584,7 +1585,7 @@ Nous aurons donc une couverture de 100\% et un \textit{correctness} inférieur �
 Dans notre cas, une annotation est un FN lorsque nous n'arrivons pas à produire une annotation complète du peptide.
 C'est à dire que nous avons à la fois une couverture et une \textit{correctness} inférieures à 100\%.
  \item Vrai négatif (VN) : Un vrai négatif est obtenu lorsque le résultat ne parait pas correct et qu'il n'est pas possible d'en obtenir un.
-Dans notre cas, les annotations de référence sont correctes : il est toujours possible d'obtenir une annotation couvrante puisque les molécules sont toutes issues d'un jeu d'annotations de référence.
+Dans notre cas, nous considérons les annotations de référence sont correctes : il est alors toujours possible d'obtenir une annotation couvrante puisque les molécules sont toutes issues d'un jeu d'annotations de référence.
 \end{itemize}
 
 
