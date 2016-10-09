@@ -32,7 +32,7 @@ L'interface a pour but de rendre les données simples d'accès pour tous les uti
 Elle est accessible via le serveur de logiciels de l'équipe Bonsai à l'adresse http://bioinfo.lifl.fr/norine/.
 Chaque peptide et chaque monomère y possède sa page dédiée.
 Sur ces pages se trouvent tous les détails présents en base de données.
-Elles sont accessibles via des formulaires de recherche par nom/type/organismes producteurs/activité etc.
+Elles sont accessibles via des formulaires de recherche par nom/type/organismes producteurs/activité \textit{etc.}
 Pour les peptides, il existe également une recherche par sous-graphe pour laquelle nous donnerons plus de détails par la suite.
 
 
@@ -618,7 +618,7 @@ L'approche que nous avons utilisé est une approche par fingerprint.
 En informatique, les fingerprints sont des structures représentant des données complexes par une projection de ces données à certaines de leurs caractéristiques essentielles.
 Dans notre cas, un fingerprint est un vecteur représentant la composition d'un NRP ou d'une NRPS.
 Dans le cas des NRP c'est la composition en monomères qui nous intéresse et dans le cas des NRPS la composition en domaines A.
-La composition peut être, par exemple, un simple comptage de chacun des monomères, un comptage de tous les dimères, de tous les trimères etc.
+La composition peut être, par exemple, un simple comptage de chacun des monomères, un comptage de tous les dimères, de tous les trimères \textit{etc.}
 
 \begin{figure}[h!]
   \begin{center}
@@ -670,7 +670,7 @@ Au total, son indice de Jaccard vaut $5 / 8$, ce qui donne une distance de Jacca
 
 \subsubsection{Tester le modèle}
 
-Afin de tester le modèle nous avons choisi de prendre des peptides réels présents dans Norine.
+Afin de tester le modèle, nous avons choisi de prendre des peptides réels présents dans Norine.
 À partir de ces peptides, nous espérons retrouver leur vrai cluster de gènes au sein d'un ensemble de clusters.
 Pour cela, il nous est nécessaire de constituer une base de données test.
 Malheureusement, la constitution d'une telle base est très difficile.
@@ -679,8 +679,8 @@ Nous devons constituer cette base par nous même.
 
 La première piste que nous avions envisagée était de rassembler des données NRPS sûres (annotées manuellement) pour ne pas nous préoccuper de la qualité des données.
 Nous avons donc utilisé les données des couples gènes/NRP de MiBIG.
-L'intérêt des données issues de MIBiG sont qu'elles ont été entrées manuellement, c'est à dire que le contributeur avait suffisamment confiance en ses données pour les partager avec la communauté.
-Cependant, il possible que le contributeur ait entré directement les résultats d'une prédiction sans ajouter d'annotations car celles-ci suffisaient pour ses travaux.
+L'intérêt des données issues de MIBiG sont qu'elles ont été entrées manuellement, c'est-à-dire que le contributeur avait suffisamment confiance en ses données pour les partager avec la communauté.
+Cependant, il est possible que le contributeur ait entré directement les résultats d'une prédiction sans ajouter d'annotations car celles-ci suffisaient pour ses travaux.
 Il nous faut donc vérifier la pertinence des structures NRP présentes en base.
 Pour cela nous avons effectué une validation croisée des peptides avec Norine.
 Malheureusement, sur les quelques centaines de couples NPRS/NRP décrits dans MIBiG, seuls 60 NRP sont également présents dans Norine.
@@ -688,7 +688,7 @@ Pour augmenter leur nombre, il sera nécessaire de valider d'autres structures m
 De plus, les données qui ont été soumises sont structurées différemment selon les contributeurs.
 MIBiG laisse une grande liberté dans les champs possibles à l'annotation, ce qui fait que plusieurs utilisateurs entrent des informations semblables sous différents noms.
 Cette diversité de structuration dans les fichiers d'annotation empêche la gestion automatique d'un grand nombre d'entrées.
-Suite au retrait des annotations impossibles à traiter dans un script (à moins de leur consacrer une exception), environ la moitié des liens potentiels entre Norine et MiBIG ne sont plus présentes.
+Suite au retrait des annotations impossibles à traiter dans un script (à moins de leur consacrer une exception), environ la moitié des liens potentiels entre Norine et MiBIG ne sont plus présents.
 Ces deux contraintes cumulées nous ont poussé a changer de stratégie et ainsi changer notre jeu de données pour des données issues de prédictions.
 
 % Cette source de données a été un double échec.
@@ -704,7 +704,7 @@ Ces deux contraintes cumulées nous ont poussé a changer de stratégie et ainsi
 A l'aide de Kai Blin (chercheur de l'équipe de Tilmann Weber), nous avons utilisé antiSMASH pour générer des annotations de NRPS sur l'ensemble des génomes de bactéries présentes sur le NCBI.
 Ce second jeu de données est beaucoup plus abondant que le premier mais pose également un problème de qualité.
 Il n'existe par exemple aucun lien entre les NRP de Norine et les génomes qui ont été analysés.
-Il faut faire manuellement les rapprochements pour connaitre les binômes NRP/NRPS.
+Il faut faire manuellement les rapprochements pour connaître les binômes NRP/NRPS.
 De plus, les annotations de antiSMASH sont des prédictions et n'ont donc été vérifiées par personne.
 Par exemple, de nombreux petits clusters de gènes ne contiennent qu'un ou deux domaines A et il est difficile voire impossible de savoir s'ils sont artefactuels ou mal annotés.
 
