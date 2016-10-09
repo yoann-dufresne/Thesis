@@ -1,17 +1,23 @@
 
-
+TODO par priorité :
+- p 57 : fig {chaine_fail} : je ne comprends pas comment est fait le comptage
+- p 84 : k = nb d'atomes OU nb de noeuds représentant une paire d'atomes ? 3 noeuds = 4 atomes + décorateurs
 - p 25 tu devrais citer antiSMASH dans "Détection de clusters de gènes" car il le fait. Je suis d'accord qu'il va plus loin que cela, mais cela ne me choque pas que tu le cites dans plusieurs catégories. A moins que tu ne fasses une catégie rien que pour lui : 1.2.1.3 Détection des clusters de gènes et identifiction (OU prédiction) de leurs produits.
-- p 42 : 2.2.3.2 : pourquoi ne pas mettre directement le prérequis ici ?
-Parce qu'il est plus général
+- chap 1 : cela m’embête toujours que tu ne cites pas antiSMASH dans les logiciels de prédiction de clusters de gènes.
+           ok pour ce que tu as ajouté sur GNP.
+- p 100 : "sont présents des liens vers pubchem et uniprot" : j'ai ajouté la ref vers PubChem comme elle était déjà dans le bib, je te laisse ajouter celle de UniProt :
+UniProt: a hub for protein information
+The UniProt Consortium
+http://nar.oxfordjournals.org/content/43/D1/D204
+- p 63 : fig {markov} vertex arity est dur à lire => changer de police
+
+Coupures :
 - p56 : compara-isons : pb de positionnement du -
 - p 70 : encore un problème de coupure : Deux-ièmement, le validateur de certificat
 - p 74 : "nous consid-érons qu’ils sont équivalents" : pb coupure
+- p 114 : "mod-ification" pb coupure
 
 
-TODO :
-- p 57 : fig {chaine_fail} : je ne comprends pas comment est fait le comptage
-- p 63 : fig {markov} vertex arity est dur à lire => changer de police
-- p 84 : k = nb d'atomes OU nb de noeuds représentant une paire d'atomes ? 3 noeuds = 4 atomes + décorateurs
 
 
-- p 84 : en fait, les vrais négatifs sont les erreurs d'annotations puisque en théorie on doit trouver une correctness à 100%, mais les erreurs dans le polymère ou les monomères font que celle-ci n'est pas atteignable. Mais, nous ne pouvons pas estimer cette valeur sans analyser chaque polymère qui n'a pas une couverture à 100%. Ce travail est en cours.
+

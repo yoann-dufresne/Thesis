@@ -112,7 +112,7 @@ Les fingerprints des peptides en base sont pré-calculés et le fingerprint de l
 La requête fingerprint est comparée à tous les fingerprints de la base et une distance est calculée.
 Les résultats sont affichés par distances décroissantes.
 Cette recherche ne prend pas en compte les structures mais permet une souplesse dans les monomères inclus.
-Les regroupements permettent de préserver une proximité élevée malgré la différence de monomère présent.
+Les regroupements permettent de trouver des peptides contenant des monomères proches mais pas identiques.
 
 
 
@@ -450,7 +450,7 @@ Cette information sera très utile pour aider au design de nouveaux NRP à parti
 \subsection{L'existant}
 
 Commençons par un tour d'horizon des travaux dans ce domaine.
-Nous nous appuierons sur des travaux de revue généralistes~\cite{carbonell_bioinformatics_2016} et spécialisés pour les NRP~\cite{kries_biosynthetic_2016}.
+Nous nous appuierons sur des travaux de revue spécialisés pour les NRP~\cite{kries_biosynthetic_2016}.
 Effectuons un survol des techniques en commençant par de petites modifications monomériques pour arriver finalement à la création totale d'un NRP.
 
 
@@ -710,21 +710,21 @@ Par exemple, de nombreux petits clusters de gènes ne contiennent qu'un ou deux 
 
 Le programme a été lancé sur les jeux de donnés précédemment présentés dans cette section.
 Les problèmes évoqués pour ces jeux de données ne nous permettent pas pour le moment de dégager une quelconque conclusion sur la qualité de prédiction du modèle.
-Il est très difficile de donner les causes précises de ces résultats mais ils sont sans doute un cumul de beaucoup de facteurs.
-Premièrement, le fait de ne pas connaître les ``vrais'' clusters par avance ne nous permet pas de faire la différence entre un cluster non retrouvé et un cluster inexistant dans les données d'origine car non annotés.
-Deuxièmement, les clusters annotés que nous utilisons sont très bruités à cause des prédictions.
-Ce bruit nuit forcément à la qualité des fingerprints et augmente les distances artificiellement.
-Troisièmement, le modèle que nous avons développé ne prend en compte que les domaines A.
-Nous savons qu'une partie de l'information est portée par les autres domaines et c'est un critère qu'il nous faudra intégrer pour mieux rendre compte de la réalité.
-Enfin, la distance de Jaccard n'est pas forcément très adaptée au problème et il nous faudra tenter des alternatives issues des systèmes de recommandation classiques.
+%Il est très difficile de donner les causes précises de ces résultats mais ils sont sans doute un cumul de beaucoup de facteurs.
+%Premièrement, le fait de ne pas connaître les ``vrais'' clusters par avance ne nous permet pas de faire la différence entre un cluster non retrouvé et un cluster inexistant dans les données d'origine car non annotés.
+%Deuxièmement, les clusters annotés que nous utilisons sont très bruités à cause des prédictions.
+%Ce bruit nuit forcément à la qualité des fingerprints et augmente les distances artificiellement.
+
 
 
 \subsubsection{Perspectives}
 
 Ce travail est un travail en cours et les résultats présentés ici sont encore très préliminaires.
-Malgré les critiques que nous venons de porter au modèle et aux données, il est très encourageant de retrouver quelques résultats positifs lors de ces premiers tests.
+Pour le moment, le modèle que nous avons développé ne prend en compte que les domaines A.
+Nous savons qu'une partie de l'information est portée par les autres domaines et c'est un critère qu'il nous faudra intégrer pour mieux rendre compte de la réalité.
 Par exemple, s2m permet de connaître le type de liaison entre deux monomères, ce qui n'est pas forcément le cas depuis une annotation manuelle à disposition en ligne.
 Cette connaissance pourrait être exploitée afin de rechercher les parties de NRPS effectuant ces liaisons.
+Nous supposons également que la distance de Jaccard n'est pas forcément très adaptée au problème et il nous faudra tenter l'utilisation d'alternatives issues des systèmes de recommandation classiques.
 Pour pouvoir continuer ce travail, il nous sera également nécessaire de constituer une base d'apprentissage de référence bien annotée.
 En effet, sans ces tests nous ne pourrons jamais déterminer avec précision la qualité des algorithmes développés.
 Nous sommes actuellement en train de réfléchir à des moyens de constituer ce jeu de données qui pourrait être d'une grande valeur pour de nombreuses tâches.
@@ -732,3 +732,10 @@ La solution qui commence à émerger s'appuie sur plusieurs bases de données ex
 En utilisant à la fois Norine pour les NRP, MIBiG pour les annotations NRPS et le NCBI pour les séquences ADN, nous pouvons créer tout un système d'interconnexion donnant rapidement accès à toutes les informations.
 De notre côté nous commençons un long travail de recensement de NRPS correspondants aux peptides de Norine.
 En soumettant sur MIBiG les annotations NRPS trouvées depuis et en concrétisant le lien depuis les pages des peptides, il nous est possible de démarrer ce jeu de données.
+
+
+
+
+
+
+
