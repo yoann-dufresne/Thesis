@@ -5,5 +5,5 @@ Coupures :
 - p 70 : encore un problème de coupure : Deux-ièmement, le validateur de certificat
 - p 74 : "nous consid-érons qu’ils sont équivalents" : pb coupure
 - p 114 : "mod-ification" pb coupure
-
+- p25, dernière ligne "... implique au moins un monomère" déborde dans la marge. Idem p29, p31, "monomère" déborde dans la marge (t'as fait en sorte que le mot ne soit pas coupé ?).
 
