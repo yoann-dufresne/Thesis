@@ -664,9 +664,8 @@ Les deux sections suivantes s'attarderont à la recherche de chaînes performant
 
 \begin{figure}[!ht]
   \begin{center}
-    \includegraphics[width=450px]{Figures/s2m/indexation/chaines_example.png}
-    \caption{\label{chaine_fail}Deux exemples de chaîne pour un motif simple.
-    Le nombre de solutions intermédiaires représente les nombres successif d'isomorphismes de sous}
+    \includegraphics[width=300px]{Figures/s2m/indexation/chaines_example.png}
+    \caption{\label{chaine_fail}Deux exemples de chaîne pour un motif simple.}
   \end{center}
 \end{figure}
 
@@ -675,13 +674,10 @@ Déterminons quel(s) critère(s) simple(s) nous permettent de supposer qu'une ch
 Avec ce ou ces critères, nous pourrons ensuite déterminer un moyen d'ordonner les n\oe{}uds de manière gloutonne.
 Partons de l'exemple présenté sur la figure \ref{chaine_fail}.
 À gauche est dessiné un motif simple suivi de deux chaînes pouvant le représenter (lecture de l'ordre des chaînes de gauche à droite).
-Pour la première chaîne, en partant du motif ne contenant qu'un ``vert'', on obtiendra 3 isomorphismes.
-En étendant ces chaînes à deux ``vert'' voisins, on conserve toujours trois isomorphismes puis deux en ajoutant ``rouge'' et enfin un seul avec le dernier ``vert''.
-Au total, on aura étendu 9 isomorphismes durant la recherche.
-En regardant maintenant la seconde chaîne, on se rend compte que le nombre de ces isomorphismes intermédiaires est bien plus faible grâce à la sélectivité de l'étiquette ``rouge'' recherchée en tout premier (5 isomorphismes intermédiaires sont étendus).
-La différence décisive entre les deux chaînes est donc le moment où le n\oe{}ud avec une étiquette sélective est recherché.
-Effectivement, si le n\oe{}ud ``rouge'' est recherché dès le début, la solution est ``ancrée'' sur une base solide et ne risque a priori pas de créer trop de solutions intermédiaires qui devront toutes être analysées pour passer à l'étape suivante.
-On peut dire qu'un n\oe{}ud est plus sélectif qu'un autre à partir du moment où sa fréquence d'apparition dans les molécules étudiées est moins élevée.
+Supposons qu'en général les graphes dans lesquels nous allons effectuer un SI soient composés de plus de n\oe{}uds ``vert'' que de n\oe{}uds ``rouge''.
+Commencer par rechercher un n\oe{}ud ``vert'' fabriquera créera en général plus de solutions intermédiaires que si l'on recherche un n\oe{}ud ``rouge'' en premier.
+Ce raisonnement peut être étendu à partir de n'importe quelle situation intermédiaire.
+On peut alors dire qu'un n\oe{}ud est plus sélectif qu'un autre à partir du moment où sa fréquence d'apparition dans les molécules étudiées est moins élevée.
 Il sera souvent plus intéressant de commencer les recherches des motifs par des n\oe{}uds dont l'étiquette est peu fréquente.
 
 \textbf{Étiquettes fréquentes}
@@ -1543,6 +1539,7 @@ Pour rappel, l'isomorphisme de sous-graphe est effectué à partir de chaînes p
 Ces chaînes sont formées de deux sous-parties.
 La première sous-partie, de taille k, est optimale en temps de calcul selon une base d'apprentissage.
 La seconde sous-partie est générée de manière gloutonne.
+Rappelons que chaque n\oe{}ud de la chaine est constiuée d'une paire d'atomes liés (voir section \ref{selectiv_p}).
 
 Nous allons ici faire varier k et tester les temps de calcul sur les jeux de données.
 Pour ne pas parasiter la mesure du temps, nous allons désactiver toutes les autres optimisations logicielles qui augmentent l'efficacité.

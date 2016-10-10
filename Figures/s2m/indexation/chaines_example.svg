@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="438.58484mm"
+   width="269.38934mm"
    height="105.12693mm"
-   viewBox="0 0 1554.0407 372.497"
+   viewBox="0 0 954.52913 372.497"
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
@@ -90,14 +90,14 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.49497475"
-     inkscape:cx="406.55419"
-     inkscape:cy="149.48735"
+     inkscape:cx="884.35628"
+     inkscape:cy="149.48734"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
-     inkscape:window-width="1855"
-     inkscape:window-height="1176"
-     inkscape:window-x="65"
+     inkscape:window-width="1615"
+     inkscape:window-height="1026"
+     inkscape:window-x="1985"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
      fit-margin-top="0"
@@ -107,8 +107,8 @@
     <inkscape:grid
        type="xygrid"
        id="grid4899"
-       originx="-85.390855"
-       originy="-1145.7478" />
+       originx="-85.390916"
+       originy="-1145.7479" />
   </sodipodi:namedview>
   <metadata
      id="metadata7">
@@ -126,7 +126,7 @@
      inkscape:label="Calque 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-85.390859,465.88257)">
+     transform="translate(-85.39092,465.88257)">
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:3.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 287.26968,-257.74694 138.56406,-80"
@@ -481,67 +481,6 @@
          id="tspan5242"
          x="685.15228"
          y="-443.0896">Ordre de recherche</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="1283.6953"
-       y="-441.06931"
-       id="text5244"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan5246"
-         x="1283.6953"
-         y="-441.06931"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle">Nombre de solutions</tspan><tspan
-         sodipodi:role="line"
-         x="1283.6953"
-         y="-403.56931"
-         id="tspan5248"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:center;writing-mode:lr-tb;text-anchor:middle">intermédiaires</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="1182.0153"
-       y="-298.94238"
-       id="text5250"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan5252"
-         x="1182.0153"
-         y="-298.94238">3 + 3 + 2 + 1</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="1182.4111"
-       y="-138.44493"
-       id="text5254"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan5256"
-         x="1182.4111"
-         y="-138.44493">1 + 1 + 2 + 1</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="1461.4111"
-       y="-299.45511"
-       id="text5258"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan5260"
-         x="1461.4111"
-         y="-299.45511">Pire cas</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;line-height:125%;font-family:Sans;-inkscape-font-specification:'Sans, Normal';text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="1461.6143"
-       y="-136.62769"
-       id="text5262"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan5264"
-         x="1461.6143"
-         y="-136.62769">Meilleur cas</tspan></text>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
        d="m 610,-417.63784 410,0"
