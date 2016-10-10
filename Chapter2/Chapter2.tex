@@ -23,7 +23,7 @@ Lorsque ces activités ne sont pas déterminées expérimentalement, les logicie
 En 2012 puis 2014, Abdo et al. publient de nouvelles méthodes de prédiction d'activité NRP, se basant sur les spécificités des NRP~\cite{abdo_new_2012, abdo_prediction_2014}.
 Dans les deux cas, les prédictions sont effectuées à partir des compositions monomériques et non pas atomiques.
 Dans le premier article~\cite{abdo_new_2012}, la prédiction est effectuée en créant pour chaque peptide connu un \textit{fingerprint} et en ajoutant un fingerprint pour le peptide dont on cherche l'activité.
-Pour prédire l'activité, les auteurs utilisent plusieurs classifieurs présent dans la librairie WEKA~\cite{hall_weka_2009}.
+Pour prédire l'activité, les auteurs utilisent plusieurs classifieurs présents dans la librairie WEKA~\cite{hall_weka_2009}.
 Dans le second article~\cite{abdo_prediction_2014}, c'est un classifieur par réseau Bayésien qui est entraîné sur les compositions en monomères.
 Une fois les réseaux entraînés, il suffit de fournir une composition en entrée pour avoir les probabilités de chaque activité en sortie.
 Dans les deux cas, il est important de constater que l'abstraction monomérique est suffisante pour une prédiction de qualité.
