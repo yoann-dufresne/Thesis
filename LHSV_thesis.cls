@@ -129,7 +129,7 @@
   \setboolean{numberingstartright}{true}
   % Texte
   \begin{center}
-    \begin{spacing}{1.5}
+    \begin{spacing}{1.3}
       ~\vspace{-1.4cm}\\
       \includegraphics[width=0.4\textwidth]{logo_UL} \vspace{-0.4cm}\\
       {\fontsize{22}{24}\bfseries\MakeUppercase\selectfont
@@ -139,7 +139,7 @@
         Laboratoire CRIStAL\\
       }
     \end{spacing}
-    \vspace*{1cm plus 0cm minus 0.1cm}
+    \vspace*{0.5cm plus 0cm minus 0.1cm}
     {\fontsize{18}{20}\bfseries\MakeUppercase\selectfont
       Th\`ese\par
     }
