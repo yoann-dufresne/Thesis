@@ -196,6 +196,24 @@ Quelques mots-clé.
 \markboth{\MakeUppercase Abstract}{\MakeUppercase Abstract}%
 \vspace{2cm}
 
+
+BACKGROUND: The monomeric composition of polymers is powerful for structure comparison and synthetic biology, among others.
+Many databases give access to the atomic structure of compounds but the monomeric structure of polymers is often lacking.
+We have designed a smart algorithm, implemented in the tool Smiles2Monomers (s2m), to infer efficiently and accurately the monomeric structure of a polymer from its chemical structure.
+
+RESULTS: Our strategy is divided into two steps: first, monomers are mapped on the atomic structure by an efficient subgraph-isomorphism algorithm ; second, the best tiling is computed so that non-overlapping monomers cover all the structure of the target polymer.
+The mapping is based on a Markovian index built by a dynamic programming algorithm.
+The index enables s2m to search quickly all the given monomers on a target polymer.
+After, a greedy algorithm combines the mapped monomers into a consistent monomeric structure.
+Finally, a local branch and cut algorithm refines the structure.
+We tested this method on two manually annotated databases of polymers and reconstructed the structures de novo with a sensitivity over 90\%.
+The average computation time per polymer is 2 s.
+
+CONCLUSION: s2m automatically creates de novo monomeric annotations for polymers, efficiently in terms of time computation and sensitivity.
+s2m allowed us to detect annotation errors in the tested databases and to easily find the accurate structures.
+So, s2m could be integrated into the curation process of databases of small compounds to verify the current entries and accelerate the annotation of new polymers.
+The full method can be downloaded or accessed via a website for peptide-like polymers at http://bioinfo.lifl.fr/norine/smiles2monomers.jsp
+
 You should write your abstract in English here.
 \vspace*{28pt}\par
 \textbf{Keywords:}\par
