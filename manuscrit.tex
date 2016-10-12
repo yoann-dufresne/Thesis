@@ -147,9 +147,36 @@ France
 
 \section*{\Huge Résumé}
 \markboth{\MakeUppercase Résumé}{\MakeUppercase Résumé}%
-\vspace{2cm}
 
-Rédigez votre résumé en français ici.
+Les peptides non ribosomiques sont des molécules qui, comme leur nom l'indique, sont synthétisée par une voie alternative au ribosomique.
+Cette voie alternative permet de créer des molécules composées de plus de 500 briques de base (à comparer avec les 20 de la voie de synthèse classique) assemblées en boucles et branchements impbriqués (à comparer à la synthèse linéaire classique).
+De la diversité de ces molécules émerge une diversité d'activités.
+Parmi ces molécules se trouvent par exemple de nombreux antibiotiques.
+
+Ces molécules sont particuliérement difficiles à étudier depuis l'ADN à cause de leur voie de synthèse alternative, mais il est également difficile de déterminer leur structure expérimentalment à cause de leur composition.
+Plusieurs logiciels ont été créés ces dernières années afin de prédire du mieux possible les composés synthétisés par un ADN donné.
+De notre côté, nous nous sommes intéressé au cheminement inverse.
+Nous proposons d'annoter les composés biologiques présents dans un peptide en partant de sa structure 2D déduite par des techniques telles que la spectrométrie de masse.
+
+Nous avons ainsi créé s2m, un logiciel qui permet de très rapidement annoter des centaines de molécules à partir de leurs structures atomiques.
+Pour parvenir à cela, nous avons mis en place des algorithmes de graphes permettant de rechercher une structure dans une autre (Isomorphiseme de sous graphe).
+En indexant intelligemment les graphes recherchés, nous avons réussit à améliorer le temps de recherche de l'état de l'art de plus de 30\% dans de nombreux cas.
+Les algorithmes de recherche sont accompagnés d'algorithmes de pavage qui permettent de choisir les composés qui seront présents dans l'annotation finale.
+ 
+Le logiciel s2m est logiciel d'annotation générique de polymères.
+Il a été testé sur un jeu de données de peptides non ribosomiques issu de la base Norine mais également sur des données peptidiques plus classiques issues de la base CCD.
+Dans les deux cas, l'algorithme est très performant à la fois en terme de temps de calcul et de qualité des résultats.
+La qualité d'annotation est telle qu'elle a permis de mettre en évidence de nombreuses erreurs d'annotations manuelles qui ont été entrées dans les bases de référence.
+
+s2m est actuellement utilisé pour de nombreuses tâches.
+La preuve de sa fiabilité nous permet de l'utiliser en tant que filtre lorsqu'un utilisateur souhaiter ajouter un nouveau peptide au sein de Norine.
+Nous avons également démarer une grande campagne de récupération et d'ajout de données au sein de cette même base.
+Pour cela nous allons chercher, dans des bases contenant des millions de molécules, celles qui semblent posséder une structure NRP.
+La recherche de cette structure en temps raisonnable est rendue possible grace à s2m.
+Enfin, nous démarons également des travaux d'aide à la création artificielle de NRP en faisant des rapprochements entres molécules et clusters de gène.
+Ces travaux sont entiérement basés sur des annotations de peptides qui ont été fournies pas s2m.
+
+
 \vspace*{28pt}\par
 \textbf{Mots-clé:}\par
 Quelques mots-clé.
@@ -160,7 +187,7 @@ Quelques mots-clé.
 ~\vspace{6.0cm}\\
 \thispagestyle{plain}
 % Insert the title of your thesis in English here
-\Huge \textbf{Title of your thesis in English}
+\Huge \textbf{Algorithms for }
 \vspace*{\fill}
 \clearpage
 \end{center}
