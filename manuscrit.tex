@@ -150,7 +150,7 @@ France
 
 La composition monomérique de polymères joue un rôle essentiel dans la comparaison de structures et la biologie de synthèse.
 Cependant, la plupart des ressources moléculaire en ligne donne accès à la structure atomique des molécules et non à leur structure monomérique.
-Nous avons donc créé un logiciel smiles2monomers (s2m) permettant de passer des atomes aux monomères.
+Nous avons donc créé un logiciel appelé smiles2monomers (s2m) permettant de passer des atomes aux monomères.
 
 L'algorithme sous-jacent se déroule en deux phases : une phase de recherche par isomorphisme de sous graphe des monomères au sein de la structure atomique puis une recherche du meilleur pavage non chevauchant des monomères trouvés.
 La recherche est basée sur un index markovien améliorant les vitesses de recherche de 30\% par rapport à l'état de l'art.
@@ -183,12 +183,19 @@ Quelques mots-clé.
 \markboth{\MakeUppercase Abstract}{\MakeUppercase Abstract}%
 \vspace{2cm}
 
+The monomeric composition of polymers is powerful for structure comparison and synthetic biology, among others.
+However, most of the online molecular ressources only give atomic structures and not monomeric structures.
+So, we designed a software called smiles2monomers (s2m) to infer monomers from atomic structures.
 
-BACKGROUND: The monomeric composition of polymers is powerful for structure comparison and synthetic biology, among others.
-Many databases give access to the atomic structure of compounds but the monomeric structure of polymers is often lacking.
-We have designed a smart algorithm, implemented in the tool Smiles2Monomers (s2m), to infer efficiently and accurately the monomeric structure of a polymer from its chemical structure.
+L'algorithme sous-jacent se déroule en deux phases : une phase de recherche par isomorphisme de sous graphe des monomères au sein de la structure atomique puis une recherche du meilleur pavage non chevauchant des monomères trouvés.
+La recherche est basée sur un index markovien améliorant les vitesses de recherche de 30\% par rapport à l'état de l'art.
+Le pavage est lui constitué d'un algorithme glouton couplé à un raffinement par ``branch \& cut''.
+s2m a été testé sur deux jeux de données déjà annotés.
+Il retrouve les annotations manuelles avec une excellente sensibilité en des temps très courts.
 
-RESULTS: Our strategy is divided into two steps: first, monomers are mapped on the atomic structure by an efficient subgraph-isomorphism algorithm ; second, the best tiling is computed so that non-overlapping monomers cover all the structure of the target polymer.
+The underlying algorithm is composed of two steps: a search of the monomers using subgraph isomorphism algorithms and a tiling algorithm of the best non-overlapping monomers cover.
+
+
 The mapping is based on a Markovian index built by a dynamic programming algorithm.
 The index enables s2m to search quickly all the given monomers on a target polymer.
 After, a greedy algorithm combines the mapped monomers into a consistent monomeric structure.
