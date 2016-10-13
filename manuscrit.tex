@@ -148,21 +148,20 @@ France
 \section*{\Huge Résumé}
 \markboth{\MakeUppercase Résumé}{\MakeUppercase Résumé}%
 
-La composition monomérique de polymères est une ressource de grande valeur pour la comparaison de structures et la biologie de synthèse.
-La plupart des ressources moléculaire en ligne donne accès à la structure atomique des molécules et non à leur structure monomérique.
-Nous avons créé un logiciel smiles2monomers (s2m) permettant de passer des atomes aux monomères.
+La composition monomérique de polymères joue un rôle essentiel dans la comparaison de structures et la biologie de synthèse.
+Cependnt, la plupart des ressources moléculaire en ligne donne accès à la structure atomique des molécules et non à leur structure monomérique.
+Nous avons donc créé un logiciel smiles2monomers (s2m) permettant de passer des atomes aux monomères.
 
-L'algorithme se déroule en deux phases : une phase de recherche par isomorphisme de sous graphe des monomères au sein de la structure atomique puis une recherche du meilleur pavage non chevauchant des monomères trouvés.
+L'algorithme sous-jacent se déroule en deux phases : une phase de recherche par isomorphisme de sous graphe des monomères au sein de la structure atomique puis une recherche du meilleur pavage non chevauchant des monomères trouvés.
 La recherche est basée sur un index markovien améliorant les vitesses de recherche de 30\% par rapport à l'état de l'art.
 Le pavage est lui constitué d'un algorithme glouton couplé à un raffinement par ``branch & cut''.
 s2m a été testé sur deux jeux de données déjà annotés.
-Il retrouve les annotations manuelles avec une sensibilité supérieure à 90\% et un temps d'exécution de 18ms par peptide.
+Il retrouve les annotations manuelles avec une excellente sensibilité en des temps très courts.
 
-Dans notre équipe, nous possédons Norine, la base de données de référence de polymères particuliers appelés Peptides Non Ribosomiques (NRP).
-s2m exécuté sur l'ensemble des données de Norine a mis à jour de nombreuses annotations erronées en base.
-Après correction des entrées, nous avons ajouté s2m au processus de validation de nouvelles entrées.
-Nous sommes en train d'ajouter des centaines de nouvelles entrées dont les structures monomériques particulières ont été mises à jour par s2m au sein de bases moléculaires généralistes.
-Les annotations de s2m sont également les structures de base pour un nouveau projet de biologie de synthèse de NRP.
+Notre équipe développe Norine, base de données de référence de polymères particuliers appelés Peptides Non Ribosomiques (NRP).
+s2m, exécuté sur l'ensemble des données de Norine, a mis à jour de nombreuses annotations erronées en base.
+s2m est donc à la fois capable de créer de nouvelles annotations et de corriger d'anciennes annotations.
+Les nouvelles annotations nous servent à la fois à découvrir de nouveaux NRP, de nouvelles fonctionnalités de NRP et potentiellement dans le futur à synthétiser des NRP non naturels.
 
 
 \vspace*{28pt}\par
