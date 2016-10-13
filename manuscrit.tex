@@ -147,10 +147,11 @@ France
 
 \section*{\Huge Résumé}
 \markboth{\MakeUppercase Résumé}{\MakeUppercase Résumé}%
+\vspace{2cm}
 
-La composition monomérique de polymères joue un rôle essentiel dans la comparaison de structures et la biologie de synthèse.
-Cependant, la plupart des ressources moléculaire en ligne donne accès à la structure atomique des molécules et non à leur structure monomérique.
-Nous avons donc créé un logiciel appelé smiles2monomers (s2m) permettant de passer des atomes aux monomères.
+La composition monomérique de polymères joue un rôle essentiel dans la comparaison de structures et dans la biologie de synthèse.
+Cependant, la plupart des ressources moléculaires en ligne donne accès à la structure atomique des molécules et non à leur structure monomérique.
+Nous avons donc créé un logiciel appelé smiles2monomers (s2m) pour inférer la structure monomérique passer des atomes aux monomères.
 
 L'algorithme sous-jacent se déroule en deux phases : une phase de recherche par isomorphisme de sous graphe des monomères au sein de la structure atomique puis une recherche du meilleur pavage non chevauchant des monomères trouvés.
 La recherche est basée sur un index markovien améliorant les vitesses de recherche de 30\% par rapport à l'état de l'art.
@@ -160,7 +161,7 @@ Il retrouve les annotations manuelles avec une excellente sensibilité en des te
 
 Notre équipe développe Norine, base de données de référence de polymères particuliers appelés Peptides Non Ribosomiques (NRP).
 s2m, exécuté sur l'ensemble des données de Norine, a mis à jour de nombreuses annotations erronées en base.
-s2m est donc à la fois capable de créer de nouvelles annotations et d'en corriger d'anciennes.
+s2m est donc à la fois capable de créer de nouvelles annotations et d'en corriger des anciennes.
 Les nouvelles annotations nous servent à la fois à découvrir de nouveaux NRP, de nouvelles fonctionnalités NRP et potentiellement dans le futur à synthétiser des NRP non naturels.
 
 
@@ -194,14 +195,15 @@ s2m a été testé sur deux jeux de données déjà annotés.
 Il retrouve les annotations manuelles avec une excellente sensibilité en des temps très courts.
 
 The underlying algorithm is composed of two steps: a search of the monomers using subgraph isomorphism algorithms and a tiling algorithm of the best non-overlapping monomers cover.
+The search is based on a Markovian index improving the execution time of the state of art by 30\%.
+The tiling is perfomed using a greedy algorithm refined by a ``branch \& cut'' algorithm.
+s2m had been tested on two different pools of data already annotated.
+The sftwage regenerate the manual annotations with an excellent sensibility in a very short amount of time.
 
-
-The mapping is based on a Markovian index built by a dynamic programming algorithm.
-The index enables s2m to search quickly all the given monomers on a target polymer.
-After, a greedy algorithm combines the mapped monomers into a consistent monomeric structure.
-Finally, a local branch and cut algorithm refines the structure.
-We tested this method on two manually annotated databases of polymers and reconstructed the structures de novo with a sensitivity over 90\%.
-The average computation time per polymer is 2 s.
+Notre équipe développe Norine, base de données de référence de polymères particuliers appelés Peptides Non Ribosomiques (NRP).
+s2m, exécuté sur l'ensemble des données de Norine, a mis à jour de nombreuses annotations erronées en base.
+s2m est donc à la fois capable de créer de nouvelles annotations et d'en corriger des anciennes.
+Les nouvelles annotations nous servent à la fois à découvrir de nouveaux NRP, de nouvelles fonctionnalités NRP et potentiellement dans le futur à synthétiser des NRP non naturels.
 
 CONCLUSION: s2m automatically creates de novo monomeric annotations for polymers, efficiently in terms of time computation and sensitivity.
 s2m allowed us to detect annotation errors in the tested databases and to easily find the accurate structures.
