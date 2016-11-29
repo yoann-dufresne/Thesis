@@ -136,7 +136,7 @@
         \'{E}cole Doctorale SPI \\
       }
       {\fontsize{14}{16}\bfseries\selectfont
-        Laboratoire CRIStAL\\
+        UMR 9189 - CRIStAL\\
       }
     \end{spacing}
     \vspace*{0.5cm plus 0cm minus 0.1cm}
